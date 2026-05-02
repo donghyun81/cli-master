@@ -97,3 +97,39 @@
 - mitigation: sandbox 권한 가능 정정 = 즉시 cp / 권한 X 정정 = Coin 손 작업 1 paste (102 파일 rm + master 1 commit + 자식 3 commit) · 후속 옵션 = `propagate.sh --prune` 신설 검토 (cycle 우선순위 낮음)
 - trail: close (Coin 손 작업 후 verify-sync 103/0/0 회복 시 baseline 정정)
 ```
+
+```
+## 2026-05-02T10:00:00+0900
+- type: 자동화 install ≠ activation (재5발 · launchd daemon 미활성)
+- cycle: C12-LOCK-RECURRENCE-DIAGNOSIS-001
+- summary: C4-VERIFY commit paste 실행 중 4-repo 모두 .git/index.lock 차단 (반복 발생). C8/C9/C10/C11 mitigation 모두 적용 후에도 재발 = launchd daemon (com.coin.git-lock-cleaner) install 누락 또는 비활성 강력 시사. macOS 터미널 / Cowork chat 의 git op = hook 발화 X (Claude Code Bash tool 한정) → daemon 만이 유일한 자동 mitigation 인데 미활성 = 영구 lock.
+- mitigation: Coin 1 paste (광역 lock rm + daemon 진단 + install + commit 재시도) → 4-repo commit 성공 + verify-sync 103/0/0
+- trail: close (사고 해결) + C13 후속 검토 (verify-sync.sh 첫 줄에 daemon 활성 자동 체크 + 미활성 시 즉시 install 권장)
+```
+
+```
+## 2026-05-02T11:00:00+0900
+- type: 3-repo drift (자식 .gitignore propagation 누락) + sandbox 자체 미발견
+- cycle: C13-VERIFY-FULL-001
+- summary: C1~C4 광역 검증 중 발견 — master `.gitignore` 12 줄에 `.claude/settings.local.json` 등록 / 3 자식 `.gitignore` 모두 미등록 = drift. propagate.sh 에 `.gitignore` 가 cp 대상 미포함 (find 의 base path = .claude/docs/scripts/agent/.ai/promptfit/.ai/uiux-sot/refresh/.github + root 5 만). 결과: 자식 git status 매번 settings.local.json untracked 표시.
+- mitigation: 옵션 A (`.gitignore` 4-repo 동기 cp + propagate.sh root 파일 list 에 추가) · 옵션 B (자식 .gitignore 만 즉시 cp + propagate.sh 갱신은 별 cycle)
+- trail: open (다음 cycle 권장 항목 = C14-PROPAGATION-COVERAGE-001)
+```
+
+```
+## 2026-05-02T12:00:00+0900
+- type: prompt 작성 baseline 검증 의무 (C15 사고 사전 차단)
+- cycle: C14+C13+C15-INFRA-MITIGATION-001 (sandbox 진입 중 발견)
+- summary: C15 초안 (--prune 전 cli infra base path orphan 검사) sandbox dry-run 시 자식 도메인 311 파일 false positive 발견 — docs/setup/{DDL,phase3,partB} / docs/design/pencil-sot/*.pen / docs/agent/solutions/MANAGED_AGENTS_READINESS.md / scripts/agent/repo-config.sh / .ai/promptfit/INDEX.md 등 모두 repo-specific. `--apply` 실행 시 도메인 전체 날아감.
+- mitigation: 정책 변경 = whitelist `.claude/` 만 prune 후보 (default). `--include <path>` flag 신설 = 별 cycle 검토. 사전 dry-run 검증으로 사고 사전 차단.
+- trail: close (사고 사전 차단 · 학습 = 새 자동화 모드 신설 시 dry-run 의무 + whitelist 우선)
+```
+
+```
+## 2026-05-02T12:00:00+0900
+- type: 3-repo drift (Android Studio .gitignore vs master .gitignore 비호환)
+- cycle: C14+C13+C15-INFRA-MITIGATION-001
+- summary: C14 초안 (master .gitignore byte-identical cp) sandbox 진입 중 발견 — 자식 .gitignore = build/gradle/local.properties/Thumbs.db 등 Android Studio repo 패턴 보유 / master .gitignore = 단순 generic. 단순 cp 시 자식 빌드 차단.
+- mitigation: 정책 변경 = master .gitignore 자체 propagate X (자식 자율). 별 script `ensure-child-gitignore-patches.sh` 가 cli infra patterns 만 자식에 marker block 으로 patch (idempotent). propagate.sh 자동 호출.
+- trail: close (사고 사전 차단 · 학습 = 자식 자율 영역과 master cli infra 영역 명확 분리 의무)
+```

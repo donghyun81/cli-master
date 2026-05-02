@@ -627,3 +627,48 @@ Coin 요청 — "C4 propagation 제대로? 빠진 내용? 중복/잔존?"
 
 - Coin 손 작업 1 paste (rm 102 + commit 4) → 다음 chat 진입 시 baseline = master rules 13 / 자식 rules 13 / 자식 flat agents 0 / verify-sync iter 103
 - baseline 정정 후 = 자식 도메인 cycle (Pencil → Compose 본 작업) 진입 가능
+
+---
+
+## 2026-05-02 · C14+C13+C15-INFRA-MITIGATION-001 (sandbox 마감 · Coin paste 대기)
+
+### 트리거
+
+C13-VERIFY-FULL 의 발견된 gap 3 종 (.gitignore propagation 누락 + daemon 미활성 자동 진단 부재 + propagate prune 모드 부재) 묶음 처리. Coin 본 의도 = "한꺼번에 요청해도 될 것 같은데" → 묶음 1 cycle.
+
+### 결정 1. 묶음 진입 (3 → 1 cycle)
+
+- **선택**: 1 cycle 묶음 (1 paste · master 4 commit + 자식 3 × 1 commit)
+- **대안**: 분리 3 cycle (12 commit + 3 paste · overhead 20 분 ↑)
+- **근거**: 의존성 직선 + 충돌 영역 X (propagate.sh 의 find base vs flag/함수 분리) + 200 메시지 임계 안 넘음
+
+### 결정 2. C14 정책 변경 — `.gitignore` byte-identical X
+
+- **사전 검증 발견**: 자식 .gitignore = Android Studio build/gradle 패턴 보유 → master 단순 cp = 자식 빌드 차단
+- **변경**: master .gitignore 자체는 propagate X. 별 patch script 가 cli infra patterns 만 자식에 보장 (idempotent · marker block)
+- **신설**: `scripts/ensure-child-gitignore-patches.sh` (--verify / --target / patch 자동) + propagate.sh 자동 호출
+
+### 결정 3. C15 안전 정책 — whitelist `.claude/` 만
+
+- **사전 검증 발견**: 초안 (전 cli infra base path orphan 검사) = 자식 도메인 (DDL / .pen / repo-config / readiness) 311 파일 false positive → `--apply` 시 도메인 전체 날아감
+- **변경**: default = `.claude/` 만 prune 후보. 자식 도메인 영역 = 자율 = 절대 prune 안 함
+- **확장**: `--include <path>` flag = 별 cycle 검토 (C16 후보)
+
+### 결정 4. dry-run vs apply 분리
+
+- **선택**: `--prune` (dry-run · default · 안전) + `--apply` (실제 rm · 명시 의무)
+- **근거**: 사고 시 revert 어려움 → opt-in 패턴
+
+### 산출물 (3 cycle 묶음)
+
+- 신설: `scripts/ensure-child-gitignore-patches.sh`
+- 수정: `scripts/propagate.sh` (--prune + --apply flag + ensure-child-gitignore 자동 호출)
+- 수정: `scripts/verify-sync.sh` (daemon 자동 진단 30 줄 + --skip-daemon-check flag)
+- 자식 3 `.gitignore` patch (marker block)
+- `.ai/reports/C14-C13-C15-INFRA-MITIGATION-001/REPORT.md`
+- decision-log + incident-log + CLAUDE.md §15 갱신
+
+### 다음 cycle 진입 조건
+
+- Coin 1 paste (master 4 commit + 자식 3 × 1 commit + 검증 3 회) → 다음 chat 진입 시 baseline 정정
+- 자식 도메인 본 작업 진입 가능 (C1~C15 master 정비 마감)
