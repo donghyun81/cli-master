@@ -31,6 +31,8 @@ set -euo pipefail
 # === 인자 파싱 ===
 TARGETS=""
 PROPAGATE_ALL=0
+PRUNE_MODE=0
+PRUNE_APPLY=0
 FILES=()
 
 while [ $# -gt 0 ]; do
@@ -43,8 +45,16 @@ while [ $# -gt 0 ]; do
       TARGETS="$2"
       shift 2
       ;;
+    --prune)
+      PRUNE_MODE=1
+      shift
+      ;;
+    --apply)
+      PRUNE_APPLY=1
+      shift
+      ;;
     --help|-h)
-      sed -n '1,30p' "$0"
+      sed -n '1,40p' "$0"
       exit 0
       ;;
     -*)
@@ -89,6 +99,113 @@ if [ "$PROPAGATE_ALL" = 1 ]; then
   for rf in .editorconfig .mcp.json gradle.properties gradlew gradlew.bat; do
     [ -f "$rf" ] && FILES+=("$rf")
   done
+fi
+
+# === C15: --prune 모드 분기 (master 부재 파일 = 자식 자동 list / rm) ===
+# - 본 모드 = 일반 cp 모드와 별개. cp 흐름 전 분기.
+# - 입력 = master 의 propagate 대상 base path (find 가 master 에서 인덱스).
+# - 자식의 같은 base path 안 파일 중 master 부재 = orphan → list 출력 (--apply 면 rm).
+# - 안전: --prune --apply 가 명시 안 되면 dry-run 만 (rm 안 함).
+if [ "$PRUNE_MODE" = 1 ]; then
+  cd "$MASTER_DIR"
+  # === 안전 정책 (whitelist) ===
+  # default = .claude/ 만 prune 후보 (master 가 SoT 인 cli infra 영역)
+  # 자식의 도메인 영역 (docs/, .ai/, scripts/agent/, app/) = 자율 영역 = prune 안 함
+  # cli infra 외 영역 추가 = --include <path> flag 사용 (Coin 명시 의무)
+  PRUNE_BASE_PATHS=(.claude)
+  PRUNE_ROOT_FILES=()  # root 파일 = 자식 build 영향 (gradlew 등) → default prune 제외
+  PRUNE_EXCLUDE_NAMES=(.DS_Store settings.local.json)
+
+  # target 해결
+  if [ -z "$TARGETS" ] || [ "$TARGETS" = "all" ]; then
+    PRUNE_TARGETS="$TARGET_REPOS"
+  else
+    PRUNE_TARGETS=""
+    IFS=',' read -ra arr <<< "$TARGETS"
+    for t in "${arr[@]}"; do
+      case "$t" in
+        GB) PRUNE_TARGETS="$PRUNE_TARGETS GentlyBreath" ;;
+        GD) PRUNE_TARGETS="$PRUNE_TARGETS GentlyDay" ;;
+        GT) PRUNE_TARGETS="$PRUNE_TARGETS GentlyTable" ;;
+        *)  PRUNE_TARGETS="$PRUNE_TARGETS $t" ;;
+      esac
+    done
+  fi
+
+  echo "═══════════════════════════════════════════════════════"
+  echo "[propagate --prune] master 부재 파일 = 자식 orphan 검색"
+  echo "  master:    $MASTER_DIR"
+  echo "  targets:   $PRUNE_TARGETS"
+  echo "  mode:      $([ "$PRUNE_APPLY" = 1 ] && echo "APPLY (실제 rm)" || echo "DRY-RUN (list 만)")"
+  echo "═══════════════════════════════════════════════════════"
+
+  TOTAL_ORPHAN=0
+  TOTAL_RM=0
+  for repo in $PRUNE_TARGETS; do
+    REPO_DIR="$PARENT_DIR/$repo"
+    if [ ! -d "$REPO_DIR" ]; then
+      echo "  $repo: SKIP (부재)"
+      continue
+    fi
+    echo ""
+    echo "--- $repo ---"
+    REPO_ORPHAN=0
+
+    # 자식의 base path 안 모든 파일 iterate
+    for base in "${PRUNE_BASE_PATHS[@]}"; do
+      [ -d "$REPO_DIR/$base" ] || continue
+      while IFS= read -r f; do
+        # exclude name 검사
+        BN=$(basename "$f")
+        SKIP=0
+        for ex in "${PRUNE_EXCLUDE_NAMES[@]}"; do
+          [ "$BN" = "$ex" ] && SKIP=1 && break
+        done
+        [ "$SKIP" = 1 ] && continue
+        # master 부재 여부
+        if [ ! -f "$MASTER_DIR/$f" ]; then
+          if [ "$PRUNE_APPLY" = 1 ]; then
+            rm -f "$REPO_DIR/$f" && \
+              (cd "$REPO_DIR" && git add "$f" 2>/dev/null) || true
+            echo "  rm  $f"
+            TOTAL_RM=$((TOTAL_RM+1))
+          else
+            echo "  orphan: $f"
+          fi
+          REPO_ORPHAN=$((REPO_ORPHAN+1))
+        fi
+      done < <(cd "$REPO_DIR" && find "$base" -type f 2>/dev/null)
+    done
+
+    # root 파일 검사
+    for rf in "${PRUNE_ROOT_FILES[@]}"; do
+      if [ -f "$REPO_DIR/$rf" ] && [ ! -f "$MASTER_DIR/$rf" ]; then
+        if [ "$PRUNE_APPLY" = 1 ]; then
+          rm -f "$REPO_DIR/$rf" && (cd "$REPO_DIR" && git add "$rf" 2>/dev/null) || true
+          echo "  rm  $rf (root)"
+          TOTAL_RM=$((TOTAL_RM+1))
+        else
+          echo "  orphan: $rf (root)"
+        fi
+        REPO_ORPHAN=$((REPO_ORPHAN+1))
+      fi
+    done
+
+    echo "  요약: orphan=$REPO_ORPHAN"
+    TOTAL_ORPHAN=$((TOTAL_ORPHAN+REPO_ORPHAN))
+  done
+
+  echo ""
+  echo "═══════════════════════════════════════════════════════"
+  if [ "$PRUNE_APPLY" = 1 ]; then
+    echo "[propagate --prune --apply] 총 orphan $TOTAL_ORPHAN / 실제 rm $TOTAL_RM"
+    echo "  자식 repo 별 git status 검토 + commit 의무"
+  else
+    echo "[propagate --prune] 총 orphan $TOTAL_ORPHAN (DRY-RUN · 실제 rm 없음)"
+    echo "  실제 rm = --apply flag 추가: bash scripts/propagate.sh --prune --apply"
+  fi
+  echo "═══════════════════════════════════════════════════════"
+  exit 0
 fi
 
 if [ "${#FILES[@]}" = 0 ]; then
@@ -182,6 +299,15 @@ echo "[propagate] 전체 요약: ok=$TOTAL_OK fail=$TOTAL_FAIL"
 echo "  다음 단계: bash scripts/verify-sync.sh   # cross-verify"
 echo "  자식 repo 별 commit 의무 (master commit body 인용)"
 echo "═══════════════════════════════════════════════════════"
+
+# === C14: .gitignore patches 자동 보장 (자식 .gitignore 가 master cli infra patterns 포함) ===
+if [ -x "$MASTER_DIR/scripts/ensure-child-gitignore-patches.sh" ]; then
+  echo ""
+  echo "[propagate] .gitignore patches 보장 (C14):"
+  PARENT_DIR="$PARENT_DIR" TARGET_REPOS="$TARGET_REPOS" \
+    bash "$MASTER_DIR/scripts/ensure-child-gitignore-patches.sh" || \
+    echo "  (warning) ensure-child-gitignore-patches.sh 실패 — 본 propagation 영향 X"
+fi
 
 if [ "$TOTAL_FAIL" -gt 0 ]; then
   exit 1
