@@ -33,11 +33,14 @@ QUICK=0
 NO_UPDATE=0
 SINGLE_TARGET=""
 
+SKIP_DAEMON_CHECK=0
+
 while [ $# -gt 0 ]; do
   case "$1" in
     --quick) QUICK=1; shift ;;
     --no-update) NO_UPDATE=1; shift ;;
     --target) SINGLE_TARGET="$2"; shift 2 ;;
+    --skip-daemon-check) SKIP_DAEMON_CHECK=1; shift ;;
     --help|-h) sed -n '1,30p' "$0"; exit 0 ;;
     *) echo "[verify-sync] unknown flag: $1" >&2; exit 2 ;;
   esac
@@ -46,6 +49,39 @@ done
 if [ ! -d "$MASTER_DIR" ]; then
   echo "[verify-sync] ERROR: master 부재: $MASTER_DIR" >&2
   exit 2
+fi
+
+# === C13: launchd daemon 자동 진단 (git lock 영구 mitigation 활성 검증) ===
+# - daemon = com.coin.git-lock-cleaner (C10 신설)
+# - macOS 만 적용 (다른 OS = skip)
+# - --skip-daemon-check flag 또는 LAUNCHCTL 부재 = skip
+if [ "$SKIP_DAEMON_CHECK" = 0 ] && command -v launchctl >/dev/null 2>&1; then
+  DAEMON_LABEL="com.coin.git-lock-cleaner"
+  PLIST_PATH="$HOME/Library/LaunchAgents/$DAEMON_LABEL.plist"
+  DAEMON_LOG="$HOME/Library/Logs/git-lock-daemon.log"
+
+  if ! launchctl list | grep -q "$DAEMON_LABEL"; then
+    echo "[verify-sync] ⚠ git-lock daemon 미활성 (C12 사고 패턴 재발 위험)"
+    if [ -f "$PLIST_PATH" ]; then
+      echo "  plist 존재하나 load 안 됨 — 수정: launchctl load $PLIST_PATH"
+    else
+      echo "  plist 부재 — 수정: bash $MASTER_DIR/scripts/install-git-lock-daemon.sh"
+    fi
+    echo "  (--skip-daemon-check 로 본 진단 제외 가능)"
+    echo ""
+  else
+    # daemon 활성 + log mtime 체크 (1시간 이상 미작동 = stuck 의심)
+    if [ -f "$DAEMON_LOG" ]; then
+      LOG_MTIME=$(stat -f %m "$DAEMON_LOG" 2>/dev/null || stat -c %Y "$DAEMON_LOG" 2>/dev/null || echo 0)
+      NOW=$(date +%s)
+      AGE=$((NOW - LOG_MTIME))
+      if [ "$AGE" -gt 3600 ]; then
+        echo "[verify-sync] ⚠ git-lock daemon log mtime > 1시간 (stuck 의심 · age=${AGE}s)"
+        echo "  진단: tail $DAEMON_LOG / 재 load: launchctl unload $PLIST_PATH && launchctl load $PLIST_PATH"
+        echo ""
+      fi
+    fi
+  fi
 fi
 
 cd "$MASTER_DIR"
