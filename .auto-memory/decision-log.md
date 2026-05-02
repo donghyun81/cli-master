@@ -495,3 +495,37 @@ git commit -m "fix(master): C10-LAUNCHD-DAEMON-001 launchd 데몬 박음 (환경
 
 - C4 propagation 시 자식 자동 적용 (단 daemon 은 master 의 path 박힘)
 - daemon install 후 = git lock 사고 99.99% 자동 mitigation (5초 안 자동 정리)
+
+---
+
+## 2026-05-02 · C4-PROPAGATE-TO-CHILDREN-001 (마감)
+
+### C4 산출물 요약
+
+- master → 3 자식 cp 327 파일 (109 × 3 · 에러 0)
+- 자식 ui-spec.json 마이그레이션 44 파일 (alias + designTool)
+- 자식 CLAUDE.md Nested 박음 (3 자식)
+- propagation-status.md 갱신 (보호 5종 ALL ✓ MATCH)
+- propagation-reports/C4-...-PROPAGATE/REPORT.md 신설
+- master .ai/reports/C4-... REPORT.md 신설
+
+### 검증 (실측 PASS)
+
+- verify-sync.sh exit 0
+- 109 파일 PASS / drift 0 / miss 0
+- ui-spec.json sample alias match True
+
+### Coin 손 작업 (sandbox 한계 → macOS 의무)
+
+상세: `propagation-reports/C4-PROPAGATE-TO-CHILDREN-001-PROPAGATE/REPORT.md` §5
+
+요약:
+1. 자식 stale lock rm (3 회) — sandbox rm 권한 X
+2. launchd 데몬 install (1회 · C10 영구) — 이후 lock 사고 0
+3. 자식 git add + commit (3 회 묶음 가능)
+4. master audit commit
+
+### 다음 cycle 진입 조건
+
+- C4 commit 마감 후 = master ↔ 자식 단방향 정합 100% 박힘
+- 자식 repo 의 본 작업 cycle (Pencil → Compose 등) 진행 가능 = master cli infra 자동 적용

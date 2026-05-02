@@ -11,14 +11,15 @@
 | GD | `<PARENT>/GentlyDay` | `622102a` (2026-05-02 baseline) |
 | GT | `<PARENT>/GentlyTable` | `d2c29f6` (2026-05-02 baseline) |
 
-## 보호 파일 4 종 sha 동기 매트릭스 (master baseline 기준)
+## 보호 파일 5 종 sha 동기 매트릭스 (C4 후 baseline · ALL ✓ MATCH)
 
 | 파일 | master sha (8자) | GB sync | GD sync | GT sync |
 |---|---|---|---|---|
-| `docs/schemas/ui-spec.schema.json` | `bba7745e` | ✓ MATCH | ✓ MATCH | ✓ MATCH |
-| `.claude/rules/pencil-uiux-workflow.md` | `af8e7e26` | ✓ MATCH | ✓ MATCH | ✓ MATCH |
-| `docs/design/pencil-sot-policy.md` | `1f97ac1f` | ✓ MATCH | ✓ MATCH | ✓ MATCH |
-| `.claude/rules/uiux-sot-refresh.md` | `487d57a2` | ✓ MATCH | ✓ MATCH | ✓ MATCH |
+| `docs/schemas/ui-spec.schema.json` (v0.3) | `5aa52b23` | ✓ MATCH | ✓ MATCH | ✓ MATCH |
+| `.claude/rules/uiux-sot-refresh.md` (95% generic) | `1f871447` | ✓ MATCH | ✓ MATCH | ✓ MATCH |
+| `docs/design/design-sot-policy.md` (신설) | `e5e3fe16` | ✓ MATCH | ✓ MATCH | ✓ MATCH |
+| `.claude/rules/pencil-uiux-workflow.md` (Pencil 30%) | `6297080a` | ✓ MATCH | ✓ MATCH | ✓ MATCH |
+| `docs/design/pencil-sot-policy.md` (Pencil 25%) | `96de2f5d` | ✓ MATCH | ✓ MATCH | ✓ MATCH |
 
 ## cli infra 핵심 sha 매트릭스 (master baseline)
 
@@ -53,3 +54,12 @@ bash scripts/verify-sync.sh           # 본 표 자동 갱신
 bash scripts/propagate.sh <file> --targets GB,GD,GT
 bash scripts/propagate.sh --all       # 전 cli infra 일괄
 ```
+
+
+## C4-PROPAGATE-TO-CHILDREN-001 마감 (2026-05-02)
+
+- verify-sync.sh 실측 PASS: 109 파일 모두 ✓ MATCH (3 자식 × 109 = 327 파일 cp 완료)
+- 자식 ui-spec.json 44 파일 마이그레이션 (lastSyncedPencilStateHash → lastSyncedDesignToolStateHash alias + designTool: pencil 신설)
+- 자식 CLAUDE.md 의 첫 5줄 Nested 패턴 박음 (3 자식 모두)
+- master 의 deprecated rules / Pencil 명명 alias 모두 자식 적용
+- exit 0 PASS
