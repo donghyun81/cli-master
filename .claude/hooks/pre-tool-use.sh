@@ -10,7 +10,7 @@ INPUT="$(cat 2>/dev/null || echo '')"
 
 CMD=$(echo "$INPUT" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('tool_input',{}).get('command',''))" 2>/dev/null || echo "")
 
-# === C9 박음: git command 감지 시 PID 기반 stale lock 자동 정리 ===
+# === C11 박음: git command 감지 시 .git/**/*.lock 광역 PID 검증 + stale 정리 ===
 case "$CMD" in
   *"git "*|*"git -C"*|*"&& git"*)
     WORK_DIR=""
@@ -21,36 +21,41 @@ case "$CMD" in
     fi
     [ -z "$WORK_DIR" ] && WORK_DIR="$PWD"
     WORK_DIR=$(eval echo "$WORK_DIR")
-    LOCK_FILE="$WORK_DIR/.git/index.lock"
+    GIT_DIR="$WORK_DIR/.git"
 
-    if [ -f "$LOCK_FILE" ]; then
-      LOCK_PID=$(cat "$LOCK_FILE" 2>/dev/null | head -c 20 | tr -d '\n[:space:]')
-
-      if [ -n "$LOCK_PID" ] && echo "$LOCK_PID" | grep -qE '^[0-9]+$'; then
-        if ps -p "$LOCK_PID" > /dev/null 2>&1; then
-          # 살아있는 PID = 활성 op = 보호 (단 30s 후에도 살아있으면 stale 의심)
-          NOW=$(date +%s)
-          LOCK_MTIME=$(stat -f %m "$LOCK_FILE" 2>/dev/null || stat -c %Y "$LOCK_FILE" 2>/dev/null || echo "$NOW")
-          AGE=$((NOW - LOCK_MTIME))
-          if [ "$AGE" -gt 30 ]; then
-            # 30s 초과 + PID 살아있음 = 의심 (long-running git op 또는 hung)
-            echo "[HOOK:PRE-TOOL-USE] WARN: .git/index.lock PID=$LOCK_PID 살아있음 + age=${AGE}s (long-running 또는 hung)" >&2
-          fi
+    cleanup_lock_hook() {
+      local lock_file="$1"
+      [ -f "$lock_file" ] || return
+      local lock_pid
+      lock_pid=$(cat "$lock_file" 2>/dev/null | head -c 20 | tr -d '
+[:space:]')
+      if [ -n "$lock_pid" ] && echo "$lock_pid" | grep -qE '^[0-9]+$'; then
+        if ps -p "$lock_pid" > /dev/null 2>&1; then
+          return  # 활성 PID = 보호
         else
-          # PID 죽음 = 확실한 stale → 즉시 rm
-          rm -f "$LOCK_FILE" 2>/dev/null && \
-            echo "[HOOK:PRE-TOOL-USE] auto-cleanup dead-PID=$LOCK_PID lock at $WORK_DIR" >&2
+          rm -f "$lock_file" 2>/dev/null && \
+            echo "[HOOK:PRE-TOOL-USE] auto-cleanup dead-PID=$lock_pid ${lock_file#$GIT_DIR/}" >&2
         fi
       else
-        # PID 박힘 X = 빈 파일 또는 손상 → mtime 보조 (5s 마진)
-        NOW=$(date +%s)
-        LOCK_MTIME=$(stat -f %m "$LOCK_FILE" 2>/dev/null || stat -c %Y "$LOCK_FILE" 2>/dev/null || echo "$NOW")
-        AGE=$((NOW - LOCK_MTIME))
-        if [ "$AGE" -gt 5 ]; then
-          rm -f "$LOCK_FILE" 2>/dev/null && \
-            echo "[HOOK:PRE-TOOL-USE] auto-cleanup no-PID lock (age=${AGE}s) at $WORK_DIR" >&2
+        local now lock_mtime age
+        now=$(date +%s)
+        lock_mtime=$(stat -f %m "$lock_file" 2>/dev/null || stat -c %Y "$lock_file" 2>/dev/null || echo "$now")
+        age=$((now - lock_mtime))
+        if [ "$age" -gt 5 ]; then
+          rm -f "$lock_file" 2>/dev/null && \
+            echo "[HOOK:PRE-TOOL-USE] auto-cleanup no-PID ${lock_file#$GIT_DIR/} (age=${age}s)" >&2
         fi
       fi
+    }
+
+    if [ -d "$GIT_DIR" ]; then
+      cleanup_lock_hook "$GIT_DIR/index.lock"
+      cleanup_lock_hook "$GIT_DIR/HEAD.lock"
+      cleanup_lock_hook "$GIT_DIR/packed-refs.lock"
+      cleanup_lock_hook "$GIT_DIR/config.lock"
+      [ -d "$GIT_DIR/refs" ] && find "$GIT_DIR/refs" -name "*.lock" -type f 2>/dev/null | while read -r ref_lock; do
+        cleanup_lock_hook "$ref_lock"
+      done
     fi
     ;;
 esac

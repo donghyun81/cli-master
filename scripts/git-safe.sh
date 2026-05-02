@@ -21,44 +21,50 @@
 
 # === 작업 디렉터리에서 git 작동 디렉터리 추정 ===
 GIT_DIR=$(git rev-parse --git-dir 2>/dev/null || echo ".git")
-LOCK_FILE="$GIT_DIR/index.lock"
 
-cleanup_lock() {
-  local reason="$1"
-  rm -f "$LOCK_FILE" 2>/dev/null
-  if [ "$?" = "0" ] && [ "$GIT_SAFE_VERBOSE" = "1" ]; then
-    echo "[git-safe] auto-cleanup .git/index.lock ($reason)" >&2
+cleanup_lock_safe() {
+  local lock_file="$1"
+  local lock_type="$2"
+  [ -f "$lock_file" ] || return
+
+  local lock_pid
+  lock_pid=$(cat "$lock_file" 2>/dev/null | head -c 20 | tr -d '\n[:space:]')
+
+  if [ -n "$lock_pid" ] && echo "$lock_pid" | grep -qE '^[0-9]+$'; then
+    if ps -p "$lock_pid" > /dev/null 2>&1; then
+      return  # 살아있는 PID = 보호
+    else
+      rm -f "$lock_file" 2>/dev/null
+      [ "$GIT_SAFE_VERBOSE" = "1" ] && echo "[git-safe] auto-cleanup dead-PID=$lock_pid $lock_type" >&2
+    fi
+  else
+    local now lock_mtime age
+    now=$(date +%s)
+    lock_mtime=$(stat -f %m "$lock_file" 2>/dev/null || stat -c %Y "$lock_file" 2>/dev/null || echo "$now")
+    age=$((now - lock_mtime))
+    if [ "$age" -gt "$STALE_THRESHOLD_S" ]; then
+      rm -f "$lock_file" 2>/dev/null
+      [ "$GIT_SAFE_VERBOSE" = "1" ] && echo "[git-safe] auto-cleanup no-PID $lock_type (age=${age}s)" >&2
+    fi
   fi
 }
 
-if [ -f "$LOCK_FILE" ]; then
-  # === PID 기반 검증 (가장 신뢰성 ↑) ===
-  LOCK_PID=$(cat "$LOCK_FILE" 2>/dev/null | head -c 20 | tr -d '\n[:space:]')
+# === C11 광역: 모든 .git/**/*.lock 검사 ===
+cleanup_lock_safe "$GIT_DIR/index.lock" "index.lock"
+cleanup_lock_safe "$GIT_DIR/HEAD.lock" "HEAD.lock"
+cleanup_lock_safe "$GIT_DIR/packed-refs.lock" "packed-refs.lock"
+cleanup_lock_safe "$GIT_DIR/config.lock" "config.lock"
 
-  if [ -n "$LOCK_PID" ] && echo "$LOCK_PID" | grep -qE '^[0-9]+$'; then
-    if ps -p "$LOCK_PID" > /dev/null 2>&1; then
-      # 살아있는 PID — 활성 git op 의심 → 사용자 확인 의무
-      echo "[git-safe] WARN: .git/index.lock PID=$LOCK_PID 활성 process 감지 — 5초 대기 후 재검증" >&2
-      sleep 5
-      if ps -p "$LOCK_PID" > /dev/null 2>&1; then
-        echo "[git-safe] ERROR: PID=$LOCK_PID 여전히 살아있음 — git command 차단. 진행 시 'rm $LOCK_FILE' 수동 + 재시도." >&2
-        exit 1
-      else
-        cleanup_lock "PID-died-after-wait"
-      fi
-    else
-      # PID 죽음 = 확실한 stale → 즉시 rm
-      cleanup_lock "dead-PID=$LOCK_PID"
-    fi
-  else
-    # PID 박힘 X 또는 형식 X = 거의 stale (빈 파일 또는 손상)
-    NOW=$(date +%s)
-    LOCK_MTIME=$(stat -f %m "$LOCK_FILE" 2>/dev/null || stat -c %Y "$LOCK_FILE" 2>/dev/null || echo "$NOW")
-    AGE=$((NOW - LOCK_MTIME))
-    if [ "$AGE" -gt "$STALE_THRESHOLD_S" ]; then
-      cleanup_lock "no-PID + age=${AGE}s > ${STALE_THRESHOLD_S}s"
-    fi
-  fi
+if [ -d "$GIT_DIR/refs" ]; then
+  while IFS= read -r ref_lock; do
+    cleanup_lock_safe "$ref_lock" "${ref_lock#$GIT_DIR/}"
+  done < <(find "$GIT_DIR/refs" -name "*.lock" -type f 2>/dev/null)
+fi
+
+# (legacy fallback removed: 광역 검사가 모든 case cover)
+
+if false; then
+  : # placeholder
 fi
 
 # === git command 실행 (wrapper 후 진짜 git 호출) ===

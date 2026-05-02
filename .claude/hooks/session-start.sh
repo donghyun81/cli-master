@@ -85,31 +85,42 @@ elif [ -n "$ACTUAL_VERSION" ]; then
     echo "[session] cc_version=$ACTUAL_VERSION (pin PASS)"
 fi
 
-# === C9 박음: 세션 시작 시 PID 기반 stale .git/index.lock 자동 정리 ===
-# C8 의 5분 mtime 마진 한계 보완 — PID 검증 우선 (mtime 무관 · 정상 op 와 race 0)
-# 작동: PID 죽음 = 즉시 rm / 살아있음 = 보호 / PID 박힘 X = mtime 30s 보조
-LOCK_FILE="$REPO_ROOT/.git/index.lock"
-if [ -f "$LOCK_FILE" ]; then
-    LOCK_PID=$(cat "$LOCK_FILE" 2>/dev/null | head -c 20 | tr -d '\n[:space:]')
+# === C11 박음: 세션 시작 시 .git/**/*.lock 광역 PID 검증 + stale 자동 정리 ===
+GIT_DIR_HOOK="$REPO_ROOT/.git"
 
-    if [ -n "$LOCK_PID" ] && echo "$LOCK_PID" | grep -qE '^[0-9]+$'; then
-        if ps -p "$LOCK_PID" > /dev/null 2>&1; then
-            echo "[session] .git/index.lock PID=$LOCK_PID 활성 (활성 git op 보호)" >&2
+cleanup_session_lock() {
+    local lock_file="$1"
+    [ -f "$lock_file" ] || return
+    local lock_pid
+    lock_pid=$(cat "$lock_file" 2>/dev/null | head -c 20 | tr -d '
+[:space:]')
+    if [ -n "$lock_pid" ] && echo "$lock_pid" | grep -qE '^[0-9]+$'; then
+        if ps -p "$lock_pid" > /dev/null 2>&1; then
+            return  # 활성 PID = 보호
         else
-            rm -f "$LOCK_FILE" 2>/dev/null && \
-                echo "[session] auto-cleanup dead-PID=$LOCK_PID lock"
+            rm -f "$lock_file" 2>/dev/null && \
+                echo "[session] auto-cleanup dead-PID=$lock_pid ${lock_file#$GIT_DIR_HOOK/}"
         fi
     else
-        NOW=$(date +%s)
-        LOCK_MTIME=$(stat -f %m "$LOCK_FILE" 2>/dev/null || stat -c %Y "$LOCK_FILE" 2>/dev/null || echo "$NOW")
-        AGE=$((NOW - LOCK_MTIME))
-        if [ "$AGE" -gt 30 ]; then
-            rm -f "$LOCK_FILE" 2>/dev/null && \
-                echo "[session] auto-cleanup no-PID lock (age=${AGE}s)"
-        else
-            echo "[session] WARN: .git/index.lock present (no PID · age=${AGE}s)" >&2
+        local now lock_mtime age
+        now=$(date +%s)
+        lock_mtime=$(stat -f %m "$lock_file" 2>/dev/null || stat -c %Y "$lock_file" 2>/dev/null || echo "$now")
+        age=$((now - lock_mtime))
+        if [ "$age" -gt 30 ]; then
+            rm -f "$lock_file" 2>/dev/null && \
+                echo "[session] auto-cleanup no-PID ${lock_file#$GIT_DIR_HOOK/} (age=${age}s)"
         fi
     fi
+}
+
+if [ -d "$GIT_DIR_HOOK" ]; then
+    cleanup_session_lock "$GIT_DIR_HOOK/index.lock"
+    cleanup_session_lock "$GIT_DIR_HOOK/HEAD.lock"
+    cleanup_session_lock "$GIT_DIR_HOOK/packed-refs.lock"
+    cleanup_session_lock "$GIT_DIR_HOOK/config.lock"
+    [ -d "$GIT_DIR_HOOK/refs" ] && find "$GIT_DIR_HOOK/refs" -name "*.lock" -type f 2>/dev/null | while read -r ref_lock; do
+        cleanup_session_lock "$ref_lock"
+    done
 fi
 
 exit 0
