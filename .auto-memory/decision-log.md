@@ -529,3 +529,101 @@ git commit -m "fix(master): C10-LAUNCHD-DAEMON-001 launchd 데몬 박음 (환경
 
 - C4 commit 마감 후 = master ↔ 자식 단방향 정합 100% 박힘
 - 자식 repo 의 본 작업 cycle (Pencil → Compose 등) 진행 가능 = master cli infra 자동 적용
+
+---
+
+## 2026-05-02 · C11-LOCK-WIDE-COVERAGE-001 (마감)
+
+### RCA
+C10 박힌 daemon + C8/C9 hook/wrapper = `.git/index.lock` 만 처리. 단 git 의 lock 종류:
+- `index.lock` — index (staging) 갱신
+- `HEAD.lock` — HEAD ref 갱신 (commit / branch 변경)
+- `packed-refs.lock` — packed-refs 갱신
+- `config.lock` — git config 변경
+- `refs/heads/<branch>.lock` — branch ref 갱신
+- `refs/tags/<tag>.lock` — tag ref 갱신
+- `refs/remotes/<remote>/<branch>.lock` — remote ref 갱신
+
+→ GT commit = HEAD ref 갱신 = HEAD.lock 박힘 + sandbox crash + stale 잔존 = commit 차단.
+
+### 결정 1. 광역 검사 patterns
+- **선택**: 4 layer 모두 (daemon + pre-tool-use + session-start + git-safe) `.git/**/*.lock` 광역
+- **근거**: 한 종류만 처리 = 다른 lock 발생 시 같은 사고 반복 → 모든 lock 종류 동일 PID 검증 + stale rm patterns 적용
+
+### C11 산출물 요약
+
+- 강화 4 파일:
+  - `scripts/git-lock-daemon.sh` (광역 · index + HEAD + packed-refs + config + refs/**/*.lock + misc)
+  - `.claude/hooks/pre-tool-use.sh` (광역 · git command 감지 시)
+  - `.claude/hooks/session-start.sh` (광역 · 세션 시작 시)
+  - `scripts/git-safe.sh` (광역 · wrapper 호출 시)
+- incident-log + decision-log + CLAUDE.md §15 + REPORT.md
+
+### Coin 손 작업 (즉시 사고 해결 + commit)
+
+```bash
+# Step 0: 모든 stale lock 광역 정리 (즉시 사고 해결)
+rm -f ~/AndroidStudioProjects/*/.git/index.lock
+rm -f ~/AndroidStudioProjects/*/.git/HEAD.lock
+rm -f ~/AndroidStudioProjects/*/.git/packed-refs.lock
+rm -f ~/AndroidStudioProjects/*/.git/config.lock
+find ~/AndroidStudioProjects/*/.git/refs -name "*.lock" -type f -delete 2>/dev/null
+
+# Step 1: GT commit 재시도 (HEAD.lock 정리됨)
+cd ~/AndroidStudioProjects/GentlyTable && git commit -m "..."
+
+# Step 2: launchd 데몬 재 install (C11 강화 적용)
+bash ~/AndroidStudioProjects/claude-cli-master/scripts/install-git-lock-daemon.sh
+# (재 install 시 기존 unload + 새 daemon load · plist 변경 X · script 만 업데이트)
+```
+
+### 다음 cycle 진입 조건
+
+- C11 commit 후 = 모든 git lock 종류 자동 mitigation 박힘
+- 자식 repo propagation 시 자동 적용 (`scripts/git-lock-daemon.sh` 는 master 안 daemon 이라 자식 repo 도 cover)
+
+---
+
+## 2026-05-02 · C4-VERIFY-001 (sandbox 마감 · Coin 손 작업 대기)
+
+### 트리거
+
+Coin 요청 — "C4 propagation 제대로? 빠진 내용? 중복/잔존?"
+
+### 점검 결과 (5 영역)
+
+| # | 영역 | 결과 |
+|---|---|---|
+| ① sha 정합 | verify-sync 109 / 0 / 0 | ✓ PASS |
+| ② C11 hook drift | master vs 자식 hook 6 파일 (3-repo × 2 hook) | ✗ DRIFT → sandbox cp 즉시 정정 |
+| ③ deprecated rules | C2 분할 후 pointer 6 종 × 4-way | ✗ 24 잔존 (Coin rm) |
+| ④ flat agents 중복 | 자식 `agents/*.md` 25 vs `active/`+`deferred/` 25 | ✗ 75 중복 (Coin rm) |
+| ⑤ sandbox testfile | 자식 `.ai/.sandbox-write-test` × 3 | ✗ 3 잔존 (Coin rm) |
+
+### 결정 1. C11 hook propagation 누락 → sandbox cp 즉시 정정
+
+- **실측**: master `pre-tool-use.sh` + `session-start.sh` 갱신 후 자식 propagate 누락 = drift 6 파일
+- **정정**: sandbox `cp` 권한 가능 → 즉시 master sha 채택 후 cp
+- **재실측**: PASS 109 / 0 / 0 회복
+
+### 결정 2. deprecated + flat + testfile = Coin 손 작업 1 paste 묶음
+
+- **선택**: 102 파일 일괄 rm + master 1 commit + 자식 3 commit (paste 1 회)
+- **대안**: cycle 별 분리 (3 cycle) — 거부 (Coin 의 손 작업 비용 ↑)
+- **근거**: sandbox `rm` 권한 한계 = 모두 같은 근본 원인 → 묶음 처리 ROI 최대
+
+### 결정 3. 자동화 후속 (옵션 A `--prune` 보류)
+
+- **현재**: `propagate.sh` 가 master 부재 파일을 자식에서도 자동 rm 안 함 (cp 일방향만)
+- **고려**: `--prune` 모드 신설 검토 (cycle 우선순위 낮음 — 본 사고 1 paste 로 마감)
+- **본 작업 본류 진입 우선**: 자식 도메인 cycle (Pencil → Compose) 시작 후 사고 재발 시 박는 방향
+
+### C4-VERIFY 산출물
+
+- `.ai/reports/C4-VERIFY-001/REPORT.md` (점검 + Coin 손 작업 1 paste + 옵션 후속)
+- decision-log + incident-log + CLAUDE.md §15 갱신 (Coin 손 작업 후 = baseline 정정)
+
+### 다음 cycle 진입 조건
+
+- Coin 손 작업 1 paste (rm 102 + commit 4) → 다음 chat 진입 시 baseline = master rules 13 / 자식 rules 13 / 자식 flat agents 0 / verify-sync iter 103
+- baseline 정정 후 = 자식 도메인 cycle (Pencil → Compose 본 작업) 진입 가능

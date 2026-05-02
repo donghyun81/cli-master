@@ -79,3 +79,21 @@
 - mitigation: macOS launchd 백그라운드 데몬 박음 (5초마다 PID 검증 + stale rm) — 환경 무관 (Cowork/IDE/터미널/sandbox/모든 도구) 자동 작동 + scripts/install-git-lock-daemon.sh 1회 install 후 영구
 - trail: close (C10 박힘 + Coin install 1회 후 99.99% 자동 mitigation · daemon log = ~/Library/Logs/git-lock-daemon.log)
 ```
+
+```
+## 2026-05-02T08:50:00+0900
+- type: 자동화 install ≠ activation (재재재발 · C10 mitigation 한계 · lock 종류 사고 발견)
+- cycle: C11-LOCK-WIDE-COVERAGE-001
+- summary: C10 daemon + C8/C9 hook/wrapper 모두 .git/index.lock 만 처리 → GT commit 시 .git/HEAD.lock 발생 (commit op = HEAD ref 갱신 시 박힘) · git lock 종류 다양: index/HEAD/packed-refs/config/refs/heads/<branch>/refs/tags/* 모두 발생 가능
+- mitigation: 4 layer (daemon + 2 hooks + wrapper) 모두 광역 검사 박음 — index.lock + HEAD.lock + packed-refs.lock + config.lock + refs/**/*.lock 동일 PID 검증 + stale rm patterns 적용
+- trail: close (C11 박힘 + Coin daemon install 1회 후 모든 git lock 종류 자동 mitigation)
+```
+
+```
+## 2026-05-02T09:30:00+0900
+- type: 자동화 install ≠ activation (재발) + 사용자 의도 vs 정책 충돌 (잔존)
+- cycle: C4-VERIFY-001
+- summary: C4 propagation 정합 (sha 109/0/0 PASS) 사후 검증 = 4 종 누락 발견 — (1) C11 hook 갱신 후 자식 propagate 누락 → drift 6 (sandbox cp 즉시 정정), (2) C2 분할의 deprecated pointer 6 종 master + 3 자식 4-way 잔존 = 24 (Coin rm), (3) 자식 flat agents 25 × 3 = 75 (active/deferred 폴더 이전 후 잔존 · Coin rm), (4) C4-1 BASELINE 검증용 sandbox testfile × 3 (Coin rm)
+- mitigation: sandbox 권한 가능 정정 = 즉시 cp / 권한 X 정정 = Coin 손 작업 1 paste (102 파일 rm + master 1 commit + 자식 3 commit) · 후속 옵션 = `propagate.sh --prune` 신설 검토 (cycle 우선순위 낮음)
+- trail: close (Coin 손 작업 후 verify-sync 103/0/0 회복 시 baseline 정정)
+```

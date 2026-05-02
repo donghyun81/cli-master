@@ -63,3 +63,22 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 - 자식 CLAUDE.md 의 첫 5줄 Nested 패턴 박음 (3 자식 모두)
 - master 의 deprecated rules / Pencil 명명 alias 모두 자식 적용
 - exit 0 PASS
+
+## C4-VERIFY-001 광역 점검 (2026-05-02 · sandbox 마감)
+
+- sha 정합 (verify-sync) = PASS 109 / DRIFT 0 / MISS 0 ✓
+- C11 hook drift 6 (pre-tool-use.sh + session-start.sh × 3 자식) → sandbox cp 즉시 정정 → 재실측 PASS 회복
+- deprecated rules pointer 4-way 잔존: workflow.md / evidence-and-reporting.md / auth-security-privacy.md / backend-and-api.md / data-and-migrations.md / performance-reliability.md = 6 종 × (master + 3 자식) = 24 (Coin rm 대기)
+- 자식 flat agents 중복: `agents/*.md` 25 = `agents/active/`+`agents/deferred/` 25 (이름·내용 byte-identical) × 3 자식 = 75 (Coin rm 대기)
+- 자식 sandbox testfile: `.ai/.sandbox-write-test` × 3 (Coin rm 대기)
+- orphan 광역 검사 (`docs/setup/`, `scripts/agent/repo-config.sh`, `MANAGED_AGENTS_READINESS.md` 등) = 모두 정상 repo-specific
+- Coin 손 작업 1 paste 후 expected: PASS 103 / DRIFT 0 / MISS 0 (master rules 13 · 자식 rules 13 · 자식 flat agents 0)
+- 가이드 위치: `.ai/reports/C4-VERIFY-001/REPORT.md` §4
+
+## Last verify-sync
+
+- timestamp: 2026-05-02T08:41:37+0000
+- pass: 109
+- drift: 0
+- miss: 0
+- exit: 0
