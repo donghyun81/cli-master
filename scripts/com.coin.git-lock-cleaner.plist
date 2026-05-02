@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.coin.git-lock-cleaner</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/bin/bash</string>
+        <string>-c</string>
+        <string>$HOME/AndroidStudioProjects/claude-cli-master/scripts/git-lock-daemon.sh</string>
+    </array>
+
+    <!-- 5초마다 호출 -->
+    <key>StartInterval</key>
+    <integer>5</integer>
+
+    <!-- 시스템 부팅 + 사용자 로그인 시 자동 시작 -->
+    <key>RunAtLoad</key>
+    <true/>
+
+    <!-- 백그라운드 (low priority) -->
+    <key>Nice</key>
+    <integer>10</integer>
+
+    <key>StandardOutPath</key>
+    <string>/dev/null</string>
+
+    <key>StandardErrorPath</key>
+    <string>/dev/null</string>
+
+    <!-- 환경 변수 (필요 시 override) -->
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PARENT_DIR</key>
+        <string>{{HOME}}/AndroidStudioProjects</string>
+    </dict>
+</dict>
+</plist>

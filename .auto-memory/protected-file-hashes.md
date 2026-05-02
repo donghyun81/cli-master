@@ -1,0 +1,76 @@
+# Protected File Hashes — claude-cli-master baseline
+
+> master 가 4 보호 파일 + 신규 도구 무관 1 보호 파일 + cli infra 의 SoT.
+> 자식 repo (GB/GD/GT) 의 모든 sha 는 본 master sha 와 byte-identical 강제.
+> drift 감지 = `verify-sync.sh` 가 자동 발화 + propagation cycle trigger.
+
+## 보호 파일 5 종 (강제 byte-identical · master HEAD baseline · C2.5 갱신)
+
+| 파일 | 분류 | sha-256 | 변동 |
+|---|---|---|---|
+| `docs/schemas/ui-spec.schema.json` | 도구 무관 (v0.3 generic 화) | `5aa52b23124681bf0dada230ff88e2f22e1b840b30bb8915cd19409e1228fb1c` | **C2.5 갱신** (designTool enum + lastSyncedDesignToolStateHash 신설) |
+| `.claude/rules/uiux-sot-refresh.md` | 도구 무관 (95% generic) | `1f87144705380a2694bd48a2050d3c44d88d005fcbb28efc5bc53b4db75c2562` | **C2.5 갱신** (Pencil 인용 → `<design-tool>` placeholder) |
+| `docs/design/design-sot-policy.md` | 도구 무관 (75% 공통 추출) | `e5e3fe165ec33dffadbb091dec40bff36c8b4f60ef0c1316f9d7d7e74d0f3b18` | **C2.5 신설** (pencil-sot-policy.md 의 75% 공통) |
+| `.claude/rules/pencil-uiux-workflow.md` | Pencil 도구 바인딩 (30% 잔존) | `6297080aa434297f7cb885af0d181854a2417c85a18376e036626e9449b900e6` | **C2.5 분리** (70% 공통 → `design-to-code-sync.md` · 본 파일 = 도구 바인딩만) |
+| `docs/design/pencil-sot-policy.md` | Pencil 도구 바인딩 (의미 = pencil-sot-binding) | `96de2f5d10a73af4aaa2608770f503dd3956304846c6db8a9b2cf2d05cba6559` | **C2.5 분리** (75% 공통 → `design-sot-policy.md` · 본 파일 = 도구 바인딩만 · Coin mv → `pencil-sot-binding.md`) |
+
+> **참고**: `design-sot-policy.md` 신설 sha = `e5e3fe165ec3...` (C2.5 마감 박음).
+
+## 신설 cli infra (C2.5)
+
+- `.claude/rules/code-principles.md` (151 줄) — Q1 답: SOLID 5 + DRY/KISS/YAGNI + 코드 리뷰 체크리스트 + reviewer 자동 참조
+- `.claude/rules/design-to-code-sync.md` (103 줄) — Q2 답: pencil-uiux-workflow.md 의 70% 공통 추출 (도구 무관)
+- `docs/design/design-sot-policy.md` (153 줄) — Q2 답: pencil-sot-policy.md 의 75% 공통 추출 (보호 신설)
+
+## C2.5 분리 결과 — 도구 무관 vs Pencil 전용 매트릭스
+
+| 영역 | 도구 무관 (공통) | Pencil 전용 (도구 바인딩) |
+|---|---|---|
+| Design SoT 정책 | `design-sot-policy.md` (보호 · §1~§8) | `pencil-sot-policy.md` (보호 · 의미 = `pencil-sot-binding.md`) — Pencil MCP tools / Path B fallback / 도구 한정 STOP |
+| Design → Code sync | `design-to-code-sync.md` — 5-type IMPL / Output Checklist P1-P9 / STOP | `pencil-uiux-workflow.md` (보호) — Pencil 도구 호출 patterns / macOS 자동화 / Cmd+S / Save As 모달 |
+| SoT refresh | `uiux-sot-refresh.md` (보호 · 95% generic) | (도구별 trigger 키워드는 본 파일 안 generic placeholder) |
+| 자동화 hook | (도구 무관 hook 없음) | `pencil-auto-save.sh` (v2) + `save-as-result-check.sh` (Pencil 의존) |
+| 자동화 rule | (도구 무관 rule 없음) | `pencil-automation.md` (Pencil .pen 자동화) |
+| schema | `ui-spec.schema.json` (보호 v0.3 · designTool enum + 도구 무관 필드명) | (구 Pencil 명명 필드는 v0.3 alias 로 유지 + deprecated 예고) |
+
+## verification
+
+```bash
+# master baseline 일관성 검증 (run from claude-cli-master/)
+for f in docs/schemas/ui-spec.schema.json .claude/rules/uiux-sot-refresh.md docs/design/design-sot-policy.md .claude/rules/pencil-uiux-workflow.md docs/design/pencil-sot-policy.md; do
+  shasum -a 256 "$f" | awk '{print $1}'
+done
+# 위 5 sha 가 본 표와 일치 = master baseline PASS
+
+# 3-repo 동기 검증
+bash scripts/verify-sync.sh
+```
+
+## Recent updates
+
+- 2026-05-02 · C2.5-COMMON-PRINCIPLES-AND-DESIGN-TOOL-DECOUPLE-001 · 보호 파일 4종 sha **모두 갱신** (도구 무관 vs Pencil 전용 분리). 신설 보호 파일 1종 (`design-sot-policy.md`). 신설 cli infra 2종 (`code-principles.md` / `design-to-code-sync.md`).
+- 2026-05-02 · C2-RULES-RESTRUCTURE-001 · 5 파일 신설 + 6 파일 deprecated + 5 파일 cross-reference 갱신. 보호 파일 4종 sha 변동 0.
+- 2026-05-02 · C1-MASTER-BOOTSTRAP-001 · master baseline 신설.
+
+## C6 신설/흡수 (2026-05-02)
+
+### 흡수 6 파일 (3-repo byte-identical)
+- `.ai/promptfit/PLAYBOOK.md` (PromptFit 평가 가이드)
+- `.ai/uiux-sot/refresh/TRIGGERS.md` (refresh trigger patterns)
+- `.ai/uiux-sot/refresh/VERIFY.md` (refresh 검증 명령)
+- `.ai/uiux-sot/refresh/WORKFLOW.md` (refresh workflow)
+- `.github/pull_request_template.md` (PR template)
+- `docs/backend/RLS_AND_PLAY_INTEGRITY_GUIDE.md` (Supabase RLS + Play Integrity)
+
+### 신설 9 파일 (master 신규 SoT)
+- `docs/guides/app-implementation-guide.md` (204 줄 · Claude CLI 진입 1차 가이드)
+- `docs/templates/api-spec.template.md`
+- `docs/templates/data-model.template.md`
+- `docs/templates/screen-flow.template.md`
+- `docs/templates/ai-prompt-guide.template.md`
+- `docs/templates/billing.template.md`
+- `docs/templates/setup-guide.template.md`
+- `docs/templates/pencil-dev-prompt.template.md`
+- `.auto-memory/child-claude-md-header.template.md` (Nested CLAUDE.md 패턴)
+
+보호 파일 5종 sha = C2.5 baseline 보존 (변동 0).

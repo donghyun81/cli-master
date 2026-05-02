@@ -1,0 +1,21 @@
+# Gently Master gitignore
+
+# macOS
+.DS_Store
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# Local Claude overrides (per-machine · propagation 대상 외)
+.claude/settings.local.json
+
+# Logs
+.ai/hooks/*.log
+.ai/traces/*.jsonl
+
+# Temp
+*.tmp
+*.swp
+*.swo

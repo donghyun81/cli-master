@@ -1,0 +1,224 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gentlybreath.local/schemas/ui-spec.schema.json",
+  "title": "Design UI Spec (Single-Screen SoT) — Tool-agnostic",
+  "type": "object",
+  "required": ["schemaVersion", "screenName", "intent", "capturedAt", "themes", "states", "tokens", "accessibility", "wcag", "nodes"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "format": "uri-reference",
+      "description": "IDE 자동 validation ref. 데이터 파일이 스키마 경로를 자기 지정. Draft 2020-12 validator 는 data 내부 $schema 를 meta-keyword 로 취급하지 않고 일반 속성으로 처리하므로 properties 에 명시 필요."
+    },
+    "schemaVersion": {
+      "type": "string",
+      "enum": ["0.1", "0.2"],
+      "description": "Breaking change 관리. 0.1=파일럿. 0.2=Option B dual-layer SoT (lifecycle/visualSotPath/lastSyncedPencilStateHash 필드 추가). 0.3=designTool generic 화 (lastSyncedDesignToolStateHash 신설 · lastSyncedPencilStateHash 는 alias 유지). Stage 3 완료 시 1.0 승격."
+    },
+    "screenName": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(-[a-z0-9]+)*-screen$",
+      "description": "kebab-case, -screen 접미사 필수. 예: upgrade-account-screen, sign-in-screen."
+    },
+    "intent": {
+      "type": "string",
+      "enum": ["CURRENT", "TARGET", "LOCKED"],
+      "description": "CURRENT=현 구현 기준, TARGET=목표 설계, LOCKED=Auth/Billing 등 STOP 영역. drift 혼동 방지를 위해 CURRENT 와 TARGET 을 한 파일에 섞지 않음."
+    },
+    "designTool": {
+      "type": "string",
+      "enum": ["pencil", "figma", "sketch", "adobe-xd"],
+      "description": "사용 디자인 도구 (v0.3 신설 · 도구 무관 generic 화). default = repo 별 settings 또는 첫 화면 도구."
+    },
+    "pencilFrameCode": {
+      "type": ["string", "null"],
+      "description": "마이그레이션 추적용. 기존 A-N 코드 (예: A-2_auth). 신규 화면은 null."
+    },
+    "capturedAt": {
+      "type": "string",
+      "format": "date",
+      "description": "ISO 8601 (YYYY-MM-DD). 파일 내용이 확정된 날짜."
+    },
+    "themes": {
+      "type": "object",
+      "required": ["light"],
+      "additionalProperties": false,
+      "properties": {
+        "light": { "$ref": "#/$defs/themeVariant" },
+        "dark":  { "$ref": "#/$defs/themeVariant" }
+      }
+    },
+    "states": {
+      "type": "object",
+      "required": ["default"],
+      "additionalProperties": true,
+      "properties": {
+        "default": { "$ref": "#/$defs/stateVariant" },
+        "loading": { "$ref": "#/$defs/stateVariant" },
+        "error":   { "$ref": "#/$defs/stateVariant" },
+        "empty":   { "$ref": "#/$defs/stateVariant" },
+        "success": { "$ref": "#/$defs/stateVariant" }
+      },
+      "description": "화면별 추가 상태 허용 (예: signup, verified). additionalProperties=true."
+    },
+    "tokens": {
+      "type": "object",
+      "required": ["color", "typography"],
+      "additionalProperties": false,
+      "properties": {
+        "color": {
+          "type": "object",
+          "description": "직접 하드코딩 금지 원칙. A-0_design_tokens 에서 inherit 하거나 값 명시.",
+          "additionalProperties": true
+        },
+        "typography": {
+          "type": "object",
+          "required": ["family"],
+          "additionalProperties": true,
+          "properties": {
+            "family": { "type": "string" }
+          }
+        }
+      }
+    },
+    "accessibility": {
+      "type": "object",
+      "required": ["minTouchTargetDp", "contentDescriptions"],
+      "additionalProperties": false,
+      "properties": {
+        "minTouchTargetDp": { "type": "integer", "minimum": 48 },
+        "contentDescriptions": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        }
+      }
+    },
+    "wcag": {
+      "type": "object",
+      "required": ["samples"],
+      "additionalProperties": false,
+      "properties": {
+        "samples": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["text", "fg", "bg", "ratio", "pass"],
+            "additionalProperties": true,
+            "properties": {
+              "text":  { "type": "string" },
+              "fg":    { "type": "string", "pattern": "^#[0-9A-Fa-f]{6}$" },
+              "bg":    { "type": "string", "pattern": "^#[0-9A-Fa-f]{6}$" },
+              "ratio": { "type": "string" },
+              "pass":  { "type": "string", "enum": ["AA", "AAA", "FAIL"] },
+              "source": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "copy": {
+      "type": "object",
+      "description": "코어 메시징/톤 가이드. 자유 key 허용. GentlyBreath 는 coreMessaging/observationTone 관례.",
+      "additionalProperties": true
+    },
+    "nodes": {
+      "type": "array",
+      "description": "Pencil 캔버스 복원용 중간 깊이 노드 트리. CLI 가 batch_design 으로 round-trip 시 사용. nodes[*].id 는 spec 논리 ID 이며 Pencil 캔버스 내부 id 와 독립 네임스페이스 (Stage 1B 파일럿 확인, batch_design 이 spec id 무시하고 자체 id 생성). round-trip 시 id 매핑은 별도 layer 책임. auto-layout/constraints 미포함 (Pencil 내부 스키마 변화 취약성 회피).",
+      "items": {
+        "type": "object",
+        "required": ["id", "type"],
+        "additionalProperties": false,
+        "properties": {
+          "id":   { "type": "string", "minLength": 1 },
+          "type": { "type": "string", "enum": ["frame", "text", "rect", "image", "button", "input", "icon", "group"] },
+          "text": { "type": "string" },
+          "position": {
+            "type": "object",
+            "required": ["x", "y"],
+            "additionalProperties": false,
+            "properties": {
+              "x": { "type": "number" },
+              "y": { "type": "number" },
+              "w": { "type": "number" },
+              "h": { "type": "number" }
+            }
+          },
+          "style": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "fill":   { "type": "string" },
+              "stroke": { "type": "string" },
+              "radius": { "type": "number" },
+              "opacity": { "type": "number", "minimum": 0, "maximum": 1 }
+            }
+          },
+          "children": {
+            "type": "array",
+            "items": { "$ref": "#/properties/nodes/items" }
+          }
+        }
+      }
+    },
+    "notes": {
+      "type": "object",
+      "description": "자유 주석. retrospective/boundary/follow-up 메모.",
+      "additionalProperties": true
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "pencilInherits": { "type": "string", "description": "inherit 토큰 원본 frame (예: A-0_design_tokens)" },
+        "migratedFrom":   { "type": ["string", "null"], "description": "마이그레이션 원본 meta.json 상대경로. 신규 화면은 null. pencilFrameCode 와 동일 nullable 관례." }
+      }
+    },
+    "lifecycle": {
+      "type": "string",
+      "enum": ["active", "deprecated", "frozen", "removed"],
+      "default": "active",
+      "description": "SoT 엔트리 생명주기. active=현 사용, deprecated=신규 참조 금지(warn), frozen=외부 조건(Auth STOP 등)으로 편집 동결, removed=SoT 제거(파일 자체는 archive 로 이동하되 엔트리는 lifecycle=removed 로 논리 삭제 기록). Option B dual-layer SoT DELETE 절차 entry point."
+    },
+    "lifecycleReason": {
+      "type": "string",
+      "description": "lifecycle 이 active 가 아닐 때 사유. 예: 'auth-stop' (Auth migration 미정의로 frozen), 'replaced-by:<screenName>' (deprecated), 'removed-at:<yyyymmdd>' (removed). active 시 생략 가능."
+    },
+    "visualSotPath": {
+      "type": ["string", "null"],
+      "description": "동일 pencil-sot/ 디렉터리 기준 .pen 상대경로. Option B dual-layer 에서 1a structural ↔ 1b visual 의 round-trip 계약. .pen 미생성 화면은 null (Phase B 대기)."
+    },
+    "lastSyncedDesignToolStateHash": {
+      "type": ["string", "null"],
+      "description": "Visual SoT (1b) 의 full 64자 sha-256. 도구 무관 generic 필드 (v0.3 신설). null 허용 = 1b 미생성 화면 (Phase B 대기). 도구별 구체 = pencil-sot-binding.md / figma-sot-binding.md 등."
+    },
+    "lastSyncedPencilStateHash": {
+      "type": ["string", "null"],
+      "description": "visualSotPath 의 .pen 과 마지막 동기화 시점 해시 (sha256-prefix 12자). CLI batch_get 결과를 canonical serialize 후 hash 처리. null=미동기 상태(신규 생성 또는 .pen 부재). drift 감지 기준: visualSotPath 존재 && hash mismatch → compound-lint warn, hash null && visualSotPath 존재 → warn."
+    }
+  },
+  "$defs": {
+    "themeVariant": {
+      "type": "object",
+      "required": ["previewPath"],
+      "additionalProperties": false,
+      "properties": {
+        "previewPath": {
+          "type": "string",
+          "description": "<screen-name>.preview.<theme>.png 상대경로 (같은 pencil-sot/ 디렉터리 기준)."
+        },
+        "surfaceBg": { "type": "string", "pattern": "^#[0-9A-Fa-f]{6}$" }
+      }
+    },
+    "stateVariant": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "previewPath": { "type": "string" },
+        "description": { "type": "string" }
+      }
+    }
+  }
+}

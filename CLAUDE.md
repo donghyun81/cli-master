@@ -1,0 +1,258 @@
+# Gently Master — Claude Code 운영 SoT (Single Source of Truth)
+
+> **이 repo 는 cli infra + 보호 파일의 단일 source-of-truth.**
+> 자식 repo (GentlyBreath / GentlyDay / GentlyTable / 향후 추가) 는 본 repo 에서 단방향 propagation 을 받는다.
+> 시간대: Asia/Seoul (KST) · 운영 CLI: Claude Code 단일.
+
+---
+
+## 0. master repo 의 책임 (3 개)
+
+1. **cli infra SoT 보유** — `.claude/` (agents/commands/hooks/rules/skills/settings) + `docs/schemas/` + `docs/design/pencil-sot-policy.md` 의 정합 source.
+2. **propagation 도구 제공** — `scripts/propagate.sh` / `scripts/verify-sync.sh` / `scripts/activate-agent.sh` / `scripts/report-gen.sh` (C3 에서 신설).
+3. **propagation 결과 보고** — `propagation-reports/<cycle-id>/REPORT.md` 누적.
+
+자식 repo 는 위 3 개에 의존만 함. 자식 repo 가 cli infra 직접 수정 금지 (단방향 정합 강제).
+
+---
+
+## 1. 자식 repo 등록 (placeholder · 변경 가능)
+
+| 자식 repo | 도메인 | 패키지 | 절대 경로 (placeholder) |
+|---|---|---|---|
+| GentlyBreath (GB) | 호흡 | `com.example.gentlybreath` | `<PARENT>/GentlyBreath` |
+| GentlyDay (GD) | 일상 | `com.example.gentlyday` | `<PARENT>/GentlyDay` |
+| GentlyTable (GT) | 식단 | `com.example.gentlytable` | `<PARENT>/GentlyTable` |
+
+`<PARENT>` 는 환경별 변수 (예: `~/AndroidStudioProjects` · `$ANDROID_PROJECTS_ROOT`). `scripts/propagate.sh` 가 자동 해결.
+
+신규 자식 repo 추가는 본 표에 행 추가 + 첫 propagation cycle 진입.
+
+---
+
+## 2. 정합 강제 3 등급 (`cycle-discipline.md` §3 박힘)
+
+| 등급 | 대상 | 강제 수준 | drift 발생 시 |
+|---|---|---|---|
+| **보호 파일 (강제)** | 4 종 — `docs/schemas/ui-spec.schema.json` · `.claude/rules/pencil-uiux-workflow.md` · `docs/design/pencil-sot-policy.md` · `.claude/rules/uiux-sot-refresh.md` | master ↔ 자식 byte-identical 의무 | 즉시 mitigation cycle (리뷰 블로커) |
+| **cli infra (권장)** | 53 + α — `.claude/` 전체 + `.claude/settings.json` 등 | 권장 byte-identical | lazy 가능 · 다음 cycle 영향 시 mitigation |
+| **repo-specific (자유)** | 도메인 코드 / 화면 / `app/` / `<repo>/CLAUDE.md` 본문 도메인 섹션 / `settings.local.json` | 정합 강제 X | 자연 발생 |
+
+---
+
+## 3. propagation 표준 흐름 (단방향 master → 자식)
+
+```
+1. master 에서 cli infra 또는 보호 파일 변경 + commit
+2. bash scripts/propagate.sh <relative-path> [--targets GB,GD,GT]   # C3 에서 신설
+3. 각 자식 repo 에서 staged commit (master commit body 인용)
+4. bash scripts/verify-sync.sh   # cross-verify · sha 비교
+5. propagation-reports/<cycle-id>/REPORT.md 자동 생성 (report-gen.sh)
+6. master 에 audit commit (propagation-status.md 갱신)
+```
+
+자식 repo 에서 cli infra 변경 시도 → STOP + master 신설 cycle 권장.
+
+---
+
+## 4. 절대 금지 (3-repo 공통)
+
+- 명령어 차단: `settings.json` deny list 참조 (`curl` `wget` `sudo` `git push` `git reset` `git clean` `*tmp*` `rm -rf /...`)
+- 경로: `/tmp` · `$TMPDIR` 계열
+- 데이터: 시크릿 / 토큰 / 키 / PII 값을 파일에 기록 (변수명 / 주입 경로만 허용)
+- 네트워크: 웹 조회 / 다운로드 (레포 내 근거만 사용)
+- **자식 repo 의 cli infra 직접 수정** (단방향 정합 위반)
+
+---
+
+## 5. STOP 조건 (즉시 중단 + 자동 수정/되돌리기 금지)
+
+1. DB migration 또는 Money / Auth 영향 경로 발견
+2. 요구사항 범위가 계획보다 확장됨 (scope expansion)
+3. 비가역 변경 징후 (파일 삭제, 스키마 변경, override)
+4. 예상 외 시스템 상태 발견
+5. **자식 repo cli infra drift 감지** (master 와 sha 불일치)
+
+`BLOCKED` 종료는 권한 / 환경 이슈에만 사용.
+
+---
+
+## 6. 표준 워크플로
+
+```
+prompt receive → intake normalization → /collect → /plan → implement → /verify → /review → DONE 또는 replan
+```
+
+Plan Mode (Shift+Tab 두 번) 에서 intake normalization + pre-EVIDENCE 계약 먼저 고정 후 구현 모드 전환.
+
+세부 단계 정의: `.claude/rules/workflow-core.md` + `cycle-discipline.md` + `pencil-automation.md`.
+
+---
+
+## 7. 진입 커맨드 라우팅
+
+| 작업 유형 | 시작 커맨드 | 언제 사용 |
+|---|---|---|
+| 제품 코드 구현 / 수정 | `/fulfill-requirement <한 줄>` | 새 기능 / 버그 / 리팩터 / UI 변경 (자식 repo 안에서) |
+| 문서 거버넌스 | `/fulfill-doc-governance` | docs/** 정책 / 참조 경로 감사 |
+| 운영 레이어 변경 | 커맨드 없이 직접 프롬프트 | hook / rule / agent / skill / command 자체 추가 / 수정 (master 에서) |
+| 빠른 검증 일괄 | `/verify-all <taskId>` | architecture + test + compound-lint |
+| 리뷰 단독 | `/review-task <taskId>` | REVIEW.md 만 재생성 |
+| 레이어 위반 점검 | `/check-layer` | shared/domain ↔ app 경계 |
+| 계획만 먼저 | `/plan-first` | EVIDENCE → PLAN 까지만 |
+| 조사형 | `/survey <주제>` | UNKNOWN 정리 / 외부 의존 파악 |
+| 멈춘 task 재개 | `/resume-task <taskId>` | STOP / BLOCKED 재개 |
+| UI/UX SoT refresh | `/uiux-refresh <FULL\|PARTIAL\|DOC-ONLY>` | `.ai/uiux-sot/latest/` 갱신 |
+| **propagation cycle** | `/cycle-report propagate <file>` | C3 에서 신설 — master 변경 후 자식 propagation 자동 |
+
+### 라우팅 판정 우선순위
+
+1. **master cli infra 변경?** → master 에서 직접 프롬프트 + propagation 의무
+2. **자식 repo 의 cli infra drift 감지?** → STOP + master 정정 cycle
+3. **운영 레이어 변경 (자식 repo 의 `.ai/`)?** → 자식 repo 에서 직접 프롬프트
+4. **docs 거버넌스 핵심?** → `/fulfill-doc-governance`
+5. **그 외 제품 코드?** → `/fulfill-requirement`
+6. **검증 / 리뷰 단독?** → `/verify-all` 또는 `/review-task`
+7. **조사만?** → `/survey`
+8. **재개?** → `/resume-task`
+9. **UI/UX baseline?** → `/uiux-refresh`
+
+---
+
+## 8. Repo-First Intake (3-repo 공통)
+
+Claude Code 는 자동 완성형 AI 가 아니라 **repo-first 해석 보조형 AI**.
+프롬프트 수신 직후 아래 고정:
+
+- 작업 유형 + reading mode
+- 요구사항 출처 충족 여부
+- 정보 공백 분류: `RESOLVABLE_IN_REPO` / `UNKNOWN` / `BLOCKED`
+- STOP 위험
+- 필수 reading order
+- 필요한 read-only 전문가
+- implementer 진입 가능 여부
+
+| 단계 | 규칙 |
+|---|---|
+| intake normalization | pre-EVIDENCE 계약을 먼저 고정. implementer direct entry 금지. |
+| /collect | 제품 변경 금지. 검색 / 수집만. 0 matches 도 기록. build / .gradle / generated 제외. |
+| /plan | ChangeBudget 표 필수. 경미한 불일치 → PLAN 갱신. 리스크 상승 → STOP. |
+| implement | 최소 변경 원칙. SoftBudget: `.claude/rules/workflow-core.md` + `cycle-discipline.md` + `pencil-automation.md` 참조. |
+| /verify | 0 command 금지. 불가 시 UNKNOWN(사유) + STOP. exit code 기록. |
+| /review | 근거 기반 판정. 근거 없으면 UNKNOWN. |
+
+verify / review 없이 완료 금지.
+
+모든 implement task 는 REVIEW 에서 PromptFit 평가 (루브릭: `<repo>/docs/agent/solutions/PROMPTFIT_RUBRIC.md`) + `.ai/promptfit/INDEX.md` 갱신.
+
+---
+
+## 9. Context Hygiene
+
+- **공통 불변**: 매 진입 시 `CLAUDE.md` + `.claude/settings.json` 만 먼저 읽음.
+- **역할별**: reading mode 에 맞는 `.claude/rules/**` / `.claude/agents/**` / `.claude/skills/**` 만 추가 열기.
+- **task-local**: `.ai/tasks/<taskId>.md` + 현재 `.ai/reports/<taskId>/` + touched files 마지막 레이어.
+- **bulk read 금지**: `.claude/**` 전체 일괄 읽지 않음.
+
+---
+
+## 10. 구현 / 설계 기본값 (3-repo 공통 · 변경 불가)
+
+- 직접 구현 우선 (새 추상화 추가 전 직접 구현 단순성 평가)
+- 신규 의존성 승인: `libs.versions.toml` 신규 항목 = PLAN `## 2. DependencyDecision` 8 항목 필수
+- TDD 우선: 새 UseCase / Coordinator 는 `FakeXxx` 기반 테스트 먼저 또는 함께
+- 외부 준비 연기: 외부 콘솔 / 인프라 미준비 = `TODO(user-prep)` 또는 stub
+- 모델 분리: DTO · Entity · DomainModel · UiState 레이어 간 혼용 금지
+- 명시적 오류 처리: typed 도메인 오류 또는 Result 우선
+- 테스트 심 주입: clock · dispatcher · identity · logger · uuid 인터페이스 주입
+- 불변 UI 상태: UiState 불변 + ViewModel → UI 단방향
+- DI baseline: 3-repo 모두 `Koin`. 위치는 `app/` (또는 향후 `shared/app` glue)
+
+세부: `.claude/rules/workflow-core.md` + `cycle-discipline.md` + `pencil-automation.md` + `.claude/rules/ui-ux-analysis.md`.
+아키텍처 공통 SoT: 각 자식 repo 의 `docs/agent/architecture/` (각 자식 repo 가 SteadyWell propagation 받음).
+
+---
+
+## 11. 산출물 규약
+
+| 산출물 | 경로 |
+|---|---|
+| Task 문서 | `<repo>/.ai/tasks/<taskId>.md` (자식 repo 안) |
+| Task 인덱스 | `<repo>/.ai/tasks/INDEX.md` |
+| 단계별 보고서 | `<repo>/.ai/reports/<taskId>/{MODE,EVIDENCE,PLAN,VERIFY,REVIEW,COMPOUND,TODO}.md` |
+| **propagation 보고서** | `claude-cli-master/propagation-reports/<cycle-id>/REPORT.md` |
+| **C# (master cycle) 보고서** | `claude-cli-master/.ai/reports/<cycle-id>/REPORT.md` |
+| 운영 레이어 문서 | `<repo>/docs/agent/solutions/`, `<repo>/docs/agent/architecture/`, `<repo>/docs/agent/process/` |
+
+stdout 출력 순서: `[EVIDENCE] → [DIFF] → [LOG]`
+
+PLAN / VERIFY / REVIEW / PromptFit 정규 스키마: `.claude/rules/report-formats.md` + `report-paths.md`.
+
+### Task ID 형식
+
+`<PREFIX>-<DOMAIN>-NNN`
+
+- master cycle: `C<n>-<DOMAIN>-NNN` (예: `C1-MASTER-BOOTSTRAP-001`)
+- 자식 repo cycle: `<REPO>-<DOMAIN>-NNN` (예: `GB-UI-001`, `GD-CLI-005`, `GT-PHASE-F-002`)
+- DOMAIN: UI · AUTH · DATA · API · SERVER · PERF · CONFIG · RELEASE · INFRA · DOCS · CLI · MASTER · PROPAGATE 등
+
+---
+
+## 12. UNKNOWN 규칙
+
+레포 내 근거 없이 단정하지 않음. 근거 불충분 항목 = `UNKNOWN` 표기 + 확인 위치 명시.
+
+---
+
+## 13. propagation status (실측 baseline)
+
+현 master HEAD sha + 3 자식 repo 동기 상태는 `.auto-memory/propagation-status.md` 에서 동적 파악.
+
+`scripts/verify-sync.sh` 가 매 cycle 자동 갱신 (C3 에서 신설).
+
+---
+
+## 14. UI/UX 규칙 하이라이트
+
+- `.claude/rules/pencil-uiux-workflow.md` (보호) — UI/UX 변경 = Pencil SoT → Compose 순서 강제 + `.ai/uiux-sot/latest/` 필수 (GT-strong patterns 채택)
+- `docs/design/pencil-sot-policy.md` (보호) — Pencil SoT 정책 §1.1 디자인 도구 바인딩 / [CURRENT] / [TARGET] / [LOCKED] 라벨 / §3 Phase R 예외 / §8 고위험 STOP / §9 마이그레이션 escape
+- `.claude/rules/uiux-sot-refresh.md` (보호) — refresh trigger FULL / PARTIAL / DOC-ONLY 분류
+
+---
+
+## 15. master cycle 진행 이력 (placeholder · 매 cycle 시 갱신)
+
+| cycle ID | 마감일 | 변경 요약 | 영향 자식 repo |
+|---|---|---|---|
+| C1-MASTER-BOOTSTRAP-001 | 2026-05-02 | master repo 신설 + 53 cli infra cp + 5 divergent 정정 채택 | (propagation 미실시 · C4 예정) |
+| C2-RULES-RESTRUCTURE-001 | 2026-05-02 | rules 5 분할 (workflow→3 / evidence→2) + DEFERRED pointer 4 통합 + agents/active·deferred 폴더 routing 갱신 | (propagation 미실시 · C4 예정) |
+| C2.5-COMMON-PRINCIPLES-AND-DESIGN-TOOL-DECOUPLE-001 | 2026-05-02 | SOLID + 코드 리뷰 체크리스트 박음 (code-principles.md 신설) + 도구 무관 vs Pencil 전용 4 항목 분리 (design-to-code-sync.md / design-sot-policy.md 신설 + ui-spec.schema v0.3 generic 화) | 5 보호 파일 sha 갱신 (C4 propagation + 자식 ui-spec.json 마이그레이션 의무) |
+| C3-AUTOMATION-SCRIPTS-001 | 2026-05-02 | 자동화 script 4종 + slash 1종 + Q2/Q4/Q5 보완 | (propagation 미실시 · C4 예정) |
+| C5-EXTRA-COMMON-ABSORB-AND-RENAME-001 | 2026-05-02 | 24 추가 공통 파일 흡수 (architecture 13 + process 4 + solutions 1 + scripts 1 + root 5) + master rename gently-master → claude-cli-master + scripts find/CORE_CLI 확장 | 자식 repo 와 sha 일치 (24 신규 추가 = 이미 동일) · C4 propagation 시 새 cli infra 만 cp |
+| C10-LAUNCHD-DAEMON-001 | 2026-05-02 | C9 한계 RCA (Cowork 자체 file ops 가 git op 호출 시 hook/wrapper 모두 발화 X · sandbox 권한 lock rm 절대 불가) → macOS launchd 백그라운드 데몬 박음 (5초마다 PID 검증 + stale rm · 환경 무관) + install-git-lock-daemon.sh 1회 install patterns | Coin install 1회 후 99.99% 자동 mitigation |
+| C9-GIT-LOCK-PID-VERIFY-001 | 2026-05-02 | C8 한계 RCA (hook = Claude Code Bash 만 발화 / mtime 마진 너무 김) → PID 기반 검증 박음 (lock 안 PID 죽음 = 즉시 rm · 정상 op 100% 보호) + scripts/git-safe.sh wrapper 신설 (Coin alias 권장 = IDE/터미널/Cowork 자동) + mtime 마진 단축 (5s/30s) | C4 propagation + Coin alias 박음 = 99.9% 자동 |
+| C8-GIT-LOCK-AUTOMITIGATION-001 | 2026-05-02 | sandbox/agent crash 후 잔존 .git/index.lock 자동 정리 (pre-tool-use.sh git 명령 감지 시 stale > 30s rm + session-start.sh 진입 시 stale > 5분 rm) + C3 dead code 정정 (Claude Code 버전 검증 exit 0 뒤 박혀 작동 X) | C4 propagation 시 자식 자동 적용 (모든 repo git lock 사고 매번 mitigation) |
+| C7-UX-LAWS-INTEGRATION-001 | 2026-05-02 | Laws of UX 30 법칙 → 권장 17 + 신중 12 + 비권장 1 (Cognitive Bias) 분류 박음 · ux-laws.md 신설 + ux-auditor/reviewer agent 자동 reading + code-principles §H + app-implementation-guide §4.5 + Dark Patterns 5종 회피 박음 | C4 propagation 시 자식 의무 적용 |
+| C6-COMMON-DOCS-AND-TEMPLATES-001 | 2026-05-02 | Part A 6 추가 흡수 (.ai/promptfit/PLAYBOOK + .ai/uiux-sot/refresh 3 + .github/pull_request_template + RLS guide) + Part C-2 9 신설 (app-implementation-guide.md + 7 도메인 template + Nested CLAUDE.md header template) + scripts find 확장 | 6 흡수 = 자식 sha 일치 / 9 신설 = C4 propagation 시 자식에 처음 cp + 자식 CLAUDE.md 상단 5~10 줄 Nested 패턴 박음 |
+
+다음 master cycle 후보 (C3~C4):
+- **C3-AUTOMATION-SCRIPTS-001** — propagate.sh + verify-sync.sh + activate-agent.sh + report-gen.sh + `/cycle-report` slash 신설
+- **C4-PROPAGATE-TO-CHILDREN-001** — master → GB / GD / GT 단방향 propagation + cross-verify
+
+---
+
+## 16. 본 SoT 변경 의무 절차
+
+1. master 의 모든 cli infra 변경은 본 CLAUDE.md §15 표에 cycle entry 추가 의무.
+2. 보호 파일 4 종 sha 변경 시 `.auto-memory/protected-file-hashes.md` 새 baseline 박음.
+3. propagation 즉시 실행 (lazy 금지) — `scripts/propagate.sh` 호출.
+4. cross-verify 자동 실행 + 결과 `propagation-reports/<cycle-id>/REPORT.md` 자동 생성.
+5. 모든 자식 repo 가 새 sha 일치 확인 후 cycle 마감.
+
+---
+
+`Sources:`
+- [.claude/settings.json](computer:///Users/yundonghyeon/AndroidStudioProjects/claude-cli-master/.claude/settings.json)
+- [.claude/rules/workflow-core.md](computer:///Users/yundonghyeon/AndroidStudioProjects/claude-cli-master/.claude/rules/workflow-core.md)
+- [.claude/rules/cycle-discipline.md](computer:///Users/yundonghyeon/AndroidStudioProjects/claude-cli-master/.claude/rules/cycle-discipline.md)
+- [.auto-memory/protected-file-hashes.md](computer:///Users/yundonghyeon/AndroidStudioProjects/claude-cli-master/.auto-memory/protected-file-hashes.md)

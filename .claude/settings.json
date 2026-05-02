@@ -1,0 +1,154 @@
+{
+  "permissions": {
+    "defaultMode": "bypassPermissions",
+    "additionalDirectories": [
+      "docs/project/",
+      ".ai/uiux-sot/latest/",
+      ".ai/promptfit/",
+      ".ai/tasks/",
+      ".ai/reports/",
+      ".auto-memory/",
+      ".git/",
+      ".vscode/",
+      ".idea/",
+      ".husky/"
+    ],
+    "allow": [
+      "Bash",
+      "Bash(cd:*)",
+      "Bash(./gradlew:*)",
+      "Bash(gradle:*)",
+      "Bash(git:*)",
+      "Bash(git -C:*)",
+      "Bash(ls:*)",
+      "Bash(cat:*)",
+      "Bash(head:*)",
+      "Bash(tail:*)",
+      "Bash(grep:*)",
+      "Bash(rg:*)",
+      "Bash(find:*)",
+      "Bash(awk:*)",
+      "Bash(sed:*)",
+      "Bash(echo:*)",
+      "Bash(printf:*)",
+      "Bash(python3:*)",
+      "Bash(python:*)",
+      "Bash(node:*)",
+      "Bash(npm:*)",
+      "Bash(npx:*)",
+      "Bash(pnpm:*)",
+      "Bash(yarn:*)",
+      "Bash(mkdir:*)",
+      "Bash(cp:*)",
+      "Bash(mv:*)",
+      "Bash(touch:*)",
+      "Bash(chmod:*)",
+      "Bash(diff:*)",
+      "Bash(sha256sum:*)",
+      "Bash(shasum:*)",
+      "Bash(wc:*)",
+      "Bash(sort:*)",
+      "Bash(uniq:*)",
+      "Bash(xargs:*)",
+      "Bash(tr:*)",
+      "Bash(cut:*)",
+      "Bash(jq:*)",
+      "Bash(which:*)",
+      "Bash(command:*)",
+      "Bash(env:*)",
+      "Bash(pwd:*)",
+      "Bash(realpath:*)",
+      "Bash(basename:*)",
+      "Bash(dirname:*)",
+      "Bash(stat:*)",
+      "Bash(file:*)",
+      "Bash(date:*)",
+      "Read",
+      "Edit",
+      "Write",
+      "Bash(cd && *:*)",
+      "Bash(rm:*)"
+    ],
+    "deny": [
+      "Bash(curl:*)",
+      "Bash(wget:*)",
+      "Bash(sudo:*)",
+      "Bash(git push:*)",
+      "Bash(git reset:*)",
+      "Bash(git clean:*)",
+      "Bash(*tmp*)",
+      "Bash(*TMPDIR*)",
+      "Bash(rm -rf /)",
+      "Bash(rm -rf /*)",
+      "Bash(rm -rf /Users:*)",
+      "Bash(rm -rf /Users/*)",
+      "Bash(rm -rf /System:*)",
+      "Bash(rm -rf /Library:*)",
+      "Bash(rm -rf $HOME:*)",
+      "Bash(rm -rf ~:*)",
+      "Bash(rm -rf ~/:*)"
+    ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash $CLAUDE_PROJECT_DIR/.claude/hooks/session-start.sh"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash $CLAUDE_PROJECT_DIR/.claude/hooks/pre-tool-use.sh"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash $CLAUDE_PROJECT_DIR/.claude/hooks/post-policy-watch.sh"
+          }
+        ]
+      },
+      {
+        "matcher": "Bash|Read|Edit|Write|Glob|Grep",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash $CLAUDE_PROJECT_DIR/.claude/hooks/post-tool-use-trace.sh"
+          }
+        ]
+      },
+      {
+        "matcher": "mcp__pencil__.*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash $CLAUDE_PROJECT_DIR/.claude/hooks/pencil-auto-save.sh"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash $CLAUDE_PROJECT_DIR/.claude/hooks/stop-gate.sh"
+          }
+        ]
+      }
+    ]
+  }
+}
