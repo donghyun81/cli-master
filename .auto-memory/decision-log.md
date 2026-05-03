@@ -672,3 +672,24 @@ C13-VERIFY-FULL 의 발견된 gap 3 종 (.gitignore propagation 누락 + daemon 
 
 - Coin 1 paste (master 4 commit + 자식 3 × 1 commit + 검증 3 회) → 다음 chat 진입 시 baseline 정정
 - 자식 도메인 본 작업 진입 가능 (C1~C15 master 정비 마감)
+
+---
+
+## 2026-05-02 · MASTER-AUTH-DOMAIN-ACTIVATE-001 (진행 중 · path rebind 박음)
+
+### 결정 1. master path rebind: `claude-cli-master` → `gently-master`
+
+- **선택**: 옵션 1 — prompt 의 모든 `~/AndroidStudioProjects/claude-cli-master/` 경로를 `~/AndroidStudioProjects/gently-master/` 로 치환 + 본 cycle 진행
+- **대안**: 옵션 2 (master rename `gently-master` → `claude-cli-master` 후 prompt 그대로) · 옵션 3 (cycle 보류 + path 정합 별 cycle 신설)
+- **근거**:
+  - 실측 baseline (`ls -d ~/AndroidStudioProjects/Gently*` + `cat ~/AndroidStudioProjects/gently-master/CLAUDE.md`) = master 디렉터리 = `gently-master`. C5-EXTRA-COMMON-ABSORB-AND-RENAME-001 의 rename 결정 (claude-cli-master 채택) 이 file system 에 미반영 (decision 박힘 + 디렉터리 mv 미실행).
+  - 옵션 2 = `mv gently-master claude-cli-master` 의무 = 자식 repo 의 모든 인용 경로 갱신 + git 상태 / IDE / Cowork 환경 영향 大. 본 cycle scope 외.
+  - 옵션 3 = 본 cycle (Auth 도메인 활성화) 보류 = GT-AUTH-PIVOT-001 박힌 패러다임의 master 박음 지연.
+  - 옵션 1 = path 치환만 (16 file ops 안 cycle scope 내 흡수). Coin 명시 승인 박음.
+- **Coin 명시 승인**: 2026-05-02 chat — "1번 권장 confirm. prompt 의 모든 claude-cli-master 경로를 gently-master 로 치환 + decision-log 에 ... append + cycle 진행."
+
+### 별 trail 신규
+- `MASTER-DIR-REBIND-CLAUDE-CLI-MASTER-TO-GENTLY-MASTER-001` — `scripts/activate-agent.sh` + `scripts/propagate.sh` 의 `claude-cli-master` 하드코딩 default → 본 cycle 은 `MASTER_DIR=$HOME/AndroidStudioProjects/gently-master` env override 우회. 사후 정정 (script default 정합 + C5 rename 의 file system 적용 또는 default 변경) = 별 cycle 의무.
+
+### 다음 cycle 진입 조건 (본 cycle 안)
+- §3-1 ~ §3-4 (auth-rules.md 신설 + deferred-domains.md 갱신 + routing-and-delegation.md 갱신 + auth-security-privacy.md mv) → 4-file 3-repo propagation → EC1~EC4 검증 → 4 commit (master + 3 자식) → close memo

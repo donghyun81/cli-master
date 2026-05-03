@@ -45,7 +45,7 @@ intake-router는 키워드 분류기가 아니다 — **어떤 전문 판단이 
 | UX 원칙 준수, 화면 상태 완전성 | ux-auditor | `.claude/agents/active/ux-auditor.md` |
 | [DEFERRED] API 계약 안전성, Breaking change | backend-api-architect | `.claude/agents/deferred/backend-api-architect.md` |
 | [DEFERRED] 데이터 보존, 마이그레이션 위험 | data-schema-guardian | `.claude/agents/deferred/data-schema-guardian.md` |
-| [DEFERRED] 인증/PII/시크릿 노출 | auth-security-privacy | `.claude/agents/deferred/auth-security-privacy.md` |
+| 인증/PII/시크릿 노출 | auth-security-privacy | `.claude/agents/active/auth-security-privacy.md` |
 | [DEFERRED] ANR/메모리/Rate limit 위험 | performance-reliability-engineer | `.claude/agents/deferred/performance-reliability-engineer.md` |
 | [DEFERRED] 테스트 커버리지 공백, 회귀 위험 | test-strategist | `.claude/agents/deferred/test-strategist.md` |
 | [DEFERRED] 관측성, 로그 안전, 크래시 추적 | observability-ops-analyst | `.claude/agents/deferred/observability-ops-analyst.md` |

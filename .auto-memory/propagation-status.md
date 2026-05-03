@@ -75,10 +75,13 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 - Coin 손 작업 1 paste 후 expected: PASS 103 / DRIFT 0 / MISS 0 (master rules 13 · 자식 rules 13 · 자식 flat agents 0)
 - 가이드 위치: `.ai/reports/C4-VERIFY-001/REPORT.md` §4
 
+
+
+
 ## Last verify-sync
 
-- timestamp: 2026-05-02T08:41:37+0000
-- pass: 109
+- timestamp: 2026-05-03T15:06:55+0900
+- pass: 104
 - drift: 0
 - miss: 0
 - exit: 0
