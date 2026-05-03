@@ -13,7 +13,7 @@
     },
     "schemaVersion": {
       "type": "string",
-      "enum": ["0.1", "0.2"],
+      "enum": ["0.1", "0.2", "0.3"],
       "description": "Breaking change 관리. 0.1=파일럿. 0.2=Option B dual-layer SoT (lifecycle/visualSotPath/lastSyncedPencilStateHash 필드 추가). 0.3=designTool generic 화 (lastSyncedDesignToolStateHash 신설 · lastSyncedPencilStateHash 는 alias 유지). Stage 3 완료 시 1.0 승격."
     },
     "screenName": {

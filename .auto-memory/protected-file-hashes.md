@@ -8,11 +8,11 @@
 
 | 파일 | 분류 | sha-256 | 변동 |
 |---|---|---|---|
-| `docs/schemas/ui-spec.schema.json` | 도구 무관 (v0.3 generic 화) | `5aa52b23124681bf0dada230ff88e2f22e1b840b30bb8915cd19409e1228fb1c` | **C2.5 갱신** (designTool enum + lastSyncedDesignToolStateHash 신설) |
-| `.claude/rules/uiux-sot-refresh.md` | 도구 무관 (95% generic) | `1f87144705380a2694bd48a2050d3c44d88d005fcbb28efc5bc53b4db75c2562` | **C2.5 갱신** (Pencil 인용 → `<design-tool>` placeholder) |
-| `docs/design/design-sot-policy.md` | 도구 무관 (75% 공통 추출) | `e5e3fe165ec33dffadbb091dec40bff36c8b4f60ef0c1316f9d7d7e74d0f3b18` | **C2.5 신설** (pencil-sot-policy.md 의 75% 공통) |
-| `.claude/rules/pencil-uiux-workflow.md` | Pencil 도구 바인딩 (30% 잔존) | `6297080aa434297f7cb885af0d181854a2417c85a18376e036626e9449b900e6` | **C2.5 분리** (70% 공통 → `design-to-code-sync.md` · 본 파일 = 도구 바인딩만) |
-| `docs/design/pencil-sot-policy.md` | Pencil 도구 바인딩 (의미 = pencil-sot-binding) | `96de2f5d10a73af4aaa2608770f503dd3956304846c6db8a9b2cf2d05cba6559` | **C2.5 분리** (75% 공통 → `design-sot-policy.md` · 본 파일 = 도구 바인딩만 · Coin mv → `pencil-sot-binding.md`) |
+| `docs/schemas/ui-spec.schema.json` | 도구 무관 (v0.3 generic 화) | `0a82b89575550fe92d9258e9b544b61ccaea96cfc04cd6fda309c3ff9a0da495` | **MASTER-PROTECTED-BASELINE-RESYNC-001 갱신** (2026-05-03 · enum "0.3" 추가) |
+| `.claude/rules/uiux-sot-refresh.md` | 도구 무관 (95% generic) | `ee377dc2ac32357f61fa1b2bfc39690ab530b65102e31062bff91ab6b8b260d3` | **MASTER-PROTECTED-BASELINE-RESYNC-001 갱신** (2026-05-03 · 후속 cycle 으로 baseline 정합) |
+| `docs/design/design-sot-policy.md` | 도구 무관 (75% 공통 추출) | `e5e3fe165ec3a826b2843f0e9791d4e6f07fb4c226bcc53639868787da49af03` | **MASTER-PROTECTED-BASELINE-RESYNC-001 갱신** (2026-05-03 · 후속 cycle 으로 baseline 정합) |
+| `.claude/rules/pencil-uiux-workflow.md` | Pencil 도구 바인딩 (30% 잔존) | `7621013e7f2dc644f0d0028b0574e12949dc7462953b4d5465c8a1186d6f0c0f` | **MASTER-PROTECTED-BASELINE-RESYNC-001 갱신** (2026-05-03 · 후속 cycle 으로 baseline 정합) |
+| `docs/design/pencil-sot-policy.md` | Pencil 도구 바인딩 (의미 = pencil-sot-binding) | `96de2f5d10a73af4aaa2608770f503dd3956304846c6db8a9b2cf2d05cba6559` | **MASTER-PROTECTED-BASELINE-RESYNC-001 갱신** (2026-05-03 · MATCH 재확인) |
 
 > **참고**: `design-sot-policy.md` 신설 sha = `e5e3fe165ec3...` (C2.5 마감 박음).
 
@@ -48,6 +48,7 @@ bash scripts/verify-sync.sh
 
 ## Recent updates
 
+- 2026-05-03 · MASTER-PROTECTED-BASELINE-RESYNC-001 · 보호 파일 5종 sha **MATCH 확정** + ui-spec.schema.json enum 에 "0.3" 추가 (description 은 변동 없음). 자식 ui-spec.json schemaVersion 마이그레이션은 별 cycle 분리.
 - 2026-05-02 · C2.5-COMMON-PRINCIPLES-AND-DESIGN-TOOL-DECOUPLE-001 · 보호 파일 4종 sha **모두 갱신** (도구 무관 vs Pencil 전용 분리). 신설 보호 파일 1종 (`design-sot-policy.md`). 신설 cli infra 2종 (`code-principles.md` / `design-to-code-sync.md`).
 - 2026-05-02 · C2-RULES-RESTRUCTURE-001 · 5 파일 신설 + 6 파일 deprecated + 5 파일 cross-reference 갱신. 보호 파일 4종 sha 변동 0.
 - 2026-05-02 · C1-MASTER-BOOTSTRAP-001 · master baseline 신설.

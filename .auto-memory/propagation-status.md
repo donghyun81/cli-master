@@ -15,10 +15,10 @@
 
 | 파일 | master sha (8자) | GB sync | GD sync | GT sync |
 |---|---|---|---|---|
-| `docs/schemas/ui-spec.schema.json` (v0.3) | `5aa52b23` | ✓ MATCH | ✓ MATCH | ✓ MATCH |
-| `.claude/rules/uiux-sot-refresh.md` (95% generic) | `1f871447` | ✓ MATCH | ✓ MATCH | ✓ MATCH |
+| `docs/schemas/ui-spec.schema.json` (v0.3) | `0a82b895` | ✓ MATCH | ✓ MATCH | ✓ MATCH |
+| `.claude/rules/uiux-sot-refresh.md` (95% generic) | `ee377dc2` | ✓ MATCH | ✓ MATCH | ✓ MATCH |
 | `docs/design/design-sot-policy.md` (신설) | `e5e3fe16` | ✓ MATCH | ✓ MATCH | ✓ MATCH |
-| `.claude/rules/pencil-uiux-workflow.md` (Pencil 30%) | `6297080a` | ✓ MATCH | ✓ MATCH | ✓ MATCH |
+| `.claude/rules/pencil-uiux-workflow.md` (Pencil 30%) | `7621013e` | ✓ MATCH | ✓ MATCH | ✓ MATCH |
 | `docs/design/pencil-sot-policy.md` (Pencil 25%) | `96de2f5d` | ✓ MATCH | ✓ MATCH | ✓ MATCH |
 
 ## cli infra 핵심 sha 매트릭스 (master baseline)
@@ -35,6 +35,10 @@
 | `.claude/agents/domain-roles.md` | `(neutral · placeholder)` | DRIFT 의도 | DRIFT 의도 | DRIFT 의도 |
 | `.claude/hooks/pencil-auto-save.sh` | `21ac3e85` (GD v2) | **✗ DRIFT** (GB v1 = `fc09cb97`) | ✓ MATCH | **✗ DRIFT** (GT v1 = `fc09cb97`) |
 | `.claude/hooks/save-as-result-check.sh` | `105f978b` (GD only) | **✗ MISS** (GB 부재) | ✓ MATCH | **✗ MISS** (GT 부재) |
+
+## MASTER-PROTECTED-BASELINE-RESYNC-001 갱신 (2026-05-03)
+
+- 2026-05-03 · MASTER-PROTECTED-BASELINE-RESYNC-001 · 5종 baseline sha 갱신 + ui-spec.schema.json enum 0.3 추가 + 4-repo propagation MATCH 재확인.
 
 ## 현 정합 상태 요약 (C1 baseline 직후)
 
