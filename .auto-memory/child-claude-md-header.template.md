@@ -1,13 +1,13 @@
 # Child CLAUDE.md Header — Nested 패턴 template
 
-> **template 출처**: master `.auto-memory/child-claude-md-header.template.md` (cp 후 자식 CLAUDE.md 상단 5~10 줄 박음).
+> **template 출처**: master `.auto-memory/child-claude-md-header.template.md` (cp 후 자식 CLAUDE.md 상단 5~10 줄 추가).
 > **공식 근거**: Anthropic Claude Code Best Practices — Nested CLAUDE.md (parent/child 자동 로드 + Virtual Monorepo Pattern).
 
 ## 적용 위치
 
 자식 repo 의 `<repo>/CLAUDE.md` 의 **첫 5~10 줄** (frontmatter 직후).
 
-## template 본문 (자식 CLAUDE.md 상단에 박음)
+## template 본문 (자식 CLAUDE.md 상단에 추가)
 
 ```markdown
 # <RepoName> CLAUDE.md
@@ -25,7 +25,7 @@
 ## 적용 절차 (C4 propagation 시 자동)
 
 1. 자식 repo 의 기존 CLAUDE.md 본문 보존
-2. 첫 5~10 줄 의 영역에 본 template 박음 (sed 또는 Coin 1회 검토)
+2. 첫 5~10 줄 의 영역에 본 template 추가 (sed 또는 Coin 1회 검토)
 3. 기존 본문 (도메인 정의 / 진입 커맨드 / Repo-First Intake 등) 그대로 유지
 4. master propagation 시 본 template sha 만 검증
 

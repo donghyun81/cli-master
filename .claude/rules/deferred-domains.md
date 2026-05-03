@@ -43,9 +43,9 @@ STOP 시 자동 발화 agent (`.claude/agents/deferred/`):
 | Performance | UNKNOWN | UNKNOWN | UNKNOWN | UNKNOWN |
 | Billing | UNKNOWN | UNKNOWN | UNKNOWN | UNKNOWN |
 
-¹ Supabase Auth 익명 부트스트랩 + JSON backup · GT-AUTH-PIVOT-001 박힌 패러다임 · `auth-rules.md` SoT (MASTER-AUTH-DOMAIN-ACTIVATE-001).
+¹ Supabase Auth 익명 부트스트랩 + JSON backup · GT-AUTH-PIVOT-001 명시된 패러다임 · `auth-rules.md` SoT (MASTER-AUTH-DOMAIN-ACTIVATE-001).
 
-> **GB SteadyWell propagation 잔존 drift** (`incident-log.md` 박힘): GB 의 deferred-domains.md 가 cycle 진척 전 ACTIVE 표기 유지. C4 propagation 시 master baseline 으로 통일.
+> **GB SteadyWell propagation 잔존 drift** (`incident-log.md` 명시됨): GB 의 deferred-domains.md 가 cycle 진척 전 ACTIVE 표기 유지. C4 propagation 시 master baseline 으로 통일.
 
 ---
 

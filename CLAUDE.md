@@ -30,7 +30,7 @@
 
 ---
 
-## 2. 정합 강제 3 등급 (`cycle-discipline.md` §3 박힘)
+## 2. 정합 강제 3 등급 (`cycle-discipline.md` §3 명시됨)
 
 | 등급 | 대상 | 강제 수준 | drift 발생 시 |
 |---|---|---|---|
@@ -226,18 +226,19 @@ PLAN / VERIFY / REVIEW / PromptFit 정규 스키마: `.claude/rules/report-forma
 |---|---|---|---|
 | C1-MASTER-BOOTSTRAP-001 | 2026-05-02 | master repo 신설 + 53 cli infra cp + 5 divergent 정정 채택 | (propagation 미실시 · C4 예정) |
 | C2-RULES-RESTRUCTURE-001 | 2026-05-02 | rules 5 분할 (workflow→3 / evidence→2) + DEFERRED pointer 4 통합 + agents/active·deferred 폴더 routing 갱신 | (propagation 미실시 · C4 예정) |
-| C2.5-COMMON-PRINCIPLES-AND-DESIGN-TOOL-DECOUPLE-001 | 2026-05-02 | SOLID + 코드 리뷰 체크리스트 박음 (code-principles.md 신설) + 도구 무관 vs Pencil 전용 4 항목 분리 (design-to-code-sync.md / design-sot-policy.md 신설 + ui-spec.schema v0.3 generic 화) | 5 보호 파일 sha 갱신 (C4 propagation + 자식 ui-spec.json 마이그레이션 의무) |
+| C2.5-COMMON-PRINCIPLES-AND-DESIGN-TOOL-DECOUPLE-001 | 2026-05-02 | SOLID + 코드 리뷰 체크리스트 추가 (code-principles.md 신설) + 도구 무관 vs Pencil 전용 4 항목 분리 (design-to-code-sync.md / design-sot-policy.md 신설 + ui-spec.schema v0.3 generic 화) | 5 보호 파일 sha 갱신 (C4 propagation + 자식 ui-spec.json 마이그레이션 의무) |
 | C3-AUTOMATION-SCRIPTS-001 | 2026-05-02 | 자동화 script 4종 + slash 1종 + Q2/Q4/Q5 보완 | (propagation 미실시 · C4 예정) |
 | C5-EXTRA-COMMON-ABSORB-AND-RENAME-001 | 2026-05-02 | 24 추가 공통 파일 흡수 (architecture 13 + process 4 + solutions 1 + scripts 1 + root 5) + master rename gently-master → claude-cli-master + scripts find/CORE_CLI 확장 | 자식 repo 와 sha 일치 (24 신규 추가 = 이미 동일) · C4 propagation 시 새 cli infra 만 cp |
-| C11-LOCK-WIDE-COVERAGE-001 | 2026-05-02 | C10 한계 RCA: daemon/hook/wrapper 모두 .git/index.lock 만 처리 → GT commit 시 .git/HEAD.lock 사고 발견. git lock 종류 다양 (index/HEAD/packed-refs/config/refs/**/*.lock). 4 layer 모두 광역 검사 박음 (동일 PID 검증 patterns) | Coin daemon 재 install 1회 후 모든 lock 종류 자동 |
-| C4-PROPAGATE-TO-CHILDREN-001 | 2026-05-02 | master → 3 자식 단방향 propagation: 327 파일 cp + 44 ui-spec.json 마이그레이션 (lastSyncedPencilStateHash → lastSyncedDesignToolStateHash alias + designTool 신설) + 3 자식 CLAUDE.md Nested 박음 + verify-sync.sh exit 0 (PASS 109 / drift 0 / miss 0) | **3 자식 모두 적용** · master ↔ 자식 정합 100% |
+| C11-LOCK-WIDE-COVERAGE-001 | 2026-05-02 | C10 한계 RCA: daemon/hook/wrapper 모두 .git/index.lock 만 처리 → GT commit 시 .git/HEAD.lock 사고 발견. git lock 종류 다양 (index/HEAD/packed-refs/config/refs/**/*.lock). 4 layer 모두 광역 검사 추가 (동일 PID 검증 patterns) | Coin daemon 재 install 1회 후 모든 lock 종류 자동 |
+| C4-PROPAGATE-TO-CHILDREN-001 | 2026-05-02 | master → 3 자식 단방향 propagation: 327 파일 cp + 44 ui-spec.json 마이그레이션 (lastSyncedPencilStateHash → lastSyncedDesignToolStateHash alias + designTool 신설) + 3 자식 CLAUDE.md Nested 추가 + verify-sync.sh exit 0 (PASS 109 / drift 0 / miss 0) | **3 자식 모두 적용** · master ↔ 자식 정합 100% |
 | C4-VERIFY-001 | 2026-05-02 | C4 propagation 사후 광역 점검: sha 정합 PASS 109/0/0 ✓ · C11 hook drift 6 (sandbox cp 즉시 정정) · deprecated rules pointer 4-way 24 잔존 + 자식 flat agents 75 중복 + sandbox testfile 3 잔존 = 102 파일 (Coin 손 작업 1 paste rm + 4 commit) · orphan 검사 false positive 0 | sandbox 부분 마감 · Coin 손 작업 후 baseline = master rules 13 / 자식 rules 13 / 자식 flat agents 0 |
 | C14+C13+C15-INFRA-MITIGATION-001 | 2026-05-02 | 묶음 cycle: (C14) `.gitignore` patches 자동 보장 — `scripts/ensure-child-gitignore-patches.sh` 신설 + propagate.sh 자동 호출 + 자식 3 marker block patch · (C13) verify-sync.sh launchd daemon 자동 진단 + log mtime stuck 경고 + --skip-daemon-check flag · (C15) propagate.sh `--prune` dry-run + `--apply` flag 신설 (whitelist `.claude/` 만 · 자식 도메인 영역 보호) · 사전 검증 사고 2건 사전 차단 (.gitignore 비호환 + prune 311 false positive) | sandbox 마감 · Coin 손 작업 1 paste = master 4 commit + 자식 3 × 1 commit · 자식 본 작업 진입 baseline 확보 |
-| C10-LAUNCHD-DAEMON-001 | 2026-05-02 | C9 한계 RCA (Cowork 자체 file ops 가 git op 호출 시 hook/wrapper 모두 발화 X · sandbox 권한 lock rm 절대 불가) → macOS launchd 백그라운드 데몬 박음 (5초마다 PID 검증 + stale rm · 환경 무관) + install-git-lock-daemon.sh 1회 install patterns | Coin install 1회 후 99.99% 자동 mitigation |
-| C9-GIT-LOCK-PID-VERIFY-001 | 2026-05-02 | C8 한계 RCA (hook = Claude Code Bash 만 발화 / mtime 마진 너무 김) → PID 기반 검증 박음 (lock 안 PID 죽음 = 즉시 rm · 정상 op 100% 보호) + scripts/git-safe.sh wrapper 신설 (Coin alias 권장 = IDE/터미널/Cowork 자동) + mtime 마진 단축 (5s/30s) | C4 propagation + Coin alias 박음 = 99.9% 자동 |
-| C8-GIT-LOCK-AUTOMITIGATION-001 | 2026-05-02 | sandbox/agent crash 후 잔존 .git/index.lock 자동 정리 (pre-tool-use.sh git 명령 감지 시 stale > 30s rm + session-start.sh 진입 시 stale > 5분 rm) + C3 dead code 정정 (Claude Code 버전 검증 exit 0 뒤 박혀 작동 X) | C4 propagation 시 자식 자동 적용 (모든 repo git lock 사고 매번 mitigation) |
-| C7-UX-LAWS-INTEGRATION-001 | 2026-05-02 | Laws of UX 30 법칙 → 권장 17 + 신중 12 + 비권장 1 (Cognitive Bias) 분류 박음 · ux-laws.md 신설 + ux-auditor/reviewer agent 자동 reading + code-principles §H + app-implementation-guide §4.5 + Dark Patterns 5종 회피 박음 | C4 propagation 시 자식 의무 적용 |
-| C6-COMMON-DOCS-AND-TEMPLATES-001 | 2026-05-02 | Part A 6 추가 흡수 (.ai/promptfit/PLAYBOOK + .ai/uiux-sot/refresh 3 + .github/pull_request_template + RLS guide) + Part C-2 9 신설 (app-implementation-guide.md + 7 도메인 template + Nested CLAUDE.md header template) + scripts find 확장 | 6 흡수 = 자식 sha 일치 / 9 신설 = C4 propagation 시 자식에 처음 cp + 자식 CLAUDE.md 상단 5~10 줄 Nested 패턴 박음 |
+| C10-LAUNCHD-DAEMON-001 | 2026-05-02 | C9 한계 RCA (Cowork 자체 file ops 가 git op 호출 시 hook/wrapper 모두 발화 X · sandbox 권한 lock rm 절대 불가) → macOS launchd 백그라운드 데몬 추가 (5초마다 PID 검증 + stale rm · 환경 무관) + install-git-lock-daemon.sh 1회 install patterns | Coin install 1회 후 99.99% 자동 mitigation |
+| C9-GIT-LOCK-PID-VERIFY-001 | 2026-05-02 | C8 한계 RCA (hook = Claude Code Bash 만 발화 / mtime 마진 너무 김) → PID 기반 검증 추가 (lock 안 PID 죽음 = 즉시 rm · 정상 op 100% 보호) + scripts/git-safe.sh wrapper 신설 (Coin alias 권장 = IDE/터미널/Cowork 자동) + mtime 마진 단축 (5s/30s) | C4 propagation + Coin alias 추가 = 99.9% 자동 |
+| C8-GIT-LOCK-AUTOMITIGATION-001 | 2026-05-02 | sandbox/agent crash 후 잔존 .git/index.lock 자동 정리 (pre-tool-use.sh git 명령 감지 시 stale > 30s rm + session-start.sh 진입 시 stale > 5분 rm) + C3 dead code 정정 (Claude Code 버전 검증 exit 0 뒤 포함되어 작동 X) | C4 propagation 시 자식 자동 적용 (모든 repo git lock 사고 매번 mitigation) |
+| C7-UX-LAWS-INTEGRATION-001 | 2026-05-02 | Laws of UX 30 법칙 → 권장 17 + 신중 12 + 비권장 1 (Cognitive Bias) 분류 추가 · ux-laws.md 신설 + ux-auditor/reviewer agent 자동 reading + code-principles §H + app-implementation-guide §4.5 + Dark Patterns 5종 회피 추가 | C4 propagation 시 자식 의무 적용 |
+| C6-COMMON-DOCS-AND-TEMPLATES-001 | 2026-05-02 | Part A 6 추가 흡수 (.ai/promptfit/PLAYBOOK + .ai/uiux-sot/refresh 3 + .github/pull_request_template + RLS guide) + Part C-2 9 신설 (app-implementation-guide.md + 7 도메인 template + Nested CLAUDE.md header template) + scripts find 확장 | 6 흡수 = 자식 sha 일치 / 9 신설 = C4 propagation 시 자식에 처음 cp + 자식 CLAUDE.md 상단 5~10 줄 Nested 패턴 추가 |
+| MASTER-AUTH-DOMAIN-ACTIVATE-001 | 2026-05-03 | Auth 도메인 master + GT 활성화 (UNKNOWN → ACTIVE) · `auth-rules.md` SoT 신설 (10 섹션 · GT-AUTH-PIVOT-001 명시된 패러다임 코드화) · `auth-security-privacy` agent deferred/ → active/ mv · `deferred-domains.md` §2 매트릭스 + §6 history 갱신 · `routing-and-delegation.md` [DEFERRED] 제거 · path rebind decision (claude-cli-master → gently-master · 별 trail open) | 3 자식 모두 byte-identical propagation (verify-sync 104/0/0). GT Auth ACTIVE / GD GB UNKNOWN 유지 (자체 활성화 별 cycle) |
 
 다음 master cycle 후보 (C3~C4):
 - **C3-AUTOMATION-SCRIPTS-001** — propagate.sh + verify-sync.sh + activate-agent.sh + report-gen.sh + `/cycle-report` slash 신설
@@ -248,7 +249,7 @@ PLAN / VERIFY / REVIEW / PromptFit 정규 스키마: `.claude/rules/report-forma
 ## 16. 본 SoT 변경 의무 절차
 
 1. master 의 모든 cli infra 변경은 본 CLAUDE.md §15 표에 cycle entry 추가 의무.
-2. 보호 파일 4 종 sha 변경 시 `.auto-memory/protected-file-hashes.md` 새 baseline 박음.
+2. 보호 파일 4 종 sha 변경 시 `.auto-memory/protected-file-hashes.md` 새 baseline 추가.
 3. propagation 즉시 실행 (lazy 금지) — `scripts/propagate.sh` 호출.
 4. cross-verify 자동 실행 + 결과 `propagation-reports/<cycle-id>/REPORT.md` 자동 생성.
 5. 모든 자식 repo 가 새 sha 일치 확인 후 cycle 마감.

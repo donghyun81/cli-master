@@ -30,10 +30,10 @@
 
 ### 2) OPS 신설 금지 원칙
 
-본 작업 직접 지원이 아닌 정책은 룰 파일에 박지 않는다.
+본 작업 직접 지원이 아닌 정책은 룰 파일에 하지 않는다.
 
 - 새 룰 박기 전 **도메인 매칭 검증 1회 필수** : 어느 기존 룰 파일의 도메인에 속하는가.
-- 어느 파일에도 안 속하면 박지 않는다. 운영 메모로만 유지.
+- 어느 파일에도 안 속하면 하지 않는다. 운영 메모로만 유지.
 - 본 작업 무관 OPS hygiene 류 task 신설 금지. **사고 발생 시 본 작업 직접 블로킹 시에만 처리** (lazy mode).
 
 ### 3) 3-repo byte-identical 강제 범위
@@ -134,7 +134,7 @@ PLAN.md / VERIFY.md / REVIEW.md / TODO.md
 - 2.1.114 = #51736 회귀 직전 known-working. npm registry 의 2.1.115 부재 (skip).
 - **npm 설치 의무** (native installer 아닌 npm scope). 이유: native auto-updater 가 다운그레이드 무력화.
 
-**Native installer auto-updater 차단 (이중 박음 의무):**
+**Native installer auto-updater 차단 (이중 설정 의무):**
 
 - `~/.zshrc`:
   ```
@@ -146,11 +146,11 @@ PLAN.md / VERIFY.md / REVIEW.md / TODO.md
   { "env": { "DISABLE_AUTOUPDATER": "1", "DISABLE_UPDATES": "1" } }
   ```
 
-근거: native installer 의 background auto-updater 가 `~/.local/bin/claude` 심링크를 강제 재생성 (`anthropics/claude-code#41602`, `#3010`, `#28625`). 이중 차단 미박음 시 단순 `rm` 다운그레이드 무력.
+근거: native installer 의 background auto-updater 가 `~/.local/bin/claude` 심링크를 강제 재생성 (`anthropics/claude-code#41602`, `#3010`, `#28625`). 이중 차단 미설정 시 단순 `rm` 다운그레이드 무력.
 
 **다운그레이드 절차 (1회 세팅):**
 
-1. env 이중 박음 (`~/.zshrc` + `~/.claude/settings.json`)
+1. env 이중 설정 (`~/.zshrc` + `~/.claude/settings.json`)
 2. `rm -rf ~/.local/share/claude && rm -f ~/.local/bin/claude` (native install 통째 제거)
 3. `npm install -g @anthropic-ai/claude-code@2.1.114`
 4. `hash -r && claude --version` → 2.1.114 검증
@@ -176,9 +176,9 @@ PLAN.md / VERIFY.md / REVIEW.md / TODO.md
 
 ### 14) Phase C — Pencil → Compose 파이프라인 5-type 분류
 
-> 본 §14 = `Pencil → Compose 파이프라인` 운영 표준 (cli infra 측 박음).
+> 본 §14 = `Pencil → Compose 파이프라인` 운영 표준 (cli infra 측 추가).
 > 6 화면 외부 검증 (home / meal-recommend / history / condition-input / exercise / onboarding · 2026-04-30) 후 정착.
-> SoT IMPL 흐름 = `pencil-uiux-workflow.md` §Phase C 5-type IMPL 흐름 (보호 파일 측 박음). 본 §은 분류·진입·마감 신호만 다룬다.
+> SoT IMPL 흐름 = `pencil-uiux-workflow.md` §Phase C 5-type IMPL 흐름 (보호 파일 측 추가). 본 §은 분류·진입·마감 신호만 다룬다.
 
 #### 5-type 분류
 
@@ -198,7 +198,7 @@ PLAN.md / VERIFY.md / REVIEW.md / TODO.md
 | 2 | EVIDENCE-only cycle (Compose 검증 + ui-spec.json append) | drift 정정이 필요하면 type 1 후속. |
 | 3 | Phase R-1~4 (역공학 → [CURRENT] → [TARGET] → [LOCKED]) | type 1 후속으로 정착. |
 | 4 | system-architect 분리 cycle | 파급 영향 평가 후 PLAN 재작성. |
-| 5 | A.1 (SoT 내부 정합 → `.pen` 우선 박음) → A.2 (Compose 재구현) 2-step | A.1 마감 후 별 cycle 로 A.2. |
+| 5 | A.1 (SoT 내부 정합 → `.pen` 우선 추가) → A.2 (Compose 재구현) 2-step | A.1 마감 후 별 cycle 로 A.2. |
 
 #### Phase 별 분류 (라이프사이클)
 
@@ -208,26 +208,26 @@ PLAN.md / VERIFY.md / REVIEW.md / TODO.md
 | B-DETAIL | 기존 `.pen` 시각 정밀화 | `.pen` 갱신 | (후속 Phase C 1) |
 | C | SoT ↔ Compose 정합 reconcile (5-type) | (분류별 dual-direction) | (분류별) |
 | R | `.pen` 부재 화면 역공학 회복 | Compose + preview.png → `.pen` 신규 | 변경 없음 (역공학 단계) |
-| **D** (정의 박음 · 2026-04-30 · `CYCLE-PHASE-D-DEFINITION-001`) | **검증 자동화** — Compose Preview ↔ Pencil canvas 자동 비교 (P6 ±2dp · ΔE≤3 자동 검증). Coin 시각 검증 manual 부담 폐기. | 변경 없음 (Phase C 정착 후) | 변경 없음 (Phase C 정착 후) |
+| **D** (정의 추가 · 2026-04-30 · `CYCLE-PHASE-D-DEFINITION-001`) | **검증 자동화** — Compose Preview ↔ Pencil canvas 자동 비교 (P6 ±2dp · ΔE≤3 자동 검증). Coin 시각 검증 manual 부담 폐기. | 변경 없음 (Phase C 정착 후) | 변경 없음 (Phase C 정착 후) |
 | E | 배포 / Track D (GD/GB 도메인 본격 + Compose impl 분리) | (별 phase 정의 cycle) | (Track D 패턴) |
 | F (장기) | 추가 화면 SoT-first 신설 (auth/settings/ticketshop/billing 등) | SoT-first 신규 (Phase A 패턴 차용) | TDD-first |
 
-#### Phase D sub-cycle 표 (정의 + 후속 trigger · 별 cycle 박음 의무)
+#### Phase D sub-cycle 표 (정의 + 후속 trigger · 별 cycle 추가 의무)
 
 | sub-cycle | 본 작업 | 상태 (2026-05-01 갱신) |
 |---|---|---|
-| **D-1** | SoT-Compose preview 자동 비교 도구 박음 | **lazy** (별 trail `CYCLE-PHASE-D-PREVIEW-DIFF-TOOL-001`) · 화면 수 12+ 도달 후 trigger (§B-4 break-even) · 6 화면 단계 손 검증 30min/round 박힘 |
-| **D-2** | Compose @Preview 자동 캡처 도구 박음 (D-1 prerequisite) | **마감** (D-2.1 + D-2.2 · 2026-04-30) · **채택**: Roborazzi 1.32.0 + Robolectric 4.13 · 6/6 화면 first capture · `verifyRoborazzi` 자동 fire |
+| **D-1** | SoT-Compose preview 자동 비교 도구 추가 | **lazy** (별 trail `CYCLE-PHASE-D-PREVIEW-DIFF-TOOL-001`) · 화면 수 12+ 도달 후 trigger (§B-4 break-even) · 6 화면 단계 손 검증 30min/round 명시됨 |
+| **D-2** | Compose @Preview 자동 캡처 도구 추가 (D-1 prerequisite) | **마감** (D-2.1 + D-2.2 · 2026-04-30) · **채택**: Roborazzi 1.32.0 + Robolectric 4.13 · 6/6 화면 first capture · `verifyRoborazzi` 자동 fire |
 | **D-3** | 회귀 검증 자동화 통합 — Phase C 6 화면 + 신규 화면 자동 시각 검증 매 commit fire | **lazy** (별 trail `CYCLE-PHASE-D-VISUAL-REGRESSION-001`) · D-1 마감 + 화면 수 12+ 도달 후 trigger |
 
-> Phase D-1/D-3 lazy 박힘 근거 (2026-05-01 Coin 결정 · `CYCLE-PHASE-D-CLOSE-PHASE-F-DEFINE-001`): 6 화면 단계 자동화 build cost (~3-5h Cowork prep + 3 sub-cycle + brew install 정책 마찰) vs 손 검증 30min/round → break-even round = 6-10 round. Phase F 화면 grow 전 ROI 시기상조. 화면 수 12+ 도달 시 자연 trigger.
-> Phase D-2 마감만으로 Phase D **부분 마감 신호** 박힘 (아래 진입/마감 신호 §).
-> 보호 파일 측 `pencil-uiux-workflow.md §Phase D 검증 자동화` IMPL 흐름은 D-1/D-3 trigger 시점에 박음 (사후 정정 default).
+> Phase D-1/D-3 lazy 명시됨 근거 (2026-05-01 Coin 결정 · `CYCLE-PHASE-D-CLOSE-PHASE-F-DEFINE-001`): 6 화면 단계 자동화 build cost (~3-5h Cowork prep + 3 sub-cycle + brew install 정책 마찰) vs 손 검증 30min/round → break-even round = 6-10 round. Phase F 화면 grow 전 ROI 시기상조. 화면 수 12+ 도달 시 자연 trigger.
+> Phase D-2 마감만으로 Phase D **부분 마감 신호** 명시됨 (아래 진입/마감 신호 §).
+> 보호 파일 측 `pencil-uiux-workflow.md §Phase D 검증 자동화` IMPL 흐름은 D-1/D-3 trigger 시점에 추가 (사후 정정 default).
 
 #### Phase F sub-cycle 패턴 (2026-05-01 신설 · `CYCLE-PHASE-D-CLOSE-PHASE-F-DEFINE-001`)
 
 > Phase F = 추가 화면 lifecycle 컨테이너. 각 sub-cycle = **새 화면 1개의 mini A→B-DETAIL→C→D-2 묶음**.
-> 기존 phase 패턴 차용 (Phase A 작성 패턴 · Phase B-DETAIL Path 2-A · Phase C 5-type · D-2 Roborazzi). 신규 패턴 박음 X (사후 정정 default).
+> 기존 phase 패턴 차용 (Phase A 작성 패턴 · Phase B-DETAIL Path 2-A · Phase C 5-type · D-2 Roborazzi). 신규 패턴 추가 X (사후 정정 default).
 
 | sub-cycle | 본 작업 | 후속 trigger |
 |---|---|---|
@@ -236,11 +236,11 @@ PLAN.md / VERIFY.md / REVIEW.md / TODO.md
 #### 진입 / 마감 신호
 
 - **Phase C 진입**: 6 화면 SoT (`.pen` + `ui-spec.json`) 과 Compose 사이 drift 또는 paradigm 충돌 감지.
-- **Phase C 마감**: 6 화면 5-type 박힘 + 별 trail close 3건 (SOT-TO-COMPOSE-AUTO-CONVERSION-001 · PHASE-C-COMMIT-VERIFY-ORDER-001 · PHASE-C-PRESENTATION-DOMAIN-BOUNDARY-MAPPING-001).
-- **Phase D 진입 신호**: Phase C 통합 cycle (`CYCLE-PHASE-C-INTEGRATION-001` 통합-A/B/C) 마감 + 별 trail close 3건 영구 박힘. `.auto-memory/cycle-handoff.md` Phase D baseline rolling rewrite 됨 (외부 검증 PASS · 2026-04-30).
-- **Phase D 부분 마감 신호** (2026-05-01 갱신 · Coin 결정): D-2 마감 (Roborazzi + Robolectric 채택 + 6/6 first capture + verify 자동 fire) 만으로 Phase D **부분 마감**. D-1/D-3 lazy (별 trail · 화면 수 12+ 도달 후 trigger). `SOT-TO-COMPOSE-VISUAL-VERIFY-MANUAL-001` 은 Coin 손 검증 30min/round 부담 박힘 (lazy close). Phase F 진입 가능.
+- **Phase C 마감**: 6 화면 5-type 명시됨 + 별 trail close 3건 (SOT-TO-COMPOSE-AUTO-CONVERSION-001 · PHASE-C-COMMIT-VERIFY-ORDER-001 · PHASE-C-PRESENTATION-DOMAIN-BOUNDARY-MAPPING-001).
+- **Phase D 진입 신호**: Phase C 통합 cycle (`CYCLE-PHASE-C-INTEGRATION-001` 통합-A/B/C) 마감 + 별 trail close 3건 영구 명시됨. `.auto-memory/cycle-handoff.md` Phase D baseline rolling rewrite 됨 (외부 검증 PASS · 2026-04-30).
+- **Phase D 부분 마감 신호** (2026-05-01 갱신 · Coin 결정): D-2 마감 (Roborazzi + Robolectric 채택 + 6/6 first capture + verify 자동 fire) 만으로 Phase D **부분 마감**. D-1/D-3 lazy (별 trail · 화면 수 12+ 도달 후 trigger). `SOT-TO-COMPOSE-VISUAL-VERIFY-MANUAL-001` 은 Coin 손 검증 30min/round 부담 명시됨 (lazy close). Phase F 진입 가능.
 - **Phase D 완전 마감 신호** (장래): D-1/D-3 trigger 후 정착 + 매 commit 자동 fire + Coin 시각 검증 manual 부담 0 도달 시.
-- **Phase F 진입 신호** (2026-05-01 신설): Phase D 부분 마감 박힘 + Phase B-DETAIL 마감 6 화면 baseline 박힘. Phase F-1 부터 진입 (7번째 화면 도메인 결정 + Pencil canvas 작성 → SoT → Compose → Roborazzi snapshot 한 묶음 mini lifecycle).
+- **Phase F 진입 신호** (2026-05-01 신설): Phase D 부분 마감 명시됨 + Phase B-DETAIL 마감 6 화면 baseline 명시됨. Phase F-1 부터 진입 (7번째 화면 도메인 결정 + Pencil canvas 작성 → SoT → Compose → Roborazzi snapshot 한 묶음 mini lifecycle).
 - **Phase F 마감 신호** (open-ended): Coin 결정 (목표 화면 수 도달) 또는 화면 수 12+ 도달 시 자동으로 Phase D-1/D-3 trigger 활성. Phase F 자체는 영구 컨테이너 (화면 추가 패턴 = 영구).
 
 #### 운영 hard 의무 (Phase C 통합)
@@ -268,26 +268,26 @@ PLAN.md / VERIFY.md / REVIEW.md / TODO.md
 - COWORK-PREP-BASELINE-MISMATCH-004 (pencil-uiux-workflow.md sha 변경 추적 누락)
 - **COWORK-PREP-BASELINE-MISMATCH-005 (cycle 4/6 진입 시 docs/plan + docs/design/screen-flow.md 미참조 → meal-detail/meal-reaction 추정)**
 - **COWORK-PREP-BASELINE-MISMATCH-006 (기획안의 ticket/billing 명시 미참조 → "기획 외 의문" 임의 추정)**
-- **COWORK-PREP-BASELINE-MISMATCH-007 (cycle 5/6 전후 GT/GD/GB 의 별 infra cycle 미참조 — feat(infra) settings.json + hook patterns 박은 cycle 추적 누락)**
+- **COWORK-PREP-BASELINE-MISMATCH-007 (cycle 5/6 전후 GT/GD/GB 의 별 infra cycle 미참조 — feat(infra) settings.json + hook patterns 추가한 cycle 추적 누락)**
 
-**Cowork prep 박을 의무 절차** (통합 prompt 작성 전 6건):
+**Cowork prep 추가할 의무 절차** (통합 prompt 작성 전 6건):
 
 1. **GT git log 실측**: `git log --oneline -5 /Users/yundonghyeon/AndroidStudioProjects/GentlyTable` — 가장 최근 5 commit 확인 (직전 cycle 마감 + 별 cycle 추적).
-2. **decision-log tail 실측**: `tail -50 /Users/yundonghyeon/AndroidStudioProjects/GentlyTable/.auto-memory/decision-log.md` — 직전 entry 박힘 검증 (entry 중복 회피).
+2. **decision-log tail 실측**: `tail -50 /Users/yundonghyeon/AndroidStudioProjects/GentlyTable/.auto-memory/decision-log.md` — 직전 entry 명시됨 검증 (entry 중복 회피).
 3. **보호 파일 sha 실측**: 4종 sha 변동 추적 (`shasum -a 256 docs/schemas/ui-spec.schema.json .claude/rules/pencil-uiux-workflow.md docs/design/pencil-sot-policy.md .claude/rules/uiux-sot-refresh.md`) — sandbox memory baseline 과 비교.
 4. **사용자 메시지 분류**: PASS 신호 ("OK" / "pass" / "권장사항대로 진행") vs 피드백 메시지 (정책 수정 / 결정 의뢰) 사전 분류 — PASS 신호 인지 미스 회피.
-5. **기획 문서 실측 (신규 · 005/006 mitigation)**: 새 화면 도메인 결정 / 기능 추가 / 디렉터리 정합 검증 시 의무. `cat /Users/yundonghyeon/AndroidStudioProjects/GentlyTable/docs/plan/기획안_보강.md` + `cat /Users/yundonghyeon/AndroidStudioProjects/GentlyTable/docs/design/screen-flow.md` 참조 후 추정 박지 X. 도메인 외 의문 발견 시 **기획안 grep 의무** (예: "ticket" / "billing" / "결제" / "구독" 등).
-6. **3-repo git log 실측 (신규 · 007 mitigation)**: 본 chat 박지 X 박은 별 cycle 추적 의무. `for r in GentlyTable GentlyDay GentlyBreath; do git log --oneline -5 /Users/yundonghyeon/AndroidStudioProjects/$r; done` — 본 chat 박은 cycle 외 별 작업 진행 patterns 검증.
+5. **기획 문서 실측 (신규 · 005/006 mitigation)**: 새 화면 도메인 결정 / 기능 추가 / 디렉터리 정합 검증 시 의무. `cat /Users/yundonghyeon/AndroidStudioProjects/GentlyTable/docs/plan/기획안_보강.md` + `cat /Users/yundonghyeon/AndroidStudioProjects/GentlyTable/docs/design/screen-flow.md` 참조 후 추정 금지. 도메인 외 의문 발견 시 **기획안 grep 의무** (예: "ticket" / "billing" / "결제" / "구독" 등).
+6. **3-repo git log 실측 (신규 · 007 mitigation)**: 본 chat 외 추가된 별 cycle 추적 의무. `for r in GentlyTable GentlyDay GentlyBreath; do git log --oneline -5 /Users/yundonghyeon/AndroidStudioProjects/$r; done` — 본 chat 추가한 cycle 외 별 작업 진행 patterns 검증.
 
 **적용 시점**: 본 chat 진입 시 §20 4 항목 추출 + 매 통합 prompt 작성 전 + Coin 본심 검증 시점 + 새 화면/도메인 결정 시.
 
 **별 trail 신규 (closed at CYCLE-CYCLE8-BASELINE-MISMATCH-MITIGATION-001 · 2026-05-01)**:
-- COWORK-PREP-BASELINE-MISMATCH-001~007 — 본 § 의 6 의무 절차 박힌 patterns 영구 정착 mitigation. 본 cycle 마감 시 일괄 close.
+- COWORK-PREP-BASELINE-MISMATCH-001~007 — 본 § 의 6 의무 절차 명시된 patterns 영구 정착 mitigation. 본 cycle 마감 시 일괄 close.
 - 향후 8회차 재발 시 mitigation 강화 cycle 진입 (Cowork 측 baseline 자동 검증 hook 도입 검토).
 
 ---
 
-### 15) cli 수정 패턴 3 종 (Q2 가이드 · C3 박힘)
+### 15) cli 수정 패턴 3 종 (Q2 가이드 · C3 명시됨)
 
 자식 repo 구현 중 cli infra 수정 필요 시 패턴 분류:
 

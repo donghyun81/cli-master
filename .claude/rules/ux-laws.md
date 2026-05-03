@@ -21,8 +21,8 @@
 1. task 유형 식별 (§5 매트릭스 참조)
 2. 해당 task 유형에 매핑된 권장 법칙 list 추출
 3. 비권장 (§3) 키워드 감지 시 STOP + Coin 명시 승인 의무
-4. 권장 법칙 적용 산출 → PLAN.md / IMPL / REVIEW 의 12-section 안 §B [UX Laws] 박음
-5. 각 법칙 적용 evidence (코드 인용 또는 SoT 인용) 박음
+4. 권장 법칙 적용 산출 → PLAN.md / IMPL / REVIEW 의 12-section 안 §B [UX Laws] 추가
+5. 각 법칙 적용 evidence (코드 인용 또는 SoT 인용) 추가
 ```
 
 자식 repo 의 모든 새 화면 / Form / 진행 task 는 본 가이드의 **권장 22 + 신중 6 + 비권장 1 + dark patterns 분리 1** 매트릭스 따름.
@@ -63,12 +63,12 @@
 #### B-2. Hick's Law (선택지 수 ↔ 의사결정 시간)
 - **적용**: 응답 시간 critical 시 선택지 최소화 + 점진적 온보딩 + 추천 강조
 - **구현 코드 패턴**: 첫 진입 시 핵심 1~2 행동만 노출 (Slack patterns) / 고급 기능 = `ExpandableSection`
-- **양면 박음**: "추상화될 정도로 단순화 X" (자체 경고)
+- **양면 명시**: "추상화될 정도로 단순화 X" (자체 경고)
 
 #### B-3. Mental Model (멘탈 모델) + Jakob's Law
 - **적용**: Material Design 3 / iOS HIG 표준 patterns 우선 채택 (사용자 멘탈 모델 정렬)
 - **구현 코드 패턴**: BottomNavigation / TopAppBar / FloatingActionButton 등 표준 컴포넌트 우선 사용
-- **양면 박음**: "익숙함 우선 + 검증된 새 patterns 만 도입" (혁신 vs 익숙 균형)
+- **양면 명시**: "익숙함 우선 + 검증된 새 patterns 만 도입" (혁신 vs 익숙 균형)
 
 ### C. 피드백 + 반응 (2 법칙)
 
@@ -87,7 +87,7 @@
 #### D-1. Goal-Gradient Effect + Zeigarnik Effect (정직한 진행 표시)
 - **적용**: multi-step Form / onboarding 시 정직한 진행 표시 (예: 3/5 단계)
 - **구현 코드 패턴**: `LinearProgressIndicator(progress = currentStep / totalSteps)` + 각 step 명확히 명시
-- **신중 분리** (`§3 dark patterns`): "**시작점에 인위적 진척 박음** (예: 0/10 대신 2/12)" 은 **비권장** — 사용자 동기 조작
+- **신중 분리** (`§3 dark patterns`): "**시작점에 인위적 진척 추가** (예: 0/10 대신 2/12)" 은 **비권장** — 사용자 동기 조작
 
 ### E. 정보 구조 (1 법칙)
 
@@ -109,7 +109,7 @@
 
 #### G-1. Aesthetic-Usability Effect (심미적 사용성 효과)
 - **적용**: Material3 Theme / 일관된 typography / spacing token 사용
-- **양면 박음**: "**미적 매력이 사용성 문제 가림**" (자체 경고) → **사용성 테스트 의무 동시 박음**. 시각만 우선 X.
+- **양면 명시**: "**미적 매력이 사용성 문제 가림**" (자체 경고) → **사용성 테스트 의무 동시 추가**. 시각만 우선 X.
 
 #### G-2. Paradox of the Active User (능동적 사용자의 역설)
 - **적용**: 매뉴얼 X / 인라인 도움말 + 툴팁 + 점진적 공개
@@ -124,7 +124,7 @@
 
 #### H-1. Von Restorff Effect (격리 효과)
 - **적용**: 핵심 행동 / 정보 시각 강조 (색 / 크기 / 위치)
-- **양면 박음**: 
+- **양면 명시**: 
   - **남용 금지** (광고로 오인 + 요소 경쟁)
   - **색상 only X** (color-blind / 저시력 배제 → 색 + 형태 + 텍스트 동시 사용)
   - **모션 신중** (모션 민감도 사용자 + `prefers-reduced-motion` 존중)
@@ -156,7 +156,7 @@
 #### Flow (몰입)
 - **적용**: 도전 ↔ 사용자 기술 균형 + 마찰 제거 + 시스템 반응성 최적화 + 콘텐츠/기능 발견 가능성
 - **구현 코드 패턴**: 점진적 난이도 / loading state 즉시 / search ≤ 200ms / 핵심 기능 first-tier 노출
-- **양면 박음**: 너무 어려움 = 좌절 / 너무 쉬움 = 지루 → **사용자 리서치 의무**
+- **양면 명시**: 너무 어려움 = 좌절 / 너무 쉬움 = 지루 → **사용자 리서치 의무**
 
 ---
 
@@ -176,11 +176,11 @@
 - **채택 부분**: < 400ms 응답 + 진행 표시 + skeleton screen
 - **거부 부분**: 의도적 지연으로 인지된 가치 ↑
 
-### 3.3 Goal-Gradient Effect 의 "인위적 진척 박음" — **비권장**
+### 3.3 Goal-Gradient Effect 의 "인위적 진척 추가" — **비권장**
 **비권장 사유**:
-- 시작점 박힘 (예: 빈 stamp card 0/10 → 2/12 로 시작) = 사용자 동기 조작
+- 시작점 명시됨 (예: 빈 stamp card 0/10 → 2/12 로 시작) = 사용자 동기 조작
 - **채택 부분**: 정직한 진행 표시 (3/5 등 실제 step 수)
-- **거부 부분**: 시작점 인위적 박음 / 진척률 부풀림
+- **거부 부분**: 시작점 인위적 추가 / 진척률 부풀림
 
 ### 3.4 Peak-End Rule 의 "부정 사건 위장" — **비권장**
 **비권장 사유**:
@@ -220,7 +220,7 @@
 | 9 | Doherty Threshold | 신중 | < 400ms OK / 의도적 지연 X |
 | 10 | Fitts's Law | **권장** | ≥ 48dp / 간격 ≥ 8dp |
 | 11 | Flow | 신중 | 사용자 리서치 의무 |
-| 12 | Goal-Gradient | 신중 | 정직한 진행 OK / 인위적 박음 X |
+| 12 | Goal-Gradient | 신중 | 정직한 진행 OK / 인위적 추가 X |
 | 13 | Zeigarnik | **권장** | 명확한 시그니파이어 |
 | 14 | Chunking | **권장** | 시각 그룹 + 계층 |
 | 15 | Miller's Law | **권장** | 7±2 ≠ 디자인 제약 핑계 |

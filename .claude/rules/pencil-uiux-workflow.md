@@ -18,7 +18,7 @@
 
 - Pencil.dev = macOS 캔버스 디자인 도구 + .pen 파일 형식
 - Pencil MCP server (stdio) = `mcp__pencil__*` tools 13 종 (open_document / batch_design / snapshot_layout / get_editor_state / set_variables 등)
-- Claude Code 2.1.114 pin 의무 (`cycle-discipline.md` §13 박힘 · 2.1.116+ 회귀로 본 작업 차단)
+- Claude Code 2.1.114 pin 의무 (`cycle-discipline.md` §13 명시됨 · 2.1.116+ 회귀로 본 작업 차단)
 
 ## 2. Pencil 도구 바인딩 매핑
 
@@ -54,7 +54,7 @@
 
 ### Type 3: Phase R (역공학)
 1. preview.png 분석 + Compose 코드 분석으로 [CURRENT] 추정
-2. `mcp__pencil__open_document(filePathOrTemplate="new")` + 추정 frame 박음
+2. `mcp__pencil__open_document(filePathOrTemplate="new")` + 추정 frame 추가
 3. ui-spec.json `lifecycle: reverse-engineered` 명시 + Coin 명시 승인 의무
 4. 이후 Type 1 흐름 적용
 
@@ -70,7 +70,7 @@
 ## 4. Pencil 측 금지 (리뷰 블로커)
 
 - `mcp__pencil__batch_design` 호출 시 children 별도 호출 (flatten 발생) — 반드시 inline
-- `pencilFrameCode` 의 spec id 와 캔버스 내부 id 동일 가정 (Stage 1B 박힌 사고 — 캔버스 id 자체 생성)
+- `pencilFrameCode` 의 spec id 와 캔버스 내부 id 동일 가정 (Stage 1B 명시된 사고 — 캔버스 id 자체 생성)
 - 25 op 초과 시 분할 안 함 — 첫 호출 24 op + 후속 호출 patterns
 
 ---
@@ -81,7 +81,7 @@
 - Save As 모달 keystroke 차단 + filename 자동 입력 실패 → Coin GUI 손 작업 fallback
 - `mcp__pencil__open_document(filePathOrTemplate=<path>)` 가 path 명시 미지원 (= "new" 리터럴만)
 
-도구 무관 STOP = `design-to-code-sync.md` §5 박힘.
+도구 무관 STOP = `design-to-code-sync.md` §5 명시됨.
 
 ---
 

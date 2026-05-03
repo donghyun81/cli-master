@@ -1,7 +1,7 @@
 # Auth Rules — Supabase 익명 부트스트랩 + JSON Backup paradigm
 
 > **단일 목적**: 자식 repo (GT/GD/GB) 의 인증 / 토큰 / identity / JSON backup / OAuth 정책 SoT.
-> **MASTER-AUTH-DOMAIN-ACTIVATE-001 신설** (GT-AUTH-PIVOT-001 commit `ae5e04d` 박힌 패러다임 코드화).
+> **MASTER-AUTH-DOMAIN-ACTIVATE-001 신설** (GT-AUTH-PIVOT-001 commit `ae5e04d` 명시된 패러다임 코드화).
 > **연관 파일**:
 > - `deferred-domains.md` §1 STOP trigger + §2 도메인 활성화 매트릭스 (Auth = ACTIVE)
 > - `safety-and-secrets.md` 시크릿 / PII 처리 + EncryptedSharedPreferences 정책
@@ -32,7 +32,7 @@
 ## §3 토큰 저장 의무
 
 - `EncryptedSharedPreferences` 사용 의무 (plaintext SharedPreferences 금지)
-- `accessToken` / `refreshToken` / `userId` 3 항목 박음
+- `accessToken` / `refreshToken` / `userId` 3 항목 추가
 - HTTP 금지 (HTTPS only)
 
 ---
@@ -90,7 +90,7 @@
 
 ---
 
-## §10 박힌 cycle 이력
+## §10 명시된 cycle 이력
 
 - 2026-05-02 · MASTER-AUTH-DOMAIN-ACTIVATE-001 · 본 rule 신설 + auth-security-privacy [DEFERRED]→ACTIVE
 - 2026-05-02 · GT-AUTH-PIVOT-001 (자식 cycle) · 본 paradigm 첫 채택

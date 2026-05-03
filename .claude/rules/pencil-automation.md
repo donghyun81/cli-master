@@ -24,9 +24,9 @@ Pencil MCP `open_document` 로 신규 doc 생성 시 in-memory 만 형성. 첫 C
 0. agent: 환경 검증 — Pencil 우측 하단 "Update Ready" 모달 활성 여부 확인. 활성 시 "Install on next launch" 클릭 의무 (Cmd+S keystroke 가로챔 회피). 근거: `PENCIL-UPDATE-MODAL-INTERCEPT-001` (CYCLE-PHASE-F-1-NEW-SCREEN-DEFINE-001 검증).
 1. agent: `mcp__pencil__open_document(filePathOrTemplate="new")` — 빈 캔버스 생성 (path 명시 미지원 · "new" 리터럴만 유효)
 2. agent: `mcp__pencil__batch_design` — **children inline 강제 + 25 op limit 시 분할 호출 patterns**:
-   - X (flatten 발생): `root=I("document",{...}); child=I(root,{...})` (별 호출 박은 patterns)
+   - X (flatten 발생): `root=I("document",{...}); child=I(root,{...})` (별 호출 추가한 patterns)
    - O (정상): `I("document",{children:[...]})` — 단일 호출에 inline
-   - O (25 op 초과 시 분할 patterns 정착 · F-1/F-2 검증): frame insert 1 op + children 22-25 op = 첫 호출 / 추가 children = 후속 호출 (각 호출마다 children inline 강제). 분할 호출 박은 patterns 도 RCA-4 미해당 (export/screenshot 미수행 시).
+   - O (25 op 초과 시 분할 patterns 정착 · F-1/F-2 검증): frame insert 1 op + children 22-25 op = 첫 호출 / 추가 children = 후속 호출 (각 호출마다 children inline 강제). 분할 호출 추가한 patterns 도 RCA-4 미해당 (export/screenshot 미수행 시).
 2-1. agent: `mcp__pencil__set_variables` — A-0_design-tokens inherit 적용 (color/typography 자동 inherit)
 2-2. agent: `mcp__pencil__batch_design` — 6 영역 컴포넌트 모두 추가 (필요 시 분할 호출 · F-1/F-2 검증 patterns 차용)
 2-3. agent: `mcp__pencil__snapshot_layout(problemsOnly=true)` — layout 문제 0건 확인 (export/screenshot 미수행 → RCA-4 미해당 · F-1/F-2 검증 PASS)
@@ -58,7 +58,7 @@ Pencil MCP `open_document` 로 신규 doc 생성 시 in-memory 만 형성. 첫 C
 
 **fallback**: agent 워크플로우 실패 시 Coin GUI Cmd+S (B-4.1 절차 · pencil-uiux-workflow.md §4.1).
 
-3-repo propagation 정책: settings.json + hook + 본 §12 모두 3-repo byte-identical 권장. F-1/F-2 검증 patterns (CYCLE-PHASE-F-1-NEW-SCREEN-DEFINE-001 + CYCLE-PHASE-F-2-NEW-SCREEN-DEFINE-001) 통계 기반 §12 갱신 박힘 (`CYCLE-WORKFLOW-V12-REVISION-001` · 2026-05-01).
+3-repo propagation 정책: settings.json + hook + 본 §12 모두 3-repo byte-identical 권장. F-1/F-2 검증 patterns (CYCLE-PHASE-F-1-NEW-SCREEN-DEFINE-001 + CYCLE-PHASE-F-2-NEW-SCREEN-DEFINE-001) 통계 기반 §12 갱신 명시됨 (`CYCLE-WORKFLOW-V12-REVISION-001` · 2026-05-01).
 
 **WORKFLOW-V12-OVERCONSERVATIVE-001 별 trail close**: F-1+F-2 = 2 cycle 우회 patterns 검증 PASS · 본 §12 갱신 cycle 마감 시 close.
 

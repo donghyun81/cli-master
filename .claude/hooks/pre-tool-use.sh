@@ -10,7 +10,7 @@ INPUT="$(cat 2>/dev/null || echo '')"
 
 CMD=$(echo "$INPUT" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('tool_input',{}).get('command',''))" 2>/dev/null || echo "")
 
-# === C11 박음: git command 감지 시 .git/**/*.lock 광역 PID 검증 + stale 정리 ===
+# === C11 추가: git command 감지 시 .git/**/*.lock 광역 PID 검증 + stale 정리 ===
 case "$CMD" in
   *"git "*|*"git -C"*|*"&& git"*)
     WORK_DIR=""

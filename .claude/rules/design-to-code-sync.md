@@ -1,7 +1,7 @@
 # Design → Code Sync Rules (도구 무관)
 
 > **단일 목적**: Design SoT → Code 단방향 sync 의 **도구 무관 일반 패턴** — Phase 분류 / 5-type IMPL 흐름 / Output Checklist / STOP 조건 / Refresh Trigger 연계.
-> **C2.5-COMMON-PRINCIPLES-AND-DESIGN-TOOL-DECOUPLE-001 신설** (Q2 답 박음).
+> **C2.5-COMMON-PRINCIPLES-AND-DESIGN-TOOL-DECOUPLE-001 신설** (Q2 답 추가).
 > **도구 바인딩 분리**: 본 파일 = 70% 공통. 도구별 바인딩 = 별 파일:
 > - Pencil 바인딩: `pencil-uiux-workflow.md` (도구 바인딩 30%)
 > - Figma 바인딩: 향후 신설 시 `figma-uiux-workflow.md` patterns
@@ -59,7 +59,7 @@
 - **P4**: Code (Compose / SwiftUI 등) 빌드 PASS
 - **P5**: preview.png 갱신 (Phase D 검증 자동화 · 도구 바인딩별 patterns)
 - **P6**: lifecycle 라벨 정합 (`[CURRENT]` / `[TARGET]` / `[LOCKED]` / `[ARCHIVED]`)
-- **P7**: cleanup pass (`legacy-cleanup-governance.md` 박힘)
+- **P7**: cleanup pass (`legacy-cleanup-governance.md` 명시됨)
 - **P8**: VERIFY.md exit code 기록
 - **P9**: REVIEW.md PromptFit 평가 + INDEX.md 갱신
 
@@ -89,7 +89,7 @@
 
 ## 8. 도구 바인딩 의무 (구체화)
 
-본 rule = 도구 무관 패턴. 실 자동화 + 도구 호출은 별 파일에서 박음:
+본 rule = 도구 무관 패턴. 실 자동화 + 도구 호출은 별 파일에서 추가:
 
 | 도구 | 바인딩 파일 | 자동화 hook |
 |---|---|---|

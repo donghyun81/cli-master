@@ -1,7 +1,7 @@
 # Design SoT Refresh Rules (도구 무관)
 
 > **단일 목적**: `.ai/uiux-sot/latest/` baseline refresh 의 도구 무관 일반 규칙 — Package Boundary / Trigger 분류 / Read Order / Output / Status / STOP.
-> **C2.5-COMMON-PRINCIPLES-AND-DESIGN-TOOL-DECOUPLE-001 generic 화** (Q2 답 박음 · 95% 공통화 · Pencil 인용 → `<design-tool>` placeholder).
+> **C2.5-COMMON-PRINCIPLES-AND-DESIGN-TOOL-DECOUPLE-001 generic 화** (Q2 답 추가 · 95% 공통화 · Pencil 인용 → `<design-tool>` placeholder).
 > **본 파일 = 보호 (강제 byte-identical)**.
 > **연관 파일**:
 > - `design-to-code-sync.md` — Design SoT → Code 단방향 sync 일반 패턴

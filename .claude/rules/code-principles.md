@@ -1,7 +1,7 @@
 # Code Principles Rules
 
 > **단일 목적**: 모든 자식 repo (도메인 무관) 의 코드 작성 / 리뷰 시 적용되는 원칙 + 코드 리뷰 체크리스트.
-> **C2.5-COMMON-PRINCIPLES-AND-DESIGN-TOOL-DECOUPLE-001 신설** (Q1 답 박음).
+> **C2.5-COMMON-PRINCIPLES-AND-DESIGN-TOOL-DECOUPLE-001 신설** (Q1 답 추가).
 > **연관 파일**:
 > - `workflow-core.md` §implement (TDD / 직접 구현 우선 / 외부 준비 연기)
 > - `verification-and-review.md` §review (REVIEW.md 12-section)
@@ -35,7 +35,7 @@
 ### D — Dependency Inversion Principle
 - 고수준 모듈 = 저수준 모듈에 의존 X. 양쪽 모두 추상에 의존.
 - 적용 예: ViewModel → `interface AuthRepository` → `SupabaseAuthRepository impl`.
-- 적용 의무: clock / dispatcher / identity / logger / uuid 인터페이스 주입 (`workflow-core.md` §implement Testability Seams 박힘).
+- 적용 의무: clock / dispatcher / identity / logger / uuid 인터페이스 주입 (`workflow-core.md` §implement Testability Seams 명시됨).
 
 ---
 
@@ -47,7 +47,7 @@
 - 적용 예: 동일 Date 포맷 변환이 2 곳 → KISS 우선 / 3 곳 이상 → 헬퍼 추출.
 
 ### KISS — Keep It Simple, Stupid
-- 직접 구현 우선 (`workflow-core.md` §implement 박힘).
+- 직접 구현 우선 (`workflow-core.md` §implement 명시됨).
 - 새 추상화 추가 전 직접 구현이 더 단순한지 평가.
 - 적용 예: state machine 라이브러리 도입 전 sealed class + when 으로 충분한지 검토.
 
@@ -60,11 +60,11 @@
 
 ## 3. 라이브러리 사용 최소화 (의존성 정책)
 
-`CLAUDE.md` §10 + `ui-ux-analysis.md` §UI 라이브러리 억제 박힘 + 본 §3 강화:
+`CLAUDE.md` §10 + `ui-ux-analysis.md` §UI 라이브러리 억제 명시됨 + 본 §3 강화:
 
 ### 신규 의존성 도입 의무 (DependencyDecision 8 항목)
 
-PLAN `## 2. DependencyDecision` 에 모두 작성 (`report-formats.md` 박힘):
+PLAN `## 2. DependencyDecision` 에 모두 작성 (`report-formats.md` 명시됨):
 
 1. 도입 사유 (해결하는 구체 문제)
 2. 직접 구현 비교 (LOC + 유지비)
@@ -116,14 +116,14 @@ reviewer agent 가 REVIEW.md 12-section 작성 시 본 체크리스트 적용 �
 - [ ] verifier 의 Exit Criteria 가 실행 가능 명령 (0 command 금지)?
 
 ### F. 안전성
-- [ ] 시크릿 / PII 하드코딩 X (`safety-and-secrets.md` 박힘)?
+- [ ] 시크릿 / PII 하드코딩 X (`safety-and-secrets.md` 명시됨)?
 - [ ] HTTP X · HTTPS only?
 - [ ] 비가역 변경 (파일 삭제 / 스키마 변경) = Coin 명시 승인?
 
 ### G. cleanup
 - [ ] EVIDENCE.md `## Cleanup Assessment` 섹션 작성됐나?
 - [ ] 미사용 import / dead code / 중복 포맷터 제거?
-- [ ] Deferred Cleanup 항목 = TODO.md 에 lazy 박힘?
+- [ ] Deferred Cleanup 항목 = TODO.md 에 lazy 명시됨?
 
 ### H. UX Laws (`.claude/rules/ux-laws.md` 자동 참조 의무 · UI/UX task 한정)
 - [ ] task 유형 식별 → §5 매트릭스 row 추출됐나?
@@ -141,7 +141,7 @@ reviewer agent 가 REVIEW.md 12-section 작성 시 본 체크리스트 적용 �
 | 분류 | 조건 | 처리 |
 |---|---|---|
 | **PASS** | A~G 모두 ✓ | DONE 마감 |
-| **PARTIAL** | 1~3 항목 ✗ + 본 작업 직접 영향 X | TODO.md 에 lazy 박음 + DONE |
+| **PARTIAL** | 1~3 항목 ✗ + 본 작업 직접 영향 X | TODO.md 에 lazy 추가 + DONE |
 | **FAIL** | 4 항목 이상 ✗ 또는 본 작업 직접 영향 1+ | replan (change-planner 재호출) |
 
 ### SOLID 위반 mitigation 패턴

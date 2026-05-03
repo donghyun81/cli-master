@@ -76,7 +76,7 @@ if [ -f "$PROTECTED_HASHES" ]; then
     echo "[session] protected_baseline_count=$PROTECTED_COUNT"
 fi
 
-# === C3 박음: Claude Code 환경 정합 자동 검증 (cycle-discipline.md §13) ===
+# === C3 추가: Claude Code 환경 정합 자동 검증 (cycle-discipline.md §13) ===
 EXPECTED_VERSION="2.1.114"
 ACTUAL_VERSION=$(claude --version 2>/dev/null | grep -oE '[0-9]+\.[0-9]+\.[0-9]+' | head -1)
 if [ -n "$ACTUAL_VERSION" ] && [ "$ACTUAL_VERSION" != "$EXPECTED_VERSION" ]; then
@@ -85,7 +85,7 @@ elif [ -n "$ACTUAL_VERSION" ]; then
     echo "[session] cc_version=$ACTUAL_VERSION (pin PASS)"
 fi
 
-# === C11 박음: 세션 시작 시 .git/**/*.lock 광역 PID 검증 + stale 자동 정리 ===
+# === C11 추가: 세션 시작 시 .git/**/*.lock 광역 PID 검증 + stale 자동 정리 ===
 GIT_DIR_HOOK="$REPO_ROOT/.git"
 
 cleanup_session_lock() {
