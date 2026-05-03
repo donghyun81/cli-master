@@ -7,7 +7,7 @@
 #
 # 환경 변수:
 #   PARENT_DIR     기본: ~/AndroidStudioProjects (자식 repo 들이 있는 곳)
-#   MASTER_DIR     기본: $PARENT_DIR/claude-cli-master
+#   MASTER_DIR     기본: $PARENT_DIR/gently-master
 #   TARGET_REPOS   기본: "GentlyBreath GentlyDay GentlyTable"
 #
 # 동작:
@@ -25,7 +25,7 @@ set -euo pipefail
 
 # === 환경 변수 default ===
 : "${PARENT_DIR:=$HOME/AndroidStudioProjects}"
-: "${MASTER_DIR:=$PARENT_DIR/claude-cli-master}"
+: "${MASTER_DIR:=$PARENT_DIR/gently-master}"
 : "${TARGET_REPOS:=GentlyBreath GentlyDay GentlyTable}"
 
 # === 인자 파싱 ===
