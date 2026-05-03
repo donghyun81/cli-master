@@ -8,7 +8,7 @@
 
 | 파일 | 분류 | sha-256 | 변동 |
 |---|---|---|---|
-| `docs/schemas/ui-spec.schema.json` | 도구 무관 (v0.3 generic 화) | `0a82b89575550fe92d9258e9b544b61ccaea96cfc04cd6fda309c3ff9a0da495` | **MASTER-PROTECTED-BASELINE-RESYNC-001 갱신** (2026-05-03 · enum "0.3" 추가) |
+| `docs/schemas/ui-spec.schema.json` | 도구 무관 (v0.3 generic 화) | `f1edd39739d4c0192872002487c02bca6929f8bd6c14f85392552182ce2aa445` | **MASTER-DOC-CITATION-FIX-001 갱신** (2026-05-04 · description 도구 generic 어휘 3곳 정정 · 필드명 alias 보존) |
 | `.claude/rules/uiux-sot-refresh.md` | 도구 무관 (95% generic) | `ee377dc2ac32357f61fa1b2bfc39690ab530b65102e31062bff91ab6b8b260d3` | **MASTER-PROTECTED-BASELINE-RESYNC-001 갱신** (2026-05-03 · 후속 cycle 으로 baseline 정합) |
 | `docs/design/design-sot-policy.md` | 도구 무관 (75% 공통 추출) | `e5e3fe165ec3a826b2843f0e9791d4e6f07fb4c226bcc53639868787da49af03` | **MASTER-PROTECTED-BASELINE-RESYNC-001 갱신** (2026-05-03 · 후속 cycle 으로 baseline 정합) |
 | `.claude/rules/pencil-uiux-workflow.md` | Pencil 도구 바인딩 (30% 잔존) | `7621013e7f2dc644f0d0028b0574e12949dc7462953b4d5465c8a1186d6f0c0f` | **MASTER-PROTECTED-BASELINE-RESYNC-001 갱신** (2026-05-03 · 후속 cycle 으로 baseline 정합) |
@@ -48,6 +48,7 @@ bash scripts/verify-sync.sh
 
 ## Recent updates
 
+- 2026-05-04 · MASTER-DOC-CITATION-FIX-001 · ui-spec.schema.json description 의 Pencil 잔존 어휘 3곳 (`L129/191/210`) → 디자인 도구 generic 정정. 필드명 alias (`lastSyncedPencilStateHash` 등 v0.3 alias) 와 도구 바인딩 파일 인용 (`pencil-sot-binding.md`) 은 보존. 4-repo byte-identical propagation 동시.
 - 2026-05-03 · MASTER-PROTECTED-BASELINE-RESYNC-001 · 보호 파일 5종 sha **MATCH 확정** + ui-spec.schema.json enum 에 "0.3" 추가 (description 은 변동 없음). 자식 ui-spec.json schemaVersion 마이그레이션은 별 cycle 분리.
 - 2026-05-02 · C2.5-COMMON-PRINCIPLES-AND-DESIGN-TOOL-DECOUPLE-001 · 보호 파일 4종 sha **모두 갱신** (도구 무관 vs Pencil 전용 분리). 신설 보호 파일 1종 (`design-sot-policy.md`). 신설 cli infra 2종 (`code-principles.md` / `design-to-code-sync.md`).
 - 2026-05-02 · C2-RULES-RESTRUCTURE-001 · 5 파일 신설 + 6 파일 deprecated + 5 파일 cross-reference 갱신. 보호 파일 4종 sha 변동 0.

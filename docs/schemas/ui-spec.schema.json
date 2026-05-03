@@ -126,7 +126,7 @@
     },
     "nodes": {
       "type": "array",
-      "description": "Pencil 캔버스 복원용 중간 깊이 노드 트리. CLI 가 batch_design 으로 round-trip 시 사용. nodes[*].id 는 spec 논리 ID 이며 Pencil 캔버스 내부 id 와 독립 네임스페이스 (Stage 1B 파일럿 확인, batch_design 이 spec id 무시하고 자체 id 생성). round-trip 시 id 매핑은 별도 layer 책임. auto-layout/constraints 미포함 (Pencil 내부 스키마 변화 취약성 회피).",
+      "description": "디자인 도구 캔버스 복원용 중간 깊이 노드 트리. CLI 가 디자인 도구 round-trip 시 사용. nodes[*].id 는 spec 논리 ID 이며 디자인 도구 캔버스 내부 id 와 독립 네임스페이스 (Stage 1B 파일럿 확인 · 디자인 도구가 spec id 무시하고 자체 id 생성). round-trip 시 id 매핑은 별도 layer 책임. auto-layout/constraints 미포함 (디자인 도구 내부 스키마 변화 취약성 회피).",
       "items": {
         "type": "object",
         "required": ["id", "type"],
@@ -188,7 +188,7 @@
     },
     "visualSotPath": {
       "type": ["string", "null"],
-      "description": "동일 pencil-sot/ 디렉터리 기준 .pen 상대경로. Option B dual-layer 에서 1a structural ↔ 1b visual 의 round-trip 계약. .pen 미생성 화면은 null (Phase B 대기)."
+      "description": "동일 <design-tool>-sot/ 디렉터리 기준 visual SoT 상대경로. Option B dual-layer 에서 1a structural ↔ 1b visual 의 round-trip 계약. visual SoT 미생성 화면은 null (Phase B 대기)."
     },
     "lastSyncedDesignToolStateHash": {
       "type": ["string", "null"],
@@ -207,7 +207,7 @@
       "properties": {
         "previewPath": {
           "type": "string",
-          "description": "<screen-name>.preview.<theme>.png 상대경로 (같은 pencil-sot/ 디렉터리 기준)."
+          "description": "<screen-name>.preview.<theme>.png 상대경로 (같은 <design-tool>-sot/ 디렉터리 기준)."
         },
         "surfaceBg": { "type": "string", "pattern": "^#[0-9A-Fa-f]{6}$" }
       }
