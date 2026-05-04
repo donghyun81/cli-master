@@ -10,8 +10,8 @@
 
 ## Follow-up (post-correction step 11)
 
-- [ ] `decision-log.md` close entry append (cycle 마감 박음 · `MASTER-DIR-REBIND` trail close)
-- [ ] `cycle-handoff.md` baseline rolling rewrite (Auth ACTIVE 박힘 + 다음 cycle 후보 갱신)
-- [ ] GT 측 `.ai/reports/GT-AUTH-PIVOT-001/REVIEW.md` close memo append (master cycle 박음 인용 · 자식 close 신호)
-- [ ] `gently-master/CLAUDE.md` §15 cycle 표 append (MASTER-AUTH-DOMAIN-ACTIVATE-001 row)
-- [ ] `GentlyTable/CLAUDE.md` §15 또는 동등 위치에 cycle 박음 (자식 측 인지)
+- [x] `decision-log.md` close entry append (cycle 마감 박음 · `MASTER-DIR-REBIND` trail close) — 2026-05-03 박힘
+- [~] `cycle-handoff.md` baseline rolling rewrite — 파일 부재 (master 미신설). 별 trail (lazy · 신설 cycle 시점에 도입)
+- [x] GT 측 `.ai/reports/GT-AUTH-PIVOT-001/REVIEW.md` close memo append (master cycle 박음 인용 · 자식 close 신호) — 2026-05-03 박힘
+- [x] `gently-master/CLAUDE.md` §15 cycle 표 append (MASTER-AUTH-DOMAIN-ACTIVATE-001 row) — 2026-05-03 박힘
+- [~] `GentlyTable/CLAUDE.md` §15 또는 동등 위치에 cycle 박음 — N/A: GT CLAUDE.md 는 §15 cycle 표 부재 (자식 = master Nested 패턴 · master CLAUDE.md §15 가 SoT). 자식 측 인지는 GT REVIEW.md close memo + master `deferred-domains.md` §2/§6 (3-repo propagation 박힘) 으로 충족.
