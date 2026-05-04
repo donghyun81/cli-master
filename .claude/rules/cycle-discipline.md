@@ -345,3 +345,26 @@ cli infra 수정 필요?
 │   └── 도메인 활성화 trigger → 패턴 3 (master 신설 + activate-agent.sh)
 └── NO: 자식 repo 의 본 작업 cycle 진행
 ```
+
+---
+
+### 17) BASELINE 실측 표준 (filename + content 동시 grep 의무)
+
+> 본 § = filename-only baseline 사고 영구 정착 mitigation.
+> 사고 패턴: agent 가 `find -name "Routes*.kt"` 만 실행 → file 이름 부재 인용 → 실제 = `GentlyDayNavGraph.kt` 안에 `object Routes` 존재. STOP 부적절 (실측 X).
+
+**의무 절차** (BASELINE 실측 시):
+
+1. **filename find 1차** — `find <path> -name "<pattern>" -type f`
+2. **container 내부 content grep 2차 (의무)** — filename 부재 시점에서 즉시 STOP/UNKNOWN 분류 금지. container 내부 동일 의미의 symbol/object/function grep 의무.
+   - Kotlin: `grep -rn "object <Name>\|class <Name>\|fun <Name>" --include="*.kt" <path>`
+   - Java: `grep -rn "class <Name>\|interface <Name>" --include="*.java" <path>`
+   - 일반: filename 으로 찾던 의미를 content keyword 로 변환 후 grep
+3. **lifecycle/deprecated 키워드 grep (의무)** — ui-spec.json / SoT 파일 BASELINE 실측 시 의무. `grep -E "lifecycle|deprecated|replaced-by"` (§14a 6 절차와 정합).
+4. **filename + content 둘 다 부재 시점에만 STOP/UNKNOWN 분류** 가능.
+
+**근거 사고**:
+- `BASELINE-FILENAME-ONLY-FALSE-NEGATIVE-001` — Routes.kt 부재 잘못 주장 · 실제 `GentlyDayNavGraph.kt` 안 `object Routes` 존재.
+- `COWORK-PREP-BASELINE-MISMATCH-005~006` — lifecycle/deprecated 키워드 미점검 (Cowork → CLI handoff 사고).
+
+**적용 대상**: `.claude/agents/active/intake-router.md` "Evidence to gather" 섹션 + §14a Cowork prep 6 절차 + 모든 BASELINE 실측 cycle.

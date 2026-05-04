@@ -59,6 +59,8 @@ tools: Read, Glob, Grep
 - `docs/agent/process/REPO_FIRST_INTAKE_WORKFLOW.md` — task-aware reading order
 - 필요한 경우에만 앱 컨텍스트 규칙 참조: `.claude/rules/` (영역별로 선택적으로)
 
+**BASELINE 실측 의무 (filename + content 동시 grep)**: 파일 부재 주장 전 의무 검증. filename find 결과 부재 시점에서 즉시 STOP/UNKNOWN 분류 금지 — container 내부 동일 의미의 symbol/object/function grep 의무. 예: "Routes.kt 부재" 주장 전 `grep -rn "object Routes\|fun Nav.*Graph" --include="*.kt"` 의무. ui-spec.json BASELINE 실측 시 lifecycle/deprecated/replaced-by 키워드 grep 의무. 근거: `.claude/rules/cycle-discipline.md §17 BASELINE 실측 표준`.
+
 프로젝트 문서(앱 개요, 아키텍처 문서 등)는 전문가 역할들이 각 도메인 판단에 필요할 때 참조한다.
 intake-router는 라우팅 판단에 필요한 최소한만 읽는다.
 

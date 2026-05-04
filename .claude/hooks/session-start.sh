@@ -123,4 +123,25 @@ if [ -d "$GIT_DIR_HOOK" ]; then
     done
 fi
 
+# === 사고 1 mitigation: ARGUMENTS stale inject 방지 ===
+# 직전 CLI 세션 마감 시 ARGUMENTS env 안 비움 → 새 세션 진입 시 stale [C1/N] 재 inject risk.
+unset ARGUMENTS 2>/dev/null
+echo "[session] arguments_purged"
+
+# === 사고 4 mitigation: launchd daemon 활성 검증 (C12 권장 영구 적용) ===
+if command -v launchctl >/dev/null 2>&1; then
+    DAEMON_LABEL="com.coin.git-lock-cleaner"
+    if ! launchctl list 2>/dev/null | grep -q "$DAEMON_LABEL"; then
+        echo "[session] WARN: git-lock daemon 미활성 (사고 4 재발 risk)" >&2
+        PLIST_PATH="$HOME/Library/LaunchAgents/$DAEMON_LABEL.plist"
+        if [ -f "$PLIST_PATH" ]; then
+            echo "[session]   load: launchctl load $PLIST_PATH" >&2
+        else
+            echo "[session]   install: bash \$MASTER_DIR/scripts/install-git-lock-daemon.sh" >&2
+        fi
+    else
+        echo "[session] daemon=active"
+    fi
+fi
+
 exit 0
