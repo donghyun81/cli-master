@@ -675,7 +675,7 @@ C13-VERIFY-FULL 의 발견된 gap 3 종 (.gitignore propagation 누락 + daemon 
 
 ---
 
-## 2026-05-02 · MASTER-AUTH-DOMAIN-ACTIVATE-001 (진행 중 · path rebind 박음)
+## 2026-05-02 · MASTER-AUTH-DOMAIN-ACTIVATE-001 (마감 · 2026-05-03 KST close)
 
 ### 결정 1. master path rebind: `claude-cli-master` → `gently-master`
 
@@ -693,3 +693,9 @@ C13-VERIFY-FULL 의 발견된 gap 3 종 (.gitignore propagation 누락 + daemon 
 
 ### 다음 cycle 진입 조건 (본 cycle 안)
 - §3-1 ~ §3-4 (auth-rules.md 신설 + deferred-domains.md 갱신 + routing-and-delegation.md 갱신 + auth-security-privacy.md mv) → 4-file 3-repo propagation → EC1~EC4 검증 → 4 commit (master + 3 자식) → close memo
+
+### close 박음 (2026-05-03 KST)
+- master commit `3a8ca0d` · GT `6438e9e` · GD `8939085` · GB `6443c81`
+- EC1~EC4 모두 PASS (verify-sync.sh 104/0/0 byte-identical · 보호 파일 4종 sha 무변경 baseline 그대로)
+- Auth 도메인 master + GT 활성화 박힘 (`deferred-domains.md` §2 매트릭스 박음). GD/GB 자체 활성화 = 별 cycle (자연 trigger · lazy)
+- 별 trail `MASTER-DIR-REBIND-CLAUDE-CLI-MASTER-TO-GENTLY-MASTER-001` = open (script hardcoded 정정 별 cycle)
