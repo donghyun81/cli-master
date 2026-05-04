@@ -160,16 +160,18 @@ PASS 줄어든 이유 = master 에서 6 파일 rm → verify-sync 가 더 이상
 
 ---
 
-## 6. baseline 갱신
+## 6. baseline 갱신 (Coin 손 작업 commit 후 실측 정정)
 
-| 항목 | 변경 전 | 변경 후 (Coin 손 작업 후) |
+| 항목 | 변경 전 | 변경 후 (실측) |
 |---|---|---|
-| master `.claude/rules/` 파일 수 | 19 | 13 |
-| 자식 `.claude/rules/` 파일 수 | 19 | 13 |
+| master `.claude/rules/` 파일 수 | 22 | **16** |
+| 자식 `.claude/rules/` 파일 수 | 22 | **16** |
 | 자식 `.claude/agents/` flat 파일 수 | 25 | 0 |
 | 자식 `.ai/.sandbox-write-test` | 1 | 0 |
-| verify-sync iter 대상 | 109 | 103 |
+| verify-sync iter 대상 | 109 | **103** |
 | 보호 파일 5 종 sha | 변동 없음 | 변동 없음 |
+
+> 정정 사유: 본 표 초안의 "13" expected = deprecated 6 만 빼고 19 ÷ 6 = 13 으로 잘못 계산. master active rules = 16 (workflow-core, cycle-discipline, pencil-automation, report-paths, report-formats, deferred-domains, code-principles, design-to-code-sync, ui-ux-analysis, uiux-sot-refresh, ux-laws, pencil-uiux-workflow, routing-and-delegation, legacy-cleanup-governance, safety-and-secrets, verification-and-review).
 
 ---
 
