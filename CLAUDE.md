@@ -1,5 +1,19 @@
 # Gently Master — Claude Code 운영 SoT (Single Source of Truth)
 
+> **용어 사전 (terminology · 2026-05-04 · `MASTER-CLI-TERMINOLOGY-DEFINE-001`)** —
+> 본 지침 / 메모리 / 규약 / 자식 repo 안 'CLI / cli' 표현 정의:
+>
+> - **CLI / Claude Code CLI** = Anthropic 의 코딩 agent CLI 도구 (`claude` 명령). 본 패키지의 운영 CLI 는 Claude Code 단일.
+> - **cli infra** = Claude Code 가 읽는 `.claude/` 디렉터리 전체 (rules / agents / hooks / commands / skills / settings).
+> - **CLI 환경 / 세션 / 측** = Claude Code 실행 환경 / 세션 / 주체 (Cowork / Coin 측과 대비되는 자동 처리 주체).
+> - **`*-CLI-NNN` task ID** (예: `GB-CLI-001`, `SW-CLI-DOCOPS-001`) = cli infra 도메인 task.
+> - **Cowork ↔ CLI 동기화** = Cowork chat (Coin 측) ↔ Claude Code (자동 처리) 사이 baseline / handoff 정합.
+>
+> **구분**: 일반 macOS 터미널 / shell script / bash 명령은 'shell' 또는 'bash' 로 표기 (cli 와 구분 의무).
+> **신규 cli 표현 추가 시**: 본 정의 그대로 적용 (별도 cycle 불필요).
+
+---
+
 > **이 repo 는 cli infra + 보호 파일의 단일 source-of-truth.**
 > 자식 repo (GentlyBreath / GentlyDay / GentlyTable / 향후 추가) 는 본 repo 에서 단방향 propagation 을 받는다.
 > 시간대: Asia/Seoul (KST) · 운영 CLI: Claude Code 단일.
