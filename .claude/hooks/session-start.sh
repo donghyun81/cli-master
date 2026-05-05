@@ -144,4 +144,10 @@ if command -v launchctl >/dev/null 2>&1; then
     fi
 fi
 
+# === MASTER-WORKING-FILE-LIFECYCLE-001 — working file archive sweep (warn-only) ===
+WFA_SCRIPT="$(cd "$(dirname "$0")/../.." && pwd)/scripts/working-file-archiver.sh"
+if [ -x "$WFA_SCRIPT" ]; then
+  "$WFA_SCRIPT" 2>/dev/null || true
+fi
+
 exit 0
