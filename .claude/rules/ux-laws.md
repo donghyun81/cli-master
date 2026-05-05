@@ -263,6 +263,22 @@
 
 자식 repo task 진입 시 ux-auditor 가 `intake-router` 의 work type 식별 → 위 매트릭스 row 자동 선택 → 해당 법칙 PLAN.md / IMPL / REVIEW 에 인용 의무.
 
+## 5.1 N/A 영역 (자동 분류 의무)
+
+다음 7 영역 화면 / task 는 §5 매트릭스 적용 X · audit N/A 분류 의무.
+
+| 영역 | 정의 | 예 |
+|---|---|---|
+| Auth-only | 로그인 / 회원가입 / 비밀번호 재설정 — UI 표시 외 도메인 | auth-screen |
+| Backend-only | API / DB / 동기화 — 화면 변경 X | API endpoint 추가 cycle |
+| Doc-only | 문서 변경 — UI 변경 X | README 갱신 |
+| Dependency-decision | 라이브러리 선택 — UI 무관 | 차트 라이브러리 결정 |
+| Build-CI-Tooling | gradle / 빌드 — UI 무관 | CI script 영역 |
+| Refactor (UI 무관) | 구조 변경만 | data class 분리 |
+| cli infra | .claude/ / docs/templates/ 영역 | rules / agents / hooks |
+
+REVIEW.md §B [UX Laws] + §B Dark Patterns 회피 검증 시 N/A 분류 = "N/A (사유: <영역>)" 1 줄 형식 의무.
+
 ---
 
 ## 6. 검증 (PromptFit + REVIEW.md 12-section 안 §B [UX Laws])
