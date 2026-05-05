@@ -48,6 +48,8 @@ bash scripts/verify-sync.sh
 
 ## Recent updates
 
+- 2026-05-05 · MASTER-UX-LAWS-NA-SCOPE-AND-RETRO-FIX-001 · cli infra ux-laws.md sha 변동 80aa2915... → 0f63f399... (322 line / §5.1 N/A 영역 7 신설) · 4-repo byte-identical · 보호 파일 5 종 sha 변동 0 · master 3c48df5 / GB a8d985e / GD dd4d6f0 / GT 25d2358.
+- 2026-05-05 · MULTI-REPO-UIUX-AUDIT-AGAINST-UX-LAWS-001 Phase 1 정합 검증 · 보호 파일 5 종 + cli infra 6 종 4-repo byte-identical 재확인 (drift 0). prompt BASELINE 의 `design-sot-policy.md` 위치 가정 (`.claude/rules/`) 정정 → 실제 `docs/design/`. 보호 파일 sha 변동 0.
 - 2026-05-04 · MASTER-DOC-CITATION-FIX-001 · ui-spec.schema.json description 의 Pencil 잔존 어휘 3곳 (`L129/191/210`) → 디자인 도구 generic 정정. 필드명 alias (`lastSyncedPencilStateHash` 등 v0.3 alias) 와 도구 바인딩 파일 인용 (`pencil-sot-binding.md`) 은 보존. 4-repo byte-identical propagation 동시.
 - 2026-05-03 · MASTER-PROTECTED-BASELINE-RESYNC-001 · 보호 파일 5종 sha **MATCH 확정** + ui-spec.schema.json enum 에 "0.3" 추가 (description 은 변동 없음). 자식 ui-spec.json schemaVersion 마이그레이션은 별 cycle 분리.
 - 2026-05-02 · C2.5-COMMON-PRINCIPLES-AND-DESIGN-TOOL-DECOUPLE-001 · 보호 파일 4종 sha **모두 갱신** (도구 무관 vs Pencil 전용 분리). 신설 보호 파일 1종 (`design-sot-policy.md`). 신설 cli infra 2종 (`code-principles.md` / `design-to-code-sync.md`).
