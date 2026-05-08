@@ -133,3 +133,13 @@
 - mitigation: 정책 변경 = master .gitignore 자체 propagate X (자식 자율). 별 script `ensure-child-gitignore-patches.sh` 가 cli infra patterns 만 자식에 marker block 으로 patch (idempotent). propagate.sh 자동 호출.
 - trail: close (사고 사전 차단 · 학습 = 자식 자율 영역과 master cli infra 영역 명확 분리 의무)
 ```
+
+## 2026-05-09T00:00:00+0900
+
+```
+- type: 3-repo drift + cycle scope 부풀음 (seed 결함 전파)
+- cycle: NEW-REPO-BASELINE-GT-CLAUDE-MD-RCA-001
+- summary: GT CLAUDE.md 가 master SoT (`# Gently Master — Claude Code 운영 SoT`) 의 verbatim cp 였음. GD/GB 는 SteadyWell propagation 을 통해 자식 Nested pattern (`# Claude Code 운영 헌법`) baseline 보유. RCA 결과 = GentlyClean seed `GentlyTable/00-CLAUDE-헌법.md` 자체가 master SoT cp 결함 + NEW-REPO-BASELINE cycle 의 verbatim cp 로 GT 만 master cp baseline 노출. 동족 사고 누적 = COWORK-PREP-BASELINE-MISMATCH-001~004 (Cowork ↔ CLI handoff baseline 미참조 4회) + 본 사고 = 5회.
+- mitigation: GT CLAUDE.md 재작성 (자식 Nested pattern + GT 도메인 1 섹션). CLAUDE.md §2 정합 강제 표 권한 (CLAUDE.md 본문 도메인 섹션 = repo-specific 자유) 인용으로 master cycle 의무 없이 GT-only 정정 타당화. 5 검증 명령 PASS (sha 비교 / line 수 / title / Gently Master grep 0 hit / 도메인 keyword 16 hit).
+- trail: close (본 cycle) · 별 trail 2 open: (1) GentlyClean seed `00-CLAUDE-헌법.md` 자체 정정 cycle (lazy · 다음 자식 repo 신설 시 자연 trigger) (2) GD/GB 도메인 헌법 1 섹션 추가 cycle (lazy · GD/GB 본 작업 진입 시 자연 trigger). 6회차 재발 시 mitigation 강화 cycle 진입 (Cowork 측 baseline 자동 검증 hook 도입 검토).
+```
