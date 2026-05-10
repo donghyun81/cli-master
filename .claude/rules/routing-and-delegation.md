@@ -52,7 +52,7 @@ intake-router는 키워드 분류기가 아니다 — **어떤 전문 판단이 
 | [DEFERRED] 배포 위험, 롤백 전략 | release-risk-manager | `.claude/agents/deferred/release-risk-manager.md` |
 <!-- propagation: repo-only -->
 | [DEFERRED] 비즈니스 정책, 불변 원칙 충돌 | domain-policy-analyst | `.claude/agents/deferred/domain-policy-analyst.md` |
-| [DEFERRED] 결제 플로우, entitlement 보호 | billing-payments-guardian | `.claude/agents/deferred/billing-payments-guardian.md` |
+| 결제 플로우, entitlement 보호 | billing-payments-guardian | `.claude/agents/active/billing-payments-guardian.md` |
 | [DEFERRED] 오프라인/동기화/충돌 해결 | sync-offline-state-specialist | `.claude/agents/deferred/sync-offline-state-specialist.md` |
 <!-- /propagation: repo-only -->
 
@@ -101,7 +101,6 @@ intake-router는 키워드 분류기가 아니다 — **어떤 전문 판단이 
 기능 도입 시 개별 agent 파일을 복원하고 이 테이블에서 [DEFERRED] 제거.
 
 **비활성 목록:**
-- billing-payments-guardian — 결제 기능 구현 시
 - domain-policy-analyst — 도메인 정책 문서 작성 시
 - sync-offline-state-specialist — 오프라인 지원 구현 시
 - server-implementer — Supabase Edge Functions 등 서버 연동 시작 시

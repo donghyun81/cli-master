@@ -41,9 +41,11 @@ STOP 시 자동 발화 agent (`.claude/agents/deferred/`):
 | Data / Migration | UNKNOWN | UNKNOWN | UNKNOWN | UNKNOWN |
 | Backend / API | UNKNOWN | UNKNOWN | UNKNOWN | UNKNOWN |
 | Performance | UNKNOWN | UNKNOWN | UNKNOWN | UNKNOWN |
-| Billing | UNKNOWN | UNKNOWN | UNKNOWN | UNKNOWN |
+| Billing | **ACTIVE** ² | **ACTIVE** ² | **ACTIVE** ² | **ACTIVE** ² |
 
 ¹ Supabase Auth 익명 부트스트랩 + JSON backup · GT-AUTH-PIVOT-001 명시된 패러다임 · `auth-rules.md` SoT (MASTER-AUTH-DOMAIN-ACTIVATE-001).
+
+² Mock-first paradigm + Edge Function 영수증 검증 paradigm · GT CLAUDE.md §6 명시된 Google Play Billing 소비형 인앱 상품 (한입 티켓) · `billing-rules.md` SoT (MASTER-BILLING-DOMAIN-ACTIVATE-001).
 
 > **GB SteadyWell propagation 잔존 drift** (`incident-log.md` 명시됨): GB 의 deferred-domains.md 가 cycle 진척 전 ACTIVE 표기 유지. C4 propagation 시 master baseline 으로 통일.
 
@@ -91,6 +93,7 @@ STOP 시 자동 발화 agent (`.claude/agents/deferred/`):
 
 ## 6. C2 변경 이력
 
+- 2026-05-10 · MASTER-BILLING-DOMAIN-ACTIVATE-001 · Billing 도메인 4-repo 활성화 (UNKNOWN×4 → ACTIVE×4) · `billing-rules.md` SoT 신설 (10 섹션 · GT CLAUDE.md §6 Mock-first paradigm + Edge Function 영수증 검증 의무 코드화) · `billing-payments-guardian` agent deferred/ → active/ 이전.
 - 2026-05-02 · MASTER-AUTH-DOMAIN-ACTIVATE-001 · Auth 도메인 master + GT 활성화 (GD/GB 별 cycle) · `auth-rules.md` SoT 신설 + agent deferred/ → active/ 이전.
 - 2026-05-02 · C2-RULES-RESTRUCTURE-001 · 기존 4 pointer rule 삭제 + 본 파일에 통합 (Billing 신설 · 활성화 trigger 키워드 표 신설 · 3 자식 repo 상태 매트릭스 신설).
 - 2026-05-02 · C1-MASTER-BOOTSTRAP-001 · GT 의 UNKNOWN baseline 채택 (master baseline).
