@@ -42,7 +42,7 @@
 
 ## 현 정합 상태 요약 (C1 baseline 직후)
 
-- **보호 파일 4 종** = 3-repo 모두 PASS (변동 없음)
+- **보호 파일 5 종** = 3-repo 모두 PASS (변동 없음)
 - **cli infra** = 6 파일 drift (master 가 GD/GT 의 best-version 채택 후 GB 와 일부 drift)
 - **propagation 의무** = C4 cycle 에서 master → 3-repo 단방향 cp 로 모두 일치 예정
 
@@ -89,10 +89,15 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 
 
 
+
 ## Last verify-sync
 
-- timestamp: 2026-05-10T16:42:40+0900
-- pass: 111
-- drift: 0
+- timestamp: 2026-05-10T17:09:14+0900
+- pass: 110
+- drift: 1
 - miss: 0
-- exit: 0
+- exit: 1
+
+### Drift 상세
+
+- .claude/rules/sot-code-name-map.md  master=1e2a2ed1b055  GentlyBreath=✓  GentlyDay=✓  GentlyTable=7f2f4e61c635(✗)

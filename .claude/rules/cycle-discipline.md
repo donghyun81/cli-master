@@ -38,11 +38,12 @@
 
 ### 3) 3-repo byte-identical 강제 범위
 
-보호 파일 4종에만 한정:
+보호 파일 5종에만 한정:
 - `docs/schemas/ui-spec.schema.json`
 - `.claude/rules/pencil-uiux-workflow.md`
 - `docs/design/pencil-sot-policy.md`
 - `.claude/rules/uiux-sot-refresh.md`
+- `docs/design/design-sot-policy.md`
 
 다른 룰 파일은 repo-specific 가능. 단 워크플로우 표준 (본 §섹션 포함) 을 3-repo 모두에 적용하려면 task 별로 propagation 명시.
 
@@ -110,10 +111,10 @@ expected message 와 1행씩 대조. 불일치 = drift = 해당 commit immutable
 
 ### 10) 보호 파일 변경 시 추가 의무
 
-보호 파일 4종 sha 가 바뀌는 commit:
+보호 파일 5종 sha 가 바뀌는 commit:
 - body `[Sha]` 섹션에 새 sha 8자 prefix 필수 명시
 - 3-repo cross-verify 결과를 `[EC]` 섹션에 명시
-- commit 후 memory baseline sha 갱신 (`.auto-memory/pencil_sot_protected_file_hashes.md`)
+- commit 후 memory baseline sha 갱신 (`.auto-memory/protected-file-hashes.md`)
 
 ### 11) 보고서 lightweight 옵션
 
@@ -274,7 +275,7 @@ PLAN.md / VERIFY.md / REVIEW.md / TODO.md
 
 1. **GT git log 실측**: `git log --oneline -5 /Users/yundonghyeon/AndroidStudioProjects/GentlyTable` — 가장 최근 5 commit 확인 (직전 cycle 마감 + 별 cycle 추적).
 2. **decision-log tail 실측**: `tail -50 /Users/yundonghyeon/AndroidStudioProjects/GentlyTable/.auto-memory/decision-log.md` — 직전 entry 명시됨 검증 (entry 중복 회피).
-3. **보호 파일 sha 실측**: 4종 sha 변동 추적 (`shasum -a 256 docs/schemas/ui-spec.schema.json .claude/rules/pencil-uiux-workflow.md docs/design/pencil-sot-policy.md .claude/rules/uiux-sot-refresh.md`) — sandbox memory baseline 과 비교.
+3. **보호 파일 sha 실측**: 5종 sha 변동 추적 (`git hash-object docs/schemas/ui-spec.schema.json .claude/rules/pencil-uiux-workflow.md docs/design/pencil-sot-policy.md .claude/rules/uiux-sot-refresh.md docs/design/design-sot-policy.md`) — sandbox memory baseline 과 비교.
 4. **사용자 메시지 분류**: PASS 신호 ("OK" / "pass" / "권장사항대로 진행") vs 피드백 메시지 (정책 수정 / 결정 의뢰) 사전 분류 — PASS 신호 인지 미스 회피.
 5. **기획 문서 실측 (신규 · 005/006 mitigation)**: 새 화면 도메인 결정 / 기능 추가 / 디렉터리 정합 검증 시 의무. `cat /Users/yundonghyeon/AndroidStudioProjects/GentlyTable/docs/plan/기획안_보강.md` + `cat /Users/yundonghyeon/AndroidStudioProjects/GentlyTable/docs/design/screen-flow.md` 참조 후 추정 금지. 도메인 외 의문 발견 시 **기획안 grep 의무** (예: "ticket" / "billing" / "결제" / "구독" 등).
 6. **3-repo git log 실측 (신규 · 007 mitigation)**: 본 chat 외 추가된 별 cycle 추적 의무. `for r in GentlyTable GentlyDay GentlyBreath; do git log --oneline -5 /Users/yundonghyeon/AndroidStudioProjects/$r; done` — 본 chat 추가한 cycle 외 별 작업 진행 patterns 검증.
