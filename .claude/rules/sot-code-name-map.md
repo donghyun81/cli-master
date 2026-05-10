@@ -73,6 +73,7 @@
 | ai-disclaimer-screen | AIDetailScreen.kt | 1:1 명명 차이 | `RootRoutes.SETTINGS_AI` | settings/sub/ · `AiDisclaimerDetailCard` 컴포넌트 포함 |
 | auth-screen | (UI 미구현) | SoT only | — | 익명 인증 자동 (`AnonymousAuthBootstrap`) |
 | condition-input-screen | ConditionInputScreen.kt | 1:1 직매핑 | `RootRoutes.CONDITION_INPUT` | — |
+| daily-prescription-screen | DailyPrescriptionScreen.kt | 1:1 직매핑 | (Phase 3 vertical slice) | GT-PHASE-3-SOT-001 신설 · RESULT = PrescriptionResultContent.kt |
 | darkmode-screen | (없음) | SoT only | — | 디자인 SoT (테마 토글) |
 | design-tokens-screen | (없음) | SoT only | — | 디자인 시스템 SoT |
 | exercise-screen | ExerciseScreen.kt | 1:1 직매핑 | `RootRoutes.EXERCISE` | — |
@@ -93,7 +94,7 @@
 
 | 카테고리 | GB | GD | GT | 합 |
 |---|---|---|---|---|
-| 1:1 직매핑 | 4 | 6 | 11 | 21 |
+| 1:1 직매핑 | 4 | 6 | 12 | 22 |
 | 1:1 명명 차이 | 4 | 0 | 2 | 6 |
 | N:1 통합 | 4 | 5 | 0 | 9 |
 | SoT only | 3 | 2 | 3 | 8 |
