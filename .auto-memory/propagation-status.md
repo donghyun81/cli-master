@@ -90,14 +90,12 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 
 
 
+
+
 ## Last verify-sync
 
-- timestamp: 2026-05-10T17:09:14+0900
-- pass: 110
-- drift: 1
+- timestamp: 2026-05-10T23:40:23+0900
+- pass: 112
+- drift: 0
 - miss: 0
-- exit: 1
-
-### Drift 상세
-
-- .claude/rules/sot-code-name-map.md  master=1e2a2ed1b055  GentlyBreath=✓  GentlyDay=✓  GentlyTable=7f2f4e61c635(✗)
+- exit: 0

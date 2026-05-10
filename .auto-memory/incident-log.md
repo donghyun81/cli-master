@@ -24,6 +24,13 @@
 - trail: <별 trail ID 또는 close>
 ```
 
+## 2026-05-10T23:41:00+0900
+- type: 3-repo drift (master ↔ GT)
+- cycle: MASTER-BILLING-DOMAIN-ACTIVATE-001 STEP-1 (drift mitigation)
+- summary: master `.claude/rules/sot-code-name-map.md` 가 GT 의 GT-PHASE-3-SOT-001 갱신 1 row + aggregate 1 update 미반영 (daily-prescription-screen 누락 · 1:1 직매핑 GT 11/21 → 12/22 갱신 누락)
+- mitigation: master Edit 2회 surgical (row insert + aggregate 갱신) → shasum 일치 (`7f2f4e61c635d6f425232c4c5f0d5b7caed9a8da3036efcff6c67de9676068d2`) → 본 cycle propagation 으로 4-repo 통일 (verify-sync 112/0/0)
+- trail: close (본 cycle 마감)
+
 ## C1 baseline 사고 (참조용 · 자식 repo 에서 발견된 drift)
 
 ```

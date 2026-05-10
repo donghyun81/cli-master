@@ -2,6 +2,13 @@
 
 > master cycle 별 의사결정 누적. 각 entry = 1 cycle 1 결정 묶음.
 
+## 2026-05-10 · MASTER-BILLING-DOMAIN-ACTIVATE-001 (마감)
+
+### 결정. Billing 도메인 4-repo 활성화 + Mock-first paradigm 코드화
+- **선택**: cycle-discipline §15 패턴 3 (도메인 활성화) 그대로 적용 — `billing-rules.md` SoT 신설 (10-section) + `billing-payments-guardian` agent deferred/ → active/ + `deferred-domains.md` Billing UNKNOWN×4 → ACTIVE×4 + `routing-and-delegation.md` [DEFERRED] 제거.
+- **근거**: GT CLAUDE.md §6 의 Mock-first paradigm + Edge Function 영수증 검증 의무 + 한입 티켓 (Google Play Billing 소비형 인앱 상품) 명시된 패러다임 코드화 의무. STEP-1 drift mitigation (sot-code-name-map.md GT 흡수) 묶음 처리.
+- **검증**: propagate.sh 336/0 + verify-sync.sh 112/0/0 (exit 0) · auth-rules.md 패턴 차용 (10-section 일관성).
+
 ## 2026-05-02 · C1-MASTER-BOOTSTRAP-001 (마감)
 
 ### 결정 1. 정합 구조
