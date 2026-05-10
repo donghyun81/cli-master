@@ -59,6 +59,16 @@ bash scripts/verify-sync.sh
 4-repo byte-identical: master 77ca613 · GB 628245f · GD 3a5b4ca · GT f4501d5
 보호 파일 5종 sha 변동: 0 (cli infra 권장 파일 5종만 신설)
 
+## GLOBAL-NO-ABBREV-POLICY-002 갱신 cli infra (2026-05-10)
+
+| 파일 | sha-256 (full) | 변경 내용 |
+|---|---|---|
+| `.claude/hooks/check-abbreviation.sh` | `c232e2c7961bd9eeb1f5756337184e61c8a5469d29db872eaa84296f8d20c9ab` | Sub B: import line skip + generated path skip / Sub C: NO_ABBREV_ENFORCE default warn→enforce |
+| `.claude/rules/no-abbreviation-policy.md` | `b42cc3df424134768f70a966a6c0f8ff1951eb138a418d0e00ca9a8e82d4fa7f` | §3 hook 제외 대상 표 신설 / §5.1 mode default enforce / §5.2 self-test 7 fixtures |
+
+4-repo byte-identical: master 7a25854 · GB 2c83a4e · GD 8ad3e7d · GT 8647a4d
+보호 파일 5종 sha 변동: 0 (cli infra 권장 파일만 갱신)
+
 ## Recent updates
 
 - 2026-05-05 · MASTER-UX-LAWS-NA-SCOPE-AND-RETRO-FIX-001 · cli infra ux-laws.md sha 변동 80aa2915... → 0f63f399... (322 line / §5.1 N/A 영역 7 신설) · 4-repo byte-identical · 보호 파일 5 종 sha 변동 0 · master 3c48df5 / GB a8d985e / GD dd4d6f0 / GT 25d2358.
