@@ -46,6 +46,19 @@ done
 bash scripts/verify-sync.sh
 ```
 
+## GLOBAL-NO-ABBREV-POLICY-001 신설 cli infra (2026-05-10)
+
+| 파일 | sha-256 (full) | 비고 |
+|---|---|---|
+| `.claude/rules/no-abbreviation-policy.md` | `dc5432f6f6110ba9bf654b8031befe07f03a8ce466c0de3d102cc30415e45403` | no-abbreviation 정책 SoT |
+| `.claude/rules/allowed-acronyms.md` | `83b092e21f07a418385470bbefce8ab5bb468f4c39751c6c457bf0e97c4da716` | 허용 표준 약어 SoT |
+| `.claude/rules/forbidden-abbreviations.md` | `82519940f655d114c88184429f7efc934a0844785f4f17145b29b581162e153a` | 금지 약어 seed list SoT |
+| `.claude/hooks/check-abbreviation.sh` | `98d0a023a90fe2d614fde796056896087c5c7fc39ea5ded445d314b2f2f37a23` | PreToolUse Edit|Write hook |
+| `.claude/settings.json` | `c777a494d5e70ddb95958a8761ab03affd81827763bed0249d7685552b61d9f9` | settings (PreToolUse 갱신) |
+
+4-repo byte-identical: master 77ca613 · GB 628245f · GD 3a5b4ca · GT f4501d5
+보호 파일 5종 sha 변동: 0 (cli infra 권장 파일 5종만 신설)
+
 ## Recent updates
 
 - 2026-05-05 · MASTER-UX-LAWS-NA-SCOPE-AND-RETRO-FIX-001 · cli infra ux-laws.md sha 변동 80aa2915... → 0f63f399... (322 line / §5.1 N/A 영역 7 신설) · 4-repo byte-identical · 보호 파일 5 종 sha 변동 0 · master 3c48df5 / GB a8d985e / GD dd4d6f0 / GT 25d2358.
