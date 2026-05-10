@@ -1,0 +1,70 @@
+repo,screen,theme,task_type,row_id,row_name,verdict,evidence
+GB,splash,light,로딩/에러/빈 상태,C-1,Doherty Threshold (<400ms 또는 splash dwell 의도),PASS,F1 — TotalTime 714ms · init wait 의도
+GB,onboarding_step1,light,multi-step Form/Onboarding,D-1,Goal-Gradient (정직한 진행),PASS,단계 표시 명시 (1/5)
+GB,onboarding_step2,light,multi-step Form/Onboarding,D-1,Goal-Gradient,PASS,단계 2/5
+GB,onboarding_step3,light,multi-step Form/Onboarding,D-1,Goal-Gradient,PASS,단계 3/5
+GB,onboarding_step4,light,multi-step Form/Onboarding,§3.1,Cognitive Bias (Loss-Aversion),BORDERLINE,F2 — "지금 시작하면 첫 5회 무료" — incentive · 카운트다운 X · 거부 wording 중립 X. ACCEPTABLE
+GB,onboarding_step4,light,multi-step Form/Onboarding,B-2,Hick's Law (점진 노출),PASS,핵심 1 CTA "시작하기"
+GB,onboarding_step5,light,Form (입력),B-1,Choice Overload (감정 5선 ≤ 7),PASS,평온·집중·수면·스트레스·불안 · "최대 3개" 명시
+GB,onboarding_step5,light,Form (입력),C-2,Fitts (≥ 48dp),PASS,bounds 산출 — chip min ≥ 48dp INFERRED
+GB,onboarding_step5,light,Form (입력),I-2,Postel (입력 관대),N/A,단순 chip 선택 — 자유 입력 영역 미확인
+GB,profile_setup,light,Form (입력),A-2,Working Memory,PASS,onboarding 직후 진입 — 직전 정보 재입력 의무 X
+GB,home,light,신규 화면 (UI),A-1,Cognitive Load (≤ 7 청크),PASS,헤더+감정 7+호흡카드+CTA = 6 chunk
+GB,home,light,신규 화면 (UI),A-2,Working Memory (감정 7 청크),PASS,평온·집중·우울·불안·분노·중립·행복 = 7 ≤ 7
+GB,home,light,Navigation,B-3,Mental Model (Material BottomNav),PASS,4 tab (홈·호흡·일기·리포트)
+GB,home,light,Navigation,E-1,Serial Position,PASS,핵심 = 첫(홈)+끝(리포트)
+GB,home,light,신규 화면 (UI),F-1,Common Region,PASS,Card grouping (오늘의 호흡 / 지금의 감정은?)
+GB,home,dark,신규 화면 (UI),A-1+F-1,Cognitive Load + Common Region,PASS,Dark mode 동일 layout · contrast 보존
+GB,breath,light,list/카탈로그,B-1,Choice Overload (5 program ≤ 7),PASS,4-4-4-4 균형·4-7-8·박스·복식·에너지 = 5
+GB,breath,light,list/카탈로그,F-2,Proximity (8/16dp),PASS,card spacing INFERRED
+GB,breath,light,list/카탈로그,A-4,Chunking,PASS,카테고리 (전체·긴장 완화·수면·집중·에너지)
+GB,breath,dark,list/카탈로그,B-1+F-2,Choice Overload + Proximity,PASS,Dark theme 동일 layout
+GB,journal,light,신규 화면 (UI),E-1,Serial Position,PASS,calendar 월 표시 + + 추가 FAB
+GB,journal,dark,신규 화면 (UI),A-1,Cognitive Load,PASS,Dark theme 동일
+GB,reports,light,신규 화면 (UI),A-4,Chunking (감정 분포 + 추이),PASS,Card grouping
+GB,reports,dark,신규 화면 (UI),A-4,Chunking,PASS,Dark theme 동일
+GB,settings,light,신규 화면 (UI),A-4,Chunking (현재 플랜·휴식 티켓·알림·테마·데이터),PASS,5 group section
+GB,settings,light,버튼/CTA,B-3,Jakob's Law (휴식 티켓 row 진입 affordance),FAIL,F3 — row clickable=false · 진입 path 단절
+GB,settings,light,버튼/CTA,C-2,Fitts (≥ 48dp),PASS,row height INFERRED ≥ 48dp · 그러나 F3 cascade
+GB,settings,dark,신규 화면 (UI),A-4,Chunking,PASS,Dark theme 동일
+GB,ticket_purchase,light,결제/가입,DARK,Hidden Costs / Forced Continuity / Confirmshaming / Roach Motel / Disguised Ads,N/A,F3 cascade — entry path 단절로 화면 자체 진입 X
+GB,notification_detail,light,알림/Snackbar/Toast,A-3,Selective Attention,PASS,"호흡 리마인더 09:00 · 알림은 하루 최대 1회로 제한"
+GD,splash,light,로딩/에러/빈 상태,C-1,Doherty (<400ms 또는 splash dwell),PASS,F5 — TotalTime 669ms · init wait
+GD,onboarding_step2,light,multi-step Form/Onboarding,D-1,Goal-Gradient,PASS,단계 표시 명시
+GD,onboarding_step3b,light,multi-step Form/Onboarding,Dark Confirmshaming,Confirmshaming 검증,PASS,F6 — "나중에" 거부 wording 중립
+GD,onboarding_step3b,light,Form (입력),A-3,Selective Attention,PASS,핵심 CTA "Samsung Health 권한 허용" + 보조 "나중에"
+GD,onboarding_step4,light,multi-step Form/Onboarding,D-1,Goal-Gradient,PASS,단계 4/5
+GD,onboarding_step4b,light,multi-step Form/Onboarding,D-1,Goal-Gradient,PASS,단계 4/5 (replay)
+GD,onboarding_step5,light,multi-step Form/Onboarding,D-1,Goal-Gradient,PASS,단계 5/5
+GD,onboarding_step5b,light,multi-step Form/Onboarding,D-1,Goal-Gradient,PASS,단계 5/5 (replay)
+GD,home,light,신규 화면 (UI),A-1,Cognitive Load,PASS,진입 직후 잠시 표시 (auth fail 직전)
+GD,auth,light,로딩/에러/빈 상태,§3.4,Peak-End 부정 위장 검증,PASS,F7 — "다시 시도해 주세요 · 로그인이 필요합니다" 정직 error · 위장 X
+GD,auth,light,로딩/에러/빈 상태,A-3,Selective Attention,PASS,핵심 CTA "홈으로 이동" 명시
+GD,auth,light,Auth-only,§5.1 N/A,UX matrix 적용 N/A,N/A,§5.1 — Auth-only 영역
+GD,(main 분기 5 화면),—,—,—,Sleep·Habits·Reports·Settings·Ticket,UNKNOWN,F8 — F7 cascade 진입 BLOCKED
+GT,splash,light,로딩/에러/빈 상태,C-1,Doherty,PASS,F9 — TotalTime 916ms · splash dwell 의도
+GT,onboarding_step1,light,multi-step Form/Onboarding,D-1,Goal-Gradient,PASS,1/4
+GT,onboarding_step2,light,multi-step Form/Onboarding,D-1,Goal-Gradient,PASS,2/4
+GT,onboarding_step3,light,multi-step Form/Onboarding,D-1,Goal-Gradient,PASS,3/4
+GT,onboarding_step4,light,multi-step Form/Onboarding,I-2,Postel (AI disclaimer),PASS,F10 — "AI가 생성한 영양 정보이며..."
+GT,onboarding_step4,light,multi-step Form/Onboarding,D-1,Goal-Gradient,PASS,4/4
+GT,home,light,신규 화면 (UI),A-1,Cognitive Load,PASS,헤더+추천 카드+식단+운동 = 4 chunk
+GT,home,light,Navigation,B-3,Mental Model (Material BottomNav 5 tab),PASS,F11 — 홈·추천·기록·리포트·설정
+GT,home,light,Navigation,E-1,Serial Position,PASS,핵심 = 첫(홈)+끝(설정)
+GT,home,light,신규 화면 (UI),F-1,Common Region (Card),PASS,오늘의 추천·오늘의 식단·오늘의 운동
+GT,home,dark,신규 화면 (UI),A-1+F-1,Cognitive Load + Common Region,PASS,Dark theme 동일
+GT,history,light,신규 화면 (UI),F-2,Proximity (calendar grid),PASS,날짜 cell uniform spacing
+GT,history,dark,신규 화면 (UI),F-2,Proximity,PASS,Dark theme 동일
+GT,meal_recommendation,light,list/카탈로그,B-1,Choice Overload (3 식단 ≤ 7),PASS,F13 — 아침·점심·저녁 = 3
+GT,meal_recommendation,light,list/카탈로그,I-2,Postel (AI disclaimer banner),PASS,F10 동 — "⚠️ AI가 생성한 영양 정보입니다 · 식품 데이터베이스는 AI 보정을 거치며..."
+GT,meal_recommendation,light,list/카탈로그,A-4,Chunking,PASS,식단 카테고리 분할
+GT,meal_recommendation,dark,list/카탈로그,B-1+I-2,Choice Overload + Postel,PASS,Dark theme 동일
+GT,reports,light,신규 화면 (UI),B-1,Choice Overload (주간/월간 ≤ 7),PASS,2 tab
+GT,reports,dark,신규 화면 (UI),B-1,Choice Overload,PASS,Dark theme 동일
+GT,settings,light,신규 화면 (UI),A-4,Chunking (테마·식단·운동·AI·알림·데이터·정보),PASS,7 group section
+GT,settings,light,버튼/CTA,B-3,Jakob's Law (한입 티켓 row 진입 affordance),FAIL,F12 — row clickable=false · 결제 서비스 init 실패 cascade
+GT,settings,light,결제/가입,Hidden Costs,Hidden Costs 검증,PASS,F12 — "결제 서비스 연결 실패 · 보유: 0한입" 정직 disclosure
+GT,settings,light,결제/가입,Forced Continuity,Forced Continuity 검증,PASS,자동 결제 wording 미발견
+GT,settings,dark,신규 화면 (UI),A-4,Chunking,PASS,Dark theme 동일
+GT,settings_scrolled,light,신규 화면 (UI),A-4+I-3,Chunking + Occam,PASS,데이터·정보 group + 버전 정보 v1.0.2
+GT,ticket_shop,light,결제/가입,DARK,Hidden Costs/Forced Continuity/Confirmshaming/Roach Motel/Disguised Ads,N/A,F12 cascade — entry path 단절로 ticket_shop 분리 화면 진입 X (settings 그대로 잔존)

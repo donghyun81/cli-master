@@ -173,6 +173,9 @@
   - `GB BreathViewModel.kt:147` → `delay(phase.durationSeconds * 1000L)` — 호흡 phase 의 의도된 timing. **PASS** (functional).
   - `GB BreathViewModel.kt:158` → `delay(1000L)` (1초 timer tick) — 남은 시간 카운트. **PASS** (functional countdown).
 - Phase 2 의무: splash dwell 의 정합 사유 명시 의무 (인지 가능 logo 표시 시간 vs 인위 지연).
+- **2026-05-05 후속 처리** (cycle MULTI-REPO-UX-BORDERLINE-CONTEXTUAL-REVIEW-001): 마감.
+  - GB SplashScreen.kt — §3.2 명백 위반 (session 외부 인자 / splash 내부 동시 작업 X) **인정** + 사유 주석 추가 (Material 권장 800~1500ms 하한 마진 명시) + 별 trail. commit `f4d6067`.
+  - GT SplashScreen.kt — §3.2 부분 위반 (`dwellElapsed && destination resolved` AND-gate = §3.2 권장형 부합) + 사유 주석 추가. commit `c2dd287`.
 
 ### 4.3 §3.3 Goal-Gradient (인위적 진척)
 
@@ -185,6 +188,9 @@
 - 결과:
   - `GD strings.xml:43 "준비 완료!"` (onboarding_ready) — 정상 onboarding 마감 wording. **borderline** (실패 처리 영역 안 사용 시 위반).
 - Phase 2 의무: onboarding_ready 사용 위치 (실패 영역 사용 여부) 검증.
+- **2026-05-05 후속 처리** (cycle MULTI-REPO-UX-BORDERLINE-CONTEXTUAL-REVIEW-001): 마감.
+  - GD `OnboardingScreen.kt:198~206 FinalStep` — 호출 path 검증 결과 errorRes (3종 source: error_login_required / error_samsung_failed / error_onboarding_failed) 가 not-null 시에도 "준비 완료!" 헤더 항상 노출 = **§3.4 명백 위반** 확인.
+  - 정정: 신규 string `onboarding_retry` "다시 시도해 주세요" 추가 + FinalStep 안 `headerRes = if (errorRes != null) onboarding_retry else onboarding_ready` swap. commit `a0bfc85`.
 
 ### 4.5 §3.5 Parkinson 카운트다운
 
