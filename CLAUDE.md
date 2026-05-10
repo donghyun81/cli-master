@@ -11,6 +11,7 @@
 >
 > **구분**: 일반 macOS 터미널 / shell script / bash 명령은 'shell' 또는 'bash' 로 표기 (cli 와 구분 의무).
 > **신규 cli 표현 추가 시**: 본 정의 그대로 적용 (별도 cycle 불필요).
+> **그 외 일반 어휘** (SoT/SSOT 등): `.claude/rules/terminology.md` 참조.
 
 ---
 
