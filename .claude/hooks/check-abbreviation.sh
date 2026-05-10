@@ -15,7 +15,7 @@
 
 set -uo pipefail
 
-: "${NO_ABBREV_ENFORCE:=warn}"
+: "${NO_ABBREV_ENFORCE:=enforce}"
 
 INPUT="$(cat 2>/dev/null || echo '')"
 [ -z "$INPUT" ] && exit 0
@@ -58,6 +58,11 @@ _, ext = osp.splitext(file_path.lower())
 if ext not in CODE_EXTS:
     sys.exit(0)
 
+# Skip generated / build paths
+_SKIP_PATH_SEGS = ('build/', '.gradle/', 'generated/')
+if any(seg in file_path for seg in _SKIP_PATH_SEGS):
+    sys.exit(0)
+
 # Forbidden token list (subset of seed list — excludes clear language keywords).
 # Language keywords (val, var, fun, fn, init, func) are excluded here
 # because they appear structurally in Kotlin/Swift/Go/Rust as syntax.
@@ -83,6 +88,9 @@ for lineno, line in enumerate(content.split('\n'), 1):
         continue
     # Skip comment lines
     if any(stripped.startswith(prefix) for prefix in ('//', '#', '*', '/*', '<!--', '*/')):
+        continue
+    # Skip import lines (false positives for package component names like ui.res.*)
+    if stripped.startswith('import '):
         continue
 
     for token in FORBIDDEN_CHECK:

@@ -56,6 +56,16 @@
 
 충돌 규칙: allowed-list ∩ forbidden-list = ∅ (충돌 시 allowed 우선).
 
+### 자동화 hook 제외 대상 (check-abbreviation.sh)
+
+hook 이 자동으로 검사를 건너뛰는 라인/경로:
+
+| 제외 대상 | 이유 |
+|---|---|
+| 주석 라인 (`//`, `#`, `*`, `/*`, `<!--`, `*/` 로 시작) | 코드 식별자 아님 |
+| `import ` 로 시작하는 라인 | 패키지 경로 구성 요소가 금지 토큰과 매칭 (예: `import androidx.compose.ui.res.stringResource` 의 `.res.`) — false positive 제거 |
+| `build/`, `.gradle/`, `generated/` 경로 | 자동 생성 파일 — 사용자 정의 식별자 아님 |
+
 ---
 
 ## 4. 매칭 규칙 (camelCase 부분 매칭 포함)
@@ -81,18 +91,22 @@
 
 | 모드 | 기본값 | 동작 |
 |---|---|---|
-| `warn` | **기본 (Cycle 1~3)** | forbidden 패턴 감지 시 stderr 경고만 출력, 도구 사용 허용 |
-| `enforce` | Cycle 4 후 승격 | forbidden 패턴 감지 시 도구 사용 차단 (exit 2) |
+| `warn` | (비기본) | forbidden 패턴 감지 시 stderr 경고만 출력, 도구 사용 허용 |
+| `enforce` | **기본 (GLOBAL-NO-ABBREV-POLICY-002 이후)** | forbidden 패턴 감지 시 도구 사용 차단 (exit 2) |
 
-승격 조건: GentlyBreath / GentlyDay / GentlyTable 의 기존 도메인 코드 정정 완료 (Cycle 2~4 마감).
+승격 완료: GLOBAL-NO-ABBREV-POLICY-002 에서 `enforce` 를 기본값으로 전환 (GT ctx→mealContextEntry 정정 완료 + import/generated path false positive 수정 완료).
 
 ### 5.2 자가 진단 (hook self-test)
 
 ```bash
-# 세 픽스처 모두 warn 모드에서 통과 의무
-bash .claude/hooks/check-abbreviation.sh  # fixture 1: forbidden 변수 → warn (exit 0)
-bash .claude/hooks/check-abbreviation.sh  # fixture 2: 허용 약어 → pass (exit 0)
-bash .claude/hooks/check-abbreviation.sh  # fixture 3: 풀네임 → pass (exit 0)
+# 7 픽스처 enforce 모드 자가 진단 (GLOBAL-NO-ABBREV-POLICY-002 기준)
+# fixture 1: forbidden 변수 → enforce block (exit 2)
+# fixture 2: 허용 약어 → pass (exit 0)
+# fixture 3: 풀네임 → pass (exit 0)
+# fixture 4: import 라인 res → pass (exit 0)  [Sub B: import skip]
+# fixture 5: generated path → pass (exit 0)    [Sub B: path skip]
+# fixture 6: enforce block (exit 2)            [Sub C: default enforce]
+# fixture 7: clean code → pass (exit 0)        [Sub C: no false positive]
 ```
 
 ---
