@@ -143,3 +143,13 @@
 - mitigation: GT CLAUDE.md 재작성 (자식 Nested pattern + GT 도메인 1 섹션). CLAUDE.md §2 정합 강제 표 권한 (CLAUDE.md 본문 도메인 섹션 = repo-specific 자유) 인용으로 master cycle 의무 없이 GT-only 정정 타당화. 5 검증 명령 PASS (sha 비교 / line 수 / title / Gently Master grep 0 hit / 도메인 keyword 16 hit).
 - trail: close (본 cycle) · 별 trail 2 open: (1) GentlyClean seed `00-CLAUDE-헌법.md` 자체 정정 cycle (lazy · 다음 자식 repo 신설 시 자연 trigger) (2) GD/GB 도메인 헌법 1 섹션 추가 cycle (lazy · GD/GB 본 작업 진입 시 자연 trigger). 6회차 재발 시 mitigation 강화 cycle 진입 (Cowork 측 baseline 자동 검증 hook 도입 검토).
 ```
+
+## 2026-05-10T18:30:00+0900
+
+```
+- type: paste-back 정확성 영역 (사고 3) + cowork sandbox memory algorithm 모순 RCA (사고 1) = 사고 4 종 누적
+- cycle: MASTER-INCIDENT-LOG-PASTE-BACK-ACCURACY-AND-SHA-ALGORITHM-RCA-001
+- summary: 직전 cycle MULTI-REPO-CLAUDEMD-DOMAIN-CONTEXT-FILL-001 paste-back 보고 영역 사고 3 + cowork baseline anchor algorithm mismatch RCA 사고 1 = 4 종. (사고 1) GB parent 표기 오류 — paste-back "GB 036592a · parent 64de5a5" / 실 chain 036592a ← d220153 ← 64de5a5 = 1 단계 누락. (사고 2) 보호 file count 6 → 5 누락 — paste-back "보호 5 sha" / cowork prompt 의무 = 6 (auth-rules.md 6d3e107ddac612e9 누락). (사고 3) sha algorithm mismatch — paste-back = sha-256 prefix (f1edd397...) / cowork prompt 의무 = git blob sha (5b84cd9e...). (사고 4 RCA) cowork sandbox memory pencil_sot_consolidated §2 자체 algorithm 모순 — 표기 = git blob sha 16자 prefix / 검증 명령 = sha256sum = 진입 cross-verify 시 6/6 mismatch false positive trigger. 본질 영향 0 (4 사고 모두 4-repo file content byte-identical ✓ / 표기 layer 사고만).
+- mitigation: (1) paste-back 시 `git log -1 --format='%h %p'` direct 인용 의무 (single-step parent 검증). (2) cowork prompt 안 보호 file count N 명시 → paste-back 동일 N 의무 (count cross-check). (3) cowork prompt 안 algorithm 명시 의무 ("git blob sha 16자 prefix") + paste-back 동일 algorithm 의무. (4) cowork sandbox memory pencil_sot §2 갱신 마감 (algorithm "git blob sha 16자 prefix" 명시 + sha-256 reference column 추가 + 검증 명령 = `git hash-object` 정정).
+- trail: close (본 cycle 마감 · 사고 본질 영향 0 · drift 0 · commit chain 정합 ✓). 동족 사고 누적 영역 = (i) 2026-05-08 paste-back PASS 후 disk cross-check 의무 (memory feedback_paste_back_disk_verification) (ii) 2026-05-09 사용자 의도 추측 X (memory feedback_no_speculation_user_intent_assumption) (iii) 본 사고 = paste-back 정확성 영역 + cowork sandbox memory 자체 정합 영역 = 3 누적. 학습 = cowork ↔ CLI handoff 시 (1) algorithm 명시 / (2) count 명시 / (3) parent commit single-step 인용 / (4) memory 자체 모순 사전 검증 = 4 hook 영역. 5회차 재발 시 mitigation 강화 cycle 진입 (handoff 자체 검증 hook 도입 검토).
+```
