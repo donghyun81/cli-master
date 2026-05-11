@@ -2,6 +2,13 @@
 
 > master cycle 별 의사결정 누적. 각 entry = 1 cycle 1 결정 묶음.
 
+## 2026-05-11 · MASTER-GB-AUTH-ACTIVATE-001 (마감)
+
+### 결정. GB Auth 도메인 활성화 (UNKNOWN → ACTIVE ³) · `auth-rules.md` SoT 재사용
+- **선택**: `cycle-discipline.md` §15 패턴 3 (도메인 활성화) 그대로 적용 — master `deferred-domains.md` §2 매트릭스 GB Auth UNKNOWN → ACTIVE ³ + footnote ³ "Supabase Auth 익명 부트스트랩 + EncryptedSessionStore · Phase 2 진행 중 (GB-PHASE-2-AUTH-* baseline)" + §6 history append + 4-repo propagation.
+- **근거**: GB Phase 2 Auth 진행 baseline (Supabase Auth 익명 부트스트랩 + EncryptedSessionStore) 의 master 측 매트릭스 반영 의무. `auth-rules.md` SoT (MASTER-AUTH-DOMAIN-ACTIVATE-001 2026-05-02 신설본) 그대로 재사용 — §1 Supabase 익명 부트스트랩 + §3 EncryptedSharedPreferences 의무 = GB-PHASE-2-AUTH 패러다임 완전 match. `routing-and-delegation.md` 의무 = vacuous (auth-security-privacy 이미 globally active from MASTER-AUTH-DOMAIN-ACTIVATE-001 · [DEFERRED] 라벨 부재).
+- **검증**: propagate.sh ok=4 fail=0 · verify-sync.sh PASS 112/0/0 (exit 0) · 5-repo `deferred-domains.md` shasum 동일 (`f43303b082f6...`) · 보호 파일 5종 sha 변동 0 · GB SteadyWell propagation 잔존 drift trail (`incident-log.md` L40 C1 baseline entry) 자연 close.
+
 ## 2026-05-11 · MASTER-APP-FOUNDATION-SCAFFOLD-001 (마감)
 
 ### 결정 1. app-foundation repo 신설 + propagation 5→6 repo 확장

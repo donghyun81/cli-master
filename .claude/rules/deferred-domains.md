@@ -37,7 +37,7 @@ STOP 시 자동 발화 agent (`.claude/agents/deferred/`):
 
 | 도메인 | master | GB | GD | GT |
 |---|---|---|---|---|
-| Auth / Security | **ACTIVE** ¹ | UNKNOWN | UNKNOWN | **ACTIVE** ¹ |
+| Auth / Security | **ACTIVE** ¹ | **ACTIVE** ³ | UNKNOWN | **ACTIVE** ¹ |
 | Data / Migration | UNKNOWN | UNKNOWN | UNKNOWN | UNKNOWN |
 | Backend / API | UNKNOWN | UNKNOWN | UNKNOWN | UNKNOWN |
 | Performance | UNKNOWN | UNKNOWN | UNKNOWN | UNKNOWN |
@@ -47,7 +47,9 @@ STOP 시 자동 발화 agent (`.claude/agents/deferred/`):
 
 ² Mock-first paradigm + Edge Function 영수증 검증 paradigm · GT CLAUDE.md §6 명시된 Google Play Billing 소비형 인앱 상품 (한입 티켓) · `billing-rules.md` SoT (MASTER-BILLING-DOMAIN-ACTIVATE-001).
 
-> **GB SteadyWell propagation 잔존 drift** (`incident-log.md` 명시됨): GB 의 deferred-domains.md 가 cycle 진척 전 ACTIVE 표기 유지. C4 propagation 시 master baseline 으로 통일.
+³ Supabase Auth 익명 부트스트랩 + EncryptedSessionStore · Phase 2 진행 중 (GB-PHASE-2-AUTH-* baseline) · `auth-rules.md` SoT 재사용 (MASTER-GB-AUTH-ACTIVATE-001).
+
+> **GB SteadyWell propagation 잔존 drift close** (`incident-log.md` C1 baseline 명시됨): C4 propagation 으로 master UNKNOWN baseline 통일 마감 후 MASTER-GB-AUTH-ACTIVATE-001 (2026-05-11) 으로 GB Auth 정식 활성화 (UNKNOWN → ACTIVE³). drift trail 자연 close.
 
 ---
 
@@ -93,6 +95,7 @@ STOP 시 자동 발화 agent (`.claude/agents/deferred/`):
 
 ## 6. C2 변경 이력
 
+- 2026-05-11 · MASTER-GB-AUTH-ACTIVATE-001 · GB Auth 도메인 활성화 (UNKNOWN → ACTIVE³) · `auth-rules.md` SoT 재사용 (GB-applicable READ-ONLY 검증 PASS · Supabase Auth 익명 부트스트랩 + EncryptedSessionStore 패러다임 match) · `routing-and-delegation.md` 의무 = vacuous (이미 globally active from MASTER-AUTH-DOMAIN-ACTIVATE-001 2026-05-02) · GB SteadyWell propagation 잔존 drift trail 자연 close.
 - 2026-05-10 · MASTER-BILLING-DOMAIN-ACTIVATE-001 · Billing 도메인 4-repo 활성화 (UNKNOWN×4 → ACTIVE×4) · `billing-rules.md` SoT 신설 (10 섹션 · GT CLAUDE.md §6 Mock-first paradigm + Edge Function 영수증 검증 의무 코드화) · `billing-payments-guardian` agent deferred/ → active/ 이전.
 - 2026-05-02 · MASTER-AUTH-DOMAIN-ACTIVATE-001 · Auth 도메인 master + GT 활성화 (GD/GB 별 cycle) · `auth-rules.md` SoT 신설 + agent deferred/ → active/ 이전.
 - 2026-05-02 · C2-RULES-RESTRUCTURE-001 · 기존 4 pointer rule 삭제 + 본 파일에 통합 (Billing 신설 · 활성화 trigger 키워드 표 신설 · 3 자식 repo 상태 매트릭스 신설).
