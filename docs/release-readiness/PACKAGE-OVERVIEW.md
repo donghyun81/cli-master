@@ -9,15 +9,15 @@
 
 ---
 
-## 1. baseline + progress (2026-05-10 18:17 KST 실측)
+## 1. baseline + progress (2026-05-11 14:39 KST 실측)
 
 | repo | HEAD | 단계 | P0 progress | 출시 |
 |---|---|---|---|---|
-| claude-cli-master | `21128f9` | 운영 (master 측 task 진행) | 0/8 | — |
-| app-foundation | `923346b` | scaffold + cli infra 정합 마감 (Gradle wire-up + core/ 실 wire = 자식 cycle) | 1/12 (8%) | — |
-| GentlyBreath | `1fd77aa` | Phase 2 Auth 진행 | 1/24 (4%) | ✓ |
-| GentlyDay | `90f4a14` | Phase 1 마감 / Phase 2 진입 대기 | 1/22 (5%) | ✓ |
-| GentlyTable | `aa78a5a` | Phase 3 SoT 진행 | 1/26 (4%) | ✓ |
+| claude-cli-master | `b1b8ca5` | 운영 (T01/T02/T03/T05 ✓ · T04/T06~T08 진행 대기) | 4/8 (50%) | — |
+| app-foundation | `f1f40f4` | scaffold + cli infra 정합 마감 · core/ 실 wrapper = FND-T02~T10 별 cycle | 1/12 (8%) | — |
+| GentlyBreath | `0552529` | Phase 2 Auth ACTIVE + upgrade-account-screen Pencil SoT 마감 | 2/25 (8%) | ✓ |
+| GentlyDay | `4d867cc` | Phase 1 마감 / Phase 2 진입 대기 (Auth UNKNOWN) | 1/22 (5%) | ✓ |
+| GentlyTable | `d90c19e` | Phase 3 SoT 진행 (daily-prescription ✓) | 1/26 (4%) | ✓ |
 
 > progress 카운트 = P0 task 마감 / 전체. CLI cleanup pass 자동 갱신 영역.
 
@@ -45,9 +45,9 @@
 |---|---|---|---|---|---|
 | MASTER-T01 | `app-foundation` repo 신설 (git init + module 구조 scaffold) | P0 | ✓ | — | `cd6f418e2906` · (마감) MASTER-APP-FOUNDATION-SCAFFOLD-001 — KMP/CMP skeleton + libs.versions.toml SSOT + CLI infra cp + COMMON-SETUP-SSOT 이전 |
 | MASTER-T02 | `propagate.sh` + `verify-sync.sh` 갱신 (5 → 6 repo · foundation 포함) | P0 | ✓ | T01 | (마감) MASTER-APP-FOUNDATION-SCAFFOLD-001 — TARGET_REPOS 6 확장 + FND case 추가 + release-readiness/* exclude (회수 1 흡수) |
-| MASTER-T03 | `docs/templates/release-checklist.template.md` 신설 | P0 | ☐ | — | (왜) 자식 P4 진입 시 cp 표준 · (예) Play Console 빌드 시 권한·Privacy·ASO 누락 회피 |
+| MASTER-T03 | `docs/templates/release-checklist.template.md` 신설 | P0 | ✓ | — | `3ad2d7f6af1e` · (마감) MASTER-RELEASE-CHECKLIST-TEMPLATE-001 — 9 섹션 placeholder template 신설 (3 자식 LAUNCH-STATUS §7~§9 공통 추출 + 7 placeholder · 자식 P4 진입 시 cp + 도메인 치환 의무) · 사고 = 초회 commit a30ad98 측 scripts/* 흡수 + decision-log T03 entry 부재 사고 → reset --soft HEAD~1 + clean state 재 commit (3ad2d7f) · 재 commit 측 decision-log T05 entry 동시 흡수 사고 = 별 trail open |
 | MASTER-T04 | 13 architecture 문서 → foundation 인용 link 갱신 | P1 | ☐ | T01 | (왜) 자식 reading order 정합 · (예) `KMP_CMP_LAYER_DIRECTION.md` 가 foundation `shared/` 가리키도록 |
-| MASTER-T05 | `repo-config.sh` 의 `PROTECTED_FILES` / `CHILD_REPOS` 갱신 | P0 | ☐ | T01 | (왜) propagation 의 export 변수 SoT · (예) `CHILD_REPOS=GB GD GT FND` |
+| MASTER-T05 | `repo-config.sh` 의 `PROTECTED_FILES` / `CHILD_REPOS` 갱신 | P0 | ✓ | T01 | `b1b8ca552d48` · (마감) MASTER-REPO-CONFIG-SOT-001 — repo-config.sh single SoT 신설 (TARGET_REPOS 4-repo + PROTECTED_FILES 5종 + PARENT_DIR/MASTER_DIR · 40 line · git blob sha `b3027e52557f6ce3`) + 3 script source 통합 + ensure-child-gitignore drift 정정 (3→4 repo 흡수 · verify 4/0 PASS) |
 | MASTER-T06 | COWORK-PREP-BASELINE-MISMATCH (12회 누적) mitigation hook | P1 | ☐ | — | (왜) cowork ↔ cli baseline 동기 사고 차단 · (예) prompt 발행 전 4-repo HEAD 자동 cross-check |
 | MASTER-T07 | `docs/templates/launch-status.template.md` 신설 (자식 LAUNCH-STATUS 갱신 표준) | P1 | ☐ | T03 | (왜) 자식 LAUNCH-STATUS 갱신 표준 · (예) 새 도메인 task 추가 시 cp |
 | MASTER-T08 | `docs/templates/foundation-fork.template.md` (자식 신규 앱 fork 절차) | P2 | ☐ | T01 | (왜) 미래 앱 (`FocusBites` 등) 신설 30 분 baseline · (예) `bash scripts/fork-from-foundation.sh <new-app>` |
