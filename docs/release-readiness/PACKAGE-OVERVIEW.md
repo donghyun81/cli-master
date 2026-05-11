@@ -14,7 +14,7 @@
 | repo | HEAD | 단계 | P0 progress | 출시 |
 |---|---|---|---|---|
 | claude-cli-master | `21128f9` | 운영 (master 측 task 진행) | 0/8 | — |
-| app-foundation | (미신설) | P0 신설 대기 | 0/12 | — |
+| app-foundation | `923346b` | scaffold + cli infra 정합 마감 (Gradle wire-up + core/ 실 wire = 자식 cycle) | 1/12 (8%) | — |
 | GentlyBreath | `1fd77aa` | Phase 2 Auth 진행 | 1/24 (4%) | ✓ |
 | GentlyDay | `90f4a14` | Phase 1 마감 / Phase 2 진입 대기 | 1/22 (5%) | ✓ |
 | GentlyTable | `aa78a5a` | Phase 3 SoT 진행 | 1/26 (4%) | ✓ |
@@ -43,8 +43,8 @@
 
 | ID | 항목 | P | 상태 | 의존 | 마감 sha · 본심 1 줄 |
 |---|---|---|---|---|---|
-| MASTER-T01 | `app-foundation` repo 신설 (git init + module 구조 scaffold) | P0 | ☐ | — | (왜) 모든 자식 P2/P3 task 가 foundation 의존 · (예) Supabase wrapper 미존재 = GT Phase 3 schema 시작 불가 |
-| MASTER-T02 | `propagate.sh` + `verify-sync.sh` 갱신 (5 → 6 repo · foundation 포함) | P0 | ☐ | T01 | (왜) 보호 5 파일을 foundation 까지 cp 정합 · (예) 새 자식 fork 시 정합 깨짐 회피 |
+| MASTER-T01 | `app-foundation` repo 신설 (git init + module 구조 scaffold) | P0 | ✓ | — | `cd6f418e2906` · (마감) MASTER-APP-FOUNDATION-SCAFFOLD-001 — KMP/CMP skeleton + libs.versions.toml SSOT + CLI infra cp + COMMON-SETUP-SSOT 이전 |
+| MASTER-T02 | `propagate.sh` + `verify-sync.sh` 갱신 (5 → 6 repo · foundation 포함) | P0 | ✓ | T01 | (마감) MASTER-APP-FOUNDATION-SCAFFOLD-001 — TARGET_REPOS 6 확장 + FND case 추가 + release-readiness/* exclude (회수 1 흡수) |
 | MASTER-T03 | `docs/templates/release-checklist.template.md` 신설 | P0 | ☐ | — | (왜) 자식 P4 진입 시 cp 표준 · (예) Play Console 빌드 시 권한·Privacy·ASO 누락 회피 |
 | MASTER-T04 | 13 architecture 문서 → foundation 인용 link 갱신 | P1 | ☐ | T01 | (왜) 자식 reading order 정합 · (예) `KMP_CMP_LAYER_DIRECTION.md` 가 foundation `shared/` 가리키도록 |
 | MASTER-T05 | `repo-config.sh` 의 `PROTECTED_FILES` / `CHILD_REPOS` 갱신 | P0 | ☐ | T01 | (왜) propagation 의 export 변수 SoT · (예) `CHILD_REPOS=GB GD GT FND` |

@@ -2,6 +2,24 @@
 
 > master cycle 별 의사결정 누적. 각 entry = 1 cycle 1 결정 묶음.
 
+## 2026-05-11 · MASTER-APP-FOUNDATION-SCAFFOLD-001 (마감)
+
+### 결정 1. app-foundation repo 신설 + propagation 5→6 repo 확장
+- **선택**: 별 git repo `~/AndroidStudioProjects/app-foundation/` 신설 (KMP/CMP skeleton + libs.versions.toml SSOT) + `scripts/propagate.sh` / `verify-sync.sh` TARGET_REPOS 확장 + FND case 추가.
+- **근거**: PACKAGE-OVERVIEW §3 MASTER-T01/T02 명시된 본심 — "shared kitchen" 모듈 SSOT 분리 (자식 3 도메인 repo 공유 baseline) + 향후 신규 앱 (FocusBites 등) 30 분 baseline 가능. GT/GD/GB 도메인 코드 SSOT 와 분리 (master = cli infra SoT / foundation = 앱 구현 코드 SSOT).
+- **검증**: app-foundation dual commit (cd6f418 scaffold + 923346b cli infra cp) · master propagate.sh 112/0 · verify-sync.sh PASS 112/0/0 exit 0 · 보호 파일 5종 sha 변동 0.
+
+### 결정 2. 회수 1 흡수 (release-readiness/* exclude policy)
+- **선택**: `scripts/propagate.sh` / `verify-sync.sh` 의 find filter 에 `! -path 'docs/release-readiness/*'` 추가 — release-readiness 영역 propagation 제외.
+- **대안**: 별 cycle 분리 / 회수 2 (propagation-status.md byproduct) 동시 흡수.
+- **근거**: release-readiness 영역 = master 측 거시 SoT (자식 repo propagation 영역 X) — propagation 시 자식에 cp 시도 = 의미 위반. CLI cleanup pass 자율로 흡수 (별 cycle 비용 회피). 회수 2 는 verify-sync byproduct (실행 시 자동 갱신) 라 본 cycle 진입 영향 X.
+- **검증**: propagate.sh --all --targets FND ok=112 fail=0 (release-readiness/* exclude 적용 후 정상 동작).
+
+### 결정 3. COMMON-SETUP-SSOT 이전 (master → app-foundation)
+- **선택**: `docs/release-readiness/COMMON-SETUP-SSOT-DRAFT.md` 삭제 + app-foundation `docs/COMMON-SETUP-SSOT.md` 신설 (이전).
+- **근거**: COMMON-SETUP-SSOT = 앱 구현 코드 baseline 영역 (Gradle wire-up + Supabase + billing + observability) — master cli infra SoT 영역 외. app-foundation 의 본심 SSOT 역할 정합.
+- **검증**: 자식 LAUNCH-STATUS 의 COMMON-SETUP 인용 link 갱신은 자식 측 별 cycle (master cycle 영역 외).
+
 ## 2026-05-10 · MASTER-BILLING-DOMAIN-ACTIVATE-001 (마감)
 
 ### 결정. Billing 도메인 4-repo 활성화 + Mock-first paradigm 코드화
@@ -727,3 +745,5 @@ C13-VERIFY-FULL 의 발견된 gap 3 종 (.gitignore propagation 누락 + daemon 
 2026-05-10 | MASTER-CLI-TERMINOLOGY-SOT-SSOT-DEFINE-001 (PASS · terminology.md 신설 + 4-repo byte-identical propagation) | scope=master .claude/rules/terminology.md 신설 + CLAUDE.md L3 cross-ref 1줄 추가 + 자식 3 propagation | master commit cc64d75 (parent 3e7201b) / GB 3b8d5a5 / GD 83cb55b / GT 09aa454 | 신설 file sha-256 (16자 prefix) = 1eb1ad8625cc97fa — 4-repo 동일 | 결정 본질 = SoT/SOT/SSOT 표기 혼용 268건 진입 마찰 해소 · legacy 정정 X (D 옵션 합리화) · cli infra 신규 rule file 형식 신설 | EC = propagate ok=3 fail=0 / verify-sync PASS 111/0/0 / 보호 파일 5종 SHA 변동 0 (f1edd397/ee377dc2/e5e3fe16/7621013e/96de2f5d 그대로) | STOP 조건 전건 미발생 | 산출물 = .ai/reports/MASTER-CLI-TERMINOLOGY-SOT-SSOT-DEFINE-001/{PLAN,VERIFY,REVIEW}.md | Risk=Low · DBMig=No · MoneyAuth=No · cleanup=N/A (ops-layer) · PromptFitScore=96/100 · Verdict=PASS
 
 2026-05-10 | MASTER-PROTECTED-FILE-DEFINITION-SOT-UNIFY-001 (PASS · master 안 보호 file 정의 4 source 자체 모순 정정 + cycle-discipline.md 4-repo propagation) | scope=master CLAUDE.md §1 L56 (4종→5종) + cycle-discipline.md §3 L41 (4종→5종 + design-sot-policy.md 추가) + L113 (4종→5종 + memory file 경로 정정 pencil_sot_protected_file_hashes.md → protected-file-hashes.md) + L277 (shasum-a-256 4 file → git hash-object 5 file) + propagation-status.md L45 (4 종 → 5 종 PASS) | SoT default = .auto-memory/protected-file-hashes.md (5 종 baseline · 변동 X) | EC = 보호 5 file git-blob sha drift 0 (5b84cd9e4bc36165/3a703b30553e0d09/b27fbe16edb68821/d3a0b57390bd0414/e580b6d7ca9a88ae 그대로 · count=5 명시 · algorithm `git hash-object`) / cycle-discipline.md 4-repo byte-identical 새 sha 4cd01b4eca11feee (count=4-repo) / verify-sync.sh PASS expected | baseline anchor = master 228a949 / GB 2dc97c0 (auth bootstrap drift acknowledged · scope X) / GD 8ad3e7d / GT 8647a4d (RESUME prompt 갱신 영역 명시 · COWORK-PREP-BASELINE-MISMATCH-010 별 mitigation 강화 cycle 분리) | STOP 조건 전건 미발생 (보호 5 sha 변동 0 · cycle-discipline.md 외 cli infra 변경 X · 자식 직접 수정 X · app/ 무수정) | 결정 본질 = 4 source self-contradiction (4종 ↔ 5종) 통일 · SoT default 정합 · sha 검증 algorithm `git hash-object` 16-prefix 표준화 · `protected-file-hashes.md` SoT (sha-256 64-char) 는 별 cycle 정합 영역 (본 cycle scope 외) | Risk=Low · DBMig=No · MoneyAuth=No · cleanup=N/A (ops-layer) · Verdict=PASS
+
+2026-05-10 | MULTI-REPO-RELEASE-LEDGER-INIT-001 (PASS 조건부 · verify-sync.sh exit 1 사용자 회수) | scope=4-repo (master/GB/GD/GT) launch-status ledger 신설 + .ai/reports 4건 + decision-log + incident-log entry | commit 4 (master adda16f9e91b / GB 397a5df8a34f / GD 3d49e2eabb89 / GT ec26196f11b1) | 결정 본질 = ledger ID 표준 = `<repo>-T<NN>` 박음 · 갱신 trigger = 자식 cycle REVIEW PASS 시 cleanup pass 자동 · ledger 본문 편집 X · app-foundation 미신설 (MASTER-T01 별 cycle) · ledger file = repo-specific (master 측 PACKAGE-OVERVIEW + COMMON-SETUP-SSOT-DRAFT + 자식 측 LAUNCH-STATUS.md) propagation 검증 대상 X | EC = HEAD baseline 일치 4/4 · 보호 5 sha 변동 0 (5b84cd9e4bc36165/d3a0b57390bd0414/e580b6d7ca9a88ae/3a703b30553e0d09/b27fbe16edb68821 그대로) · billing-rules.md 0ec5d54f49dfd6e2 (별 cycle 산출 4-repo byte-identical) 무결성 PASS · ledger line 96/114/184/181/194 baseline 일치 · protected-file-hashes.md 변동 0 · Stage 격리 100% (cycle 무관 dirty 미stage) · verify-sync.sh exit 1 (사유 = ledger false positive · 6 miss = repo-specific 의도 · 보호 sha 자체 PASS) | STOP 조건 미발동 · 사용자 회수 의무 = release-readiness/ 영역 verify-sync exclude 정책 결정 + propagation-status.md 자체 갱신 부산물 처리 결정 | Risk=Low · DBMig=No · MoneyAuth=No · cleanup=N/A (ledger 영역 cleanup 대상 X · 자식 cycle 자연 trigger) · Verdict=PASS 조건부

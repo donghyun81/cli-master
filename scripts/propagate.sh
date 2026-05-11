@@ -26,7 +26,7 @@ set -euo pipefail
 # === 환경 변수 default ===
 : "${PARENT_DIR:=$HOME/AndroidStudioProjects}"
 : "${MASTER_DIR:=$PARENT_DIR/claude-cli-master}"
-: "${TARGET_REPOS:=GentlyBreath GentlyDay GentlyTable}"
+: "${TARGET_REPOS:=GentlyBreath GentlyDay GentlyTable app-foundation}"
 
 # === 인자 파싱 ===
 TARGETS=""
@@ -80,6 +80,7 @@ else
       GB) TARGET_LIST="$TARGET_LIST GentlyBreath" ;;
       GD) TARGET_LIST="$TARGET_LIST GentlyDay" ;;
       GT) TARGET_LIST="$TARGET_LIST GentlyTable" ;;
+      FND) TARGET_LIST="$TARGET_LIST app-foundation" ;;
       *)  TARGET_LIST="$TARGET_LIST $t" ;;
     esac
   done
@@ -94,7 +95,8 @@ if [ "$PROPAGATE_ALL" = 1 ]; then
   done < <(find .claude docs scripts/agent .ai/promptfit .ai/uiux-sot/refresh .github -type f \
     ! -name '.DS_Store' \
     ! -name 'settings.local.json' \
-    ! -path './.git/*' 2>/dev/null)
+    ! -path './.git/*' \
+    ! -path 'docs/release-readiness/*' 2>/dev/null)
   # C5 박힘: root 공통 파일 5종 명시 추가
   for rf in .editorconfig .mcp.json gradle.properties gradlew gradlew.bat; do
     [ -f "$rf" ] && FILES+=("$rf")
@@ -127,6 +129,7 @@ if [ "$PRUNE_MODE" = 1 ]; then
         GB) PRUNE_TARGETS="$PRUNE_TARGETS GentlyBreath" ;;
         GD) PRUNE_TARGETS="$PRUNE_TARGETS GentlyDay" ;;
         GT) PRUNE_TARGETS="$PRUNE_TARGETS GentlyTable" ;;
+        FND) PRUNE_TARGETS="$PRUNE_TARGETS app-foundation" ;;
         *)  PRUNE_TARGETS="$PRUNE_TARGETS $t" ;;
       esac
     done

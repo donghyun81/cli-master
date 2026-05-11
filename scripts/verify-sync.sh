@@ -27,7 +27,7 @@ set -uo pipefail
 
 : "${PARENT_DIR:=$HOME/AndroidStudioProjects}"
 : "${MASTER_DIR:=$PARENT_DIR/claude-cli-master}"
-: "${TARGET_REPOS:=GentlyBreath GentlyDay GentlyTable}"
+: "${TARGET_REPOS:=GentlyBreath GentlyDay GentlyTable app-foundation}"
 
 QUICK=0
 NO_UPDATE=0
@@ -125,7 +125,8 @@ else
   done < <(find .claude docs scripts/agent .ai/promptfit .ai/uiux-sot/refresh .github -type f \
     ! -name '.DS_Store' \
     ! -name 'settings.local.json' \
-    ! -path './.git/*' 2>/dev/null | sort)
+    ! -path './.git/*' \
+    ! -path 'docs/release-readiness/*' 2>/dev/null | sort)
   # C5 박힘: root 공통 파일 5종 명시 추가
   for rf in .editorconfig .mcp.json gradle.properties gradlew gradlew.bat; do
     [ -f "$rf" ] && CHECK_FILES+=("$rf")
@@ -138,6 +139,7 @@ if [ -n "$SINGLE_TARGET" ]; then
     GB) TARGET_LIST="GentlyBreath" ;;
     GD) TARGET_LIST="GentlyDay" ;;
     GT) TARGET_LIST="GentlyTable" ;;
+    FND) TARGET_LIST="app-foundation" ;;
     *)  TARGET_LIST="$SINGLE_TARGET" ;;
   esac
 else

@@ -71,6 +71,7 @@ bash scripts/verify-sync.sh
 
 ## Recent updates
 
+- 2026-05-11 · MASTER-APP-FOUNDATION-SCAFFOLD-001 · `app-foundation` repo 신설 (HEAD `923346b` · scaffold cd6f418 + cli infra cp 923346b dual commit) + propagation 5→6 repo 확장 (`propagate.sh` / `verify-sync.sh` TARGET_REPOS + FND case + release-readiness/* exclude) + `COMMON-SETUP-SSOT-DRAFT.md` master → foundation `docs/COMMON-SETUP-SSOT.md` 이전 + PACKAGE-OVERVIEW §3 MASTER-T01 ✓. propagate 112/0 · verify-sync PASS 112/0/0 (exit 0) · 보호 파일 5종 sha 변동 0.
 - 2026-05-10 · MASTER-BILLING-DOMAIN-ACTIVATE-001 · Billing 도메인 4-repo 활성화 (UNKNOWN×4 → ACTIVE×4) · `billing-rules.md` SoT 신설 + `billing-payments-guardian` agent deferred/ → active/ + STEP-1 drift mitigation (master sot-code-name-map.md ← GT 흡수 · 새 sha `7f2f4e61c635d6f425232c4c5f0d5b7caed9a8da3036efcff6c67de9676068d2`) · 4-repo byte-identical (verify-sync 112/0/0) · 보호 파일 5종 sha 변동 0.
 - 2026-05-05 · MASTER-UX-LAWS-NA-SCOPE-AND-RETRO-FIX-001 · cli infra ux-laws.md sha 변동 80aa2915... → 0f63f399... (322 line / §5.1 N/A 영역 7 신설) · 4-repo byte-identical · 보호 파일 5 종 sha 변동 0 · master 3c48df5 / GB a8d985e / GD dd4d6f0 / GT 25d2358.
 - 2026-05-05 · MULTI-REPO-UIUX-AUDIT-AGAINST-UX-LAWS-001 Phase 1 정합 검증 · 보호 파일 5 종 + cli infra 6 종 4-repo byte-identical 재확인 (drift 0). prompt BASELINE 의 `design-sot-policy.md` 위치 가정 (`.claude/rules/`) 정정 → 실제 `docs/design/`. 보호 파일 sha 변동 0.

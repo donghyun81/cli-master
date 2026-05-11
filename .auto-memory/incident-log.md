@@ -160,3 +160,13 @@
 - mitigation: (1) paste-back 시 `git log -1 --format='%h %p'` direct 인용 의무 (single-step parent 검증). (2) cowork prompt 안 보호 file count N 명시 → paste-back 동일 N 의무 (count cross-check). (3) cowork prompt 안 algorithm 명시 의무 ("git blob sha 16자 prefix") + paste-back 동일 algorithm 의무. (4) cowork sandbox memory pencil_sot §2 갱신 마감 (algorithm "git blob sha 16자 prefix" 명시 + sha-256 reference column 추가 + 검증 명령 = `git hash-object` 정정).
 - trail: close (본 cycle 마감 · 사고 본질 영향 0 · drift 0 · commit chain 정합 ✓). 동족 사고 누적 영역 = (i) 2026-05-08 paste-back PASS 후 disk cross-check 의무 (memory feedback_paste_back_disk_verification) (ii) 2026-05-09 사용자 의도 추측 X (memory feedback_no_speculation_user_intent_assumption) (iii) 본 사고 = paste-back 정확성 영역 + cowork sandbox memory 자체 정합 영역 = 3 누적. 학습 = cowork ↔ CLI handoff 시 (1) algorithm 명시 / (2) count 명시 / (3) parent commit single-step 인용 / (4) memory 자체 모순 사전 검증 = 4 hook 영역. 5회차 재발 시 mitigation 강화 cycle 진입 (handoff 자체 검증 hook 도입 검토).
 ```
+
+## 2026-05-11T00:00:00+0900
+
+```
+- type: verify-sync.sh false positive drift/miss (ledger repo-specific 영역 vs propagation 검증 정책 mismatch · 도구 부산물 1건 동시 발생)
+- cycle: MULTI-REPO-RELEASE-LEDGER-INIT-001
+- summary: 4-repo ledger 신설 commit 4건 마감 후 verify-sync.sh exit 1 출력 (PASS 112 / DRIFT 0 / MISS 6). MISS 6 = master/docs/release-readiness/PACKAGE-OVERVIEW.md + COMMON-SETUP-SSOT-DRAFT.md 가 자식 3-repo MISS. 본 cycle 의도 = ledger file = repo-specific 구조 (master 측 거시 SoT 2 file + 자식 측 LAUNCH-STATUS.md 1 file 각각). verify-sync.sh = docs/ 전체 propagation 대상 + release-readiness/ exclude 정책 X = false positive. 핵심 의무 모두 PASS (HEAD baseline 일치 4/4 · 보호 5 sha 변동 0 · billing-rules.md sha 0ec5d54f49dfd6e2 무결성 PASS · ledger line 96/114/184/181/194 일치 · protected-file-hashes.md 변동 0 · Stage 격리 100%). 부산물 사고 1 = verify-sync.sh 실행 시 .auto-memory/propagation-status.md 자체 갱신 박음 (도구 부산물 · 본 cycle scope X · CLI stage 안 함 의무 준수). 부산물 경고 1 = git-lock daemon 미활성 (C12 사고 패턴 재발 위험 경고 · 본 cycle scope 외 · 사용자 결정 영역).
+- mitigation: 별 mitigation cycle 권장 분리 = (1) verify-sync.sh 안 release-readiness/ 영역 exclude 정책 추가 (제안: docs/release-readiness/* glob 패턴 propagation 대상 제외) (2) propagation-status.md 자체 갱신 부산물 처리 결정 (도구 행동 변경 vs 별 cycle 단독 commit). 본 cycle REVIEW.md 4건 = Verdict=PASS 조건부 박음 + 사용자 회수 의무 4건 명시 (.ai/reports/MULTI-REPO-RELEASE-LEDGER-INIT-001/REVIEW.md 안 박음).
+- trail: open (별 mitigation cycle 분리 · ledger 영역 도구 정책 mismatch 첫 사고). 동족 사고 누적 영역 = COWORK-PREP-BASELINE-MISMATCH-001~004 (Cowork ↔ CLI handoff 영역 4회) + paste-back 정확성 영역 4회 + 본 사고 = 9 누적 (단 영역 분리 — 본 사고 = CLI ↔ 도구 영역 첫 사고). 학습 = repo-specific 영역 신설 시 verify-sync.sh exclude 정책 사전 검증 의무 · 본 cycle 진입 전 release-readiness/ 영역 처리 정책 prompt 본문 명시 X → CLI 자체 판단 영역 X → 사용자 회수 영역 의무.
+```
