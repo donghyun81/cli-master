@@ -170,3 +170,13 @@
 - mitigation: 별 mitigation cycle 권장 분리 = (1) verify-sync.sh 안 release-readiness/ 영역 exclude 정책 추가 (제안: docs/release-readiness/* glob 패턴 propagation 대상 제외) (2) propagation-status.md 자체 갱신 부산물 처리 결정 (도구 행동 변경 vs 별 cycle 단독 commit). 본 cycle REVIEW.md 4건 = Verdict=PASS 조건부 박음 + 사용자 회수 의무 4건 명시 (.ai/reports/MULTI-REPO-RELEASE-LEDGER-INIT-001/REVIEW.md 안 박음).
 - trail: open (별 mitigation cycle 분리 · ledger 영역 도구 정책 mismatch 첫 사고). 동족 사고 누적 영역 = COWORK-PREP-BASELINE-MISMATCH-001~004 (Cowork ↔ CLI handoff 영역 4회) + paste-back 정확성 영역 4회 + 본 사고 = 9 누적 (단 영역 분리 — 본 사고 = CLI ↔ 도구 영역 첫 사고). 학습 = repo-specific 영역 신설 시 verify-sync.sh exclude 정책 사전 검증 의무 · 본 cycle 진입 전 release-readiness/ 영역 처리 정책 prompt 본문 명시 X → CLI 자체 판단 영역 X → 사용자 회수 영역 의무.
 ```
+
+## 2026-05-11T17:00:00+0900
+
+```
+- type: verification PASS (cli infra 환경 정합 영역 · pin 정책 unpin 게이트)
+- cycle: CLAUDE-CODE-VERSION-UNPIN-VERIFY-001
+- summary: claude 2.1.121 환경 안 stdio MCP tool discovery 회귀 (#51736) 해소 실측 검증. PASS 4/4 — (1) claude --version = 2.1.121 (2) mcp list pencil ✓ Connected (3) ToolSearch query="pencil" = 13 tools (mcp__pencil__* prefix 전수 명단 verbatim 일치 · batch_design/batch_get/export_nodes/find_empty_space_on_canvas/get_editor_state/get_guidelines/get_screenshot/get_variables/open_document/replace_all_matching_properties/search_all_unique_properties/set_variables/snapshot_layout) (4) mcp__pencil__get_editor_state 실호출 PASS (active editor daily-prescription.pen + 4 top-level frames). cli-master 한정 · propagation 자체 금지 · .mcp.json/.claude 무변경 STOP 조건 모두 준수. 산출물 = .ai/reports/CLAUDE-CODE-VERSION-UNPIN-VERIFY-001/{PLAN,EVIDENCE,VERIFY,REVIEW}.md 4 파일 + 본 incident-log entry.
+- mitigation: 별 cycle CLI-VERSION-UNPIN-PROPAGATION-001 진입 권장 (cycle-discipline.md §13 안 2.1.114 pin 의무 영역 → 2.1.121+ unpinned 갱신 + 4-repo propagation + CLAUDE.md §15 entry). Coin 결정 게이트 통과 후 진입 의무.
+- trail: 부분 close — CLAUDE-CODE-VERSION-PIN-2.1.114-001 별 trail = 본 cycle PASS 로 unpin 게이트 통과 / 실 close 는 별 cycle CLI-VERSION-UNPIN-PROPAGATION-001 마감 시점. #51736 회귀 본질 영향 0 (2.1.121 에서 해소 실측 확인 · single 환경 한계 단서 잔존).
+```
