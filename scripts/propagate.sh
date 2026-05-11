@@ -23,10 +23,10 @@
 
 set -euo pipefail
 
-# === 환경 변수 default ===
-: "${PARENT_DIR:=$HOME/AndroidStudioProjects}"
-: "${MASTER_DIR:=$PARENT_DIR/claude-cli-master}"
-: "${TARGET_REPOS:=GentlyBreath GentlyDay GentlyTable app-foundation}"
+# === 환경 변수 default (single SoT · MASTER-REPO-CONFIG-SOT-001) ===
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+# shellcheck source=./repo-config.sh
+. "$SCRIPT_DIR/repo-config.sh"
 
 # === 인자 파싱 ===
 TARGETS=""

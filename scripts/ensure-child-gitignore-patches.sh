@@ -24,8 +24,12 @@
 
 set -uo pipefail
 
-: "${PARENT_DIR:=$HOME/AndroidStudioProjects}"
-: "${TARGET_REPOS:=GentlyBreath GentlyDay GentlyTable}"
+# === 환경 변수 default (single SoT · MASTER-REPO-CONFIG-SOT-001) ===
+# drift 정정: 기존 literal default 측 3 repo (app-foundation 미포함) →
+# repo-config.sh source 측 4 repo 자동 흡수 (TARGET_REPOS = GB GD GT FND).
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+# shellcheck source=./repo-config.sh
+. "$SCRIPT_DIR/repo-config.sh"
 
 VERIFY_ONLY=0
 SINGLE_TARGET=""
