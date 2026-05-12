@@ -470,7 +470,7 @@ git commit -m "feat(master): C7-UX-LAWS-INTEGRATION-001 Laws of UX 17 권장 + 1
   - A 거부: Coin 명시 호출 = 자동화 약함 (사용자 요청 = 매번 처리 안 함)
   - B 단독 거부: 세션 시작 후 새로 발생 lock 처리 X
   - C 단독 거부: 세션 시작 시 즉시 정리 안 됨
-  - **묶음 채택**: 두 hook 모두 박아 99% case 자동 mitigation
+  - **묶음 채택**: 두 hook 모두 동시 적용해 99% case 자동 mitigation
 
 ### 결정 2. stale 마진 (race condition 회피)
 - **pre-tool-use.sh**: 30초 (반응성 우선 · 정상 git op 는 30s 안에 거의 끝남)
