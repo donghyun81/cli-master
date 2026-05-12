@@ -160,18 +160,24 @@ PLAN.md / VERIFY.md / REVIEW.md / TODO.md
 
 3 항목 모두 PASS = cycle 진행 가능. 1+ FAIL = 즉시 STOP + 아래 복귀 절차.
 
-**self-test FAIL 시 복귀 절차 — 직전 known-working 버전 복귀 (현 시점 default `2.1.121` · 회귀 발견 시점에 갱신):**
+**self-test FAIL 시 복귀 절차 — 직전 known-working 버전 복귀 (동적 영역 · 본 §13 안 버전 hardcode X):**
+
+현 시점 known-working 버전 = `.auto-memory/incident-log.md` 안 `CLAUDE-CODE-LATEST-CHASE-001` trail 의 **마지막 PASS entry** 영역 reference. 본 §13 본문 측 버전 명시 X · lazy default · grep 영역 단일 진실.
 
 ```bash
+# 1. 마지막 PASS 버전 grep
+grep -A2 "CLAUDE-CODE-LATEST-CHASE-001" .auto-memory/incident-log.md | grep -i "PASS"
+
+# 2. 복귀 실행
 rm -rf ~/.local/share/claude && rm -f ~/.local/bin/claude
-npm install -g @anthropic-ai/claude-code@<known-working>
+npm install -g @anthropic-ai/claude-code@<known-working-from-grep>
 hash -r && claude --version
 ```
 
 복귀 후 의무:
 
-- `.auto-memory/incident-log.md` 안 `CLAUDE-CODE-LATEST-CHASE-001` entry append (회귀 버전 / 증상 / 복귀 시각 KST / 외부 issue link 4 항목 의무).
-- 새 known-working 등재 전까지 본 §13 안 기재 known-working 갱신 의무 (별 cycle).
+- `.auto-memory/incident-log.md` 안 `CLAUDE-CODE-LATEST-CHASE-001` trail 안 entry append (회귀 버전 / 증상 / 복귀 시각 KST / 외부 issue link 4 항목 의무 · 회귀 case) 또는 PASS entry append (자연 PASS case · 버전 / self-test 결과 / 직전 PASS reference 영역).
+- 본 §13 본문 측 known-working 버전 갱신 의무 **폐기** (= lazy default · 매 갱신 의무 X · 별 trail 영역 단일 갱신 default).
 
 **참고 (외부 검증 영역 · `CLAUDE-CODE-VERSION-UNPIN-VERIFY-001`):**
 

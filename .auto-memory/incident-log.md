@@ -258,3 +258,28 @@
 - mitigation: 본 mini-cycle 측 3 line paraphrase (verb form 1 회 → "동시 적용해" · self-referential token 2 회 → "degeneration cluster" · 의미 정합 보존) + 사후 검증 강화 의무 patterns 정착 = (1) cleanup 산출물 측 single-glyph grep count = 0 강제 (token cluster 외 single character 측 검사 추가) (2) cycle entry 안 자기 인용 token 측 paraphrase 의무 (= 정책 본문 자체 token 측 entry 측 재현 X · 화이트리스트 §5 무접촉 의무) (3) REVIEW PASS 직전 disk 측 single-glyph count = 0 confirm step 추가 (= verification scope 확장).
 - trail: close (본 mini-cycle 마감) · 동족 사고 누적 영역 = paste-back disk verification 영역 측 prior 사고 + 본 사고 = cleanup 산출물 측 self-verification 영역 첫 사고. 학습 = cleanup cycle 측 사후 검증 patterns = token cluster grep + 단독 character grep + self-referential token paraphrase 의무 3 step 정착. text-degeneration-prevention.md §11 mitigation patterns 정합 (감지 → 분류 → 정정 → 재검증 → 기록).
 ```
+
+## 2026-05-12T17:00:00+0900
+
+```
+- type: cli infra 정책 본문 정정 마감 (cycle-discipline.md §13 안 hardcode 영역 → 동적 영역 전환)
+- cycle: CLAUDE-CODE-LATEST-CHASE-POLICY-CLARIFY-001
+- summary: 직전 cycle CLI-VERSION-UNPIN-PROPAGATION-001 마감 후 §13 본문 측 "현 시점 default `2.1.121` · 회귀 발견 시점에 갱신" 영역 + "새 known-working 등재 전까지 본 §13 안 기재 known-working 갱신 의무" 영역 = 사용자 본심 정합 결함 영역 (cowork overhead + lazy 갱신 영역 누락 사고 가능) 정정 cycle. 정정 내용 = (1) line 163 hardcode 영역 → 동적 영역 (`.auto-memory/incident-log.md` 안 `CLAUDE-CODE-LATEST-CHASE-001` trail 마지막 PASS entry reference default · grep 영역 단일 진실 patterns) (2) line 174 갱신 의무 영역 → 폐기 명시 (lazy default · 매 갱신 의무 X · 별 trail 영역 단일 갱신 default). self-test 3 항목 영역 (claude --version + mcp list pencil ✓ Connected + ToolSearch ≥ 13) 본문 무변경. cycle-discipline.md sha `0e4a7d01997c0d12ddb432d14ee37cdb1c4f1bbc` → `5726cb44c5f4d53d10db3018a74debea6ba5fc19` (4-repo byte-identical · git blob sha1). Gently 4-repo propagation scope (cli-master + GB + GD + GT) · Proto 3-repo 무접촉 (현 baseline `732017a7...` 유지 영역 · 별 cycle 후보 영역). 보호 파일 5종 sha 변동 0 · `.mcp.json` 무변경 · `settings.json` 무변경. 산출물 4종 = .ai/reports/CLAUDE-CODE-LATEST-CHASE-POLICY-CLARIFY-001/{PLAN,EVIDENCE,VERIFY,REVIEW}.md.
+- mitigation: 본 cycle = "현 사용 버전 저장 자체 폐기 · 사고 영역만 별 trail 안 영구 기록" 사용자 본심 정합 정착 영역. 운영 영역 = "현 시점 known-working 알고 싶으면 `.auto-memory/incident-log.md` 안 `CLAUDE-CODE-LATEST-CHASE-001` trail 의 마지막 PASS entry grep" patterns 단일 진실. memory `claude_code_environment.md` 안 "known-working = 2.1.139" mismatch 영역 = 본 cycle 마감 후 자연 해소 (= §13 본문 측 hardcode 영역 폐기 → mismatch 영역 자체 부재).
+- trail: 1 open (= 본 §13 정정 의도 정합 영역) — `CLAUDE-CODE-LATEST-CHASE-001` trail 측 첫 PASS entry append (2026-05-12 KST / 2.1.139 / self-test 3/3 PASS · CLAUDE-CODE-LATEST-CHASE-FIRST-RUN-001 결과 영역 reference · 회귀 X · 직전 PASS entry 영역 default). 동족 사고 영역 = §13 hardcode 영역 잔존 사고 (직전 cycle CLI-VERSION-UNPIN-PROPAGATION-001 마감 시점 hardcode 잔존 = 본 cycle 마감 영역). 별 cycle 후보 영역 (= 본 cycle scope 외 · STOP + 보고만): Proto 3-repo cycle-discipline.md 정합 · Proto 3-repo settings.json mismatch · sha algorithm SoT (hook sha256 vs disk git blob sha1) · vocabulary cleanup / DEGENERATION-PREVENTION 동족 영역.
+```
+
+## 2026-05-12T17:00:00+0900 — CLAUDE-CODE-LATEST-CHASE-001 trail entry
+
+```
+- trail: CLAUDE-CODE-LATEST-CHASE-001 (open · 회귀 누적 영역)
+- entry type: PASS (= 회귀 X · 자연 PASS case · 본 trail 안 첫 PASS entry)
+- 날짜: 2026-05-12 KST
+- 버전: 2.1.139
+- self-test 결과: 3/3 PASS (= claude --version = 2.1.139 ✓ + mcp list pencil ✓ Connected ✓ + ToolSearch query="pencil" ≥ 13 mcp__pencil__* tools ✓)
+- 검증 출처: CLAUDE-CODE-LATEST-CHASE-FIRST-RUN-001 결과 영역
+- 직전 PASS entry: 부재 (= 본 entry 가 trail 안 첫 PASS entry · 향후 PASS entry 측 본 entry reference default)
+- 회귀 상태: X (= 회귀 영역 0 · 자연 PASS 영역)
+- 외부 issue link: N/A (= 회귀 X case · issue link 의무 영역 부재)
+- 비고: 본 entry = 사용자 본심 정합 default ("현 사용 버전 저장 자체 폐기 · 사고 영역만 별 trail 안 영구 기록") 정착 영역. 운영 영역 = 본 entry grep = `grep -A2 "CLAUDE-CODE-LATEST-CHASE-001" .auto-memory/incident-log.md | grep -i "PASS"` patterns 단일 진실. 향후 회귀 발견 시 trail 안 회귀 entry append + 직전 PASS entry (= 본 entry · 2.1.139) 복귀 영역 default.
+```
