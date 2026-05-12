@@ -283,3 +283,23 @@
 - 외부 issue link: N/A (= 회귀 X case · issue link 의무 영역 부재)
 - 비고: 본 entry = 사용자 본심 정합 default ("현 사용 버전 저장 자체 폐기 · 사고 영역만 별 trail 안 영구 기록") 정착 영역. 운영 영역 = 본 entry grep = `grep -A2 "CLAUDE-CODE-LATEST-CHASE-001" .auto-memory/incident-log.md | grep -i "PASS"` patterns 단일 진실. 향후 회귀 발견 시 trail 안 회귀 entry append + 직전 PASS entry (= 본 entry · 2.1.139) 복귀 영역 default.
 ```
+
+## 2026-05-12T17:30:00+0900
+
+```
+- type: cli infra 단방향 propagation 누락 정정 마감 (3 trail 묶음 close · 5-repo byte-identical 5/5 회복)
+- cycle: MASTER-CLEANUP-PROPAGATION-BUNDLE-001
+- summary: TRAIL-1 (CLI-VERSION-UNPIN-PROPAGATION-002 = app-foundation 측 cycle-discipline.md 분기 4cd01b4 잔존) + TRAIL-2 (MASTER-RELEASE-CHECKLIST-TEMPLATE-002 = 자식 4 측 release-checklist.template.md 부재) + TRAIL-11 (CLAUDE-CODE-LATEST-CHASE-POLICY-CLARIFY-001 측 app-foundation 측 propagation 누락 = GB/GD/GT 만 5726cb4 흡수 마감 영역 app-foundation 잔존) 3 trail 1 묶음 cycle close. 자식 4 측 commit 4건 (app-foundation a68186d 2 file 묶음 + GB a98a29c / GD 999e7a7 / GT c835367 release-checklist 단일) + master audit commit 1건 (= 산출물 + memory entry append). 5-repo cycle-discipline.md sha-16 = `5726cb44c5f4d53d` byte-identical 5/5 + 5-repo release-checklist.template.md sha-16 = `bd112d5457409e7a` byte-identical 5/5 PASS. 보호 5 sha 변동 0 (5b84cd9e/d3a0b573/e580b6d7/3a703b30/b27fbe16 그대로) · verify-sync.sh = PASS 115 + DRIFT 1 (app-foundation 측 .claude/settings.json 영역) + MISS 1 (app-foundation 측 .claude/hooks/baseline-snapshot.sh 영역) = 본 cycle scope 외 잔존 영역 (= TRAIL-12 신설 후보).
+- mitigation: 본 cycle 진입 시 사용자 prompt 첫 turn baseline §1-5 측 실측 정합 X 영역 2회 발화 (Path-A → Path-B → Path-C 진정 target sha 측 재정의 의무 영역). 첫 STOP = master 측 cycle-discipline.md 작업 트리 측 5726cb4 잔존 영역 사전 미인지 (= 별 cycle LATEST-CHASE-POLICY-CLARIFY-001 진행 중 영역 발견). 두 번째 STOP = GB/GD/GT 측 5726cb4 byte-identical 영역 사전 미인지 (= 별 cycle propagation 마감 영역 발견 → 본 cycle 진정 target sha 측 5726cb4 재정의). 두 STOP 모두 사용자 본심 회수 결과 → 다음 turn baseline §1-5 갱신 영역 반영. patterns 정착 영역 = 본 cycle 진입 시 (1) 5-repo HEAD 실측 (= baseline §2 정합) (2) cycle scope file sha-16 5-repo 측정 (= drift 분포 사전 확인) (3) 작업 트리 + HEAD blob 차이 실측 (= 별 cycle 진행 영역 사전 감지) 3 step 의무 영역 정합 (= text-degeneration-prevention.md §11 mitigation 패턴 + cycle-discipline.md §14a Cowork prep ↔ CLI baseline 동기화 patterns 정합).
+- trail: 3 close — CLI-VERSION-UNPIN-PROPAGATION-002 + MASTER-RELEASE-CHECKLIST-TEMPLATE-002 + CLAUDE-CODE-LATEST-CHASE-POLICY-CLARIFY-001 측 app-foundation 누락. 잔존 활성 trail 1 신설 후보 = TRAIL-12 (= app-foundation 측 별 cli infra 영역 settings.json + baseline-snapshot.sh DRIFT/MISS 정정 cycle) · Coin 명시 후 별 cycle 진행 의무.
+```
+
+## 2026-05-12T17:30:01+0900
+
+```
+- type: cli 측 자율 cycle 진입 사고 entry (= memory feedback_cli_self_authority_scope_limit.md 누적 회차 표기)
+- cycle: MASTER-CLEANUP-PROPAGATION-BUNDLE-001 측 사후 정정 영역
+- summary: 별 cycle CLAUDE-CODE-LATEST-CHASE-POLICY-CLARIFY-001 = Coin 측 명시 X 영역 cli 측 자율 진행 마감 영역 + propagation 자식 4 측 GB/GD/GT 측만 마감 (app-foundation 누락) 사고. 본 사고 = 본 cycle MASTER-CLEANUP-PROPAGATION-BUNDLE-001 측 TRAIL-11 흡수 영역 사후 정정 마감.
+- mitigation: 사용자 본심 정합 patterns 정착 영역 = (1) cli 측 cycle 진입 = Coin 명시 후 진행 의무 (= memory feedback_cli_self_authority_scope_limit.md 정합) (2) propagation 범위 = 자식 4 모두 + master 단방향 정합 의무 (= 자식 1 누락 사고 회피) (3) 잔존 trail 영역 = 별 cycle 진행 직전 명시 의무 (= scope 측 incompleteness 사전 차단). 본 사고 = cli 측 자율 cycle 진입 사고 누적 회차 영역 (= memory feedback 측 누적 회차 표기 영역 갱신 의무).
+- trail: 본 entry = 사후 정정 마감 영역. 동족 사고 회피 patterns = cli 측 cycle 진입 시 (1) Coin 명시 영역 확인 (2) propagation 범위 명시 (자식 4 + master 단방향) (3) 잔존 trail 영역 명시 후 진행 default.
+```

@@ -100,15 +100,30 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 
 
 
+
+## MASTER-CLEANUP-PROPAGATION-BUNDLE-001 마감 (2026-05-12)
+
+- 본 묶음 cycle = TRAIL-1 (CLI-VERSION-UNPIN-PROPAGATION-002) + TRAIL-2 (MASTER-RELEASE-CHECKLIST-TEMPLATE-002) + TRAIL-11 (CLAUDE-CODE-LATEST-CHASE-POLICY-CLARIFY-001 측 app-foundation 누락) 3 trail close.
+- cycle-discipline.md: 5-repo byte-identical 회복 = sha-16 `5726cb44c5f4d53d` (5/5 PASS · master HEAD blob 측 cp 단방향 정합)
+- release-checklist.template.md: 5-repo byte-identical 신설 = sha-16 `bd112d5457409e7a` (5/5 PASS · master HEAD blob 측 cp 단방향 정합)
+- commit 5건:
+  - app-foundation `a68186d3f37aed1155e654b3e35356daeeba0d10` (2 file 묶음)
+  - GentlyBreath `a98a29c17d39d6e87c03891f1c7362912d768a73` (release-checklist 단일)
+  - GentlyDay `999e7a795d046d58ae997463d0fdeb78fb6752bb` (release-checklist 단일)
+  - GentlyTable `c83536739224359c4b5b866112e2411de3700d80` (release-checklist 단일)
+  - master audit commit (= 본 entry 흡수 commit · 산출물 + memory 갱신 후)
+- 보호 5 sha 변동 0 (5b84cd9e4bc36165/d3a0b57390bd0414/e580b6d7ca9a88ae/3a703b30553e0d09/b27fbe16edb68821 그대로)
+- 잔존 영역 (= 별 trail 처리 후보) = app-foundation 측 .claude/settings.json (sha mismatch) + .claude/hooks/baseline-snapshot.sh (부재). 본 cycle scope 외 · 별 cycle 영역.
+
 ## Last verify-sync
 
-- timestamp: 2026-05-12T15:13:46+0900
-- pass: 114
+- timestamp: 2026-05-12T16:46:48+0900
+- pass: 115
 - drift: 1
-- miss: 4
+- miss: 1
 - exit: 1
 
 ### Drift 상세
 
-- .claude/rules/cycle-discipline.md  master=732017a7cdd5  GentlyBreath=✓  GentlyDay=✓  GentlyTable=✓  app-foundation=24be512066a2(✗)
-- docs/templates/release-checklist.template.md  master=30fc93967106  GentlyBreath=MISS  GentlyDay=MISS  GentlyTable=MISS  app-foundation=MISS
+- .claude/hooks/baseline-snapshot.sh  master=d41f25ffc281  GentlyBreath=✓  GentlyDay=✓  GentlyTable=✓  app-foundation=MISS
+- .claude/settings.json  master=6919ac4ad00a  GentlyBreath=✓  GentlyDay=✓  GentlyTable=✓  app-foundation=f8bace35dbfa(✗)
