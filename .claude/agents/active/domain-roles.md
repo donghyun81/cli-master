@@ -12,47 +12,47 @@
 
 | 역할 | 파일 | 전문 영역 |
 |---|---|---|
-| intake-router | `.claude/agents/intake-router.md` | 트리아지 리드 |
-| requirements-analyst | `.claude/agents/requirements-analyst.md` | 문제 구조화 |
-| system-architect | `.claude/agents/system-architect.md` | 통합 아키텍트 |
-| change-planner | `.claude/agents/change-planner.md` | 실행 조율 |
-| verifier | `.claude/agents/verifier.md` | 기술적 타당성 |
-| reviewer | `.claude/agents/reviewer.md` | 최종 기술 판정 |
+| intake-router | `.claude/agents/active/intake-router.md` | 트리아지 리드 |
+| requirements-analyst | `.claude/agents/active/requirements-analyst.md` | 문제 구조화 |
+| system-architect | `.claude/agents/active/system-architect.md` | 통합 아키텍트 |
+| change-planner | `.claude/agents/active/change-planner.md` | 실행 조율 |
+| verifier | `.claude/agents/active/verifier.md` | 기술적 타당성 |
+| reviewer | `.claude/agents/active/reviewer.md` | 최종 기술 판정 |
 
 ## 도메인 분석 역할 — generic (모든 repo 공통, read-only)
 
 | 역할 | 파일 | 전문 영역 |
 |---|---|---|
-| ux-auditor | `.claude/agents/ux-auditor.md` | UX 원칙 준수, 화면 상태 완전성 |
-| backend-api-architect | `.claude/agents/backend-api-architect.md` | API 계약 안전성 |
-| data-schema-guardian | `.claude/agents/data-schema-guardian.md` | DBMig 판정, 데이터 보존 |
-| auth-security-privacy | `.claude/agents/auth-security-privacy.md` | 인증/PII/시크릿 위험 |
-| performance-reliability-engineer | `.claude/agents/performance-reliability-engineer.md` | ANR/메모리/Rate limit |
-| test-strategist | `.claude/agents/test-strategist.md` | 테스트 커버리지 공백 |
-| observability-ops-analyst | `.claude/agents/observability-ops-analyst.md` | 관측성, PII 로그 |
-| release-risk-manager | `.claude/agents/release-risk-manager.md` | 배포 위험, 롤백 전략 |
+| ux-auditor | `.claude/agents/active/ux-auditor.md` | UX 원칙 준수, 화면 상태 완전성 |
+| backend-api-architect | `.claude/agents/deferred/backend-api-architect.md` | API 계약 안전성 |
+| data-schema-guardian | `.claude/agents/deferred/data-schema-guardian.md` | DBMig 판정, 데이터 보존 |
+| auth-security-privacy | `.claude/agents/active/auth-security-privacy.md` | 인증/PII/시크릿 위험 |
+| performance-reliability-engineer | `.claude/agents/deferred/performance-reliability-engineer.md` | ANR/메모리/Rate limit |
+| test-strategist | `.claude/agents/deferred/test-strategist.md` | 테스트 커버리지 공백 |
+| observability-ops-analyst | `.claude/agents/deferred/observability-ops-analyst.md` | 관측성, PII 로그 |
+| release-risk-manager | `.claude/agents/deferred/release-risk-manager.md` | 배포 위험, 롤백 전략 |
 
 ## 문서 거버넌스 역할 (모든 repo 공통, read-only — fulfill-doc-governance 전용)
 
 | 역할 | 파일 | 전문 영역 |
 |---|---|---|
-| docs-drift-auditor | `.claude/agents/docs-drift-auditor.md` | 드리프트 감지, 참조 경로 감사 |
-| docs-structure-architect | `.claude/agents/docs-structure-architect.md` | 문서 계층·SOT 경계 분석 |
+| docs-drift-auditor | `.claude/agents/active/docs-drift-auditor.md` | 드리프트 감지, 참조 경로 감사 |
+| docs-structure-architect | `.claude/agents/active/docs-structure-architect.md` | 문서 계층·SOT 경계 분석 |
 
 ## 구현 역할 (모든 repo 공통, write 허용)
 
 | 역할 | 파일 | 전문 영역 |
 |---|---|---|
-| ui-implementer | `.claude/agents/ui-implementer.md` | UI/화면 구현 |
-| server-implementer | `.claude/agents/server-implementer.md` | 백엔드 구현 |
-| docs-change-communicator | `.claude/agents/docs-change-communicator.md` | DocSync, 문서 갱신 |
-| code-simplifier | `.claude/agents/code-simplifier.md` | 구현 후 cleanup pass |
+| ui-implementer | `.claude/agents/active/ui-implementer.md` | UI/화면 구현 |
+| server-implementer | `.claude/agents/deferred/server-implementer.md` | 백엔드 구현 |
+| docs-change-communicator | `.claude/agents/active/docs-change-communicator.md` | DocSync, 문서 갱신 |
+| code-simplifier | `.claude/agents/active/code-simplifier.md` | 구현 후 cleanup pass |
 
 ## 검증 보조 역할 (모든 repo 공통, read-only)
 
 | 역할 | 파일 | 전문 영역 |
 |---|---|---|
-| layer-checker | `.claude/agents/layer-checker.md` | shared/domain I2 불변 원칙 위반 확인 |
+| layer-checker | `.claude/agents/active/layer-checker.md` | shared/domain I2 불변 원칙 위반 확인 |
 
 <!-- propagation: repo-only -->
 <!-- TODO: <REPO>-only 도메인 역할이 필요하면 propagation 후 자식 repo 에서 이 블록 안에 추가. master 에서는 비움. -->

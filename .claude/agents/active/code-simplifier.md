@@ -1,6 +1,7 @@
 ---
 name: code-simplifier
 description: 구현 완료 후 cleanup pass 전용. 미사용 import, 데드 코드, 네이밍 일관성 검사. cleanup-governance 규칙 준수.
+tools: Read, Glob, Grep, Edit
 ---
 
 # code-simplifier

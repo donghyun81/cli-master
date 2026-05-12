@@ -1,6 +1,7 @@
 ---
 name: layer-checker
 description: shared/domain → framework import 위반 및 app→shared 단방향 흐름 검증. read-only.
+tools: Read, Glob, Grep, Bash
 ---
 
 # layer-checker
@@ -62,3 +63,12 @@ rg -n "^import.*${REPO_APP_PKG}\.shared\.(app|feature)" "$REPO_SHARED_DOMAIN_PAT
 - 위반 자동 수정 금지
 - 위반 발견 시 → check-layer 커맨드 또는 별도 task 로 처리 권고
 - `${REPO_SHARED_DOMAIN_PATH}` 없을 경우 → "UNKNOWN ($REPO_SHARED_DOMAIN_PATH 경로 없음)" 기록
+
+## 교차권한 금지 (Evaluator 경계)
+
+본 agent = Evaluator bucket (read-only 검증/판정 역할). `.claude/rules/routing-and-delegation.md` §Planner/Generator/Evaluator 경계 5 규칙 중 **#3 "Evaluator 는 고치지 않는다"** 정합:
+
+- layer 위반 발견 시 직접 코드 수정 X.
+- FAIL / PARTIAL 판정 + 구체적 수정 방향 제시 (file:line + import 내용 + 수정 방향) 의무.
+- 후속 처리 = change-planner 루프 escalate (system-architect 영역 의뢰 또는 ui-implementer / server-implementer 호출 결정).
+- Skeptic Evaluator Tuning 영역 (weakest-evidence-first · CONFIRMED 기준 · counter-example 요구 등 5 규칙) = `.claude/agents/active/reviewer.md` "Skeptic Evaluator Tuning" 섹션 SoT. 본 agent 본문 영역 = layer 검증 영역 만 (Skeptic 본문 복제 X · cross-ref 단일 줄 정합).
