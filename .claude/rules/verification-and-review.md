@@ -46,7 +46,7 @@ EXIT 0 = PASS | EXIT 1 = 아티팩트 누락 또는 시크릿 감지
 ## /review 규칙
 
 ### Risk 기반 리뷰 경량화
-- **Low Risk**: VERIFY.md (빌드/테스트 통과 확인) + 3-section REVIEW (Requirements, Regression, Secrets). **UI 레이어 변경(Screen/ViewModel/UiState 신규·수정) 포함 시 §5 Model Separation 추가 필수.** PromptFit 선택.
+- **Low Risk**: VERIFY.md (빌드/테스트 통과 확인) + 3-section REVIEW (Requirements, Regression, Secrets). **UI 레이어 변경(Screen/ViewModel/UiState 신규·수정) 포함 시 §5 Model Separation 추가 필수** (= `.claude/rules/workflow-core.md` "### 모델 분리 (Model Separation)" §implement 영역 정합). PromptFit 선택.
 - **Medium Risk**: 현행 12-section REVIEW + PromptFit 필수.
 - **High Risk**: 12-section REVIEW + PromptFit + 독립 reviewer 실행 필수.
 

@@ -123,7 +123,7 @@ intake-router는 키워드 분류기가 아니다 — **어떤 전문 판단이 
 |---|---|---|---|
 | Planner | "어떤 단위로 나누고 어떤 순서로 할 것인가" | intake-router, requirements-analyst, system-architect, change-planner, release-risk-manager | MODE.md, EVIDENCE.md(pre), PLAN.md |
 | Generator | "이 단위를 실제로 만든다" | ui-implementer, server-implementer, docs-change-communicator, code-simplifier | 제품 코드·문서 diff, EVIDENCE.md(post) |
-| Evaluator | "만들어진 것이 목적을 충족하는가, 회귀 위험은 없는가" | verifier, reviewer, layer-checker, 그리고 read-only 분석 11 종 (ux-auditor, backend-api-architect 등) | VERIFY.md, REVIEW.md, 분석 리포트 |
+| Evaluator | "만들어진 것이 목적을 충족하는가, 회귀 위험은 없는가" | verifier, reviewer, layer-checker, 그리고 read-only 분석 11 종 (ux-auditor, backend-api-architect [DEFERRED] 등 · §분석 전문가 표 [DEFERRED] 표기 정합) | VERIFY.md, REVIEW.md, 분석 리포트 |
 
 교차 권한 금지 규칙:
 

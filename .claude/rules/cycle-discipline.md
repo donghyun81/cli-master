@@ -47,6 +47,8 @@
 
 다른 룰 파일은 repo-specific 가능. 단 워크플로우 표준 (본 §섹션 포함) 을 3-repo 모두에 적용하려면 task 별로 propagation 명시.
 
+**cli infra 권장 byte-identical 영역**: `.claude/` 전체 (settings.json + rules + agents + hooks + skills + commands) + `scripts/` 측 propagation 도구 (propagate.sh + verify-sync.sh + ensure-child-gitignore-patches.sh 등) + `docs/agent/architecture/*` 등 = cli infra 권장 byte-identical 영역 (CLAUDE.md §2 "53 + α" 영역 정합). drift 발생 시 lazy mitigation default (= 다음 cycle 영향 시점 회복 의무).
+
 ### 4) repo 규약
 
 task ID prefix 가 source repo 를 가리킨다:
