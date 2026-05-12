@@ -74,6 +74,8 @@ task ID prefix 가 source repo 를 가리킨다:
 
 **v2 도입 근거**: GB-TRACK-D-PILOT-001 (Cycle 9, 64a110f) 에서 빌드 PASS + Coin "go" 명시 승인 후 회귀 위험이 객관적 검증됨 — Coin direct 와 결과 동등. v1 의 "app/src/ = 항상 Coin direct" 는 매 cycle 손 작업 강요로 Coin 의도 ("자동화") 와 어긋남. v2 는 명시 승인 + 빌드 검증을 위임 신뢰 단서로 인정.
 
+**우선순위 정합**: `.claude/rules/safety-and-secrets.md §절대 금지 명령` 표 안 `git commit` 영역 = 본 §5 v2 (한시 허가) 우선 · `safety-and-secrets.md` 표 = 응급 백스탑 default 영역. 본 §5 v2 자동 허용 카테고리 영역 + app/src/ 변경 + 빌드 PASS + Coin 명시 승인 영역 측 agent commit 허용 정합.
+
 ### 6) commit subject 표준
 
 형식: `<type>(<scope>): <task-id> <summary>`

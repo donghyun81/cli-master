@@ -22,6 +22,8 @@
 | `git reset` | 비가역 상태 변경 금지 |
 | `git clean` | 추적 외 파일 삭제 금지 |
 
+> **`git commit` 영역 우선순위 정합**: `.claude/rules/cycle-discipline.md §5 agent commit 한시 허가 정책 (v2)` 우선 · 본 표 = 응급 백스탑 default 영역. v2 자동 허용 카테고리 (docs / cleanup / propagation / report / refactor / test / chore / audit / discipline) + app/src/ 변경 + 빌드 PASS + Coin 명시 승인 영역 측 agent commit 허용 정합.
+
 ---
 
 ## 금지 경로

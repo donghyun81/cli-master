@@ -93,6 +93,7 @@ PROTECTED=(
   .claude/rules/pencil-uiux-workflow.md
   docs/design/pencil-sot-policy.md
   .claude/rules/uiux-sot-refresh.md
+  docs/design/design-sot-policy.md
 )
 CORE_CLI=(
   .claude/settings.json
