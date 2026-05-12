@@ -313,3 +313,13 @@
 - mitigation: 본 entry = 8회차 재발 영역 self-flag 단독 영역 (= 사용자 결정 = `self-flag incident-log append 만`). mitigation 강화 cycle 진입 영역 = 별 cycle 후보 = `MASTER-COWORK-HANDOFF-BASELINE-AUTOVERIFY-HOOK-002` 가칭 (= 직전 MASTER-COWORK-HANDOFF-BASELINE-AUTOVERIFY-HOOK-001 측 명시된 active enforcement 단계 영역 진입 · passive snapshot 영역 → active validation 영역 전환). 영역 정합 = (1) cycle 진입 시 baseline-snapshot.sh 측 capture HEAD vs prompt 명시 BASELINE HEAD 자동 비교 영역 hook 신설 (2) mismatch 감지 시 stderr warn 측 §14a 6 의무 절차 reminder 출력 영역 (3) 8회차+ 영역 측 enforce mode (= exit 2 차단) lazy 도입 영역. 별 cycle scope 의 사용자 결정 영역 = 추후 결정 영역 분리.
 - trail: open 신설 = COWORK-PREP-BASELINE-MISMATCH-008 (= 8회차 재발 영역 첫 entry · cycle 마감 후 동일 prompt 재 invoke 영역). 동족 사고 누적 영역 = COWORK-PREP-BASELINE-MISMATCH-001~007 close + 본 entry = 8 누적. 학습 = cycle 마감 후 동일 prompt 재 invoke 영역 = idempotent 확인 영역 vs Cowork prep 미 갱신 영역 사전 판정 patterns 정립 영역 (= baseline-snapshot.sh 측 active validation 단계 진입 영역 정합). 본 cycle scope 외 영역 (= STOP 7 방지 영역) · 사용자 회수 의무 = mitigation 강화 cycle (MASTER-COWORK-HANDOFF-BASELINE-AUTOVERIFY-HOOK-002 가칭) 진입 결정 영역.
 ```
+
+## 2026-05-12T18:30:00+0900
+
+```
+- type: cli infra cross-ref 검증 false positive entry (cycle 진입 사전 disk cross-check 결과 정합)
+- cycle: MASTER-CLI-LOW-CROSSREF-3FIX-001 (= 본 cycle 진입 시 사용자 측 prompt 안 사전 disk cross-check 결과 영역 명시)
+- summary: 사고 14건 사전 점검 영역 중 2 영역 false positive 검증 영역 — (L3-2) `.claude/rules/code-principles.md` L158 측 `cycle-discipline.md §3 §15 패턴 1` 명시 영역 = file + § 명시 정합 ✓ (= 추정 의심 영역이나 실측 = `cycle-discipline.md` file 명시 + `§3` + `§15 패턴 1` 모두 정확 영역 정합 · cross-ref 정합 PASS) · (L3-9) `.claude/agents/active/reviewer.md` description 측 `ux-laws.md §6 §B [UX Laws]` 명시 영역 = file + § 명시 정합 ✓ (= 추정 의심 영역이나 실측 = `ux-laws.md` file 명시 + `§6` + `§B [UX Laws]` 모두 정확 영역 정합 · cross-ref 정합 PASS). 본 2 영역 = 사고 14건 영역에서 분리 영역 (= 본 cycle 측 mitigation 대상 영역 X · 추적 영역만).
+- mitigation: 본 entry = false positive 추적 영역 단독 영역 (= incident-log append 영역만 · cycle scope 외 영역 분리 · STOP 7 방지 정합). 본 cycle 측 추가 변경 영역 X. 영역 정합 = (1) 향후 사고 영역 점검 시 본 2 영역 측 검증 결과 영역 (= false positive 영역) 참조 default (= 동족 사고 영역 측 재 발화 시 본 entry grep 영역 = 영역 정합 확인) (2) cycle prompt 측 cross-check 사고 영역 patterns 정착 영역 (= prompt 측 사전 disk verification 영역 사용자 측 자발 영역 정합 · cli 자율 검증 의무 영역 X).
+- trail: open 영역 X (= false positive 추적 entry · 동족 사고 누적 영역 X). 동족 사고 누적 영역 = 사고 14건 점검 영역 측 false positive 2 = 본 entry 만 영역. 학습 = cycle 진입 시 사전 disk cross-check 영역 (= 사용자 측 prompt 안 명시 영역) = cli 측 추가 작업 영역 X (= 추적 영역만) + 향후 동일 file + § 영역 점검 시 본 entry 영역 reference default 영역 정합.
+```
