@@ -13,7 +13,7 @@
 
 | repo | HEAD | 단계 | P0 progress | 출시 |
 |---|---|---|---|---|
-| claude-cli-master | `b1b8ca5` | 운영 (T01/T02/T03/T05 ✓ · T04/T06~T08 진행 대기) | 4/8 (50%) | — |
+| claude-cli-master | `67eb0c2` | 운영 (T01/T02/T03/T04/T05 ✓ · T06~T08 진행 대기) | 5/8 (63%) | — |
 | app-foundation | `f1f40f4` | scaffold + cli infra 정합 마감 · core/ 실 wrapper = FND-T02~T10 별 cycle | 1/12 (8%) | — |
 | GentlyBreath | `0552529` | Phase 2 Auth ACTIVE + upgrade-account-screen Pencil SoT 마감 | 2/25 (8%) | ✓ |
 | GentlyDay | `4d867cc` | Phase 1 마감 / Phase 2 진입 대기 (Auth UNKNOWN) | 1/22 (5%) | ✓ |
@@ -46,11 +46,12 @@
 | MASTER-T01 | `app-foundation` repo 신설 (git init + module 구조 scaffold) | P0 | ✓ | — | `cd6f418e2906` · (마감) MASTER-APP-FOUNDATION-SCAFFOLD-001 — KMP/CMP skeleton + libs.versions.toml SSOT + CLI infra cp + COMMON-SETUP-SSOT 이전 |
 | MASTER-T02 | `propagate.sh` + `verify-sync.sh` 갱신 (5 → 6 repo · foundation 포함) | P0 | ✓ | T01 | (마감) MASTER-APP-FOUNDATION-SCAFFOLD-001 — TARGET_REPOS 6 확장 + FND case 추가 + release-readiness/* exclude (회수 1 흡수) |
 | MASTER-T03 | `docs/templates/release-checklist.template.md` 신설 | P0 | ✓ | — | `3ad2d7f6af1e` · (마감) MASTER-RELEASE-CHECKLIST-TEMPLATE-001 — 9 섹션 placeholder template 신설 (3 자식 LAUNCH-STATUS §7~§9 공통 추출 + 7 placeholder · 자식 P4 진입 시 cp + 도메인 치환 의무) · 사고 = 초회 commit a30ad98 측 scripts/* 흡수 + decision-log T03 entry 부재 사고 → reset --soft HEAD~1 + clean state 재 commit (3ad2d7f) · 재 commit 측 decision-log T05 entry 동시 흡수 사고 = 별 trail open |
-| MASTER-T04 | 13 architecture 문서 → foundation 인용 link 갱신 | P1 | ☐ | T01 | (왜) 자식 reading order 정합 · (예) `KMP_CMP_LAYER_DIRECTION.md` 가 foundation `shared/` 가리키도록 |
+| MASTER-T04 | 13 architecture 문서 → foundation 인용 link 갱신 | P1 | ✓ | T01 | `990b58e` · (마감) MASTER-ARCHITECTURE-FOUNDATION-LINK-001 — 13 architecture 측 코드 path 인용 옆 markdown link 추가 (clickable · 자식 reading order 정합) + 신규 cli infra `.claude/rules/architecture-foundation-link-policy.md` 신설 (5-repo byte-identical · 추후 신설 시 자동 적용 baseline) + 5-repo propagation 56/56 PASS · 보호 5 sha 변동 X · 사전 DRIFT 2 영역 (cycle-discipline.md app-foundation + release-checklist.template.md 자식 4) 별 cycle 처리 trail |
 | MASTER-T05 | `repo-config.sh` 의 `PROTECTED_FILES` / `CHILD_REPOS` 갱신 | P0 | ✓ | T01 | `b1b8ca552d48` · (마감) MASTER-REPO-CONFIG-SOT-001 — repo-config.sh single SoT 신설 (TARGET_REPOS 4-repo + PROTECTED_FILES 5종 + PARENT_DIR/MASTER_DIR · 40 line · git blob sha `b3027e52557f6ce3`) + 3 script source 통합 + ensure-child-gitignore drift 정정 (3→4 repo 흡수 · verify 4/0 PASS) |
 | MASTER-T06 | COWORK-PREP-BASELINE-MISMATCH (12회 누적) mitigation hook | P1 | ☐ | — | (왜) cowork ↔ cli baseline 동기 사고 차단 · (예) prompt 발행 전 4-repo HEAD 자동 cross-check |
 | MASTER-T07 | `docs/templates/launch-status.template.md` 신설 (자식 LAUNCH-STATUS 갱신 표준) | P1 | ☐ | T03 | (왜) 자식 LAUNCH-STATUS 갱신 표준 · (예) 새 도메인 task 추가 시 cp |
 | MASTER-T08 | `docs/templates/foundation-fork.template.md` (자식 신규 앱 fork 절차) | P2 | ☐ | T01 | (왜) 미래 앱 (`FocusBites` 등) 신설 30 분 baseline · (예) `bash scripts/fork-from-foundation.sh <new-app>` |
+| MASTER-T09 | text degeneration 본질 mitigation 정책 + post-edit hook | P1 | ✓ | — | (마감) MASTER-DEGENERATION-PREVENTION-POLICY-001 — `.claude/rules/text-degeneration-prevention.md` SoT 신설 (M1 sentence 3+ / M2 paragraph 5+ / M3 file z-score · paraphrase 의무 source 무관 · mental scan 3 step · session reset trigger) + `.claude/hooks/post-edit-degeneration-check.sh` (Python3 tokenizer · 화이트리스트 union allowed-acronyms · TARGET_EXTS .md/.txt · warn default · enforce mode env · positional argument fallback) + settings.json PostToolUse Edit\|Write matcher 등록 + 7 fixture self-test PASS · 5-repo byte-identical propagation |
 
 ---
 
