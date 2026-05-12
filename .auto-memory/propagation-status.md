@@ -115,15 +115,18 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 - 보호 5 sha 변동 0 (5b84cd9e4bc36165/d3a0b57390bd0414/e580b6d7ca9a88ae/3a703b30553e0d09/b27fbe16edb68821 그대로)
 - 잔존 영역 (= 별 trail 처리 후보) = app-foundation 측 .claude/settings.json (sha mismatch) + .claude/hooks/baseline-snapshot.sh (부재). 본 cycle scope 외 · 별 cycle 영역.
 
+
+
 ## Last verify-sync
 
-- timestamp: 2026-05-12T16:46:48+0900
-- pass: 115
-- drift: 1
+- timestamp: 2026-05-12T17:06:17+0900
+- pass: 114
+- drift: 2
 - miss: 1
 - exit: 1
 
 ### Drift 상세
 
+- .claude/agents/active/billing-payments-guardian.md  master=b8aea0e4e7c7  GentlyBreath=✓  GentlyDay=✓  GentlyTable=✓  app-foundation=fa6ea5a803cf(✗)
 - .claude/hooks/baseline-snapshot.sh  master=d41f25ffc281  GentlyBreath=✓  GentlyDay=✓  GentlyTable=✓  app-foundation=MISS
 - .claude/settings.json  master=6919ac4ad00a  GentlyBreath=✓  GentlyDay=✓  GentlyTable=✓  app-foundation=f8bace35dbfa(✗)
