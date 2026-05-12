@@ -25,16 +25,16 @@
 ```
 
 ## 2026-05-11T16:30:00+0900
-- type: 도메인 도구 한계 사전 검증 PASS (Sentry SDK ↔ Kotlin 2.0.21 호환 baseline 박음)
+- type: 도메인 도구 한계 사전 검증 PASS (Sentry SDK ↔ Kotlin 2.0.21 호환 baseline 확인)
 - cycle: SENTRY-SDK-INTEGRATE-01 (사전 의무 검증 · 마감)
-- summary: Firebase BoM 34.13.0 측 Kotlin 2.2.0 metadata incompatibility 사고 (2026-05-11T14:50) 측 재발 회피 paradigm 측 적용 — Sentry Android SDK `7.20.0` + Gradle plugin `4.14.1` 측 1차 candidate 박음. GB 측 1 repo 측 한정 file edit (libs.versions.toml + build.gradle.kts × 2) 후 `:app:compileDebugKotlin` 측 BUILD SUCCESSFUL exit 0 (kotlin_module metadata reject 0 · 사전 검증 PASS 신호) → 3 repo 측 propagation + 5 file 측 통합 + 3 commit (GB 219a224 · GD ffd8265 · GT e8bca80). 측 cycle prompt 측 명시 STOP 조건 ("Sentry SDK 측 Kotlin 2.0.21 호환 mismatch 감지 → 즉시 STOP") 측 발동 X.
+- summary: Firebase BoM 34.13.0 측 Kotlin 2.2.0 metadata incompatibility 사고 (2026-05-11T14:50) 측 재발 회피 paradigm 측 적용 — Sentry Android SDK `7.20.0` + Gradle plugin `4.14.1` 측 1차 candidate 채택. GB 측 1 repo 측 한정 file edit (libs.versions.toml + build.gradle.kts × 2) 후 `:app:compileDebugKotlin` 측 BUILD SUCCESSFUL exit 0 (kotlin_module metadata reject 0 · 사전 검증 PASS 신호) → 3 repo 측 propagation + 5 file 측 통합 + 3 commit (GB 219a224 · GD ffd8265 · GT e8bca80). 측 cycle prompt 측 명시 STOP 조건 ("Sentry SDK 측 Kotlin 2.0.21 호환 mismatch 감지 → 즉시 STOP") 측 발동 X.
 - mitigation: paradigm 정착 — 외부 SDK 통합 시 1 repo 측 한정 build script edit 후 `:app:compileDebugKotlin` 측 사전 호환 검증 (assembleDebug 측 진입 전) → PASS 시 3 repo propagation. 호환 mismatch 시 분기점 binary search 또는 SDK 측 alternative 검토.
 - trail: close (SENTRY-SDK-INTEGRATE-01 마감) · paradigm 측 향후 외부 SDK 통합 cycle (Sentry release tracking · OkHttp interceptor · foundation/core/observability/ wrapper) 측 재사용 의무.
 
 ## 2026-05-11T14:50:00+0900
 - type: 도메인 도구 한계 (Firebase BoM ↔ Kotlin metadata 버전 호환)
 - cycle: FIREBASE-COMMIT-001 (STOP 보고) · FIREBASE-BOM-DOWNGRADE-001 (mitigation 마감)
-- summary: Firebase BoM `34.13.0` 측 transitive `com.google.android.gms:play-services-measurement-{impl,api}:23.2.0` 측 Kotlin `2.2.0` build 박힘 (`META-INF/*.kotlin_module` metadata binary version) ↔ 프로젝트 Kotlin `2.0.21` 측 metadata reader 측 reject → 3 repo (GB/GD/GT) × `:app:compileDebugKotlin` BUILD FAILED · `Module was compiled with an incompatible version of Kotlin. The binary version of its metadata is 2.2.0, expected version is 2.0.0.` × 5+ `kotlin_module` 측 동시 reject. assembleDebug 측 진입 불가.
+- summary: Firebase BoM `34.13.0` 측 transitive `com.google.android.gms:play-services-measurement-{impl,api}:23.2.0` 측 Kotlin `2.2.0` build 결과 (`META-INF/*.kotlin_module` metadata binary version) ↔ 프로젝트 Kotlin `2.0.21` 측 metadata reader 측 reject → 3 repo (GB/GD/GT) × `:app:compileDebugKotlin` BUILD FAILED · `Module was compiled with an incompatible version of Kotlin. The binary version of its metadata is 2.2.0, expected version is 2.0.0.` × 5+ `kotlin_module` 측 동시 reject. assembleDebug 측 진입 불가.
 - mitigation: `[FIREBASE-BOM-DOWNGRADE-001]` cycle 측 BoM 34.13.0 → 33.7.0 측 1 line downgrade (3 repo byte-identical · firebase-analytics 22.1.2 + firebase-crashlytics 19.3.0 측 resolve) → 3 repo × `:app:assembleDebug` BUILD SUCCESSFUL (exit 0) · build 4-line line edit (libs.versions.toml `firebaseBom` 측 1 line × 3 repo). cycle prompt 측 STOP 조건 ("AGP / Kotlin / Crashlytics plugin 측 호환 불호환") 측 정확 발동 + 별 cycle 측 file edit only 측 mitigation 마감.
 - trail: close (FIREBASE-BOM-DOWNGRADE-001 마감) · 후속 `[KOTLIN-UPGRADE-2.2.X-001]` 별 trail 후보 (출시 후 시점 진입) · BoM `33.x.x` 측 마지막 Kotlin 2.0.x 호환 line 측 식별 lazy (33.16.0 측 실측 검증 별 cycle 후보 · 출시 직전 보안 패치 적용 시점).
 
@@ -70,7 +70,7 @@
 - type: 사용자 의도 vs 정책 충돌
 - cycle: (CLI-GUIDE-001 보고서 작성 중 발견)
 - summary: 자식 repo 가 cli infra 직접 수정 가능 → master SoT 위반 위험 + propagation 의무 누락 패턴
-- mitigation: master 신설 + 단방향 propagation 정책 박음 (CLAUDE.md §0 §3 §4)
+- mitigation: master 신설 + 단방향 propagation 정책 정착 (CLAUDE.md §0 §3 §4)
 - trail: close (C4 마감 + 자식 repo CLAUDE.md propagation 시)
 ```
 
@@ -80,34 +80,34 @@
 - cycle: C8-GIT-LOCK-AUTOMITIGATION-001
 - summary: sandbox / agent crash 후 잔존 .git/index.lock = 다음 git command 차단 → Coin 매번 손 작업 rm 의무 반복
 - mitigation: pre-tool-use.sh = git command 감지 시 stale > 30s 자동 정리 + session-start.sh = 세션 시작 시 stale > 5분 자동 정리
-- trail: close (C8 박힘 · cli infra 권장 byte-identical · C4 propagation 시 자식 자동 적용)
+- trail: close (C8 마감 · cli infra 권장 byte-identical · C4 propagation 시 자식 자동 적용)
 ```
 
 ```
 ## 2026-05-02T08:10:00+0900
 - type: 자동화 install ≠ activation (재발 · C8 mitigation 한계)
 - cycle: C9-GIT-LOCK-PID-VERIFY-001
-- summary: C8 박힌 hook 자동화 = Claude Code Bash tool 만 발화 → Coin 의 IDE/터미널/Cowork 에서 git 호출 시 hook X + stale 마진 30s/5분 너무 김
+- summary: C8 적용 hook 자동화 = Claude Code Bash tool 만 발화 → Coin 의 IDE/터미널/Cowork 에서 git 호출 시 hook X + stale 마진 30s/5분 너무 김
 - mitigation: PID 기반 검증 (lock 안 PID 죽음 = 즉시 rm · mtime 무관) + standalone scripts/git-safe.sh wrapper (Coin 환경 alias 권장) + mtime 마진 단축 (pre-tool-use 5s / session-start 30s)
-- trail: close (C9 박힘 · 99.9% case 자동 mitigation · alias 적용 시 Coin 환경 100%)
+- trail: close (C9 마감 · 99.9% case 자동 mitigation · alias 적용 시 Coin 환경 100%)
 ```
 
 ```
 ## 2026-05-02T08:30:00+0900
-- type: 자동화 install ≠ activation (재재발 · C9 mitigation 한계 · 환경 진단 박힘)
+- type: 자동화 install ≠ activation (재재발 · C9 mitigation 한계 · 환경 진단 마감)
 - cycle: C10-LAUNCHD-DAEMON-001
-- summary: C9 PID 검증 박았으나 사용자 환경 = Cowork chat 의 자체 file ops 가 git operation 호출 시 hook X · wrapper X · sandbox 권한으로 lock rm 절대 불가 (실측 PASS) · Coin 환경 alias 박혀 있어도 본 메시지는 sandbox 환경 발생
-- mitigation: macOS launchd 백그라운드 데몬 박음 (5초마다 PID 검증 + stale rm) — 환경 무관 (Cowork/IDE/터미널/sandbox/모든 도구) 자동 작동 + scripts/install-git-lock-daemon.sh 1회 install 후 영구
-- trail: close (C10 박힘 + Coin install 1회 후 99.99% 자동 mitigation · daemon log = ~/Library/Logs/git-lock-daemon.log)
+- summary: C9 PID 검증 적용했으나 사용자 환경 = Cowork chat 의 자체 file ops 가 git operation 호출 시 hook X · wrapper X · sandbox 권한으로 lock rm 절대 불가 (실측 PASS) · Coin 환경 alias 적용해도 본 메시지는 sandbox 환경 발생
+- mitigation: macOS launchd 백그라운드 데몬 신설 (5초마다 PID 검증 + stale rm) — 환경 무관 (Cowork/IDE/터미널/sandbox/모든 도구) 자동 작동 + scripts/install-git-lock-daemon.sh 1회 install 후 영구
+- trail: close (C10 마감 + Coin install 1회 후 99.99% 자동 mitigation · daemon log = ~/Library/Logs/git-lock-daemon.log)
 ```
 
 ```
 ## 2026-05-02T08:50:00+0900
 - type: 자동화 install ≠ activation (재재재발 · C10 mitigation 한계 · lock 종류 사고 발견)
 - cycle: C11-LOCK-WIDE-COVERAGE-001
-- summary: C10 daemon + C8/C9 hook/wrapper 모두 .git/index.lock 만 처리 → GT commit 시 .git/HEAD.lock 발생 (commit op = HEAD ref 갱신 시 박힘) · git lock 종류 다양: index/HEAD/packed-refs/config/refs/heads/<branch>/refs/tags/* 모두 발생 가능
-- mitigation: 4 layer (daemon + 2 hooks + wrapper) 모두 광역 검사 박음 — index.lock + HEAD.lock + packed-refs.lock + config.lock + refs/**/*.lock 동일 PID 검증 + stale rm patterns 적용
-- trail: close (C11 박힘 + Coin daemon install 1회 후 모든 git lock 종류 자동 mitigation)
+- summary: C10 daemon + C8/C9 hook/wrapper 모두 .git/index.lock 만 처리 → GT commit 시 .git/HEAD.lock 발생 (commit op = HEAD ref 갱신 시 발생) · git lock 종류 다양: index/HEAD/packed-refs/config/refs/heads/<branch>/refs/tags/* 모두 발생 가능
+- mitigation: 4 layer (daemon + 2 hooks + wrapper) 모두 광역 검사 추가 — index.lock + HEAD.lock + packed-refs.lock + config.lock + refs/**/*.lock 동일 PID 검증 + stale rm patterns 적용
+- trail: close (C11 마감 + Coin daemon install 1회 후 모든 git lock 종류 자동 mitigation)
 ```
 
 ```
@@ -180,8 +180,8 @@
 ```
 - type: verify-sync.sh false positive drift/miss (ledger repo-specific 영역 vs propagation 검증 정책 mismatch · 도구 부산물 1건 동시 발생)
 - cycle: MULTI-REPO-RELEASE-LEDGER-INIT-001
-- summary: 4-repo ledger 신설 commit 4건 마감 후 verify-sync.sh exit 1 출력 (PASS 112 / DRIFT 0 / MISS 6). MISS 6 = master/docs/release-readiness/PACKAGE-OVERVIEW.md + COMMON-SETUP-SSOT-DRAFT.md 가 자식 3-repo MISS. 본 cycle 의도 = ledger file = repo-specific 구조 (master 측 거시 SoT 2 file + 자식 측 LAUNCH-STATUS.md 1 file 각각). verify-sync.sh = docs/ 전체 propagation 대상 + release-readiness/ exclude 정책 X = false positive. 핵심 의무 모두 PASS (HEAD baseline 일치 4/4 · 보호 5 sha 변동 0 · billing-rules.md sha 0ec5d54f49dfd6e2 무결성 PASS · ledger line 96/114/184/181/194 일치 · protected-file-hashes.md 변동 0 · Stage 격리 100%). 부산물 사고 1 = verify-sync.sh 실행 시 .auto-memory/propagation-status.md 자체 갱신 박음 (도구 부산물 · 본 cycle scope X · CLI stage 안 함 의무 준수). 부산물 경고 1 = git-lock daemon 미활성 (C12 사고 패턴 재발 위험 경고 · 본 cycle scope 외 · 사용자 결정 영역).
-- mitigation: 별 mitigation cycle 권장 분리 = (1) verify-sync.sh 안 release-readiness/ 영역 exclude 정책 추가 (제안: docs/release-readiness/* glob 패턴 propagation 대상 제외) (2) propagation-status.md 자체 갱신 부산물 처리 결정 (도구 행동 변경 vs 별 cycle 단독 commit). 본 cycle REVIEW.md 4건 = Verdict=PASS 조건부 박음 + 사용자 회수 의무 4건 명시 (.ai/reports/MULTI-REPO-RELEASE-LEDGER-INIT-001/REVIEW.md 안 박음).
+- summary: 4-repo ledger 신설 commit 4건 마감 후 verify-sync.sh exit 1 출력 (PASS 112 / DRIFT 0 / MISS 6). MISS 6 = master/docs/release-readiness/PACKAGE-OVERVIEW.md + COMMON-SETUP-SSOT-DRAFT.md 가 자식 3-repo MISS. 본 cycle 의도 = ledger file = repo-specific 구조 (master 측 거시 SoT 2 file + 자식 측 LAUNCH-STATUS.md 1 file 각각). verify-sync.sh = docs/ 전체 propagation 대상 + release-readiness/ exclude 정책 X = false positive. 핵심 의무 모두 PASS (HEAD baseline 일치 4/4 · 보호 5 sha 변동 0 · billing-rules.md sha 0ec5d54f49dfd6e2 무결성 PASS · ledger line 96/114/184/181/194 일치 · protected-file-hashes.md 변동 0 · Stage 격리 100%). 부산물 사고 1 = verify-sync.sh 실행 시 .auto-memory/propagation-status.md 자체 갱신 발생 (도구 부산물 · 본 cycle scope X · CLI stage 안 함 의무 준수). 부산물 경고 1 = git-lock daemon 미활성 (C12 사고 패턴 재발 위험 경고 · 본 cycle scope 외 · 사용자 결정 영역).
+- mitigation: 별 mitigation cycle 권장 분리 = (1) verify-sync.sh 안 release-readiness/ 영역 exclude 정책 추가 (제안: docs/release-readiness/* glob 패턴 propagation 대상 제외) (2) propagation-status.md 자체 갱신 부산물 처리 결정 (도구 행동 변경 vs 별 cycle 단독 commit). 본 cycle REVIEW.md 4건 = Verdict=PASS 조건부 판정 + 사용자 회수 의무 4건 명시 (.ai/reports/MULTI-REPO-RELEASE-LEDGER-INIT-001/REVIEW.md 안 명시).
 - trail: open (별 mitigation cycle 분리 · ledger 영역 도구 정책 mismatch 첫 사고). 동족 사고 누적 영역 = COWORK-PREP-BASELINE-MISMATCH-001~004 (Cowork ↔ CLI handoff 영역 4회) + paste-back 정확성 영역 4회 + 본 사고 = 9 누적 (단 영역 분리 — 본 사고 = CLI ↔ 도구 영역 첫 사고). 학습 = repo-specific 영역 신설 시 verify-sync.sh exclude 정책 사전 검증 의무 · 본 cycle 진입 전 release-readiness/ 영역 처리 정책 prompt 본문 명시 X → CLI 자체 판단 영역 X → 사용자 회수 영역 의무.
 ```
 
@@ -214,8 +214,8 @@
 ```
 - type: cli infra propagation 마감 (cycle-discipline.md §13 본문 갱신 · pin 폐기 → 최신 추격 정책 전환) + 별 trail 2 종 갱신 (close + open)
 - cycle: CLI-VERSION-UNPIN-PROPAGATION-001
-- summary: 직전 cycle CLAUDE-CODE-VERSION-UNPIN-VERIFY-001 안 #51736 회귀 해소 실측 PASS (2.1.121 환경) 후 본 cycle 안 정책 본문 전환 마감. cycle-discipline.md §13 line 132+ "2.1.114 pin 의무" 단락 → "최신 추격 정책 (npm scope + DISABLE_AUTOUPDATER + DISABLE_UPDATES 이중 차단 유지 + 주 1회 능동 갱신 default + 매 cycle 진입 self-test 3 항목 + FAIL 시 복귀 절차)" 본문 갱신 + 4-repo byte-identical propagation. 새 sha = `0e4a7d01997c0d12ddb432d14ee37cdb1c4f1bbc` (4-repo 모두 동일 ✓). #51736 본질 fix verbatim 인용 박음 (changelog v2.1.122 line "ToolSearch missing post-startup MCP tools in nonblocking mode"). 산출물 4종 = .ai/reports/CLI-VERSION-UNPIN-PROPAGATION-001/{PLAN,EVIDENCE,VERIFY,REVIEW}.md. self-test 3 항목 본 cycle 마감 시점 모두 PASS (claude --version = 2.1.121 / mcp list pencil ✓ Connected / ToolSearch query="pencil" = 13 mcp__pencil__* tools). 보호 파일 5종 sha 변동 0 (CONFIRMED). Proto 3-repo (8e48d48 baseline) 무접촉 의무 준수 (별 cycle 책임).
-- mitigation: env 차단 (DISABLE_AUTOUPDATER + DISABLE_UPDATES) 본문 안 명시 유지 (해제 X · STOP 조건 정합) · 능동 갱신 = 사용자 자율 영역 명시 박음 (default 주 1회 권장) · self-test 3 항목 매 cycle 진입 의무 박음 (FAIL 시 직전 known-working = 현 시점 2.1.121 복귀 절차 + CLAUDE-CODE-LATEST-CHASE-001 entry append 의무).
+- summary: 직전 cycle CLAUDE-CODE-VERSION-UNPIN-VERIFY-001 안 #51736 회귀 해소 실측 PASS (2.1.121 환경) 후 본 cycle 안 정책 본문 전환 마감. cycle-discipline.md §13 line 132+ "2.1.114 pin 의무" 단락 → "최신 추격 정책 (npm scope + DISABLE_AUTOUPDATER + DISABLE_UPDATES 이중 차단 유지 + 주 1회 능동 갱신 default + 매 cycle 진입 self-test 3 항목 + FAIL 시 복귀 절차)" 본문 갱신 + 4-repo byte-identical propagation. 새 sha = `0e4a7d01997c0d12ddb432d14ee37cdb1c4f1bbc` (4-repo 모두 동일 ✓). #51736 본질 fix verbatim 인용 적용 (changelog v2.1.122 line "ToolSearch missing post-startup MCP tools in nonblocking mode"). 산출물 4종 = .ai/reports/CLI-VERSION-UNPIN-PROPAGATION-001/{PLAN,EVIDENCE,VERIFY,REVIEW}.md. self-test 3 항목 본 cycle 마감 시점 모두 PASS (claude --version = 2.1.121 / mcp list pencil ✓ Connected / ToolSearch query="pencil" = 13 mcp__pencil__* tools). 보호 파일 5종 sha 변동 0 (CONFIRMED). Proto 3-repo (8e48d48 baseline) 무접촉 의무 준수 (별 cycle 책임).
+- mitigation: env 차단 (DISABLE_AUTOUPDATER + DISABLE_UPDATES) 본문 안 명시 유지 (해제 X · STOP 조건 정합) · 능동 갱신 = 사용자 자율 영역 명시 (default 주 1회 권장) · self-test 3 항목 매 cycle 진입 의무 정착 (FAIL 시 직전 known-working = 현 시점 2.1.121 복귀 절차 + CLAUDE-CODE-LATEST-CHASE-001 entry append 의무).
 - trail: 2 종 갱신 — (a) close `CLAUDE-CODE-VERSION-PIN-2.1.114-001` (본 cycle 마감으로 pin 폐기 정책 채택 + #51736 회귀 해소 실측 + 4-repo propagation 마감 영역 모두 close) (b) open 신설 `CLAUDE-CODE-LATEST-CHASE-001` (회귀 누적 영역 · 현 시점 known-working = 2.1.121 · 새 회귀 발견 시 entry append + known-working 갱신 + 별 cycle 진입). 동족 사고 영역 = baseline anchor mismatch 5 누적 (COWORK-PREP-BASELINE-MISMATCH-001~004 + 본 cycle 자식 3-repo HEAD drift 발견 후 사용자 A 채택 baseline 갱신 진행 = 5회차) → mitigation 강화 cycle 진입 권장 (별 cycle MASTER-COWORK-HANDOFF-BASELINE-AUTOVERIFY-HOOK-001 후보).
 ```
 
@@ -227,4 +227,24 @@
 - summary: 직전 cycle CLI-VERSION-UNPIN-PROPAGATION-001 (Gently 4-repo) 마감 후 Proto 3-repo (ProtoGentlyBreath + ProtoGentlyDay + ProtoGentlyTable) 확장 처리. cli-master `.claude/rules/cycle-discipline.md` → Proto 3-repo 단방향 cp + stage+commit (3 child commits: PB `9805361c` parent `7ded7008` / PD `f266338c` parent `419d5a8b` / PT `3d96668f` parent `a8ec3c1c`) + 7-repo cross-verify (모두 sha `732017a7cdd589d496140156c019ab9b79439d4bb37a300e1d1c548d8948258d`) + Proto 3-repo `.auto-memory/protected-file-hashes.md` Recent updates entry append. STOP 조건 충족: Gently 4-repo 무접촉 · 보호 파일 5종 sha 변동 0 · Proto 3-repo 의 다른 unrelated 변경 (decision-log.md / cycle-prompt-*.md / Phase4 deleted file / 자식 trace logs 등) commit 포함 0 (명시적 stage `git add .claude/rules/cycle-discipline.md .auto-memory/protected-file-hashes.md` 의무 준수). 산출물 4종 = .ai/reports/PROTO-CLI-VERSION-UNPIN-PROPAGATION-001/{PLAN,EVIDENCE,VERIFY,REVIEW}.md.
 - mitigation: 본 cycle = anchor stale 패턴 (직전 master cycle 안 Proto 3-repo `infra 명시 미참여` 잔존 영역) 마감. 향후 cli infra 변경 시 `propagate.sh --targets all` 가 7-repo 모두 자동 포함 검증 의무 (별 cycle 후보 = scripts/propagate.sh 안 Proto 3-repo target 사전 검증).
 - trail: 부분 close — 직전 cycle CLI-VERSION-UNPIN-PROPAGATION-001 의 자연 후속 확장 close (Gently 4-repo + Proto 3-repo = 7-repo 모두 정합 달성). `CLAUDE-CODE-LATEST-CHASE-001` open trail 무영향 (회귀 누적 영역 별 trail). 동족 사고 = COWORK-PREP-BASELINE-MISMATCH (5회차 누적) → 별 cycle MASTER-COWORK-HANDOFF-BASELINE-AUTOVERIFY-HOOK-001 진입 의무 (본 통합 cycle 의 Task 2 scope).
+```
+
+## 2026-05-12T15:30:00+0900
+
+```
+- type: cli infra + auto-memory cleanup 마감 (degeneration mitigation 영역 paraphrase · TRAIL-4/5/8 묶음 cycle)
+- cycle: MASTER-CLEANUP-VOCAB-LAZY-BUNDLE-001
+- summary: 직전 cycle MASTER-DEGENERATION-PREVENTION-POLICY-001 산출 hook + policy 활성 baseline 후, 활성 trail 3 종 (TRAIL-4 architecture-foundation-link-policy.md / TRAIL-5 decision-log + incident-log / TRAIL-8 untracked 2 report 디렉터리) 묶음 cycle 마감. TRAIL-4 = 본문 paraphrase (n-gram metric 통과 영역 자유 · 표기 의미 정합 보존 = 13 architecture markdown 참조 의무 변경 X) + 5-repo byte-identical propagation (master + GB + GD + GT + app-foundation 모두 sha `33c3b891e0fd2f29`). TRAIL-5 = decision-log (박-cluster 50→0) + incident-log (박-cluster 20→0) paraphrase (entry 의미 정합 보존 = 사고 RCA / 정책 변경 사유 변경 X · 자식 cp X). TRAIL-8 = 잔여 untracked 2 report 디렉터리 (.ai/reports/MASTER-CLI-TERMINOLOGY-SOT-SSOT-DEFINE-001 + MULTI-REPO-RELEASE-LEDGER-INIT-001) git add + 묶음 commit. hook self-test = 3 file 모두 박-cluster 0 + exit 0 (warn mode) PASS. verify-sync.sh = TRAIL-4 file 측 5-repo PASS (DRIFT 0 / MISS 0) · 외부 활성 trail 영역 (CLI-VERSION-UNPIN-PROPAGATION-002 + MASTER-RELEASE-CHECKLIST-TEMPLATE-002 + baseline-snapshot 외부 cycle) 측 잔존 DRIFT 5 + MISS 8 = 본 cycle scope 외 (사후 별 cycle 영역). 보호 5 sha 변동 0 ✓ (5b84cd9e4bc36165/d3a0b57390bd0414/e580b6d7ca9a88ae/3a703b30553e0d09/b27fbe16edb68821 그대로).
+- mitigation: 본 cycle = degeneration prevention 정책 산출 hook 활성 후 첫 cleanup application cycle. 산출물 = master commit 1 (= TRAIL-4 + TRAIL-5 + TRAIL-8 묶음) + 4 자식 commit (= TRAIL-4 propagation) + REVIEW.md PASS + 본 entry. 박-cluster filler degeneration 영역 = 학습 = 한 어절 한 문단 5+ 반복 시 paraphrase pass 의무 default. text-degeneration-prevention.md §11 mitigation cycle 패턴 정합 (감지 → 분류 → 정정 → 재검증 → 기록).
+- trail: 3 close — (a) MASTER-CLI-VOCABULARY-CLEANUP-001 (TRAIL-4 · architecture-foundation-link-policy.md cleanup 영역 1회성 정정 완료 · 향후 hook 자동 차단 영역) (b) MASTER-AUTO-MEMORY-VOCABULARY-CLEANUP-001 (TRAIL-5 · decision-log + incident-log source 정리 완료) (c) MASTER-LAZY-REPORTS-CLEANUP-001 (TRAIL-8 · 잔여 untracked 2 영역 commit 마감). 잔존 활성 trail 2 = CLI-VERSION-UNPIN-PROPAGATION-002 (app-foundation 측 cycle-discipline.md propagation 누락) + MASTER-RELEASE-CHECKLIST-TEMPLATE-002 (자식 4 측 release-checklist.template.md propagation 누락) = 본 cycle scope 외 · verify-sync exit 0 회복 영역 사후 별 cycle.
+```
+
+## 2026-05-12T15:50:00+0900
+
+```
+- type: cli infra 자동화 hook 신설 마감 (Cowork ↔ CLI baseline mismatch 5회차+ 누적 영역 자동 캡처)
+- cycle: MASTER-COWORK-HANDOFF-BASELINE-AUTOVERIFY-HOOK-001
+- summary: COWORK-PREP-BASELINE-MISMATCH-001~007 누적 영역 mitigation 으로 SessionStart hook `.claude/hooks/baseline-snapshot.sh` 신설 (7-repo HEAD + cycle-discipline.md sha + 보호 5종 sha + settings.json sha JSON 캡처). 산출 `.ai/baseline-snapshot/<timestamp>.json` + `latest.json` copy. 7-repo capture scope = cli-master + Gently 3 + Proto 3 (drift detection 영역) · 4-repo propagation scope = cli-master + Gently 3 (Proto 3 무접촉 = 별 cycle 분리). hook 측 비차단 default (exit 0) · drift 감지 시 stderr warn-only. settings.json SessionStart 배열 안 기존 `session-start.sh` 와 묶음 추가 등록 (새 sha `6919ac4a`). self-test PASS = JSON 6823 byte · 7-repo 모두 cycle-discipline sha `732017a7...` byte-identical · drift 0. 산출물 4종 = .ai/reports/MASTER-COWORK-HANDOFF-BASELINE-AUTOVERIFY-HOOK-001/{PLAN,EVIDENCE,VERIFY,REVIEW}.md (Low Risk 경량 §1+§2+§11). 보호 파일 5종 sha 변동 0 · cli infra 영역만 변경.
+- mitigation: 본 cycle = COWORK-PREP-BASELINE-MISMATCH 7 누적 영역 자동 캡처 단계 (passive snapshot). 향후 baseline anchor stale 감지 시점 자동 보정 / active enforcement 단계 = lazy (8회차+ 재발 시 mitigation 강화 cycle 진입 의무). 사용자 prompt baseline anchor (cycle-discipline `0e4a7d01...` · settings `73d95a33...`) = pre-PROTO cycle stale 영역 = 본 cycle mitigation 의 대상 patterns 자체 → 디스크 실측 truth baseline (`732017a7...` / `f8bace35...`) 채택 후 진행 (§14a 6 의무 절차 정합).
+- trail: 7 close — COWORK-PREP-BASELINE-MISMATCH-001 (cycle 2 prep file anchor mismatch) · COWORK-PREP-BASELINE-MISMATCH-002 (mcp save_as 영구 한계 미참조) · COWORK-PREP-BASELINE-MISMATCH-003 (cycle 3 lazy close 마감 미참조) · COWORK-PREP-BASELINE-MISMATCH-004 (pencil-uiux-workflow.md sha 변경 추적 누락) · COWORK-PREP-BASELINE-MISMATCH-005 (cycle 4/6 진입 시 기획 docs 미참조) · COWORK-PREP-BASELINE-MISMATCH-006 (기획안의 ticket/billing 명시 미참조) · COWORK-PREP-BASELINE-MISMATCH-007 (cycle 5/6 전후 GT/GD/GB 별 infra cycle 미참조). 본 cycle 마감 baseline 자동 캡처 hook 정착 = 7 누적 영역 자연 close.
 ```

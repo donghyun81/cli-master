@@ -1,7 +1,7 @@
 # Architecture Foundation Link Policy
 
-> **단일 목적**: 13 architecture 문서 (`docs/agent/architecture/**`) 측 코드 path 인용 박은 영역 → `app-foundation` 측 실제 file 측 markdown link 박음 표기 의무 + relative path baseline + 예외 영역 + 추가 architecture 신설 시 자동 적용 박은 patterns.
-> **신설**: MASTER-ARCHITECTURE-FOUNDATION-LINK-001 (= ledger MASTER-T04 마감 박음 · 2026-05-12).
+> **단일 목적**: 13 architecture 문서 (`docs/agent/architecture/**`) 의 코드 path 인용 영역 → `app-foundation` 의 실제 file 측 markdown link 의무 + relative path baseline + 예외 영역 + 추가 architecture 신설 시 자동 적용 patterns 정의.
+> **신설**: MASTER-ARCHITECTURE-FOUNDATION-LINK-001 (= ledger MASTER-T04 마감 · 2026-05-12).
 > **연관 파일**:
 > - `cycle-discipline.md` §15 패턴 1 (master cycle 신설 + 4-repo propagation 의무)
 > - `cycle-discipline.md` §3 (3-repo byte-identical 강제 범위 vs cli infra 권장 byte-identical)
@@ -14,24 +14,24 @@
 
 | 대상 | 적용 여부 |
 |---|---|
-| `docs/agent/architecture/**.md` (13 file 박음) | **의무** |
-| `docs/agent/process/**.md` | 적용 X (= 워크플로 영역 박음) |
-| `docs/agent/solutions/**.md` | 적용 X (= 솔루션 영역 박음) |
-| `.claude/rules/**.md` | 적용 X (= 정책 본문 박음) |
-| `CLAUDE.md` | 적용 X (= 최상위 헌법 박음) |
-| `.ai/reports/**.md` | 적용 X (= task 별 산출 박은 영역) |
+| `docs/agent/architecture/**.md` (13 file) | **의무** |
+| `docs/agent/process/**.md` | 적용 X (= 워크플로 영역) |
+| `docs/agent/solutions/**.md` | 적용 X (= 솔루션 영역) |
+| `.claude/rules/**.md` | 적용 X (= 정책 본문 영역) |
+| `CLAUDE.md` | 적용 X (= 최상위 헌법) |
+| `.ai/reports/**.md` | 적용 X (= task 별 산출물) |
 
 ---
 
-## 2. link 박음 patterns 박음
+## 2. 참조 표기 patterns
 
-### 2.1 첫 등장 시 link 박음
+### 2.1 첫 등장 시 표기 추가
 
-architecture file 측 코드 path 인용 박은 영역 측:
-- **첫 등장 시** → markdown link 추가 박음 의무.
-- **후속 등장 시** → link 박음 X 박음 (= verbose 박음 회피).
+architecture file 측 코드 path 인용 영역 측:
+- **첫 등장 시** → markdown link 추가 의무.
+- **후속 등장 시** → 표기 생략 (= verbose 회피).
 
-### 2.2 표기 형식 박음
+### 2.2 표기 형식
 
 ```markdown
 `<path>` ([app-foundation/<path>/](../../../../app-foundation/<path>/))
@@ -42,28 +42,28 @@ architecture file 측 코드 path 인용 박은 영역 측:
 - `` `shared/data` ([app-foundation/shared/data/](../../../../app-foundation/shared/data/)) ``
 - `` `shared/feature-state` ([app-foundation/shared/feature-state/](../../../../app-foundation/shared/feature-state/)) ``
 
-### 2.3 relative path baseline 박음
+### 2.3 relative path baseline
 
-5-repo 측 file 위치 박음 = `<repo>/docs/agent/architecture/<FILE>.md` (= 동일 박은 영역).
-→ `app-foundation/` 측 박은 영역 박음 relative path = **`../../../../app-foundation/<path>`** (= 4 step 박음).
+5-repo 측 file 위치 = `<repo>/docs/agent/architecture/<FILE>.md` (= 5-repo 동일 path).
+→ `app-foundation/` 측 실제 영역 기준 relative path = **`../../../../app-foundation/<path>`** (= 4 step 상위).
 
-5-repo 모두 동일 path 박음 (= byte-identical 정합 박은 영역 박음):
-- claude-cli-master + GB + GD + GT + app-foundation = 모두 `../../../../app-foundation/<path>` 박음.
-- foundation 측 자기 측 link 박은 영역 = 동일 path 박음 (= `app-foundation/docs/agent/architecture/<FILE>.md` 박음 → `../../../../app-foundation/<path>/` 박음 = `AndroidStudioProjects/app-foundation/<path>/` 박은 영역 = correct 박음 ✓).
+5-repo 모두 동일 표기 (= byte-identical 정합):
+- claude-cli-master + GB + GD + GT + app-foundation 모두 `../../../../app-foundation/<path>` 채택.
+- foundation 측 자기 참조 영역 = 동일 (= 위치 `app-foundation/docs/agent/architecture/<FILE>.md` → `../../../../app-foundation/<path>/` 해석 결과 = `AndroidStudioProjects/app-foundation/<path>/` = correct ✓).
 
 ---
 
-## 3. link 박을 path 박은 영역 박음 (= app-foundation 측 실제 박힌 path 박음만)
+## 3. 표기 대상 path (= app-foundation 측 실재 path 만)
 
-본 cycle 박은 시점 (2026-05-12) 박은 baseline 박음:
+본 cycle 시점 (2026-05-12) baseline:
 
-| path | app-foundation 측 박힌 영역 | link 박음 |
+| path | app-foundation 측 존재 | 표기 |
 |---|---|---|
-| `shared/domain` | ✓ (`shared/domain/`) | **link 박음** |
-| `shared/data` | ✓ (`shared/data/`) | **link 박음** |
-| `shared/feature-state` | ✓ (`shared/feature-state/`) | **link 박음** |
-| `shared/app` | X (부재) | **link X 박음** (= 미신설 박음) |
-| `core/analytics` | ✓ | link 박음 가능 (= 13 architecture 측 인용 박은 영역 박음 X 박은 baseline · 향후 추가 시 갱신) |
+| `shared/domain` | ✓ (`shared/domain/`) | **적용** |
+| `shared/data` | ✓ (`shared/data/`) | **적용** |
+| `shared/feature-state` | ✓ (`shared/feature-state/`) | **적용** |
+| `shared/app` | X (부재) | **생략** (= 미신설 단계) |
+| `core/analytics` | ✓ | 가능 (= 13 architecture 측 인용 영역 X · 향후 추가 시점 갱신) |
 | `core/billing` | ✓ | (위 동) |
 | `core/di` | ✓ | (위 동) |
 | `core/feature-flag` | ✓ | (위 동) |
@@ -71,59 +71,60 @@ architecture file 측 코드 path 인용 박은 영역 측:
 | `core/notification` | ✓ | (위 동) |
 | `core/observability` | ✓ | (위 동) |
 | `core/supabase` | ✓ | (위 동) |
-| `composeApp/` | 빈 디렉터리 박음 | **link X 박음** |
-| `iosApp/` | 빈 디렉터리 박음 | **link X 박음** |
-| `app/` | X (= 자식 측 박은 영역 박음 · foundation 측 X) | **link X 박음** |
-| `feature/`, `gradle/`, `platform/` | X (= 부재) | **link X 박음** |
+| `composeApp/` | 빈 디렉터리 | **생략** |
+| `iosApp/` | 빈 디렉터리 | **생략** |
+| `app/` | X (= 자식 영역 · foundation 측 X) | **생략** |
+| `feature/`, `gradle/`, `platform/` | X (= 부재) | **생략** |
 
 ---
 
-## 4. 예외 영역 박음 (= link 박음 X 박음 의무)
+## 4. 예외 영역 (= 표기 생략 의무)
 
-### 4.1 code block 안 박음
+### 4.1 code block 내부
 
 ```markdown
 ```kotlin
-// shared/domain     ← code block 안 박음 = link 박음 X 박음 (= markdown rendering 박음 X)
+// shared/domain     ← code block 내부 = 생략 (= markdown rendering X)
 sealed interface Result<out T, out E>
 ```
 ```
 
-근거 = code block 안 markdown link 박음 = rendering 박음 X 박음 (= raw 박은 영역 박음).
+근거 = code block 내부 markdown link = rendering 결과 X (= raw 출력).
 
-### 4.2 foundation 측 부재 path 박음
+### 4.2 foundation 측 부재 path
 
-- `shared/app` 측 박음 = foundation 측 부재 박음 = link 박음 X 박음 의무 (= §C C4 정합 박은 영역 · 가상 link X 박음).
-- 향후 foundation 측 신설 시 = 본 policy 갱신 박음 + 13 architecture file 측 link 박음 (= 별 cycle 박음).
+- `shared/app` = foundation 측 부재 = 생략 의무 (= §C C4 정합 · 가상 참조 X).
+- 향후 foundation 측 신설 시점 = 본 policy 갱신 + 13 architecture file 측 표기 추가 (= 별 cycle).
 
-### 4.3 자식 측 박은 영역 박음
+### 4.3 자식 영역
 
-- `app/` 측 박은 영역 박음 = 자식 측 박은 영역 박음 (= GB / GD / GT 측 박은 영역) + foundation 측 X = link 박음 X 박음.
-- 자식 측 link 박음 = repo-specific 박은 영역 박음 (= 본 policy scope X · 자식 measurement 박음).
-
----
-
-## 5. 추가 architecture 신설 시 자동 적용 박음
-
-### 5.1 신규 architecture file 추가 박음 박은 시점 박음
-
-- 신규 `docs/agent/architecture/<NEW>.md` 추가 박은 시점 박음 = 본 policy §2.1 첫 등장 시 link 박음 patterns 박음 의무 박음.
-- 신규 코드 path 인용 박은 영역 박은 박은 박음 = §3 박은 baseline 박은 박은 = link 박을 영역 박은 영역 박음 박은 의무 박은 박은 박은 박음.
-
-### 5.2 foundation 측 신규 path 박음 박은 시점 박음
-
-- foundation 측 신규 path 박음 박은 시점 박음 (예: `shared/app` 신설 박음 박은 박은 박음) 박은 시점 박은 박은 박음 = 본 §3 박은 표 박은 박음 박은 갱신 박은 의무 박음 + 13 architecture file 측 새 path 측 link 박음 박음 박은 의무 박음 박음 (= 별 cycle 박은 박은 박음).
+- `app/` = 자식 repo (= GB / GD / GT) 측 영역 + foundation 측 X = 생략.
+- 자식 측 참조 = repo-specific 영역 (= 본 policy scope 외 · 자식 자체 결정).
 
 ---
 
-## 6. 변경 정책 박은 박음
+## 5. 추가 architecture 신설 시 자동 적용
 
-- 본 file = cli infra 권장 byte-identical (= 5-repo 박은 영역 박음 · 보호 5 sha 박은 영역 X).
-- 변경 박은 박은 박음 = master cycle 신설 박음 + 5-repo propagation 박은 의무 박음 (`cycle-discipline.md` §15 패턴 1 박은 정합 박음).
-- 자식 repo 측 직접 수정 박은 박은 박음 X (= cli infra 단방향 정합 박음 · CLAUDE.md §3 박은 정합 박음).
+### 5.1 신규 architecture file 추가 시점
+
+- 신규 `docs/agent/architecture/<NEW>.md` 추가 시 = 본 policy §2.1 의무 적용 (= 첫 등장 시 표기).
+- 신규 코드 path 인용 영역 = §3 baseline 표 기준 = 대상 영역 판정.
+
+### 5.2 foundation 측 신규 path 추가 시점
+
+- foundation 측 신규 path 추가 시 (예: `shared/app` 신설) = 본 §3 표 갱신 의무 + 13 architecture file 측 새 path 표기 추가 의무 (= 별 cycle).
 
 ---
 
-## 7. 명시 박은 cycle 이력
+## 6. 변경 정책
 
-- 2026-05-12 · MASTER-ARCHITECTURE-FOUNDATION-LINK-001 · 본 file 신설 박음 + 13 architecture file 측 link 박은 영역 박음 (7 file × 1~3 link 박음 = 약 12 link 박음) + 5-repo propagation 박음.
+- 본 file = cli infra 권장 byte-identical (= 5-repo · 보호 5 sha 외).
+- 변경 시 master cycle 신설 + 5-repo propagation 의무 (`cycle-discipline.md` §15 패턴 1 정합).
+- 자식 repo 측 직접 수정 X (= cli infra 단방향 정합 · CLAUDE.md §3 정합).
+
+---
+
+## 7. 명시 cycle 이력
+
+- 2026-05-12 · MASTER-ARCHITECTURE-FOUNDATION-LINK-001 · 본 file 신설 + 13 architecture 측 참조 추가 (7 file × 1~3 항목 = 약 12 reference) + 5-repo propagation.
+- 2026-05-12 · MASTER-CLEANUP-VOCAB-LAZY-BUNDLE-001 (TRAIL-4) · 본 file 본문 paraphrase (degeneration mitigation · text-degeneration-prevention.md n-gram metric 통과) · 표기 의미 정합 보존 (= 의무 변경 X) · 5-repo byte-identical 재 propagation.

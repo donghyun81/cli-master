@@ -12,11 +12,11 @@
     - GT: `e8bca80` (parent `1744830`) · 5 files · 32 insertions
 - **검증**: 3 repo × `:app:assembleDebug` BUILD SUCCESSFUL exit 0 (GB 16s · GD 22s · GT 24s · BoM 33.7.0 baseline 보존 drift 0) · 3 repo × Sentry 영역 byte-identical (versions 2 + library 1 + plugin 1 line + root apply false 1 + app plugin alias 1 + app sentryDsn val 1 + app buildConfigField 1 + app dependency 1 + app sentry{} block 7 + Application SentryAndroid import 1 + init block 8 + .gitignore sentry.properties+.sentryclirc 3 line) · 보호 파일 5종 sha 변동 0.
 - **paradigm**:
-    - **Crashlytics 측 중복 capture 회피** = `options.isEnableUncaughtExceptionHandler = false` 박음 (Sentry 측 자동 uncaught handler 측 비활성 → Crashlytics 측 단독 uncaught handler 채택 · 동일 crash 측 양측 중복 capture 회피).
+    - **Crashlytics 측 중복 capture 회피** = `options.isEnableUncaughtExceptionHandler = false` 적용 (Sentry 측 자동 uncaught handler 측 비활성 → Crashlytics 측 단독 uncaught handler 채택 · 동일 crash 측 양측 중복 capture 회피).
     - **tracesSampleRate 0.1** = 10% sample 측 Sentry quota 절약 (Developer free 5K error/월 + performance trace 측 별 quota).
     - **DSN 측 secret 보호** = `local.properties` 측 `SENTRY_DSN` 명시 + `.gitignore` line 15 측 `local.properties` 명시 default + `.gitignore` 측 `sentry.properties` + `.sentryclirc` 추가 (사후 sentry-cli 측 release tracking 활성 시점 측 사전 mitigation).
     - **BuildConfig field injection** = 기존 Supabase paradigm 정합 (`buildConfigField("String", "SENTRY_DSN", "\"$sentryDsn\"")`).
-    - **release tracking lazy** = `autoUploadProguardMapping.set(false)` + `includeProguardMapping.set(false)` 박음 (internal testing 진입 시점 측 별 cycle 측 활성).
+    - **release tracking lazy** = `autoUploadProguardMapping.set(false)` + `includeProguardMapping.set(false)` 적용 (internal testing 진입 시점 측 별 cycle 측 활성).
     - **tracingInstrumentation.enabled = true** = OkHttp / SQLite / FileIO 측 자동 instrumentation (기본 default).
 - **Sentry organization paradigm**:
     - organization ID `o4511370292297728` (numeric)
@@ -201,7 +201,7 @@ COMMIT
 
 ### 다음 cycle 진입 조건
 
-- C3 진입 = C2 commit 완료 + master rules 새 구조 baseline 박힘
+- C3 진입 = C2 commit 완료 + master rules 새 구조 baseline 등재
 - C4 진입 = C3 마감 + script 4종 검증 PASS
 
 ---
@@ -214,7 +214,7 @@ COMMIT
 - 신설 1 slash command (.claude/commands/cycle-report.md)
 - 신설 1 template (.auto-memory/cycle-handoff-template.md · Q4 누락 보완)
 - 갱신 1 hook (.claude/hooks/session-start.sh · Claude Code 버전 자동 검증 + Q5 §b)
-- 갱신 1 rule (.claude/rules/cycle-discipline.md · §15 §16 cli 수정 패턴 3 종 박음 · Q2 가이드)
+- 갱신 1 rule (.claude/rules/cycle-discipline.md · §15 §16 cli 수정 패턴 3 종 명시 · Q2 가이드)
 - 신설 본 보고서 (.ai/reports/C3-AUTOMATION-SCRIPTS-001/REPORT.md)
 
 ### 검증 (실측 PASS)
@@ -240,7 +240,7 @@ git commit -m "feat(master): C3-AUTOMATION-SCRIPTS-001 자동화 script 4종 + s
 
 ## 2026-05-02 · C2.5-COMMON-PRINCIPLES-AND-DESIGN-TOOL-DECOUPLE-001 (마감)
 
-### 결정 1. SOLID + DRY/KISS/YAGNI 박을 위치
+### 결정 1. SOLID + DRY/KISS/YAGNI 적용 위치
 - **선택**: 신규 `code-principles.md` 룰 신설
 - **근거**: 단일 목적 파일 + reviewer 자동 참조 명확
 
@@ -267,7 +267,7 @@ git commit -m "feat(master): C3-AUTOMATION-SCRIPTS-001 자동화 script 4종 + s
 1f87144705380a26  uiux-sot-refresh.md (95% generic)
 6297080aa4342977  pencil-uiux-workflow.md (30% Pencil 바인딩)
 96de2f5d10a73af4  pencil-sot-policy.md (의미 = pencil-sot-binding · 25% Pencil)
-+ design-sot-policy.md (신설 · 첫 commit 후 sha 박음)
++ design-sot-policy.md (신설 · 첫 commit 후 sha 기록)
 ```
 
 ### Coin 손 작업 (C2.5 sandbox 권한 한계)
@@ -280,14 +280,14 @@ git add -A && \
 git commit -m "$(cat <<'COMMIT'
 feat(master): C2.5-COMMON-PRINCIPLES-AND-DESIGN-TOOL-DECOUPLE-001 도구 무관 분리 + SOLID
 
-[Goal] cli infra 의 도구 무관 vs Pencil 전용 분리 + SOLID/DRY/KISS/YAGNI 코드 리뷰 체크리스트 박음
+[Goal] cli infra 의 도구 무관 vs Pencil 전용 분리 + SOLID/DRY/KISS/YAGNI 코드 리뷰 체크리스트 신설
 [Diff] +2 cli infra rules (code-principles.md + design-to-code-sync.md) +1 보호 (design-sot-policy.md) ~4 보호 sha 갱신 (ui-spec.schema.json v0.3 / uiux-sot-refresh 95% generic / pencil-uiux-workflow 30% 도구 / pencil-sot-policy → pencil-sot-binding 25% 도구) ~ protected-file-hashes baseline
 [Sha]  보호 파일 4종 sha 모두 변경:
        5aa52b23 ui-spec.schema.json (v0.3 designTool enum)
        1f871447 uiux-sot-refresh.md (95% generic)
        6297080a pencil-uiux-workflow.md (30% Pencil)
        96de2f5d pencil-sot-binding.md (rename + 25% Pencil)
-[EC]   JSON valid · 5 보호 파일 sha 박음 · 도구 무관 vs 도구 전용 매트릭스 박음
+[EC]   JSON valid · 5 보호 파일 sha 명시 · 도구 무관 vs 도구 전용 매트릭스 명시
 [Next] C3 (이미 마감) → C4 propagation 시 자식 repo 의 ui-spec.json 마이그레이션 의무 (lastSyncedPencilStateHash → lastSyncedDesignToolStateHash)
 [Refs] task: C2.5-COMMON-PRINCIPLES-AND-DESIGN-TOOL-DECOUPLE-001 · parent: <C3 commit hash>
 COMMIT
@@ -296,7 +296,7 @@ COMMIT
 
 ### 다음 cycle 진입 조건
 
-- C4 진입 = C2.5 commit 완료 + 5 보호 파일 sha baseline 박음
+- C4 진입 = C2.5 commit 완료 + 5 보호 파일 sha baseline 기록
 - C4 추가 의무 = 자식 repo 의 ui-spec.json 마이그레이션 (lastSyncedPencilStateHash → lastSyncedDesignToolStateHash · alias 호환)
 
 ---
@@ -326,7 +326,7 @@ COMMIT
 
 ### 검증 (실측 PASS)
 
-- verify-sync.sh --quick = 23 파일 검증 박힘 (확장 전 12 → 확장 후 23)
+- verify-sync.sh --quick = 23 파일 검증 적용 (확장 전 12 → 확장 후 23)
 - 24 흡수 파일 = 자식 repo 와 모두 sha 일치 (PASS 10 / 자식 동일 13 / MISS = master 신설 cli infra 가 자식 미반영 정상)
 - bash -n script 4종 PASS
 
@@ -367,7 +367,7 @@ feat(master): C5-EXTRA-COMMON-ABSORB-AND-RENAME-001 24 추가 공통 흡수 + re
 [Goal] master 의 통합 완전성 ↑ + gently-master → claude-cli-master rename
 [Diff] +24 흡수 (architecture 13 + process 4 + solutions/PROMPTFIT_RUBRIC + scripts/frontmatter-grep + root 5) ~21 파일 인용 갱신 (gently → claude-cli) ~2 scripts (verify-sync + propagate find/CORE_CLI 확장) + rename gently-master → claude-cli-master + C2 deprecated 6 rm + C2.5 mv
 [Sha]  보호 파일 5종 sha 변동 0 (C2.5 baseline 보존)
-[EC]   verify-sync --quick = 23 파일 검증 박힘 · 잔존 gently-master 인용 0 · 24 흡수 파일 자식 sha 일치 PASS
+[EC]   verify-sync --quick = 23 파일 검증 적용 · 잔존 gently-master 인용 0 · 24 흡수 파일 자식 sha 일치 PASS
 [Next] C4-PROPAGATE-TO-CHILDREN-001 (master → 3 자식 repo 단방향 propagation + cross-verify ALL ✓ MATCH)
 [Refs] task: C5-EXTRA-COMMON-ABSORB-AND-RENAME-001 · parent: <C2.5 commit hash>
 COMMIT
@@ -377,7 +377,7 @@ COMMIT
 ### 다음 cycle 진입 조건
 
 - C4 진입 = C5 commit + rename 완료
-- C4 마감 = master → 3 자식 repo cross-verify ALL ✓ MATCH (24 흡수 파일 = 자식과 동일 sha 라 propagation 의미 = 자식의 master 의존 박음 + 새 cli infra 만 cp)
+- C4 마감 = master → 3 자식 repo cross-verify ALL ✓ MATCH (24 흡수 파일 = 자식과 동일 sha 라 propagation 의미 = 자식의 master 의존 표명 + 새 cli infra 만 cp)
 
 ---
 
@@ -410,7 +410,7 @@ git commit -m "feat(master): C6-COMMON-DOCS-AND-TEMPLATES-001 통합 가이드 +
 ### 다음 cycle 진입 조건
 
 - C4 진입 = C6 commit + master 의 통합 완전성 100%
-- C4 추가 의무: 자식 repo CLAUDE.md 의 첫 5~10 줄 Nested 패턴 박음 (template cp + 기존 본문 보존)
+- C4 추가 의무: 자식 repo CLAUDE.md 의 첫 5~10 줄 Nested 패턴 추가 (template cp + 기존 본문 보존)
 
 ---
 
@@ -432,13 +432,13 @@ git commit -m "feat(master): C6-COMMON-DOCS-AND-TEMPLATES-001 통합 가이드 +
 - 갱신 1 가이드: `app-implementation-guide.md` §4.5 신설
 - 갱신 1 script: `verify-sync.sh` CORE_CLI 에 ux-laws.md 추가
 
-### 비권장 5 항목 (사용자 답변 박힘)
+### 비권장 5 항목 (사용자 답변 반영)
 
 | # | 비권장 | 사유 |
 |---|---|---|
 | 1 | Cognitive Bias 활용 | 사전적 + 구체 행동 X + dark pattern 위험 |
 | 2 | Doherty 의도적 지연 | 사용자 기만 (실 빠른데 늦게 보이게) |
-| 3 | Goal-Gradient 인위적 진척 | 시작점 박음 동기 조작 |
+| 3 | Goal-Gradient 인위적 진척 | 시작점 추가 동기 조작 |
 | 4 | Peak-End 부정 위장 | 취소 인식 조작 / 권리 침해 |
 | 5 | Parkinson 카운트다운 | 긴급성 조작 |
 
@@ -485,7 +485,7 @@ git commit -m "feat(master): C7-UX-LAWS-INTEGRATION-001 Laws of UX 17 권장 + 1
 
 ### 추가 정정 (C3 dead code 사고)
 
-C3 에서 박힌 `session-start.sh` 의 Claude Code 버전 검증 코드가 `exit 0` 뒤에 있어서 **dead code 였음** (실 작동 안 함). C8 에서 동시 정정.
+C3 에서 추가된 `session-start.sh` 의 Claude Code 버전 검증 코드가 `exit 0` 뒤에 있어서 **dead code 였음** (실 작동 안 함). C8 에서 동시 정정.
 
 ### Coin 손 작업 1줄
 
@@ -515,7 +515,7 @@ git commit -m "fix(master): C8-GIT-LOCK-AUTOMITIGATION-001 stale .git/index.lock
 ### 결정 2. PID 검증 patterns
 - lock 안 첫 20 char read → 숫자만이면 PID
 - `ps -p $PID` 살아있음 = 보호 / 죽음 = 즉시 rm
-- PID 박힘 X 또는 형식 X = 빈 파일 또는 손상 → mtime 보조
+- PID 등재 X 또는 형식 X = 빈 파일 또는 손상 → mtime 보조
 
 ### C9 산출물 요약
 
@@ -525,10 +525,10 @@ git commit -m "fix(master): C8-GIT-LOCK-AUTOMITIGATION-001 stale .git/index.lock
 - 갱신 1 doc: `scripts/README.md` §5 git-safe.sh 명세 + alias 권장
 - incident-log + decision-log + CLAUDE.md §15 + REPORT.md
 
-### Coin 손 작업 (C9 commit + alias 박음)
+### Coin 손 작업 (C9 commit + alias 등재)
 
 ```bash
-# 1. ~/.zshrc 에 alias 박음 (Coin 환경 자동 mitigation)
+# 1. ~/.zshrc 에 alias 등재 (Coin 환경 자동 mitigation)
 echo "alias git='bash ~/AndroidStudioProjects/claude-cli-master/scripts/git-safe.sh'" >> ~/.zshrc
 source ~/.zshrc
 
@@ -544,7 +544,7 @@ git commit -m "fix(master): C9-GIT-LOCK-PID-VERIFY-001 PID 기반 검증 + git-s
 ### 다음 cycle 진입 조건
 
 - C4 propagation 시 자식 자동 적용
-- alias 박은 후 Coin 환경 git lock 사고 0 (검증 의무)
+- alias 등재 후 Coin 환경 git lock 사고 0 (검증 의무)
 
 ---
 
@@ -552,23 +552,23 @@ git commit -m "fix(master): C9-GIT-LOCK-PID-VERIFY-001 PID 기반 검증 + git-s
 
 ### 결정 1. 환경 무관 mitigation 방식
 - **선택**: macOS launchd 백그라운드 데몬 (5초마다 PID 검증 + stale rm)
-- **대안**: A. cron · B. fswatch + osascript · C. 사용자 환경 마다 alias 박음 (각 IDE / 터미널 / Cowork)
+- **대안**: A. cron · B. fswatch + osascript · C. 사용자 환경 마다 alias 등재 (각 IDE / 터미널 / Cowork)
 - **근거**:
   - A 거부: cron 은 분 단위 최소 (5초 X)
   - B 거부: fswatch 의존 + 무거움
-  - C 거부: 환경 마다 alias 박음 의무 = Coin 손 작업 N 회 + Cowork 같은 환경은 alias 박음 X
+  - C 거부: 환경 마다 alias 등재 의무 = Coin 손 작업 N 회 + Cowork 같은 환경은 alias 등재 X
   - **launchd 채택**: macOS 표준 + StartInterval 5s + low priority (Nice 10) + 모든 환경 cover
 
 ### 결정 2. install patterns
 - **선택**: `scripts/install-git-lock-daemon.sh` 1회 호출 = `~/Library/LaunchAgents/com.coin.git-lock-cleaner.plist` 신설 + launchctl load + 활성 검증
-- **근거**: Coin 손 작업 1회로 영구 박힘
+- **근거**: Coin 손 작업 1회로 영구 정착
 
 ### C10 산출물 요약
 
 - 신설 1 script: `scripts/git-lock-daemon.sh` (5초마다 launchd 가 호출)
 - 신설 1 plist: `scripts/com.coin.git-lock-cleaner.plist` (launchd 등록 template)
 - 신설 1 install script: `scripts/install-git-lock-daemon.sh` (Coin 1회 호출)
-- 갱신 1 doc: `scripts/README.md` §6 박음 + 이전 mitigation 와 관계 매트릭스
+- 갱신 1 doc: `scripts/README.md` §6 추가 + 이전 mitigation 와 관계 매트릭스
 - incident-log + decision-log + CLAUDE.md §15 + REPORT.md
 
 ### Coin 손 작업 (C10 install + 현 lock 정리 + commit)
@@ -584,12 +584,12 @@ bash ~/AndroidStudioProjects/claude-cli-master/scripts/install-git-lock-daemon.s
 # Step 3: master commit
 cd ~/AndroidStudioProjects/claude-cli-master && \
 git add -A && \
-git commit -m "fix(master): C10-LAUNCHD-DAEMON-001 launchd 데몬 박음 (환경 무관 영구 mitigation)"
+git commit -m "fix(master): C10-LAUNCHD-DAEMON-001 launchd 데몬 신설 (환경 무관 영구 mitigation)"
 ```
 
 ### 다음 cycle 진입 조건
 
-- C4 propagation 시 자식 자동 적용 (단 daemon 은 master 의 path 박힘)
+- C4 propagation 시 자식 자동 적용 (단 daemon 은 master 의 path 명시)
 - daemon install 후 = git lock 사고 99.99% 자동 mitigation (5초 안 자동 정리)
 
 ---
@@ -600,7 +600,7 @@ git commit -m "fix(master): C10-LAUNCHD-DAEMON-001 launchd 데몬 박음 (환경
 
 - master → 3 자식 cp 327 파일 (109 × 3 · 에러 0)
 - 자식 ui-spec.json 마이그레이션 44 파일 (alias + designTool)
-- 자식 CLAUDE.md Nested 박음 (3 자식)
+- 자식 CLAUDE.md Nested 추가 (3 자식)
 - propagation-status.md 갱신 (보호 5종 ALL ✓ MATCH)
 - propagation-reports/C4-...-PROPAGATE/REPORT.md 신설
 - master .ai/reports/C4-... REPORT.md 신설
@@ -623,7 +623,7 @@ git commit -m "fix(master): C10-LAUNCHD-DAEMON-001 launchd 데몬 박음 (환경
 
 ### 다음 cycle 진입 조건
 
-- C4 commit 마감 후 = master ↔ 자식 단방향 정합 100% 박힘
+- C4 commit 마감 후 = master ↔ 자식 단방향 정합 100% 도달
 - 자식 repo 의 본 작업 cycle (Pencil → Compose 등) 진행 가능 = master cli infra 자동 적용
 
 ---
@@ -631,7 +631,7 @@ git commit -m "fix(master): C10-LAUNCHD-DAEMON-001 launchd 데몬 박음 (환경
 ## 2026-05-02 · C11-LOCK-WIDE-COVERAGE-001 (마감)
 
 ### RCA
-C10 박힌 daemon + C8/C9 hook/wrapper = `.git/index.lock` 만 처리. 단 git 의 lock 종류:
+C10 신설 daemon + C8/C9 hook/wrapper = `.git/index.lock` 만 처리. 단 git 의 lock 종류:
 - `index.lock` — index (staging) 갱신
 - `HEAD.lock` — HEAD ref 갱신 (commit / branch 변경)
 - `packed-refs.lock` — packed-refs 갱신
@@ -640,7 +640,7 @@ C10 박힌 daemon + C8/C9 hook/wrapper = `.git/index.lock` 만 처리. 단 git �
 - `refs/tags/<tag>.lock` — tag ref 갱신
 - `refs/remotes/<remote>/<branch>.lock` — remote ref 갱신
 
-→ GT commit = HEAD ref 갱신 = HEAD.lock 박힘 + sandbox crash + stale 잔존 = commit 차단.
+→ GT commit = HEAD ref 갱신 = HEAD.lock 발생 + sandbox crash + stale 잔존 = commit 차단.
 
 ### 결정 1. 광역 검사 patterns
 - **선택**: 4 layer 모두 (daemon + pre-tool-use + session-start + git-safe) `.git/**/*.lock` 광역
@@ -675,7 +675,7 @@ bash ~/AndroidStudioProjects/claude-cli-master/scripts/install-git-lock-daemon.s
 
 ### 다음 cycle 진입 조건
 
-- C11 commit 후 = 모든 git lock 종류 자동 mitigation 박힘
+- C11 commit 후 = 모든 git lock 종류 자동 mitigation 도달
 - 자식 repo propagation 시 자동 적용 (`scripts/git-lock-daemon.sh` 는 master 안 daemon 이라 자식 repo 도 cover)
 
 ---
@@ -712,7 +712,7 @@ Coin 요청 — "C4 propagation 제대로? 빠진 내용? 중복/잔존?"
 
 - **현재**: `propagate.sh` 가 master 부재 파일을 자식에서도 자동 rm 안 함 (cp 일방향만)
 - **고려**: `--prune` 모드 신설 검토 (cycle 우선순위 낮음 — 본 사고 1 paste 로 마감)
-- **본 작업 본류 진입 우선**: 자식 도메인 cycle (Pencil → Compose) 시작 후 사고 재발 시 박는 방향
+- **본 작업 본류 진입 우선**: 자식 도메인 cycle (Pencil → Compose) 시작 후 사고 재발 시 진행 방향
 
 ### C4-VERIFY 산출물
 
@@ -778,10 +778,10 @@ C13-VERIFY-FULL 의 발견된 gap 3 종 (.gitignore propagation 누락 + daemon 
 - **선택**: 옵션 1 — prompt 의 모든 `~/AndroidStudioProjects/claude-cli-master/` 경로를 `~/AndroidStudioProjects/gently-master/` 로 치환 + 본 cycle 진행
 - **대안**: 옵션 2 (master rename `gently-master` → `claude-cli-master` 후 prompt 그대로) · 옵션 3 (cycle 보류 + path 정합 별 cycle 신설)
 - **근거**:
-  - 실측 baseline (`ls -d ~/AndroidStudioProjects/Gently*` + `cat ~/AndroidStudioProjects/gently-master/CLAUDE.md`) = master 디렉터리 = `gently-master`. C5-EXTRA-COMMON-ABSORB-AND-RENAME-001 의 rename 결정 (claude-cli-master 채택) 이 file system 에 미반영 (decision 박힘 + 디렉터리 mv 미실행).
+  - 실측 baseline (`ls -d ~/AndroidStudioProjects/Gently*` + `cat ~/AndroidStudioProjects/gently-master/CLAUDE.md`) = master 디렉터리 = `gently-master`. C5-EXTRA-COMMON-ABSORB-AND-RENAME-001 의 rename 결정 (claude-cli-master 채택) 이 file system 에 미반영 (decision 등재 + 디렉터리 mv 미실행).
   - 옵션 2 = `mv gently-master claude-cli-master` 의무 = 자식 repo 의 모든 인용 경로 갱신 + git 상태 / IDE / Cowork 환경 영향 大. 본 cycle scope 외.
-  - 옵션 3 = 본 cycle (Auth 도메인 활성화) 보류 = GT-AUTH-PIVOT-001 박힌 패러다임의 master 박음 지연.
-  - 옵션 1 = path 치환만 (16 file ops 안 cycle scope 내 흡수). Coin 명시 승인 박음.
+  - 옵션 3 = 본 cycle (Auth 도메인 활성화) 보류 = GT-AUTH-PIVOT-001 채택 패러다임의 master 등재 지연.
+  - 옵션 1 = path 치환만 (16 file ops 안 cycle scope 내 흡수). Coin 명시 승인 적용.
 - **Coin 명시 승인**: 2026-05-02 chat — "1번 권장 confirm. prompt 의 모든 claude-cli-master 경로를 gently-master 로 치환 + decision-log 에 ... append + cycle 진행."
 
 ### 별 trail 신규
@@ -790,10 +790,10 @@ C13-VERIFY-FULL 의 발견된 gap 3 종 (.gitignore propagation 누락 + daemon 
 ### 다음 cycle 진입 조건 (본 cycle 안)
 - §3-1 ~ §3-4 (auth-rules.md 신설 + deferred-domains.md 갱신 + routing-and-delegation.md 갱신 + auth-security-privacy.md mv) → 4-file 3-repo propagation → EC1~EC4 검증 → 4 commit (master + 3 자식) → close memo
 
-### close 박음 (2026-05-03 KST)
+### close 마감 (2026-05-03 KST)
 - master commit `3a8ca0d` · GT `6438e9e` · GD `8939085` · GB `6443c81`
 - EC1~EC4 모두 PASS (verify-sync.sh 104/0/0 byte-identical · 보호 파일 4종 sha 무변경 baseline 그대로)
-- Auth 도메인 master + GT 활성화 박힘 (`deferred-domains.md` §2 매트릭스 박음). GD/GB 자체 활성화 = 별 cycle (자연 trigger · lazy)
+- Auth 도메인 master + GT 활성화 마감 (`deferred-domains.md` §2 매트릭스 명시). GD/GB 자체 활성화 = 별 cycle (자연 trigger · lazy)
 - 별 trail `MASTER-DIR-REBIND-CLAUDE-CLI-MASTER-TO-GENTLY-MASTER-001` = open (script hardcoded 정정 별 cycle)
 - 2026-05-05 · MASTER-CLI-TERMINOLOGY-DEFINE-001 (PASS) · CLAUDE.md 머리 quote block prepend (terminology 5 항) · 4-repo byte-identical · § 번호 미부여 · 보호 파일 sha 변동 0 · 다른 cycle 병행 진행 · v4-resume 분할 진입 흡수.
 - 2026-05-05 · MULTI-REPO-UIUX-AUDIT-AGAINST-UX-LAWS-001 Phase 1 마감 (Cowork 진행) · 보호 파일 5 종 + cli infra 6 종 4-repo byte-identical OK · drift 0 · 위반 0 · borderline 4 (splash dwell × 2 + onboarding wording + Forced Continuity) · anti-pattern 4 PASS (Roach Motel + Confirmshaming + Disguised Ads + Hidden Costs) · N/A 분류 8 화면 (GB 1 + GD 6 + GT 1) · 산출물 = `.ai/reports/MULTI-REPO-UIUX-AUDIT-AGAINST-UX-LAWS-001/EVIDENCE.md` (263 line · 9 섹션 · sha `20838bb7...`) + scripts/ · Phase 2 진입 권장 = (최우선) 결제·가입 깊이 (Forced Continuity disclosure + GT Billing TODO 정합).
@@ -817,20 +817,20 @@ C13-VERIFY-FULL 의 발견된 gap 3 종 (.gitignore propagation 누락 + daemon 
 
 2026-05-10 | MASTER-PROTECTED-FILE-DEFINITION-SOT-UNIFY-001 (PASS · master 안 보호 file 정의 4 source 자체 모순 정정 + cycle-discipline.md 4-repo propagation) | scope=master CLAUDE.md §1 L56 (4종→5종) + cycle-discipline.md §3 L41 (4종→5종 + design-sot-policy.md 추가) + L113 (4종→5종 + memory file 경로 정정 pencil_sot_protected_file_hashes.md → protected-file-hashes.md) + L277 (shasum-a-256 4 file → git hash-object 5 file) + propagation-status.md L45 (4 종 → 5 종 PASS) | SoT default = .auto-memory/protected-file-hashes.md (5 종 baseline · 변동 X) | EC = 보호 5 file git-blob sha drift 0 (5b84cd9e4bc36165/3a703b30553e0d09/b27fbe16edb68821/d3a0b57390bd0414/e580b6d7ca9a88ae 그대로 · count=5 명시 · algorithm `git hash-object`) / cycle-discipline.md 4-repo byte-identical 새 sha 4cd01b4eca11feee (count=4-repo) / verify-sync.sh PASS expected | baseline anchor = master 228a949 / GB 2dc97c0 (auth bootstrap drift acknowledged · scope X) / GD 8ad3e7d / GT 8647a4d (RESUME prompt 갱신 영역 명시 · COWORK-PREP-BASELINE-MISMATCH-010 별 mitigation 강화 cycle 분리) | STOP 조건 전건 미발생 (보호 5 sha 변동 0 · cycle-discipline.md 외 cli infra 변경 X · 자식 직접 수정 X · app/ 무수정) | 결정 본질 = 4 source self-contradiction (4종 ↔ 5종) 통일 · SoT default 정합 · sha 검증 algorithm `git hash-object` 16-prefix 표준화 · `protected-file-hashes.md` SoT (sha-256 64-char) 는 별 cycle 정합 영역 (본 cycle scope 외) | Risk=Low · DBMig=No · MoneyAuth=No · cleanup=N/A (ops-layer) · Verdict=PASS
 
-2026-05-10 | MULTI-REPO-RELEASE-LEDGER-INIT-001 (PASS 조건부 · verify-sync.sh exit 1 사용자 회수) | scope=4-repo (master/GB/GD/GT) launch-status ledger 신설 + .ai/reports 4건 + decision-log + incident-log entry | commit 4 (master adda16f9e91b / GB 397a5df8a34f / GD 3d49e2eabb89 / GT ec26196f11b1) | 결정 본질 = ledger ID 표준 = `<repo>-T<NN>` 박음 · 갱신 trigger = 자식 cycle REVIEW PASS 시 cleanup pass 자동 · ledger 본문 편집 X · app-foundation 미신설 (MASTER-T01 별 cycle) · ledger file = repo-specific (master 측 PACKAGE-OVERVIEW + COMMON-SETUP-SSOT-DRAFT + 자식 측 LAUNCH-STATUS.md) propagation 검증 대상 X | EC = HEAD baseline 일치 4/4 · 보호 5 sha 변동 0 (5b84cd9e4bc36165/d3a0b57390bd0414/e580b6d7ca9a88ae/3a703b30553e0d09/b27fbe16edb68821 그대로) · billing-rules.md 0ec5d54f49dfd6e2 (별 cycle 산출 4-repo byte-identical) 무결성 PASS · ledger line 96/114/184/181/194 baseline 일치 · protected-file-hashes.md 변동 0 · Stage 격리 100% (cycle 무관 dirty 미stage) · verify-sync.sh exit 1 (사유 = ledger false positive · 6 miss = repo-specific 의도 · 보호 sha 자체 PASS) | STOP 조건 미발동 · 사용자 회수 의무 = release-readiness/ 영역 verify-sync exclude 정책 결정 + propagation-status.md 자체 갱신 부산물 처리 결정 | Risk=Low · DBMig=No · MoneyAuth=No · cleanup=N/A (ledger 영역 cleanup 대상 X · 자식 cycle 자연 trigger) · Verdict=PASS 조건부
+2026-05-10 | MULTI-REPO-RELEASE-LEDGER-INIT-001 (PASS 조건부 · verify-sync.sh exit 1 사용자 회수) | scope=4-repo (master/GB/GD/GT) launch-status ledger 신설 + .ai/reports 4건 + decision-log + incident-log entry | commit 4 (master adda16f9e91b / GB 397a5df8a34f / GD 3d49e2eabb89 / GT ec26196f11b1) | 결정 본질 = ledger ID 표준 = `<repo>-T<NN>` 채택 · 갱신 trigger = 자식 cycle REVIEW PASS 시 cleanup pass 자동 · ledger 본문 편집 X · app-foundation 미신설 (MASTER-T01 별 cycle) · ledger file = repo-specific (master 측 PACKAGE-OVERVIEW + COMMON-SETUP-SSOT-DRAFT + 자식 측 LAUNCH-STATUS.md) propagation 검증 대상 X | EC = HEAD baseline 일치 4/4 · 보호 5 sha 변동 0 (5b84cd9e4bc36165/d3a0b57390bd0414/e580b6d7ca9a88ae/3a703b30553e0d09/b27fbe16edb68821 그대로) · billing-rules.md 0ec5d54f49dfd6e2 (별 cycle 산출 4-repo byte-identical) 무결성 PASS · ledger line 96/114/184/181/194 baseline 일치 · protected-file-hashes.md 변동 0 · Stage 격리 100% (cycle 무관 dirty 미stage) · verify-sync.sh exit 1 (사유 = ledger false positive · 6 miss = repo-specific 의도 · 보호 sha 자체 PASS) | STOP 조건 미발동 · 사용자 회수 의무 = release-readiness/ 영역 verify-sync exclude 정책 결정 + propagation-status.md 자체 갱신 부산물 처리 결정 | Risk=Low · DBMig=No · MoneyAuth=No · cleanup=N/A (ledger 영역 cleanup 대상 X · 자식 cycle 자연 trigger) · Verdict=PASS 조건부
 
-2026-05-11 | MASTER-REPO-CONFIG-SOT-001 (PASS · = ledger MASTER-T05 마감) | scope=master ops-layer (scripts/ 측 single SoT 신설 + 3 script source 통합 · 자식 propagation X) | commit 1 (master `<TBD-AMEND>` · parent 74d9ee509af1) | 결정 본질 = scripts/repo-config.sh single SoT 신설 (TARGET_REPOS 4-repo + PROTECTED_FILES 5종 + PARENT_DIR/MASTER_DIR export · 40 line · sha 7b235ab3ea18...) + 3 script (propagate.sh + verify-sync.sh + ensure-child-gitignore-patches.sh) literal default → source 측 단일 진입점 통합 + ensure-child-gitignore drift 정정 (3→4 repo 자동 흡수 · app-foundation 포함) | EC = bash -n × 4 PASS · source 검증 PASS (TARGET_REPOS=GentlyBreath GentlyDay GentlyTable app-foundation · PROTECTED_FILES count=5) · ensure-gitignore --verify 4/0 exit 0 · verify-sync.sh PASS 112/0/0 exit 0 · 보호 5 sha 변동 0 (f1edd397/ee377dc2/e5e3fe16/7621013e/96de2f5d 그대로) | 산출물 = scripts/repo-config.sh + scripts/{propagate,verify-sync,ensure-child-gitignore-patches}.sh M + .auto-memory/decision-log.md append + .ai/tasks/MASTER-REPO-CONFIG-SOT-001.md + .ai/reports/MASTER-REPO-CONFIG-SOT-001/{EVIDENCE,PLAN,VERIFY,REVIEW}.md | skip 영역 (본 cycle scope X · 사용자 결정 옵션 외 = 옵션 1 매핑) = docs/release-readiness/PACKAGE-OVERVIEW.md (병렬 cycle MASTER-RELEASE-CHECKLIST-TEMPLATE-001 측 §3 T03 ✓ + sha bd112d545740 placeholder + §1 progress `T03` mixed 영역 + 본 cycle 측 §3 T05 ✓ 갱신 = Cowork Edit 별 처리 · 옵션 C revert X · 별 cycle 측 갱신) + 병렬 cycle 산출 (docs/templates/release-checklist.template.md ?? + .ai/reports/MASTER-RELEASE-CHECKLIST-TEMPLATE-001/ ?? + .ai/tasks/MASTER-RELEASE-CHECKLIST-TEMPLATE-001.md ??) | STOP 조건 미발동 (master HEAD 74d9ee5 변동 X · 병렬 cycle commit X 박힘 단 dirty 영역 박힘 · 사용자 회수 의무 박음) | Risk=Low · DBMig=No · MoneyAuth=No · cleanup=N/A (ops-layer · 제품 코드 미변경) · Verdict=PASS · PromptFitScore=96/100
+2026-05-11 | MASTER-REPO-CONFIG-SOT-001 (PASS · = ledger MASTER-T05 마감) | scope=master ops-layer (scripts/ 측 single SoT 신설 + 3 script source 통합 · 자식 propagation X) | commit 1 (master `<TBD-AMEND>` · parent 74d9ee509af1) | 결정 본질 = scripts/repo-config.sh single SoT 신설 (TARGET_REPOS 4-repo + PROTECTED_FILES 5종 + PARENT_DIR/MASTER_DIR export · 40 line · sha 7b235ab3ea18...) + 3 script (propagate.sh + verify-sync.sh + ensure-child-gitignore-patches.sh) literal default → source 측 단일 진입점 통합 + ensure-child-gitignore drift 정정 (3→4 repo 자동 흡수 · app-foundation 포함) | EC = bash -n × 4 PASS · source 검증 PASS (TARGET_REPOS=GentlyBreath GentlyDay GentlyTable app-foundation · PROTECTED_FILES count=5) · ensure-gitignore --verify 4/0 exit 0 · verify-sync.sh PASS 112/0/0 exit 0 · 보호 5 sha 변동 0 (f1edd397/ee377dc2/e5e3fe16/7621013e/96de2f5d 그대로) | 산출물 = scripts/repo-config.sh + scripts/{propagate,verify-sync,ensure-child-gitignore-patches}.sh M + .auto-memory/decision-log.md append + .ai/tasks/MASTER-REPO-CONFIG-SOT-001.md + .ai/reports/MASTER-REPO-CONFIG-SOT-001/{EVIDENCE,PLAN,VERIFY,REVIEW}.md | skip 영역 (본 cycle scope X · 사용자 결정 옵션 외 = 옵션 1 매핑) = docs/release-readiness/PACKAGE-OVERVIEW.md (병렬 cycle MASTER-RELEASE-CHECKLIST-TEMPLATE-001 측 §3 T03 ✓ + sha bd112d545740 placeholder + §1 progress `T03` mixed 영역 + 본 cycle 측 §3 T05 ✓ 갱신 = Cowork Edit 별 처리 · 옵션 C revert X · 별 cycle 측 갱신) + 병렬 cycle 산출 (docs/templates/release-checklist.template.md ?? + .ai/reports/MASTER-RELEASE-CHECKLIST-TEMPLATE-001/ ?? + .ai/tasks/MASTER-RELEASE-CHECKLIST-TEMPLATE-001.md ??) | STOP 조건 미발동 (master HEAD 74d9ee5 변동 X · 병렬 cycle commit X 발생 단 dirty 영역 잔존 · 사용자 회수 의무 명시) | Risk=Low · DBMig=No · MoneyAuth=No · cleanup=N/A (ops-layer · 제품 코드 미변경) · Verdict=PASS · PromptFitScore=96/100
 
 2026-05-11 MASTER-RELEASE-CHECKLIST-TEMPLATE-001 PASS · template 신설 (docs/templates/release-checklist.template.md) · Drift 1+2 발견 후 reset --soft HEAD~1 + clean state 재 commit · scripts/* T05 산출물 흡수 사고 회수
 
-2026-05-11 MASTER-REPO-CONFIG-SOT-001 PASS · scripts/repo-config.sh single SoT 신설 (40 line · 7b235ab3ea18) · 3 script source 통합 (propagate.sh + verify-sync.sh + ensure-child-gitignore-patches.sh) · ensure-child-gitignore-patches.sh app-foundation 추가 drift 정정 · HEAD 3ad2d7f 측 commit body - diff mismatch 영역 incident-log 별 trail open 박음 (= 본 cycle 측 mitigation X · 별 cycle 측 사후 처리 영역)
+2026-05-11 MASTER-REPO-CONFIG-SOT-001 PASS · scripts/repo-config.sh single SoT 신설 (40 line · 7b235ab3ea18) · 3 script source 통합 (propagate.sh + verify-sync.sh + ensure-child-gitignore-patches.sh) · ensure-child-gitignore-patches.sh app-foundation 추가 drift 정정 · HEAD 3ad2d7f 측 commit body - diff mismatch 영역 incident-log 별 trail open 명시 (= 본 cycle 측 mitigation X · 별 cycle 측 사후 처리 영역)
 
 2026-05-11 · MASTER-ARCHITECTURE-FOUNDATION-LINK-001 (마감 · sha=<TBD-commit-sha>)
 
-- 13 architecture 문서 측 코드 path 인용 옆 markdown link 추가 (clickable · 7 file: COMMON_ARCHITECTURE + KMP_CMP_LAYER_DIRECTION + KOIN_DI_BASELINE + MODEL_SEPARATION + SSOT_PRINCIPLES + TDD_WORKFLOW + TESTABILITY_SEAMS · ERROR_RESULT_POLICY 측 code block 박음 = link X 박은 의무)
+- 13 architecture 문서 측 코드 path 인용 옆 markdown link 추가 (clickable · 7 file: COMMON_ARCHITECTURE + KMP_CMP_LAYER_DIRECTION + KOIN_DI_BASELINE + MODEL_SEPARATION + SSOT_PRINCIPLES + TDD_WORKFLOW + TESTABILITY_SEAMS · ERROR_RESULT_POLICY 측 code block 영역 = link X 의무)
 - 신규 cli infra 1 file (.claude/rules/architecture-foundation-link-policy.md) — 추후 architecture 문서 신설 시 link 표기 의무 baseline
 - 5-repo byte-identical propagation (14 file × 4 자식 = 56 cp · ok=56 fail=0)
 - Risk: 사전 DRIFT 2 영역 (cycle-discipline.md app-foundation 1 + release-checklist.template.md 자식 4) — 본 cycle scope 외 · 별 cycle 2 건 처리 예정 (CLI-VERSION-UNPIN-PROPAGATION-002 + MASTER-RELEASE-CHECKLIST-TEMPLATE-002)
 - §13 self-test 3/3 PASS (claude 2.1.121 · pencil Connected · ToolSearch 13 tools) · 보호 5 sha 변동 0 (5b84cd9e/d3a0b573/e580b6d7/3a703b30/b27fbe16 그대로)
 
-2026-05-12 | MASTER-DEGENERATION-PREVENTION-POLICY-001 (PASS · 본질 mitigation · ledger MASTER-T09 마감) | scope=master cli infra (rules + hooks + settings.json) + 5-repo byte-identical propagation | 결정 본질 = autoregressive LLM token-level degeneration 차단 정책 신설 — 단일 어휘 매핑 list 우회 X · 메커니즘 차단 우선 (3 metric M1/M2/M3 + paraphrase source 무관 + mental scan 3 step + session reset trigger) | 산출물 = .claude/rules/text-degeneration-prevention.md (신규 · 13 section) + .claude/hooks/post-edit-degeneration-check.sh (신규 · Python3 tokenizer · 화이트리스트 union allowed-acronyms.md · TARGET_EXTS .md/.txt · warn default · DEGEN_ENFORCE=enforce mode · positional argument fallback) + .claude/settings.json PostToolUse Edit\|Write matcher 등록 (post-policy-watch.sh 뒤 묶음) + CLAUDE.md §15 entry + docs/release-readiness/PACKAGE-OVERVIEW.md §3 T09 row | self-test 7 fixture PASS: (1) C6 policy file enforce → exit 0 (2) 박음 cluster positive case → 5 violation 감지 + exit 2 (3) allowed-acronyms.md clean → exit 0 (4) settings.json non-target → exit 0 (5) hook script .sh non-target → exit 0 (6) empty stdin → exit 0 (7) stdin envelope JSON → exit 0 | M3 임계값 tuning: z=4·stddev + 절대 floor=10 (extreme outlier 만 감지 · 박음 x90/총 386 share 23.3% 같은 cluster 만 잡음 · 일반 prose domain term repetition 자연 허용) | 5-repo propagation 의무 (master + GB + GD + GT + app-foundation byte-identical) | STOP 조건 미발동 (보호 5 sha 변동 0 · TRAIL-9 자식 4 HEAD baseline 일치 검증 · 본 cycle 산출물 자체 self-test PASS 후 진입) | Risk=Low · DBMig=No · MoneyAuth=No · cleanup=N/A (ops-layer) · Verdict=PASS
+2026-05-12 | MASTER-DEGENERATION-PREVENTION-POLICY-001 (PASS · 본질 mitigation · ledger MASTER-T09 마감) | scope=master cli infra (rules + hooks + settings.json) + 5-repo byte-identical propagation | 결정 본질 = autoregressive LLM token-level degeneration 차단 정책 신설 — 단일 어휘 매핑 list 우회 X · 메커니즘 차단 우선 (3 metric M1/M2/M3 + paraphrase source 무관 + mental scan 3 step + session reset trigger) | 산출물 = .claude/rules/text-degeneration-prevention.md (신규 · 13 section) + .claude/hooks/post-edit-degeneration-check.sh (신규 · Python3 tokenizer · 화이트리스트 union allowed-acronyms.md · TARGET_EXTS .md/.txt · warn default · DEGEN_ENFORCE=enforce mode · positional argument fallback) + .claude/settings.json PostToolUse Edit\|Write matcher 등록 (post-policy-watch.sh 뒤 묶음) + CLAUDE.md §15 entry + docs/release-readiness/PACKAGE-OVERVIEW.md §3 T09 row | self-test 7 fixture PASS: (1) C6 policy file enforce → exit 0 (2) degeneration cluster positive case → 5 violation 감지 + exit 2 (3) allowed-acronyms.md clean → exit 0 (4) settings.json non-target → exit 0 (5) hook script .sh non-target → exit 0 (6) empty stdin → exit 0 (7) stdin envelope JSON → exit 0 | M3 임계값 tuning: z=4·stddev + 절대 floor=10 (extreme outlier 만 감지 · 발생 x90/총 386 share 23.3% 같은 cluster 만 잡음 · 일반 prose domain term repetition 자연 허용) | 5-repo propagation 의무 (master + GB + GD + GT + app-foundation byte-identical) | STOP 조건 미발동 (보호 5 sha 변동 0 · TRAIL-9 자식 4 HEAD baseline 일치 검증 · 본 cycle 산출물 자체 self-test PASS 후 진입) | Risk=Low · DBMig=No · MoneyAuth=No · cleanup=N/A (ops-layer) · Verdict=PASS
