@@ -218,3 +218,13 @@
 - mitigation: env 차단 (DISABLE_AUTOUPDATER + DISABLE_UPDATES) 본문 안 명시 유지 (해제 X · STOP 조건 정합) · 능동 갱신 = 사용자 자율 영역 명시 박음 (default 주 1회 권장) · self-test 3 항목 매 cycle 진입 의무 박음 (FAIL 시 직전 known-working = 현 시점 2.1.121 복귀 절차 + CLAUDE-CODE-LATEST-CHASE-001 entry append 의무).
 - trail: 2 종 갱신 — (a) close `CLAUDE-CODE-VERSION-PIN-2.1.114-001` (본 cycle 마감으로 pin 폐기 정책 채택 + #51736 회귀 해소 실측 + 4-repo propagation 마감 영역 모두 close) (b) open 신설 `CLAUDE-CODE-LATEST-CHASE-001` (회귀 누적 영역 · 현 시점 known-working = 2.1.121 · 새 회귀 발견 시 entry append + known-working 갱신 + 별 cycle 진입). 동족 사고 영역 = baseline anchor mismatch 5 누적 (COWORK-PREP-BASELINE-MISMATCH-001~004 + 본 cycle 자식 3-repo HEAD drift 발견 후 사용자 A 채택 baseline 갱신 진행 = 5회차) → mitigation 강화 cycle 진입 권장 (별 cycle MASTER-COWORK-HANDOFF-BASELINE-AUTOVERIFY-HOOK-001 후보).
 ```
+
+## 2026-05-12T01:00:00+0900
+
+```
+- type: cli infra propagation 확장 (cycle-discipline.md Proto 3-repo 정합 도달 · 7-repo byte-identical sha 732017a7... 달성)
+- cycle: PROTO-CLI-VERSION-UNPIN-PROPAGATION-001
+- summary: 직전 cycle CLI-VERSION-UNPIN-PROPAGATION-001 (Gently 4-repo) 마감 후 Proto 3-repo (ProtoGentlyBreath + ProtoGentlyDay + ProtoGentlyTable) 확장 처리. cli-master `.claude/rules/cycle-discipline.md` → Proto 3-repo 단방향 cp + stage+commit (3 child commits: PB `9805361c` parent `7ded7008` / PD `f266338c` parent `419d5a8b` / PT `3d96668f` parent `a8ec3c1c`) + 7-repo cross-verify (모두 sha `732017a7cdd589d496140156c019ab9b79439d4bb37a300e1d1c548d8948258d`) + Proto 3-repo `.auto-memory/protected-file-hashes.md` Recent updates entry append. STOP 조건 충족: Gently 4-repo 무접촉 · 보호 파일 5종 sha 변동 0 · Proto 3-repo 의 다른 unrelated 변경 (decision-log.md / cycle-prompt-*.md / Phase4 deleted file / 자식 trace logs 등) commit 포함 0 (명시적 stage `git add .claude/rules/cycle-discipline.md .auto-memory/protected-file-hashes.md` 의무 준수). 산출물 4종 = .ai/reports/PROTO-CLI-VERSION-UNPIN-PROPAGATION-001/{PLAN,EVIDENCE,VERIFY,REVIEW}.md.
+- mitigation: 본 cycle = anchor stale 패턴 (직전 master cycle 안 Proto 3-repo `infra 명시 미참여` 잔존 영역) 마감. 향후 cli infra 변경 시 `propagate.sh --targets all` 가 7-repo 모두 자동 포함 검증 의무 (별 cycle 후보 = scripts/propagate.sh 안 Proto 3-repo target 사전 검증).
+- trail: 부분 close — 직전 cycle CLI-VERSION-UNPIN-PROPAGATION-001 의 자연 후속 확장 close (Gently 4-repo + Proto 3-repo = 7-repo 모두 정합 달성). `CLAUDE-CODE-LATEST-CHASE-001` open trail 무영향 (회귀 누적 영역 별 trail). 동족 사고 = COWORK-PREP-BASELINE-MISMATCH (5회차 누적) → 별 cycle MASTER-COWORK-HANDOFF-BASELINE-AUTOVERIFY-HOOK-001 진입 의무 (본 통합 cycle 의 Task 2 scope).
+```
