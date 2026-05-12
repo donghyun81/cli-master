@@ -24,6 +24,20 @@
 - trail: <별 trail ID 또는 close>
 ```
 
+## 2026-05-11T16:30:00+0900
+- type: 도메인 도구 한계 사전 검증 PASS (Sentry SDK ↔ Kotlin 2.0.21 호환 baseline 박음)
+- cycle: SENTRY-SDK-INTEGRATE-01 (사전 의무 검증 · 마감)
+- summary: Firebase BoM 34.13.0 측 Kotlin 2.2.0 metadata incompatibility 사고 (2026-05-11T14:50) 측 재발 회피 paradigm 측 적용 — Sentry Android SDK `7.20.0` + Gradle plugin `4.14.1` 측 1차 candidate 박음. GB 측 1 repo 측 한정 file edit (libs.versions.toml + build.gradle.kts × 2) 후 `:app:compileDebugKotlin` 측 BUILD SUCCESSFUL exit 0 (kotlin_module metadata reject 0 · 사전 검증 PASS 신호) → 3 repo 측 propagation + 5 file 측 통합 + 3 commit (GB 219a224 · GD ffd8265 · GT e8bca80). 측 cycle prompt 측 명시 STOP 조건 ("Sentry SDK 측 Kotlin 2.0.21 호환 mismatch 감지 → 즉시 STOP") 측 발동 X.
+- mitigation: paradigm 정착 — 외부 SDK 통합 시 1 repo 측 한정 build script edit 후 `:app:compileDebugKotlin` 측 사전 호환 검증 (assembleDebug 측 진입 전) → PASS 시 3 repo propagation. 호환 mismatch 시 분기점 binary search 또는 SDK 측 alternative 검토.
+- trail: close (SENTRY-SDK-INTEGRATE-01 마감) · paradigm 측 향후 외부 SDK 통합 cycle (Sentry release tracking · OkHttp interceptor · foundation/core/observability/ wrapper) 측 재사용 의무.
+
+## 2026-05-11T14:50:00+0900
+- type: 도메인 도구 한계 (Firebase BoM ↔ Kotlin metadata 버전 호환)
+- cycle: FIREBASE-COMMIT-001 (STOP 보고) · FIREBASE-BOM-DOWNGRADE-001 (mitigation 마감)
+- summary: Firebase BoM `34.13.0` 측 transitive `com.google.android.gms:play-services-measurement-{impl,api}:23.2.0` 측 Kotlin `2.2.0` build 박힘 (`META-INF/*.kotlin_module` metadata binary version) ↔ 프로젝트 Kotlin `2.0.21` 측 metadata reader 측 reject → 3 repo (GB/GD/GT) × `:app:compileDebugKotlin` BUILD FAILED · `Module was compiled with an incompatible version of Kotlin. The binary version of its metadata is 2.2.0, expected version is 2.0.0.` × 5+ `kotlin_module` 측 동시 reject. assembleDebug 측 진입 불가.
+- mitigation: `[FIREBASE-BOM-DOWNGRADE-001]` cycle 측 BoM 34.13.0 → 33.7.0 측 1 line downgrade (3 repo byte-identical · firebase-analytics 22.1.2 + firebase-crashlytics 19.3.0 측 resolve) → 3 repo × `:app:assembleDebug` BUILD SUCCESSFUL (exit 0) · build 4-line line edit (libs.versions.toml `firebaseBom` 측 1 line × 3 repo). cycle prompt 측 STOP 조건 ("AGP / Kotlin / Crashlytics plugin 측 호환 불호환") 측 정확 발동 + 별 cycle 측 file edit only 측 mitigation 마감.
+- trail: close (FIREBASE-BOM-DOWNGRADE-001 마감) · 후속 `[KOTLIN-UPGRADE-2.2.X-001]` 별 trail 후보 (출시 후 시점 진입) · BoM `33.x.x` 측 마지막 Kotlin 2.0.x 호환 line 측 식별 lazy (33.16.0 측 실측 검증 별 cycle 후보 · 출시 직전 보안 패치 적용 시점).
+
 ## 2026-05-10T23:41:00+0900
 - type: 3-repo drift (master ↔ GT)
 - cycle: MASTER-BILLING-DOMAIN-ACTIVATE-001 STEP-1 (drift mitigation)
@@ -179,4 +193,28 @@
 - summary: claude 2.1.121 환경 안 stdio MCP tool discovery 회귀 (#51736) 해소 실측 검증. PASS 4/4 — (1) claude --version = 2.1.121 (2) mcp list pencil ✓ Connected (3) ToolSearch query="pencil" = 13 tools (mcp__pencil__* prefix 전수 명단 verbatim 일치 · batch_design/batch_get/export_nodes/find_empty_space_on_canvas/get_editor_state/get_guidelines/get_screenshot/get_variables/open_document/replace_all_matching_properties/search_all_unique_properties/set_variables/snapshot_layout) (4) mcp__pencil__get_editor_state 실호출 PASS (active editor daily-prescription.pen + 4 top-level frames). cli-master 한정 · propagation 자체 금지 · .mcp.json/.claude 무변경 STOP 조건 모두 준수. 산출물 = .ai/reports/CLAUDE-CODE-VERSION-UNPIN-VERIFY-001/{PLAN,EVIDENCE,VERIFY,REVIEW}.md 4 파일 + 본 incident-log entry.
 - mitigation: 별 cycle CLI-VERSION-UNPIN-PROPAGATION-001 진입 권장 (cycle-discipline.md §13 안 2.1.114 pin 의무 영역 → 2.1.121+ unpinned 갱신 + 4-repo propagation + CLAUDE.md §15 entry). Coin 결정 게이트 통과 후 진입 의무.
 - trail: 부분 close — CLAUDE-CODE-VERSION-PIN-2.1.114-001 별 trail = 본 cycle PASS 로 unpin 게이트 통과 / 실 close 는 별 cycle CLI-VERSION-UNPIN-PROPAGATION-001 마감 시점. #51736 회귀 본질 영향 0 (2.1.121 에서 해소 실측 확인 · single 환경 한계 단서 잔존).
+```
+
+## 2026-05-11T16:44:58+0900
+- type: blocked-tasks
+-   - MASTER-UX-LAWS-NA-SCOPE-AND-RETRO-FIX-001: 누락= VERIFY.md
+-   - MASTER-WORKING-FILE-LIFECYCLE-001: 누락= VERIFY.md
+-   - MULTI-REPO-BILLING-MODEL-RECONCILE-001: 누락= VERIFY.md
+-   - MULTI-REPO-UX-BORDERLINE-CONTEXTUAL-REVIEW-001: 누락= VERIFY.md
+
+## 2026-05-11T16:45:13+0900
+- type: blocked-tasks
+-   - MASTER-UX-LAWS-NA-SCOPE-AND-RETRO-FIX-001: 누락= VERIFY.md
+-   - MASTER-WORKING-FILE-LIFECYCLE-001: 누락= VERIFY.md
+-   - MULTI-REPO-BILLING-MODEL-RECONCILE-001: 누락= VERIFY.md
+-   - MULTI-REPO-UX-BORDERLINE-CONTEXTUAL-REVIEW-001: 누락= VERIFY.md
+
+## 2026-05-12T00:00:00+0900
+
+```
+- type: cli infra propagation 마감 (cycle-discipline.md §13 본문 갱신 · pin 폐기 → 최신 추격 정책 전환) + 별 trail 2 종 갱신 (close + open)
+- cycle: CLI-VERSION-UNPIN-PROPAGATION-001
+- summary: 직전 cycle CLAUDE-CODE-VERSION-UNPIN-VERIFY-001 안 #51736 회귀 해소 실측 PASS (2.1.121 환경) 후 본 cycle 안 정책 본문 전환 마감. cycle-discipline.md §13 line 132+ "2.1.114 pin 의무" 단락 → "최신 추격 정책 (npm scope + DISABLE_AUTOUPDATER + DISABLE_UPDATES 이중 차단 유지 + 주 1회 능동 갱신 default + 매 cycle 진입 self-test 3 항목 + FAIL 시 복귀 절차)" 본문 갱신 + 4-repo byte-identical propagation. 새 sha = `0e4a7d01997c0d12ddb432d14ee37cdb1c4f1bbc` (4-repo 모두 동일 ✓). #51736 본질 fix verbatim 인용 박음 (changelog v2.1.122 line "ToolSearch missing post-startup MCP tools in nonblocking mode"). 산출물 4종 = .ai/reports/CLI-VERSION-UNPIN-PROPAGATION-001/{PLAN,EVIDENCE,VERIFY,REVIEW}.md. self-test 3 항목 본 cycle 마감 시점 모두 PASS (claude --version = 2.1.121 / mcp list pencil ✓ Connected / ToolSearch query="pencil" = 13 mcp__pencil__* tools). 보호 파일 5종 sha 변동 0 (CONFIRMED). Proto 3-repo (8e48d48 baseline) 무접촉 의무 준수 (별 cycle 책임).
+- mitigation: env 차단 (DISABLE_AUTOUPDATER + DISABLE_UPDATES) 본문 안 명시 유지 (해제 X · STOP 조건 정합) · 능동 갱신 = 사용자 자율 영역 명시 박음 (default 주 1회 권장) · self-test 3 항목 매 cycle 진입 의무 박음 (FAIL 시 직전 known-working = 현 시점 2.1.121 복귀 절차 + CLAUDE-CODE-LATEST-CHASE-001 entry append 의무).
+- trail: 2 종 갱신 — (a) close `CLAUDE-CODE-VERSION-PIN-2.1.114-001` (본 cycle 마감으로 pin 폐기 정책 채택 + #51736 회귀 해소 실측 + 4-repo propagation 마감 영역 모두 close) (b) open 신설 `CLAUDE-CODE-LATEST-CHASE-001` (회귀 누적 영역 · 현 시점 known-working = 2.1.121 · 새 회귀 발견 시 entry append + known-working 갱신 + 별 cycle 진입). 동족 사고 영역 = baseline anchor mismatch 5 누적 (COWORK-PREP-BASELINE-MISMATCH-001~004 + 본 cycle 자식 3-repo HEAD drift 발견 후 사용자 A 채택 baseline 갱신 진행 = 5회차) → mitigation 강화 cycle 진입 권장 (별 cycle MASTER-COWORK-HANDOFF-BASELINE-AUTOVERIFY-HOOK-001 후보).
 ```

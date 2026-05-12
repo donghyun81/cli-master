@@ -129,13 +129,14 @@ PLAN.md / VERIFY.md / REVIEW.md / TODO.md
 > 본 §13 = `Pencil → Compose 파이프라인` 의 agent 환경 가용성 보장 정책.
 > 19c-1~6 사이 외부 검증된 환경 회귀 / mitigation 의 영구 정착.
 
-**Claude Code version pin = 2.1.114 (#51736 패치 전까지 의무):**
+**Claude Code version 정책 = 최신 추격 (pin 폐기 · CLI-VERSION-UNPIN-PROPAGATION-001 갱신):**
 
-- 2.1.116 이상 = stdio MCP tool discovery 회귀 (`anthropics/claude-code#51736`). 증상: `claude mcp list` 는 Connected 인데 ToolSearch query="pencil" empty. `mcp__pencil__*` 호출 자체 불가 → Path 2-A 본 작업 차단.
-- 2.1.114 = #51736 회귀 직전 known-working. npm registry 의 2.1.115 부재 (skip).
-- **npm 설치 의무** (native installer 아닌 npm scope). 이유: native auto-updater 가 다운그레이드 무력화.
+- 특정 버전 pin 박지 X (이전 2.1.114 pin 폐기 · `CLAUDE-CODE-VERSION-UNPIN-VERIFY-001` 안 #51736 회귀 해소 실측 PASS 후 정책 전환).
+- npm scope 의무 (`@anthropic-ai/claude-code` · native installer auto-updater path 회피).
+- 의도 X 백그라운드 jump 차단 default = `DISABLE_AUTOUPDATER` + `DISABLE_UPDATES` 이중 차단 유지 (해제 금지).
+- 능동 갱신 = 사용자 직접 `npm install -g @anthropic-ai/claude-code@latest` 실행. default 주 1회 권장 (timing 사용자 자율).
 
-**Native installer auto-updater 차단 (이중 설정 의무):**
+**Native installer auto-updater 차단 (이중 설정 의무 · 본 정책 default):**
 
 - `~/.zshrc`:
   ```
@@ -147,28 +148,45 @@ PLAN.md / VERIFY.md / REVIEW.md / TODO.md
   { "env": { "DISABLE_AUTOUPDATER": "1", "DISABLE_UPDATES": "1" } }
   ```
 
-근거: native installer 의 background auto-updater 가 `~/.local/bin/claude` 심링크를 강제 재생성 (`anthropics/claude-code#41602`, `#3010`, `#28625`). 이중 차단 미설정 시 단순 `rm` 다운그레이드 무력.
+근거: native installer 의 background auto-updater 가 `~/.local/bin/claude` 심링크를 강제 재생성 (`anthropics/claude-code#41602`, `#3010`, `#28625`). 이중 차단 미설정 시 사용자 능동 jump 정책 무력 (의도 X 자동 jump 사고 · 다운그레이드 무력화 영역 포함).
 
-**다운그레이드 절차 (1회 세팅):**
+**매 cycle 진입 self-test 3 항목 (모두 PASS 의무):**
 
-1. env 이중 설정 (`~/.zshrc` + `~/.claude/settings.json`)
-2. `rm -rf ~/.local/share/claude && rm -f ~/.local/bin/claude` (native install 통째 제거)
-3. `npm install -g @anthropic-ai/claude-code@2.1.114`
-4. `hash -r && claude --version` → 2.1.114 검증
-5. 30s 대기 후 `ls -la ~/.local/bin/claude` 재검증 (No such file 이어야 함)
+매 cycle 첫 행동:
 
-**환경 자가 검증 (매 cycle 첫 행동 의무):**
+1. `claude --version` raw output 캡처 — EVIDENCE.md 안 그대로 박음.
+2. `claude mcp list` 안 `pencil ✓ Connected` 명시 — 출력 안 verbatim 박음.
+3. CLI 세션 안 `ToolSearch query="pencil"` 결과 ≥ 13 tools (`mcp__pencil__*` prefix · `CLAUDE-CODE-VERSION-UNPIN-VERIFY-001` baseline 명단: batch_design / batch_get / export_nodes / find_empty_space_on_canvas / get_editor_state / get_guidelines / get_screenshot / get_variables / open_document / replace_all_matching_properties / search_all_unique_properties / set_variables / snapshot_layout).
 
-매 cycle 진입 시 `claude --version` 검증. 2.1.114 아니면 STOP + Coin 다운그레이드 미적용 보고. Pencil → Compose 본 작업 진행 차단 위험.
+3 항목 모두 PASS = cycle 진행 가능. 1+ FAIL = 즉시 STOP + 아래 복귀 절차.
+
+**self-test FAIL 시 복귀 절차 — 직전 known-working 버전 복귀 (현 시점 default `2.1.121` · 회귀 발견 시점에 갱신):**
+
+```bash
+rm -rf ~/.local/share/claude && rm -f ~/.local/bin/claude
+npm install -g @anthropic-ai/claude-code@<known-working>
+hash -r && claude --version
+```
+
+복귀 후 의무:
+
+- `.auto-memory/incident-log.md` 안 `CLAUDE-CODE-LATEST-CHASE-001` entry append (회귀 버전 / 증상 / 복귀 시각 KST / 외부 issue link 4 항목 의무).
+- 새 known-working 등재 전까지 본 §13 안 기재 known-working 갱신 의무 (별 cycle).
+
+**참고 (외부 검증 영역 · `CLAUDE-CODE-VERSION-UNPIN-VERIFY-001`):**
+
+- 직전 #51736 회귀 = changelog 안 v2.1.122 fix 직접 인용: "ToolSearch missing post-startup MCP tools in nonblocking mode".
+- 2.1.121 환경 안 회귀 해소 실측 PASS (`CLAUDE-CODE-VERSION-UNPIN-VERIFY-001` 안 4 항목 검증 · ToolSearch ≥ 13 + mcp__pencil__get_editor_state 실호출 + active editor `daily-prescription.pen` 확인).
 
 **관련 별 trail:**
 
-- `CLAUDE-CODE-VERSION-PIN-2.1.114-001` (open · `anthropics/claude-code#51736` 패치 추적). 패치 release 확인 시 별 cycle 으로 unpin + 외부 검증 + 통합.
+- `CLAUDE-CODE-VERSION-PIN-2.1.114-001` (close · `CLI-VERSION-UNPIN-PROPAGATION-001` 마감 영역 · pin 폐기 정책 채택 + #51736 회귀 해소 실측 + 4-repo propagation 마감).
+- `CLAUDE-CODE-LATEST-CHASE-001` (open · 회귀 누적 영역 · 새 회귀 발견 시 entry append + known-working 갱신 + 별 cycle 진입).
 - `LAUNCHER-PRE-WARM-PENCIL-001` (open · `~/bin/cc-pen` 런처 정착 후보).
 
 **관련 사고 누적 (`.auto-memory/incident-log.md`):**
 
-- `CLAUDE-CODE-2.1.116-MCP-DISCOVERY-REGRESSION-001` (#51736 회귀)
+- `CLAUDE-CODE-2.1.116-MCP-DISCOVERY-REGRESSION-001` (#51736 회귀 · v2.1.122 fix 마감)
 - `CLAUDE-CODE-NATIVE-AUTO-UPDATER-SYMLINK-RESTORE-001` (auto-updater 무력화)
 - `NATIVE-VS-NPM-INSTALL-DUAL-PATH-001` (PATH 충돌)
 - `/CLEAR-MCP-RELOAD-MISCONCEPTION-001` (`/clear` ≠ MCP 재attach)
