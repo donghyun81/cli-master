@@ -2,6 +2,70 @@
 
 > master cycle 별 의사결정 누적. 각 entry = 1 cycle 1 결정 묶음.
 
+## 2026-05-11 · SENTRY-SDK-INTEGRATE-01 (마감 · 3 commit)
+
+### 결정. 3 repo (GB / GD / GT) × Sentry Android SDK + Gradle plugin + DSN injection + Crashlytics dedup 통합 commit 마감
+- **선택**: Sentry Android SDK `7.20.0` + Sentry Android Gradle plugin `4.14.1` 채택 — 1차 candidate 측 `:app:compileDebugKotlin` 측 Kotlin 2.0.21 호환 사전 검증 PASS (Firebase BoM 측 사고 패턴 재발 회피 의무 충족). 3 repo × Sentry scope 5 file (`libs.versions.toml` + `build.gradle.kts` + `app/build.gradle.kts` + `*Application.kt` + `.gitignore`) 측 selective add + commit.
+- **3 commit sha 산출물**:
+    - GB: `219a224` (parent `9e6ca5e`) · 5 files · 32 insertions
+    - GD: `ffd8265` (parent `4fcbfbf`) · 5 files · 33 insertions
+    - GT: `e8bca80` (parent `1744830`) · 5 files · 32 insertions
+- **검증**: 3 repo × `:app:assembleDebug` BUILD SUCCESSFUL exit 0 (GB 16s · GD 22s · GT 24s · BoM 33.7.0 baseline 보존 drift 0) · 3 repo × Sentry 영역 byte-identical (versions 2 + library 1 + plugin 1 line + root apply false 1 + app plugin alias 1 + app sentryDsn val 1 + app buildConfigField 1 + app dependency 1 + app sentry{} block 7 + Application SentryAndroid import 1 + init block 8 + .gitignore sentry.properties+.sentryclirc 3 line) · 보호 파일 5종 sha 변동 0.
+- **paradigm**:
+    - **Crashlytics 측 중복 capture 회피** = `options.isEnableUncaughtExceptionHandler = false` 박음 (Sentry 측 자동 uncaught handler 측 비활성 → Crashlytics 측 단독 uncaught handler 채택 · 동일 crash 측 양측 중복 capture 회피).
+    - **tracesSampleRate 0.1** = 10% sample 측 Sentry quota 절약 (Developer free 5K error/월 + performance trace 측 별 quota).
+    - **DSN 측 secret 보호** = `local.properties` 측 `SENTRY_DSN` 명시 + `.gitignore` line 15 측 `local.properties` 명시 default + `.gitignore` 측 `sentry.properties` + `.sentryclirc` 추가 (사후 sentry-cli 측 release tracking 활성 시점 측 사전 mitigation).
+    - **BuildConfig field injection** = 기존 Supabase paradigm 정합 (`buildConfigField("String", "SENTRY_DSN", "\"$sentryDsn\"")`).
+    - **release tracking lazy** = `autoUploadProguardMapping.set(false)` + `includeProguardMapping.set(false)` 박음 (internal testing 진입 시점 측 별 cycle 측 활성).
+    - **tracingInstrumentation.enabled = true** = OkHttp / SQLite / FileIO 측 자동 instrumentation (기본 default).
+- **Sentry organization paradigm**:
+    - organization ID `o4511370292297728` (numeric)
+    - data residency US (`ingest.us.sentry.io`)
+    - plan Developer free (5K error/월 · 14-day Business trial 측 자동 free downgrade)
+    - 3 project ID (GB `4511370294001665` · GD `4511370324279296` · GT `4511370329391104`)
+- **다음 cycle** (lazy):
+    - Sentry release tracking 활성 (sentry-cli 측 release upload + ProGuard mapping upload) — internal testing 진입 시점 별 cycle
+    - OkHttp interceptor 측 network error capture — 도메인 코드 측 OkHttp 사용 시점 별 cycle
+    - foundation/core/observability/ wrapper 코드 — 앞 chat 측 결정 영역
+    - Sentry organization slug (human-readable) paste — release tracking 측 의무 시점 별 paste
+- **결과 보고**: `.ai/reports/SENTRY-SDK-INTEGRATE-01/REVIEW.md`.
+
+---
+
+## 2026-05-11 · FIREBASE-COMMIT-001 · RESUME (마감 · commit-only)
+
+### 결정. 3 repo (GB / GD / GT) × Firebase Crashlytics + Analytics SDK + BoM 33.7.0 측 commit 마감
+- **선택**: 사전 [FIREBASE-BOM-DOWNGRADE-001] cycle 측 PASS baseline 측 정합 — 3 repo × Firebase scope 3 file (`gradle/libs.versions.toml` + `build.gradle.kts` + `app/build.gradle.kts`) 측 selective add + commit. out-of-scope working tree (GB/GT × `docs/release-readiness/LAUNCH-STATUS.md` · `.idea/*` · `cc-paste-*.md` · `.ai/reports/MULTI-REPO-RELEASE-LEDGER-INIT-001/`) 측 git add 측 제외 (cycle scope isolation).
+- **근거**: cycle-discipline §5 v2 측 "**`app/src/` 변경 + 빌드 PASS + STEP 'go' 단계 Coin 명시 승인**" 측 spirit + 사용자 prompt 측 명시 commit 지시 = Coin direct 측 functional equivalent. build script (gradle 영역) 측 HIGH RISK boundary 측 형식적 분류 측 우회 X — build PASS 측 객관 검증 + cycle prompt 측 명시 instruction 측 cli 자체 판단 정합. 3 commit subject 통일: `feat(crashlytics): FIREBASE-COMMIT-001 integrate Firebase Crashlytics + Analytics SDK + BoM 33.7.0`. body 6 section (Goal/Diff/Sha/EC/Next/Refs) 정합.
+- **3 commit sha 산출물**:
+    - GB: `9e6ca5e` (parent `0552529`)
+    - GD: `4fcbfbf` (parent `4d867cc`)
+    - GT: `1744830` (parent `d90c19e`)
+- **검증**: 3 repo × `:app:assembleDebug` UP-TO-DATE BUILD SUCCESSFUL (사전 cycle 측 빌드 cache 재활용) + 3 repo × Firebase 영역 byte-identical 확인 (versions 3 + libraries 3 + plugins 2 + root plugins 2 + app plugin apply 2 + app dependency 3 line) + 보호 파일 5종 sha 변동 0.
+- **paradigm**:
+    - Firebase project `gently-apps` (org_id `335377021436`) · 3 Android app (GB/GD/GT 각 별 package)
+    - SHA-1 측 skip 결정 (Supabase Auth 사용 · Firebase Auth X · debug keystore SHA-1 측 등록 의무 X)
+    - Crashlytics + Analytics 측 동시 채택 (analytics only X · KPI 측정 의무 = D7 retention measure baseline + crash-free ≥ 99% 측정)
+    - production 빌드 측 mock 노출 X (Crashlytics 측 BuildConfig.DEBUG guard X · 실 Crashlytics 측 production-default)
+- **다음 cycle**: `[SENTRY-SDK-INTEGRATE-01]` cycle 측 Sentry Android SDK 통합 paste 측 진입 baseline 확보. 사후 Sentry SDK 측 Kotlin 2.0.21 호환 측 검증 의무 (= Sentry SDK 측 metadata version 측 사전 확인 후 진행 · 호환 mismatch 시 BoM 측 사고 패턴 재발 회피).
+- **결과 보고**: `.ai/reports/FIREBASE-COMMIT-001/REVIEW.md`.
+
+---
+
+## 2026-05-11 · FIREBASE-BOM-DOWNGRADE-001 (마감 · file edit only · commit X)
+
+### 결정. Firebase BoM `34.13.0` → `33.7.0` 측 3 repo × 1 line downgrade
+- **선택**: BoM 34.13.0 측 transitive `play-services-measurement-{impl,api}-23.2.0` (Kotlin 2.2.0 build) ↔ 프로젝트 Kotlin 2.0.21 측 metadata incompatibility (`:app:compileDebugKotlin` reject) → BoM 33.7.0 측 downgrade (analytics 22.1.2 + crashlytics 19.3.0 · Kotlin 2.0.x 호환).
+- **근거**: GB 1차 검증 측 BoM 33.7.0 compileDebugKotlin PASS + assembleDebug PASS · 분기점 binary search 측 1 회 SUCCESS 마감 (cycle prompt 측 "최대 5 회" 1 회 마감). 3 repo (GB/GD/GT) × `gradle/libs.versions.toml` 측 동일 변경 + 다른 영역 변경 X (`firebaseCrashlyticsPlugin = "3.0.2"` · `googleServices = "4.4.4"` 측 보존).
+- **검증**: 3 repo × `:app:dependencies` 측 firebase-bom 33.7.0 → analytics 22.1.2 + crashlytics 19.3.0 resolve PASS + 3 repo × `:app:assembleDebug` BUILD SUCCESSFUL (exit 0) + byte-identical 확인 (`firebaseBom = "33.7.0"` × 3).
+- **scope**: file edit only · commit X · cycle-discipline §5 v2 예외 1 회 적용 (BoM 버전 명시 영역 한정).
+- **다음 cycle**: `[FIREBASE-COMMIT-001]` cycle 측 재 paste 측 진입 baseline 확보 (Cowork chat 측 결정 후).
+- **분기점 lazy**: BoM `33.x.x` line 측 마지막 Kotlin 2.0.x 호환 버전 측 미식별 (33.16.0 측 실측 검증 lazy · 출시 직전 보안 패치 적용 시점 측 별 cycle 후보).
+- **paradigm**: Kotlin upgrade 측 별 cycle (`[KOTLIN-UPGRADE-2.2.X-001]` 후보 · 출시 8주 timeline 측 risk ↑ → 출시 후 시점 별 cycle).
+- **결과 보고**: `.ai/reports/FIREBASE-BOM-DOWNGRADE-001/REVIEW.md`.
+
+---
+
 ## 2026-05-11 · MASTER-GB-AUTH-ACTIVATE-001 (마감)
 
 ### 결정. GB Auth 도메인 활성화 (UNKNOWN → ACTIVE ³) · `auth-rules.md` SoT 재사용
