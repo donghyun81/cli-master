@@ -9,15 +9,15 @@
 
 ---
 
-## 1. baseline + progress (2026-05-11 14:39 KST 실측)
+## 1. baseline + progress (2026-05-12 15:13 KST 실측 · MASTER-T09 마감 직후)
 
 | repo | HEAD | 단계 | P0 progress | 출시 |
 |---|---|---|---|---|
-| claude-cli-master | `67eb0c2` | 운영 (T01/T02/T03/T04/T05 ✓ · T06~T08 진행 대기) | 5/8 (63%) | — |
-| app-foundation | `f1f40f4` | scaffold + cli infra 정합 마감 · core/ 실 wrapper = FND-T02~T10 별 cycle | 1/12 (8%) | — |
-| GentlyBreath | `0552529` | Phase 2 Auth ACTIVE + upgrade-account-screen Pencil SoT 마감 | 2/25 (8%) | ✓ |
-| GentlyDay | `4d867cc` | Phase 1 마감 / Phase 2 진입 대기 (Auth UNKNOWN) | 1/22 (5%) | ✓ |
-| GentlyTable | `d90c19e` | Phase 3 SoT 진행 (daily-prescription ✓) | 1/26 (4%) | ✓ |
+| claude-cli-master | `0a6d2f1` | 운영 (T01/T02/T03/T04/T05/T09 ✓ · T06~T08 진행 대기) | 6/9 (67%) | — |
+| app-foundation | `bd66390` | scaffold + cli infra 정합 마감 · core/ 실 wrapper = FND-T02~T10 별 cycle | 1/12 (8%) | — |
+| GentlyBreath | `7a8eb78` | Phase 2 Auth ACTIVE + upgrade-account-screen Pencil SoT 마감 | 2/25 (8%) | ✓ |
+| GentlyDay | `5154bbd` | Phase 1 마감 / Phase 2 진입 대기 (Auth UNKNOWN) | 1/22 (5%) | ✓ |
+| GentlyTable | `284a06b` | Phase 3 SoT 진행 (daily-prescription ✓) | 1/26 (4%) | ✓ |
 
 > progress 카운트 = P0 task 마감 / 전체. CLI cleanup pass 자동 갱신 영역.
 

@@ -98,10 +98,17 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 
 
 
+
+
 ## Last verify-sync
 
-- timestamp: 2026-05-11T14:24:30+0900
-- pass: 112
-- drift: 0
-- miss: 0
-- exit: 0
+- timestamp: 2026-05-12T15:13:46+0900
+- pass: 114
+- drift: 1
+- miss: 4
+- exit: 1
+
+### Drift 상세
+
+- .claude/rules/cycle-discipline.md  master=732017a7cdd5  GentlyBreath=✓  GentlyDay=✓  GentlyTable=✓  app-foundation=24be512066a2(✗)
+- docs/templates/release-checklist.template.md  master=30fc93967106  GentlyBreath=MISS  GentlyDay=MISS  GentlyTable=MISS  app-foundation=MISS
