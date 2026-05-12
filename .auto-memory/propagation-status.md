@@ -117,16 +117,20 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 
 
 
+
 ## Last verify-sync
 
-- timestamp: 2026-05-12T17:06:17+0900
-- pass: 114
-- drift: 2
+- timestamp: 2026-05-12T17:38:59+0900
+- pass: 111
+- drift: 5
 - miss: 1
 - exit: 1
 
 ### Drift 상세
 
 - .claude/agents/active/billing-payments-guardian.md  master=b8aea0e4e7c7  GentlyBreath=✓  GentlyDay=✓  GentlyTable=✓  app-foundation=fa6ea5a803cf(✗)
+- .claude/agents/active/code-simplifier.md  master=f05166855af4  GentlyBreath=✓  GentlyDay=✓  GentlyTable=✓  app-foundation=1b98596e1fb0(✗)
+- .claude/agents/active/domain-roles.md  master=09c5f1f7bb66  GentlyBreath=✓  GentlyDay=✓  GentlyTable=✓  app-foundation=86e8b6a75b48(✗)
+- .claude/agents/active/layer-checker.md  master=5c04b2d75d8d  GentlyBreath=✓  GentlyDay=✓  GentlyTable=✓  app-foundation=34f42c7f2eb7(✗)
 - .claude/hooks/baseline-snapshot.sh  master=d41f25ffc281  GentlyBreath=✓  GentlyDay=✓  GentlyTable=✓  app-foundation=MISS
 - .claude/settings.json  master=6919ac4ad00a  GentlyBreath=✓  GentlyDay=✓  GentlyTable=✓  app-foundation=f8bace35dbfa(✗)
