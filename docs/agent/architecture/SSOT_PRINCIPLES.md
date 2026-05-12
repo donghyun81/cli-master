@@ -43,7 +43,7 @@
 
 ### 3.2 정책 계산의 위치
 
-- 비즈니스 정책 계산은 `shared/domain` 또는 동등한 domain layer 에서만
+- 비즈니스 정책 계산은 `shared/domain` ([app-foundation/shared/domain/](../../../../app-foundation/shared/domain/)) 또는 동등한 domain layer 에서만
 - `app/`, `feature/`, `platform/` 레이어가 정책 계산을 새로 소유하면 review FAIL
 
 ### 3.3 라우트·문구·리소스

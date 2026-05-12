@@ -760,3 +760,11 @@ C13-VERIFY-FULL 의 발견된 gap 3 종 (.gitignore propagation 누락 + daemon 
 2026-05-11 MASTER-RELEASE-CHECKLIST-TEMPLATE-001 PASS · template 신설 (docs/templates/release-checklist.template.md) · Drift 1+2 발견 후 reset --soft HEAD~1 + clean state 재 commit · scripts/* T05 산출물 흡수 사고 회수
 
 2026-05-11 MASTER-REPO-CONFIG-SOT-001 PASS · scripts/repo-config.sh single SoT 신설 (40 line · 7b235ab3ea18) · 3 script source 통합 (propagate.sh + verify-sync.sh + ensure-child-gitignore-patches.sh) · ensure-child-gitignore-patches.sh app-foundation 추가 drift 정정 · HEAD 3ad2d7f 측 commit body - diff mismatch 영역 incident-log 별 trail open 박음 (= 본 cycle 측 mitigation X · 별 cycle 측 사후 처리 영역)
+
+2026-05-11 · MASTER-ARCHITECTURE-FOUNDATION-LINK-001 (마감 · sha=<TBD-commit-sha>)
+
+- 13 architecture 문서 측 코드 path 인용 옆 markdown link 추가 (clickable · 7 file: COMMON_ARCHITECTURE + KMP_CMP_LAYER_DIRECTION + KOIN_DI_BASELINE + MODEL_SEPARATION + SSOT_PRINCIPLES + TDD_WORKFLOW + TESTABILITY_SEAMS · ERROR_RESULT_POLICY 측 code block 박음 = link X 박은 의무)
+- 신규 cli infra 1 file (.claude/rules/architecture-foundation-link-policy.md) — 추후 architecture 문서 신설 시 link 표기 의무 baseline
+- 5-repo byte-identical propagation (14 file × 4 자식 = 56 cp · ok=56 fail=0)
+- Risk: 사전 DRIFT 2 영역 (cycle-discipline.md app-foundation 1 + release-checklist.template.md 자식 4) — 본 cycle scope 외 · 별 cycle 2 건 처리 예정 (CLI-VERSION-UNPIN-PROPAGATION-002 + MASTER-RELEASE-CHECKLIST-TEMPLATE-002)
+- §13 self-test 3/3 PASS (claude 2.1.121 · pencil Connected · ToolSearch 13 tools) · 보호 5 sha 변동 0 (5b84cd9e/d3a0b573/e580b6d7/3a703b30/b27fbe16 그대로)

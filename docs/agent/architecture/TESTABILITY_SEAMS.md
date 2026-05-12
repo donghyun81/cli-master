@@ -94,7 +94,7 @@ PLAN `## 7. TestabilitySeams` 섹션:
 ```markdown
 ## 7. TestabilitySeams
 
-- 테스트 파일: `shared/domain/src/commonTest/.../GetThingsUseCaseTest.kt`
+- 테스트 파일: `shared/domain/src/commonTest/.../GetThingsUseCaseTest.kt` ([app-foundation/shared/domain/](../../../../app-foundation/shared/domain/))
 - FakeXxx 사용: FakeThingsRepository, FakeClock
 - 심 주입 대상: clock (생성자), dispatcher (생성자) — 둘 다 적용
 - 심 연기 시 명시적 사유: identity/logger/uuid 는 이 task 에서 사용하지 않음 (single-use case 범위)

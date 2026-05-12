@@ -1,7 +1,7 @@
 # Koin DI Baseline
 
 > **목적**: 모든 레포에서 Dependency Injection 구성을 일관되게 유지한다.
-> **선택 근거**: KMP/CMP 양쪽에서 동작하며, framework-neutral 한 `shared/domain` 을 오염시키지 않는다.
+> **선택 근거**: KMP/CMP 양쪽에서 동작하며, framework-neutral 한 `shared/domain` ([app-foundation/shared/domain/](../../../../app-foundation/shared/domain/)) 을 오염시키지 않는다.
 
 ---
 
@@ -22,9 +22,9 @@
 | `iosApp/` (iOS, 향후) | iOS-specific Koin 모듈 + `initKoin()` bridge |
 
 **금지 위치**:
-- `shared/domain/**` — Koin import 금지 (framework-neutral 유지)
-- `shared/feature-state/**` — Koin import 금지 (ViewModel은 생성자 주입만, Koin이 ViewModel 만들 때 wiring)
-- `shared/data/**` — Koin import 금지 (Repository 구현체는 생성자 주입만)
+- `shared/domain/**` ([app-foundation/shared/domain/](../../../../app-foundation/shared/domain/)) — Koin import 금지 (framework-neutral 유지)
+- `shared/feature-state/**` ([app-foundation/shared/feature-state/](../../../../app-foundation/shared/feature-state/)) — Koin import 금지 (ViewModel은 생성자 주입만, Koin이 ViewModel 만들 때 wiring)
+- `shared/data/**` ([app-foundation/shared/data/](../../../../app-foundation/shared/data/)) — Koin import 금지 (Repository 구현체는 생성자 주입만)
 
 ---
 

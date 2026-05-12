@@ -47,8 +47,8 @@ class FakeJournalRepository : JournalRepository {
 
 | 테스트 종류 | 위치 |
 |---|---|
-| domain 순수 로직 | `shared/domain/src/commonTest` (KMP) 또는 `app/src/test` (단일 모듈) |
-| ViewModel + StateFlow | `shared/feature-state/src/commonTest` 또는 `app/src/test` |
+| domain 순수 로직 | `shared/domain/src/commonTest` ([app-foundation/shared/domain/](../../../../app-foundation/shared/domain/)) (KMP) 또는 `app/src/test` (단일 모듈) |
+| ViewModel + StateFlow | `shared/feature-state/src/commonTest` ([app-foundation/shared/feature-state/](../../../../app-foundation/shared/feature-state/)) 또는 `app/src/test` |
 | Android UI (Compose) | `app/src/androidTest` (instrumented) |
 | iOS UI | `iosApp/<...>Tests` (XCUI) |
 

@@ -11,7 +11,7 @@
 |---|---|---|
 | `DTO` | `data/remote/` (data layer) | 네트워크·직렬화 경계 표현 (Json, Protobuf) |
 | `Entity` | `data/local/` (data layer) | DB 테이블 매핑 (Room `@Entity`) |
-| `DomainModel` | `domain/` 또는 `shared/domain/` | 비즈니스 로직이 다루는 순수 모델 |
+| `DomainModel` | `domain/` 또는 `shared/domain/` ([app-foundation/shared/domain/](../../../../app-foundation/shared/domain/)) | 비즈니스 로직이 다루는 순수 모델 |
 | `UiState` | `ui/` 또는 `feature-state/` (presentation) | UI 렌더링 전용 불변 상태 |
 
 ---

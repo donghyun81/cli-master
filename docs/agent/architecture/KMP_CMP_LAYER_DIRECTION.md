@@ -1,7 +1,7 @@
 # KMP/CMP Layer Direction — Shared-First Architecture
 
 > **목적**: Kotlin Multiplatform / Compose Multiplatform 전환 시 단방향 레이어 흐름을 강제한다.
-> **불변 원칙**: I2 — `shared/domain` 은 `shared/data`, `shared/feature-state`, `shared/app`, `app/`, `iosApp/` 어떤 것도 import 할 수 없다.
+> **불변 원칙**: I2 — `shared/domain` ([app-foundation/shared/domain/](../../../../app-foundation/shared/domain/)) 은 `shared/data` ([app-foundation/shared/data/](../../../../app-foundation/shared/data/)), `shared/feature-state` ([app-foundation/shared/feature-state/](../../../../app-foundation/shared/feature-state/)), `shared/app`, `app/`, `iosApp/` 어떤 것도 import 할 수 없다.
 
 ---
 
