@@ -1,10 +1,10 @@
 {
-  "timestamp": "20260512T064910+0000",
-  "projectDir": "/sessions/keen-wonderful-wozniak/mnt/AndroidStudioProjects/claude-cli-master",
-  "parentDir": "/sessions/keen-wonderful-wozniak/mnt/AndroidStudioProjects",
+  "timestamp": "20260512T154651+0900",
+  "projectDir": "/Users/yundonghyeon/AndroidStudioProjects/claude-cli-master",
+  "parentDir": "/Users/yundonghyeon/AndroidStudioProjects",
   "repos": {
     "claude-cli-master": {
-      "path": "/sessions/keen-wonderful-wozniak/mnt/AndroidStudioProjects/claude-cli-master",
+      "path": "/Users/yundonghyeon/AndroidStudioProjects/claude-cli-master",
       "head": "148b428fcae54f9df8f716273cd39412905a31e4",
       "cycleDisciplineSha": "732017a7cdd589d496140156c019ab9b79439d4bb37a300e1d1c548d8948258d",
       "settingsSha": "6919ac4ad00ab7962e0ef7393872c9c1c086e50b2af6a80e0ea0c1628581d80f",
@@ -17,7 +17,7 @@
       }
     },
     "GentlyBreath": {
-      "path": "/sessions/keen-wonderful-wozniak/mnt/AndroidStudioProjects/GentlyBreath",
+      "path": "/Users/yundonghyeon/AndroidStudioProjects/GentlyBreath",
       "head": "8e3d81acfe4bf827bd1db3d9449bc533fdcd8cd3",
       "cycleDisciplineSha": "732017a7cdd589d496140156c019ab9b79439d4bb37a300e1d1c548d8948258d",
       "settingsSha": "6919ac4ad00ab7962e0ef7393872c9c1c086e50b2af6a80e0ea0c1628581d80f",
@@ -30,7 +30,7 @@
       }
     },
     "GentlyDay": {
-      "path": "/sessions/keen-wonderful-wozniak/mnt/AndroidStudioProjects/GentlyDay",
+      "path": "/Users/yundonghyeon/AndroidStudioProjects/GentlyDay",
       "head": "e0029d3bcb4bd3b2d338792fc1a14fb586c97762",
       "cycleDisciplineSha": "732017a7cdd589d496140156c019ab9b79439d4bb37a300e1d1c548d8948258d",
       "settingsSha": "6919ac4ad00ab7962e0ef7393872c9c1c086e50b2af6a80e0ea0c1628581d80f",
@@ -43,7 +43,7 @@
       }
     },
     "GentlyTable": {
-      "path": "/sessions/keen-wonderful-wozniak/mnt/AndroidStudioProjects/GentlyTable",
+      "path": "/Users/yundonghyeon/AndroidStudioProjects/GentlyTable",
       "head": "7de44ea2b98188afaa9921f5c516021c532cd236",
       "cycleDisciplineSha": "732017a7cdd589d496140156c019ab9b79439d4bb37a300e1d1c548d8948258d",
       "settingsSha": "6919ac4ad00ab7962e0ef7393872c9c1c086e50b2af6a80e0ea0c1628581d80f",
@@ -56,7 +56,7 @@
       }
     },
     "ProtoGentlyBreath": {
-      "path": "/sessions/keen-wonderful-wozniak/mnt/AndroidStudioProjects/ProtoGentlyBreath",
+      "path": "/Users/yundonghyeon/AndroidStudioProjects/ProtoGentlyBreath",
       "head": "9805361cc6f035e3db02cecc031eecd97fe57dfa",
       "cycleDisciplineSha": "732017a7cdd589d496140156c019ab9b79439d4bb37a300e1d1c548d8948258d",
       "settingsSha": "60e797665a00bf0a4b88d5bbbac76734e5a2db7bae4ec3be6b787895896ef078",
@@ -69,7 +69,7 @@
       }
     },
     "ProtoGentlyDay": {
-      "path": "/sessions/keen-wonderful-wozniak/mnt/AndroidStudioProjects/ProtoGentlyDay",
+      "path": "/Users/yundonghyeon/AndroidStudioProjects/ProtoGentlyDay",
       "head": "f266338c40734975ce7916e47afca71d359f0751",
       "cycleDisciplineSha": "732017a7cdd589d496140156c019ab9b79439d4bb37a300e1d1c548d8948258d",
       "settingsSha": "60e797665a00bf0a4b88d5bbbac76734e5a2db7bae4ec3be6b787895896ef078",
@@ -82,7 +82,7 @@
       }
     },
     "ProtoGentlyTable": {
-      "path": "/sessions/keen-wonderful-wozniak/mnt/AndroidStudioProjects/ProtoGentlyTable",
+      "path": "/Users/yundonghyeon/AndroidStudioProjects/ProtoGentlyTable",
       "head": "3d96668f45f8673aac49ac78dcc70a2312f2476b",
       "cycleDisciplineSha": "732017a7cdd589d496140156c019ab9b79439d4bb37a300e1d1c548d8948258d",
       "settingsSha": "60e797665a00bf0a4b88d5bbbac76734e5a2db7bae4ec3be6b787895896ef078",

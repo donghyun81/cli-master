@@ -121,23 +121,11 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 
 
 
+
 ## Last verify-sync
 
-- timestamp: 2026-05-12T19:56:08+0900
-- pass: 107
-- drift: 9
-- miss: 1
-- exit: 1
-
-### Drift 상세
-
-- .claude/agents/active/billing-payments-guardian.md  master=b8aea0e4e7c7  GentlyBreath=✓  GentlyDay=✓  GentlyTable=✓  app-foundation=fa6ea5a803cf(✗)
-- .claude/agents/active/code-simplifier.md  master=f05166855af4  GentlyBreath=✓  GentlyDay=✓  GentlyTable=✓  app-foundation=1b98596e1fb0(✗)
-- .claude/agents/active/domain-roles.md  master=09c5f1f7bb66  GentlyBreath=✓  GentlyDay=✓  GentlyTable=✓  app-foundation=86e8b6a75b48(✗)
-- .claude/agents/active/layer-checker.md  master=5c04b2d75d8d  GentlyBreath=✓  GentlyDay=✓  GentlyTable=✓  app-foundation=34f42c7f2eb7(✗)
-- .claude/hooks/baseline-snapshot.sh  master=d41f25ffc281  GentlyBreath=✓  GentlyDay=✓  GentlyTable=✓  app-foundation=MISS
-- .claude/rules/cycle-discipline.md  master=48f2dcdc5ed7  GentlyBreath=✓  GentlyDay=✓  GentlyTable=✓  app-foundation=9c5021e50834(✗)
-- .claude/rules/routing-and-delegation.md  master=444ec894710c  GentlyBreath=✓  GentlyDay=✓  GentlyTable=✓  app-foundation=059d80d8434a(✗)
-- .claude/rules/safety-and-secrets.md  master=768c41b5a941  GentlyBreath=✓  GentlyDay=✓  GentlyTable=✓  app-foundation=7e9e35b41ad6(✗)
-- .claude/rules/verification-and-review.md  master=ee9e985059f8  GentlyBreath=✓  GentlyDay=✓  GentlyTable=✓  app-foundation=b107f7c98b73(✗)
-- .claude/settings.json  master=6919ac4ad00a  GentlyBreath=✓  GentlyDay=✓  GentlyTable=✓  app-foundation=f8bace35dbfa(✗)
+- timestamp: 2026-05-13T11:23:33+0900
+- pass: 117
+- drift: 0
+- miss: 0
+- exit: 0
