@@ -122,10 +122,16 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 
 
 
+
 ## Last verify-sync
 
-- timestamp: 2026-05-13T11:23:33+0900
+- timestamp: 2026-05-13T15:37:53+0900
 - pass: 117
-- drift: 0
+- drift: 2
 - miss: 0
-- exit: 0
+- exit: 1
+
+### Drift 상세
+
+- gradlew  master=3238afb2aed5  GentlyBreath=✓  GentlyDay=✓  GentlyTable=✓  app-foundation=734b3879d350(✗)
+- gradlew.bat  master=1d297e00bd21  GentlyBreath=✓  GentlyDay=✓  GentlyTable=✓  app-foundation=57931b17dd22(✗)
