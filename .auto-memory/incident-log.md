@@ -323,3 +323,23 @@
 - mitigation: 본 entry = false positive 추적 영역 단독 영역 (= incident-log append 영역만 · cycle scope 외 영역 분리 · STOP 7 방지 정합). 본 cycle 측 추가 변경 영역 X. 영역 정합 = (1) 향후 사고 영역 점검 시 본 2 영역 측 검증 결과 영역 (= false positive 영역) 참조 default (= 동족 사고 영역 측 재 발화 시 본 entry grep 영역 = 영역 정합 확인) (2) cycle prompt 측 cross-check 사고 영역 patterns 정착 영역 (= prompt 측 사전 disk verification 영역 사용자 측 자발 영역 정합 · cli 자율 검증 의무 영역 X).
 - trail: open 영역 X (= false positive 추적 entry · 동족 사고 누적 영역 X). 동족 사고 누적 영역 = 사고 14건 점검 영역 측 false positive 2 = 본 entry 만 영역. 학습 = cycle 진입 시 사전 disk cross-check 영역 (= 사용자 측 prompt 안 명시 영역) = cli 측 추가 작업 영역 X (= 추적 영역만) + 향후 동일 file + § 영역 점검 시 본 entry 영역 reference default 영역 정합.
 ```
+
+## 2026-05-13T12:00:00+0900
+
+```
+- type: cli infra cover 영역 검증 false positive entry (verify-sync.sh quick vs 전체 모드 분기 실측 정합)
+- cycle: MASTER-INCIDENT-L2-CLASSIFICATION-2APPEND-001 (= L2 검증 안 잡힌 사고 5건 중 본 entry = L2-#4 영역)
+- summary: 직전 L2 검증 안 cowork 측 추정 영역 = "verify-sync.sh 측 CORE_CLI 20 종 = .claude/ 안 61 file 중 12 만 명시 · 자동 cover ~36%" 영역. 본 cycle 진입 사전 disk cross-check 결과 (= verify-sync.sh L90-136 실측) = `--quick` 모드 (= `QUICK=1`) = `CHECK_FILES = PROTECTED (5) + CORE_CLI (20) = 25 file` 영역만 (= 빠른 검증 영역). **전체 모드 (default · `QUICK=0`) = `find .claude docs scripts/agent .ai/promptfit .ai/uiux-sot/refresh .github -type f ! -name '.DS_Store' ! -name 'settings.local.json' ! -path './.git/*' ! -path 'docs/release-readiness/*'` 영역 = 이미 동적 glob cover** (= C5 cycle 영역 정합 ✓ · 117 file PASS / DRIFT 0 / MISS 0). CORE_CLI 배열 영역 = `--quick` 모드 전용 영역 = 의도된 default 영역 (= 빠른 sanity check 영역 의도). 추정 영역 wrong mode 적용 = false positive 영역 분류 정합.
+- mitigation: 본 entry = false positive 추적 영역 단독 영역 (= incident-log append 영역만 · cycle scope 외 변경 영역 X · CORE_CLI 배열 또는 verify-sync.sh 본문 변경 X · STOP 5 방지 정합). 영역 정합 = (1) 향후 L2 검증 영역 = 스크립트 본문 실측 영역 추가 의무 (= quick vs 전체 모드 분기 영역 사전 분리 검증 default) (2) cycle prompt 측 사전 disk cross-check patterns 정착 영역 = 사용자 측 자발 영역 정합 (= cli 자율 검증 의무 영역 X) (3) 향후 동일 추정 재 발화 시 본 entry grep = `grep -A2 "L2-#4" .auto-memory/incident-log.md` 영역 = 영역 정합 확인 default.
+- trail: open 영역 X (= false positive 추적 entry · 동족 사고 누적 영역 X). 동족 사고 누적 영역 = 직전 entry 2026-05-12T18:30:00+0900 (= L3-2 + L3-9 cross-ref false positive 2) + 본 entry (= L2-#4 cover false positive 1) = 본 chat 측 false positive 누적 3 영역. 학습 = L2 검증 영역 = 스크립트 본문 분기 영역 (quick vs default) 사전 분리 검증 + cli infra cover 비율 추정 영역 = find-based 동적 glob 영역 vs 명시 배열 영역 분리 의무 default 영역.
+```
+
+## 2026-05-13T12:00:01+0900
+
+```
+- type: 의도된 영역 default classification entry (domain-roles.md 위치 영역 · 사용자 결정 C-2-c default 유지)
+- cycle: MASTER-INCIDENT-L2-CLASSIFICATION-2APPEND-001 (= L2 검증 안 잡힌 사고 5건 중 본 entry = L2-#5 영역)
+- summary: `.claude/agents/active/domain-roles.md` (= 100 line · "Domain Roles — Navigation Index" 본문) 위치 영역 = `.claude/agents/active/` 안 영역 정합. Claude Code 측 agent 자동 인식 가능성 영역 추정 영역 (= path 영역 정합 · 그러나 실 본문 = navigation index 영역 · agent 명세 영역 X). 실 사고 발생 = 0 건 (`grep -c "domain-roles" .auto-memory/incident-log.md` = 0 · 본 entry append 직전 baseline 정합). 사용자 본 chat 측 결정 = C-2-c (= default 유지 영역 + incident-log entry append 영역만). domain-roles.md 본문 변경 영역 X · 위치 변경 영역 X · agent 분리 영역 X.
+- mitigation: 본 entry = 의도된 영역 default 분류 명시 영역 단독 영역 (= incident-log append 영역만 · domain-roles.md 본문/위치 변경 영역 X · STOP 4 방지 정합). 영역 정합 = (1) 사고 영역 분류 default = "잠재 위험 영역" vs "실 사고 발생 영역" 분리 의무 (= 잠재 영역만 = 본 entry 추적 영역만 · 실 사고 영역 = 별 cycle mitigation 영역 분리) (2) 향후 domain-roles.md 측 실 사고 발생 시 (= Claude Code 측 navigation index 영역 agent 로 오인식 영역 발화 시) = 별 cycle 후보 영역 = "domain-roles 위치 재검토" 가칭 (= `.claude/agents/active/` → `.claude/docs/` 또는 `.claude/rules/` 영역 이동 영역 검토) (3) 본 chat 측 사용자 결정 C-2-c 정합 영역 = default 유지 영역 진입 default.
+- trail: open 영역 X (= 의도된 default 분류 entry · 동족 사고 누적 영역 X). 동족 사고 누적 영역 = 본 entry = 의도된 default 분류 1 영역. 학습 = 사고 영역 분류 시 "잠재 위험 영역" vs "실 사고 발생 영역" 분리 의무 default 영역 (= 잠재 영역만 = 추적 영역만 · 실 사고 영역만 = mitigation 영역 진입). 본 cycle 측 사고 14건 영역 종합 정착 영역 = 마감 10 + false positive 3 (L3-2 + L3-9 + L2-#4) + 의도된 default 1 (L2-#5 = 본 entry) = 14 영역 분류 영구 정착 영역 정합.
+```
