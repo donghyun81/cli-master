@@ -14,6 +14,8 @@
 # Logs
 .ai/hooks/*.log
 .ai/traces/*.jsonl
+.ai/nightly-baseline/*.log
+.ai/nightly-baseline/latest.md
 
 # Temp
 *.tmp

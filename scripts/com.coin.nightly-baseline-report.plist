@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.coin.nightly-baseline-report</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/bin/bash</string>
+        <string>-c</string>
+        <string>export PATH="/usr/local/bin:/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin:$(ls -1d {{HOME}}/.nvm/versions/node/*/bin 2&gt;/dev/null | tail -1):$PATH"; {{HOME}}/AndroidStudioProjects/claude-cli-master/scripts/nightly-baseline-report.sh</string>
+    </array>
+
+    <!-- 매일 04:00 KST 실행 (working-file-archiver 03:00 + 1 시간 시차) -->
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Hour</key>
+        <integer>4</integer>
+        <key>Minute</key>
+        <integer>0</integer>
+    </dict>
+
+    <!-- 부팅 시 자동 발화 X (04:00 일정만 발화) -->
+    <key>RunAtLoad</key>
+    <false/>
+
+    <!-- 백그라운드 (low priority) -->
+    <key>Nice</key>
+    <integer>10</integer>
+
+    <key>StandardOutPath</key>
+    <string>{{HOME}}/Library/Logs/nightly-baseline-report.log</string>
+
+    <key>StandardErrorPath</key>
+    <string>{{HOME}}/Library/Logs/nightly-baseline-report.err</string>
+
+    <!-- 환경 변수 (잡 안 PARENT_DIR override 가능) -->
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PARENT_DIR</key>
+        <string>{{HOME}}/AndroidStudioProjects</string>
+        <key>HOME</key>
+        <string>{{HOME}}</string>
+    </dict>
+</dict>
+</plist>
