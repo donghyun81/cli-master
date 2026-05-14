@@ -193,10 +193,12 @@ COMMITS_BLOCK="$(build_recent_commits)"
 CYCLE_BLOCK="$(build_cycle_unfinished)"
 
 # === claude -p prompt 본문 build ===
-PROMPT_FILE="$(mktemp -t nightly-baseline-prompt.XXXXXX)"
-trap 'rm -f "$PROMPT_FILE" "$OUT_FILE.tmp"' EXIT
+# CLAUDE.md §4 절대 금지 (/tmp · $TMPDIR 계열) + settings.json deny Bash(*tmp*) 정합:
+# mktemp/$TMPDIR 미사용. heredoc 으로 prompt 영역을 shell 변수에 박고 stdin pipe.
+# OUT_FILE.tmp 만 trap 정리 영역 (= $NIGHTLY_DIR 안 = repo 안 출력 영역 = §4 정합).
+trap 'rm -f "$OUT_FILE.tmp"' EXIT
 
-cat > "$PROMPT_FILE" <<PROMPT
+PROMPT_BODY=$(cat <<PROMPT
 당신은 baseline 리포트 양식화 보조다. 아래 측정 데이터를 그대로 인용해 markdown 리포트 1 개를 만든다. 추측·창작 금지. 데이터 밖 fact 추가 금지.
 
 ## 본 작업 정의 (repo 도메인 baseline · 단방향 단일 진실)
@@ -286,6 +288,7 @@ $CYCLE_BLOCK
 
 위 layout 그대로 출력하라. 데이터 안에 없는 fact 추가 X.
 PROMPT
+)
 
 # === claude -p 호출 (read-only · LLM only · --tools "" 로 도구 비활성) ===
 CLAUDE_EXIT=0
@@ -305,7 +308,7 @@ else
     --output-format text \
     --max-budget-usd 0.50 \
     --append-system-prompt "You are a baseline report formatter. Use only the data provided in the user message. Do not invent facts. Output Korean markdown." \
-    < "$PROMPT_FILE" 2>&1)"
+    <<< "$PROMPT_BODY" 2>&1)"
   CLAUDE_EXIT="$?"
 fi
 
