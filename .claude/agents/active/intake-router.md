@@ -42,6 +42,17 @@ tools: Read, Glob, Grep
 - 병렬 vs 순차 처리 방식
 - 초기 위험 등급
 
+## Supabase keyword routing (= CLI 자동 / 권장 검토 / Dashboard 한정 분기)
+
+`.claude/rules/supabase-handling.md` 안 §6 trigger 키워드 (supabase / edge function / EF / migration / RLS / Vault / psql / supabase db / supabase functions / supabase secrets / supabase gen types / supabase storage / supabase link / auth admin / service_role 등) 감지 시 본 rule reading 의무 + 다음 분기 적용:
+
+- **§2 CLI 자동 처리 영역** (EF lifecycle / EF secrets / migration scaffold + edit / `supabase db diff` + dump / staging `supabase db push` / `supabase gen types` / storage 파일 / read-only `psql` / local seed / `supabase link`) → 별도 확인 없이 자체 진행
+- **§3 권장 검토 영역** (production `supabase db push` / RLS policy 첫 적용 / admin API / Vault 시크릿 첫 등록) → 사용자 명시 승인 후 진행
+- **§4 Dashboard 한정 영역** (DB backup·restore / billing / API key rotation / 실시간 시각 모니터링) → STOP + 사용자 확인 (CLI 자동 진입 금지)
+- **§5 STOP 조건** (`safety-and-secrets.md` curl/wget deny 정합 어긋남 = admin API curl 강제 차단 · `supabase` CLI 또는 SDK 우선 / `service_role` key 평문 작성 시도 / production `db push`·`db reset` 사용자 승인 부재 / `vault.create_secret` 첫 등록 사용자 확인 부재) → 즉시 STOP
+
+`safety-and-secrets.md` 안 `curl` / `wget` deny 와 admin API 호출 경로 정합 어긋남이 본 분기의 핵심 영역 → `supabase functions invoke` 경유 또는 supabase-js / supabase-kt SDK 우선.
+
 ## Must escalate when
 
 - **MoneyAuth**: 결제·구독·entitlement·수익 흐름 관련 → 즉시 STOP, 사용자 보고. 전문가 호출 전에 게이트
