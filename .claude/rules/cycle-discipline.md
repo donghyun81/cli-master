@@ -397,3 +397,53 @@ cli infra 수정 필요?
 - `COWORK-PREP-BASELINE-MISMATCH-005~006` — lifecycle/deprecated 키워드 미점검 (Cowork → CLI handoff 사고).
 
 **적용 대상**: `.claude/agents/active/intake-router.md` "Evidence to gather" 섹션 + §14a Cowork prep 6 절차 + 모든 BASELINE 실측 cycle.
+
+---
+
+### 18) cli infra 분기 정기 review cadence (2026-05-17 신설 · `MASTER-CLI-INFRA-SELFIMPROVING-REVIEW-CADENCE-001`)
+
+> 본 § = Anthropic blog "How Claude Code works in large codebases" (2026-05-14) 권고 (B-1) 흡수. 종전 cli infra review = incident-driven 한정 (= 사고 발생 시 mitigation cycle). 본 § 정착 후 = 분기 별 정기 점검 cadence 추가.
+
+**trigger 시점**: 매 quarter 첫 월요일 (1/6, 4/6, 7/6, 10/6 부근 첫 월요일 KST). 본 timing = anchor 단일 sot · 사용자 자율 직접 진입.
+
+**scope 한정** (= 본 §의 review cycle 영역 한정 · 제품 코드 무접촉):
+
+| 점검 대상 | grep / 측정 |
+|---|---|
+| `.claude/rules/*.md` outdated rule 발견 | 모델 진화 (Sonnet/Opus major 갱신) 이후 어휘 / 패러다임 / 권고 영역 정합 검토 |
+| `.claude/hooks/*.sh` self-test PASS 여부 | 각 hook 단독 실행 → silent-success 또는 의도된 fixture 발화 |
+| `.claude/settings.json` deny list + hook 등록 영역 정합 | 새 hook 누락 / deprecated hook 잔존 검토 |
+| `.auto-memory/protected-file-hashes.md` baseline | 5 보호 file sha 정합 |
+| 직전 분기 incident-log entry 누적 추세 | 동일 패러다임 사고 3+ 누적 = 신 rule 신설 후보 |
+
+**cycle 산출**: lightweight 4 file (§11 정합) — PLAN.md / VERIFY.md / REVIEW.md / TODO.md. 보고서 측 `[Diff]` 영역 0 인 경우 = "cli infra 영역 분기 무사고 PASS" 1 줄 명시.
+
+**자동 발화 X**: 본 § = 정책 명시 영역 only · 자동 trigger hook 신설 X (= scope 폭발 회피 · §15 패턴 1 정합). 사용자 인지 영역 단일.
+
+**관련 별 trail**: `MASTER-CLI-INFRA-QUARTERLY-REVIEW-NNN` (N = 분기 진입 시점 부여 · TaskId 자율).
+
+---
+
+### 19) Hooks self-improving loop (2026-05-17 신설 · `MASTER-CLI-INFRA-SELFIMPROVING-REVIEW-CADENCE-001`)
+
+> 본 § = Anthropic blog (2026-05-14) 권고 (B-3) 흡수. 기존 hook 영역 = quality gate (stop-gate.sh) + degeneration (post-edit-degeneration-check.sh) + libs cross-verify 영역 중심. 추가 영역 = 활성 cycle 측 paradigm 누적 자동 추출 후 cli infra 정착 후보 silent 제안.
+
+**역할**: `.claude/hooks/stop-reflect.sh` (= Stop hook · stop-gate.sh 와 분리 · SRP 정합). 매 cycle 마감 시점 `.ai/reports/<taskId>/REVIEW.md` 또는 `EVIDENCE.md` 안 paradigm 누적 패턴 grep + silent 후보 출력.
+
+**감지 패턴** (= grep 정규식 · false positive 회피 한정 cluster):
+
+| 패턴 | 한국어 + 영어 |
+|---|---|
+| 신 paradigm | `(신\|새\|emerging\|new) (paradigm\|패러다임)` |
+| 정합 paradigm | `(정합\|consistent\|recurring) (paradigm\|패러다임)` |
+| 누적 paradigm | `(누적\|반복\|accumulated) (paradigm\|패러다임)` |
+
+**임계**: 한 file 안 3+ 회 등장 시점만 trigger (= M2-like 임계 · `text-degeneration-prevention.md` §3 정합).
+
+**출력 정책**: silent-success default · 발화 시점만 stderr 1~3 줄 후보 명시. exit 0 의무 (non-blocking · 기존 stop-gate.sh 영역 breakage X).
+
+**self-test**: `bash .claude/hooks/stop-reflect.sh` (positional arg fallback) 또는 `bash .claude/hooks/stop-reflect.sh <path>`.
+
+**mode**: env `REFLECT_ENFORCE=warn` (default) · `REFLECT_ENFORCE=silent` (= 출력 0 · debug 영역).
+
+**관련 cycle**: 본 §의 첫 정착 = `MASTER-CLI-INFRA-SELFIMPROVING-REVIEW-CADENCE-001`. paradigm 추출 결과 = 사용자 자율 채택 (= 자동 file 신설 X · `CLAUDE.md` 또는 `.auto-memory` 갱신 후보 silent 제안 영역 단일).
