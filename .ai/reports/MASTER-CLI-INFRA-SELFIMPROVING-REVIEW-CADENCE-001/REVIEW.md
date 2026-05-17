@@ -77,15 +77,15 @@
 
 ### Deliverable 4 — commit sha (master + 자식 4 + parent sha 인용)
 
-| repo | parent sha (직전 HEAD) | new sha (본 cycle commit) |
-|---|---|---|
-| claude-cli-master | `f554ecf6` | `<commit 직후 갱신>` |
-| GentlyBreath | `242a113c` | `<commit 직후 갱신>` |
-| GentlyDay | `0d5fb1cc` | `<commit 직후 갱신>` |
-| GentlyTable | `3220cc1c` | `<commit 직후 갱신>` |
-| app-foundation | `48eba315` | `<commit 직후 갱신>` |
+| repo | parent sha (직전 HEAD) | new sha (본 cycle commit) | 비고 |
+|---|---|---|---|
+| claude-cli-master | `f554ecf6` | **`54e46df`** | feat(infra) · 7 file changed + 364 insertions |
+| GentlyBreath | `242a113c` (사용자 §0 anchor) → `da8165b` (실 HEAD baseline anchor stale) | **본 cycle 별 commit X · 사용자 `da8165b` commit (GB-SUPABASE-LINK-001) 안 묶음** | propagate.sh cp + git add 결과 영역 = 사용자 별 `da8165b` commit 안 staged 상태에서 한꺼번에 commit 됨 (= byte-identical sha 정합). 본 cycle 의 cli infra 3 file 변경 = `da8165b` commit body 측 명시 X (= 별 cycle 의 부산물 영역 묶음). REVIEW.md 측 명시 + 별 cycle 발생 X 정합. |
+| GentlyDay | `0d5fb1cc` | **`4179b53`** | chore(infra) · 3 file + 124 insertions · amend 후 sha 정합 |
+| GentlyTable | `3220cc1c` | **`ce67383`** | chore(infra) · 3 file + 124 insertions |
+| app-foundation | `48eba315` | **`8fc771f`** | chore(infra) · 3 file + 124 insertions |
 
-> 본 표 = REVIEW.md 최초 작성 시점 영역 (= commit 직전). 실 commit sha = 본 cycle 마감 보고 시점 동일 file 안 갱신 의무.
+**자기 검증 (§9 정합 의무)**: master commit body 측 `[Sha]` 영역 cycle-discipline.md `32220dd1` → `3419a7e0` + stop-reflect.sh 신설 `52c17749` + settings.json `49bea81b` → `06869a49` 명시 정합. drift 0.
 
 ### Deliverable 5 — REVIEW.md 절대 path
 
