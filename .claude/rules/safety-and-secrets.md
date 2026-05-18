@@ -84,6 +84,52 @@ read-only 역할(ux-auditor, backend-api-architect 등)은 Write/Edit 권한이 
 
 ---
 
+## macOS Keychain 측 secret 보관 paradigm
+
+> **신설**: 2026-05-18 · `MASTER-CLI-SUPABASE-COMPREHENSIVE-001` · macOS native Keychain 측 secret 보관 + wrap script 측 추출 paradigm 단일 진실 영역.
+> **연관**: `.claude/rules/supabase-handling.md` §10.5 (= MCP server 측 Keychain reference) + `~/bin/claude-wrap.sh` (= 본 paradigm 측 진입점).
+
+### 등록 paradigm (= 사용자 manual 진입 영역)
+
+token 측 macOS Keychain 측 보관 영역. cli session 측 진입 차단 영역 (= token 평문 본문 측 cli session 측 inject 차단 의무).
+
+```bash
+security add-generic-password -a "$USER" -s <slot-name> -w
+# -w flag = hidden prompt · token 측 stdout 노출 차단
+```
+
+본 cycle 측 slot 명세 (= MASTER-CLI-SUPABASE-COMPREHENSIVE-001 baseline):
+- `supabase-gb-token` (= GentlyBreath 측 PAT)
+- `supabase-gd-token` (= GentlyDay 측 PAT)
+- `supabase-gt-token` (= GentlyTable 측 PAT)
+
+### 추출 paradigm (= wrap script 측 진입 영역)
+
+`~/bin/claude-wrap.sh` 측 fail-fast paradigm:
+
+```bash
+SUPABASE_ACCESS_TOKEN_GB="$(security find-generic-password -s supabase-gb-token -a "$USER" -w 2>/dev/null)" \
+  || { echo "Keychain miss: supabase-gb-token" >&2; exit 1; }
+export SUPABASE_ACCESS_TOKEN_GB
+```
+
+**bash semantics fact** (= fail-fast paradigm 정합 의무):
+- `export VAR="$(failing)"` 측 exit code = 0 default (= `export` builtin 측 `$()` exit code propagate X)
+- → local assignment + export 분리 paradigm 의무 (= 위 본문 정합)
+
+### Keychain trust dialog paradigm
+
+첫 access 시점 macOS Keychain 측 trust dialog 활성 영역. 사용자 본인 측 **"Always Allow"** 클릭 권장 (= 후속 access 측 자동 PASS default).
+
+### 평문 차단 의무
+
+본 paradigm 측 token 평문 commit / file 기록 차단 (= 기존 §시크릿 기록 금지 규칙 정합):
+- `.mcp.json` 측 `${SUPABASE_ACCESS_TOKEN_<자식>}` env interpolation 정합 (= 평문 token 본문 X)
+- wrap script 측 subshell `$()` capture + 변수 미echo (= stdout / stderr 노출 차단)
+- commit log 측 `eyJ` (= JWT prefix) / `sbp_` (= Supabase PAT prefix) 평문 0 match 의무 (= compound-lint 정합)
+
+---
+
 ## 시크릿 스캔 패턴
 
 compound-lint(`scripts/agent/compound-lint.sh`)가 다음을 검사한다:

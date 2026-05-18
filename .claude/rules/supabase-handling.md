@@ -153,6 +153,9 @@ supabase gen types
 supabase storage
 supabase link
 service_role / anon key
+mcp / Supabase MCP / mcp__supabase-*
+Keychain / security find-generic-password / security add-generic-password
+SUPABASE_ACCESS_TOKEN / SUPABASE_ACCESS_TOKEN_GB / SUPABASE_ACCESS_TOKEN_GD / SUPABASE_ACCESS_TOKEN_GT
 ```
 
 ---
@@ -180,3 +183,73 @@ service_role / anon key
 ## §9 명시 cycle 이력
 
 - 2026-05-16 · CLI-INFRA-SUPABASE-HANDLING-001 · 본 rule 신설 + intake-router supabase 분기 1 섹션 추가 + 4-repo propagation
+- 2026-05-18 · MASTER-CLI-SUPABASE-COMPREHENSIVE-001 · §10 신설 (= MCP server 호출 paradigm + supabase CLI 통합 paradigm + 자식별 3 instance + Keychain wrap reference + read-only baseline + `cli_...` token 폐기) + §6 키워드 trigger list append + 5-repo byte-identical propagation (= master + app-foundation + GB + GD + GT)
+
+---
+
+## §10 MCP server 호출 paradigm (= MASTER-CLI-SUPABASE-COMPREHENSIVE-001)
+
+> **신설**: 2026-05-18 · `MASTER-CLI-SUPABASE-COMPREHENSIVE-001` · MCP server 호출 paradigm + supabase CLI 통합 paradigm 본문.
+> **본질**: §2 CLI 자동 paradigm (= `supabase` CLI 직접 호출) 외 MCP layer 측 도구 호출 paradigm 병행 추가.
+
+### §10.1 MCP server 등록 + 호출 paradigm
+
+`.mcp.json` 측 등록 영역 (= 5-repo byte-identical · `claude-cli-master` + `app-foundation` + `GentlyBreath` + `GentlyDay` + `GentlyTable`):
+
+| server | project_ref | 자식 도메인 |
+|---|---|---|
+| `supabase-gb` | `vpmkruzpcpbfpqgpcihp` | 호흡 (GentlyBreath) |
+| `supabase-gd` | `davlfkmebzdzolmaznlk` | 일상 (GentlyDay) |
+| `supabase-gt` | `jzypsbpdjrxnzodkkfhs` | 식단 (GentlyTable) |
+
+호출 namespace = `mcp__supabase-{gb,gd,gt}__*` (= 자식 도메인 분리). 주요 tool 영역 = `list_tables` / `list_extensions` / `list_migrations` / `execute_sql` (= read-only SELECT) / `get_advisors` / `get_logs` / `list_edge_functions`.
+
+### §10.2 supabase CLI 호출 paradigm 분기
+
+기존 §2 본문 (= CLI 자동 처리 영역) 본문 본질 무접촉. 신 paradigm = wrap script (= `~/bin/claude-wrap.sh`) 측 `SUPABASE_ACCESS_TOKEN_{GB,GD,GT}` env var inject 통합. 자식별 진입 시점 (= 사용자 본인 terminal 또는 cli session 내부):
+
+```bash
+SUPABASE_ACCESS_TOKEN="$SUPABASE_ACCESS_TOKEN_GB" supabase functions list --project-ref vpmkruzpcpbfpqgpcihp
+# 또는 ~/.zshrc alias paradigm:
+supabase-gb projects list   # alias supabase-gb='SUPABASE_ACCESS_TOKEN="$SUPABASE_ACCESS_TOKEN_GB" supabase'
+```
+
+### §10.3 분기 결정 표 (= MCP server vs supabase CLI 진입)
+
+| task 영역 | 권장 paradigm | 근거 |
+|---|---|---|
+| DB schema / extension / migration 조회 | **MCP server** (`mcp__supabase-<자식>__list_*`) | read-only · cli session 직접 호출 |
+| read-only SQL (= SELECT) | **MCP server** (`execute_sql`) | read-only baseline 정합 |
+| Edge Function deploy / new / delete | **supabase CLI** (`supabase functions deploy` 등) | write paradigm 영역 · §2.1 정합 |
+| migration 신설 / apply | **supabase CLI** (`supabase migration new` / `supabase db push`) | write paradigm · §2.3 정합 |
+| EF log tail (= streaming) | **supabase CLI** (`supabase functions logs --tail`) | 실시간 streaming · MCP layer X |
+| performance / security advisor | **MCP server** (`get_advisors`) | MCP 단일 진입점 |
+| Vault secret 등록 | **§3.4 정합** (= 사용자 명시 승인 의무) | (= 기존 paradigm 정합) |
+
+### §10.4 read-only baseline (= phased 1 차)
+
+본 cycle 측 baseline = **read-only paradigm 단일** (= `.mcp.json` URL 측 `read_only=true` 의무).
+
+write paradigm 확장 영역 (= `apply_migration` / write SQL 호출) = 별 cycle `MASTER-CLI-MCP-SUPABASE-WRITE-ACTIVATE-001` 분리 default. 본 cycle scope 측 write paradigm 시도 = STOP (= §5 STOP 조건 정합).
+
+### §10.5 Keychain wrap script paradigm
+
+token 보관 + 추출 영역 = macOS Keychain (= `supabase-gb-token` / `supabase-gd-token` / `supabase-gt-token` 3 slot · `security find-generic-password` 측 추출 + wrap script 측 env var inject).
+
+본문 SoT = [`safety-and-secrets.md` §macOS Keychain 측 secret 보관 paradigm](./safety-and-secrets.md). token 평문 commit / file 기록 차단 의무 (= 기존 §"시크릿 기록 금지 규칙" 정합).
+
+### §10.6 자식별 3 instance paradigm
+
+5-repo byte-identical propagation (= master `.mcp.json` 본문 = 5-repo 동일 · 3 server 모두 등록). 자식 cwd 측 cli session 진입 시점 = 3 server 모두 진입 가능 default · 단 호출 namespace 측 자식 도메인 정합 의무 (= GB repo 측 `mcp__supabase-gb__*` 호출 default).
+
+### §10.7 기존 `cli_...` token 폐기 paradigm
+
+본 cycle 진입 baseline = `supabase login` 측 자동 발행 token (= `cli_yundonghyeon@<host>_<timestamp>` 패턴). 본 cycle paradigm = **신 PAT 대체** (= 사용자 Dashboard 발행 + Keychain 등록 + wrap script inject).
+
+폐기 procedure (= 사용자 manual 진입 의무):
+1. cli session 측 Step 10 검증 PASS 확인 (= `claude /mcp` 3 server connect + tool 호출 PASS)
+2. `https://supabase.com/dashboard/account/tokens` 진입
+3. `cli_...` row 측 Revoke
+4. 폐기 후 = wrap script 측 inject paradigm 측 자동 인증 default
+
+cli session 측 직접 폐기 시도 = STOP (= §5 정합 · 사용자 manual 의무).
