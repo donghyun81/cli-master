@@ -237,6 +237,27 @@ PLAN / VERIFY / REVIEW / PromptFit 정규 스키마: `.claude/rules/report-forma
 - `docs/design/pencil-sot-policy.md` (보호) — Pencil SoT 정책 §1.1 디자인 도구 바인딩 / [CURRENT] / [TARGET] / [LOCKED] 라벨 / §3 Phase R 예외 / §8 고위험 STOP / §9 마이그레이션 escape
 - `.claude/rules/uiux-sot-refresh.md` (보호) — refresh trigger FULL / PARTIAL / DOC-ONLY 분류
 
+신규 Pencil 측 cli infra (MASTER-CLI-PENCIL-OPTIMIZATION-001 · 2026-05-19):
+- `.claude/rules/pencil-cli-headless.md` — `@pencil.dev/cli` headless 진입점 + batch tasks.json + Save As 모달 회피 + CI/CD 통합 paradigm
+- `.claude/rules/pencil-mcp-tools-reference.md` — 12 official + 1 package-verified (`open_document`) 도구 단일 SoT
+- `.claude/rules/design-prompting-paradigm.md` — Effective Prompting 4 원칙 + verification 4-step + §FREEDOM
+
+---
+
+## 14a. 보호 파일 sha baseline (2026-05-19 · MASTER-CLI-PENCIL-OPTIMIZATION-001 마감)
+
+5종 보호 파일 sha (post-cycle baseline · 본 cycle 안 `.claude/rules/pencil-uiux-workflow.md` 단일 변경):
+
+| 보호 파일 | sha | 본 cycle 변동 |
+|---|---|---|
+| `docs/schemas/ui-spec.schema.json` | `5b84cd9e4bc361652d6d0e561d8846eed3400d00` | 불변 |
+| `.claude/rules/pencil-uiux-workflow.md` | `20c72ae66b513bdc991a377f73688c23d1154bcc` | **갱신** (이전 `3a703b30...`) |
+| `docs/design/pencil-sot-policy.md` | `b27fbe16edb688218d7e57dd9a66d0f2a31ef300` | 불변 |
+| `.claude/rules/uiux-sot-refresh.md` | `d3a0b57390bd0414cc89283a571dd6ecb8cb1562` | 불변 |
+| `docs/design/design-sot-policy.md` | `e580b6d7ca9a88aef67c03f4bb39360993ab996f` | 불변 |
+
+`.auto-memory/protected-file-hashes.md` 와의 정합 의무 (`cycle-discipline.md` §10 정합).
+
 ---
 
 ## 15. master cycle 진행 이력 (placeholder · 매 cycle 시 갱신)
@@ -268,6 +289,7 @@ PLAN / VERIFY / REVIEW / PromptFit 정규 스키마: `.claude/rules/report-forma
 | MASTER-DEGENERATION-PREVENTION-POLICY-001 | 2026-05-12 | text degeneration 본질 mitigation cycle. 신규 SoT `.claude/rules/text-degeneration-prevention.md` 신설 (3 metric · M1 한 문장 동일 token 3+ / M2 한 문단 5+ / M3 file z-score · paraphrase 의무 + mental scan 3 step + session reset trigger) + 신규 hook `.claude/hooks/post-edit-degeneration-check.sh` (Python3 + bash · 화이트리스트 union allowed-acronyms 자동 · TARGET_EXTS .md/.txt · warn default + enforce mode · positional argument fallback) + settings.json PostToolUse Edit\|Write matcher 등록 (post-policy-watch.sh 와 묶음) + self-test 7 fixture PASS (C6 policy file enforce → exit 0 · 박음 cluster positive case 5 violation 감지). 5-repo propagation 의무. | **5-repo 적용** (master + GB + GD + GT + app-foundation) |
 | CLI-INFRA-SUPABASE-HANDLING-001 | 2026-05-16 | Supabase 도메인 (Edge Function / migration / RLS / Vault / psql / DB push 등) 요청 진입 시 CLI 자동 처리 영역 + Dashboard 한정 영역 분기 + STOP gate SoT 신설. `.claude/rules/supabase-handling.md` 9 섹션 (§1 적용 범위 / §2 CLI 자동 9 sub / §3 권장 검토 4 sub / §4 Dashboard 한정 4 sub / §5 STOP / §6 키워드 trigger / §7 인접 SoT 정합 / §8 변경 정책 / §9 cycle 이력) + `.claude/agents/active/intake-router.md` Decision authority 뒤 Supabase keyword routing 1 섹션 append (§6 키워드 감지 시 §2/§3/§4/§5 분기). safety-and-secrets curl/wget deny 정합 어긋남 (admin API curl 강제 불가) = `supabase` CLI 또는 SDK 우선 명시. 4-repo propagation (master + GB + GD + GT · app-foundation §9 scope 외). verify-sync 121/0/0 PASS. | **4-repo 적용** (master + GB + GD + GT) |
 | MASTER-CLI-SUPABASE-COMPREHENSIVE-001 | 2026-05-18 | Supabase MCP server 3 instance 등록 (supabase-gb/gd/gt · 자식별 project_ref 분리 · HTTP transport + Bearer Authorization + read_only=true) + macOS Keychain wrap script paradigm 신설 (`~/bin/claude-wrap.sh` · `security find-generic-password` 측 token 추출 + fail-fast paradigm + `exec command claude` 측 alias resolution 차단) + 5-repo byte-identical propagation (master + app-foundation + GB + GD + GT) + supabase CLI 통합 paradigm (`~/.zshrc` 측 supabase-gb/gd/gt 3 alias append + setopt INTERACTIVE_COMMENTS) + supabase-handling.md §10 신설 (7 sub-section · MCP server 호출 + supabase CLI 분기 + read-only baseline + Keychain reference + 자식별 paradigm + `cli_...` token 폐기) + safety-and-secrets.md §macOS Keychain 측 secret 보관 paradigm 신설 + 기존 `cli_yundonghyeon@<host>_<timestamp>` 자동 token 폐기 paradigm (= 사용자 manual revoke). read-only baseline (= phased 1차 · write 확장 = `MASTER-CLI-MCP-SUPABASE-WRITE-ACTIVATE-001` 별 cycle 분리). | **5-repo 적용** (master + app-foundation + GB + GD + GT byte-identical) |
+| MASTER-CLI-PENCIL-OPTIMIZATION-001 | 2026-05-19 | pencil.dev 공식 doc (2026-04-03) 흡수: 12 official MCP tool 단일 reference SoT (`pencil-mcp-tools-reference.md`) + 1 package-verified (`open_document`) 분리 명시 (Part A / Part B 구조) + Pencil CLI headless mode 진입점 SoT (`pencil-cli-headless.md` · @pencil.dev/cli npm + interactive shell + batch tasks.json + Save As 모달 회피 + CI/CD 통합) + Effective Prompting paradigm SoT (`design-prompting-paradigm.md` · Be Specific + Provide Context + Reference Design Systems + Iterative 4-step + Verification 4-step + §FREEDOM) + Variables ↔ Compose Theme.kt sync paradigm (`design-to-code-sync.md` §9 신설) + P9→P10 screenshot/export 검증 추가 + `pencil-uiux-workflow.md` §1 정정 (12 official + 1 pkg + 신규 5 도구 명시) + §9 신설 (Pencil CLI binding) + `pencil-automation.md` §13 신설 (headless 분기 표) + ui-implementer / ux-auditor agent 2 file 측 Pencil paradigm 섹션 append. 보호 파일 1 sha 갱신 (pencil-uiux-workflow.md `3a703b30...` → `20c72ae6...`) · 나머지 4 보호 파일 sha 불변. 5-repo byte-identical propagation. 0 production code touch. | **5-repo 적용** (master + app-foundation + GB + GD + GT byte-identical) |
 
 다음 master cycle 후보 (C3~C4):
 - **C3-AUTOMATION-SCRIPTS-001** — propagate.sh + verify-sync.sh + activate-agent.sh + report-gen.sh + `/cycle-report` slash 신설

@@ -97,3 +97,13 @@ stdout:
 - SoftBudget 초과: Yes/No
 - 다음: verifier
 ```
+
+---
+
+## Pencil Integration paradigm (MASTER-CLI-PENCIL-OPTIMIZATION-001)
+
+UI 변경이 Pencil SoT 측 design 의도 흡수를 동반할 때 본 paradigm 적용:
+
+- **headless mode 진입점**: 다중 screen 일괄 신설 / Save As 모달 회피 / CI 자동화 cycle 측 = `.claude/rules/pencil-cli-headless.md` 단일 SoT 참조. desktop stdio (`mcp__pencil__*`) vs CLI headless 분기 = 본 SoT §7.
+- **design system context 호출**: design system 측 styles / guidelines 의도 흡수 시 `mcp__pencil__get_guidelines` 호출 → 결과 prompt context 안 인용. 새 token / hex 신설 진입 시 의무.
+- **Variables ↔ Theme.kt sync 책임**: 변경 영역이 `app-foundation/core/designsystem/.../Theme.kt` 또는 Pencil variable 둘 중 하나에 닿을 때 = `.claude/rules/design-to-code-sync.md` §9 양방향 sync paradigm 적용 의무. drift 발견 시 STOP + change-planner 재호출.

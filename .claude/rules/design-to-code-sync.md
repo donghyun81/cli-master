@@ -62,6 +62,7 @@
 - **P7**: cleanup pass (`legacy-cleanup-governance.md` 명시됨)
 - **P8**: VERIFY.md exit code 기록
 - **P9**: REVIEW.md PromptFit 평가 + INDEX.md 갱신
+- **P10**: 시각 검증 자산 disk 갱신 — `get_screenshot` (PNG render) 또는 `export_nodes` (PNG / JPEG / WEBP / PDF) 호출 후 결과 file 의 sha 변동 확인 (preview.png paradigm 정합 · `MASTER-CLI-PENCIL-OPTIMIZATION-001` 안 추가)
 
 ---
 
@@ -101,3 +102,40 @@
 1. 본 `design-to-code-sync.md` 의 5-type 분류 + Output Checklist 그대로 사용
 2. 도구별 `<tool>-uiux-workflow.md` + `<tool>-automation.md` + `<tool>-auto-save.sh` 신설
 3. master cycle 으로 신설 + propagation
+
+---
+
+## 9. Variables ↔ Code Sync paradigm (`MASTER-CLI-PENCIL-OPTIMIZATION-001`)
+
+design 도구 측 variable / token 과 코드 측 theme / token 간 양방향 sync. pencil.dev 공식 doc (Variables + Design ↔ Code page · 2026-04-03) 명시 paradigm 본 §9 에 흡수.
+
+### 9.1 design tool → code (token export 방향)
+
+agent prompt 패턴 (도구 무관 일반형):
+- "Update `<code-token-file>` with these `<design-tool>` variables"
+- "Sync design tokens from `<design-tool>` to my code"
+- "Export `<design-tool>` variables as `<code-format>` constants"
+
+### 9.2 code → design tool (token import 방향)
+
+agent prompt 패턴:
+- "Create `<design-tool>` variables from my `<code-token-file>`"
+- "Import design tokens from `<code-token-file>` into `<design-tool>`"
+
+### 9.3 본 패키지 Compose 측 구체화
+
+자식 repo (GB / GD / GT) 측 Compose theme 단일 source = `app-foundation/core/designsystem/.../Theme.kt`. Pencil variables ↔ Compose Theme 측 양방향 sync prompt 권장 형식:
+
+- "Create Pencil variables from app-foundation/core/designsystem/.../Theme.kt"
+- "Update Theme.kt with these Pencil variables (color palette · typography scale · spacing tokens)"
+- "Sync design tokens between Pencil variables and Compose Theme — drift 검출 시 [CURRENT] 라벨 정합 의무"
+
+### 9.4 sync 방향 결정 (drift 발생 시)
+
+| drift 시점 | 정답 (SoT) | sync 방향 |
+|---|---|---|
+| Pencil 측 신규 variable 추가 | Pencil | design tool → Theme.kt |
+| Theme.kt 측 신규 color 추가 (Compose 측 prototype 우선) | Theme.kt | Theme.kt → Pencil |
+| 두 측 동시 충돌 | UNKNOWN | STOP → Coin 명시 결정 의뢰 |
+
+Pencil 측 variable 변경 → Phase C type 5 (일괄 갱신) flow 진입. `mcp__pencil__set_variables` 호출 후 inherit 적용된 모든 screen 자동 반영.

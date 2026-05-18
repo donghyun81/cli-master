@@ -17,7 +17,9 @@
 ## 1. 전제 (Pencil 공식 근거)
 
 - Pencil.dev = macOS 캔버스 디자인 도구 + .pen 파일 형식
-- Pencil MCP server (stdio) = `mcp__pencil__*` tools 13 종 (open_document / batch_design / snapshot_layout / get_editor_state / set_variables 등)
+- Pencil MCP server (stdio) = `mcp__pencil__*` tools = **12 official** (pencil.dev 공식 doc 2026-04-03 기준) + **1 package-verified** (`open_document` · 공식 doc 명시 X / 본 패키지 검증된 영역 · §FREEDOM)
+- 도구 list 전체 단일 SoT = `pencil-mcp-tools-reference.md` (본 file 내 도구 목록 중복 금지)
+- 본 cycle (`MASTER-CLI-PENCIL-OPTIMIZATION-001` · 2026-05-19) 안 명시적 추가 5 종 = `search_all_unique_properties` / `replace_all_matching_properties` / `find_empty_space_on_canvas` / `get_guidelines` / `export_nodes` (각 도구 본문 = 참조 file)
 - Claude Code 2.1.114 pin 의무 (`cycle-discipline.md` §13 명시됨 · 2.1.116+ 회귀로 본 작업 차단)
 
 ## 2. Pencil 도구 바인딩 매핑
@@ -110,3 +112,29 @@
 - Pencil .dev 공식 문서: design tool 의 in-memory + Save As 모달 patterns
 - macOS Accessibility API: System Events osascript keystroke
 - Claude Code MCP stdio binding: `anthropics/claude-code` GitHub
+
+---
+
+## 9. Pencil CLI binding (headless mode 진입점)
+
+Pencil 측 작업은 desktop app stdio (= 본 file §3 Type 1~5) 외에 별도 headless 진입점이 존재. SoT = [`pencil-cli-headless.md`](./pencil-cli-headless.md).
+
+### 9.1 desktop app vs CLI headless 선택 기준
+
+| 시나리오 | 권장 binding |
+|---|---|
+| Coin 본인 측 design 실시간 시각 검증 의무 | desktop app (§3 흐름) |
+| batch 다중 screen 일괄 신설 (5+ screen 한 cycle) | CLI headless (`pencil interactive` / `pencil --tasks tasks.json`) |
+| Save As 모달 회피 의무 (Coin 클릭 0) | CLI headless (`save()` 직접 호출) |
+| CI/CD scheduled design refresh | CLI headless |
+| 단일 screen + 시각 검증 X | 둘 다 가능 (Coin 자율) |
+
+### 9.2 호출 paradigm
+
+CLI headless 환경 안에서 `mcp__pencil__*` namespace 와 동일한 tool surface 가 shell 명령으로 노출. 예: `batch_design({ ... })`. 상세 = `pencil-cli-headless.md` §4 + §6 (`save()` 호출).
+
+### 9.3 STOP 조건
+
+- Node.js < 18 → headless mode 미지원 → desktop app fallback
+- `PENCIL_CLI_KEY` 부재 + `pencil login` 미실행 → 인증 실패 → STOP
+- `pencil status` FAIL → headless 진입 차단 → desktop app fallback

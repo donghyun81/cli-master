@@ -16,6 +16,7 @@
 **핵심 원칙**:
 - **신규 .pen 첫 저장** = 사람 1회 클릭 필요 (macOS Save As 모달 다이얼로그)
 - **기존 .pen 변경 저장** = agent 직접 호출로 자동 (Coin 손 작업 0)
+- **headless mode 우회** = §13 (Pencil CLI headless reference) 활용 시 Save As 모달 자체 회피 가능. desktop app paradigm 과 분기 결정은 §13 표 참조.
 
 **근거**: GB-PHASE-B-WORKFLOW-V12-REWRITE-AND-EXPAND-V3-001 (Cycle 8) 검증.
 Pencil MCP `open_document` 로 신규 doc 생성 시 in-memory 만 형성. 첫 Cmd+S 시 macOS Save As 모달 다이얼로그 활성. 모달이 keyboard 입력을 가로채 자동 keystroke 차단. 우회 RCA cost 가 1회 사람 클릭보다 높음.
@@ -61,4 +62,25 @@ Pencil MCP `open_document` 로 신규 doc 생성 시 in-memory 만 형성. 첫 C
 3-repo propagation 정책: settings.json + hook + 본 §12 모두 3-repo byte-identical 권장. F-1/F-2 검증 patterns (CYCLE-PHASE-F-1-NEW-SCREEN-DEFINE-001 + CYCLE-PHASE-F-2-NEW-SCREEN-DEFINE-001) 통계 기반 §12 갱신 명시됨 (`CYCLE-WORKFLOW-V12-REVISION-001` · 2026-05-01).
 
 **WORKFLOW-V12-OVERCONSERVATIVE-001 별 trail close**: F-1+F-2 = 2 cycle 우회 patterns 검증 PASS · 본 §12 갱신 cycle 마감 시 close.
+
+---
+
+### 13) Pencil CLI headless mode 분기 (`pencil-cli-headless.md` 단일 SoT)
+
+본 §13 = `pencil-cli-headless.md` 본문 인용 pointer. 상세 절차 (`@pencil.dev/cli` 설치 / `pencil interactive` shell / batch tasks.json / save() 호출 / 모델 선택 / CI/CD 통합 등) = 단일 SoT 참조 의무.
+
+§12 desktop app paradigm 측 신규 `.pen` 첫 저장 시 Save As 모달 활성 한계는 macOS Pencil app 한정 사고. `pencil interactive -o <screen>.pen` 또는 `pencil --in <in>.pen --out <out>.pen --prompt "..."` 호출은 headless 환경 안에서 직접 `save()` 발행 → Save As 다이얼로그 자체 미발생. Coin GUI 클릭 의무 0.
+
+**desktop vs headless 분기 표**:
+
+| 사용 시점 | 권장 paradigm | 근거 |
+|---|---|---|
+| Coin 본인 측 design 실시간 검증 의무 (Pencil app viewport 시각 확인) | **desktop app** (현 §12 흐름) | 사용자 본인 측 의도 직접 측정 |
+| batch cycle 측 다중 화면 일괄 신설 (예: feature 진입 시 5~10 screen 한꺼번에) | **headless mode** (§13 / `pencil-cli-headless.md` §5 tasks.json) | Coin GUI 손 작업 0 + CI/CD 통합 가능 |
+| 단일 screen 신설 + 시각 검증 의무 X | desktop (default) 또는 headless (자동화 필요 시) | Coin 결정 자율 영역 |
+| CI/CD 측 nightly design refresh / drift 정정 자동 | **headless mode** | scheduled 자동화 진입점 |
+
+**공식 doc reference**:
+- [Pencil CLI 명세](https://docs.pencil.dev/for-developers/pencil-cli)
+- 본 패키지 측 단일 SoT = [`pencil-cli-headless.md`](./pencil-cli-headless.md)
 
