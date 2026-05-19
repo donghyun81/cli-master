@@ -30,6 +30,12 @@ implement → cleanup pass → Pre-DocSync Verify(PASS) → DocSync → /verify 
   `.claude/rules/legacy-cleanup-governance.md` 에 따른 cleanup assessment 를 EVIDENCE.md 에
   남기고 dead code / 미사용 참조 / 중복 포맷터 경로 / 교체된 구 버전 mapper 등을 제거 또는
   `TODO.md` 에 deferred 로 적는다.
+- **DocSync** 는 cleanup pass + Pre-DocSync Verify PASS 이후, `/verify` 진입 전 단계다.
+  갱신 대상 영역 = `.ai/reports/<taskId>/*.md` task 산출물 + `docs/agent/` 운영 레이어 문서 +
+  **자식 repo 출시 docs 영역** (= `docs/release-readiness/LAUNCH-STATUS.md` + `docs/CLAUDE.md`
+  또는 자식 root `CLAUDE.md` + `docs/setup/*`). 자식 출시 docs 갱신 본 paradigm =
+  `MASTER-CLI-DOCS-AUTOSYNC-PARADIGM-001` 안 영구 정착. 세부 본문 = `cycle-discipline.md`
+  §20 + `.claude/agents/active/docs-change-communicator.md` Key questions.
 - ops-layer task 는 cleanup pass 를 `N/A (ops-layer task)` 로 EVIDENCE.md 에 명시한다.
 - verifier 또는 reviewer가 reject하면 → change-planner/system-architect 단계로 되돌린다.
 

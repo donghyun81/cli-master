@@ -447,3 +447,36 @@ cli infra 수정 필요?
 **mode**: env `REFLECT_ENFORCE=warn` (default) · `REFLECT_ENFORCE=silent` (= 출력 0 · debug 영역).
 
 **관련 cycle**: 본 §의 첫 정착 = `MASTER-CLI-INFRA-SELFIMPROVING-REVIEW-CADENCE-001`. paradigm 추출 결과 = 사용자 자율 채택 (= 자동 file 신설 X · `CLAUDE.md` 또는 `.auto-memory` 갱신 후보 silent 제안 영역 단일).
+
+---
+
+### 20) DocSync 단계 본문 (= 자식 repo 출시 docs 영역 명시 · 2026-05-19 신설 · `MASTER-CLI-DOCS-AUTOSYNC-PARADIGM-001`)
+
+> 본 § = `workflow-core.md` §단계 흐름 안 DocSync 단계 본문 정합 + 매 cycle 마감 step 안 docs 갱신 의무 영역 단일 SoT. paste source baseline = H24 finding (= 3-repo 측 `LAUNCH-STATUS.md` + `docs/CLAUDE.md` + `docs/setup/*` 영역 7~8 일 stale 누적 default · 사용자 manual 갱신 영역 default).
+
+#### 20.1 갱신 대상 영역
+
+cycle 마감 시 DocSync 단계 안 대상 본문:
+
+| 영역 | 본질 | 위치 |
+|---|---|---|
+| task 산출물 | 본 cycle 진행 EVIDENCE / PLAN / VERIFY / REVIEW (= 기존 영역) | `.ai/reports/<taskId>/*.md` |
+| 운영 레이어 | 아키텍처 / 프로세스 / 솔루션 (= 기존 영역) | `docs/agent/**` |
+| 자식 출시 docs (= 본 cycle 추가) | next release task 표 + 자식 헌법 + setup 가이드 | `docs/release-readiness/LAUNCH-STATUS.md` + `docs/CLAUDE.md` 또는 자식 root `CLAUDE.md` + `docs/setup/*` |
+
+#### 20.2 갱신 의무
+
+- 본 cycle 변경 영향 영역 발견 시 = 해당 자식 출시 docs 항목 갱신 의무
+- 본 cycle 변경 영향 X = 0 갱신 default (= 강제 X · 빈 변경 commit 금지)
+- 진입 paradigm = `docs-change-communicator` agent 호출 (= Key questions 본문 안 자식 출시 docs 영역 명시 · 본 cycle 안 추가)
+- 사용자 manual 갱신 영역 폐기 (= 본 paradigm 정착 후 default · 자동 / 반자동 진입 우선)
+
+#### 20.3 정합 의무
+
+- `workflow-core.md` §단계 흐름 DocSync bullet = 본 § 본문 인용
+- `docs-change-communicator.md` Key questions = 자식 출시 docs 영역 questions 6~8 포함
+- 본 § 본문 변경 시 master cycle 신설 + 5-repo propagation (= §15 패턴 1 정합)
+
+#### 20.4 명시 cycle 이력
+
+- 2026-05-19 · `MASTER-CLI-DOCS-AUTOSYNC-PARADIGM-001` · 본 § 신설 + `workflow-core.md` §단계 흐름 DocSync bullet 본문 보강 + `docs-change-communicator.md` Key questions 6~8 append + 5-repo byte-identical propagation
