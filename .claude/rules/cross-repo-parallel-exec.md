@@ -54,14 +54,18 @@ main agent 측 결과 통합 + cross-repo 정합 결정
 - Verdict + Top Findings + Counter-example + Recommended Next Step + Pointers 5 섹션 의무
 - raw output 그대로 return 금지 (= main agent context 압박 회피)
 
-### 2.2 영역 2 — 다중 cli session 운영 paradigm
+### 2.2 영역 2 — 다중 cli session 운영 paradigm (= 권장 paradigm default · 2026-05-19 본문 강화)
+
+> **본 영역 = 사용자 본심 정합 권장 paradigm default** (= `MASTER-CLI-CROSS-REPO-SUBSCRIPTION-AWARE-PARADIGM-001` 안 본문 강화 · 실 IMPL / 자식 cli infra 정합 영역 default · subscription pool 정합 default · §2.4 Subscription-aware paradigm 정합).
 
 terminal × cli 측 독립 session × 독립 context paradigm. session 측 자식별 cwd 분리 default · cross-repo 정합 처리 책임 = 사용자 본인 영역 default.
 
 **진입 조건**:
+- 실 IMPL 영역 (= 자식 도메인 source / cli infra propagation cycle / 자식별 무거운 IMPL 영역 default)
 - 단일 자식 측 무거운 IMPL 영역 (= main agent context 측 단일 자식 본질 측 집중 의무)
 - 자식별 IMPL 측 다른 자식 무접촉 영역 default (= cross-repo 정합 영역 X 또는 사후 정합)
 - cli session 측 context 측 분리 의무 (= session 측 자식 도메인 단일 집중 default)
+- subscription pool 정합 영역 (= interactive pool 단일 default · §2.4 정합)
 
 **호출 paradigm**:
 ```
@@ -72,10 +76,40 @@ terminal C → cli session C (cwd = ~/AndroidStudioProjects/GentlyTable) → GT 
 사용자 본인 측 cross-repo 정합 의무 (= session × session 측 직접 cross-verify 영역)
 ```
 
+**사용자 본인 측 의무 영역** (= 본 paradigm 측 trade-off 영역 default):
+
+| 의무 항목 | 본질 |
+|---|---|
+| terminal × N 운영 | 자식별 1 terminal default (= 자식 3 → terminal × 3 default) |
+| 자식 cwd 진입 | `cd ~/AndroidStudioProjects/<자식> && claude` × N 진입 default |
+| paste source × N 운반 | cowork chat → cli session × N 측 paste 운반 default |
+| paste-back × N 운반 | cli session × N → cowork chat 측 paste-back 운반 default |
+| cross-repo 정합 의무 | session × session 측 직접 cross-verify default (= 자동화 영역 X · 사용자 본인 영역 default) |
+
+**자식 cli infra 자동 정합 영역** (= 본 paradigm 측 benefit 영역 default):
+
+- 자식 `.claude/settings.json` 정합 ✓ (= 자식 측 cli infra 본문 자동 적용)
+- 자식 `.claude/hooks/*` 발화 ✓ (= SessionStart + PreToolUse + PostToolUse + Stop 모두 자동 발화)
+- 자식 `.claude/rules/*` 정합 ✓ (= 자식 측 cli infra rule 본문 자동 적용)
+- 자식 `.claude/agents/*` 정합 ✓ (= 자식 측 active/deferred agent 자동 인식)
+
+**subscription pool 정합 영역** (= `2026-06-15 Anthropic billing split` 정합 · §2.4 정합):
+
+- 본 paradigm 측 모든 cli session = **interactive pool 정합 default** ✓ (= `claude` 단순 interactive 진입 default)
+- 2026-06-15 이후 billing split 영역 **무 영향 default** (= Agent SDK credit pool 분리 영역 미해당)
+- `claude -p` sub-process spawn paradigm = **회피 default** (= §2.4 정합 · 요금 폭탄 risk default)
+
+**trade-off 영역** (= 본 paradigm 측 사용자 본인 측 부담 영역 default):
+
+- 사용자 본인 측 의무 영역 default (= terminal × N 운영 + paste × N 운반 영역)
+- cross-repo 정합 자동화 X default (= cowork chat 측 보조 측정 영역 default · 자동 cross-verify 영역 X)
+- weekly limit × N 영역 default (= 사용자 본인 측 cli session 활용 영역 default · subscription pool 분배)
+
 **적용 case 예**:
-- "GB 측 Phase 2 Auth 도메인 무거운 IMPL cycle" (= GD/GT 무접촉)
-- "GT 측 daily-prescription 측 LAUNCH-STATUS 갱신 cycle" (= 다른 자식 무접촉)
-- "자식별 도메인 specific cycle 측 동시 운영" (= 사용자 본인 측 multi-tasking 영역)
+- "GB + GD + GT 측 동일 Auth bootstrap 신설 의뢰" (= 동족 자식 측 실 IMPL · 영역 2 권장 default)
+- "GB 측 Phase 2 Auth 도메인 무거운 IMPL cycle" (= GD/GT 무접촉 · 영역 2 단일 자식 진입)
+- "GT 측 daily-prescription 측 LAUNCH-STATUS 갱신 cycle" (= 다른 자식 무접촉 · 영역 2 단일 자식 진입)
+- "자식별 도메인 specific cycle 측 동시 운영" (= 사용자 본인 측 multi-tasking 영역 · 영역 2 다중 cli session 운영)
 
 ### 2.3 paradigm 선택 본심 (= cli session 자율 판단 default)
 
@@ -89,6 +123,39 @@ terminal C → cli session C (cwd = ~/AndroidStudioProjects/GentlyTable) → GT 
 | 단일 자식 측 무거운 IMPL (= 다른 자식 무접촉) | **영역 2** (다중 cli session) | context 측 분리 의무 default |
 | 자식별 도메인 specific cycle 동시 운영 (= 사용자 multi-tasking) | **영역 2** (다중 cli session) | session 측 독립 context default |
 | cross-repo + 단일 자식 무거운 IMPL 혼합 영역 | **자율 결정** (= 사용자 본심 측정 의무) | 본심 분기 의제 본질 발견 시 = AskUserQuestion 영역 |
+
+### 2.4 Subscription-aware paradigm (= 2026-06-15 Anthropic billing split 정합 · `MASTER-CLI-CROSS-REPO-SUBSCRIPTION-AWARE-PARADIGM-001` 신설)
+
+> **본 sub-section = 2026-06-15 적용 default Anthropic billing split 영역 본문 + `claude -p` 사용 회피 paradigm 명시 default**. 본 paradigm 정합 의무 = 영역 1 + 영역 2 + 영역 3 분기 본문 측 billing 영역 정합 측정 default.
+
+**2026-06-15 Anthropic billing split 본질**:
+
+| pool | 적용 영역 | 요금 paradigm | 본 cycle 측 권장 |
+|---|---|---|---|
+| **interactive pool** (= 변경 X) | `claude` 단순 interactive 진입 (= terminal 측 `claude` 호출 default) | subscription 요금 정합 default ✓ (= $20 Pro / $100 Max 5x / $200 Max 20x · weekly limit 영역 default) | **영역 1 + 영역 2 정합** (= 권장 paradigm) |
+| **Agent SDK credit pool** (= 신 영역) | `claude -p` sub-process spawn + Agent SDK 호출 + GitHub Actions + 3rd-party agents | 별 monthly credit pool + **full API rate** (= subscription 요금 외 영역) + **roll over X** default | **영역 3 = 회피 default** (= 요금 폭탄 risk default) |
+
+**`claude -p` 사용 회피 paradigm**:
+
+- 본 paradigm 측 영역 3 (= `claude -p` sub-process spawn) paradigm **회피 default** (= 2026-06-15 이후 별 credit pool 측 full API rate 적용 default)
+- 사용자 본인 측 cli session 진입 paradigm = **`claude` interactive default** · `-p` flag **미사용 default**
+- cli session 측 자율 sub-process spawn paradigm **회피 default** (= Bash 측 `claude -p` 호출 의도적 회피 default)
+- 단 별 영역 정합 (= cli session 자체 측 `claude -p` Bash 호출 X) = main agent 측 Bash deny list 정합 default + 사용자 본인 측 의무 default
+
+**권장 paradigm 본질** (= 본 §2.4 정합 default):
+
+| 요청사항 본질 | 권장 paradigm | 본질 |
+|---|---|---|
+| 가벼운 cross-repo 측정 (= sha 측정 / source grep / cross-verify) | **영역 1** (= Task tool sub-agent fan-out · 단일 cli session) | interactive pool 정합 default · main agent context 단일 default |
+| 실 IMPL / 자식 cli infra 정합 (= 자식 도메인 source / cli infra propagation cycle) | **영역 2** (= 다중 cli session · 권장 default) | interactive pool 정합 default · 자식 cli infra 자동 정합 default |
+| 단일 자식 무거운 IMPL (= 다른 자식 무접촉) | **영역 2** (= 단일 자식 cli session 진입) | interactive pool 정합 default · context 단일 자식 집중 default |
+| 자동화 영역 (= `claude -p` sub-process spawn / Agent SDK 호출) | **영역 3 = 회피 default** | Agent SDK credit pool 측 별 영역 default · 요금 폭탄 risk default |
+
+**공식 reference**:
+
+- Anthropic 공식 announce (= 2026-06-15 적용 default · Claude Code subscription pricing change 영역)
+- search keyword: "Claude Code Max plan subscription pricing change 2026" / "Agent SDK credit pool June 15" / "claude -p print mode subscription policy"
+- 측정 시점 = 2026-05-19 KST (= `MASTER-CLI-CROSS-REPO-SUBSCRIPTION-AWARE-PARADIGM-001` cycle 진입 시점)
 
 ## 3. 자식별 cwd 분리 paradigm (= 영역 1 적용 시 default)
 
@@ -128,6 +195,39 @@ main agent 측 sub-agent 결과 통합 paradigm (= `report-formats.md` Subagent 
 2. **Top Findings 측 동족 영역 측정** = 동족 자식 측 paradigm 정합 측정 default (= sha 정합 / source code 정합 / lifecycle 영역 정합)
 3. **Counter-example 측 영역** = main agent 측 cross-repo 정합 결정 측 보강 영역 default
 4. **Pointers 측 lazy loading** = main agent 측 필요 시점 측 추가 read default (= just-in-time)
+
+### 3.4 Sub-agent token cost warning (= 7× standard default · `MASTER-CLI-CROSS-REPO-SUBSCRIPTION-AWARE-PARADIGM-001` 신설)
+
+> **본 sub-section = 영역 1 sub-agent fan-out paradigm 측 실제 token 비용 영향 영역 본문 default**. main agent 측 sub-agent fan-out 결정 시점 본 warning 영역 측정 의무 default.
+
+**sub-agent token 비용 본질**:
+
+| paradigm | token 비용 비율 (vs standard single-agent) | 본질 |
+|---|---|---|
+| single-agent (= standard cli session 단일) | 1× (= baseline) | main agent context 단일 default |
+| 3-agent team (= main + sub × 2) | **~7× default** | sub-agent context × N 분리 + main agent 측 통합 token 영역 누적 default |
+| Agent SDK 측 호출 (= 영역 3 영역) | Claude Code terminal × **1.3~1.5× default** | prompt caching 영역 차이 default (= Agent SDK 측 캐싱 영역 X 또는 부분 default) |
+
+**실 사례 인용** (= 본 paradigm 측 awareness 영역 default):
+
+- **49-subagent typescript-checks 측정 사례**: **$8,000 ~ $15,000 USD default** (= sub-agent fan-out paradigm 측 large-scale 적용 영역 default · 사용자 본인 측 측정 사례 인용 영역)
+- **23-subagent code-quality project 측정 사례**: **$47,000 USD default (3 days 측정)** (= sub-agent chain 측 unattended 영역 적용 사례 default · 사용자 본인 측 risk awareness 영역 default)
+- 측정 source: 2026-05-19 KST 측 공개 측정 사례 영역 default
+
+**권장 paradigm 정합** (= 본 §3.4 정합 default):
+
+| 권장 항목 | 본질 | 정합 영역 |
+|---|---|---|
+| **sub-agent parallelism cap default** | main agent 측 동시 sub-agent fan-out 개수 한도 default (= 권장 ≤ 3 sub-agent default · cli session 자율 결정 영역) | `CLAUDE.md` 측 명시 영역 default |
+| **sub-agent chain unattended 영역 회피 default** | sub-agent → sub-agent 측 chain 측 unattended 영역 default 회피 (= main agent 측 매 sub-agent return 측정 의무) | 영역 1 paradigm 정합 default |
+| **`--include-hook-events` flag 측정 default** | sub-agent 호출 측 hook event 측 token 측정 의무 (= billing 측 정합 영역 default) | cli session 측 자율 측정 default |
+| **subscription pool 정합 측정** | 영역 1 (= sub-agent fan-out) 측 interactive pool 정합 default (= §2.4 정합) · Agent SDK 영역 회피 default | §2.4 Subscription-aware paradigm 정합 default |
+
+**main agent 측 sub-agent fan-out 결정 paradigm**:
+
+- 요청 본질 측 token cost 측정 의무 default (= sub-agent N 측 ~N× ~7× 측정 영역 default)
+- 가벼운 측정 영역 (= sha 측정 / source grep) = sub-agent 1~3 default (= 권장 ≤ 3 sub-agent)
+- 무거운 영역 (= 자식별 IMPL / context-heavy 영역) = 영역 2 (= 다중 cli session) paradigm 정합 default · sub-agent fan-out 회피 default
 
 ## 4. cross-repo 정합 처리 paradigm (= 영역 1 적용 시 default)
 
@@ -194,3 +294,4 @@ drift 발견 시점 main agent 측 mitigation:
 ## 8. 명시 cycle 이력
 
 - 2026-05-19 · MASTER-CLI-PARENT-MOUNT-PARALLEL-EXEC-PARADIGM-001 · 본 SoT 신설 + 부모 mount root CLAUDE.md 신설 + cross-repo-orchestrator sub-agent 신설 (§FREEDOM) + routing-and-delegation.md cross-repo sub-section append + cycle-discipline.md §21 신설 + 5-repo byte-identical propagation
+- 2026-05-19 · MASTER-CLI-CROSS-REPO-SUBSCRIPTION-AWARE-PARADIGM-001 · 본 SoT 정정 강화: §2.2 영역 2 paradigm 본문 강화 (= 사용자 본인 측 의무 영역 표 + 자식 cli infra 자동 정합 영역 + subscription pool 정합 영역 + trade-off 영역 본문 추가) + §2.4 Subscription-aware paradigm sub-section 신설 (= 2026-06-15 Anthropic billing split 영역 + interactive pool vs Agent SDK credit pool 분기 + `claude -p` 사용 회피 paradigm) + §3.4 Sub-agent token cost warning sub-section 신설 (= 3-agent team token ~7× default + 실 사례 $8k~$15k / $47k 3 days + 권장 paradigm 정합) + 부모 mount root CLAUDE.md §4 정정 강화 + 5-repo byte-identical propagation
