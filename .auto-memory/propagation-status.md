@@ -115,6 +115,31 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 - 보호 5 sha 변동 0 (5b84cd9e4bc36165/d3a0b57390bd0414/e580b6d7ca9a88ae/3a703b30553e0d09/b27fbe16edb68821 그대로)
 - 잔존 영역 (= 별 trail 처리 후보) = app-foundation 측 .claude/settings.json (sha mismatch) + .claude/hooks/baseline-snapshot.sh (부재). 본 cycle scope 외 · 별 cycle 영역.
 
+## MASTER-CLI-BASELINE-SNAPSHOT-REPOS-V6-MITIGATION-001 마감 (2026-05-19)
+
+- 본 cycle = `MASTER-CLI-FULL-PARADIGM-AUDIT-001` F1 finding mitigation default (= `.claude/hooks/baseline-snapshot.sh` 측 v6 5-repo paradigm 정합 X 영역).
+- baseline-snapshot.sh: 5-repo byte-identical 회복 = sha `18fb59c80f64e520c84b0720cfb133276b54752e` (5/5 PASS · master HEAD blob 측 cp 단방향 정합 · 직전 sha `839ac890721c62c24c6edcd24f4dcf2f09962710`).
+- 본문 정정 영역:
+  - line 3 목적 본문 = "7-repo (claude-cli-master + Gently 3 + Proto 3)" → "5-repo (claude-cli-master + app-foundation + Gently 3)"
+  - REPOS 배열 = 7 entry (claude-cli-master + Gently 3 + ProtoGently 3) → 5 entry (claude-cli-master + app-foundation + GentlyBreath + GentlyDay + GentlyTable · ProtoGently 3 제거 + app-foundation 추가)
+  - line 116 자식 list (= drift detection grep 영역) = `GentlyBreath GentlyDay GentlyTable` → `app-foundation GentlyBreath GentlyDay GentlyTable` (= 4 자식 cover)
+  - 신설 paradigm row append (= 본 cycle entry `MASTER-CLI-BASELINE-SNAPSHOT-REPOS-V6-MITIGATION-001` 2026-05-19)
+- commit 5 건:
+  - master `a020cba` (= feat · parent `2c7dc02`)
+  - app-foundation `7a9316d`
+  - GentlyBreath `232d3e8`
+  - GentlyDay `d40cb9e`
+  - GentlyTable `82153a3`
+  - master audit commit (= 본 entry 흡수 commit · 후속 step)
+- hook self-test = PASS (= exit 0 · latest.json 안 5-repo entry 정합 ✓ + Proto* entry 부재 ✓).
+- 보호 5 sha 변동 0 (= drift 0 의무 정합 ✓ · `5b84cd9e4bc36165` + `20c72ae66b513bdc` + `b27fbe16edb68821` + `d3a0b57390bd0414` + `e580b6d7ca9a88ae` 그대로).
+- propagation report 3 file 자동 생성 = `propagation-reports/MASTER-CLI-BASELINE-SNAPSHOT-REPOS-V6-MITIGATION-001/{REPORT,DIFF,VERIFY}.md`.
+- 직전 잔존 영역 close: `MASTER-CLEANUP-PROPAGATION-BUNDLE-001` 측 "app-foundation 측 .claude/hooks/baseline-snapshot.sh (부재)" 영역 = 본 cycle 측 app-foundation 측 file 도입 + 5-repo byte-identical 정합 default 마감 (= 자연 close · 별 mitigation trail 진입 X).
+- 잔존 영역 (= 별 cycle 후보 · 본 cycle scope 외 default):
+  - `scripts/propagate.sh` + `scripts/verify-sync.sh` 측 `TARGET_REPOS` default = `"GentlyBreath GentlyDay GentlyTable"` (= 3 자식 only · app-foundation 부재 · 동일 v6 paradigm drift). 본 cycle 측 `--targets FND,GB,GD,GT` 명시 사용 default · 별 cycle 후보 `MASTER-CLI-PROPAGATE-VERIFY-SYNC-V6-MITIGATION-001` 패턴.
+  - verify-sync.sh 측 pre-existing scope 외 DRIFT: gradlew + gradlew.bat (= app-foundation 측 sha ≠ master · 본 cycle 무관) + 1 doc MISS (= `docs/baseline/cowork-project-instructions-§20-redline-20260517.md` 측 4 자식 모두 MISS).
+
+
 
 
 
@@ -133,7 +158,7 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 
 ## Last verify-sync
 
-- timestamp: 2026-05-19T19:47:58+0900
+- timestamp: 2026-05-19T23:06:55+0900
 - pass: 130
 - drift: 2
 - miss: 4
