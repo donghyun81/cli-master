@@ -480,3 +480,74 @@ cycle 마감 시 DocSync 단계 안 대상 본문:
 #### 20.4 명시 cycle 이력
 
 - 2026-05-19 · `MASTER-CLI-DOCS-AUTOSYNC-PARADIGM-001` · 본 § 신설 + `workflow-core.md` §단계 흐름 DocSync bullet 본문 보강 + `docs-change-communicator.md` Key questions 6~8 append + 5-repo byte-identical propagation
+
+---
+
+### 21) Cross-repo cycle 영역 (= 5-repo · 2026-05-19 신설 · `MASTER-CLI-PARENT-MOUNT-PARALLEL-EXEC-PARADIGM-001`)
+
+> 본 § = master cycle 측 cross-repo (= 5-repo · master + app-foundation + GB + GD + GT) 영역 운영 paradigm + cli infra 5-repo byte-identical 영역 정합 + cross-repo sub-agent (= cross-repo-orchestrator) 측 routing 영역 단일 SoT. paste source baseline = `MASTER-CLI-PARENT-MOUNT-PARALLEL-EXEC-PARADIGM-001` H27-β cowork chat 사용자 본심 정합 (= "양쪽 모두 가능한데 요청사항에 따라서 claude code cli 가 판단해서 일을 처리").
+
+#### 21.1 cross-repo cycle 영역 본질
+
+cross-repo cycle = 5-repo (= master + app-foundation + GB + GD + GT) 측 동시 영향 영역 default. 본 영역 cycle 진입 시점 paradigm 2 영역 (= 본 §15 패턴 1 cli infra 측 단방향 propagation + 본 § 영역 1 sub-agent 병렬 paradigm) 정합 default.
+
+| 영역 | 본질 | 본 §15 패턴 정합 |
+|---|---|---|
+| cli infra 5-repo byte-identical 영역 | `.claude/` (rules + agents + hooks + skills + commands + settings) + `docs/schemas/` + 보호 5 file + `scripts/` 측 propagation 도구 | §15 패턴 1 (= master cycle 신설 + propagation) |
+| 자식 도메인 specific 영역 | 자식별 도메인 source (= app/ + composeApp/ + core/ + domain/) | §15 패턴 2 (= 자식 local · 본 § 영역 X) |
+| cross-repo 정합 검증 영역 | 동족 자식 측 sha 정합 + 보호 file sha cross-verify + paradigm 정합 측정 | §15 패턴 1 + 본 § 영역 1 sub-agent fan-out |
+
+#### 21.2 cross-repo paradigm 분기 (= `cross-repo-parallel-exec.md` 정합)
+
+본 § 측 cross-repo paradigm 분기 단일 SoT = `.claude/rules/cross-repo-parallel-exec.md`. 본 §은 cycle 운영 측 paradigm pointer 본질 default.
+
+| paradigm | 진입 조건 | 호출 방식 |
+|---|---|---|
+| **영역 1** (= 단일 cli session 측 sub-agent 병렬) | 가벼운 cross-repo 정합 영역 + 동족 자식 측 동일 paradigm 신설 + cli infra propagation cycle | `cross-repo-orchestrator` sub-agent 호출 + 자식별 Task tool fan-out + return 통합 |
+| **영역 2** (= 다중 cli session 운영) | 단일 자식 측 무거운 IMPL + 다른 자식 무접촉 | 사용자 본인 측 terminal × cli session ×N · cross-repo 정합 책임 = 사용자 영역 |
+
+paradigm 선택 본심 = cli session 측 자율 판단 default.
+
+#### 21.3 cross-repo cycle 운영 표준
+
+cli infra 5-repo byte-identical 영역 cycle 진입 시점 표준:
+
+1. **master 측 변경 + commit** (= cli infra 또는 보호 file 영역 default · `cycle-discipline.md` §5 v2 자동 허용 카테고리 정합)
+2. **propagation 단방향** (= `bash scripts/propagate.sh <relative-path> [--targets FND,GB,GD,GT|all]`)
+3. **자식별 staged commit** (= 각 자식 repo 측 `chore(cli-infra): propagation <cycle-id>` body 정합 · master commit body 인용)
+4. **cross-verify** (= `bash scripts/verify-sync.sh` exit 0 default · sha 정합 표 산출)
+5. **propagation report 생성** (= `propagation-reports/<cycle-id>/REPORT.md` 자동 생성)
+6. **audit commit** (= master 측 `.auto-memory/propagation-status.md` + `.auto-memory/incident-log.md` 갱신 + commit)
+7. **master CLAUDE.md §15 entry append** (= 본 cycle entry 1 row 추가 의무)
+
+#### 21.4 cross-repo 영역 STOP 조건
+
+| trigger | mitigation |
+|---|---|
+| 보호 5 file sha drift 발견 (= 자식별 sub-agent 측정 결과 또는 verify-sync 측 mismatch) | 즉시 STOP + 사용자 회수 default (= `cycle-discipline.md` §10 + master CLAUDE.md §5 정합) |
+| 자식별 sub-agent 결과 본질 어긋남 (= 동족 자식 측 paradigm 정합 측 mismatch) | STOP + 사용자 회수 default |
+| cross-repo 영역 측 HIGH RISK 도메인 진입 (= DB migration / Money / Auth / production push 영향) | 즉시 STOP default |
+| 자식 repo 측 cli infra 직접 수정 시도 (= 단방향 정합 위반) | 즉시 STOP + master 측 정합 cycle 진입 의뢰 |
+| production code touch 징후 (= cli infra cycle 측 0 LOC touch 의무 default) | 즉시 STOP |
+
+#### 21.5 cross-repo cycle 측 산출물 영역
+
+| 산출물 | 위치 | 본질 |
+|---|---|---|
+| PLAN.md | `claude-cli-master/.ai/reports/<cycle-id>/PLAN.md` | ChangeBudget + cross-repo 영역 명시 + §FREEDOM 영역 결정 default |
+| EVIDENCE.md | `claude-cli-master/.ai/reports/<cycle-id>/EVIDENCE.md` | baseline 실측 (= 5-repo HEAD sha + 보호 file sha) + dirty 영역 + 자식별 sub-agent return body 인용 default |
+| VERIFY.md | `claude-cli-master/.ai/reports/<cycle-id>/VERIFY.md` | propagation cycle PASS + sha 정합 + production code touch 0 LOC verify |
+| REVIEW.md | `claude-cli-master/.ai/reports/<cycle-id>/REVIEW.md` | 12-section 또는 lightweight 4 section (= cli infra 영역 default · `cycle-discipline.md` §11 정합) + PromptFit |
+| TODO.md | `claude-cli-master/.ai/reports/<cycle-id>/TODO.md` | 후속 작업 + scope 외 dirty 영역 baseline 명시 default |
+
+#### 21.6 정합 의무
+
+- `.claude/rules/cross-repo-parallel-exec.md` 측 paradigm 분기 본문 단일 SoT 정합
+- `.claude/agents/active/cross-repo-orchestrator.md` 측 sub-agent routing 정합
+- `.claude/rules/routing-and-delegation.md` §실행 방식 규칙 Cross-repo sub-section 정합
+- 부모 mount root `CLAUDE.md` (= `/Users/yundonghyeon/AndroidStudioProjects/CLAUDE.md`) §3 cli session 진입 paradigm 분기 정합
+- 본 § 본문 변경 시 master cycle 신설 + 5-repo propagation (= §15 패턴 1 정합)
+
+#### 21.7 명시 cycle 이력
+
+- 2026-05-19 · `MASTER-CLI-PARENT-MOUNT-PARALLEL-EXEC-PARADIGM-001` · 본 § 신설 + `cross-repo-parallel-exec.md` 신설 + `cross-repo-orchestrator.md` sub-agent 신설 (§FREEDOM) + 부모 mount root CLAUDE.md 신설 + `routing-and-delegation.md` Cross-repo sub-section append + 5-repo byte-identical propagation

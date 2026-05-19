@@ -160,6 +160,37 @@ intake-router는 키워드 분류기가 아니다 — **어떤 전문 판단이 
 
 역할별 경로 스코핑: `.claude/rules/safety-and-secrets.md` "## 역할별 경로 허용 매트릭스" 참조.
 
+### Cross-repo 영역 (= 5-repo · master + app-foundation + GB + GD + GT) — 2026-05-19 신설
+
+> 본 sub-section = `MASTER-CLI-PARENT-MOUNT-PARALLEL-EXEC-PARADIGM-001` 안 추가. cross-repo 영역 본질 발견 시점 본 sub-section 정합 + `.claude/rules/cross-repo-parallel-exec.md` SoT reading 의무.
+
+#### cross-repo paradigm 분기 (= cli session 자율 판단 default)
+
+| paradigm | 진입 조건 | 호출 방식 |
+|---|---|---|
+| **영역 1** (= 단일 cli session 측 sub-agent 병렬) | 가벼운 cross-repo 정합 영역 + 동족 자식 측 동일 paradigm 신설 + cli infra propagation cycle | `cross-repo-orchestrator` sub-agent 호출 → 자식별 Task tool sub-agent fan-out + return 통합 |
+| **영역 2** (= 다중 cli session 운영) | 단일 자식 측 무거운 IMPL + 다른 자식 무접촉 + 자식별 도메인 specific cycle 동시 운영 | 사용자 본인 측 terminal × cli session ×N · cross-repo 정합 책임 = 사용자 영역 |
+
+paradigm 선택 본심 = cli session 측 자율 판단 default (= 사용자 본심 정합 = 요청사항 본질 측정 후 paradigm 선택). 본 분기 본문 단일 SoT = `.claude/rules/cross-repo-parallel-exec.md` §2 정합.
+
+#### cross-repo sub-agent (= cross-repo-orchestrator)
+
+cross-repo 영역 본질 발견 시점 (= 키워드: "5-repo" / "3 자식" / "GB + GD + GT" / "cross-repo" / "동족 자식" / "병렬" / "fan-out" / "byte-identical" / "propagation" 등) `cross-repo-orchestrator` sub-agent 호출 default. 본 sub-agent 측 routing 본질:
+
+- `intake-router.md` 측 **단일 repo routing paradigm** 측 cross-repo 측 확장 영역 default (= 2 영역 분리 paradigm 정합)
+- 본 sub-agent 측 직접 해법 결정 X (= routing + 통합 영역 단일 default · Planner 경계 정합)
+- 자식별 sub-agent fan-out 측 cwd 분리 paradigm 의무 (= `cross-repo-parallel-exec.md` §3 정합)
+- sub-agent return 측 Subagent Return Contract 정합 의무 (= `report-formats.md` 정합 · ≤ 4k token / 5 섹션 의무)
+
+#### cross-repo 영역 STOP 조건
+
+| trigger | mitigation |
+|---|---|
+| 보호 5 file sha drift 발견 (= 자식별 sub-agent 측정 결과 mismatch) | 즉시 STOP + 사용자 회수 default |
+| 자식별 sub-agent 결과 본질 어긋남 (= 동족 자식 측 paradigm 정합 측 mismatch) | STOP + 사용자 회수 default |
+| cross-repo 영역 측 HIGH RISK 도메인 진입 (= DB migration / Money / Auth / production push 영향) | 즉시 STOP default |
+| sub-agent return body 측 raw output 그대로 (= 4k token 한도 초과) | sub-agent 재 호출 + return 본문 압축 의무 |
+
 ---
 
 ## 전문가 호출 흐름

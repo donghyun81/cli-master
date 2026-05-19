@@ -123,15 +123,23 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 
 
 
+
+
+
+
+
+
 ## Last verify-sync
 
-- timestamp: 2026-05-13T15:37:53+0900
-- pass: 117
-- drift: 2
-- miss: 0
+- timestamp: 2026-05-19T16:43:18+0900
+- pass: 128
+- drift: 3
+- miss: 4
 - exit: 1
 
 ### Drift 상세
 
+- .claude/agents/active/intake-router.md  master=2f3164a2c776  GentlyBreath=✓  GentlyDay=✓  GentlyTable=✓  app-foundation=b0efb7dd94f1(✗)
+- docs/baseline/cowork-project-instructions-§20-redline-20260517.md  master=15bc24c867b2  GentlyBreath=MISS  GentlyDay=MISS  GentlyTable=MISS  app-foundation=MISS
 - gradlew  master=3238afb2aed5  GentlyBreath=✓  GentlyDay=✓  GentlyTable=✓  app-foundation=734b3879d350(✗)
 - gradlew.bat  master=1d297e00bd21  GentlyBreath=✓  GentlyDay=✓  GentlyTable=✓  app-foundation=57931b17dd22(✗)
