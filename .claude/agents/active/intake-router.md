@@ -53,6 +53,21 @@ tools: Read, Glob, Grep
 
 `safety-and-secrets.md` 안 `curl` / `wget` deny 와 admin API 호출 경로 정합 어긋남이 본 분기의 핵심 영역 → `supabase functions invoke` 경유 또는 supabase-js / supabase-kt SDK 우선.
 
+## Auth keyword routing (= 익명 부트스트랩 / OAuth / 토큰 / PII 분기)
+
+`.claude/rules/auth-rules.md` §7 trigger 키워드 (로그인 / 회원가입 / 인증 / 토큰 저장 / 세션 / OAuth / SSO / login / signup / signin / auth / token / session / 익명 / anonymous / email / password / PII / EncryptedSharedPreferences / GoTrue / `auth.admin` 등) 감지 시 본 rule reading 의무 + 다음 분기 적용:
+
+- **§1 익명 부트스트랩 paradigm** (`POST /auth/v1/signup` body `{}` · `SecureTokenStore` 저장 · `AnonymousAuthBootstrap` 진입점) → default 채택 영역 · CLI 자동 진입 가능
+- **§2 identity 변동성 경계** (`UserIdentityProvider` 인터페이스 단일 진입점 · domain 계층 SDK 직접 호출 금지) → 위반 시 STOP + 인터페이스 분리 의뢰
+- **§3 토큰 저장 의무** (`EncryptedSharedPreferences` 의무 · plaintext SharedPreferences 금지 · HTTPS only) → 위반 시 즉시 STOP
+- **§4 AuthRepository 패턴** (`signOut()` = 익명 세션 폐기 + 신규 부트스트랩 · `restoreSession()` = `bootstrapAsync()` 통합) → paradigm 정합 의무
+- **§5 JSON backup paradigm** (`formatVersion` + `exportedFromRepo` guard 의무 · SAF 사용 의무) → 신설 시 본 paradigm 정합
+- **§6 OAuth Phase 2** (Google / Kakao OAuth) → **별 cycle 의무** · 본 cycle 안 직접 진입 금지 · 사용자 명시 승인 후 cycle 분리
+- **§7 STOP trigger** (로그인 방식 / 세션 / 토큰 저장 방식 변경 · OAuth 신설 · RLS 정책 충돌 · 시크릿 하드코딩) → 즉시 STOP + Coin 명시 승인 의뢰
+- **§8 절대 금지** (시크릿 하드코딩 · PII 로그 출력 · HTTP · plaintext 토큰 · mock 인증 production 노출 · Supabase 서버 사이드 직접 변경) → 위반 시 즉시 STOP
+
+본 분기 핵심 = Auth trigger 활성 시점 `auth-rules.md` SoT 정독 의무 (= Key questions 영역 위험 신호 평가 직후 본 rule reading) + `auth-security-privacy` agent (= active) 호출 분기.
+
 ## Must escalate when
 
 - **MoneyAuth**: 결제·구독·entitlement·수익 흐름 관련 → 즉시 STOP, 사용자 보고. 전문가 호출 전에 게이트

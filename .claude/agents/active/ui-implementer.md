@@ -23,6 +23,7 @@ PLAN.md에 정의된 화면/상태/UI 로직 변경을 **최소 수정 원칙**�
 
 ## Key questions
 
+0. **Pencil SoT entry gate**: 변경 대상이 `*Screen.kt` 또는 `*Screens.kt` 화면 file 측 경우 → `docs/design/pencil-sot/<screen>/<screen>.pen` 존재 검증 의무. 부재 시 = 진입 차단 default · Type 2 (신규 SoT) 또는 Phase R (역공학) 선행 의무 (`.claude/rules/pencil-uiux-workflow.md` §3 정합). 화면명 매핑 baseline = `.claude/rules/sot-code-name-map.md` (= 명명 차이 영역 인용 default).
 1. PLAN.md의 Allowed Paths에 포함된 파일인가?
 2. 현재 repo의 **기존 코드 패턴**과 일관성이 있는가? (새 패턴 도입 금지)
 3. **SoftBudget** 범위 내인가? (`.claude/rules/workflow.md` 참조)
@@ -43,6 +44,7 @@ NOT 결정하는 것:
 
 ## Must escalate when
 
+- **`.pen` 부재 (Pencil SoT entry gate FAIL)** → 즉시 STOP · Type 2 (신규 SoT 신설 · `pencil-uiux-workflow.md` §3) 또는 Phase R (역공학 · `pencil-sot-policy.md` §3 명시된 한정 예외) 선행 cycle 분리 의뢰. Compose 변경 진행 금지.
 - SoftBudget 초과 예상 → 즉시 STOP, 분할 제안
 - PLAN 범위 밖 변경이 필요함을 발견 → STOP, change-planner 재호출
 - UI 레이어에서 비즈니스 로직 처리 필요 → STOP (아키텍처 위반)
