@@ -1,9 +1,10 @@
 #!/bin/bash
 # baseline-snapshot.sh — SessionStart hook
-# 목적: 7-repo (claude-cli-master + Gently 3 + Proto 3) HEAD + cycle-discipline.md sha +
+# 목적: 5-repo (claude-cli-master + app-foundation + Gently 3) HEAD + cycle-discipline.md sha +
 #       보호 파일 5종 sha + settings.json sha 자동 측정 +
 #       .ai/baseline-snapshot/<timestamp>.json 출력 + latest.json 복사.
 # 신설: MASTER-COWORK-HANDOFF-BASELINE-AUTOVERIFY-HOOK-001 (2026-05-12)
+# 갱신: MASTER-CLI-BASELINE-SNAPSHOT-REPOS-V6-MITIGATION-001 (2026-05-19 · 5-repo paradigm 정합)
 # 관련: .claude/rules/cycle-discipline.md §14a (Cowork prep ↔ CLI baseline 동기화 6 의무 절차)
 # 동작: 비차단 (warn-only · exit 0).
 # self-test: bash .claude/hooks/baseline-snapshot.sh
@@ -22,12 +23,10 @@ PARENT_DIR="$(dirname "$PROJECT_DIR")"
 
 REPOS=(
   "claude-cli-master"
+  "app-foundation"
   "GentlyBreath"
   "GentlyDay"
   "GentlyTable"
-  "ProtoGentlyBreath"
-  "ProtoGentlyDay"
-  "ProtoGentlyTable"
 )
 
 PROTECTED_FILES=(
@@ -112,7 +111,7 @@ cp "$OUT_FILE" "$LATEST_FILE" 2>/dev/null
 MASTER_CYCLE=$(grep -A 4 '"claude-cli-master"' "$OUT_FILE" | grep cycleDisciplineSha | head -1 | sed -E 's/.*"([a-f0-9]{64}|MISSING)".*/\1/')
 DRIFT_COUNT=0
 DRIFT_LIST=""
-for child in GentlyBreath GentlyDay GentlyTable; do
+for child in app-foundation GentlyBreath GentlyDay GentlyTable; do
   CHILD_CYCLE=$(grep -A 4 "\"$child\"" "$OUT_FILE" | grep cycleDisciplineSha | head -1 | sed -E 's/.*"([a-f0-9]{64}|MISSING)".*/\1/')
   if [ -n "$CHILD_CYCLE" ] && [ "$CHILD_CYCLE" != "$MASTER_CYCLE" ] && [ "$CHILD_CYCLE" != "MISSING" ]; then
     DRIFT_COUNT=$((DRIFT_COUNT+1))
