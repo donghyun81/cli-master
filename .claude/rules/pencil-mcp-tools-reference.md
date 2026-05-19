@@ -33,11 +33,78 @@
 - children 의무: inline 강제 (`I("root", { children: [...] })`) · flatten 발생 패턴 금지
 - 분할 호출: op > 25 시 frame insert 1 op + children 22~25 op = 첫 호출 / 추가 children = 후속 호출 (각 호출 children inline)
 
+#### 1.1.1 .pen format 13 Entity type 정합 호출 (= `MASTER-CLI-PENCIL-OPTIMIZATION-002` 강화)
+
+본 cycle 측 강화 본문 (= H26 단계 1 마감). 호출 시 `type` field 측 13 Entity enum 단일 default (= `rectangle` / `ellipse` / `line` / `polygon` / `path` / `text` / `frame` / `group` / `note` / `prompt` / `context` / `icon_font` / `ref`). 본문 단일 SoT = `pencil-pen-format-schema.md` §2.
+
+```javascript
+batch_design({ ops: [
+  I("dashboard", {
+    type: "frame",
+    layout: "vertical",
+    gap: "$spacing.md",
+    padding: "$spacing.lg",
+    children: [
+      I("header", { type: "frame", ... }),
+      I("hero-text", { type: "text", content: "Welcome", ... }),
+      I("cta", { type: "ref", ref: "primary-button", descendants: { "label/content": "Get Started" } })
+    ]
+  })
+] })
+```
+
+#### 1.1.2 Component / Instance / Slot 호출 paradigm (= 강화 본문)
+
+- **Component origin 신설**: `reusable: true` field 측정 (= `pencil-component-paradigm.md` §2 정합)
+- **Instance 신설**: `type: "ref"` + `ref: <origin-id>` 명시 의무
+- **Descendants override**: `descendants: { "<path>/<property>": <value> }` 형식 (= `pencil-component-paradigm.md` §4 정합 · slash-prefixed key syntax)
+- **Slot container 신설**: empty `Frame` + `reusable: true` + `slot: [<recommended-component-id>]` array 동시 만족 의무
+
+#### 1.1.3 Variable substitution 정합 호출
+
+모든 numeric / color / boolean / string field 측 `$<variable-name>` reference 측 substitution 가능 (= document `variables` map 측 등록 변수 측). multi-axis variable 측 호출 = `pencil-theme-multi-axis.md` §5 정합.
+
 ### 1.2 `batch_get`
 
 - 본질: pattern 또는 ID 측 node 검색 + 읽기
 - 응답: node tree (children 포함 가능)
 - 사용처: design state 검증 / 특정 component 추출 / debug
+
+#### 1.2.1 13 Entity type 정합 검색 paradigm (= `MASTER-CLI-PENCIL-OPTIMIZATION-002` 강화)
+
+본 cycle 측 강화 본문. `type` field 측 13 enum 측 filter 가능 (= 단일 type 한정 검색 default). 본문 단일 SoT = `pencil-pen-format-schema.md` §2.
+
+```javascript
+// 단일 type 검색 (= 모든 Component origin 추출)
+batch_get({ pattern: { reusable: true } })
+
+// 다중 조건 검색 (= 모든 Slot container 추출)
+batch_get({ pattern: { type: "frame", reusable: true, "slot.length": { ">": 0 } } })
+
+// nested component 측 검색 (= 모든 instance 측 origin chain 추출)
+batch_get({ pattern: { type: "ref" }, include: "descendants" })
+```
+
+#### 1.2.2 Nested component search paradigm (= 강화 본문)
+
+`type: "ref"` instance 측 origin chain 추적 paradigm:
+- `ref` field 측 origin id 추출 → 다음 `batch_get({ id: <ref-id> })` 호출 측 origin 본문 측정
+- nested instance (= origin 측 child 측 `type: "ref"`) 측 deeper chain 측 반복 default
+- `descendants` field 측 override 본문 측 origin 측 default 측 비교 측 customization 추출 default
+
+#### 1.2.3 Component instance audit paradigm
+
+design system 측 token 정합 audit 측 권장 호출:
+
+```javascript
+// 모든 hardcoded color 검출 (= variable reference 미적용 instance 추출)
+batch_get({
+  pattern: { fill: { "$not_starts_with": "$" } },
+  include: ["id", "name", "fill"]
+})
+```
+
+`search_all_unique_properties` (= §3.1) + `replace_all_matching_properties` (= §3.2) 측 통합 audit + migration paradigm 정합 default.
 
 ### 1.3 `get_variables`
 

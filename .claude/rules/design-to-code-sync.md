@@ -139,3 +139,77 @@ agent prompt 패턴:
 | 두 측 동시 충돌 | UNKNOWN | STOP → Coin 명시 결정 의뢰 |
 
 Pencil 측 variable 변경 → Phase C type 5 (일괄 갱신) flow 진입. `mcp__pencil__set_variables` 호출 후 inherit 적용된 모든 screen 자동 반영.
+
+### 9.5 Multi-axis paradigm (= `MASTER-CLI-PENCIL-OPTIMIZATION-002` 강화 본문)
+
+Pencil 측 Theme = 단일 axis (= mode 단축) X · 다축 paradigm default. 본 §9.5 = 본 cycle 측 추가 강화 본문 (= H26 단계 1 마감 · pencil.dev `the-pen-format` "Themes" 흡수).
+
+권장 baseline 3 axis:
+
+| axis | 측정값 list | Compose 측 정합 source |
+|---|---|---|
+| `mode` | light / dark | `isSystemInDarkTheme()` + `LightColorScheme` / `DarkColorScheme` |
+| `spacing` | compact / default / comfortable | `LocalGentlySpacing` CompositionLocal + 사용자 설정 |
+| `device` | mobile / tablet / desktop | `WindowSizeClass.widthSizeClass` + `LocalConfiguration` |
+
+Pencil document 측 `themes` field 본문:
+
+```json
+{
+  "themes": {
+    "mode": ["light", "dark"],
+    "spacing": ["compact", "default", "comfortable"],
+    "device": ["mobile", "tablet", "desktop"]
+  }
+}
+```
+
+variable 측 axis 별 cross-product value assignment 가능 (= `typography.body.fontSize` 측 `device + spacing` cross-product 정합 default · 본 §9.5 강화 영역). 본문 단일 SoT = `pencil-theme-multi-axis.md`.
+
+### 9.6 Compose 측 multi-axis mapping paradigm
+
+자식 repo (= GB / GD / GT) 측 Compose Theme 측 multi-axis 정합:
+
+```kotlin
+@Composable
+fun GentlyTheme(
+    darkMode: Boolean = isSystemInDarkTheme(),
+    spacingDensity: SpacingDensity = SpacingDensity.Default,
+    windowSize: WindowSizeClass,
+    content: @Composable () -> Unit
+) {
+    val colorScheme = if (darkMode) DarkColorScheme else LightColorScheme
+    val spacing = when (spacingDensity) {
+        SpacingDensity.Compact -> CompactSpacing
+        SpacingDensity.Default -> DefaultSpacing
+        SpacingDensity.Comfortable -> ComfortableSpacing
+    }
+    val typography = when (windowSize.widthSizeClass) {
+        WindowWidthSizeClass.Compact -> MobileTypography
+        WindowWidthSizeClass.Medium -> TabletTypography
+        else -> DesktopTypography
+    }
+
+    CompositionLocalProvider(
+        LocalGentlySpacing provides spacing,
+        LocalDeviceClass provides windowSize.widthSizeClass.toDeviceClass()
+    ) {
+        MaterialTheme(
+            colorScheme = colorScheme,
+            typography = typography,
+            shapes = GentlyShapes,
+            content = content
+        )
+    }
+}
+```
+
+본 패키지 측 Theme 단일 source = `app-foundation/core/designsystem/.../Theme.kt`. 모든 자식 repo 측 본 Theme 측 propagation 의무 default (= cli infra 권장 byte-identical 영역 · `cycle-discipline.md` §3 정합).
+
+### 9.7 multi-axis sync 측 권장 prompt 패턴
+
+- "Update `<Theme.kt>` with all Pencil multi-axis variables (mode + spacing + device axis)"
+- "Generate CompositionLocal + Provider Composable per Pencil theme axis"
+- "Validate that all Pencil cross-axis variable combinations resolve in Compose runtime"
+
+상세 prompt paradigm = `design-prompting-paradigm.md` §1~§3 (= measurable + context + reference) 정합 의무. multi-axis 단일 SoT = `pencil-theme-multi-axis.md`.
