@@ -180,19 +180,21 @@ if [ "$PRUNE_MODE" = 1 ]; then
       done < <(cd "$REPO_DIR" && find "$base" -type f 2>/dev/null)
     done
 
-    # root 파일 검사
-    for rf in "${PRUNE_ROOT_FILES[@]}"; do
-      if [ -f "$REPO_DIR/$rf" ] && [ ! -f "$MASTER_DIR/$rf" ]; then
-        if [ "$PRUNE_APPLY" = 1 ]; then
-          rm -f "$REPO_DIR/$rf" && (cd "$REPO_DIR" && git add "$rf" 2>/dev/null) || true
-          echo "  rm  $rf (root)"
-          TOTAL_RM=$((TOTAL_RM+1))
-        else
-          echo "  orphan: $rf (root)"
+    # root 파일 검사 (= bash 3.x 측 `set -u` 측 0-array `"${arr[@]}"` unbound 영역 mitigation · 명시적 size check default)
+    if [ "${#PRUNE_ROOT_FILES[@]}" -gt 0 ]; then
+      for rf in "${PRUNE_ROOT_FILES[@]}"; do
+        if [ -f "$REPO_DIR/$rf" ] && [ ! -f "$MASTER_DIR/$rf" ]; then
+          if [ "$PRUNE_APPLY" = 1 ]; then
+            rm -f "$REPO_DIR/$rf" && (cd "$REPO_DIR" && git add "$rf" 2>/dev/null) || true
+            echo "  rm  $rf (root)"
+            TOTAL_RM=$((TOTAL_RM+1))
+          else
+            echo "  orphan: $rf (root)"
+          fi
+          REPO_ORPHAN=$((REPO_ORPHAN+1))
         fi
-        REPO_ORPHAN=$((REPO_ORPHAN+1))
-      fi
-    done
+      done
+    fi
 
     echo "  요약: orphan=$REPO_ORPHAN"
     TOTAL_ORPHAN=$((TOTAL_ORPHAN+REPO_ORPHAN))
