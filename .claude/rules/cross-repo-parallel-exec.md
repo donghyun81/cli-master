@@ -8,7 +8,7 @@
 > - `.claude/agents/active/intake-router.md` (= 단일 repo routing paradigm baseline)
 > - `.claude/rules/routing-and-delegation.md` §실행 방식 규칙 (= cross-repo sub-section)
 > - `.claude/rules/cycle-discipline.md` §21 (= cross-repo cycle 영역)
-> - `.claude/rules/report-formats.md` (= Subagent Return Contract · sub-agent 결과 통합 paradigm 정합)
+> - `.claude/rules/reporting.md` §9 (= Subagent Return Contract · sub-agent 결과 통합 paradigm 정합)
 > SOT: `CLAUDE.md`
 
 ---
@@ -49,7 +49,7 @@ main agent 측 결과 통합 + cross-repo 정합 결정
 - "3 자식 측 동일 도메인 영역 측 source 측정" (= 동족 자식 측 source code 비교 + 정합 측정)
 - "cli infra rule SoT 본문 cross-repo cross-verify" (= 5-repo byte-identical 영역 측 drift 발견)
 
-**Subagent Return Contract 정합 의무** (= `report-formats.md` 정합):
+**Subagent Return Contract 정합 의무** (= `reporting.md` §9 정합):
 - 단일 sub-agent return ≤ 4,000 token 요약
 - Verdict + Top Findings + Counter-example + Recommended Next Step + Pointers 5 섹션 의무
 - raw output 그대로 return 금지 (= main agent context 압박 회피)
@@ -189,7 +189,7 @@ sub-agent 측 자식 측 cli infra (= `../<repo>/CLAUDE.md` + `.claude/`) 인지
 
 ### 3.3 sub-agent return 영역 통합 paradigm
 
-main agent 측 sub-agent 결과 통합 paradigm (= `report-formats.md` Subagent Return Contract 정합):
+main agent 측 sub-agent 결과 통합 paradigm (= `reporting.md` §9 Subagent Return Contract 정합):
 
 1. **Verdict 측 비교** = 자식별 PASS / FAIL / PARTIAL / UNKNOWN 영역 통합 측정
 2. **Top Findings 측 동족 영역 측정** = 동족 자식 측 paradigm 정합 측정 default (= sha 정합 / source code 정합 / lifecycle 영역 정합)
@@ -263,7 +263,7 @@ drift 발견 시점 main agent 측 mitigation:
 | 1 | 자식별 sub-agent 결과 본질 어긋남 발견 (= 동족 자식 측 paradigm 정합 측 mismatch) | 즉시 STOP + 사용자 회수 default (= AskUserQuestion 영역) |
 | 2 | cross-repo 영역 측 HIGH RISK 도메인 진입 (= DB migration / Money / Auth / production push) | 즉시 STOP default (= `cycle-discipline.md` §STOP 정합) |
 | 3 | sub-agent 측 cwd 분리 paradigm 위반 (= main agent cwd 측 자식 측 write 시도) | 즉시 STOP + cwd 분리 paradigm 재 정합 의무 |
-| 4 | sub-agent return body 측 raw output 그대로 (= `report-formats.md` 4k token 한도 초과) | sub-agent 재 호출 + return 본문 압축 paradigm 정합 의무 |
+| 4 | sub-agent return body 측 raw output 그대로 (= `reporting.md` §9.1 4k token 한도 초과) | sub-agent 재 호출 + return 본문 압축 paradigm 정합 의무 |
 | 5 | 보호 5 file sha drift 발견 (= 자식별 sub-agent 측정 결과 mismatch) | 즉시 STOP + master 측 mitigation cycle 진입 (= §4.3 정합) |
 
 ## 6. paradigm 호출 trigger 영역

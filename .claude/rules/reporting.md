@@ -1,16 +1,82 @@
-# Report Formats Rules
+# Reporting — Unified SoT (산출물 경로 + 형식 + 근거 기준 + Subagent Return Contract)
 
-> **단일 목적**: EVIDENCE.md / PLAN.md (10-section 정규 스키마) / VERIFY.md / REVIEW.md (12-section 정규 스키마) / Subagent Return Contract / 근거 기록 기준 / 제외 경로 정의.
-> **분할 출처**: 기존 evidence-and-reporting.md (438 줄) 의 line 71~end 발췌 (C2-RULES-RESTRUCTURE-001).
+> **단일 목적**: 산출물 경로 규약 + stdout 출력 순서 + Task 문서 (`.ai/tasks/<taskId>.md`) 형식 + EVIDENCE.md / PLAN.md (10-section 정규 스키마) / VERIFY.md / REVIEW.md (12-section 정규 스키마) / 근거 기록 기준 / Subagent Return Contract / 제외 경로 통합 SoT.
+> **신설**: MASTER-CLI-CLEANUP-7CYCLE-001 (2026-05-21) · 직전 2 file (`report-paths.md` + `report-formats.md`) 본문 통합 default.
 > **연관 파일**:
-> - `report-paths.md` — 산출물 경로 + stdout 출력 순서 + Task 문서 형식
+> - `cycle-discipline.md` §11 — 보고서 lightweight 옵션 (4 파일 vs 7 파일)
 > - `verification-and-review.md` — /verify 와 /review 세부 규칙
 > - `legacy-cleanup-governance.md` — Cleanup Assessment 섹션 의무
+> - `workflow-core.md` — 단계 흐름 (intake / collect / plan / implement / verify / review)
 > SOT: `CLAUDE.md`
 
 ---
 
-## EVIDENCE.md 형식
+## §1 산출물 경로 규약
+
+모든 산출물의 형식, 경로, 기록 기준을 정의한다.
+
+| 파일 | 경로 | 특성 |
+|---|---|---|
+| Task 문서 | `.ai/tasks/<taskId>.md` | 불변 (원문 요구사항 + 메타) |
+| Task 인덱스 | `.ai/tasks/INDEX.md` | 항상 최신 유지 |
+| MODE | `.ai/reports/<taskId>/MODE.md` | 첫 단계에서 생성 |
+| EVIDENCE | `.ai/reports/<taskId>/EVIDENCE.md` | 수집 근거 전체 |
+| PLAN | `.ai/reports/<taskId>/PLAN.md` | ChangeBudget + 작업 계획 |
+| VERIFY | `.ai/reports/<taskId>/VERIFY.md` | 검증 명령 + 결과 |
+| REVIEW | `.ai/reports/<taskId>/REVIEW.md` | 최종 판정 |
+| COMPOUND | `.ai/reports/<taskId>/COMPOUND.md` | compound-lint 결과 |
+| TODO | `.ai/reports/<taskId>/TODO.md` | 후속 작업 목록 |
+
+---
+
+## §2 stdout 출력 순서
+
+항상 다음 순서를 따른다:
+
+```
+[EVIDENCE] 수집 근거 요약
+[DIFF]     변경 내역 (파일:라인)
+[LOG]      검증 명령과 exit code
+```
+
+---
+
+## §3 Task 문서 (`.ai/tasks/<taskId>.md`) 형식
+
+```markdown
+## Meta
+| 항목 | 값 |
+|---|---|
+| TaskId | <PREFIX>-<DOMAIN>-NNN |
+| Created (KST) | YYYY-MM-DD HH:MM |
+| Status | COLLECT / PLAN / IMPLEMENT / VERIFY / REVIEW / DONE / STOP / BLOCKED |
+| Risk | Low / Medium / High |
+| DBMig | Yes / No |
+| MoneyAuth | Yes / No |
+
+## 원문 요구사항
+[사용자 원문 그대로]
+
+## 분해된 문제 진술
+[requirements-analyst 결과]
+
+## 성공 조건
+[measurable success criteria]
+
+## Measurable Exit Criteria
+_자연어 성공 조건과 1:1 대응. 실행 가능한 검증 명령이나 grep 패턴으로 기술._
+- [ ] `<검증 명령 또는 grep 패턴>` — <기대 결과>
+
+## 비기능 요구사항
+[non-functional requirements]
+
+## 불확실성 (UNKNOWN)
+[근거 없는 항목 + 확인 위치]
+```
+
+---
+
+## §4 EVIDENCE.md 형식
 
 ```markdown
 ## Requirements Source
@@ -66,7 +132,7 @@ _이 섹션이 없으면 stop-gate가 차단한다. 조사형·문서형 task는
 
 ---
 
-## PLAN.md 형식 (10-section 정규 스키마)
+## §5 PLAN.md 형식 (10-section 정규 스키마)
 
 > 각 섹션은 이름이 있는 독립 관심사다. 해당하지 않으면 `N/A` 명시 — 섹션 삭제 금지.
 
@@ -175,7 +241,7 @@ _외부 의존 연기 항목 없으면 `N/A` 명시._
 
 ---
 
-## VERIFY.md 형식
+## §6 VERIFY.md 형식
 
 ```markdown
 ## Verify Commands
@@ -203,7 +269,7 @@ STDOUT: [핵심 출력]
 
 ---
 
-## REVIEW.md 형식 (12-section 정규 스키마)
+## §7 REVIEW.md 형식 (12-section 정규 스키마)
 
 > 각 섹션은 이름이 있는 독립 판정 영역이다. 해당 없으면 "N/A" 명시.
 
@@ -303,7 +369,7 @@ PromptFitConfidence:
 
 ---
 
-## 근거 기록 기준
+## §8 근거 기록 기준
 
 | 신뢰도 | 표기 | 조건 |
 |---|---|---|
@@ -315,14 +381,14 @@ PromptFitConfidence:
 
 ---
 
-## Subagent Return Contract
+## §9 Subagent Return Contract
 
 상위 agent (intake-router / change-planner / verifier / reviewer) 가 하위 subagent 를 호출해
 그 결과를 자신의 컨텍스트로 다시 흡수할 때는 아래 계약을 따른다. 하위 agent 가 긴 raw output
 을 그대로 돌려주면 상위 agent 의 context window 가 금방 고갈되고, 장기 실행 task 일수록 이
 비용이 누적된다.
 
-### 크기 상한
+### §9.1 크기 상한
 
 - 단일 subagent return 은 **≤ 4,000 token 요약** 을 목표로 한다 (Claude Code subagent output window 실측 기준 — 2k는 정보 손실, 8k는 상위 agent context 압박).
 - 4k 를 초과할 것으로 예상되면 subagent 는 **full detail 을 파일(path pointer)** 로 남기고
@@ -330,7 +396,7 @@ PromptFitConfidence:
 - 긴 코드/로그 인용은 path pointer 가 기본이다 (`file:line-range` 또는
   `.ai/reports/<taskId>/<name>.md`). 원문 복붙은 금지.
 
-### 필수 return 섹션
+### §9.2 필수 return 섹션
 
 subagent 가 상위 agent 에게 돌려주는 최소 요약은 아래 5 개 섹션을 포함한다:
 
@@ -345,7 +411,7 @@ subagent 가 상위 agent 에게 돌려주는 최소 요약은 아래 5 개 섹�
    을 유도한다.
 6. **Trace Pointer** (선택) — `.ai/traces/<taskId>.jsonl` 경로. 상위 agent 가 도구 호출 이력을 확인할 때 사용.
 
-### escape 경로 (하한 미달 / 상한 초과)
+### §9.3 escape 경로 (하한 미달 / 상한 초과)
 
 - **정보 부족**: 판정에 필요한 근거가 없으면 `Verdict: UNKNOWN` + `Recommended Next Step`
    에 "보강 필요: <무엇>" 기록. 추측으로 PASS/FAIL 을 쓰지 않는다.
@@ -356,7 +422,7 @@ subagent 가 상위 agent 에게 돌려주는 최소 요약은 아래 5 개 섹�
    선언해도 상위 agent 는 별도 Evaluator (verifier/reviewer) 의 독립 return 을 받을 때까지
    PASS 로 간주하지 않는다.
 
-### 상위 agent 흡수 규칙
+### §9.4 상위 agent 흡수 규칙
 
 - return 의 **Verdict 와 Top Findings 만** 상위 context 에 즉시 올린다.
 - Pointers 는 필요할 때만 열어 context 에 올린다 (just-in-time).
@@ -365,11 +431,11 @@ subagent 가 상위 agent 에게 돌려주는 최소 요약은 아래 5 개 섹�
   Evaluator 를 호출한다 (self-cite 루프 방지).
 
 관련: `.claude/rules/routing-and-delegation.md` "Planner / Generator / Evaluator 경계",
-`.claude/agents/reviewer.md` "Skeptic Evaluator Tuning".
+`.claude/agents/active/reviewer.md` "Skeptic Evaluator Tuning".
 
 ---
 
-## 제외 경로 (collect 시)
+## §10 제외 경로 (collect 시)
 
 다음 경로는 collect에서 제외한다:
 - `build/`, `**/build/`
@@ -378,3 +444,18 @@ subagent 가 상위 agent 에게 돌려주는 최소 요약은 아래 5 개 섹�
 - `.git/`
 - `app/build/`
 - `captures/`
+
+---
+
+## §11 본 SoT 의 변경 정책
+
+- cli infra 권장 byte-identical (= 5-repo · master + app-foundation + GentlyBreath + GentlyDay + GentlyTable · 보호 5 file 외)
+- 변경 시 master cycle 신설 + 5-repo propagation (`cycle-discipline.md` §15 패턴 1)
+- 자식 repo 직접 수정 금지
+
+---
+
+## §12 명시 cycle 이력
+
+- (직전) C2-RULES-RESTRUCTURE-001 (2026-05-02) · `evidence-and-reporting.md` (438 line) → `report-paths.md` (line 1~70) + `report-formats.md` (line 71~end) 분리 신설
+- 2026-05-21 · MASTER-CLI-CLEANUP-7CYCLE-001 · 본 file 신설 (= `report-paths.md` + `report-formats.md` 2 file 본문 통합 default · 본질 변경 X · 단일 SoT 정합 default) + 2 file 삭제 + 9 file 인용 갱신 + 5-repo byte-identical propagation

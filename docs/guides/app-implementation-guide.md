@@ -171,7 +171,7 @@ Compose @Composable → ViewModel.onEvent(Event) → state mutation
     ├── billing-payments-guardian (MoneyAuth → STOP)
     └── 기타 필요 전문가
     ↓
-[5] change-planner → PLAN.md (10-section 정규 스키마 · report-formats.md)
+[5] change-planner → PLAN.md (10-section 정규 스키마 · reporting.md §5)
     ↓
 [6] implement (ui-implementer / docs-change-communicator 등)
     ├── 13 architecture 문서 의 해당 부분 자동 인용

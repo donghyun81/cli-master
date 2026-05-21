@@ -100,8 +100,7 @@ CORE_CLI=(
   .claude/rules/workflow-core.md
   .claude/rules/cycle-discipline.md
   .claude/rules/pencil-automation.md
-  .claude/rules/report-paths.md
-  .claude/rules/report-formats.md
+  .claude/rules/reporting.md
   .claude/rules/routing-and-delegation.md
   .claude/rules/deferred-domains.md
   .claude/rules/code-principles.md

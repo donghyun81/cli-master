@@ -86,12 +86,12 @@ main 측 결과 통합 + cross-repo 정합 결정
 sub-agent prompt 본문 의무 항목:
 - **Working directory 명시** (= `cwd = ~/AndroidStudioProjects/<repo>` 인용)
 - **측정 영역 명시** (= file path + measure method · 예: `git hash-object .claude/rules/cycle-discipline.md`)
-- **return format 명시** (= Verdict + Top Findings + Counter-example + Recommended Next Step + Pointers 5 섹션 · `report-formats.md` 정합)
+- **return format 명시** (= Verdict + Top Findings + Counter-example + Recommended Next Step + Pointers 5 섹션 · `reporting.md` §9 Subagent Return Contract 정합)
 - **return 본문 한도** (= ≤ 2,000 token 권장 / ≤ 4,000 token 의무 · 4k 초과 시 path pointer paradigm 정합)
 
 ## Subagent Return Contract 정합
 
-본 sub-agent 측 main agent 측 return body 형식 의무 (= `report-formats.md` Subagent Return Contract 정합):
+본 sub-agent 측 main agent 측 return body 형식 의무 (= `reporting.md` §9 Subagent Return Contract 정합):
 
 ```markdown
 ## Verdict

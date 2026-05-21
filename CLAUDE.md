@@ -205,7 +205,7 @@ verify / review 없이 완료 금지.
 
 stdout 출력 순서: `[EVIDENCE] → [DIFF] → [LOG]`
 
-PLAN / VERIFY / REVIEW / PromptFit 정규 스키마: `.claude/rules/report-formats.md` + `report-paths.md`.
+PLAN / VERIFY / REVIEW / PromptFit 정규 스키마: `.claude/rules/reporting.md` §5~§7 + §1 경로 규약 (= 직전 report-formats.md + report-paths.md 본문 통합 default · MASTER-CLI-CLEANUP-7CYCLE-001 M1 마감).
 
 ### Task ID 형식
 

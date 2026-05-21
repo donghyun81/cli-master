@@ -64,7 +64,7 @@
 
 ### 신규 의존성 도입 의무 (DependencyDecision 8 항목)
 
-PLAN `## 2. DependencyDecision` 에 모두 작성 (`report-formats.md` 명시됨):
+PLAN `## 2. DependencyDecision` 에 모두 작성 (`reporting.md` §5 PLAN.md 정규 스키마 명시):
 
 1. 도입 사유 (해결하는 구체 문제)
 2. 직접 구현 비교 (LOC + 유지비)

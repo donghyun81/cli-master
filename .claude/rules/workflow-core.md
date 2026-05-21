@@ -104,7 +104,7 @@ Remaining Work / Next Entry Conditions / Known Risks)만으로 동작한다.
 - STOP 신호가 있는 상태 (MoneyAuth, DBMig, 비가역 변경 징후 등)
 - pre-EVIDENCE 계약이 미완성인 상태 (implementer 진입 전이면 계약부터 먼저)
 
-관련: `.claude/commands/resume-task.md` (reset 후 재진입 엔트리), `.claude/rules/report-formats.md`
+관련: `.claude/commands/resume-task.md` (reset 후 재진입 엔트리), `.claude/rules/reporting.md` §9
 (Subagent Return Contract — 하위 호출 결과 요약 규칙).
 
 ---
@@ -171,7 +171,7 @@ task-aware reading order와 공통 intake 절차:
 
 각 섹션은 해당 없어도 삭제하지 않고 `N/A` 명시.
 단계별 Plan 목록과 Notes는 섹션 뒤에 추가한다.
-형식 상세: `.claude/rules/report-formats.md`
+형식 상세: `.claude/rules/reporting.md` §5 PLAN.md (= 직전 report-formats.md 본문 통합 default)
 
 ---
 

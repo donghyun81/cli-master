@@ -180,7 +180,7 @@ cross-repo 영역 본질 발견 시점 (= 키워드: "5-repo" / "3 자식" / "GB
 - `intake-router.md` 측 **단일 repo routing paradigm** 측 cross-repo 측 확장 영역 default (= 2 영역 분리 paradigm 정합)
 - 본 sub-agent 측 직접 해법 결정 X (= routing + 통합 영역 단일 default · Planner 경계 정합)
 - 자식별 sub-agent fan-out 측 cwd 분리 paradigm 의무 (= `cross-repo-parallel-exec.md` §3 정합)
-- sub-agent return 측 Subagent Return Contract 정합 의무 (= `report-formats.md` 정합 · ≤ 4k token / 5 섹션 의무)
+- sub-agent return 측 Subagent Return Contract 정합 의무 (= `reporting.md` §9 정합 · ≤ 4k token / 5 섹션 의무)
 
 #### cross-repo 영역 STOP 조건
 

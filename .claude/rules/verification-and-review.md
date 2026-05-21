@@ -53,7 +53,7 @@ EXIT 0 = PASS | EXIT 1 = 아티팩트 누락 또는 시크릿 감지
 ### 기본 원칙
 - 근거 없는 단정 금지 (CONFIRMED / INFERRED / UNKNOWN으로 분류)
 - VERIFY PASS 없이는 review를 PASS로 판정하지 않는다
-- REVIEW.md 는 12-section 정규 스키마로 작성 (형식: `.claude/rules/report-formats.md`)
+- REVIEW.md 는 12-section 정규 스키마로 작성 (형식: `.claude/rules/reporting.md` §7)
 
 ### REVIEW.md 12-section 체크리스트
 
