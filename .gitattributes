@@ -1,0 +1,8 @@
+# Gently Master .gitattributes — 5-repo SoT
+# 신설: ECOSYSTEM-GITIGNORE-CLI-FALLOUT-MITIGATION-001 (2026-05-21 KST)
+# paradigm: A (= `*.bat -text` · scope 최소 + 즉시 mitigation default)
+# 본질: gradlew.bat line ending drift (HEAD blob LF ↔ WT CRLF) 측 외부 tool 자동 normalize 사고 mitigation default
+# 정합: 5-repo byte-identical default · master cycle 신설 + propagation 측 변경 default
+
+# Windows batch file — line ending normalize X (binary 처리 default · 현 HEAD blob 영역 보존)
+*.bat -text

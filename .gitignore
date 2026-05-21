@@ -16,6 +16,19 @@
 .ai/traces/*.jsonl
 .ai/nightly-baseline/*.log
 .ai/nightly-baseline/latest.md
+.ai/logs/
+
+# CLI session 자동 부산물 (baseline-snapshot hook · ECOSYSTEM-GITIGNORE-CLI-FALLOUT-MITIGATION-001)
+.ai/baseline-snapshot/
+
+# Kotlin daemon compiler cache
+.kotlin/
+
+# supabase CLI 자체 갱신 영역
+supabase/.temp/
+
+# GB cli batch artifact (cc-batch-pencil)
+cc-batch-pencil.json
 
 # Temp
 *.tmp

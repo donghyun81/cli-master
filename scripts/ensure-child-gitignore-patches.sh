@@ -54,6 +54,13 @@ PATCH_BODY=$(cat <<'PATCH'
 .claude/settings.local.json
 .ai/hooks/*.log
 .ai/traces/*.jsonl
+.ai/nightly-baseline/*.log
+.ai/nightly-baseline/latest.md
+.ai/logs/
+.ai/baseline-snapshot/
+.kotlin/
+supabase/.temp/
+cc-batch-pencil.json
 PATCH
 )
 
