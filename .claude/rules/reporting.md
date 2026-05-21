@@ -15,6 +15,8 @@
 
 모든 산출물의 형식, 경로, 기록 기준을 정의한다.
 
+> **연관 영역 — working file lifecycle**: 본 §1 산출물 외 cycle 진행 시 working file (= `cycle-prompt-*.md` + `cc-paste-*.md` + `*-addendum-*.md` + `.bak` + `.ai/prompts/*.md` 등) 측 lifecycle + archive paradigm 단일 SoT = [`working-file-lifecycle.md`](./working-file-lifecycle.md) (= frontmatter 3 키 + 5 위치 archive + INDEX.md 5-column 형식 + REVIEW.md PASS 또는 mtime 14일 fallback trigger).
+
 | 파일 | 경로 | 특성 |
 |---|---|---|
 | Task 문서 | `.ai/tasks/<taskId>.md` | 불변 (원문 요구사항 + 메타) |

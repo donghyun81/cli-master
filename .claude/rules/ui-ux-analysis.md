@@ -106,10 +106,14 @@ UiState 정책:
 
 ## KMP/CMP 전환 중 주의사항
 
-본 레포는 현재 KMP/CMP 미도입 상태이며, 아래 가이드는 향후 도입 시 활성화된다.
-UI 변경 시:
-- `docs/multiplatform-reboot-package/40_UI_UX_DIRECTION_CMP.md` 방향과 정합성 확인
-- Android-only 코드 수정 시 → 향후 CMP 전환 시 영향 범위를 TODO.md에 기록
-- Compose Multiplatform 전환 예정 영역은 최소 변경 원칙 강화
+> **본 cycle 시점 (2026-05-21 · MASTER-CLI-CLEANUP-7CYCLE-001 M3 마감 후) baseline**: app-foundation 도입 마감 default · KMP/CMP 활성 default. 본 §은 자식 repo (= GB/GD/GT) 측 도메인 코드 작성 시점 정합 영역 default.
 
-KMP/CMP 도입 시 SteadyWell SoT에서 관련 섹션(KMP/CMP 호환 게이트, 전환 주의사항 등)을 재propagation한다.
+자식 repo 측 UI 변경 시:
+- app-foundation 측 shared 영역 (= `shared/feature-state` + `shared/data` + `shared/domain` + `core/*`) 인용 default · 자식 측 도메인 코드 = `app/src/main/java/**` 영역 default
+- `docs/multiplatform-reboot-package/40_UI_UX_DIRECTION_CMP.md` 방향과 정합성 확인
+- Compose 측 hex/sp/dp 하드코딩은 `ui/theme/` 외부에서 금지 (= 리뷰 블로커 default · `pencil-uiux-workflow.md` 정합 default)
+- Android-only 영역 (= `androidMain` 한정) vs cross-platform 영역 (= `commonMain` 진입) 측 분기 영역 default · 자식 repo `app/` = 단일 platform 진입점 default 단 점진 KMP/CMP 확장 default
+
+baseline 갱신 history:
+- (직전) baseline: "KMP/CMP 미도입 상태" default · 본 §은 향후 도입 시 활성화 영역 default
+- 2026-05-21 (MASTER-CLI-CLEANUP-7CYCLE-001 M3): app-foundation 도입 마감 default · KMP/CMP 활성 default · 본 §은 자식 도메인 코드 작성 시점 정합 영역 default
