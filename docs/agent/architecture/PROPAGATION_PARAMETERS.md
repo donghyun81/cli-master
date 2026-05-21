@@ -10,7 +10,7 @@
 
 ## 1. 목적
 
-운영 자산(`scripts/agent/compound-lint.sh`, `.claude/agents/{layer-checker,domain-roles}.md`, `.claude/commands/{check-layer,uiux-refresh}.md`, `.claude/rules/uiux-sot-refresh.md`) 은 generic 하다 — 어떤 repo 에도 byte-identical 로 propagation 가능하다.
+운영 자산(`scripts/agent/compound-lint.sh`, `.claude/agents/active/layer-checker.md`, `.claude/rules/domain-roles.md`, `.claude/commands/{check-layer,uiux-refresh}.md`, `.claude/rules/uiux-sot-refresh.md`) 은 generic 하다 — 어떤 repo 에도 byte-identical 로 propagation 가능하다. (= domain-roles.md = MASTER-CLI-CLEANUP-7CYCLE-001 S3 안 `.claude/agents/active/` → `.claude/rules/` 이동 마감)
 
 repo 고유 값(패키지/경로/파일명/이름) 은 각 repo 가 자체 `scripts/agent/repo-config.sh` 에서 export 한다.
 운영 스크립트는 실행 시점에 `repo-config.sh` 를 source 해 env var 를 로드한다.

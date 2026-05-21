@@ -111,8 +111,8 @@ intake-router는 라우팅 판단에 필요한 최소한만 읽는다.
 | 배포·롤백 위험 | release-risk-manager | 병렬 가능 |
 | DocSync·문서 갱신 | docs-change-communicator | 순차 (마지막) |
 
-모든 역할 파일: `.claude/agents/<role>.md`
-역할 인덱스 및 분리 기준: `.claude/agents/domain-roles.md`
+모든 역할 파일: `.claude/agents/active/<role>.md` 또는 `.claude/agents/deferred/<role>.md` (= active/deferred 분기 default · `deferred-domains.md` §2 매트릭스 정합)
+역할 인덱스 및 분리 기준: `.claude/rules/domain-roles.md` (= navigation index 본질 default · cli infra rule 영역 default · MASTER-CLI-CLEANUP-7CYCLE-001 S3 이동 마감)
 
 ## Expected outputs
 
