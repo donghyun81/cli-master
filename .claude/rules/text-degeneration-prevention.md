@@ -87,7 +87,7 @@ json, http, https, url, uuid, sql, html, css, xml, yaml, toml,
 # numeric noise excluded by token shape
 ```
 
-추가 어휘 union = `allowed-acronyms.md` (hook §6 자동 인식).
+추가 어휘 union = `abbreviation-policy.md` §3 allowed acronym list (hook §6 자동 인식 · 직전 `allowed-acronyms.md` 본문 흡수 default · MASTER-CLI-CLEANUP-7CYCLE-001).
 
 ## 6. 자동화 hook 연계
 
@@ -140,7 +140,7 @@ scan 통과 후 출력 → PostToolUse hook (§6) 가 사후 재검증.
 | `.ai/reports/<taskId>/{PLAN,EVIDENCE,VERIFY,REVIEW,TODO}.md` | 의 | ✗ (제외 경로 — task-local) |
 | `docs/agent/**.md` | 의 | ✓ |
 | `docs/release-readiness/PACKAGE-OVERVIEW.md` | 의 | ✓ |
-| 도메인 source (`.kt` / `.swift` / `.ts` 등) | ✗ (= `no-abbreviation-policy.md` scope) | ✗ |
+| 도메인 source (`.kt` / `.swift` / `.ts` 등) | ✗ (= `abbreviation-policy.md` §1~§2 scope) | ✗ |
 
 ## 10. STOP 조건
 

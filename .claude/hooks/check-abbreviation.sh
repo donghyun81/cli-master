@@ -7,9 +7,9 @@
 #   warn    (default, Cycle 1~3) — warn to stderr, always exit 0
 #   enforce (Cycle 4+ upgrade)   — block with exit 2 on violation
 #
-# Policy SoT: .claude/rules/no-abbreviation-policy.md
-# Forbidden:  .claude/rules/forbidden-abbreviations.md
-# Allowed:    .claude/rules/allowed-acronyms.md
+# Policy SoT: .claude/rules/abbreviation-policy.md (§1 정책 + §2 금지 seed + §3 허용 acronym 통합 SoT)
+#   (직전 3 file no-abbreviation-policy.md / forbidden-abbreviations.md / allowed-acronyms.md
+#    본문 통합 default · MASTER-CLI-CLEANUP-7CYCLE-001 마감)
 #
 # macOS bash 3.x compatible — no associative arrays, no ${var,,}
 
@@ -66,7 +66,7 @@ if any(seg in file_path for seg in _SKIP_PATH_SEGS):
 # Forbidden token list (subset of seed list — excludes clear language keywords).
 # Language keywords (val, var, fun, fn, init, func) are excluded here
 # because they appear structurally in Kotlin/Swift/Go/Rust as syntax.
-# See forbidden-abbreviations.md §3 for full exclusion rationale.
+# See abbreviation-policy.md §2.3 for full exclusion rationale.
 FORBIDDEN_CHECK = [
     "btn", "msg", "cfg", "idx", "ctx", "cnt", "tmp", "usr", "pwd",
     "fnc", "mgr", "svc", "ctrl", "hdlr", "obj", "arr", "lst",
@@ -139,8 +139,7 @@ if echo "$ANALYSIS" | grep -q "^FORBIDDEN:"; then
 
     BLOCK_MSG="[NO-ABBREV] ${COUNT} forbidden abbreviation(s) in ${FILE_PATH}
 ${DETAILS}
-→ Policy: .claude/rules/no-abbreviation-policy.md
-→ Seed:   .claude/rules/forbidden-abbreviations.md
+→ Policy: .claude/rules/abbreviation-policy.md (§1 policy + §2 forbidden seed + §3 allowed acronym)
 → Action: use full descriptive names instead of abbreviations"
 
     if [ "$NO_ABBREV_ENFORCE" = "enforce" ]; then

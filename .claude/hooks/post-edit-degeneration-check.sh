@@ -11,7 +11,8 @@
 #   bash .claude/hooks/post-edit-degeneration-check.sh <relative-or-absolute-path>
 #
 # Policy SoT: .claude/rules/text-degeneration-prevention.md
-# Whitelist additionally pulls from: .claude/rules/allowed-acronyms.md
+# Whitelist additionally pulls from: .claude/rules/abbreviation-policy.md (§3 allowed acronym list)
+#   (직전 allowed-acronyms.md 본문 흡수 default · MASTER-CLI-CLEANUP-7CYCLE-001 마감)
 #
 # macOS bash 3.x compatible. python3 required (already required by other hooks).
 
@@ -20,7 +21,7 @@ set -uo pipefail
 : "${DEGEN_ENFORCE:=warn}"
 
 REPO_ROOT=$(git rev-parse --show-toplevel 2>/dev/null || echo ".")
-ALLOWED_ACRONYMS_PATH="$REPO_ROOT/.claude/rules/allowed-acronyms.md"
+ALLOWED_ACRONYMS_PATH="$REPO_ROOT/.claude/rules/abbreviation-policy.md"
 
 # --- Input resolution: stdin JSON (PostToolUse) OR positional argument (self-test) ---
 INPUT=""
@@ -113,7 +114,7 @@ WHITELIST_BASE = {
     "degen", "degeneration", "ngram", "stddev", "zscore",
 }
 
-# Optional: pull allowed-acronyms.md tokens (lowercased, alpha-only)
+# Optional: pull abbreviation-policy.md §3 allowed acronym tokens (lowercased, alpha-only)
 allowed_path = os.environ.get("DEGEN_ALLOWED", "")
 ACRONYM_EXTRA = set()
 if allowed_path and os.path.exists(allowed_path):

@@ -39,7 +39,7 @@
 | 5 | 도구 바인딩 | 디자인 도구의 구체 절차 | `docs/design/pencil-sot-policy.md` (의미 = pencil-sot-binding) + `.claude/rules/pencil-uiux-workflow.md` |
 | 6 | refresh baseline | 런타임 → SoT 비교 기준의 현재 baseline | `.claude/rules/uiux-sot-refresh.md` + `.ai/uiux-sot/latest/` |
 | 7 | 화면명 매핑 | SoT 화면명 ↔ Compose 코드 화면명 매핑 | `.claude/rules/sot-code-name-map.md` |
-| 8 | 도메인 정책 SSoT (분산) | 각 도메인 정책의 단일 출처 | `auth-rules.md` (인증) · `allowed-acronyms.md` (허용 약어) · `working-file-lifecycle.md` (working file) · `cycle-discipline.md` (cycle) · `verification-and-review.md` (검증) · `routing-and-delegation.md` (agent) · `ux-laws.md` (UX) · `data-model.md` / `api-spec.md` / `billing.md` (자식 도메인) |
+| 8 | 도메인 정책 SSoT (분산) | 각 도메인 정책의 단일 출처 | `auth-rules.md` (인증) · `abbreviation-policy.md` (= 직전 3 file 통합 · §1 정책 + §2 금지 seed + §3 허용 약어) · `working-file-lifecycle.md` (working file) · `cycle-discipline.md` (cycle) · `verification-and-review.md` (검증) · `routing-and-delegation.md` (agent) · `ux-laws.md` (UX) · `data-model.md` / `api-spec.md` / `billing.md` (자식 도메인) |
 
 ### 1.3 SoT 아님 (반대 케이스 · 명시 부정)
 
