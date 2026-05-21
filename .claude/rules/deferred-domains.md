@@ -31,7 +31,7 @@ STOP 시 자동 발화 agent (`.claude/agents/deferred/`):
 
 ---
 
-## 2. 현재 상태 (3 자식 repo 통합 baseline)
+## 2. 현재 상태 (5-repo 통합 baseline · master + app-foundation + GentlyBreath + GentlyDay + GentlyTable)
 
 > master baseline = 모두 UNKNOWN. 자식 repo 별 도메인 활성화는 자식 repo 의 별도 cycle 에서 진행 + master propagation 시 본 표 갱신.
 
@@ -74,7 +74,7 @@ STOP 시 자동 발화 agent (`.claude/agents/deferred/`):
 2. **deferred-domains.md 본 표 갱신** — UNKNOWN → ACTIVE + 비고 (예: "Supabase Auth + EncryptedSessionStore")
 3. **routing-and-delegation.md 갱신** — 해당 agent 의 `[DEFERRED]` 라벨 제거 + 활성 매핑 추가
 4. **agent 폴더 mv** — `.claude/agents/deferred/<name>.md` → `.claude/agents/active/<name>.md` (`scripts/activate-agent.sh` 자동 · C3 신설)
-5. **3-repo propagation** — `bash scripts/propagate.sh --all` (C3 신설)
+5. **5-repo propagation** — `bash scripts/propagate.sh --all` (C3 신설)
 6. **신규 rule 파일이 보호 등급이면** `.auto-memory/protected-file-hashes.md` 갱신
 
 ---

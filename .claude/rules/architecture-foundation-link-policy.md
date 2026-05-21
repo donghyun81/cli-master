@@ -3,7 +3,7 @@
 > **단일 목적**: 13 architecture 문서 (`docs/agent/architecture/**`) 의 코드 path 인용 영역 → `app-foundation` 의 실제 file 측 markdown link 의무 + relative path baseline + 예외 영역 + 추가 architecture 신설 시 자동 적용 patterns 정의.
 > **신설**: MASTER-ARCHITECTURE-FOUNDATION-LINK-001 (= ledger MASTER-T04 마감 · 2026-05-12).
 > **연관 파일**:
-> - `cycle-discipline.md` §15 패턴 1 (master cycle 신설 + 4-repo propagation 의무)
+> - `cycle-discipline.md` §15 패턴 1 (master cycle 신설 + 5-repo propagation 의무)
 > - `cycle-discipline.md` §3 (3-repo byte-identical 강제 범위 vs cli infra 권장 byte-identical)
 > - `docs/agent/architecture/COMMON_ARCHITECTURE.md` §1 (운영 레이어 vs 제품 레이어 경계)
 > SOT: `CLAUDE.md`

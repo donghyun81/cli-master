@@ -61,12 +61,12 @@
 1. 본 file 안 새 섹션 (`## N. <어휘>`) 추가
 2. 동의어 + 빈도 (실측) + 본 패키지 표준 표기 + 도메인 instance 분류 명시
 3. master cycle 신설 (`MASTER-CLI-TERMINOLOGY-<TOPIC>-DEFINE-NNN`)
-4. 4-repo propagation (`scripts/propagate.sh .claude/rules/terminology.md --targets all`)
+4. 5-repo propagation (`scripts/propagate.sh .claude/rules/terminology.md --targets all`)
 5. `verify-sync.sh` PASS 확인
 
 ---
 
 ## 3. 본 file 의 변경 정책
 
-본 file = cli infra 권장 byte-identical (4-repo).
-변경 시 master cycle 신설 + 4-repo propagation 의무 (`cycle-discipline.md` §15 패턴 1).
+본 file = cli infra 권장 byte-identical (5-repo · master + app-foundation + GentlyBreath + GentlyDay + GentlyTable).
+변경 시 master cycle 신설 + 5-repo propagation 의무 (`cycle-discipline.md` §15 패턴 1).

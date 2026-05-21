@@ -85,7 +85,7 @@
 ## §9 본 rule 의 변경 정책
 
 - master 측 단방향 propagation 영역 (cli infra 권장 byte-identical · 보호 파일 4종 외)
-- 변경 시 master cycle 신설 + 3-repo propagation 의무
+- 변경 시 master cycle 신설 + 5-repo propagation 의무
 - 자식 repo 직접 수정 금지
 
 ---

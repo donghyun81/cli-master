@@ -8,7 +8,7 @@
 > - `auth-rules.md` §1 — GoTrue REST 익명 부트스트랩
 > - `deferred-domains.md` §1 STOP trigger (Backend / API) + §5 trigger 키워드
 > - `routing-and-delegation.md` — auth-security-privacy + billing-payments-guardian + server-implementer 매핑
-> - `cycle-discipline.md` §15 패턴 1 (master cycle 신설 + 4-repo propagation)
+> - `cycle-discipline.md` §15 패턴 1 (master cycle 신설 + 5-repo propagation)
 > SOT: `CLAUDE.md`
 
 ---
@@ -174,15 +174,15 @@ SUPABASE_ACCESS_TOKEN / SUPABASE_ACCESS_TOKEN_GB / SUPABASE_ACCESS_TOKEN_GD / SU
 
 ## §8 본 rule 의 변경 정책
 
-- cli infra 권장 byte-identical (4-repo · master + GentlyBreath + GentlyDay + GentlyTable)
-- 변경 시 master cycle 신설 + 4-repo propagation 의무 (`cycle-discipline.md` §15 패턴 1)
+- cli infra 권장 byte-identical (5-repo · master + app-foundation + GentlyBreath + GentlyDay + GentlyTable)
+- 변경 시 master cycle 신설 + 5-repo propagation 의무 (`cycle-discipline.md` §15 패턴 1)
 - 자식 repo 직접 수정 금지
 
 ---
 
 ## §9 명시 cycle 이력
 
-- 2026-05-16 · CLI-INFRA-SUPABASE-HANDLING-001 · 본 rule 신설 + intake-router supabase 분기 1 섹션 추가 + 4-repo propagation
+- 2026-05-16 · CLI-INFRA-SUPABASE-HANDLING-001 · 본 rule 신설 + intake-router supabase 분기 1 섹션 추가 + 4-repo propagation (= master + GB + GD + GT · 본 시점 app-foundation §9 scope 외 default · 본 cycle baseline)
 - 2026-05-18 · MASTER-CLI-SUPABASE-COMPREHENSIVE-001 · §10 신설 (= MCP server 호출 paradigm + supabase CLI 통합 paradigm + 자식별 3 instance + Keychain wrap reference + read-only baseline + `cli_...` token 폐기) + §6 키워드 trigger list append + 5-repo byte-identical propagation (= master + app-foundation + GB + GD + GT)
 
 ---

@@ -1,4 +1,4 @@
-# SoT ↔ Code 화면명 매핑 SoT (3-repo)
+# SoT ↔ Code 화면명 매핑 SoT (5-repo · master + app-foundation + GentlyBreath + GentlyDay + GentlyTable · 자식 도메인 코드 = GB/GD/GT 측만)
 
 > **단일 목적**: Pencil SoT 화면명 ↔ Compose 코드 화면명 차이 영역 통합 매핑.
 > **scope**: GB / GD / GT 3 자식 repo (master = SoT 만 보유 / 코드 X).
@@ -90,7 +90,7 @@
 
 ---
 
-## 5. 패턴 집계 (3-repo 합산)
+## 5. 패턴 집계 (GB+GD+GT 자식 도메인 합산 · master + app-foundation 측 도메인 코드 X default)
 
 | 카테고리 | GB | GD | GT | 합 |
 |---|---|---|---|---|
@@ -116,7 +116,7 @@
 - 보호 5 또는 cli infra 6 drift 발생 시 본 매핑 재검증 (직접 영향 X 면 lazy).
 - 자식 repo 안 신규 *Screen*.kt 추가 / 삭제 / rename = 본 매핑 row 갱신 의무.
 - 자식 repo 안 신규 ui-spec.json 추가 / 삭제 / rename = 본 매핑 row 갱신 의무.
-- 갱신 시 master 작성 + 3 자식 repo cp propagation (cli infra 표준 byte-identical 의무).
+- 갱신 시 master 작성 + 5-repo cp propagation (cli infra 표준 byte-identical 의무 · 자식 도메인 코드 매핑 본질 = GB/GD/GT 측만 default · foundation 측 화면 X default).
 
 ---
 

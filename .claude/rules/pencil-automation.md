@@ -59,7 +59,7 @@ Pencil MCP `open_document` 로 신규 doc 생성 시 in-memory 만 형성. 첫 C
 
 **fallback**: agent 워크플로우 실패 시 Coin GUI Cmd+S (B-4.1 절차 · pencil-uiux-workflow.md §4.1).
 
-3-repo propagation 정책: settings.json + hook + 본 §12 모두 3-repo byte-identical 권장. F-1/F-2 검증 patterns (CYCLE-PHASE-F-1-NEW-SCREEN-DEFINE-001 + CYCLE-PHASE-F-2-NEW-SCREEN-DEFINE-001) 통계 기반 §12 갱신 명시됨 (`CYCLE-WORKFLOW-V12-REVISION-001` · 2026-05-01).
+5-repo propagation 정책: settings.json + hook + 본 §12 모두 5-repo byte-identical 권장. F-1/F-2 검증 patterns (CYCLE-PHASE-F-1-NEW-SCREEN-DEFINE-001 + CYCLE-PHASE-F-2-NEW-SCREEN-DEFINE-001) 통계 기반 §12 갱신 명시됨 (`CYCLE-WORKFLOW-V12-REVISION-001` · 2026-05-01).
 
 **WORKFLOW-V12-OVERCONSERVATIVE-001 별 trail close**: F-1+F-2 = 2 cycle 우회 patterns 검증 PASS · 본 §12 갱신 cycle 마감 시 close.
 
