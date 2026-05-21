@@ -6,7 +6,7 @@
 > - `pencil-uiux-workflow.md` (보호) — Pencil → Compose 본 작업 정책
 > - `cycle-discipline.md` §13 — Claude Code 환경 정합 (2.1.114 pin)
 > - `.claude/hooks/pencil-auto-save.sh` (v2 · master 채택) — 자동 호출 hook
-> - `.claude/hooks/save-as-result-check.sh` (GD-only 흡수) — Save As 결과 검증
+> - `scripts/save-as-result-check.sh` (= 수동 helper · MASTER-CLI-CLEANUP-7CYCLE-001 S4 마감 후 위치 default · settings.json 등록 X default · GD-only 흡수 baseline) — Save As 결과 검증
 > SOT: `CLAUDE.md`
 
 ---

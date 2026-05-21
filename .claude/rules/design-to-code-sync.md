@@ -94,7 +94,7 @@
 
 | 도구 | 바인딩 파일 | 자동화 hook |
 |---|---|---|
-| Pencil | `.claude/rules/pencil-uiux-workflow.md` + `.claude/rules/pencil-automation.md` | `.claude/hooks/pencil-auto-save.sh` + `save-as-result-check.sh` |
+| Pencil | `.claude/rules/pencil-uiux-workflow.md` + `.claude/rules/pencil-automation.md` | `.claude/hooks/pencil-auto-save.sh` (= auto trigger) + `scripts/save-as-result-check.sh` (= 수동 helper · MASTER-CLI-CLEANUP-7CYCLE-001 S4 이동 마감) |
 | Figma | (향후 신설) `figma-uiux-workflow.md` + `figma-automation.md` | (향후) `figma-auto-export.sh` |
 | Sketch | (향후) `sketch-uiux-workflow.md` | (향후) `sketch-auto-export.sh` |
 

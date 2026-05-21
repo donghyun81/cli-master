@@ -1,6 +1,7 @@
 #!/bin/bash
 # Save As 결과 자동 검증 + cli 결과 출력
-# 호출: bash .claude/hooks/save-as-result-check.sh <expected-filename> <expected-dir>
+# 호출: bash scripts/save-as-result-check.sh <expected-filename> <expected-dir>
+# (= MASTER-CLI-CLEANUP-7CYCLE-001 S4 안 .claude/hooks/ → scripts/ 이동 마감 · 수동 helper paradigm 정합 default · settings.json 등록 X default)
 # 출력: 정상 저장 PASS / 잔존 untitled list / Coin 권장 정정 가이드
 
 REPO_ROOT=$(git rev-parse --show-toplevel 2>/dev/null || echo ".")
