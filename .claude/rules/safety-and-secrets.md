@@ -186,3 +186,19 @@ STOP 시 기록 항목:
 - `declare -A` (연관배열) 사용 금지 (bash 4+ 전용)
 - `${!var}` 간접 참조 최소화
 - `[[ ... ]]` 사용 가능 (bash 3.2+)
+
+---
+
+## git commit 측 stage 정합 paradigm (= 2026-05-21 신설 · pointer)
+
+> **본 § = pointer 영역 default**. 본문 단일 SoT = [`cycle-discipline.md` §22](./cycle-discipline.md) (= `MASTER-CLI-GIT-MV-SED-STAGE-PARADIGM-CHECK-001` 마감 default). 본 § = 안내 + trigger 영역 단일 default · 보호 영역 본질 X default.
+
+`git mv` 측 rename 호출 후 동족 file 측 sed content 정정 영역 측 stage 누락 사고 mitigation. post-rename `git add -u` 의무 paradigm 정합 의무 default. GB+GD 동족 사고 baseline default (= GT 측 자율 회피 default).
+
+본 paradigm trigger 영역 default:
+
+- `git commit` 호출 시점 = pre-commit hook (= `.claude/hooks/pre-commit-stage-check.sh`) 측 stage 영역 측 rename + working tree 측 unstaged 영역 측정 default
+- 발화 시점 = stderr 측 warn 출력 default + post-rename `git add -u` 의무 paradigm 안내 default
+- mode = warn default (= exit 0 · non-blocking default · enforce mode 별 cycle default)
+
+상세 paradigm step + STOP 조건 = `cycle-discipline.md` §22 단일 SoT default. 본 § 본문 변경 시 = master cycle 신설 + 5-repo propagation 의무 default (= `cycle-discipline.md` §15 패턴 1 정합).
