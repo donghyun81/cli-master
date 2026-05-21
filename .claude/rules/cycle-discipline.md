@@ -551,3 +551,91 @@ cli infra 5-repo byte-identical 영역 cycle 진입 시점 표준:
 #### 21.7 명시 cycle 이력
 
 - 2026-05-19 · `MASTER-CLI-PARENT-MOUNT-PARALLEL-EXEC-PARADIGM-001` · 본 § 신설 + `cross-repo-parallel-exec.md` 신설 + `cross-repo-orchestrator.md` sub-agent 신설 (§FREEDOM) + 부모 mount root CLAUDE.md 신설 + `routing-and-delegation.md` Cross-repo sub-section append + 5-repo byte-identical propagation
+
+---
+
+### 22) git mv + sed 측 stage 정합 (= 2026-05-21 신설 · `MASTER-CLI-GIT-MV-SED-STAGE-PARADIGM-CHECK-001`)
+
+> 본 § = rename + content 변경 동시 cycle 측 stage 누락 사고 mitigation 단일 SoT. GB+GD 동족 사고 baseline (= directory 측 file rename 후 sed content 정정 영역 측 stage 분리 사고 default · GT 측 자율 회피 default). post-rename `git add -u` 의무 paradigm + `pre-commit-stage-check.sh` hook 정합 본문 단일 default.
+
+#### 22.1 사고 본질
+
+`git mv` 측 directory 측 file rename 호출 시점:
+
+- git 자체 측 rename detection 자동 PASS default (= `R` prefix 측 staged 영역 표시)
+- 단 후속 sed 측 content 정정 영역 (= rename 측 file 본문 측 path string 또는 인용 경로 정합 영역) = working tree 측 변경 default · stage 영역 미반영 default
+- 결과 = commit 측 rename + 일부 content 정합 영역 단일 staged · 나머지 content 정정 영역 unstaged default · review 측 누락 발견 사고 default
+
+본 사고 GB+GD 측 동족 발화 (= 2 자식 측 동일 paradigm cycle 진입 시점 cluster 발화 default). GT 측 본 패턴 회피 default (= 사용자 본인 측 manual mitigation default).
+
+#### 22.2 mitigation paradigm
+
+| step | 본질 |
+|---|---|
+| 1 | `git mv <old> <new>` 호출 (= rename detection 자동) |
+| 2 | sed 또는 Edit tool 측 content 정정 (= rename 측 file 본문 + 인용 file 측 path 정합) |
+| 3 | **`git add -u` 의무** (= post-rename + post-sed 측 일괄 stage default · unstaged content 영역 0 보장) |
+| 4 | `git diff --cached --name-only` 측 list 측정 (= stage 영역 측 전체 file 확인 default) |
+| 5 | `git status` 측 working tree 측 unstaged 영역 0 확인 default |
+| 6 | commit 진입 (= `cycle-discipline.md` §5 v2 정합) |
+
+본 paradigm 측 step 3 (`git add -u`) 누락 = 사고 발화 baseline default. 본 § 측 의무 영역 default.
+
+#### 22.3 pre-commit hook 정합
+
+`.claude/hooks/pre-commit-stage-check.sh` (= 2026-05-21 신설 default) PreToolUse Bash matcher 측 등록 default. 본 hook 본질:
+
+- trigger = `git commit` substring 측 Bash command 측정 (= hook 자체 측 filter default)
+- detection = `git diff --cached` 측 rename (= `R` prefix) 영역 발견 시점 + 동족 file 측 working tree 측 unstaged 영역 측정 default
+- 발화 시점 = unstaged content 영역 발견 시점 stderr 측 warn 출력 default (= post-rename `git add -u` 의무 paradigm 안내 default)
+- mode = warn default (= exit 0 · non-blocking default · `enforce` mode 별 cycle default)
+
+상세 본문 = `pre-commit-stage-check.sh` 측 self-test paradigm 정합 default.
+
+#### 22.4 STOP 조건
+
+| trigger | mitigation |
+|---|---|
+| `git mv` 호출 후 `git add -u` 미호출 + 동족 sed 측 content 정정 영역 발견 | hook warn 발화 default · 사용자 측 step 3 진입 의뢰 |
+| `git diff --cached` 측 rename + working tree 측 unstaged 영역 잔존 발견 | 즉시 STOP + step 3 mitigation 진입 default |
+| rename 측 path 정합 영역 측 다른 file 측 인용 경로 변경 미발견 (= `grep -rn <old-path>`) | 별 cycle 진입 권장 default (= 본 cycle scope 외 영역 default) |
+
+#### 22.5 안내 paradigm (= safety-and-secrets.md 측 pointer 정합)
+
+본 § = `safety-and-secrets.md` 측 신 § "git mv + sed paradigm pointer" 측 단일 SoT default. safety-and-secrets.md 측 본문 = 본 §22 인용 default · 보호 영역 본질 X default.
+
+#### 22.6 명시 cycle 이력
+
+- 2026-05-21 · `MASTER-CLI-GIT-MV-SED-STAGE-PARADIGM-CHECK-001` · 본 § 신설 + `safety-and-secrets.md` pointer § 신설 + `.claude/hooks/pre-commit-stage-check.sh` 신설 + `.claude/settings.json` PreToolUse Bash matcher 신 hook 등록 + 5-repo byte-identical propagation
+
+---
+
+### 23) Recommended option disk verification paradigm (= 2026-05-21 신설 · `MASTER-CLI-RECOMMENDED-OPTION-DISK-VERIFICATION-PARADIGM-001`)
+
+> 본 § = 후속 cycle 후보 / Recommended option / paste source umbrella 발행 시점 disk 측 이미 구현 여부 측정 의무 paradigm 명시 영역 default. 본문 단일 SoT = [`recommended-option-disk-verification.md`](./recommended-option-disk-verification.md) (= 4 의무 영역 + paste source authoring ⑤ 자기 정합 paradigm + 예시 case 3 + 위반 mitigation cycle default).
+
+#### 23.1 cycle scope 결정 영역 측 적용
+
+cycle scope file 영역 결정 시점 (= master cycle 또는 자식 cycle 측) 본 paradigm 정합 의무 default:
+
+- cycle scope file × N 측 측정 명령 호출 default (= `find` + `grep` + `git hash-object` + `git ls-files`)
+- 측정 결과 = 중복 신설 차단 default + 갱신 vs 신설 결정 default + 부분 구현 영역 측 scope 재 정의 default
+- 측정 결과 인용 default (= paste source 본문 §0 baseline 영역 + §3 contract SoT 영역 default)
+
+#### 23.2 §17 BASELINE 실측 표준 정합
+
+본 paradigm 측 의무 ① (= disk 측 이미 구현 여부 측정 의무) 측 측정 명령 영역 정합 default = §17 BASELINE 실측 표준 의무 절차 (= filename + content 동시 grep 의무) 본문 정합 default.
+
+- filename find 1차 + container 내부 content grep 2차 의무 default (= §17 정합 default)
+- lifecycle / deprecated 키워드 grep 의무 default (= §17 §14a 6 절차 정합 default)
+- filename + content 둘 다 부재 시점만 STOP / UNKNOWN 분류 가능 default
+
+본 §23 + §17 = 본 paradigm 측 측정 영역 본문 단일 default.
+
+#### 23.3 위반 시 mitigation
+
+본 paradigm 측 위반 mitigation 본문 단일 SoT = `recommended-option-disk-verification.md` §5 위반 시 mitigation cycle paradigm 정합 default.
+
+#### 23.4 명시 cycle 이력
+
+- 2026-05-21 · `MASTER-CLI-RECOMMENDED-OPTION-DISK-VERIFICATION-PARADIGM-001` · 본 § 신설 + `recommended-option-disk-verification.md` 신 rule 신설 + 5-repo byte-identical propagation
