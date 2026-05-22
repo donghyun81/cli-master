@@ -666,3 +666,33 @@ verify 의무 본문 = step 7 핵심 영역 default (= compile + install + monke
 #### 24.4 명시 cycle 이력
 
 - 2026-05-22 · `MASTER-CLI-RUNTIME-CRASH-MITIGATION-PROCESS-PARADIGM-001` · 본 § 신설 + `runtime-crash-mitigation-process.md` 신 rule 신설 + 5-repo byte-identical propagation
+
+---
+
+### 25) LAUNCH-STATUS + INDEX + task file auto-sync paradigm (= 2026-05-22 신설 · `MASTER-CLI-LAUNCH-STATUS-AUTO-SYNC-PARADIGM-001`)
+
+> 본 § = 자식 repo (= GB / GD / GT + app-foundation) 측 cycle REVIEW PASS 시점 cli session 측 LAUNCH-STATUS + INDEX + task file 갱신 의무 paradigm 명시 영역 default. 본문 단일 SoT = [`launch-status-auto-sync.md`](./launch-status-auto-sync.md) (= trigger 기반 paradigm + 3 의무 영역 + paste-back verify 의무 본문 + cli session 자율 paradigm + STOP 조건 + paste source authoring 영역 default).
+
+#### 25.1 paradigm 본질
+
+- trigger 기반 default (= 자식 cycle REVIEW PASS 시점 default · paste-back 본문 발행 직전 시점 default · 매 cycle 마감 시점 catch-up drift 회피 default)
+- cli session 측 LAUNCH-STATUS + INDEX + task file 갱신 의무 default (= 3 file 영역 default)
+- paste-back `[EC]` 섹션 측 갱신 verify 본문 명시 default · `[Diff]` 섹션 측 갱신 file list 명시 default
+
+#### 25.2 3 의무 영역
+
+| # | 영역 | 본질 |
+|---|---|---|
+| 1 | LAUNCH-STATUS 갱신 default | `docs/release-readiness/LAUNCH-STATUS.md` 측 task 상태 ☐ → ✓ default · baseline HEAD sha 갱신 default · 신 cycle ID + 마감 sha 인용 default |
+| 2 | `.ai/tasks/INDEX.md` 갱신 default | 신 task entry append default · cycle ID + 마감 sha + mtime + 상태 명시 default |
+| 3 | `.ai/tasks/<CYCLE-ID>.md` 신 task file 생성 default | 본 cycle outcome + scope + 결정 paradigm + paste-back 본문 default · INDEX 측 인용 default |
+
+#### 25.3 trigger 본질 + precedent
+
+- 진입 trigger = 자식 cycle REVIEW PASS 시점 default (= 의무 영역 default) · 자식 propagation cycle 마감 시점 default (= lazy 가능 default) · catch-up cycle 진입 시점 default (= 별 cycle default)
+- precedent: `MASTER-CLI-RUNTIME-CRASH-MITIGATION-PROCESS-PARADIGM-001` (= H32 마감 default · self-contained 11 section format default)
+- baseline trigger: H32-H34 마감 사이클 측 LAUNCH-STATUS HEAD drift 누적 default (= GB 14 commits / GD 18 commits / GT 12 commits drift default) + INDEX 갱신 drift (= GD 4 days / GT 6 days 누락 default) + 신 task file 누락 (= GB 2 / GD 0 / GT 1 default)
+
+#### 25.4 명시 cycle 이력
+
+- 2026-05-22 · `MASTER-CLI-LAUNCH-STATUS-AUTO-SYNC-PARADIGM-001` · 본 § 신설 + `launch-status-auto-sync.md` 신 rule 신설 + 5-repo byte-identical propagation
