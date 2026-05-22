@@ -696,3 +696,33 @@ verify 의무 본문 = step 7 핵심 영역 default (= compile + install + monke
 #### 25.4 명시 cycle 이력
 
 - 2026-05-22 · `MASTER-CLI-LAUNCH-STATUS-AUTO-SYNC-PARADIGM-001` · 본 § 신설 + `launch-status-auto-sync.md` 신 rule 신설 + 5-repo byte-identical propagation
+
+---
+
+### 26) Paste source umbrella authoring 측 disk 실측 의무 paradigm (= 2026-05-22 신설 · `MASTER-CLI-PASTE-AUTHORING-DISK-VERIFICATION-PARADIGM-001`)
+
+> 본 § = cowork chat 측 paste source umbrella authoring 시점 disk 실측 의무 paradigm 명시 영역 default. 본문 단일 SoT = [`paste-authoring-disk-verification.md`](./paste-authoring-disk-verification.md) (= trigger 기반 paradigm + 3 의무 영역 + paste-back verify 의무 본문 + cli session 자율 paradigm + STOP 조건 + 자기 정합 paradigm 본질 default).
+
+#### 26.1 paradigm 본질
+
+- trigger 기반 default (= cowork chat 측 paste source umbrella authoring 시점 default · 매 cycle 강제 X default)
+- cowork chat 측 paste source umbrella `§1 cycle 본질` + `§2 scope` + `§3 contract SoT` 영역 본문 작성 시점 default
+- 책임 분리 default (= cowork chat 측 paste source authoring 측 disk 실측 의무 default · cli session 측 paste-back verify 의무 default · `cowork-project-instructions v14 §B-1 + §B-2` 정합 default)
+
+#### 26.2 3 의무 영역
+
+| # | 영역 | 본질 |
+|---|---|---|
+| 1 | paste source umbrella §1 + §1.3 disk 측정 결과 섹션 명시 의무 default | scope file × N 측 disk 측정 결과 본문 인용 default (= grep / find / git ls-files / Read 측정 결과 default · 가정 X default) |
+| 2 | paste source umbrella §3 contract SoT 섹션 byte-identical quote 의무 default | precedent rule + 인용 entry × N 측 byte-identical quote default (= line number 인용 default · 가정 X default) |
+| 3 | paste source umbrella §2 scope 섹션 file path 모두 disk 측정 의무 default | 변경 file × N 측 `git ls-files` / `find` / `Read` 측정 의무 default · 부재 발견 시 scope 재 정의 의무 default (= `recommended-option-disk-verification.md` §2.3 + §2.4 정합 default) |
+
+#### 26.3 trigger 본질 + precedent
+
+- 진입 trigger = cowork chat 측 paste source umbrella authoring 시점 default (= 의무 영역 default)
+- precedent: `MASTER-CLI-RECOMMENDED-OPTION-DISK-VERIFICATION-PARADIGM-001` (= H29 마감 default · 동족 paradigm 본질 default · cli session 측 disk 측정 의무 paradigm default · 본 § = cowork chat 측 paste source authoring paradigm default · 별 file 분리 paradigm default) + `MASTER-CLI-LAUNCH-STATUS-AUTO-SYNC-PARADIGM-001` (= H35 마감 default · self-contained 12 section format default)
+- baseline trigger: H36 chat 측 3REPO-CRITICAL-PATH-PROGRESS-001 cycle GB scope 재 정의 사고 default (= paste source umbrella 측 `BreathSessionRepository.kt` + `BreathSessionDao.kt` 명시 default · 실 disk 부재 default · 실 disk = `MeditationSessionsListRepository.kt` 정합 default · cli session 측 자율 scope 재 정의 마감 default)
+
+#### 26.4 명시 cycle 이력
+
+- 2026-05-22 · `MASTER-CLI-PASTE-AUTHORING-DISK-VERIFICATION-PARADIGM-001` · 본 § 신설 + `paste-authoring-disk-verification.md` 신 rule 신설 + 5-repo byte-identical propagation
