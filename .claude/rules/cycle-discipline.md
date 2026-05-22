@@ -639,3 +639,30 @@ cycle scope file 영역 결정 시점 (= master cycle 또는 자식 cycle 측) �
 #### 23.4 명시 cycle 이력
 
 - 2026-05-21 · `MASTER-CLI-RECOMMENDED-OPTION-DISK-VERIFICATION-PARADIGM-001` · 본 § 신설 + `recommended-option-disk-verification.md` 신 rule 신설 + 5-repo byte-identical propagation
+
+---
+
+### 24) Runtime crash mitigation process paradigm (= 2026-05-22 신설 · `MASTER-CLI-RUNTIME-CRASH-MITIGATION-PROCESS-PARADIGM-001`)
+
+> 본 § = 자식 repo (= GB / GD / GT) 측 Android runtime crash 발견 시점 cli session 측 mitigation process paradigm 명시 영역 default. 본문 단일 SoT = [`runtime-crash-mitigation-process.md`](./runtime-crash-mitigation-process.md) (= trigger 기반 paradigm + 9-step mitigation process + verify 의무 본문 + cli session 자율 paradigm + STOP 조건 + paste source authoring 영역 default).
+
+#### 24.1 paradigm 본질
+
+- trigger 기반 default (= 매번 runtime verify 회피 default · 외부 동기화 덜 된 영역 false positive 회피 default)
+- 진입 trigger = 사용자 보고 default 또는 cli session 측 의도 시점 verify default
+- cli session 측 ADB + emulator + Logcat 영역 default (= cowork chat 측 영역 X default · `cowork-project-instructions v14 §B-2` 책임 분리 정합 default)
+
+#### 24.2 9-step process + verify 의무
+
+본 paradigm 측 9-step mitigation process (= 1.paste 발행 + 2.terminal paste + 3.Logcat 수집 + 4.stack trace 측정 + 5.root cause 측정 + 6.mitigation IMPL + 7.emulator runtime verify + 8.commit + 9.paste-back default) 본문 단일 SoT = `runtime-crash-mitigation-process.md` §2 정합 default.
+
+verify 의무 본문 = step 7 핵심 영역 default (= compile + install + monkey launch + crash buffer FATAL 0 + process alive 의무 default · staging flavor 한정 default · production push X 의무 default · `runtime-crash-mitigation-process.md` §3 정합 default).
+
+#### 24.3 precedent + 인접 paradigm
+
+- precedent: `3REPO-RUNTIME-CRASH-DIAGNOSIS-001` (2026-05-22 H32 마감 default · Sentry `SentryInitProvider` 자동 init 측 empty DSN crash 차단 default · 3 자식 byte-identical mitigation default)
+- 인접 paradigm: `cycle-discipline.md` §5 v2 ([agent-commit: yes] 묵시 동의) + §7 (commit body 6-section) + `cross-repo-parallel-exec.md` §2 (영역 1/2 paradigm 분기) + `safety-and-secrets.md` (production push X) + `recommended-option-disk-verification.md` (disk 측정 의무)
+
+#### 24.4 명시 cycle 이력
+
+- 2026-05-22 · `MASTER-CLI-RUNTIME-CRASH-MITIGATION-PROCESS-PARADIGM-001` · 본 § 신설 + `runtime-crash-mitigation-process.md` 신 rule 신설 + 5-repo byte-identical propagation
