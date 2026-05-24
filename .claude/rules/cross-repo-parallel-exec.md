@@ -258,13 +258,7 @@ drift 발견 시점 main agent 측 mitigation:
 
 ## 5. STOP 조건 (= cross-repo 영역 한정)
 
-| # | trigger | mitigation |
-|---|---|---|
-| 1 | 자식별 sub-agent 결과 본질 어긋남 발견 (= 동족 자식 측 paradigm 정합 측 mismatch) | 즉시 STOP + 사용자 회수 default (= AskUserQuestion 영역) |
-| 2 | cross-repo 영역 측 HIGH RISK 도메인 진입 (= DB migration / Money / Auth / production push) | 즉시 STOP default (= `cycle-discipline.md` §STOP 정합) |
-| 3 | sub-agent 측 cwd 분리 paradigm 위반 (= main agent cwd 측 자식 측 write 시도) | 즉시 STOP + cwd 분리 paradigm 재 정합 의무 |
-| 4 | sub-agent return body 측 raw output 그대로 (= `reporting.md` §9.1 4k token 한도 초과) | sub-agent 재 호출 + return 본문 압축 paradigm 정합 의무 |
-| 5 | 보호 5 file sha drift 발견 (= 자식별 sub-agent 측정 결과 mismatch) | 즉시 STOP + master 측 mitigation cycle 진입 (= §4.3 정합) |
+> **본 §5 = pointer 영역 default**. 본문 단일 SoT = [`CLAUDE.md §5`](../../CLAUDE.md) (= `MASTER-CLI-CYCLE-1-STOP-CANONICAL-INTEGRATION-001` 마감 default · 9 STOP 항 default · cross-repo HIGH RISK 도메인 진입 = STOP #7 default · 보호 5 file sha drift = STOP #5 default). 본 § 본문 변경 시 = master cycle 신설 + 5-repo propagation 의무 default.
 
 ## 6. paradigm 호출 trigger 영역
 

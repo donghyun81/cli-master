@@ -523,13 +523,7 @@ cli infra 5-repo byte-identical 영역 cycle 진입 시점 표준:
 
 #### 21.4 cross-repo 영역 STOP 조건
 
-| trigger | mitigation |
-|---|---|
-| 보호 5 file sha drift 발견 (= 자식별 sub-agent 측정 결과 또는 verify-sync 측 mismatch) | 즉시 STOP + 사용자 회수 default (= `cycle-discipline.md` §10 + master CLAUDE.md §5 정합) |
-| 자식별 sub-agent 결과 본질 어긋남 (= 동족 자식 측 paradigm 정합 측 mismatch) | STOP + 사용자 회수 default |
-| cross-repo 영역 측 HIGH RISK 도메인 진입 (= DB migration / Money / Auth / production push 영향) | 즉시 STOP default |
-| 자식 repo 측 cli infra 직접 수정 시도 (= 단방향 정합 위반) | 즉시 STOP + master 측 정합 cycle 진입 의뢰 |
-| production code touch 징후 (= cli infra cycle 측 0 LOC touch 의무 default) | 즉시 STOP |
+> **본 §21.4 = pointer 영역 default**. 본문 단일 SoT = [`CLAUDE.md §5`](../../CLAUDE.md) (= `MASTER-CLI-CYCLE-1-STOP-CANONICAL-INTEGRATION-001` 마감 default · 9 STOP 항 default). 본 § 본문 변경 시 = master cycle 신설 + 5-repo propagation 의무 default.
 
 #### 21.5 cross-repo cycle 측 산출물 영역
 
@@ -595,11 +589,7 @@ cli infra 5-repo byte-identical 영역 cycle 진입 시점 표준:
 
 #### 22.4 STOP 조건
 
-| trigger | mitigation |
-|---|---|
-| `git mv` 호출 후 `git add -u` 미호출 + 동족 sed 측 content 정정 영역 발견 | hook warn 발화 default · 사용자 측 step 3 진입 의뢰 |
-| `git diff --cached` 측 rename + working tree 측 unstaged 영역 잔존 발견 | 즉시 STOP + step 3 mitigation 진입 default |
-| rename 측 path 정합 영역 측 다른 file 측 인용 경로 변경 미발견 (= `grep -rn <old-path>`) | 별 cycle 진입 권장 default (= 본 cycle scope 외 영역 default) |
+> **본 §22.4 = pointer 영역 default**. 본문 단일 SoT = [`CLAUDE.md §5`](../../CLAUDE.md) (= `MASTER-CLI-CYCLE-1-STOP-CANONICAL-INTEGRATION-001` 마감 default · 9 STOP 항 default · git mv + sed stage 누락 = STOP #8 default). 본 § 본문 변경 시 = master cycle 신설 + 5-repo propagation 의무 default.
 
 #### 22.5 안내 paradigm (= safety-and-secrets.md 측 pointer 정합)
 

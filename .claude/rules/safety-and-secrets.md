@@ -165,17 +165,7 @@ AIza[0-9A-Za-z\-_]{35}    # Google API Key
 
 ## 비가역 변경 STOP 정책
 
-다음이 감지되면 즉시 STOP, 자동 수정 금지:
-
-1. 파일 삭제 시도
-2. DB 스키마 변경 (migration 포함)
-3. 기존 파일의 대규모 override
-4. Auth/결제 코드 변경
-
-STOP 시 기록 항목:
-- 감지된 변경 설명
-- 영향 경로 (파일:라인)
-- 사용자가 취해야 할 다음 행동
+> **본 § = pointer 영역 default**. 본문 단일 SoT = [`CLAUDE.md §5`](../../CLAUDE.md) (= `MASTER-CLI-CYCLE-1-STOP-CANONICAL-INTEGRATION-001` 마감 default · 9 STOP 항 default). 본 § 본문 변경 시 = master cycle 신설 + 5-repo propagation 의무 default.
 
 ---
 
