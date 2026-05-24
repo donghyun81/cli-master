@@ -753,3 +753,21 @@ sub-agent spawn 영역 신설 X 의무 default · 신 sub-agent 신설 시점 �
 #### 28.3 명시 cycle 이력
 
 - 2026-05-22 · `MASTER-CLI-CYCLE-3-AUTOMATION-POLICY-INSTALL-001` · 본 § 신설 + `automation-policy.md` 신설 + 5-repo byte-identical propagation default
+
+### 29) Mode 시스템 paradigm (= 2026-05-22 신설 default · `MASTER-CLI-CYCLE-4A-MODE-SYSTEM-HOT-INSTALL-001`)
+
+> 본 § = Mode 시스템 (= AI 행동 layer default · Phase A/B/C/D/F orthogonal default · L1-2 정합 default) paradigm 명시 영역 default. 본문 단일 SoT = [`mode-system.md`](./mode-system.md) (= 3 mode hot default · M1 + M3 + M5 default · Mode picker 워크플로우 default · 현 5-repo 동일 mode / 미래 자식별 발산 protocol default · L1-6 정합 default).
+
+#### 29.1 Mode 본질
+
+- Mode = AI 행동 layer default · Phase = 작업 lifecycle 위치 layer default · orthogonal default · 동시 활성 default
+- 자산 본문 측 mode + Phase 명시 의무 default
+
+#### 29.2 Mode 잘못 결정 recovery (= L1-7 정합 default)
+
+- STOP 조건 9 sub-case 흡수 default · 신 recovery 절차 신설 X default · `verification-and-review.md §에러 유형별 복구 경로` 정합 default
+
+#### 29.3 명시 cycle 이력
+
+- 2026-05-22 · `MASTER-CLI-CYCLE-4A-MODE-SYSTEM-HOT-INSTALL-001` · 본 § 신설 + `mode-system.md` 신설 + 5-repo byte-identical propagation default
+- 2026-05-22 · `MASTER-CLI-CYCLE-4B-MODE-BUNDLE-COLD-INSTALL-001` · cold storage `mode-bundle-COLD.md` 신설 default (= master only default · propagation X default)
