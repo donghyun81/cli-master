@@ -461,3 +461,10 @@ subagent 가 상위 agent 에게 돌려주는 최소 요약은 아래 5 개 섹�
 
 - (직전) C2-RULES-RESTRUCTURE-001 (2026-05-02) · `evidence-and-reporting.md` (438 line) → `report-paths.md` (line 1~70) + `report-formats.md` (line 71~end) 분리 신설
 - 2026-05-21 · MASTER-CLI-CLEANUP-7CYCLE-001 · 본 file 신설 (= `report-paths.md` + `report-formats.md` 2 file 본문 통합 default · 본질 변경 X · 단일 SoT 정합 default) + 2 file 삭제 + 9 file 인용 갱신 + 5-repo byte-identical propagation
+- 2026-05-22 · MASTER-CLI-CYCLE-2A-ANCHOR-LIST-HOT-INSTALL-001 · §13 Negative Space Line append default (= anchor list paradigm 정합 default)
+
+---
+
+## §13 Negative Space Line (= 2026-05-22 신설 default · `MASTER-CLI-CYCLE-2A-ANCHOR-LIST-HOT-INSTALL-001`)
+
+매 cycle 보고 끝 1 줄 "고려했으나 hot 제외 영역: <영역 default>" 의무 default. 본 line = anchor list 진화 signal default (= 사용자 본심 정합 default). 비어 있는 영역 = "(없음)" 명시 default. 발행 영역 = REVIEW.md 본문 끝 + paste-back 본문 끝 default. 본문 단일 SoT = [`anchor-list.md §4`](./anchor-list.md) (= 10 anchor hot default · P0 6 + P1 4 default).

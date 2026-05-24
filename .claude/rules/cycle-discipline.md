@@ -717,3 +717,22 @@ verify 의무 본문 = step 7 핵심 영역 default (= compile + install + monke
 #### 26.4 명시 cycle 이력
 
 - 2026-05-22 · `MASTER-CLI-PASTE-AUTHORING-DISK-VERIFICATION-PARADIGM-001` · 본 § 신설 + `paste-authoring-disk-verification.md` 신 rule 신설 + 5-repo byte-identical propagation
+
+### 27) Anchor list paradigm (= 2026-05-22 신설 default · `MASTER-CLI-CYCLE-2A-ANCHOR-LIST-HOT-INSTALL-001`)
+
+> 본 § = anchor list (= 누락 시 cycle 무조건 실패 본질 영역 default · purpose 수준 default) paradigm 명시 영역 default. 본문 단일 SoT = [`anchor-list.md`](./anchor-list.md) (= 10 anchor hot default · P0 6 + P1 4 default).
+
+#### 27.1 paradigm 본질
+
+- purpose 수준 default (= method 어휘 X default)
+- 본인 confirm 영역 default (= hot 영역 default)
+- hot 제외 후보 = cold storage (= `.auto-memory/anchor-list-COLD.md` default · master only default · Cycle 2b 마감 default) 측 누적 default
+
+#### 27.2 cycle 보고 format negative space line
+
+매 cycle 보고 끝 1 줄 "고려했으나 hot 제외 영역" 의무 default · 본문 단일 SoT = `reporting.md §13` default.
+
+#### 27.3 명시 cycle 이력
+
+- 2026-05-22 · `MASTER-CLI-CYCLE-2A-ANCHOR-LIST-HOT-INSTALL-001` · 본 § 신설 + `anchor-list.md` 신설 + `reporting.md §13` append + 5-repo byte-identical propagation default
+- 2026-05-22 · `MASTER-CLI-CYCLE-2B-ANCHOR-LIST-COLD-INSTALL-001` · cold storage `anchor-list-COLD.md` 신설 default (= master only default · propagation X default)
