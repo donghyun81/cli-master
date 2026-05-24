@@ -156,16 +156,25 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 
 
 
+
+
+
+
+
+
+
+
+
+
+
 ## Last verify-sync
 
-- timestamp: 2026-05-19T23:06:55+0900
-- pass: 130
-- drift: 2
-- miss: 4
+- timestamp: 2026-05-24T18:20:04+0900
+- pass: 133
+- drift: 3
+- miss: 0
 - exit: 1
 
 ### Drift 상세
 
-- docs/baseline/cowork-project-instructions-§20-redline-20260517.md  master=15bc24c867b2  GentlyBreath=MISS  GentlyDay=MISS  GentlyTable=MISS  app-foundation=MISS
-- gradlew  master=3238afb2aed5  GentlyBreath=✓  GentlyDay=✓  GentlyTable=✓  app-foundation=734b3879d350(✗)
-- gradlew.bat  master=1d297e00bd21  GentlyBreath=✓  GentlyDay=✓  GentlyTable=✓  app-foundation=57931b17dd22(✗)
+- gradle.properties  master=51e4b5a131eb  GentlyBreath=7ee2174dc737(✗)  GentlyDay=7ee2174dc737(✗)  GentlyTable=7ee2174dc737(✗)  app-foundation=✓
