@@ -736,3 +736,20 @@ verify 의무 본문 = step 7 핵심 영역 default (= compile + install + monke
 
 - 2026-05-22 · `MASTER-CLI-CYCLE-2A-ANCHOR-LIST-HOT-INSTALL-001` · 본 § 신설 + `anchor-list.md` 신설 + `reporting.md §13` append + 5-repo byte-identical propagation default
 - 2026-05-22 · `MASTER-CLI-CYCLE-2B-ANCHOR-LIST-COLD-INSTALL-001` · cold storage `anchor-list-COLD.md` 신설 default (= master only default · propagation X default)
+
+### 28) Automation policy paradigm (= 2026-05-22 신설 default · `MASTER-CLI-CYCLE-3-AUTOMATION-POLICY-INSTALL-001`)
+
+> 본 § = automation policy (= Transport OK / Inspection X 원칙 default) paradigm 명시 영역 default. 본문 단일 SoT = [`automation-policy.md`](./automation-policy.md) (= 11 영역 분류 표 + 4 Inspection cadence + Sub-agent spawn 금지 + Cowork chat disk 직접 read 의무 default).
+
+#### 28.1 원칙 본질
+
+- 원칙 1: Transport 자동화 OK / Inspection 자동화 X default
+- 원칙 2: 자동화 자리에 명시적 inspection checkpoint default (= 변경 직후 calibration 강화 3~5 cycle default)
+
+#### 28.2 Sub-agent spawn 금지 (= B-5 정합 default)
+
+sub-agent spawn 영역 신설 X 의무 default · 신 sub-agent 신설 시점 본인 confirm 의무 default.
+
+#### 28.3 명시 cycle 이력
+
+- 2026-05-22 · `MASTER-CLI-CYCLE-3-AUTOMATION-POLICY-INSTALL-001` · 본 § 신설 + `automation-policy.md` 신설 + 5-repo byte-identical propagation default
