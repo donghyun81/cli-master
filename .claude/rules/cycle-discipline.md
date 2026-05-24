@@ -35,6 +35,7 @@
 - 새 룰 박기 전 **도메인 매칭 검증 1회 필수** : 어느 기존 룰 파일의 도메인에 속하는가.
 - 어느 파일에도 안 속하면 하지 않는다. 운영 메모로만 유지.
 - 본 작업 무관 OPS hygiene 류 task 신설 금지. **사고 발생 시 본 작업 직접 블로킹 시에만 처리** (lazy mode).
+- **예외: 사용자 본심 외화 영역 default** (= 신 rule 신설 허용 default · L1-1 정합 default). 본인 자율 paradigm 본질 + 본인 confirm anchor list + 본인 confirm mode bundle + 본인 confirm automation policy 영역 신설 시점 = 본 §2 OPS 신설 금지 차단 회피 default. 본 예외 영역 trigger = 본인 명시 결정 default + paste source umbrella §3 contract SoT 측 본인 본심 인용 의무 default.
 
 ### 3) 3-repo byte-identical 강제 범위
 
