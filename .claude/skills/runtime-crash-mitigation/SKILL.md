@@ -83,6 +83,28 @@ precedent cycle (= `3REPO-RUNTIME-CRASH-DIAGNOSIS-001`) 측 실증 default. 본 
 - emulator 미실행 발견 시 = cli session 측 `adb devices` 측정 default · device 부재 발견 시 사용자 본인 측 emulator 실행 의뢰 default
 - 사용자 본인 측 IDE 측 Run / `emulator @<avd>` 호출 default 또는 cli session 측 `emulator` Bash 명령 (= 자율 default)
 
+### §3.3 Native bundled skill `/run` + `/verify` + `/sandbox` 통합 (= 2026-05-27 추가 · MASTER-CLI-NATIVE-RUN-VERIFY-SANDBOX-INTEGRATION-001)
+
+Anthropic v2.1.145+ 측 bundled skill (`/run` + `/verify` + `/run-skill-generator`) paradigm 통합. 본 §3.3 = §3 measure 5-command verify 본문 (= `assembleStagingDebug` → `installStagingDebug` → monkey → logcat → ps) 측 native 대체 경로 명시. manual 경로 + bundled skill 경로 양쪽 가용 default · cli session §FREEDOM 결정.
+
+| bundled skill | 본 paradigm 측 역할 | 정합 |
+|---|---|---|
+| `/verify` | step 7 verify 의무 (= §3 5-command 본문) 측 native 대체 default. build + 실 앱 구동 측 코드 변경 확인 default — test / type check fallback 회피 default. | "0 command 금지" (`workflow-core.md ## /verify 규칙`) 정합 — `/verify` = 1+ 실 명령 실행 default |
+| `/run` | step 3 launch + 실 앱 구동 측 native 대체 default (= `adb monkey` launch 본문). 변경 동작 시각 확인 default. | step 3 Logcat 수집 전 launch paradigm 정합 |
+| `/run-skill-generator` | 자식별 launch recipe 1 회 capture default (= `.claude/skills/run-<name>/SKILL.md`). 본 패키지 측 run-master / run-foundation / run-GB / run-GD / run-GT 신설 default. | 자식별 staging flavor recipe 정합 — GB/GD/GT = `:composeApp:installStagingDebug` default |
+
+#### staging flavor 한정 + production push X (= §3.1 강화)
+
+- bundled skill (`/run` + `/verify`) 호출 시점 = **staging flavor 단일 default** (= `run-<자식>` skill recipe 측 `:composeApp:installStagingDebug` 한정 · production flavor 호출 X · staging package = `com.gently.<domain>.staging`)
+- `/run-skill-generator` 측 production code read 가능 default · production code write X default · production data INSERT / DELETE / UPDATE 절대 X default (= master `CLAUDE.md §5` STOP #1 정합)
+- production verification = 별 cycle 분리 default (= 사용자 본심 회수 의무 default)
+
+#### `/sandbox` isolation (= 선택 default · cli session §FREEDOM)
+
+- `/sandbox` = build + 앱 구동 측 filesystem + network isolation 적용 paradigm default (= v2.1.113 + v2.1.133 sandbox settings + v2.1.145 `/sandbox` menu)
+- 권장 isolation 영역 = network deny (= production endpoint 접촉 차단 · `sandbox.network.deniedDomains` 측 production Supabase host 등록 default) + staging flavor 한정 (= production push X 의무 강화)
+- isolation 구체 설정 (= `sandbox.network.deniedDomains` / `sandbox.bwrapPath` / `sandbox.socatPath` 등) = cli session 자율 default · 본 §3.3 = paradigm shape 명시 한정
+
 ---
 
 ## §4 cli session 자율 paradigm
@@ -185,4 +207,5 @@ precedent cycle (= `3REPO-RUNTIME-CRASH-DIAGNOSIS-001`) 측 실증 default. 본 
 
 - 2026-05-22 · `MASTER-CLI-RUNTIME-CRASH-MITIGATION-PROCESS-PARADIGM-001` · 직전 rule (`.claude/rules/runtime-crash-mitigation-process.md`) 신설 (= paradigm 본질 + 9-step process + verify 의무 본문 + cli session 자율 paradigm + STOP 조건 + 적용 영역 + paste source authoring 영역 + commit body 본문 + 인접 paradigm 정합 default) + `cycle-discipline.md` §24 pointer 추가 default + CLAUDE.md §15 entry append default + 5-repo byte-identical propagation default
 - 2026-05-26 · `MASTER-CLI-SKILLS-MIGRATION-PHASE-1-001` · 본 skill 신설 default (= 직전 rule 본문 본질 보존 default · skill paradigm 정합 default · trigger 시점 lazy load default · `.claude/rules/runtime-crash-mitigation-process.md` 측 thin pointer 갱신 default)
+- 2026-05-27 · `MASTER-CLI-NATIVE-RUN-VERIFY-SANDBOX-INTEGRATION-001` · §3.3 신설 default (= Anthropic v2.1.145+ native bundled skill `/run` + `/verify` + `/run-skill-generator` 통합 + `/sandbox` isolation mention default · staging flavor 한정 + production push X 의무 강화 default · 본문 본질 보존 default · 추가 영역 한정 default) + 5-repo byte-identical propagation default
 - precedent: `3REPO-RUNTIME-CRASH-DIAGNOSIS-001` (2026-05-22 H32 마감 default · Sentry `SentryInitProvider` 자동 init 측 empty DSN crash 차단 default · `<meta-data android:name="io.sentry.auto-init" android:value="false" />` × 3 자식 byte-identical mitigation default · GB `616bec5` + GD `317e74a` + GT `664a092`)

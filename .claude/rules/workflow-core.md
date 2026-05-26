@@ -310,11 +310,21 @@ code-level 구현/수정 task에서 cleanup assessment는 기본 절차다. 조�
 ops-layer task이면 `N/A (ops-layer task)` 명시. stop-gate가 이 섹션 누락 시 차단.
 상세: `.claude/rules/legacy-cleanup-governance.md`
 
+### Native run/verify integration trigger (2026-05-27 · MASTER-CLI-NATIVE-RUN-VERIFY-SANDBOX-INTEGRATION-001)
+
+Anthropic v2.1.145+ bundled skill (`/run` + `/verify` + `/run-skill-generator`) 통합 trigger. implement phase 의 자식 repo 진입 시점에 적용한다.
+
+- 자식 repo 첫 진입 + 비표준 build/launch (staging flavor + productFlavor + BuildConfig env 분리) 발견 시 → `/run-skill-generator` 1회 호출로 per-project recipe 를 capture 한다 (`.claude/skills/run-<name>/SKILL.md` commit). 본 패키지 자식별 recipe = run-master / run-foundation / run-GB / run-GD / run-GT (각 자식 한정 · byte-identical 아님 · L1-3 polyrepo 정합).
+- recipe capture 후 `/run` (앱 구동 + 변경 동작 시각 확인) + `/verify` (build + 실 앱 실행으로 코드 변경 확인) 가 기록된 recipe 를 따른다 (재발견 회피).
+- staging flavor 한정 · production push 금지 (master `CLAUDE.md` §5 STOP #1 + `safety-and-secrets.md` 정합). `/sandbox` isolation 적용 여부는 cli session 자율.
+- runtime crash 영역 진입 시점은 `.claude/rules/runtime-crash-mitigation-process.md` (본문 SoT = `.claude/skills/runtime-crash-mitigation/SKILL.md` §3 9-step verify 의무 + §3.3 native bundled skill 통합) 를 따른다.
+
 ---
 
 ## /verify 규칙
 
 - **0 command 금지** (최소 1개 검증 명령 실행 필수)
+- **native `/verify` bundled skill 활용 (2026-05-27 · MASTER-CLI-NATIVE-RUN-VERIFY-SANDBOX-INTEGRATION-001)**: Anthropic v2.1.145+ 의 `/verify` 는 build + 실 앱 실행으로 코드 변경을 확인한다 (test / type check fallback 회피). manual 검증 명령 (`./gradlew ...` + `adb ...`) 또는 `/verify` bundled skill 양쪽 사용 가능 — cli session 자율. 단 "0 command 금지" 정합 의무 (`/verify` = 1개 이상 실 명령 실행). 자식별 launch recipe 는 `.claude/skills/run-<name>/SKILL.md` (`/run-skill-generator` capture) 를 따르며 staging flavor 한정.
 - 불가피한 경우: `UNKNOWN(사유)` 명시 + 제품 변경 없이 STOP
 - 검증 명령과 exit code를 LOG에 남김
 - 결과 → `.ai/reports/<taskId>/VERIFY.md`
