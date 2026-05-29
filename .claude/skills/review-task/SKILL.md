@@ -33,7 +33,7 @@ exit code 와 stdout 을 기록한다.
 
 ### 3. REVIEW.md 생성 (12-section 정규 스키마)
 `.ai/reports/$ARGUMENTS/REVIEW.md` 를 생성한다.
-형식: `.claude/rules/evidence-and-reporting.md` 의 REVIEW.md 12-section 스키마 준수.
+형식: `.claude/rules/reporting.md` 의 REVIEW.md 12-section 스키마 준수.
 
 필수 포함 항목:
 - 1. Requirements Coverage

@@ -23,7 +23,7 @@ allowed-tools:
 
 > **Context Reset Policy**: 이 커맨드는 장기 실행 task 의 context reset 후 재진입 엔트리다.
 > `HANDOFF.md` 가 존재하면 최우선으로 읽고, EVIDENCE/PLAN/VERIFY/REVIEW/TODO 는 발췌 읽기만
-> 한다 (bulk 전수 읽기 금지). 상세: `.claude/rules/workflow.md` "Context Reset Policy" 섹션.
+> 한다 (bulk 전수 읽기 금지). 상세: `.claude/rules/workflow-core.md` "Context Reset Policy" 섹션.
 >
 > **YAML 프런트매터 파싱**: HANDOFF.md에 YAML 프런트매터가 있으면 `taskId`, `status`,
 > `nextEntry`, `riskFlags`를 먼저 파싱하여 재진입 판단에 사용한다. 본문은 상세 맥락이
