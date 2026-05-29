@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# scripts/verify-sync.sh — 3-repo cli infra + 보호 파일 sha 동기 검증
+# scripts/verify-sync.sh — 5-repo cli infra + 보호 파일 sha 동기 검증
 #
 # 사용:
 #   bash scripts/verify-sync.sh                         # 전체 검증 + propagation-status.md 자동 갱신
@@ -10,7 +10,7 @@
 # 환경 변수:
 #   PARENT_DIR     기본: ~/AndroidStudioProjects
 #   MASTER_DIR     기본: $PARENT_DIR/claude-cli-master
-#   TARGET_REPOS   기본: "GentlyBreath GentlyDay GentlyTable"
+#   TARGET_REPOS   기본: "GentlyBreath GentlyDay GentlyTable app-foundation"
 #
 # 동작:
 #   1. master 의 모든 cli infra + 보호 파일 sha 계산
@@ -148,7 +148,7 @@ else
 fi
 
 echo "═══════════════════════════════════════════════════════"
-echo "[verify-sync] 3-repo sha 동기 검증"
+echo "[verify-sync] 5-repo sha 동기 검증"
 echo "  master:  $MASTER_DIR"
 echo "  targets: $(echo $TARGET_LIST | xargs)"
 echo "  files:   ${#CHECK_FILES[@]}$([ "$QUICK" = 1 ] && echo ' (quick)' || echo ' (전체)')"
