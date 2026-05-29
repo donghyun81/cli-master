@@ -114,8 +114,10 @@ CORE_CLI=(
   scripts/agent/frontmatter-grep.sh
   .editorconfig
   .mcp.json
-  gradle.properties
 )
+# gradle.properties = domain-specific (repo-specific 자유 · L1-3 polyrepo)
+# → byte-identical 검증 제외 (MASTER-CLI-VERIFY-SYNC-DIFFERENTIATION-SCOPE-001)
+# gradlew / gradlew.bat 는 보존 (= FULL mode root file loop 참조)
 
 if [ "$QUICK" = 1 ]; then
   CHECK_FILES=("${PROTECTED[@]}" "${CORE_CLI[@]}")
@@ -127,9 +129,13 @@ else
     ! -name '.DS_Store' \
     ! -name 'settings.local.json' \
     ! -path './.git/*' \
+    ! -path '*skills/run-*' \
     ! -path 'docs/release-readiness/*' 2>/dev/null | sort)
-  # C5 박힘: root 공통 파일 5종 명시 추가
-  for rf in .editorconfig .mcp.json gradle.properties gradlew gradlew.bat; do
+  # skills/run-* = 자식별 차별화 launch recipe (run-master/foundation/GB/GD/GT · 각 자식 한정 ·
+  #   propagation X · §Q-2 / P0-4 NATIVE-RUN-VERIFY-SANDBOX) → byte-identical/MISS 검증 제외
+  #   (MASTER-CLI-VERIFY-SYNC-DIFFERENTIATION-SCOPE-001)
+  # C5 박힘: root 공통 파일 명시 추가 (gradle.properties 제외 = domain-specific · L1-3)
+  for rf in .editorconfig .mcp.json gradlew gradlew.bat; do
     [ -f "$rf" ] && CHECK_FILES+=("$rf")
   done
 fi
