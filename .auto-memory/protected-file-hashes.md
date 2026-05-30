@@ -11,10 +11,31 @@
 | `docs/schemas/ui-spec.schema.json` | 도구 무관 (v0.3 generic 화) | `f1edd39739d4c0192872002487c02bca6929f8bd6c14f85392552182ce2aa445` | **MASTER-DOC-CITATION-FIX-001 갱신** (2026-05-04 · description 도구 generic 어휘 3곳 정정 · 필드명 alias 보존) |
 | `.claude/rules/uiux-sot-refresh.md` | 도구 무관 (95% generic) | `ee377dc2ac32357f61fa1b2bfc39690ab530b65102e31062bff91ab6b8b260d3` | **MASTER-PROTECTED-BASELINE-RESYNC-001 갱신** (2026-05-03 · 후속 cycle 으로 baseline 정합) |
 | `docs/design/design-sot-policy.md` | 도구 무관 (75% 공통 추출) | `e5e3fe165ec3a826b2843f0e9791d4e6f07fb4c226bcc53639868787da49af03` | **MASTER-PROTECTED-BASELINE-RESYNC-001 갱신** (2026-05-03 · 후속 cycle 으로 baseline 정합) |
-| `.claude/rules/pencil-uiux-workflow.md` | Pencil 도구 바인딩 (30% 잔존) | `7621013e7f2dc644f0d0028b0574e12949dc7462953b4d5465c8a1186d6f0c0f` | **MASTER-PROTECTED-BASELINE-RESYNC-001 갱신** (2026-05-03 · 후속 cycle 으로 baseline 정합) |
+| `.claude/rules/pencil-uiux-workflow.md` | Pencil 도구 바인딩 (30% 잔존) | `f1825013a6fabd4bd3d5fa77df2f7c84c64c7319c128d85abfb4c07c45f2a0ec` | **MASTER-CLI-PENCIL-OPTIMIZATION-001 갱신** (2026-05-19 · §1 12 official + 1 pkg 도구 정정 + §9 Pencil CLI binding 신설 · 본문 sha 변동 origin) · MASTER-CLI-PROTECTED-FILE-HASH-CONVENTION-001 resync (2026-05-30 · 직전 manifest stale `7621013e...` 정정) |
 | `docs/design/pencil-sot-policy.md` | Pencil 도구 바인딩 (의미 = pencil-sot-binding) | `96de2f5d10a73af4aaa2608770f503dd3956304846c6db8a9b2cf2d05cba6559` | **MASTER-PROTECTED-BASELINE-RESYNC-001 갱신** (2026-05-03 · MATCH 재확인) |
 
 > **참고**: `design-sot-policy.md` 신설 sha = `e5e3fe165ec3...` (C2.5 마감 박음).
+
+## CONVENTION — hash algorithm 분기 + resync trigger (MASTER-CLI-PROTECTED-FILE-HASH-CONVENTION-001 · 2026-05-30)
+
+> 본 manifest = 보호 파일 sha 의 master-only authoritative SoT. 자식 (GB/GD/GT) 측 copy 는 byte-identical propagate 대상 X (= `propagate.sh` 측 별도 propagate X · 각 repo git-tracked manifest · 별 follow-up 정합).
+
+### algorithm 분기 (= 3 layer 측 hash algorithm 상이 · 혼동 주의)
+
+| layer | file | algorithm | 본 manifest 값 형식 |
+|---|---|---|---|
+| record manifest | `.auto-memory/protected-file-hashes.md` (본 file) | **sha-256** (`shasum -a 256`) | 64 char hex |
+| runtime enforce | `.ai/baseline-snapshot/latest.json` | **sha-256** (`shasum -a 256`) | 64 char hex (= 본 manifest 와 동일 algorithm · 양 sha-256 정합 의무) |
+| cycle baseline | `CLAUDE.md` §14a (보호 파일 sha baseline 표) | **git-sha1** (`git hash-object`) | 40 char hex |
+
+⚠ 본 manifest 측 값 = **sha-256** default. `CLAUDE.md` §14a 측 git-sha1 (40 char) 과 직접 비교 금지 (= 다른 algorithm · 동일 file 측 두 값 모두 정답 · 형식만 상이). 동일 file 측 sha-256 == `baseline-snapshot/latest.json` 측 sha-256 정합 의무.
+
+### resync trigger (= staleness 재발 방지)
+
+보호 파일 본문 변경 + propagate cycle 진입 시점:
+1. `propagate.sh` 측 보호 파일 baseline 변경 감지 WARN ("보호 파일 baseline 변경 감지 · `.auto-memory/protected-file-hashes.md` 갱신 의무") 발화 default.
+2. 본 WARN 발화 시 = 본 manifest 측 해당 row sha-256 **수동 resync 의무** default (= 변동 attribution cycle ID 명시) + `CLAUDE.md` §14a git-sha1 row + §15 entry 정합 default.
+3. WARN 미이행 = staleness 근본 원인 default (= 본 cycle 측 pencil row `7621013e...` → `f1825013...` resync = PENCIL-OPTIMIZATION-001 (2026-05-19) 측 WARN 미이행 누적 mitigation).
 
 ## 신설 cli infra (C2.5)
 
