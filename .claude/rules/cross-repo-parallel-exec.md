@@ -111,6 +111,24 @@ terminal C → cli session C (cwd = ~/AndroidStudioProjects/GentlyTable) → GT 
 - "GT 측 daily-prescription 측 LAUNCH-STATUS 갱신 cycle" (= 다른 자식 무접촉 · 영역 2 단일 자식 진입)
 - "자식별 도메인 specific cycle 측 동시 운영" (= 사용자 본인 측 multi-tasking 영역 · 영역 2 다중 cli session 운영)
 
+#### 2.2.1 dispatch 체크리스트 (= cowork-role 측 영역 2 운영 step 본문)
+
+본 sub-section = 영역 2 측 cowork-role(= cowork chat 기획 측) 이 동족 자식 다중 변경 cycle 을 실제로 어떻게 분배하는지 step-by-step 단일 명문화 영역. 운영 증거 = cc-paste-GB-T07 + GD-T11 + GT-T02 등 자식별 entry-prompt 발행 패턴. 본 절 신설 전까지 = 패턴 실재 · rule 본문 미명문화.
+
+| step | 주체 | 본문 |
+|---|---|---|
+| 1 | cowork-role | repo별 지시 prompt `cc-paste-<REPO>-<TASK>.md` × N authoring (= 자식별 delta 차별화 · 동일 prompt × N 복제 회피 · §2.2.2 + `paste-authoring-disk-verification.md` 정합) |
+| 2 | cowork-role | 본인 측 방향 설명 1 줄 (= gatekeeper step 유지 · 어느 자식이 무엇을 받는지 본심 명시) |
+| 3 | 본인 | 한 줄 트리거로 repo별 cli session 진입 (= clipboard 수동 운반 단계 제거 · §2.2 진입 표 측 `cd ~/AndroidStudioProjects/<자식> && claude` 정합) |
+| 4 | 자식 cli session × N | 각 repo 가 자기 fresh context 안에서 자기 cc-paste 단일 실행 (= 단일 session 전담 아님 · 자식별 독립 context · autocompact thrashing 회피) |
+| 5 | cowork-role | paste-back × N 회수 + session × session 직접 cross-verify + 마무리 + 다음 task 선정 복귀 (= `automation-policy.md §5` disk 직접 read 의무 정합) |
+
+#### 2.2.2 dispatch ≠ sub-agent fan-out (= B-5 경계 명시)
+
+본 dispatch 분배 = **영역 2 다중 cli session** 분산 default · **영역 1 sub-agent fan-out 아님**. 즉 단일 cli session 측 Task tool spawn 으로 자식 N 을 부르는 영역 X. 자식별 = 사용자 본인 측 독립 terminal × 독립 session × 독립 subscription interactive pool 진입.
+
+sub-agent(= 영역 1) 영역 = 가벼운 cross-repo 측정 (= sha 측정 / source grep / cross-verify) ≤ 3 한정 default (= §3.4 Sub-agent token cost warning 정합 · 실 IMPL 또는 자식별 무거운 분배 영역 측 sub-agent spawn 회피). dispatch 측 무거운 IMPL 분배 = 영역 2 단일 진입점 default.
+
 ### 2.3 paradigm 선택 본심 (= cli session 자율 판단 default)
 
 본 paradigm 분기 측 선택 = **cli session 자율 결정 default**. 요청사항 본질 측정 후 paradigm 선택 default.
@@ -288,4 +306,5 @@ drift 발견 시점 main agent 측 mitigation:
 ## 8. 명시 cycle 이력
 
 - 2026-05-19 · MASTER-CLI-PARENT-MOUNT-PARALLEL-EXEC-PARADIGM-001 · 본 SoT 신설 + 부모 mount root CLAUDE.md 신설 + cross-repo-orchestrator sub-agent 신설 (§FREEDOM) + routing-and-delegation.md cross-repo sub-section append + cycle-discipline.md §21 신설 + 5-repo byte-identical propagation
+- 2026-05-30 · MASTER-CLI-CROSS-REPO-DISPATCH-CHECKLIST-001 · §2.2.1 dispatch 체크리스트 sub-section 신설 (= cowork-role 측 영역 2 운영 5-step 표 · 자식별 cc-paste authoring → 본인 한 줄 트리거 → 자식 fresh context 실행 → cross-verify 복귀) + §2.2.2 dispatch ≠ sub-agent fan-out 경계 명시 (= B-5 정합 · 영역 1 sub-agent ≤ 3 가벼운 측정 한정) + scripts/propagate.sh line 11 header 주석 TARGET_REPOS 기본값 4-repo (app-foundation 포함) 정정 (= repo-config.sh SoT 정합) + 5-repo byte-identical propagation
 - 2026-05-19 · MASTER-CLI-CROSS-REPO-SUBSCRIPTION-AWARE-PARADIGM-001 · 본 SoT 정정 강화: §2.2 영역 2 paradigm 본문 강화 (= 사용자 본인 측 의무 영역 표 + 자식 cli infra 자동 정합 영역 + subscription pool 정합 영역 + trade-off 영역 본문 추가) + §2.4 Subscription-aware paradigm sub-section 신설 (= 2026-06-15 Anthropic billing split 영역 + interactive pool vs Agent SDK credit pool 분기 + `claude -p` 사용 회피 paradigm) + §3.4 Sub-agent token cost warning sub-section 신설 (= 3-agent team token ~7× default + 실 사례 $8k~$15k / $47k 3 days + 권장 paradigm 정합) + 부모 mount root CLAUDE.md §4 정정 강화 + 5-repo byte-identical propagation
