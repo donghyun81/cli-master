@@ -3,8 +3,13 @@
 > **단일 목적**: Pencil SoT 화면명 ↔ Compose 코드 화면명 차이 영역 통합 매핑.
 > **scope**: GB / GD / GT 3 자식 repo (master = SoT 만 보유 / 코드 X).
 > **연관 파일**: `design-to-code-sync.md` (Phase 분류) · `pencil-sot-policy.md` (Pencil SoT 정책) · `uiux-sot-refresh.md` (refresh trigger).
-> **baseline**: 2026-05-05 (cycle MULTI-REPO-SOT-CODE-NAME-MAP-001 신설) · chat A 의존 row 2 = TODO placeholder.
+> **baseline**: 2026-05-05 (cycle MULTI-REPO-SOT-CODE-NAME-MAP-001 신설).
 > SOT: `CLAUDE.md`
+
+> ⚠ **STALENESS / VOLATILITY 경고** (= 2026-05-31 측정 · `MASTER-CLI-SOT-CODE-NAME-MAP-VOLATILE-FLAG-001`):
+> - **3 자식 코드 row 대거 stale** (= GB 6 / GD 3 / GT 9 stale) + **실재 화면 누락** (= GB 5 / GD 6 / GT 4) + ui-spec SoT 디렉터리 희소 (= GB 4 / GT 4).
+> - 본 doc = **volatile artifact** (= 화면 evolution 마다 5-repo 수기 byte-identical 갱신 의무 · disk 자동 도출 가능 영역을 수기 유지 · `rule-architecture` 원칙 4 변동성 risk · 원칙 1 양 최소·SSOT risk).
+> - **전면 재매핑 + 구조결정 (= 자동도출 hook vs byte-identical 강등 vs 자식별 분리) = `ENTRY-PROMPT-rule-architecture-establishment.md` 프로그램 이관** (= GAP-2 행동→규칙 라우팅 색인 + §5-A L3 도메인층 + 원칙 1/4). **그 전까지 본 §2~§4 표 = 참고용 (= 현행 보장 X)**.
 
 ---
 
@@ -34,7 +39,6 @@
 | onboarding-ai-screen | OnboardingScreen.kt | N:1 통합 | (위 동) | (위 동) |
 | onboarding-emotion-screen | OnboardingScreen.kt | N:1 통합 | (위 동) | (위 동) |
 | onboarding-wrapper-screen | OnboardingScreen.kt | N:1 통합 | (위 동) | (위 동) |
-| **paywall-screen** | **TODO (chat A 마감 baseline 인용)** | TODO | — | chat A 마감 후 1 회 갱신 |
 | report-screen | ReportsScreen.kt | 1:1 명명 차이 | `Destinations.REPORTS` | "report" ↔ "Reports" |
 | settings-screen | SettingsScreen.kt | 1:1 직매핑 | `Destinations.SETTINGS` | — |
 | splash-landing-screen | SplashScreen.kt | 1:1 명명 차이 | `Destinations.SPLASH` | "splash-landing" ↔ "Splash" |
@@ -62,7 +66,6 @@
 | settings-screen | SettingsScreen.kt | 1:1 직매핑 | `Routes.Settings` | — |
 | sleep-screen | SleepScreen.kt | 1:1 직매핑 | `Routes.Sleep` | — |
 | splash-screen | SplashScreen.kt | 1:1 직매핑 | `Routes.Splash` | — |
-| **(SoT 미존재 / chat A 의존)** | **TicketScreen.kt** | TODO | `Routes.Ticket` | **chat A 마감 baseline 인용 의무 (GD ticketshop 결정 a/b/c)** |
 
 ---
 
@@ -99,7 +102,6 @@
 | N:1 통합 | 4 | 5 | 0 | 9 |
 | SoT only | 3 | 2 | 3 | 8 |
 | 코드 only | 2 | 0 | 1 | 3 |
-| TODO (chat A 의존) | 1 | 1 | 0 | 2 |
 
 ---
 
@@ -107,7 +109,7 @@
 
 1. 코드 측 본질 변경 (rename / 통합 / 분리) = STOP. 본 SoT 는 매핑만 기록, 변경 명령 X.
 2. SoT 측 신설 / 통합 / 폐기 결정 = Coin 명시 승인 의무.
-3. chat A 의존 row 2 (GB paywall · GD TicketScreen) = chat A 마감 후 1 회 갱신만 허용. 본 cycle 내 갱신 X.
+3. 전면 재매핑 + 구조결정 (= 자동도출 vs byte-identical 강등 vs 자식별 분리) = 본 doc scope X → `rule-architecture` 프로그램 이관 (= 상단 STALENESS 배너 + §8 정합). 수기 부분 재매핑도 회피 (= 원칙 4 재위반 risk).
 
 ---
 
@@ -127,3 +129,4 @@
 - GD routine-item-add-screen → RoutineScreen 일부 인정 (현 매핑) vs 별 라우트 분리 결정.
 - GT DietDetailScreen → 새 SoT 신설 (diet-detail-screen) 검토.
 - 자동화 hook 신설 (`design-to-code-sync` 와 통합) → 별 cycle.
+- **전면 재매핑 + 구조결정** (= 자동도출 hook vs byte-identical 강등 vs 자식별 분리) → `ENTRY-PROMPT-rule-architecture-establishment.md` 프로그램 이관 (= GAP-2 행동→규칙 라우팅 색인 + L3 도메인층 + 원칙 1/4 · 상단 STALENESS 배너 정합).
