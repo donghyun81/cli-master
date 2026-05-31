@@ -20,7 +20,7 @@
 - Pencil MCP server (stdio) = `mcp__pencil__*` tools = **12 official** (pencil.dev 공식 doc 2026-04-03 기준) + **1 package-verified** (`open_document` · 공식 doc 명시 X / 본 패키지 검증된 영역 · §FREEDOM)
 - 도구 list 전체 단일 SoT = `pencil-mcp-tools-reference.md` (본 file 내 도구 목록 중복 금지)
 - 본 cycle (`MASTER-CLI-PENCIL-OPTIMIZATION-001` · 2026-05-19) 안 명시적 추가 5 종 = `search_all_unique_properties` / `replace_all_matching_properties` / `find_empty_space_on_canvas` / `get_guidelines` / `export_nodes` (각 도구 본문 = 참조 file)
-- Claude Code 2.1.114 pin 의무 (`cycle-discipline.md` §13 명시됨 · 2.1.116+ 회귀로 본 작업 차단)
+- Claude Code 환경 = `cycle-discipline.md` §13 latest-chase 정책 (= 특정 버전 pin 박지 X · MCP discovery 회귀 발견 시 §13 trail 마지막 PASS known-working 복귀)
 
 ## 2. Pencil 도구 바인딩 매핑
 
@@ -30,7 +30,16 @@
 - Structural SoT 디렉터리 = `docs/design/pencil-sot/<screen>/<screen>.ui-spec.json`
 - preview.png 디렉터리 = `docs/design/pencil-sot/<screen>/preview.<theme>.png`
 
+## 2.5. .pen SoT 변형 경로 위계 (= D7 · 기본 = headless 평문-JSON)
+
+> **기본 (primary) 경로 = headless 평문-JSON** (= §9 · D7 결정): `.pen` = plain JSON (`version "2.11"`) 직접 read/write 가 SoT 변형 기본 경로 (= `pen_recolor.py` json.load/write · Pencil app / MCP tool / Save-As GUI **불요**).
+> **alternative 경로 = desktop-app + MCP tool** (= §3 Type 1~5): Coin 본인 측 **실시간 시각 검증 의무** 시 한정 진입 (= 주 경로 아님 · 시각 검증 전용).
+
+선택 기준 상세 = §9.1. 본 §2.5 = 경로 위계 단일 선언 (= 후속 §3 desktop-app 절차 + §9 headless 절차 양쪽 진입 전 기준 · 절차 step 자체 무변경).
+
 ## 3. 5-type IMPL 흐름 (Pencil 도구 호출 구체화)
+
+> **경로 위계** (= §2.5 · D7): 본 §3 desktop-app + MCP 흐름 = **실시간 시각 검증 alternative 경로**. `.pen` 변형 **기본 경로 = §9 headless 평문-JSON**. 아래 Type 1~5 절차 = 시각 검증 진입 시 적용 (= 절차 step 자체 무변경).
 
 ### Type 1: drift 정정 (Path 2-A 표준)
 1. `mcp__pencil__open_document(filePathOrTemplate=<.pen 절대경로>)` — 기존 .pen 열기
@@ -90,7 +99,7 @@
 ## 6. 환경 의존성
 
 - macOS 만 (Pencil = macOS-only 도구)
-- Claude Code 2.1.114 pin (`cycle-discipline.md` §13)
+- Claude Code 환경 = `cycle-discipline.md` §13 latest-chase 정책 (= 특정 버전 pin 박지 X)
 - Accessibility 권한 (Cmd+S keystroke 자동 · sunk cost · Cycle 7)
 - Pencil app 활성 + Update Ready 모달 미활성
 
@@ -117,17 +126,17 @@
 
 ## 9. Pencil CLI binding (headless mode 진입점)
 
-Pencil 측 작업은 desktop app stdio (= 본 file §3 Type 1~5) 외에 별도 headless 진입점이 존재. SoT = [`pencil-cli-headless.md`](./pencil-cli-headless.md).
+Pencil 측 작업의 **기본 (primary) SoT 변형 경로 = headless 평문-JSON** (= D7 결정 · §2.5 위계 정합): `.pen` = plain JSON 직접 read/write 가 기본 경로 (= `pen_recolor.py` json.load/write · Pencil app / MCP tool / Save-As GUI 불요). desktop app stdio (= 본 file §3 Type 1~5) = 실시간 시각 검증 alternative 진입점. headless SoT = [`pencil-cli-headless.md`](./pencil-cli-headless.md).
 
-### 9.1 desktop app vs CLI headless 선택 기준
+### 9.1 desktop app vs CLI headless 선택 기준 (= headless 기본 · desktop-app = 실시간 시각 검증 한정)
 
 | 시나리오 | 권장 binding |
 |---|---|
-| Coin 본인 측 design 실시간 시각 검증 의무 | desktop app (§3 흐름) |
+| Coin 본인 측 design 실시간 시각 검증 의무 | desktop app (§3 흐름 · = alternative 진입 한정 case) |
 | batch 다중 screen 일괄 신설 (5+ screen 한 cycle) | CLI headless (`pencil interactive` / `pencil --tasks tasks.json`) |
 | Save As 모달 회피 의무 (Coin 클릭 0) | CLI headless (`save()` 직접 호출) |
 | CI/CD scheduled design refresh | CLI headless |
-| 단일 screen + 시각 검증 X | 둘 다 가능 (Coin 자율) |
+| 단일 screen + 시각 검증 X | **CLI headless (= 기본 경로 default)** |
 
 ### 9.2 호출 paradigm
 
