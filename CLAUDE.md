@@ -264,17 +264,19 @@ PLAN / VERIFY / REVIEW / PromptFit 정규 스키마: `.claude/rules/reporting.md
 
 ---
 
-## 14a. 보호 파일 sha baseline (2026-05-19 · MASTER-CLI-PENCIL-OPTIMIZATION-001 마감)
+## 14a. 보호 파일 sha baseline (2026-05-31 · MASTER-CLI-PENCIL-RECOLOR-GENERATOR-001 마감 · git-sha1)
 
-5종 보호 파일 sha (post-cycle baseline · 본 cycle 안 `.claude/rules/pencil-uiux-workflow.md` 단일 변경):
+5종 보호 파일 git-sha1 (= `git hash-object` · post-cycle baseline · 본 cycle 안 `.claude/rules/pencil-uiux-workflow.md` 단일 변경):
 
-| 보호 파일 | sha | 본 cycle 변동 |
+| 보호 파일 | git-sha1 | 본 cycle 변동 |
 |---|---|---|
 | `docs/schemas/ui-spec.schema.json` | `5b84cd9e4bc361652d6d0e561d8846eed3400d00` | 불변 |
-| `.claude/rules/pencil-uiux-workflow.md` | `20c72ae66b513bdc991a377f73688c23d1154bcc` | **갱신** (이전 `3a703b30...`) |
+| `.claude/rules/pencil-uiux-workflow.md` | `2ee16ae4311c4c2688119ebe960f9ba85348075f` | **갱신** (이전 `20c72ae6...` · §9.4 Recolor sub-flow 신설) |
 | `docs/design/pencil-sot-policy.md` | `b27fbe16edb688218d7e57dd9a66d0f2a31ef300` | 불변 |
 | `.claude/rules/uiux-sot-refresh.md` | `d3a0b57390bd0414cc89283a571dd6ecb8cb1562` | 불변 |
 | `docs/design/design-sot-policy.md` | `e580b6d7ca9a88aef67c03f4bb39360993ab996f` | 불변 |
+
+> **algorithm 분기 주의** (`protected-file-hashes.md §CONVENTION` 정합): 본 §14a = **git-sha1 (40 char)** · `.auto-memory/protected-file-hashes.md` manifest + `.ai/baseline-snapshot/latest.json` = **sha-256 (64 char)**. pencil-uiux-workflow.md 측 sha-256 = `d64481370d700109b97f61800d68784c912c1288f61bb6a38911a8d498b93072` (= manifest 측 baseline). 두 algorithm 직접 비교 금지.
 
 `.auto-memory/protected-file-hashes.md` 와의 정합 의무 (`cycle-discipline.md` §10 정합).
 

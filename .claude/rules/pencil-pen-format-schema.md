@@ -1,6 +1,6 @@
 # .pen Format Schema SoT
 
-> **단일 목적**: `.pen` file format version `"2.10"` TypeScript schema 본문 + 13 Entity type 단일 reference + AI agent 측 `batch_design` / `batch_get` 호출 시 schema 정합 의무.
+> **단일 목적**: `.pen` file format version `"2.11"` TypeScript schema 본문 + 13 Entity type 단일 reference + AI agent 측 `batch_design` / `batch_get` 호출 시 schema 정합 의무.
 > **신설**: MASTER-CLI-PENCIL-OPTIMIZATION-002 (2026-05-19 H26 단계 1 마감).
 > **공식 근거**: pencil.dev `/for-developers/the-pen-format` (2026-04-03 last updated).
 > **연관 파일**:
@@ -21,7 +21,7 @@
 
 ```typescript
 export interface Document {
-  version: "2.10";
+  version: "2.11";
   themes?: { [key: string]: string[] };
   imports?: { [key: string]: string };
   variables?: { [key: string]: Variable };
@@ -31,7 +31,7 @@ export interface Document {
 
 | key | 본질 |
 |---|---|
-| `version` | `"2.10"` 고정 (= 현 시점 baseline · 후속 minor 변경 시 본 SoT 갱신 cycle 진입 의무) |
+| `version` | `"2.11"` 고정 (= 현 시점 baseline · 후속 minor 변경 시 본 SoT 갱신 cycle 진입 의무) |
 | `themes` | multi-axis theme map (= `mode` / `spacing` / `device` 등 axis 별 string[] · 상세 = `pencil-theme-multi-axis.md`) |
 | `imports` | 외부 library import map (= `<alias>: <library-id>` · `.lib.pen` reference) |
 | `variables` | document-scope variable map (= `<name>: Variable` · 본 §5 참조) |
@@ -381,7 +381,7 @@ batch_design({ ops: [
 
 | trigger | mitigation |
 |---|---|
-| `version` field 측 `"2.10"` 외 measurement | 공식 doc 측 schema upgrade 측정 + 본 SoT 갱신 cycle 진입 (= `MASTER-CLI-PENCIL-SCHEMA-UPDATE-NNN`) |
+| `version` field 측 `"2.11"` 외 measurement | 공식 doc 측 schema upgrade 측정 + 본 SoT 갱신 cycle 진입 (= `MASTER-CLI-PENCIL-SCHEMA-UPDATE-NNN`) |
 | 14 번째 Entity type 발견 (= 공식 doc 측 신규 추가) | 본 SoT §2 union type 갱신 + 5-repo propagation cycle 진입 |
 | `Ref` 측 `ref` field 미명시 + `type: "ref"` 호출 시도 | batch_design 측 FAIL 발화 · agent prompt 측 component id 명시 의뢰 |
 | Variable reference 측 `$` prefix 부재 + 존재 X token 시도 | document `variables` map 측 등록 의무 (= 등록 X 시 raw string default) |
@@ -400,3 +400,4 @@ batch_design({ ops: [
 ## 9. 명시 cycle 이력
 
 - 2026-05-19 · MASTER-CLI-PENCIL-OPTIMIZATION-002 · 본 SoT 신설 (= H26 단계 1 마감 · pencil.dev 공식 doc anchor §C #1 흡수 · 13 Entity type 통합 reference) + 5-repo byte-identical propagation
+- 2026-05-31 · MASTER-CLI-PENCIL-RECOLOR-GENERATOR-001 · `.pen` version baseline `"2.10"` → `"2.11"` 갱신 (= 실 disk `.pen` 측 version `"2.11"` 실측 정합 default · §1.1 Document interface + §1.1 표 + §7 STOP 조건 + 본 목적 line 동기) + 5-repo byte-identical propagation. 13 Entity type union + Variable / Theme system 본문 무변경 (= minor version bump · schema 구조 동일 default).

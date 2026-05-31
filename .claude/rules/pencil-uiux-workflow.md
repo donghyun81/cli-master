@@ -138,3 +138,41 @@ CLI headless 환경 안에서 `mcp__pencil__*` namespace 와 동일한 tool surf
 - Node.js < 18 → headless mode 미지원 → desktop app fallback
 - `PENCIL_CLI_KEY` 부재 + `pencil login` 미실행 → 인증 실패 → STOP
 - `pencil status` FAIL → headless 진입 차단 → desktop app fallback
+
+### 9.4 Recolor sub-flow (= gray-trap → brand 결정론 remap · headless 경로)
+
+자식 `.pen` 이 foundation Neutral 색을 capture 한 gray-trap 을 활성 자식 brand colorScheme 으로 결정론 remap 하는 경로. 본문 단일 SoT = [`.claude/skills/pencil-recolor/SKILL.md`](../skills/pencil-recolor/SKILL.md). `.pen` = plain JSON (`version: "2.11"`) 직접 read/write — Pencil app / MCP tool 불요 (= `pen_recolor.py` 측 `json.load`).
+
+#### 9.4.1 진입 조건
+
+| 조건 | 본질 |
+|---|---|
+| 활성 자식 `<Repo>Theme.kt` 측 full colorScheme 존재 | `lightColorScheme(role = ValName, ...)` block + `val ValName = Color(0xFFRRGGBB)` parse 가능 (= role→hex resolve table) |
+| 대상 `.pen` 측 foundation Neutral hex 잔존 | gray-trap 상태 (= 자식 brand identity 미반영) |
+| 색만 교체 의무 | 구조 / 좌표 / 텍스트 무변경 (= §3 Type 1 drift 정정 sub-case 정합) |
+
+#### 9.4.2 호출 paradigm
+
+```bash
+python3 .claude/skills/pencil-recolor/pen_recolor.py \
+  --pen  docs/design/pencil-sot/<screen>/<screen>.pen \
+  --theme <repo>/.../shared/ui/theme/<Repo>Theme.kt \
+  --out  docs/design/pencil-sot/<screen>/<screen>.pen
+```
+
+generator 가 출력 후 모든 fill / stroke 를 4 bucket 으로 분류 (= TRUE LEAK / role-gap / off-token / active). **TRUE LEAK ≠ 0 = FAIL (exit 2) + 즉시 STOP** (= remap 누락 신호 · fingerprint dict 재측정 의무). role-gap + off-token = WARN (PASS).
+
+#### 9.4.3 dual-layer sha sync (= 후속 step · §3 Type 1 step 5~6 정합)
+
+```bash
+NEW_SHA=$(shasum -a 256 docs/design/pencil-sot/<screen>/<screen>.pen | cut -d' ' -f1)
+# <screen>.ui-spec.json 의 lastSyncedDesignToolStateHash = $NEW_SHA (full 64자) 갱신
+```
+
+`design-to-code-sync.md` §4 Output Checklist P1~P3 정합 (= Visual SoT sha 갱신 + ui-spec.json full 64자 sha + 두 SoT sha 일치).
+
+#### 9.4.4 STOP 조건 (recolor 한정)
+
+- TRUE LEAK ≠ 0 → 즉시 STOP + `FOUNDATION_NEUTRAL` fingerprint dict 재측정
+- generator 가 색 외 구조 / 좌표 / 텍스트 변경 징후 → STOP (= scope expansion)
+- `.pen` json.load FAIL (= encryption / 비-JSON) → STOP + MCP tool 경로 (`pencil-cli` skill) 재평가

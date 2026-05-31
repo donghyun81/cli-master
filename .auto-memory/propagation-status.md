@@ -171,14 +171,24 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## Last verify-sync
 
-- timestamp: 2026-05-25T00:38:12+0900
-- pass: 136
-- drift: 3
+- timestamp: 2026-05-31T02:09:11+0900
+- pass: 154
+- drift: 0
 - miss: 0
-- exit: 1
-
-### Drift 상세
-
-- gradle.properties  master=51e4b5a131eb  GentlyBreath=7ee2174dc737(✗)  GentlyDay=7ee2174dc737(✗)  GentlyTable=7ee2174dc737(✗)  app-foundation=✓
+- exit: 0
