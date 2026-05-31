@@ -8,7 +8,7 @@
 - macOS (Pencil 도구 의존)
 - Android Studio Hedgehog 이상
 - JDK 17
-- Claude Code 2.1.114 (`cycle-discipline.md` §13 박힘)
+- Claude Code (latest · `cycle-discipline.md` §13 latest-chase 정책 · `@anthropic-ai/claude-code@latest`)
 
 ## 2. clone + 첫 build
 

@@ -76,13 +76,12 @@ if [ -f "$PROTECTED_HASHES" ]; then
     echo "[session] protected_baseline_count=$PROTECTED_COUNT"
 fi
 
-# === C3 추가: Claude Code 환경 정합 자동 검증 (cycle-discipline.md §13) ===
-EXPECTED_VERSION="2.1.114"
+# === Claude Code 버전 진단 echo (cycle-discipline.md §13 latest-chase 정책) ===
+# 특정 버전 hardcode 박지 X (§13 pin 폐기 + 최신 추격 정책) · 진단 echo 만 보존.
+# 버전 판정 / 강제 복귀 = §13 cli session 측 self-test (claude --version raw capture → EVIDENCE) 담당.
 ACTUAL_VERSION=$(claude --version 2>/dev/null | grep -oE '[0-9]+\.[0-9]+\.[0-9]+' | head -1)
-if [ -n "$ACTUAL_VERSION" ] && [ "$ACTUAL_VERSION" != "$EXPECTED_VERSION" ]; then
-    echo "[session] WARN: Claude Code 버전 $ACTUAL_VERSION ≠ pin $EXPECTED_VERSION (cycle-discipline §13 의무 다운그레이드)" >&2
-elif [ -n "$ACTUAL_VERSION" ]; then
-    echo "[session] cc_version=$ACTUAL_VERSION (pin PASS)"
+if [ -n "$ACTUAL_VERSION" ]; then
+    echo "[session] cc_version=$ACTUAL_VERSION"
 fi
 
 # === C11 추가: 세션 시작 시 .git/**/*.lock 광역 PID 검증 + stale 자동 정리 ===
