@@ -1,6 +1,6 @@
 # Rule Routing Index — 계층 taxonomy + 행동→규칙 라우팅 색인
 
-> **단일 목적**: `.claude/rules/` 42 rule 의 논리적 계층(L0~L3) 외화 + Reading Mode 7종(행동) → 의무 로드 규칙 집합 매핑 + 행동별 측정 가능 목표(GSM) + deviation 경로 + 색인 갱신 규약. **물리 폴더 이동 없음 · frontmatter 없음** — 본 색인 한 file 이 계층을 표현한다.
+> **단일 목적**: `.claude/rules/` 43 rule 의 논리적 계층(L0~L3) 외화 + Reading Mode 7종(행동) → 의무 로드 규칙 집합 매핑 + 행동별 측정 가능 목표(GSM) + deviation 경로 + 색인 갱신 규약. **물리 폴더 이동 없음 · frontmatter 없음** — 본 색인 한 file 이 계층을 표현한다.
 > **본 색인 = pointer only**. 각 rule 의 본문은 해당 file 단일 SoT. 본 색인은 어느 본문도 복제하지 않는다.
 > **신설**: RULE-ARCH-PHASE1-001 (2026-05-31 · Phase 0 audit `cc-audit-RULE-ARCH-PHASE0-001.md` §4 매핑 후보 + cli session 42-file 재측정 정합).
 > **연관 파일**:
@@ -15,7 +15,7 @@
 
 ## §0. 계층 본질 + 사용법
 
-`.claude/rules/` 는 평면 폴더다(subfolder 0 · 42 `*.md`). 본 색인은 그 평면 위에 **논리적 4층**을 덮어 행동별로 무엇을 먼저 읽어야 하는지 가리킨다.
+`.claude/rules/` 는 평면 폴더다(subfolder 0). 본 색인은 자신을 제외한 **43 rule** 을 그 평면 위에 **논리적 4층**으로 덮어 행동별로 무엇을 먼저 읽어야 하는지 가리킨다.
 
 | 층 | 이름 | 로드 시점 | 본질 |
 |---|---|---|---|
@@ -28,7 +28,7 @@
 
 ---
 
-## §A. 계층 taxonomy (L0~L3 · 42 rule 배치)
+## §A. 계층 taxonomy (L0~L3 · 43 rule 배치)
 
 > 각 file 옆 1줄 = 1차 목적(분류 문구). 본문은 해당 file 단일 SoT — 여기서 복제하지 않는다. (보호) = 보호 5종 byte-identical 영역.
 
@@ -64,10 +64,11 @@
 | [`text-degeneration-prevention.md`](./text-degeneration-prevention.md) | 출력 token degeneration 3 metric + paraphrase 의무 |
 | [`architecture-foundation-link-policy.md`](./architecture-foundation-link-policy.md) | architecture 문서 → app-foundation 실 path markdown link 의무 |
 
-### L2 — 프로그래밍 (code-level 행동 시 · 4 rule)
+### L2 — 프로그래밍 (code-level 행동 시 · 5 rule)
 
 | rule | 1차 목적 |
 |---|---|
+| [`code-style-guide.md`](./code-style-guide.md) | L2 단일 진입점 · 스타일 SoT pointer(포맷/축약/원칙/커밋/아키텍처) + 신규 안정 규칙(nullability · visibility · concurrency 노출) |
 | [`code-principles.md`](./code-principles.md) | SOLID + DRY/KISS/YAGNI + 코드 리뷰 체크리스트(reviewer 자동 참조) |
 | [`abbreviation-policy.md`](./abbreviation-policy.md) | 사용자 정의 축약 금지 seed + 허용 표준 약어 + hook 정합 |
 | [`design-to-code-sync.md`](./design-to-code-sync.md) | Design SoT → Code 단방향 sync 도구 무관 패턴(5-type / Output Checklist) |
@@ -125,9 +126,9 @@
 
 | Reading Mode (행동) | 의무 로드(L0 항상 +) |
 |---|---|
-| **1. 구현형** (code-level) | L1: `workflow-core` · `cycle-discipline` · `verification-and-review` · `reporting` · `routing-and-delegation` · `legacy-cleanup-governance` · `mode-system`(M1/M3) · `libs-versions-cross-verify`(의존성 변경 시) / L2: `code-principles` · `abbreviation-policy` / L3: 키워드 시 도메인 정책(`auth-rules`·`billing-rules`·`supabase-handling`·`deferred-domains`) |
-| **2. UI-UX형** | L1: `workflow-core` · `cycle-discipline` · `verification-and-review` · `reporting` / L2: `design-to-code-sync` · `design-prompting-paradigm` · `code-principles` / L3: `ui-ux-analysis` · `ux-laws` · `uiux-sot-refresh`(보호) · `sot-code-name-map` + Pencil 사용 시 `pencil-uiux-workflow`(보호) 및 관련 Pencil cluster |
-| **3. API-서버형** | L1: `workflow-core` · `cycle-discipline` · `verification-and-review` · `reporting` / L2: `code-principles` / L3: `supabase-handling` · `auth-rules` · `billing-rules` · `deferred-domains`(Backend/Data STOP) |
+| **1. 구현형** (code-level) | L1: `workflow-core` · `cycle-discipline` · `verification-and-review` · `reporting` · `routing-and-delegation` · `legacy-cleanup-governance` · `mode-system`(M1/M3) · `libs-versions-cross-verify`(의존성 변경 시) / L2: `code-style-guide`(진입점) · `code-principles` · `abbreviation-policy` / L3: 키워드 시 도메인 정책(`auth-rules`·`billing-rules`·`supabase-handling`·`deferred-domains`) |
+| **2. UI-UX형** | L1: `workflow-core` · `cycle-discipline` · `verification-and-review` · `reporting` / L2: `code-style-guide` · `design-to-code-sync` · `design-prompting-paradigm` · `code-principles` / L3: `ui-ux-analysis` · `ux-laws` · `uiux-sot-refresh`(보호) · `sot-code-name-map` + Pencil 사용 시 `pencil-uiux-workflow`(보호) 및 관련 Pencil cluster |
+| **3. API-서버형** | L1: `workflow-core` · `cycle-discipline` · `verification-and-review` · `reporting` / L2: `code-style-guide` · `code-principles` / L3: `supabase-handling` · `auth-rules` · `billing-rules` · `deferred-domains`(Backend/Data STOP) |
 | **4. 빌드-릴리즈형** | L1: `cycle-discipline`(§13 환경 정합) · `libs-versions-cross-verify` · `launch-status-auto-sync` · `verification-and-review` · `reporting` · `working-file-lifecycle` |
 | **5. 정책-계획 점검형** | L1: `workflow-core` · `cycle-discipline` · `mode-system` · `automation-policy` · `plugin-policy` · `recommended-option-disk-verification` · `paste-authoring-disk-verification` · `terminology` · `text-degeneration-prevention` · `architecture-foundation-link-policy` · `reporting` |
 | **6. CLI 운영 레이어형** (cli-ops · M5) | L0 강조: `cross-repo-parallel-exec`(단방향) · `safety-and-secrets`(보호 path) / L1: `cycle-discipline`(§3·§15) · `mode-system`(M5) · `automation-policy` · `reporting` · `working-file-lifecycle` · `recommended-option-disk-verification` · `paste-authoring-disk-verification` · `text-degeneration-prevention` |
@@ -161,7 +162,7 @@
 2. **rule 이동/통합/폐기 시**: §A 행 제거 또는 이동 + §B 의존 행 동기. 통합(예: 3 file → 1 SoT)은 흡수 후 단일 행으로 정리.
 3. **층 재배치 판단**: L0/L1/L2/L3 경계가 모호하면 "로드 시점"으로 판정(항상=L0 / 작업 시작=L1 / code-level=L2 / 키워드 trigger=L3). 재배치는 본 색인 1 file 변경으로 끝난다 — 물리 이동·frontmatter 불요.
 4. **갱신 trigger**: 신 rule 신설 cycle 마감 시 + `cycle-discipline §18` 분기 review 시 + Reading Mode 정의(`workflow-core` §Intake) 변경 시.
-5. **(선택) verify hook pointer**: 본 색인 §A 멤버 수 ↔ `find .claude/rules -type f -name '*.md' | wc -l` 정합 검증을 분기 review(`cycle-discipline §18`) 측 측정 항목으로 둘 수 있다(자동 hook 신설은 별 cycle · 본 cycle 미신설).
+5. **(선택) verify hook pointer**: 본 색인 §A 멤버 수 + 색인 자신 1 = `find .claude/rules -type f -name '*.md' | wc -l`(현재 43 + 1 = 44) 정합 검증을 분기 review(`cycle-discipline §18`) 측 측정 항목으로 둘 수 있다(자동 hook 신설은 별 cycle).
 6. **frontmatter 표준화 = 본 cycle 비포함**: 42 file 에 `layer:` frontmatter 일괄 부여는 자식 propagation cascade + 보호 resync 를 동시에 trigger 하므로 별 의제. 본 색인의 수기 유지가 `cycle-discipline §2`(양 최소·변동성 회피) 측 default.
 
 ---
@@ -176,3 +177,4 @@
 ## §F. 명시 cycle 이력
 
 - 2026-05-31 · RULE-ARCH-PHASE1-001 · 본 색인 신설(L0 3 + L1 17 + L2 4 + L3 18 = 42 배치 + Reading Mode 7종 라우팅 표 + GSM 목표/deviation + 갱신 규약). 진입 HEAD `f759954`(authoring baseline `c7e03c9` 대비 2 commit 전진 · 사용자 reconcile 승인). 기존 42 file 본문 + 보호 5종 sha 무변경(신 file 1건 only). Phase 0 audit `cc-audit-RULE-ARCH-PHASE0-001.md` §4 후보 + cli 재측정 정합(sot-code-name-map = audit L1 후보 → 본 색인 L3 재배치: 키워드 trigger + 자식 화면 volatile + 해당 file staleness 배너의 "L3 도메인층" 자기 귀속 근거).
+- 2026-05-31 · RULE-ARCH-PHASE2-001 · `code-style-guide.md`(L2) 신설 → §A L2 표(4→5 rule) + §B 구현형/UI-UX형/API-서버형 행에 1행 등록. Phase 1 commit `5cb9cdd` 후속. §C: 하드 규칙 3 채택(nullability · visibility · concurrency 노출) + 식별자 case 후퇴 + scope function 가이드라인 + 4 후보 탈락(원칙 4). §B 행 6(CLI 운영)은 제외 — L2 Kotlin 스타일은 bash/md cli-infra ops 에서 로드되지 않음(일관성).
