@@ -179,6 +179,7 @@
 - 2026-05-31 · RULE-ARCH-PHASE1-001 · 본 색인 신설(L0 3 + L1 17 + L2 4 + L3 18 = 42 배치 + Reading Mode 7종 라우팅 표 + GSM 목표/deviation + 갱신 규약). 진입 HEAD `f759954`(authoring baseline `c7e03c9` 대비 2 commit 전진 · 사용자 reconcile 승인). 기존 42 file 본문 + 보호 5종 sha 무변경(신 file 1건 only). Phase 0 audit `cc-audit-RULE-ARCH-PHASE0-001.md` §4 후보 + cli 재측정 정합(sot-code-name-map = audit L1 후보 → 본 색인 L3 재배치: 키워드 trigger + 자식 화면 volatile + 해당 file staleness 배너의 "L3 도메인층" 자기 귀속 근거).
 - 2026-05-31 · RULE-ARCH-PHASE2-001 · `code-style-guide.md`(L2) 신설 → §A L2 표(4→5 rule) + §B 구현형/UI-UX형/API-서버형 행에 1행 등록. Phase 1 commit `5cb9cdd` 후속. §C: 하드 규칙 3 채택(nullability · visibility · concurrency 노출) + 식별자 case 후퇴 + scope function 가이드라인 + 4 후보 탈락(원칙 4). §B 행 6(CLI 운영)은 제외 — L2 Kotlin 스타일은 bash/md cli-infra ops 에서 로드되지 않음(일관성).
 - 2026-05-31 · RULE-ARCH-PHASE3-001 · SSOT 5건 dedup(중복 본문 → canonical pointer · 정보 손실 0) + §G SSOT ownership map 신설. canonical grow-only merge 2건(MODEL_SEPARATION §2 ← UseCase·I2 내부 의존 / verification-and-review /verify ← native `/verify`). 편집 6 file(workflow-core · KMP_CMP_LAYER_DIRECTION · TDD_WORKFLOW · SSOT_PRINCIPLES · reviewer · 본 색인). 진입 HEAD `7277a6d`(Phase 2 step-0 commit). 보호 5종 무변동.
+- 2026-05-31 · RULE-ARCH-PHASE4-001 · §H consult·enforce·amend 워크플로우 연결 신설 + `workflow-core.md`(intake/implement consult 1줄씩) + `code-style-guide.md`(editorconfig advisory + L2 enforcement=warn) wiring. 최소 wiring(추가만 · 기존 본문 삭제 0). RULE-ARCH 프로그램 마지막 master cycle. Phase 3 commit `31837ad` 후속.
 
 ---
 
@@ -195,3 +196,17 @@
 | 5 | 코드 리뷰 12-section 체크리스트 | `.claude/rules/verification-and-review.md` §"12-section 체크리스트" | `reviewer.md` Expected outputs (→ pointer + 역할 고유 보존) · `code-principles.md §4` (기존 pointer 유지) |
 
 > 형식 vs 기준 분리: REVIEW.md 채우는 **형식 스키마** SoT = `reporting.md §7` · **체크리스트(판정 기준 + 블로커)** SoT = `verification-and-review.md`. 둘은 별개 canonical.
+
+---
+
+## §H. consult · enforce · amend 워크플로우 연결 (RULE-ARCH-PHASE4-001)
+
+> Phase 1~3 산출(본 색인 + `code-style-guide.md` + SSOT dedup)을 실 워크플로우에 연결한다. **확인**(행동 시 색인 consult) → **강제**(warn 수준 · 차단 X) → **개선**(미커버 → amend loop). 최소 wiring(§D·원칙 1) — 신 본문 없이 기존 SoT 를 가리킨다.
+
+| 단계 | 어디서 | SoT pointer |
+|---|---|---|
+| **확인 (consult)** | 행동 판정 직후 — `workflow-core.md` Intake(Reading Mode 판정) + implement step | 본 색인 §B 라우팅 표 (L0 항상 + L1/L2/L3 subset · bulk read 금지) |
+| **강제 (enforce)** | **warn 수준** (차단 X · 신 blocking gate 신설 X · 사용자 본심) | `code-style-guide.md` §A(enforcement=warn) + `check-abbreviation.sh` + `post-edit-degeneration-check.sh` (기존 warn hook) |
+| **개선 (amend)** | 색인·가이드 미커버 또는 충돌 발견 시 | `cycle-discipline.md §18`(분기 review) + `§19`(stop-reflect self-improving) + `automation-policy.md §1.2`(calibration) + cowork memory `project_cli_infra_rule_candidates` + 본 색인 §C/§D deviation |
+
+> enforce = warn default 본심: advisory + 기존 warn hook 으로 강제하고 blocking gate 는 신설하지 않는다. 빌드 강제화(ktlint warn-gate 등)는 별 후보 cycle(`MASTER-CLI-KTLINT-WARN-GATE-NNN`).

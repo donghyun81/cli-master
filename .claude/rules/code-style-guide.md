@@ -17,6 +17,7 @@
 - **pointer-first**: 포맷 / 축약 / 설계 원칙 / 커밋 / 아키텍처는 각 SoT 가 단일 진실이다. 본 guide 는 그 본문을 복제하지 않는다(복제 발견 = STOP · `rule-routing-index.md §D`).
 - **로드 시점**: code-level(Kotlin) 행동 — 구현형 / UI-UX형 / API-서버형(`rule-routing-index.md §B`). cli-infra ops(bash·md)는 본 guide 대상이 아니다(Kotlin 표면 관용이라서).
 - **무엇을 신설하는가**: 아래 §C 의 안정·객관·광범위 규칙만. 도구가 강제하는 영역(포맷·import 정렬·modifier 순서)이나 주관적 영역(LOC budget·KDoc 의무)은 신설하지 않는다(§C 탈락 표).
+- **enforcement 수준 = warn (advisory)**: 본 guide 규칙은 차단(blocking) 아님 — 기존 warn hook(`check-abbreviation.sh` + `post-edit-degeneration-check.sh`) + IDE/리뷰 advisory 로 강제하고 신 blocking gate 는 신설하지 않는다(사용자 본심). 빌드 강제화(ktlint warn-gate 등)는 별 후보 cycle.
 
 ---
 
@@ -24,7 +25,7 @@
 
 | 영역 | SoT pointer | 가리키는 것 |
 |---|---|---|
-| 포맷·들여쓰기·EOL | [`.editorconfig`](../../.editorconfig) | charset utf-8 / LF / indent 4 / max 120 + `[*.{kt,kts}]` ktlint_standard 선언 (⚠ 빌드 강제는 미연결 = Phase 4) |
+| 포맷·들여쓰기·EOL | [`.editorconfig`](../../.editorconfig) | charset utf-8 / LF / indent 4 / max 120 + `[*.{kt,kts}]` ktlint_standard 선언 = **advisory**(IDE/수기) · 빌드 비강제(플러그인 미연결) · 강제화(ktlint warn-gate) = 후보 cycle `MASTER-CLI-KTLINT-WARN-GATE-NNN` |
 | 식별자 축약·약어 | [`abbreviation-policy.md`](./abbreviation-policy.md) | 사용자 정의 축약 금지 seed + 허용 표준 약어 list + PreToolUse hook |
 | 설계 원칙·리뷰 | [`code-principles.md`](./code-principles.md) | SOLID 5 + DRY/KISS/YAGNI + 코드 리뷰 체크리스트(A~H) |
 | 커밋 메시지 | [`COMMIT_CONVENTION.md`](../../docs/agent/process/COMMIT_CONVENTION.md) | Conventional Commits type/scope/subject/body + `ops` 확장 |
