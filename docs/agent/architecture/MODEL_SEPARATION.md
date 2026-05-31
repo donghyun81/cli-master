@@ -25,6 +25,8 @@
 | `DomainModel` → `UiState` | ViewModel 또는 전용 Mapper (feature-state → UI 경계) |
 | `UiState` → 사용자 액션 | ViewModel 의 Intent/Event handler — Domain UseCase 호출 |
 
+경계 매핑(데이터 변환)은 **Repository · UseCase · ViewModel(또는 전용 Mapper) 경계에서만** 수행한다. 내부 계층은 하위 계층 모델에 직접 의존하지 않는다(I2 불변 원칙 준수). 경계를 넘는 변환이 추가·변경되면 PLAN `## 4. ModelBoundaryPlan` 에 기록한다.
+
 ---
 
 ## 3. 금지 패턴

@@ -12,6 +12,7 @@
 - 최소 1개 검증 명령을 실행하고 exit code를 기록한다
 - 검증 명령은 PLAN.md의 VerifyCmds에 명시된 것을 우선 사용
 - **명령 흔적 필수**: VERIFY.md 에 백틱 래핑 명령(테이블) 또는 `CMD:` 패턴(LOG) 이 1개 이상 있어야 한다 — compound-lint 3b 검사 대상 (FAIL)
+- **native `/verify` bundled skill (2026-05-27 · MASTER-CLI-NATIVE-RUN-VERIFY-SANDBOX-INTEGRATION-001)**: Anthropic v2.1.145+ 의 `/verify` 는 build + 실 앱 실행으로 코드 변경을 확인한다(test/type-check fallback 회피). manual 검증 명령(`./gradlew ...` + `adb ...`) 또는 `/verify` bundled skill 양쪽 사용 가능 — cli session 자율 · 단 "0 command 금지" 정합. 자식별 launch recipe = `.claude/skills/run-<name>/SKILL.md`(`/run-skill-generator` capture) · staging flavor 한정
 
 ### 검증 명령 실행 불가 시
 불가피한 이유가 있으면:
@@ -46,7 +47,7 @@ EXIT 0 = PASS | EXIT 1 = 아티팩트 누락 또는 시크릿 감지
 ## /review 규칙
 
 ### Risk 기반 리뷰 경량화
-- **Low Risk**: VERIFY.md (빌드/테스트 통과 확인) + 3-section REVIEW (Requirements, Regression, Secrets). **UI 레이어 변경(Screen/ViewModel/UiState 신규·수정) 포함 시 §5 Model Separation 추가 필수** (= `.claude/rules/workflow-core.md` "### 모델 분리 (Model Separation)" §implement 영역 정합). PromptFit 선택.
+- **Low Risk**: VERIFY.md (빌드/테스트 통과 확인) + 3-section REVIEW (Requirements, Regression, Secrets). **UI 레이어 변경(Screen/ViewModel/UiState 신규·수정) 포함 시 §5 Model Separation 추가 필수** (= [`docs/agent/architecture/MODEL_SEPARATION.md`](../../docs/agent/architecture/MODEL_SEPARATION.md) 정합). PromptFit 선택.
 - **Medium Risk**: 현행 12-section REVIEW + PromptFit 필수.
 - **High Risk**: 12-section REVIEW + PromptFit + 독립 reviewer 실행 필수.
 

@@ -50,13 +50,7 @@ shared/data/**  →  shared/{feature-state,app}/**            # 금지 (data는 
 
 ## 4. 경계 매핑 위치
 
-| 변환 | 위치 |
-|---|---|
-| DTO → DomainModel | Repository (data → domain 경계) |
-| Entity → DomainModel | Repository (data → domain 경계) |
-| DomainModel → UiState | ViewModel 또는 전용 Mapper (feature-state → UI 경계) |
-
-내부 계층은 하위 계층 모델에 직접 의존하지 않는다.
+> 본 항목의 SoT = [`MODEL_SEPARATION.md §2`](./MODEL_SEPARATION.md) (DTO/Entity/DomainModel/UiState 경계 변환 위치 = Repository · UseCase · ViewModel · 내부 계층 하위 의존 금지). 본 file 은 가리키기만 한다(중복 금지). 본 §은 위 경계 매핑이 §1 단방향 레이어 흐름·§3 I2 금지 import 와 정합함을 확인하는 navigation 지점이다.
 
 ---
 

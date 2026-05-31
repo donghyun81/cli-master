@@ -244,25 +244,10 @@ SoftBudget 초과 예상 시 추상화 레이어 추가보다 task 분할을 우
 - 연기 마커: `// TODO(user-prep): <선행 조건>` 주석 또는 stub 구현
 - stub 또는 interface만 제공하고, 실제 연동 코드는 외부 준비 완료 후 별도 task 로 진행한다
 
-### 모델 분리 (Model Separation)
+### 모델 분리 + 경계 매핑 (Model Separation / Boundary Mapping)
 
-레이어 간 모델은 혼용하지 않는다:
-- `DTO`: 네트워크·직렬화 경계에서만 사용 (data layer)
-- `Entity`: DB 저장소 경계에서만 사용 (data layer)
-- `DomainModel`: 비즈니스 로직 계층에서만 사용 (domain layer)
-- `UiState`: UI 렌더링 전용 (presentation layer) — `SharedUiState<T>` 패턴 참조
-
-동일 객체를 여러 레이어에 걸쳐 직접 전달하지 않는다. 경계 통과 시 반드시 변환한다.
-PLAN `## 4. ModelBoundaryPlan` 섹션에 모델 분리 영향을 명시한다.
-
-### 경계 매핑 원칙 (Boundary Mapping Only)
-
-데이터 변환(mapping)은 레이어 경계(Repository, UseCase, ViewModel)에서만 수행한다:
-- DTO → DomainModel: Repository 진입점에서 변환
-- DomainModel → UiState: ViewModel 또는 전용 Mapper 에서 변환
-- 내부 계층이 하위 계층 모델에 직접 의존하지 않는다 (I2 불변 원칙 준수)
-
-경계를 넘는 변환이 추가되거나 변경되면 PLAN `## 4. ModelBoundaryPlan` 섹션에 기록한다.
+> 본 항목의 SoT = [`docs/agent/architecture/MODEL_SEPARATION.md`](../../docs/agent/architecture/MODEL_SEPARATION.md) (DTO/Entity/DomainModel/UiState 분리 · 경계 변환 위치 = Repository · UseCase · ViewModel · I2 내부 의존 금지 · 금지/허용 패턴). 본 file 은 가리키기만 한다(중복 금지).
+> implement 의무: 모델·경계 매핑 변경이 있으면 PLAN `## 4. ModelBoundaryPlan` 에 명시한다.
 
 ### 오류·결과 정책 (Error/Result Policy)
 
@@ -323,24 +308,13 @@ Anthropic v2.1.145+ bundled skill (`/run` + `/verify` + `/run-skill-generator`) 
 
 ## /verify 규칙
 
-- **0 command 금지** (최소 1개 검증 명령 실행 필수)
-- **native `/verify` bundled skill 활용 (2026-05-27 · MASTER-CLI-NATIVE-RUN-VERIFY-SANDBOX-INTEGRATION-001)**: Anthropic v2.1.145+ 의 `/verify` 는 build + 실 앱 실행으로 코드 변경을 확인한다 (test / type check fallback 회피). manual 검증 명령 (`./gradlew ...` + `adb ...`) 또는 `/verify` bundled skill 양쪽 사용 가능 — cli session 자율. 단 "0 command 금지" 정합 의무 (`/verify` = 1개 이상 실 명령 실행). 자식별 launch recipe 는 `.claude/skills/run-<name>/SKILL.md` (`/run-skill-generator` capture) 를 따르며 staging flavor 한정.
-- 불가피한 경우: `UNKNOWN(사유)` 명시 + 제품 변경 없이 STOP
-- 검증 명령과 exit code를 LOG에 남김
-- 결과 → `.ai/reports/<taskId>/VERIFY.md`
+> 단계 흐름 hub: implement → cleanup → DocSync 후 **/verify 단계 존재**. 상세 규칙(0 command 금지 · UNKNOWN+STOP · exit code LOG · 허용 검증 명령 유형 · native `/verify` bundled skill · VERIFY.md 필수 항목)의 SoT = [`verification-and-review.md`](./verification-and-review.md). 본 file 은 가리키기만 한다(중복 금지).
 
 ---
 
 ## /review 규칙
 
-- 근거 기반 판정 (CONFIRMED / INFERRED / UNKNOWN)
-- 체크리스트:
-  - [ ] 요구사항 성공조건 충족 여부
-  - [ ] 회귀 위험 없음
-  - [ ] 아키텍처 원칙 위배 없음
-  - [ ] 누락된 TODO 없음
-  - [ ] 문서-구현 드리프트 없음
-- 결과 → `.ai/reports/<taskId>/REVIEW.md`
+> 단계 흐름 hub: /verify 후 **/review 단계 존재**. 상세 규칙(근거 기반 판정 CONFIRMED/INFERRED/UNKNOWN · 12-section 체크리스트 · Verdict · 루프 재진입)의 SoT = [`verification-and-review.md`](./verification-and-review.md). 본 file 은 가리키기만 한다(중복 금지).
 
 ---
 

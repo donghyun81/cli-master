@@ -106,74 +106,10 @@ Skeptic tuning 을 지킨 리뷰는 REVIEW.md `## Findings` 에 "가장 약한 �
 
 ## Expected outputs
 
-`.ai/reports/<taskId>/REVIEW.md` (12-section 정규 스키마):
+`.ai/reports/<taskId>/REVIEW.md` 를 12-section 정규 스키마로 작성한다.
 
-```markdown
-## Technical Review
-
-### 1. Requirements Coverage
-- [ ] 요구사항 성공조건 충족: <근거 (CONFIRMED/INFERRED/UNKNOWN)>
-- [ ] 성공 조건 항목별 대조: <확인>
-
-### 2. Regression Risk
-- 변경 영향 범위: <확인>
-- 회귀 위험 없음: <근거>
-
-### 3. Architecture Integrity — SOLID
-- SOLID 영향: <없음 / 단일 책임 위반 여부 / 과도한 추상화 여부>
-- DTO·Entity·DomainModel·UiState 분리 유지: <확인>
-- 오류 모델 선택 근거 명시: <N/A / 확인>
-
-### 4. Architecture Integrity — Layer Boundaries
-- 아키텍처 경계 준수: <확인>
-- I2 불변 원칙 (domain→data import 금지): <N/A / 확인>
-- 경계 매핑 위치 (Repository·UseCase·ViewModel 에서만): <N/A / 확인>
-
-### 5. Model Separation
-- UiState 가 DomainModel 과 분리됨: <N/A / 확인>
-- UI 단방향 흐름 유지: <N/A / 확인>
-- 경계 매핑 변환 위치: <N/A / 확인>
-
-### 6. Dependency Governance
-- libs.versions.toml 변경: <Yes/No>
-- DependencyDecision 8개 항목 기술 여부: <N/A / PASS>
-- 신규 의존성 승인: <N/A / PASS / FAIL>
-
-### 7. TDD Evidence & Testability Seams
-- FakeXxx 테스트 존재 또는 N/A 사유: <확인>
-- StateFlow 테스트: <N/A / 존재>
-- 심 기반 테스트 (clock·dispatcher·identity·logger·uuid): <N/A / 존재 / 연기 사유>
-
-### 8. Error / Result Policy
-- typed Result 사용 여부: <N/A / Yes>
-- sealed 오류 모델: <N/A / 확인>
-- 기존 코드 전면 교체 없음: <확인>
-
-### 9. External Prep / Deferred Items
-- user-prep TODO 또는 stub 처리: <N/A / 확인>
-- 외부 의존으로 인한 UI 불변 상태 침해 없음: <확인>
-
-### 10. DocSync
-- 문서-구현 드리프트 없음: <확인>
-
-### 11. Secrets Safety
-- 시크릿 노출 없음: <compound-lint 결과>
-
-### 12. Rollback Viability
-- 롤백 지점 실행 가능성: <확인>
-- 비가역 변경 없음: <확인>
-
-## Findings
-[근거 기반 기술 판단. 근거 없으면 UNKNOWN.]
-
-## Verdict
-PASS / FAIL / PARTIAL
-
-## Remaining Risks
-[향후 주의사항 — 이유와 함께 명시]
-```
-
-전체 형식: `.claude/rules/evidence-and-reporting.md`
+> REVIEW.md **체크리스트(판정 기준 + 블로커 여부)** 의 SoT = [`verification-and-review.md`](../../rules/verification-and-review.md) §"REVIEW.md 12-section 체크리스트". **채울 markdown 형식 스키마**(§1 Requirements Coverage ~ §13 Cleanup + PromptFit)의 SoT = [`reporting.md §7`](../../rules/reporting.md). 본 agent 정의는 가리키기만 한다(중복 금지).
+> reviewer 고유(보존) = 위 Mission · Use when · Think like · Key questions · Decision authority · Must escalate · 판단 프레임 · Verdict 기준 · Skeptic Evaluator Tuning. 판정 시 `## Findings` 에 "가장 약한 근거:" + "counter-example:" 두 줄 의무(Skeptic Tuning).
 
 PASS 시:
 ```bash

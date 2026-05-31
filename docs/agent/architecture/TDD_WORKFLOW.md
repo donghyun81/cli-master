@@ -56,14 +56,7 @@ class FakeJournalRepository : JournalRepository {
 
 ## 4. 심 주입 항목
 
-테스트에서 fake 가능해야 하는 외부 의존:
-- **시간**: `Clock` 또는 `DateProvider` — `System.currentTimeMillis()` / `Clock.System.now()` 직접 사용 금지
-- **디스패처**: `CoroutineDispatcher` 주입 — `Dispatchers.IO` / `Dispatchers.Main` 직접 사용 금지
-- **사용자 정체성**: `UserIdentityProvider` — domain 에서 인증 SDK 직접 호출 금지
-- **로거**: 추상 로거 인터페이스 사용
-- **무작위값/UUID**: 주입 가능한 provider
-
-상세: `TESTABILITY_SEAMS.md`
+> 본 항목의 SoT = [`TESTABILITY_SEAMS.md §1`](./TESTABILITY_SEAMS.md) (clock · dispatcher · identity · logger · uuid + network/DB/file 변동성 경계 8 심 · 직접 사용 금지 대상). 본 file 은 가리키기만 한다(중복 금지). TDD 흐름에서 위 심은 §2 `FakeXxx` 패턴으로 격리하고 §6 Red→Green→Refactor 로 진행한다.
 
 ---
 
