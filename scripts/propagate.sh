@@ -218,20 +218,28 @@ if [ "${#FILES[@]}" = 0 ]; then
   exit 2
 fi
 
-# === BASELINE 검증: 보호 파일 4종 ===
+# === BASELINE 검증: 보호 파일 5종 (manifest 동적 reference · stale-hardcode 폐기) ===
+# EXPECTED = .auto-memory/protected-file-hashes.md 측 sha-256 row 동적 parse (= 직전 stale hardcode heredoc 폐기 · manifest 단일 source).
+# ACTUAL   = 동일 5 보호 file 측 live shasum. 두 baseline 불일치 시에만 WARN = 실 (manifest ≠ live-disk) drift 신호 (= stale-hardcode noise 제거 · WARN-only non-blocking 보존).
+# 보호 file list = verify-sync.sh PROTECTED 배열 정합 (5종 · design-sot-policy.md 포함).
 cd "$MASTER_DIR"
-EXPECTED_BASELINE=$(cat <<'BASE'
-bba7745ef7c494746f6ffcd829202c3495d297ea26cbd2591dbc6d1cc7114cbd  docs/schemas/ui-spec.schema.json
-af8e7e26a782818c56f00cd33a379d9abfe88292fcc78bd18266e514f6935a80  .claude/rules/pencil-uiux-workflow.md
-1f97ac1f1c7a71b1efa5a4b9756f46e0d5879a9d6cfbf9651de1ed293295ae6d  docs/design/pencil-sot-policy.md
-487d57a2759aa93c8733fba37624000362ecde1665a75edc6207dd6b9dba07db  .claude/rules/uiux-sot-refresh.md
-BASE
+PROTECTED_MANIFEST=".auto-memory/protected-file-hashes.md"
+PROTECTED_BASELINE_FILES=(
+  docs/schemas/ui-spec.schema.json
+  .claude/rules/pencil-uiux-workflow.md
+  docs/design/pencil-sot-policy.md
+  .claude/rules/uiux-sot-refresh.md
+  docs/design/design-sot-policy.md
 )
-ACTUAL_BASELINE=$(for f in docs/schemas/ui-spec.schema.json .claude/rules/pencil-uiux-workflow.md docs/design/pencil-sot-policy.md .claude/rules/uiux-sot-refresh.md; do
+EXPECTED_BASELINE=$(for f in "${PROTECTED_BASELINE_FILES[@]}"; do
+  msha=$(grep -F "\`$f\`" "$PROTECTED_MANIFEST" 2>/dev/null | grep -oE '[a-f0-9]{64}' | head -1 || true)
+  printf '%s  %s\n' "$msha" "$f"
+done)
+ACTUAL_BASELINE=$(for f in "${PROTECTED_BASELINE_FILES[@]}"; do
   shasum -a 256 "$f" 2>/dev/null
 done)
 if [ "$EXPECTED_BASELINE" != "$ACTUAL_BASELINE" ]; then
-  echo "[propagate] WARN: 보호 파일 baseline 변경 감지. .auto-memory/protected-file-hashes.md 갱신 의무." >&2
+  echo "[propagate] WARN: 보호 파일 baseline 변경 감지 (manifest ≠ live-disk). .auto-memory/protected-file-hashes.md 갱신 의무." >&2
   echo "[propagate] WARN: 그래도 propagation 진행. master baseline 이 새 sha 로 박힌 cycle 확인 의무." >&2
 fi
 
