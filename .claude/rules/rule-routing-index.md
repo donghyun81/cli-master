@@ -15,7 +15,7 @@
 
 ## §0. 계층 본질 + 사용법
 
-`.claude/rules/` 는 평면 폴더다(subfolder 0). 본 색인은 자신을 제외한 **43 rule** 을 그 평면 위에 **논리적 4층**으로 덮어 행동별로 무엇을 먼저 읽어야 하는지 가리킨다.
+`.claude/rules/` 는 평면 폴더다(subfolder 0). 본 색인은 자신을 제외한 **44 rule** 을 그 평면 위에 **논리적 4층**으로 덮어 행동별로 무엇을 먼저 읽어야 하는지 가리킨다.
 
 | 층 | 이름 | 로드 시점 | 본질 |
 |---|---|---|---|
@@ -38,11 +38,11 @@
 |---|---|
 | [`safety-and-secrets.md`](./safety-and-secrets.md) | 금지 명령 / 금지 경로 / 시크릿·PII 기록 금지 / 역할별 경로 매트릭스 |
 | [`anchor-list.md`](./anchor-list.md) | 누락 시 cycle 실패하는 10 anchor(A1~A10 · baseline drift / 보호 sha / scope / propagation 등) |
-| [`cross-repo-parallel-exec.md`](./cross-repo-parallel-exec.md) | 5-repo 단방향 propagation + sub-agent fan-out vs 다중 session + subscription pool 정합 |
+| [`cross-repo-parallel-exec.md`](./cross-repo-parallel-exec.md) **(kernel)** | 5-repo 단방향 propagation(A4) + subscription pool 정합(A6 · `claude -p` 회피 · billing) + 영역 1/2/3 1-줄 요약 + STOP/trigger · 실행 본문 = `cross-repo-parallel-exec-detail.md`(behavior-triggered · L1) |
 
 > file 외 L0: master `CLAUDE.md §5`(STOP 9항 canonical) + 부모 mount root `CLAUDE.md`(5-repo umbrella). 두 헌법은 `.claude/rules/` 밖이라 본 42 집합에 포함되지 않으나 L0 로 항상 적용.
 
-### L1 — 프로세스·워크플로우 (작업 시작 시 · 17 rule)
+### L1 — 프로세스·워크플로우 (작업 시작 시 · 18 rule)
 
 | rule | 1차 목적 |
 |---|---|
@@ -63,6 +63,7 @@
 | [`terminology.md`](./terminology.md) | SoT/SSOT 등 일반 어휘 단일 사전 |
 | [`text-degeneration-prevention.md`](./text-degeneration-prevention.md) | 출력 token degeneration 3 metric + paraphrase 의무 |
 | [`architecture-foundation-link-policy.md`](./architecture-foundation-link-policy.md) | architecture 문서 → app-foundation 실 path markdown link 의무 |
+| [`cross-repo-parallel-exec-detail.md`](./cross-repo-parallel-exec-detail.md) | cross-repo 실행 본문(영역 1/2/3 + dispatch + 자식별 cwd 분리 + sub-agent token cost + 정합 처리) · cross-repo 행동 trigger 로드(= L0 kernel demote 본문) |
 
 ### L2 — 프로그래밍 (code-level 행동 시 · 5 rule)
 
@@ -131,7 +132,7 @@
 | **3. API-서버형** | L1: `workflow-core` · `cycle-discipline` · `verification-and-review` · `reporting` / L2: `code-style-guide` · `code-principles` / L3: `supabase-handling` · `auth-rules` · `billing-rules` · `deferred-domains`(Backend/Data STOP) |
 | **4. 빌드-릴리즈형** | L1: `cycle-discipline`(§13 환경 정합) · `libs-versions-cross-verify` · `launch-status-auto-sync` · `verification-and-review` · `reporting` · `working-file-lifecycle` |
 | **5. 정책-계획 점검형** | L1: `workflow-core` · `cycle-discipline` · `mode-system` · `automation-policy` · `plugin-policy` · `recommended-option-disk-verification` · `paste-authoring-disk-verification` · `terminology` · `text-degeneration-prevention` · `architecture-foundation-link-policy` · `reporting` |
-| **6. CLI 운영 레이어형** (cli-ops · M5) | L0 강조: `cross-repo-parallel-exec`(단방향) · `safety-and-secrets`(보호 path) / L1: `cycle-discipline`(§3·§15) · `mode-system`(M5) · `automation-policy` · `reporting` · `working-file-lifecycle` · `recommended-option-disk-verification` · `paste-authoring-disk-verification` · `text-degeneration-prevention` |
+| **6. CLI 운영 레이어형** (cli-ops · M5) | L0 강조: `cross-repo-parallel-exec`(kernel · 단방향/subscription) · `safety-and-secrets`(보호 path) / L1: `cycle-discipline`(§3·§15) · `mode-system`(M5) · `automation-policy` · `reporting` · `working-file-lifecycle` · `recommended-option-disk-verification` · `paste-authoring-disk-verification` · `text-degeneration-prevention` + **cross-repo 행동 시 `cross-repo-parallel-exec-detail`**(kernel demote 본문) |
 | **7. task 재개-후속형** (task-resume) | L1: `workflow-core`(Context Reset / HANDOFF) · `reporting`(§9 Subagent Return) · `cycle-discipline`(§8 future context 회복) |
 
 > L3 도메인 rule 은 키워드 trigger 가 본질이다(`deferred-domains.md §5` + 각 도메인 rule §STOP trigger). 위 표의 L3 항목은 "해당 키워드가 잡힐 때만" 로드한다 — 무조건 로드 아님.
@@ -162,7 +163,7 @@
 2. **rule 이동/통합/폐기 시**: §A 행 제거 또는 이동 + §B 의존 행 동기. 통합(예: 3 file → 1 SoT)은 흡수 후 단일 행으로 정리.
 3. **층 재배치 판단**: L0/L1/L2/L3 경계가 모호하면 "로드 시점"으로 판정(항상=L0 / 작업 시작=L1 / code-level=L2 / 키워드 trigger=L3). 재배치는 본 색인 1 file 변경으로 끝난다 — 물리 이동·frontmatter 불요.
 4. **갱신 trigger**: 신 rule 신설 cycle 마감 시 + `cycle-discipline §18` 분기 review 시 + Reading Mode 정의(`workflow-core` §Intake) 변경 시.
-5. **(선택) verify hook pointer**: 본 색인 §A 멤버 수 + 색인 자신 1 = `find .claude/rules -type f -name '*.md' | wc -l`(현재 43 + 1 = 44) 정합 검증을 분기 review(`cycle-discipline §18`) 측 측정 항목으로 둘 수 있다(자동 hook 신설은 별 cycle).
+5. **(선택) verify hook pointer**: 본 색인 §A 멤버 수 + 색인 자신 1 = `find .claude/rules -type f -name '*.md' | wc -l`(현재 44 + 1 = 45) 정합 검증을 분기 review(`cycle-discipline §18`) 측 측정 항목으로 둘 수 있다(자동 hook 신설은 별 cycle).
 6. **frontmatter 표준화 = 본 cycle 비포함**: 42 file 에 `layer:` frontmatter 일괄 부여는 자식 propagation cascade + 보호 resync 를 동시에 trigger 하므로 별 의제. 본 색인의 수기 유지가 `cycle-discipline §2`(양 최소·변동성 회피) 측 default.
 
 ---
@@ -181,6 +182,7 @@
 - 2026-05-31 · RULE-ARCH-PHASE3-001 · SSOT 5건 dedup(중복 본문 → canonical pointer · 정보 손실 0) + §G SSOT ownership map 신설. canonical grow-only merge 2건(MODEL_SEPARATION §2 ← UseCase·I2 내부 의존 / verification-and-review /verify ← native `/verify`). 편집 6 file(workflow-core · KMP_CMP_LAYER_DIRECTION · TDD_WORKFLOW · SSOT_PRINCIPLES · reviewer · 본 색인). 진입 HEAD `7277a6d`(Phase 2 step-0 commit). 보호 5종 무변동.
 - 2026-05-31 · RULE-ARCH-PHASE4-001 · §H consult·enforce·amend 워크플로우 연결 신설 + `workflow-core.md`(intake/implement consult 1줄씩) + `code-style-guide.md`(editorconfig advisory + L2 enforcement=warn) wiring. 최소 wiring(추가만 · 기존 본문 삭제 0). RULE-ARCH 프로그램 마지막 master cycle. Phase 3 commit `31837ad` 후속.
 - 2026-06-01 · MASTER-CLI-GUIDANCE-ROUTING-001 · §I 행동→지침(docs) 라우팅 신설(§H 뒤 · pointer only · 7행 표). 비-rule process/workflow/template 지침(DOC_GOVERNANCE/DOC_TASK_TYPES/REPO_FIRST_INTAKE/COMMIT_CONVENTION/DEPENDENCY_DECISION_CHECKLIST/ADR_TEMPLATE/PROPAGATION_PARAMETERS/PROMPTFIT_RUBRIC/templates 8)을 행동 시점 behavior-routed 로 표면화(GAP-2 docs 판). 대상 docs 실존 disk 검증 PASS · 지침 본문 복제 0 · 기존 §A~§H 무변경 · 보호 5종 무접촉. 진입 HEAD `b2a138e`.
+- 2026-06-01 · MASTER-CLI-CONTEXT-OPT-PHASE3-L0-CHILD-DEDUP-001 · (H4) §A L0 `cross-repo-parallel-exec.md` = kernel 표기(subscription/단방향/영역 요약 잔류) + L1 `cross-repo-parallel-exec-detail.md` 신설 등록(17→18 rule · 43→44 · 색인 자신 포함 45) + §B Reading Mode 6 cross-repo 행동 시 detail 로드. L0 always-load 본문 demote(삭제 0 · 18.2K→kernel 8.2K + detail 12.6K). 보호 5종 무접촉.
 
 ---
 
