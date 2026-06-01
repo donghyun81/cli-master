@@ -23,15 +23,15 @@
 
 | # | 영역 | Transport (OK) | Inspection (X) | paradigm 본문 file |
 |---|---|---|---|---|
-| 1 | cli infra propagation | ✓ propagate.sh default | — | `cross-repo-parallel-exec.md §4.3` + master `CLAUDE.md §3` |
-| 2 | cli infra cross-verify | ✓ verify-sync.sh default | — | `cross-repo-parallel-exec.md §4.2` |
+| 1 | cli infra propagation | ✓ propagate.sh default | — | `cross-repo-parallel-exec-detail.md §4.3` + master `CLAUDE.md §3` |
+| 2 | cli infra cross-verify | ✓ verify-sync.sh default | — | `cross-repo-parallel-exec-detail.md §4.2` |
 | 3 | Hook 발화 | ✓ SessionStart/PreToolUse/PostToolUse/Stop default | — | `cycle-discipline.md §13 + §19` + `safety-and-secrets.md` |
 | 4 | Sub-agent return 통합 | ✓ 4k token 압축 + 5-section schema default | — | `reporting.md §9` default |
 | 5 | Disk 측 이미 구현 여부 측정 | — | ✓ 수동 의무 default | `recommended-option-disk-verification.md §2.1` |
 | 6 | paste source authoring disk verify | — | ✓ cowork chat 측 수동 default | `paste-authoring-disk-verification.md §3` |
 | 7 | paste-back disk verify | — | ✓ cli session 측 자율 default | `paste-authoring-disk-verification.md §4` |
 | 8 | Runtime crash diagnosis | — | ✓ cli session 측 ADB + emulator + Logcat default | `runtime-crash-mitigation-process.md §3` |
-| 9 | Cross-repo cross-verify | — | ✓ main agent 측 sub-agent verdict 비교 default | `cross-repo-parallel-exec.md §4.1` |
+| 9 | Cross-repo cross-verify | — | ✓ main agent 측 sub-agent verdict 비교 default | `cross-repo-parallel-exec-detail.md §4.1` |
 | 10 | REVIEW.md 12-section 판정 | — | ✓ 수동 판정 default (= 블로커 1·2·3·4·6·9 default) | `reporting.md §7` |
 | 11 | Recommended option 최종 confirm | — | ✓ 사용자 본심 회수 의무 default | `recommended-option-disk-verification.md §2.2` |
 
@@ -50,7 +50,7 @@
 
 ## §4. Sub-agent spawn 금지 (= B-5 정합 default)
 
-본 automation paradigm 도입 시점 = sub-agent spawn 영역 신설 X 의무 default (= `cross-repo-parallel-exec.md §3.4` Sub-agent token cost warning default · 49-subagent $8k~$15k / 23-subagent $47k/3d default). 신 sub-agent 신설 시점 = 본인 confirm 의무 default.
+본 automation paradigm 도입 시점 = sub-agent spawn 영역 신설 X 의무 default (= `cross-repo-parallel-exec-detail.md §3.4` Sub-agent token cost warning default · 49-subagent $8k~$15k / 23-subagent $47k/3d default). 신 sub-agent 신설 시점 = 본인 confirm 의무 default.
 
 - 영역 1 (= 단일 cli session + sub-agent fan-out paradigm default) = 권장 sub-agent parallelism ≤ 3 default + chain unattended 회피 default + interactive pool 정합 default
 - 영역 2 (= 다중 cli session 운영 default) = 권장 default · 사용자 본인 측 terminal × N 진입 default
@@ -66,7 +66,7 @@
 
 ## §6. 인접 paradigm 정합
 
-- `cross-repo-parallel-exec.md §2.4 + §3.4` (= subscription-aware + sub-agent token cost warning default)
+- `cross-repo-parallel-exec.md §2.4`(kernel) + `cross-repo-parallel-exec-detail.md §3.4` (= subscription-aware + sub-agent token cost warning default)
 - `recommended-option-disk-verification.md` (= disk 측정 의무 default)
 - `paste-authoring-disk-verification.md` (= paste source authoring disk verify default)
 - `runtime-crash-mitigation-process.md` (= cli session 측 ADB + emulator + Logcat default)

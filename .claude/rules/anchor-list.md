@@ -74,7 +74,7 @@
 
 **우선순위**: P0
 
-**precedent**: `cross-repo-parallel-exec.md §2.4 + §3.4` + 부모 mount root `CLAUDE.md §4` default
+**precedent**: `cross-repo-parallel-exec.md §2.4`(kernel) + `cross-repo-parallel-exec-detail.md §3.4` + 부모 mount root `CLAUDE.md §4` default
 
 ### A7 — Filename + content dual grep
 
@@ -94,7 +94,7 @@
 
 **우선순위**: P1
 
-**precedent**: `cross-repo-parallel-exec.md §2.1~§2.3` + 부모 mount root `CLAUDE.md §3.3` default
+**precedent**: `cross-repo-parallel-exec-detail.md §2.1~§2.3` + 부모 mount root `CLAUDE.md §3.3` default
 
 ### A9 — Domain SoT mandatory read
 
@@ -139,7 +139,7 @@
 
 - `recommended-option-disk-verification.md` (= A5 baseline default)
 - `paste-authoring-disk-verification.md` (= A5 + A10 baseline default)
-- `cross-repo-parallel-exec.md §2.4 + §3.4` (= A6 + A8 baseline default)
+- `cross-repo-parallel-exec.md §2.4`(kernel) + `cross-repo-parallel-exec-detail.md §3.4` (= A6 + A8 baseline default)
 - `cycle-discipline.md §17` (= A7 baseline default)
 - `reporting.md §13` (= negative space line default)
 - `cowork-project-instructions §B-1~§B-3` (= A10 baseline default)
