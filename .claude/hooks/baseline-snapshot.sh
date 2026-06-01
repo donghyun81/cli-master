@@ -5,6 +5,7 @@
 #       .ai/baseline-snapshot/<timestamp>.json 출력 + latest.json 복사.
 # 신설: MASTER-COWORK-HANDOFF-BASELINE-AUTOVERIFY-HOOK-001 (2026-05-12)
 # 갱신: MASTER-CLI-BASELINE-SNAPSHOT-REPOS-V6-MITIGATION-001 (2026-05-19 · 5-repo paradigm 정합)
+# 갱신: MASTER-CLI-CONTEXT-OPT-PHASE2-BASELINE-SURFACE-001 (2026-06-01 · mount root robust 탐지 = 부모 mount 진입 시 dirname mis-resolve 정정)
 # 관련: .claude/rules/cycle-discipline.md §14a (Cowork prep ↔ CLI baseline 동기화 6 의무 절차)
 # 동작: 비차단 (warn-only · exit 0).
 # self-test: bash .claude/hooks/baseline-snapshot.sh
@@ -19,7 +20,16 @@ TIMESTAMP=$(date +"%Y%m%dT%H%M%S%z")
 OUT_FILE="$SNAPSHOT_DIR/${TIMESTAMP}.json"
 LATEST_FILE="$SNAPSHOT_DIR/latest.json"
 
-PARENT_DIR="$(dirname "$PROJECT_DIR")"
+# mount root (= 5-repo 가 직접 놓인 디렉터리) robust 탐지.
+# 부모 mount root CLAUDE.md §3 진입 paradigm 2 영역 정합:
+#   §3.1 자식 단독 진입  → PROJECT_DIR = <mount>/<child> · 5-repo = dirname(PROJECT_DIR) 하위
+#   §3.2 부모 mount 진입  → PROJECT_DIR = <mount> 자체    · 5-repo = PROJECT_DIR 하위
+# claude-cli-master 존재 위치로 분기 (= dirname-only 가정이 §3.2 측 5-repo 전부 MISSING 산출하던 결함 정정).
+if [ -d "$PROJECT_DIR/claude-cli-master/.git" ]; then
+  PARENT_DIR="$PROJECT_DIR"
+else
+  PARENT_DIR="$(dirname "$PROJECT_DIR")"
+fi
 
 REPOS=(
   "claude-cli-master"
