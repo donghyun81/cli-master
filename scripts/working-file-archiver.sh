@@ -51,14 +51,46 @@ extract_frontmatter() {
   ' "$file"
 }
 
-# REVIEW.md PASS 매칭 (정리trigger 의 task ID 검색)
+# 영구 제외 (= 패턴 매칭돼도 archive X · working-file-lifecycle.md §1 제외 정합)
+#   - cowork-handoff-architecture.md = 영구 SoT
+#   - cowork-handoff-active.md       = append SoT (handoff-active-rotate.sh 관할)
+#   - CLAUDE.md / README.md / .gitignore = repo-specific 또는 보호
+is_excluded() {
+  case "$(basename "$1")" in
+    cowork-handoff-architecture.md|cowork-handoff-active.md|CLAUDE.md|README.md|.gitignore) return 0 ;;
+  esac
+  return 1
+}
+
+# REVIEW.md PASS 판정 helper (= legacy inline heading + 표준 '## Verdict' 다음 줄 양식 둘 다 cover)
+review_says_pass() {
+  local rf="$1"
+  [ -f "$rf" ] || return 1
+  # (a) legacy: heading 줄 안 PASS (예: '## ... PASS')
+  grep -qE '^##.*PASS' "$rf" && return 0
+  # (b) 표준 (reporting.md §7): '## Verdict' 다음 첫 비빈 줄 = PASS
+  awk '/^##[[:space:]]*Verdict/{v=1; next} v && NF {print; exit}' "$rf" | grep -qE '^PASS' && return 0
+  return 1
+}
+
+# REVIEW.md PASS 매칭 (= 정리trigger 의 task ID 검색 · repo-local + sibling repo lookup)
+#   sibling lookup = mount root 아래 git repo 별 .ai/reports/ 검색 (= 부모 root sweep 시
+#   master-cycle cc-paste 의 REVIEW(master repo 소재)도 PASS trigger 매칭 가능).
 check_review_pass() {
   local task_id="$1"
-  if [ -z "$task_id" ]; then return 1; fi
-  local review_file="$REPO_ROOT/.ai/reports/$task_id/REVIEW.md"
-  if [ -f "$review_file" ]; then
-    grep -q "^## .*PASS" "$review_file" && return 0
+  [ -z "$task_id" ] && return 1
+  # (1) repo-local
+  review_says_pass "$REPO_ROOT/.ai/reports/$task_id/REVIEW.md" && return 0
+  # (2) sibling repo lookup (mount-root 인지)
+  local mount_root="$REPO_ROOT"
+  if [ ! -d "$REPO_ROOT/claude-cli-master" ] && [ -d "$REPO_ROOT/../claude-cli-master" ]; then
+    mount_root="$(cd "$REPO_ROOT/.." && pwd)"
   fi
+  local d
+  for d in "$mount_root"/*/; do
+    [ -d "${d}.git" ] || continue
+    review_says_pass "${d}.ai/reports/$task_id/REVIEW.md" && return 0
+  done
   return 1
 }
 
@@ -92,7 +124,10 @@ archive_one() {
 # 후보 파일 sweep
 sweep_candidates() {
   # 부모 root / repo root 의 working file
-  for pattern in "cycle-prompt-*.md" "cc-paste-*.md" "*_addendum*.md" "*-addendum-*.md" "*.bak"; do
+  #   기존 5 패턴 + 신 4 패턴 (cowork-handoff-*ENTRY* / cowork-chat-entry-* / ENTRY-PROMPT-* / cc-audit-*)
+  #   ※ cowork-handoff-active.md / cowork-handoff-architecture.md 는 *ENTRY* 패턴 비매칭 + is_excluded 이중 방어
+  for pattern in "cycle-prompt-*.md" "cc-paste-*.md" "*_addendum*.md" "*-addendum-*.md" "*.bak" \
+                 "cowork-handoff-*ENTRY*.md" "cowork-chat-entry-*.md" "ENTRY-PROMPT-*.md" "cc-audit-*.md"; do
     for f in "$REPO_ROOT"/$pattern; do
       [ -e "$f" ] || continue
       [ -f "$f" ] || continue
@@ -112,6 +147,10 @@ sweep_candidates() {
 
 process_candidate() {
   local file="$1"
+  if is_excluded "$file"; then
+    log "skip(excluded): $file"
+    return
+  fi
   local cleanup_trigger=$(extract_frontmatter "$file" "정리trigger")
   local task_id=$(echo "$cleanup_trigger" | grep -oE '[A-Z]+-[A-Z0-9-]+-[0-9]+' | head -1)
   local cycle_id="${task_id:-unknown}"
