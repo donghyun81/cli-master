@@ -170,15 +170,35 @@ variable 측 axis 별 cross-product value assignment 가능 (= `typography.body.
 
 자식 repo (= GB / GD / GT) 측 Compose Theme 측 multi-axis 정합:
 
+foundation `GentlyTheme` (= `app-foundation/core/designsystem/.../theme/GentlyTheme.kt`) 는 resolved 값을 **주입받는** no-default 시그니처 default (= 기본값 X · 주입 컴파일 강제 · 정체성 색·폰트 단일 source = 각 자식 default):
+
 ```kotlin
+// foundation 실 시그니처 — colorScheme + typography no-default 주입
 @Composable
 fun GentlyTheme(
-    darkMode: Boolean = isSystemInDarkTheme(),
-    spacingDensity: SpacingDensity = SpacingDensity.Default,
-    windowSize: WindowSizeClass,
-    content: @Composable () -> Unit
+    colorScheme: ColorScheme,   // no-default · 주입 의무
+    typography: Typography,      // no-default · 주입 의무
+    content: @Composable () -> Unit,
 ) {
-    val colorScheme = if (darkMode) DarkColorScheme else LightColorScheme
+    MaterialTheme(
+        colorScheme = colorScheme,
+        typography = typography,
+        content = content,
+    )
+}
+```
+
+multi-axis (= mode + spacing + device/window 축) 해소 = **caller(per-child 래퍼 `<Child>Theme.kt`) + CompositionLocal provider 측 paradigm** default (= 설계의도 · 현 시점 일부 미구현 영역). foundation `GentlyTheme` 는 내부 도출 X · resolved 값 주입받음 default. mode axis (= `darkMode → colorScheme`) 는 현 per-child 래퍼에서 해소 (= `pencil-theme-multi-axis.md §4.1` 정합) · spacing density (`spacingDensity`) + window size (`windowSize.widthSizeClass`) 축은 caller 가 resolve 후 `CompositionLocalProvider` 로 제공하는 설계의도 default:
+
+```kotlin
+// 설계의도(일부 미구현) — caller(per-child 래퍼) 측 multi-axis 해소 paradigm
+@Composable
+fun <Child>Theme(
+    darkTheme: Boolean = isSystemInDarkTheme(),
+    spacingDensity: SpacingDensity = SpacingDensity.Default,   // 설계의도 축
+    windowSize: WindowSizeClass,                                // 설계의도 축
+    content: @Composable () -> Unit,
+) {
     val spacing = when (spacingDensity) {
         SpacingDensity.Compact -> CompactSpacing
         SpacingDensity.Default -> DefaultSpacing
@@ -189,16 +209,14 @@ fun GentlyTheme(
         WindowWidthSizeClass.Medium -> TabletTypography
         else -> DesktopTypography
     }
-
     CompositionLocalProvider(
         LocalGentlySpacing provides spacing,
-        LocalDeviceClass provides windowSize.widthSizeClass.toDeviceClass()
+        LocalDeviceClass provides windowSize.widthSizeClass.toDeviceClass(),
     ) {
-        MaterialTheme(
-            colorScheme = colorScheme,
+        GentlyTheme(
+            colorScheme = if (darkTheme) <Child>DarkColorScheme else <Child>LightColorScheme,
             typography = typography,
-            shapes = GentlyShapes,
-            content = content
+            content = content,
         )
     }
 }

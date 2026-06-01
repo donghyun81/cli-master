@@ -130,23 +130,38 @@ document-scope theme 측 override default · 본 frame children 측 `mode: "dark
 
 ### 4.1 mode axis ↔ Compose `colorScheme`
 
+foundation `GentlyTheme` 는 resolved 값을 **주입받는** no-default 시그니처 default (= foundation `core/designsystem/.../theme/GentlyTheme.kt` 실 시그니처 정합). mode axis (= `darkMode → colorScheme`) 해소 + typography 선택 = **per-child 래퍼(`<Child>Theme.kt`)** 측에서 수행 default (= foundation 측 내부 도출 X · 정체성 색·폰트 단일 source = 각 자식 default).
+
 ```kotlin
+// foundation core/designsystem/.../theme/GentlyTheme.kt — no-default 주입 (= 기본값 X · 주입 컴파일 강제)
 @Composable
 fun GentlyTheme(
-    darkMode: Boolean = isSystemInDarkTheme(),
-    content: @Composable () -> Unit
+    colorScheme: ColorScheme,   // no-default · 주입 의무
+    typography: Typography,      // no-default · 주입 의무
+    content: @Composable () -> Unit,
 ) {
-    val colorScheme = if (darkMode) DarkColorScheme else LightColorScheme
     MaterialTheme(
         colorScheme = colorScheme,
-        typography = GentlyTypography,
-        shapes = GentlyShapes,
-        content = content
+        typography = typography,
+        content = content,
+    )
+}
+
+// per-child 래퍼 (= <Child>Theme.kt) 측 mode axis 해소 + typography 주입
+@Composable
+fun GentlyBreathTheme(
+    darkTheme: Boolean = isSystemInDarkTheme(),
+    content: @Composable () -> Unit,
+) {
+    GentlyTheme(
+        colorScheme = if (darkTheme) GentlyBreathDarkColorScheme else GentlyBreathLightColorScheme,
+        typography = GentlyBreathTypography,   // per-child 주입 (= 현 Typography())
+        content = content,
     )
 }
 ```
 
-Pencil `mode: "light"` / `mode: "dark"` ↔ Compose `LightColorScheme` / `DarkColorScheme` = 1:1 mapping default.
+Pencil `mode: "light"` / `mode: "dark"` ↔ Compose `<Child>LightColorScheme` / `<Child>DarkColorScheme` = 1:1 mapping default. 본 mode axis 해소 = caller(per-child 래퍼) 측 default (= foundation `GentlyTheme` 는 resolved colorScheme 주입받음).
 
 ### 4.2 spacing axis ↔ Compose `LocalDensity` + 사용자 설정
 
