@@ -180,6 +180,7 @@
 - 2026-05-31 · RULE-ARCH-PHASE2-001 · `code-style-guide.md`(L2) 신설 → §A L2 표(4→5 rule) + §B 구현형/UI-UX형/API-서버형 행에 1행 등록. Phase 1 commit `5cb9cdd` 후속. §C: 하드 규칙 3 채택(nullability · visibility · concurrency 노출) + 식별자 case 후퇴 + scope function 가이드라인 + 4 후보 탈락(원칙 4). §B 행 6(CLI 운영)은 제외 — L2 Kotlin 스타일은 bash/md cli-infra ops 에서 로드되지 않음(일관성).
 - 2026-05-31 · RULE-ARCH-PHASE3-001 · SSOT 5건 dedup(중복 본문 → canonical pointer · 정보 손실 0) + §G SSOT ownership map 신설. canonical grow-only merge 2건(MODEL_SEPARATION §2 ← UseCase·I2 내부 의존 / verification-and-review /verify ← native `/verify`). 편집 6 file(workflow-core · KMP_CMP_LAYER_DIRECTION · TDD_WORKFLOW · SSOT_PRINCIPLES · reviewer · 본 색인). 진입 HEAD `7277a6d`(Phase 2 step-0 commit). 보호 5종 무변동.
 - 2026-05-31 · RULE-ARCH-PHASE4-001 · §H consult·enforce·amend 워크플로우 연결 신설 + `workflow-core.md`(intake/implement consult 1줄씩) + `code-style-guide.md`(editorconfig advisory + L2 enforcement=warn) wiring. 최소 wiring(추가만 · 기존 본문 삭제 0). RULE-ARCH 프로그램 마지막 master cycle. Phase 3 commit `31837ad` 후속.
+- 2026-06-01 · MASTER-CLI-GUIDANCE-ROUTING-001 · §I 행동→지침(docs) 라우팅 신설(§H 뒤 · pointer only · 7행 표). 비-rule process/workflow/template 지침(DOC_GOVERNANCE/DOC_TASK_TYPES/REPO_FIRST_INTAKE/COMMIT_CONVENTION/DEPENDENCY_DECISION_CHECKLIST/ADR_TEMPLATE/PROPAGATION_PARAMETERS/PROMPTFIT_RUBRIC/templates 8)을 행동 시점 behavior-routed 로 표면화(GAP-2 docs 판). 대상 docs 실존 disk 검증 PASS · 지침 본문 복제 0 · 기존 §A~§H 무변경 · 보호 5종 무접촉. 진입 HEAD `b2a138e`.
 
 ---
 
@@ -210,3 +211,21 @@
 | **개선 (amend)** | 색인·가이드 미커버 또는 충돌 발견 시 | `cycle-discipline.md §18`(분기 review) + `§19`(stop-reflect self-improving) + `automation-policy.md §1.2`(calibration) + cowork memory `project_cli_infra_rule_candidates` + 본 색인 §C/§D deviation |
 
 > enforce = warn default 본심: advisory + 기존 warn hook 으로 강제하고 blocking gate 는 신설하지 않는다. 빌드 강제화(ktlint warn-gate 등)는 별 후보 cycle(`MASTER-CLI-KTLINT-WARN-GATE-NNN`).
+
+---
+
+## §I. 행동 → 지침(docs) 라우팅 (= 비-rule 지침 behavior 표면화 · MASTER-CLI-GUIDANCE-ROUTING-001)
+
+> §B 는 행동→**rule** 라우팅. 본 §I 는 행동→**지침(docs/agent/** + templates)** 라우팅 — rule 이 아닌 process/workflow/template 지침을 행동 시점에 표면화한다. architecture 지침(13)은 §A L2 pointer + §G SSOT map 으로 이미 라우팅되므로 본 표는 **비-architecture 지침** 한정. pointer only(본문은 각 docs 단일 SoT).
+
+| 행동(지침 작업) | 의무 로드 지침 | 위치 |
+|---|---|---|
+| 문서/지침 작성·수정·드리프트 감사 | `DOC_GOVERNANCE_WORKFLOW` + `DOC_TASK_TYPES` + `REPO_FIRST_INTAKE_WORKFLOW` | `docs/agent/process/` |
+| commit 메시지 작성 | `COMMIT_CONVENTION` | `docs/agent/process/` |
+| 신규 의존성 추가(libs.versions.toml) | `DEPENDENCY_DECISION_CHECKLIST`(8항목) | `docs/agent/architecture/` |
+| 아키텍처 결정 기록 | `ADR_TEMPLATE` | `docs/agent/architecture/` |
+| cli infra propagation | `PROPAGATION_PARAMETERS` + master `CLAUDE.md §5` | `docs/agent/architecture/` |
+| prompt/산출물 품질 점검 | `PROMPTFIT_RUBRIC` | `docs/agent/solutions/` |
+| 신 도메인 산출물 작성 | 해당 `*.template.md`(api-spec / data-model / screen-flow / setup-guide / billing / release-checklist / ai-prompt-guide / pencil-dev-prompt) | `docs/templates/` |
+
+> architecture 13 지침(Model/Error/Testability/TDD/KOIN/Compose/COMMON_ARCH/SSOT_PRINCIPLES/LEGACY 등)은 §A L2 pointer + §C deviation + §G SSOT map 에 이미 routed — 본 §I 중복 등록 X(원칙 1). 자식 repo-local 지침(implementation-guide / setup / plan 등)은 자식 `CLAUDE.md` + `DOC_GOVERNANCE_WORKFLOW` 관할(별 영역).
