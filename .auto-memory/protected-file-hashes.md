@@ -75,7 +75,7 @@ bash scripts/verify-sync.sh
 | `.claude/rules/allowed-acronyms.md` | `83b092e21f07a418385470bbefce8ab5bb468f4c39751c6c457bf0e97c4da716` | 허용 표준 약어 SoT |
 | `.claude/rules/forbidden-abbreviations.md` | `82519940f655d114c88184429f7efc934a0844785f4f17145b29b581162e153a` | 금지 약어 seed list SoT |
 | `.claude/hooks/check-abbreviation.sh` | `98d0a023a90fe2d614fde796056896087c5c7fc39ea5ded445d314b2f2f37a23` | PreToolUse Edit|Write hook |
-| `.claude/settings.json` | `c777a494d5e70ddb95958a8761ab03affd81827763bed0249d7685552b61d9f9` | settings (PreToolUse 갱신) |
+| `.claude/settings.json` | `549b142d8937c76ebbed9a8a461ddf8ece652beb94b985a4e5ba64402a19c836` | settings · **MASTER-CLI-CONTEXT-OPT-FOLLOWUP-CLEANUP-001 record resync** (이전 `c777a494…` = 78fc97f InstructionsLoaded hook 등록 이후 record stale · live 5-repo byte-identical + `baseline-snapshot/latest.json settingsSha` 정합 = 무단 drift 아님 · settings.json 본문 무접촉) |
 
 4-repo byte-identical: master 77ca613 · GB 628245f · GD 3a5b4ca · GT f4501d5
 보호 파일 5종 sha 변동: 0 (cli infra 권장 파일 5종만 신설)
