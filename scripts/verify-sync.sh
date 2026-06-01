@@ -214,20 +214,54 @@ echo "  DRIFT: $DRIFT_COUNT (자식 sha ≠ master)"
 echo "  MISS:  $MISS_COUNT (자식 부재 또는 repo 부재)"
 echo "═══════════════════════════════════════════════════════"
 
-# === propagation-status.md 자동 갱신 ===
+# === propagation-status.md 자동 갱신 (= live sha 매트릭스 + Last verify-sync footer 재생성) ===
+# Phase C (MASTER-CLI-POSTCYCLE-AUTOMATION-001): 수기 sha 표 = 영구 stale 원인 →
+#   verify-sync 가 보호 5 + 핵심 cli infra 매트릭스를 live sha 로 재생성 (= 자동 footer + 자동 매트릭스 = 단일 진실).
+#   auto-region = AUTO_MARKER 부터 EOF (수기 본문은 marker 위 = 무접촉).
 if [ "$NO_UPDATE" = 0 ] && [ "$QUICK" = 0 ]; then
   STATUS_FILE="$MASTER_DIR/.auto-memory/propagation-status.md"
   TS=$(date '+%Y-%m-%dT%H:%M:%S%z')
+  AUTO_MARKER="## Auto-generated (verify-sync · live · 직접 편집 금지)"
+  BT='`'
 
-  # 기존 파일 백업 후 자동 검증 timestamp + 결과 박음
   if [ -f "$STATUS_FILE" ]; then
-    # 마지막 "Last verify-sync" 섹션 찾아서 갱신, 없으면 append
-    if grep -q "^## Last verify-sync" "$STATUS_FILE"; then
-      # in-place edit (sed)
-      sed -i.bak "/^## Last verify-sync/,$ d" "$STATUS_FILE"
-      rm -f "${STATUS_FILE}.bak" 2>/dev/null
+    # --- live 매트릭스 rows 빌드 (보호 5 + 핵심 cli infra) ---
+    MATRIX_ROWS=""
+    for f in "${PROTECTED[@]}" "${CORE_CLI[@]}"; do
+      MSHA=$(shasum -a 256 "$MASTER_DIR/$f" 2>/dev/null | awk '{print substr($1,1,12)}')
+      [ -z "$MSHA" ] && continue
+      ROW="| ${BT}${f}${BT} | ${BT}${MSHA}${BT} |"
+      for repo in $TARGET_LIST; do
+        DSHA=$(shasum -a 256 "$PARENT_DIR/$repo/$f" 2>/dev/null | awk '{print substr($1,1,12)}')
+        if [ -z "$DSHA" ]; then CELL="MISS"
+        elif [ "$DSHA" = "$MSHA" ]; then CELL="✓"
+        else CELL="${BT}${DSHA}${BT}✗"; fi
+        ROW="$ROW $CELL |"
+      done
+      MATRIX_ROWS="${MATRIX_ROWS}${ROW}\n"
+    done
+    COLHDR="| 파일 | master sha (12) |"; COLSEP="|---|---|"
+    for repo in $TARGET_LIST; do COLHDR="$COLHDR $repo |"; COLSEP="$COLSEP---|"; done
+
+    # --- auto-region 삭제 (신 marker 우선 · 없으면 legacy footer fallback) ---
+    if grep -qF "$AUTO_MARKER" "$STATUS_FILE"; then
+      sed -i.bak "/^## Auto-generated (verify-sync/,$ d" "$STATUS_FILE"; rm -f "${STATUS_FILE}.bak" 2>/dev/null
+    elif grep -q "^## Last verify-sync" "$STATUS_FILE"; then
+      sed -i.bak "/^## Last verify-sync/,$ d" "$STATUS_FILE"; rm -f "${STATUS_FILE}.bak" 2>/dev/null
     fi
+
+    # --- auto-region append (marker + live 매트릭스 + footer) ---
     {
+      echo "$AUTO_MARKER"
+      echo ""
+      echo "> 본 영역 = ${BT}verify-sync.sh${BT} 매 실행 시 live sha 재생성. 수기 편집 금지 (= 영구 stale 차단)."
+      echo "> targets: $(echo $TARGET_LIST | xargs)"
+      echo ""
+      echo "### 보호 5 + 핵심 cli infra sha 매트릭스 (live)"
+      echo ""
+      echo "$COLHDR"
+      echo "$COLSEP"
+      printf "%b" "$MATRIX_ROWS"
       echo ""
       echo "## Last verify-sync"
       echo ""
@@ -243,8 +277,26 @@ if [ "$NO_UPDATE" = 0 ] && [ "$QUICK" = 0 ]; then
         printf "%b" "$DRIFT_DETAILS" | sed 's/^/- /'
       fi
     } >> "$STATUS_FILE"
-    echo "[verify-sync] propagation-status.md 갱신 박음"
+    echo "[verify-sync] propagation-status.md 갱신 박음 (live 매트릭스 + footer)"
   fi
+fi
+
+# === 상태문서 부재 참조 WARN (= drift 재발 감지 · --no-update 에서도 실행) ===
+# 두 상태문서가 인용하는 repo-relative file path 존재 검증 → 부재 시 stderr WARN.
+STATUS_DOCS="$MASTER_DIR/.auto-memory/protected-file-hashes.md $MASTER_DIR/.auto-memory/propagation-status.md"
+REF_MISSING=""
+for doc in $STATUS_DOCS; do
+  [ -f "$doc" ] || continue
+  for path in $(grep -oE '`(\.claude|docs|scripts|\.auto-memory|\.ai)/[A-Za-z0-9._/-]+\.(md|json|sh|sql|toml|kt|py)`' "$doc" | tr -d '`' | sort -u); do
+    [ -e "$MASTER_DIR/$path" ] || REF_MISSING="${REF_MISSING}  - $path (in $(basename "$doc"))\n"
+  done
+done
+if [ -n "$REF_MISSING" ]; then
+  echo "" >&2
+  echo "[verify-sync] ⚠ 상태문서 부재 참조 (= stale ref · drift 재발 신호):" >&2
+  printf "%b" "$REF_MISSING" | sort -u >&2
+  echo "  → 정정: 해당 .auto-memory 상태문서 본문 갱신 (master cycle)" >&2
+  echo "" >&2
 fi
 
 if [ $((DRIFT_COUNT+MISS_COUNT)) -gt 0 ]; then
