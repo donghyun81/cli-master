@@ -188,7 +188,7 @@
 
 ## §G. SSOT ownership map (= 동일 사실의 단일 canonical · RULE-ARCH-PHASE3-001)
 
-> 같은 사실이 여러 file 에 중복되던 5건을 단일 canonical 로 확정하고 과거 중복측을 pointer 로 후퇴시켰다. 사실 → canonical(소유) → 과거 중복측(now pointer). 새 중복 발견 시 canonical 로 merge(grow-only) 후 pointer(§D amend loop 정합).
+> 같은 사실이 여러 file 에 중복되던 6건을 단일 canonical 로 확정하고 과거 중복측을 pointer 로 후퇴시켰다. 사실 → canonical(소유) → 과거 중복측(now pointer). 새 중복 발견 시 canonical 로 merge(grow-only) 후 pointer(§D amend loop 정합).
 
 | # | 사실 | canonical (소유) | 과거 중복측 (now pointer) |
 |---|---|---|---|
@@ -197,6 +197,7 @@
 | 3 | 운영↔제품 레이어 경계 | `docs/agent/architecture/COMMON_ARCHITECTURE.md §1` | `SSOT_PRINCIPLES.md §4` (경계 정의분만 · SSOT/drift framing 고유 보존) |
 | 4 | /verify · /review 규칙 | `.claude/rules/verification-and-review.md` | `workflow-core.md` §/verify·§/review (hub 1줄 + pointer) |
 | 5 | 코드 리뷰 12-section 체크리스트 | `.claude/rules/verification-and-review.md` §"12-section 체크리스트" | `reviewer.md` Expected outputs (→ pointer + 역할 고유 보존) · `code-principles.md §4` (기존 pointer 유지) |
+| 6 | SoftBudget (Risk별 LOC budget 200/120/60) + Risk 기반 산출물 경량화 | `.claude/rules/workflow-core.md §implement` | `mode-system.md` M1 Verification policy + §7 (→ pointer · 이전 `code-principles.md §SoftBudget` = 부재 § stale pointer 정정 · MASTER-CLI-CONTEXT-OPT-PHASE4-SSOT-SWEEP-METRICS-001) |
 
 > 형식 vs 기준 분리: REVIEW.md 채우는 **형식 스키마** SoT = `reporting.md §7` · **체크리스트(판정 기준 + 블로커)** SoT = `verification-and-review.md`. 둘은 별개 canonical.
 

@@ -21,7 +21,7 @@
 
 - **Purpose**: production 안정성 목표 + 도메인별 준비도 기반 단계적 활성화 default
 - **Method defaults**: TDD + Clean Arch + SOLID + DependencyDecision 8 + Fake first + Repository pattern + UseCase boundary default
-- **Verification policy**: Risk 별 차등 default (= Low ≤ 200 LOC 3-section / Medium ≤ 120 LOC 10/12-section / High ≤ 60 LOC + 독립 reviewer default · `code-principles.md §SoftBudget` 정합 default)
+- **Verification policy**: Risk 별 차등 default (= `workflow-core.md §implement` SoftBudget(Risk별 LOC budget) + Risk 기반 산출물 경량화 표 정합 default · Low/Medium/High 별 LOC·섹션·독립 reviewer 본문 = `workflow-core.md` 단일 SoT)
 - **적용 trigger**: 구현 상태 = production-ready 진입 + 도메인 = ACTIVE (= Auth + Billing default) + Pencil → Compose 파이프라인 영역 default
 - **Anti-pattern**: "빠른 hack default" + "테스트 skip default" + "Fake 우회 default" + "DependencyDecision skip default" 발견 시 mode 재선택 signal default
 
@@ -90,7 +90,7 @@
 
 - master `CLAUDE.md §5` (= STOP canonical default · Cycle 1 결과 default)
 - `workflow-core.md §단계 흐름` (= M1 baseline default)
-- `code-principles.md §SoftBudget` (= Verification policy default · Risk-based default)
+- `workflow-core.md §implement` (= SoftBudget + Risk 기반 산출물 경량화 · Verification policy default · Risk-based default)
 - `verification-and-review.md §에러 유형별 복구 경로` (= L1-7 recovery sub-case 흡수 default)
 - `deferred-domains.md` (= M2 cold default · UNKNOWN → ACTIVE trigger default)
 - `safety-and-secrets.md §비가역 변경 STOP 정책` (= M3 trigger default · Cycle 1 마감 후 pointer 영역 default)
