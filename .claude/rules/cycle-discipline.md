@@ -416,6 +416,7 @@ cli infra 수정 필요?
 | `.claude/settings.json` deny list + hook 등록 영역 정합 | 새 hook 누락 / deprecated hook 잔존 검토 |
 | `.auto-memory/protected-file-hashes.md` baseline | 5 보호 file sha 정합 |
 | 직전 분기 incident-log entry 누적 추세 | 동일 패러다임 사고 3+ 누적 = 신 rule 신설 후보 |
+| `.auto-memory/context-health-metrics.md` 지표 (= context-opt 회귀 방지) | 항상로드 char(5-repo별 · parent/master/L0 kernel/자식) + 환각 패턴 수(stale_pointer / conflicting_sot / buried_ratio) 분기 재측정 + trajectory append (= `MASTER-CLI-CONTEXT-OPT-FOLLOWUP-CLEANUP-001` wiring) |
 
 **cycle 산출**: lightweight 4 file (§11 정합) — PLAN.md / VERIFY.md / REVIEW.md / TODO.md. 보고서 측 `[Diff]` 영역 0 인 경우 = "cli infra 영역 분기 무사고 PASS" 1 줄 명시.
 
