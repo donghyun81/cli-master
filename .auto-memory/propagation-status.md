@@ -175,7 +175,7 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 | `.claude/rules/cycle-discipline.md` | `88f0565b2a4b` | ✓ | ✓ | ✓ | ✓ |
 | `.claude/rules/pencil-automation.md` | `aedb79780211` | ✓ | ✓ | ✓ | ✓ |
 | `.claude/rules/reporting.md` | `f5de353a3b4f` | ✓ | ✓ | ✓ | ✓ |
-| `.claude/rules/routing-and-delegation.md` | `848612d341be` | ✓ | ✓ | ✓ | ✓ |
+| `.claude/rules/routing-and-delegation.md` | `4b3acd696389` | ✓ | ✓ | ✓ | ✓ |
 | `.claude/rules/deferred-domains.md` | `8831715f59bb` | ✓ | ✓ | ✓ | ✓ |
 | `.claude/rules/code-principles.md` | `3876d64a7a9b` | ✓ | ✓ | ✓ | ✓ |
 | `.claude/rules/design-to-code-sync.md` | `b0c799785c04` | ✓ | ✓ | ✓ | ✓ |
@@ -191,8 +191,8 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 
 ## Last verify-sync
 
-- timestamp: 2026-06-02T00:36:26+0900
-- pass: 158
+- timestamp: 2026-06-02T12:07:21+0900
+- pass: 159
 - drift: 0
 - miss: 0
 - exit: 0
