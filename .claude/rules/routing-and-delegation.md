@@ -47,7 +47,7 @@ intake-router는 키워드 분류기가 아니다 — **어떤 전문 판단이 
 | [DEFERRED] 데이터 보존, 마이그레이션 위험 | data-schema-guardian | `.claude/agents/deferred/data-schema-guardian.md` |
 | 인증/PII/시크릿 노출 | auth-security-privacy | `.claude/agents/active/auth-security-privacy.md` |
 | [DEFERRED] ANR/메모리/Rate limit 위험 | performance-reliability-engineer | `.claude/agents/deferred/performance-reliability-engineer.md` |
-| [DEFERRED] 테스트 커버리지 공백, 회귀 위험 | test-strategist | `.claude/agents/deferred/test-strategist.md` |
+| 테스트 ROI 우선순위, 여러 경우 완전성, 회귀 위험 | test-strategist | `.claude/agents/active/test-strategist.md` |
 | [DEFERRED] 관측성, 로그 안전, 크래시 추적 | observability-ops-analyst | `.claude/agents/deferred/observability-ops-analyst.md` |
 | [DEFERRED] 배포 위험, 롤백 전략 | release-risk-manager | `.claude/agents/deferred/release-risk-manager.md` |
 <!-- propagation: repo-only -->
@@ -107,7 +107,6 @@ intake-router는 키워드 분류기가 아니다 — **어떤 전문 판단이 
 - backend-api-architect — API 연동 시작 시
 - data-schema-guardian — Room DB 도입 시
 - performance-reliability-engineer — 성능 정책 정의 시
-- test-strategist — 테스트 프레임워크 설정 완료 시
 - observability-ops-analyst — 옵저버빌리티 설정 시
 - release-risk-manager — 첫 릴리스 빌드 준비 시
 

@@ -45,3 +45,15 @@ disable-model-invocation: true
 - master 안에서만 작동 (자식 repo 에서 호출 시 STOP)
 - 보호 파일 sha 변경 cycle 시 추가 의무 발화 (commit body `[Sha]` 새 sha 명시 확인)
 - propagation 중 자식 repo 가 dirty 이면 STOP + Coin 결정 의무
+
+## 테스트 health 신호 (warn · 비블로커)
+
+해당 cycle 이 자식 repo 의 테스트 코드(`*Test.kt`)를 건드린 경우, 보고 끝에 테스트 health 1줄을 표면화한다(= test drift 조기 감지 · `docs/agent/architecture/TESTING_STRATEGY.md` §10):
+
+- 테스트 파일 수 변화 · `@Ignore`/`@Disabled` 누적 수 · 실패 수
+
+```
+[TEST-HEALTH] *Test.kt N개(Δ+M) · @Ignore K개 · 실패 0   (warn · 비블로커)
+```
+
+enforce=warn (= `code-style-guide.md §A` 정합 · 차단/수치 게이트 신설 X). 본 cycle(cli infra propagation)처럼 테스트 코드 무접촉이면 `N/A (no test touch)` 1줄. product-code 검증 path(`/verify`)에서도 동일 신호 산출 가능.

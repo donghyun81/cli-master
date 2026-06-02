@@ -28,7 +28,7 @@
 | data-schema-guardian | `.claude/agents/deferred/data-schema-guardian.md` | DBMig 판정, 데이터 보존 |
 | auth-security-privacy | `.claude/agents/active/auth-security-privacy.md` | 인증/PII/시크릿 위험 |
 | performance-reliability-engineer | `.claude/agents/deferred/performance-reliability-engineer.md` | ANR/메모리/Rate limit |
-| test-strategist | `.claude/agents/deferred/test-strategist.md` | 테스트 커버리지 공백 |
+| test-strategist | `.claude/agents/active/test-strategist.md` | 테스트 ROI 우선순위·여러 경우 완전성·피라미드 적정성·회귀 위험 (SoT `TESTING_STRATEGY.md`) |
 | observability-ops-analyst | `.claude/agents/deferred/observability-ops-analyst.md` | 관측성, PII 로그 |
 | release-risk-manager | `.claude/agents/deferred/release-risk-manager.md` | 배포 위험, 롤백 전략 |
 

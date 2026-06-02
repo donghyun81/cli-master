@@ -75,7 +75,7 @@
 | [`design-to-code-sync.md`](./design-to-code-sync.md) | Design SoT → Code 단방향 sync 도구 무관 패턴(5-type / Output Checklist) |
 | [`design-prompting-paradigm.md`](./design-prompting-paradigm.md) | design 도구 agent prompt 4원칙(measurable / context / reference / iterative) |
 
-> L2 인접 docs pointer(본문 X · 인용만): `KMP_CMP_LAYER_DIRECTION` · `MODEL_SEPARATION` · `ERROR_RESULT_POLICY` · `TESTABILITY_SEAMS` · `TDD_WORKFLOW` · `KOIN_DI_BASELINE` · `COMPOSE_STABILITY` — 각 자식 `docs/agent/architecture/**` 측 실본문. 본 색인은 가리키기만 한다.
+> L2 인접 docs pointer(본문 X · 인용만): `KMP_CMP_LAYER_DIRECTION` · `MODEL_SEPARATION` · `ERROR_RESULT_POLICY` · `TESTABILITY_SEAMS` · `TDD_WORKFLOW` · `TESTING_STRATEGY` · `KOIN_DI_BASELINE` · `COMPOSE_STABILITY` — 각 자식 `docs/agent/architecture/**` 측 실본문. 본 색인은 가리키기만 한다. 테스트 3 docs 분담: `TDD_WORKFLOW`(언제 의무) · `TESTABILITY_SEAMS`(어떻게 가능) · `TESTING_STRATEGY`(무엇을 ROI 순·여러 케이스·지속 유지).
 
 ### L3 — 도메인·팀 (키워드 trigger 시 · 18 rule)
 
@@ -127,9 +127,9 @@
 
 | Reading Mode (행동) | 의무 로드(L0 항상 +) |
 |---|---|
-| **1. 구현형** (code-level) | L1: `workflow-core` · `cycle-discipline` · `verification-and-review` · `reporting` · `routing-and-delegation` · `legacy-cleanup-governance` · `mode-system`(M1/M3) · `libs-versions-cross-verify`(의존성 변경 시) / L2: `code-style-guide`(진입점) · `code-principles` · `abbreviation-policy` / L3: 키워드 시 도메인 정책(`auth-rules`·`billing-rules`·`supabase-handling`·`deferred-domains`) |
-| **2. UI-UX형** | L1: `workflow-core` · `cycle-discipline` · `verification-and-review` · `reporting` / L2: `code-style-guide` · `design-to-code-sync` · `design-prompting-paradigm` · `code-principles` / L3: `ui-ux-analysis` · `ux-laws` · `uiux-sot-refresh`(보호) · `sot-code-name-map` + Pencil 사용 시 `pencil-uiux-workflow`(보호) 및 관련 Pencil cluster |
-| **3. API-서버형** | L1: `workflow-core` · `cycle-discipline` · `verification-and-review` · `reporting` / L2: `code-style-guide` · `code-principles` / L3: `supabase-handling` · `auth-rules` · `billing-rules` · `deferred-domains`(Backend/Data STOP) |
+| **1. 구현형** (code-level) | L1: `workflow-core` · `cycle-discipline` · `verification-and-review` · `reporting` · `routing-and-delegation` · `legacy-cleanup-governance` · `mode-system`(M1/M3) · `libs-versions-cross-verify`(의존성 변경 시) / L2: `code-style-guide`(진입점) · `code-principles` · `abbreviation-policy` · 테스트 시 `TESTING_STRATEGY`(ROI·multi-case·피라미드)+`TDD_WORKFLOW`+`TESTABILITY_SEAMS` / L3: 키워드 시 도메인 정책(`auth-rules`·`billing-rules`·`supabase-handling`·`deferred-domains`) |
+| **2. UI-UX형** | L1: `workflow-core` · `cycle-discipline` · `verification-and-review` · `reporting` / L2: `code-style-guide` · `design-to-code-sync` · `design-prompting-paradigm` · `code-principles` · 테스트 시 `TESTING_STRATEGY`(UI = Compose UI test/Roborazzi e2e 층) / L3: `ui-ux-analysis` · `ux-laws` · `uiux-sot-refresh`(보호) · `sot-code-name-map` + Pencil 사용 시 `pencil-uiux-workflow`(보호) 및 관련 Pencil cluster |
+| **3. API-서버형** | L1: `workflow-core` · `cycle-discipline` · `verification-and-review` · `reporting` / L2: `code-style-guide` · `code-principles` · 테스트 시 `TESTING_STRATEGY`(Backend/Data = high-ROI · Repository+Fake/EF 계약) / L3: `supabase-handling` · `auth-rules` · `billing-rules` · `deferred-domains`(Backend/Data STOP) |
 | **4. 빌드-릴리즈형** | L1: `cycle-discipline`(§13 환경 정합) · `libs-versions-cross-verify` · `launch-status-auto-sync` · `verification-and-review` · `reporting` · `working-file-lifecycle` |
 | **5. 정책-계획 점검형** | L1: `workflow-core` · `cycle-discipline` · `mode-system` · `automation-policy` · `plugin-policy` · `recommended-option-disk-verification` · `paste-authoring-disk-verification` · `terminology` · `text-degeneration-prevention` · `architecture-foundation-link-policy` · `reporting` |
 | **6. CLI 운영 레이어형** (cli-ops · M5) | L0 강조: `cross-repo-parallel-exec`(kernel · 단방향/subscription) · `safety-and-secrets`(보호 path) / L1: `cycle-discipline`(§3·§15) · `mode-system`(M5) · `automation-policy` · `reporting` · `working-file-lifecycle` · `recommended-option-disk-verification` · `paste-authoring-disk-verification` · `text-degeneration-prevention` + **cross-repo 행동 시 `cross-repo-parallel-exec-detail`**(kernel demote 본문) |
@@ -145,7 +145,7 @@
 
 | 행동 | 목표 tag (측정 가능) | deviation 경로 |
 |---|---|---|
-| 1. 구현형 | 모델 분리 위반 0 + 빌드 exit 0 + `## Cleanup Assessment` 기록 존재 | 표준 외 rule 필요 시 PLAN `## 3. ArchitectureImpact` 에 근거 + reviewer 판정 |
+| 1. 구현형 | 모델 분리 위반 0 + 빌드 exit 0 + `## Cleanup Assessment` 기록 존재 + 고위험(Auth/Billing/Data/Backend) 변경 behavior 에 ROI-coverage 테스트 존재(`TESTING_STRATEGY` §5·§10 · review §7 게이트 · enforce=warn) | 표준 외 rule 필요 시 PLAN `## 3. ArchitectureImpact` 에 근거 + reviewer 판정 |
 | 2. UI-UX형 | `.pen` SoT 선행 존재 + theme 밖 hex/sp/dp 하드코딩 0 + REVIEW §B [UX Laws] 채워짐 | `.pen` 부재 = Phase R 진입(`pencil-uiux-workflow §3 Type 3`) 또는 STOP |
 | 3. API-서버형 | secret 평문 0 + Edge Function 단일 진입점 + RLS role별 SELECT 검증 | production push/RLS 첫 적용 = 사용자 명시 승인(`supabase-handling §3`) |
 | 4. 빌드-릴리즈형 | libs 3-source mismatch 0 + LAUNCH-STATUS HEAD 정합 + production push 승인 존재 | 검증 명령 불가 = `UNKNOWN(사유)` + STOP(`verification-and-review`) |
@@ -183,6 +183,7 @@
 - 2026-05-31 · RULE-ARCH-PHASE4-001 · §H consult·enforce·amend 워크플로우 연결 신설 + `workflow-core.md`(intake/implement consult 1줄씩) + `code-style-guide.md`(editorconfig advisory + L2 enforcement=warn) wiring. 최소 wiring(추가만 · 기존 본문 삭제 0). RULE-ARCH 프로그램 마지막 master cycle. Phase 3 commit `31837ad` 후속.
 - 2026-06-01 · MASTER-CLI-GUIDANCE-ROUTING-001 · §I 행동→지침(docs) 라우팅 신설(§H 뒤 · pointer only · 7행 표). 비-rule process/workflow/template 지침(DOC_GOVERNANCE/DOC_TASK_TYPES/REPO_FIRST_INTAKE/COMMIT_CONVENTION/DEPENDENCY_DECISION_CHECKLIST/ADR_TEMPLATE/PROPAGATION_PARAMETERS/PROMPTFIT_RUBRIC/templates 8)을 행동 시점 behavior-routed 로 표면화(GAP-2 docs 판). 대상 docs 실존 disk 검증 PASS · 지침 본문 복제 0 · 기존 §A~§H 무변경 · 보호 5종 무접촉. 진입 HEAD `b2a138e`.
 - 2026-06-01 · MASTER-CLI-CONTEXT-OPT-PHASE3-L0-CHILD-DEDUP-001 · (H4) §A L0 `cross-repo-parallel-exec.md` = kernel 표기(subscription/단방향/영역 요약 잔류) + L1 `cross-repo-parallel-exec-detail.md` 신설 등록(17→18 rule · 43→44 · 색인 자신 포함 45) + §B Reading Mode 6 cross-repo 행동 시 detail 로드. L0 always-load 본문 demote(삭제 0 · 18.2K→kernel 8.2K + detail 12.6K). 보호 5종 무접촉.
+- 2026-06-01 · MASTER-CLI-TESTING-STRATEGY-001 · 테스트 전략 layer 배선. §A L2 pointer 줄에 `TESTING_STRATEGY` 추가(테스트 3 docs 분담 1줄: TDD_WORKFLOW=언제 / TESTABILITY_SEAMS=어떻게 / TESTING_STRATEGY=무엇을 ROI 순·여러 케이스·지속 유지) + §B 구현형/UI-UX형/API-서버형 3행 L2 에 `TESTING_STRATEGY` 테스트 pointer 추가 + §C 구현형 GSM 에 "고위험 변경 ROI-coverage 테스트 존재(enforce=warn)" 목표 1행 보강. 신 본문 0(pointer only · `docs/agent/architecture/TESTING_STRATEGY.md` 단일 SoT) · 기존 §A~§I 행 무삭제 · 보호 5종 무접촉. 동반: `test-strategist` deferred→active 재활성 + review-task §7 ROI/multi-case/피라미드 확장. 5-repo byte-identical propagation.
 
 ---
 

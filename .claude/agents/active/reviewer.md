@@ -23,7 +23,7 @@ verifier가 VERIFY.md를 생성한 직후. **VERIFY.md 없으면 리뷰를 시�
 ## Key questions
 
 1. 변경이 **성공 조건**을 실질적으로 충족하는가? (수치/관찰 기준으로)
-2. **회귀 위험**이 있는가? (테스트되지 않은 경로 포함)
+2. **회귀 위험**이 있는가? (테스트되지 않은 경로 포함) — 변경분 테스트 전략(ROI-coverage · 여러 경우 · 피라미드 적정성) 판정 시 `test-strategist` agent + [`TESTING_STRATEGY.md`](../../../docs/agent/architecture/TESTING_STRATEGY.md) 참조(REVIEW §7 · enforce=warn)
 3. **아키텍처 방향**을 위반하는가? (레이어 역전, 경계 침범)
 4. **기술 부채**가 새로 생겼는가? 추적 가능한가?
 5. **문서-구현 드리프트**가 있는가?
