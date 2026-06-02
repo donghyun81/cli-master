@@ -86,17 +86,28 @@ app/src/main/java/**/*ViewModel*.kt
 
 ## UI 라이브러리 억제 기본값
 
-새 UI 라이브러리는 **기본적으로 억제**한다. 다음 기준을 모두 충족할 때만 도입한다:
+> **본 § = UI 라이브러리 억제 / 직접 구현 우선 정책의 canonical** (= MASTER-CLI-DEPENDENCY-DECISION-RECONCILE-001 · `rule-routing-index.md §G`). `DEPENDENCY_DECISION_CHECKLIST.md §3` · `code-principles.md` §UI 라이브러리 억제 · master `CLAUDE.md §10` 의 UI 억제 본문은 본 §을 가리킨다.
+
+**기본 stance (가장 강한 게이트)**: UI 라이브러리는 **직접 구현 우선 default**. 외부 UI 라이브러리 도입은 **금지 default** 이며, 도입하려면 **사용자(Coin) 명시 승인이 필수**다. 아래 4 기준을 모두 충족하고 사용자 승인을 받은 경우에만 예외적으로 도입한다:
 
 1. **KMP/CMP 호환**: common artifact 또는 platform-shell-only 범위 명시
-2. **DependencyDecision 섹션 작성**: PLAN `## 2. DependencyDecision` 에 8개 항목 기술 필수 (`.claude/rules/workflow-core.md` (DependencyDecision) 참조)
+2. **DependencyDecision 8항 작성**: PLAN `## 2. DependencyDecision` 에 8개 항목 기술 필수 — 8항 본문 canonical = `docs/agent/architecture/DEPENDENCY_DECISION_CHECKLIST.md` (⑧ UI 라이브러리 특별 정당화 게이트 포함)
 3. **기존 Compose 기능으로 불가**: 직접 구현 대비 비용·안전 측면에서 명확히 우위
 4. **UiState 분리 유지**: 새 UI 라이브러리 도입 후에도 UiState 는 domain/data 모델과 분리 상태 유지
 
-특히 보수적 기본값 적용 대상:
-- **차트/그래프 라이브러리**: Compose Canvas 직접 구현이 기본. 라이브러리는 DependencyDecision 필수
-- **애니메이션 라이브러리**: Compose Animation API 기본. 외부 라이브러리는 DependencyDecision 필수
-- **커스텀 UI 컴포넌트 라이브러리**: 기존 Material3 + Compose 기본. 도입 전 직접 구현 먼저 평가
+per-category 보수 기본값:
+
+| 종류 | 기본 정책 |
+|---|---|
+| 차트/그래프 | Compose Canvas 직접 구현이 기본. 라이브러리는 도입 금지 default + ⑧ 정당화 + Coin 승인 |
+| 애니메이션 | Compose Animation API 기본. 외부 라이브러리는 도입 금지 default + ⑧ 정당화 + Coin 승인 |
+| 커스텀 UI 컴포넌트 | Material3 + Compose 기본. 도입 전 직접 구현 먼저 평가. Material3 누락 컴포넌트(예: BottomSheet)는 Compose-Foundation 래퍼 우선 |
+| 이미지 로더 | Coil 우선 (KMP 지원 검증). 다른 라이브러리는 ⑧ 정당화 + Coin 승인 |
+| Markdown 렌더러 | 직접 Composable 구현 우선. 외부 라이브러리는 ⑧ 정당화 + Coin 승인 |
+
+**억제 범위 = UI 레이어 한정 (비대칭)**: 본 억제는 UI 레이어에만 적용되는 추가 overlay 다. 인프라 / 데이터 / cross-cutting 라이브러리(Koin · Retrofit · OkHttp · Kotlinx · Room 등 de facto 표준 = `DEPENDENCY_DECISION_CHECKLIST.md §5` 변동성 경계: network / DB / file system / time / identity / billing / feature flags / platform SDK wrapping)는 막지 않는다 — DependencyDecision 8항 통과 시 허용. 본 canonical 문안을 "모든 라이브러리 금지"로 오독하지 않는다.
+
+**UI vs 인프라 단일 판별 테스트**: 어떤 라이브러리가 **픽셀 / 시각·인터랙션 디자인을 직접 생산·소유**하는가(= UI · 금지 default), 아니면 본인 UI 가 소비하는 **비시각 capability(데이터 · 네트워크 · DI · 영속 · 디코딩)** 를 제공하는가(= 인프라 · 8항 통과 시 허용)로 가른다. 예: Coil 은 이미지 fetch / decode / cache capability 를 제공하고 실제 표시는 본인 Composable 이 하므로 UI 가 아니라 인프라다 — 허용 근거가 된다.
 
 UiState 정책:
 - `UiState` 는 UI 전용 불변 data class다. 네트워크 DTO · DB Entity · DomainModel 과 혼용 금지

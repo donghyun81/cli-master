@@ -62,7 +62,7 @@
 | 지표 | 값 | 근거 |
 |---|---|---|
 | `stale_pointer` | 0 (genuine) | H7(Phase 0) reviewer.md 실존 · figma = 의도 placeholder · SoftBudget→code-principles wrong pointer(Phase 4 정정) |
-| `conflicting_sot` | 1 (defer) | DependencyDecision 8항목 3 framing(workflow-core/code-principles/CHECKLIST) — 억지 merge 회피(§3.2) · 별 reconciliation cycle 후보 |
+| `conflicting_sot` | 0 (actioned) | DependencyDecision 8항 3 framing → `DEPENDENCY_DECISION_CHECKLIST.md` canonical + UI 억제 → `ui-ux-analysis.md` canonical 로 reconcile 마감 (MASTER-CLI-DEPENDENCY-DECISION-RECONCILE-001 · `rule-routing-index §G` row 7+8 · grow-only merge 정보 소실 0) |
 | `master §15 hot entry` | 8 | cold 재배치(Phase 1) 후 hot · ≥ ~10 도달 시 cold 재이전 trigger(`CLAUDE.md §15` note) |
 
 ---
@@ -103,3 +103,4 @@
 
 - 2026-06-01 · MASTER-CLI-CONTEXT-OPT-PHASE4-SSOT-SWEEP-METRICS-001 · 본 file 신설(= 항상로드 char 4 지표 + 환각 패턴 3 지표 정의 + Phase 0~4 trajectory + cadence). H6 sweep = SoftBudget canonical 1건 actioned(§G row 6) + DependencyDecision 1건 defer + 23 footer 보일러플레이트 비-dedup. master only(propagation X).
 - 2026-06-02 · MASTER-CLI-GSM-MEASUREMENT-LAYER-001 · GSM Metric family 재위치(= §0 GSM 귀속 신설 + 헤더 blurb reframe · `gsm-measurement.md §2` context 건강 family 귀속). 기존 2 family(항상로드 char + 환각 패턴) 측정 항목·값 무변경(= 위치/귀속만 GSM 정합 · program-level · 행동 무관). master-only(propagation X 유지).
+- 2026-06-02 · MASTER-CLI-DEPENDENCY-DECISION-RECONCILE-001 · `conflicting_sot` 1(defer)→0(actioned). DependencyDecision 8항 3 framing(workflow-core/code-principles/CHECKLIST) → `DEPENDENCY_DECISION_CHECKLIST.md` canonical + UI 억제 → `ui-ux-analysis.md` canonical 로 reconcile(= `rule-routing-index §G` row 7+8 · grow-only merge · 정보 소실 0 · UI 강도 보존). 지표 정의(§1) 무변경(= 환각 패턴 측정값만 갱신) · master-only(propagation X).

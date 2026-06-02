@@ -186,12 +186,13 @@
 - 2026-06-01 · MASTER-CLI-CONTEXT-OPT-PHASE3-L0-CHILD-DEDUP-001 · (H4) §A L0 `cross-repo-parallel-exec.md` = kernel 표기(subscription/단방향/영역 요약 잔류) + L1 `cross-repo-parallel-exec-detail.md` 신설 등록(17→18 rule · 43→44 · 색인 자신 포함 45) + §B Reading Mode 6 cross-repo 행동 시 detail 로드. L0 always-load 본문 demote(삭제 0 · 18.2K→kernel 8.2K + detail 12.6K). 보호 5종 무접촉.
 - 2026-06-01 · MASTER-CLI-TESTING-STRATEGY-001 · 테스트 전략 layer 배선. §A L2 pointer 줄에 `TESTING_STRATEGY` 추가(테스트 3 docs 분담 1줄: TDD_WORKFLOW=언제 / TESTABILITY_SEAMS=어떻게 / TESTING_STRATEGY=무엇을 ROI 순·여러 케이스·지속 유지) + §B 구현형/UI-UX형/API-서버형 3행 L2 에 `TESTING_STRATEGY` 테스트 pointer 추가 + §C 구현형 GSM 에 "고위험 변경 ROI-coverage 테스트 존재(enforce=warn)" 목표 1행 보강. 신 본문 0(pointer only · `docs/agent/architecture/TESTING_STRATEGY.md` 단일 SoT) · 기존 §A~§I 행 무삭제 · 보호 5종 무접촉. 동반: `test-strategist` deferred→active 재활성 + review-task §7 ROI/multi-case/피라미드 확장. 5-repo byte-identical propagation.
 - 2026-06-02 · MASTER-CLI-GSM-MEASUREMENT-LAYER-001 · GSM 계측 layer canonical 신설 + §C realign. **(§C realign)** 행동 7종 "복합 Goal 체크리스트" → G(의도)/S(관측 신호)/M(정량 지표) 3-tuple 재구성 (= `gsm-measurement.md` form 정합 · 3열→5열 표). **의미·강도 보존**: 모든 게이트(enforce=warn · `TESTING_STRATEGY §5·§10` · review §7) + deviation 경로 + 고위험 ROI-coverage 목표 = M 열 verbatim 보존 (= 형식 GSM 정합 · 약화 0). **(§A 등록 · Phase 3)** L1 표에 `gsm-measurement.md` 1행 추가(18→19 rule) + §0/§A 헤더/§D count reconcile(44→45 rule · §A 헤더 43→45 = pre-existing -1 stale[sub-header 합 44] + 본 cycle +1 · find 실측 정합 · 색인 자신 1 = 46). **(§B)** Mode 6(CLI 운영) L1 에 `gsm-measurement` consult 추가. **(amend 정량 trigger · Phase 4)** §C amend loop 단락에 "N(기본 3) cycle 연속 deviation → amend 후보 승격"(= `gsm-measurement.md §6` · `stop-reflect.sh` 임계 정합) pointer 추가. 신 본문 규약 복제 0(`gsm-measurement.md` 단일 SoT) · 기존 §A~§I 행 무삭제 · 보호 5종 무접촉. 5-repo byte-identical propagation.
+- 2026-06-02 · MASTER-CLI-DEPENDENCY-DECISION-RECONCILE-001 · §G SSOT map +2 row(6→8): **(7)** DependencyDecision 8항 → canonical `DEPENDENCY_DECISION_CHECKLIST.md` (= `code-principles` Android 빌드/보안 축(라이센스·CVE·APK/Bundle·ProGuard/R8·제거 절차·직접구현 LOC) grow-only merge → canonical ②④⑥⑦ 하위 기준 흡수 · workflow-core/code-principles 8항 본문 → pointer · **8 first-class 항 불변**(PLAN 스키마·compound-lint 게이트 정합)) · **(8)** UI 라이브러리 억제 → canonical `ui-ux-analysis.md §UI 라이브러리 억제 기본값` (= 가장 강한 게이트 "직접 구현 우선 default + 외부 UI 라이브러리 도입 금지 default + Coin 승인 필수" 채택 + 비대칭(억제=UI 한정·인프라 8항 허용)/UI-vs-인프라 판별 테스트 신설 + per-category(차트/애니/컴포넌트/이미지/Markdown) 보존 · CHECKLIST §3·code-principles UI·CLAUDE.md §10 → pointer). `conflicting_sot` 1→0(`context-health-metrics.md` master-only). 신 본문 0(canonical merge·pointer only · 정보 소실 0 · UI 강도 보존) · 기존 §A~§I 행 무삭제 · 보호 5종 무접촉. 진입 HEAD `f4691c2`. 5-repo byte-identical propagation(CHECKLIST + workflow-core + code-principles + ui-ux-analysis + rule-routing-index).
 
 ---
 
 ## §G. SSOT ownership map (= 동일 사실의 단일 canonical · RULE-ARCH-PHASE3-001)
 
-> 같은 사실이 여러 file 에 중복되던 6건을 단일 canonical 로 확정하고 과거 중복측을 pointer 로 후퇴시켰다. 사실 → canonical(소유) → 과거 중복측(now pointer). 새 중복 발견 시 canonical 로 merge(grow-only) 후 pointer(§D amend loop 정합).
+> 같은 사실이 여러 file 에 중복되던 8건을 단일 canonical 로 확정하고 과거 중복측을 pointer 로 후퇴시켰다. 사실 → canonical(소유) → 과거 중복측(now pointer). 새 중복 발견 시 canonical 로 merge(grow-only) 후 pointer(§D amend loop 정합).
 
 | # | 사실 | canonical (소유) | 과거 중복측 (now pointer) |
 |---|---|---|---|
@@ -201,6 +202,8 @@
 | 4 | /verify · /review 규칙 | `.claude/rules/verification-and-review.md` | `workflow-core.md` §/verify·§/review (hub 1줄 + pointer) |
 | 5 | 코드 리뷰 12-section 체크리스트 | `.claude/rules/verification-and-review.md` §"12-section 체크리스트" | `reviewer.md` Expected outputs (→ pointer + 역할 고유 보존) · `code-principles.md §4` (기존 pointer 유지) |
 | 6 | SoftBudget (Risk별 LOC budget 200/120/60) + Risk 기반 산출물 경량화 | `.claude/rules/workflow-core.md §implement` | `mode-system.md` M1 Verification policy + §7 (→ pointer · 이전 `code-principles.md §SoftBudget` = 부재 § stale pointer 정정 · MASTER-CLI-CONTEXT-OPT-PHASE4-SSOT-SWEEP-METRICS-001) |
+| 7 | DependencyDecision 8항 (libs.versions.toml 신규 의존성 판정) | `docs/agent/architecture/DEPENDENCY_DECISION_CHECKLIST.md` | `workflow-core.md §신규 의존성 승인` (→ 게이트 REVIEW FAIL·compound-lint 8c·PLAN §2 위치만 + 8항 pointer) · `code-principles.md §신규 의존성 도입 의무` (→ 코드 원칙 맥락 pointer · Android 빌드/보안 축 고유 차원 = canonical ②④⑥⑦ 하위 기준 grow-only 흡수 · 8 first-class 항 불변) |
+| 8 | UI 라이브러리 억제 / 직접 구현 우선 | `.claude/rules/ui-ux-analysis.md §UI 라이브러리 억제 기본값` | `DEPENDENCY_DECISION_CHECKLIST.md §3` (→ pointer · ⑧ 게이트 항만 유지) · `code-principles.md §UI 라이브러리 억제 default` (→ pointer) · master `CLAUDE.md §10` (→ pointer) |
 
 > 형식 vs 기준 분리: REVIEW.md 채우는 **형식 스키마** SoT = `reporting.md §7` · **체크리스트(판정 기준 + 블로커)** SoT = `verification-and-review.md`. 둘은 별개 canonical.
 

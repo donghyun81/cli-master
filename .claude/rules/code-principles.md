@@ -60,25 +60,15 @@
 
 ## 3. 라이브러리 사용 최소화 (의존성 정책)
 
-`CLAUDE.md` §10 + `ui-ux-analysis.md` §UI 라이브러리 억제 명시됨 + 본 §3 강화:
+코드 원칙 관점에서 의존성은 최소화한다 (= §2 DRY/KISS/YAGNI + 직접 구현 우선 정합). 구체 판정 절차의 canonical 은 별 file 이 소유하며 본 §은 코드 원칙 맥락에서 가리킨다.
 
 ### 신규 의존성 도입 의무 (DependencyDecision 8 항목)
 
-PLAN `## 2. DependencyDecision` 에 모두 작성 (`reporting.md` §5 PLAN.md 정규 스키마 명시):
-
-1. 도입 사유 (해결하는 구체 문제)
-2. 직접 구현 비교 (LOC + 유지비)
-3. 라이센스 호환성 + 유지 활성도
-4. 의존성 트리 영향 (transitive 충돌 위험)
-5. APK / Bundle size 영향
-6. ProGuard / R8 의 keep rule 영향
-7. 보안 취약점 history (CVE)
-8. 제거 절차 (cleanup 후보 시점)
+`libs.versions.toml` 신규 항목 = PLAN `## 2. DependencyDecision` 8 항목(①~⑧) 필수. 8항 본문 + 평가 기준의 canonical = `docs/agent/architecture/DEPENDENCY_DECISION_CHECKLIST.md`. 직전 본 §의 Android 빌드/보안 축 고유 차원(라이센스 호환성 · CVE history · APK/Bundle size · ProGuard/R8 keep rule · 제거 절차 · 직접 구현 LOC 비교)은 grow-only merge 로 canonical 의 ②④⑥⑦ 하위 기준에 흡수됨 (= 정보 소실 0). PLAN.md 형식 = `reporting.md §5`.
 
 ### UI 라이브러리 억제 default
 
-- Compose 표준 만 사용. 외부 UI 라이브러리 도입 금지 (Coin 명시 승인 필수).
-- 예외: Material3 의 누락 컴포넌트 (예: BottomSheet) → Compose-Foundation 래퍼 우선.
+UI 라이브러리 억제 강도(직접 구현 우선 default · 외부 UI 라이브러리 도입 금지 default · Coin 명시 승인 필수 · Material3 누락 컴포넌트 = Compose-Foundation 래퍼 우선)의 canonical = `.claude/rules/ui-ux-analysis.md` §UI 라이브러리 억제 기본값 (= UI vs 인프라 판별 + per-category 포함). 코드 리뷰 시 본 강도를 적용한다.
 
 ---
 

@@ -10,13 +10,15 @@
 | # | 항목 | 평가 기준 |
 |---|---|---|
 | ① | 공식·표준 지위 | 공식 첫번째 후보인가, 사실상 표준인가, 사용처가 검증된 라이브러리인가 |
-| ② | 유지보수 품질 | 최근 12개월 내 활동, 이슈 응답, 보안 패치 빈도 |
+| ② | 유지보수 품질 | 최근 12개월 내 활동, 이슈 응답, 보안 패치 빈도 · 보안 취약점 history (CVE) · 라이센스 호환성 (배포·legal 적합성) |
 | ③ | KMP·CMP 호환 | common artifact 가 있는가, 또는 platform-shell-only 로 제한 가능한가 |
-| ④ | transitive 비용 | 추가되는 간접 의존성 수, APK/Framework 사이즈 영향 |
+| ④ | transitive 비용 | 추가되는 간접 의존성 수 · APK / Bundle / Framework 사이즈 영향 · ProGuard / R8 keep rule (빌드 통합 비용) |
 | ⑤ | 기존 기능 중복 여부 | repo 내 이미 충족 가능한 기능과 중복되지 않는가 |
-| ⑥ | 제거 난이도 | 향후 교체·삭제 비용 (얼마나 많은 코드가 침투되는가) |
-| ⑦ | 직접 구현 대비 우위 | 직접 구현보다 라이브러리가 더 저렴하고 안전한 명확한 근거 |
-| ⑧ | UI 라이브러리 특별 정당화 | UI 라이브러리의 경우 KMP 호환 + Compose 기본 기능으로 불가하다는 증거 |
+| ⑥ | 제거 난이도 | 향후 교체·삭제 비용 (얼마나 많은 코드가 침투되는가) · 제거 절차 (cleanup 후보 시점) |
+| ⑦ | 직접 구현 대비 우위 | 직접 구현보다 라이브러리가 더 저렴하고 안전한 명확한 근거 (LOC + 유지비 정량 비교) |
+| ⑧ | UI 라이브러리 특별 정당화 | UI 라이브러리의 경우 KMP 호환 + Compose 기본 기능으로 불가하다는 증거 (상세 억제 정책 canonical = `.claude/rules/ui-ux-analysis.md` §UI 라이브러리 억제 기본값) |
+
+> **흡수 차원** (= MASTER-CLI-DEPENDENCY-DECISION-RECONCILE-001 · grow-only merge): 위 ②④⑥⑦ 하위 기준 = 직전 `code-principles.md` 의 고유 Android 빌드/보안 축(라이센스 호환성 · CVE history · APK/Bundle size · ProGuard/R8 keep rule · 제거 절차 · 직접 구현 LOC 비교)을 흡수한 결과. **8 first-class 항은 불변** — PLAN.md 스키마(`reporting.md §5`) + compound-lint 게이트 + REVIEW Dependency Governance 가 모두 8항을 기준으로 하므로 항 수를 늘리지 않고 하위 기준으로 흡수한다.
 
 ---
 
@@ -42,17 +44,11 @@
 
 ---
 
-## 3. UI 라이브러리 특별 정책
+## 3. UI 라이브러리 특별 정책 (canonical = ui-ux-analysis)
 
-UI 라이브러리는 더 보수적으로 평가:
+UI 라이브러리 억제 정책의 **canonical** = `.claude/rules/ui-ux-analysis.md` §UI 라이브러리 억제 기본값. 강도(직접 구현 우선 default · 외부 UI 라이브러리 도입 금지 default · 사용자 명시 승인 필수) + per-category 보수 기본값(차트 / 애니메이션 / 컴포넌트 / 이미지 / Markdown) + UI vs 인프라 판별 테스트 = 본 canonical 단일 소유.
 
-| 종류 | 기본 정책 |
-|---|---|
-| 차트/그래프 | Compose Canvas 직접 구현이 기본. 라이브러리는 ⑧ 정당화 필수 |
-| 애니메이션 | Compose Animation API 기본. 외부 라이브러리는 ⑧ 정당화 필수 |
-| 컴포넌트 라이브러리 | Material3 + Compose 기본. 도입 전 직접 구현 평가 |
-| 이미지 로더 | Coil 우선 (KMP 지원 검증). 다른 라이브러리는 ⑧ 정당화 필수 |
-| Markdown 렌더러 | 직접 Composable 구현 우선. 외부 라이브러리는 ⑧ 정당화 필수 |
+본 §1 의 ⑧ "UI 라이브러리 특별 정당화" 는 **게이트 항으로 유지**(= PLAN.md 작성 시 필수 기술 항목)하되, 어떤 카테고리를 어떤 강도로 억제하는지의 상세는 위 canonical 을 따른다.
 
 ---
 
@@ -78,6 +74,7 @@ PLAN.md 텍스트 참조 또는 EVIDENCE.md 텍스트 기반 판정은 사용하
 ## 6. 관련 문서
 
 - `KOIN_DI_BASELINE.md` — Koin 의존성 추가 시 ⑧ 항목 N/A 적용
-- `.claude/rules/workflow.md` — DependencyDecision 8개 항목 강제
-- `.claude/rules/ui-ux-analysis.md` — UI 라이브러리 억제 기본값
+- `.claude/rules/workflow-core.md` §신규 의존성 승인 — PLAN `## 2. DependencyDecision` 위치 + REVIEW FAIL + compound-lint 8c 게이트 (8항 본문 canonical = 본 file)
+- `.claude/rules/code-principles.md` §신규 의존성 도입 의무 — 코드 원칙 맥락 (라이브러리 사용 최소화 · 8항 본문 canonical = 본 file)
+- `.claude/rules/ui-ux-analysis.md` §UI 라이브러리 억제 기본값 — UI 억제 강도 + per-category canonical (본 §3 가 가리킴)
 - `scripts/agent/compound-lint.sh` — 8c 단계 git status 감지

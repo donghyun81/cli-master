@@ -220,15 +220,7 @@ SoftBudget 초과 예상 시 추상화 레이어 추가보다 task 분할을 우
 
 ### 신규 의존성 승인 (DependencyDecision)
 
-`libs.versions.toml` 에 새 항목을 추가하기 전 PLAN `## 2. DependencyDecision` 섹션에 8개 항목을 모두 기술해야 한다:
-1. ①공식·표준 지위 (공식·사실상 표준 여부)
-2. ②유지보수 품질 (최근 활동, 이슈 대응)
-3. ③KMP·CMP 호환 (공통 artifact 또는 platform-shell-only 범위 명시)
-4. ④transitive 비용 (추가되는 간접 의존성)
-5. ⑤기존 기능 중복 여부 (repo 내 이미 충족 가능한지)
-6. ⑥제거 난이도 (향후 교체·삭제 비용)
-7. ⑦직접 구현 대비 우위 (왜 직접 구현보다 라이브러리가 저렴·안전한지)
-8. ⑧UI 라이브러리 특별 정당화 (UI 라이브러리의 경우: KMP 호환 + Compose 불가 증거 필수)
+`libs.versions.toml` 에 새 항목을 추가하기 전 PLAN `## 2. DependencyDecision` 섹션에 8개 항목(①~⑧)을 모두 기술해야 한다. 8항 본문 + 평가 기준 + 흡수 하위 차원의 canonical = [`docs/agent/architecture/DEPENDENCY_DECISION_CHECKLIST.md`](../../docs/agent/architecture/DEPENDENCY_DECISION_CHECKLIST.md) (= 본 file 은 게이트만 소유 · 8항 본문 복제 X).
 
 `## 2. DependencyDecision` 섹션 없이 `libs.versions.toml` 변경이 감지되면 REVIEW FAIL 조건이다.
 감지 방식: compound-lint 8c — git status 기반 실제 파일 변경 감지 (단일 기준). PLAN.md 텍스트 참조 또는 EVIDENCE.md 텍스트 기반 판정은 사용하지 않는다.
