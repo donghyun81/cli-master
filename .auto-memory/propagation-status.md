@@ -170,7 +170,7 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 | `docs/design/pencil-sot-policy.md` | `96de2f5d10a7` | ✓ | ✓ | ✓ | ✓ |
 | `.claude/rules/uiux-sot-refresh.md` | `ee377dc2ac32` | ✓ | ✓ | ✓ | ✓ |
 | `docs/design/design-sot-policy.md` | `e5e3fe165ec3` | ✓ | ✓ | ✓ | ✓ |
-| `.claude/settings.json` | `d22047d89440` | ✓ | ✓ | ✓ | ✓ |
+| `.claude/settings.json` | `9696afb38b0c` | ✓ | ✓ | ✓ | ✓ |
 | `.claude/rules/workflow-core.md` | `fe05533e27f4` | ✓ | ✓ | ✓ | ✓ |
 | `.claude/rules/cycle-discipline.md` | `88f0565b2a4b` | ✓ | ✓ | ✓ | ✓ |
 | `.claude/rules/pencil-automation.md` | `aedb79780211` | ✓ | ✓ | ✓ | ✓ |
@@ -191,8 +191,8 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 
 ## Last verify-sync
 
-- timestamp: 2026-06-02T12:07:21+0900
-- pass: 159
+- timestamp: 2026-06-02T15:24:44+0900
+- pass: 161
 - drift: 0
 - miss: 0
 - exit: 0
