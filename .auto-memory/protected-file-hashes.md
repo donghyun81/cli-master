@@ -75,7 +75,7 @@ bash scripts/verify-sync.sh
 |---|---|---|
 | ~~no-abbreviation-policy.md + allowed-acronyms.md + forbidden-abbreviations.md~~ (소멸) | — (sha record 폐기) | **MASTER-CLI-CLEANUP-7CYCLE-001 (2026-05-21) 통합 삭제**: 직전 3 file → `.claude/rules/abbreviation-policy.md` 단일 SoT 흡수 (§1 정책 + §2 금지 seed + §3 허용 약어) + 3 file 삭제. 현재 부재 · 본 manifest sha record 추적 X (= 보호 5종 외 cli infra advisory) |
 | `.claude/hooks/check-abbreviation.sh` | `98d0a023a90fe2d614fde796056896087c5c7fc39ea5ded445d314b2f2f37a23` | PreToolUse Edit\|Write hook |
-| `.claude/settings.json` | `d22047d8944058583c29055489c08a99357e6ab0f897af5a1841017ff5aa0cd8` | settings · **MASTER-CLI-POSTCYCLE-AUTOMATION-001 Phase D resync** (이전 `549b142d…` · Stop 배열에 `stop-housekeeping.sh` 추가 = **본문 변경** · 5-repo byte-identical propagate · `baseline-snapshot/latest.json settingsSha` = 다음 SessionStart 시 runtime 재생성 self-heal · 직전 `c777a494…` = MASTER-CLI-CONTEXT-OPT-FOLLOWUP-CLEANUP-001 record resync) |
+| `.claude/settings.json` | `9696afb38b0cda52a80ff9dc7f92b8b10ce0137ddf58ada9506f9a596d5f2a00` | settings · **MASTER-CLI-GSM-MEASUREMENT-LAYER-001 resync** (이전 `d22047d8…` · Stop 배열에 `measure-gsm-cycle.sh` 4번째 추가 = **본문 변경** · 5-repo byte-identical propagate · `baseline-snapshot/latest.json settingsSha` = 다음 SessionStart 시 runtime 재생성 self-heal · 직전 `549b142d…` = MASTER-CLI-POSTCYCLE-AUTOMATION-001 Phase D) |
 
 4-repo byte-identical: master 77ca613 · GB 628245f · GD 3a5b4ca · GT f4501d5
 보호 파일 5종 sha 변동: 0 (cli infra 권장 파일 5종만 신설)

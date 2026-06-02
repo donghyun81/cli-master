@@ -13,6 +13,7 @@
 - 본인 confirm 영역 default (= 10 anchor default · hot 영역 default)
 - hot 제외 후보 = cold storage (= `.auto-memory/anchor-list-COLD.md` default) 측 누적 default · master only default · propagation X default
 - hot 복귀 trigger = 본 cold anchor 영역 재발 사고 1+ 회 발견 시점 default
+- **GSM 외화** (= MASTER-CLI-GSM-MEASUREMENT-LAYER-001 · 2026-06-02): 각 anchor = G/S/M 3-tuple 로 외화 (= [`gsm-measurement.md`](./gsm-measurement.md) canonical form 정합). G(의도) = 기존 Purpose 의 측정 restatement · 본질·우선순위(P0/P1)·적용 trigger 보존 · purpose 수준 유지 (= M 은 목표값 한정 · method 어휘 X). Metric family = `gsm-measurement.md §2` anchor family.
 
 ## §2. Hot anchor list (= 10 anchor default · P0 6 + P1 4 default)
 
@@ -26,6 +27,11 @@
 
 **precedent**: `COWORK-PREP-BASELINE-MISMATCH-001~008` (= 8회차 재발 default · `cycle-discipline.md §14a` 정합 default)
 
+**GSM** (= `gsm-measurement.md` form):
+- **G** — cowork 인용 baseline 과 cli disk 실측 baseline 이 일치한다 (표면 인용이 실측을 대체하지 않음).
+- **S** — 진입 첫 turn 의 5-repo HEAD 실측 + 박제 표 대조 흔적.
+- **M** — baseline mismatch 미reconcile 건수 `= 0` (drift 발견 시 forward-progress 판정 + 기록 100%).
+
 ### A2 — Protected file integrity guard
 
 **Purpose**: 5-repo 측 byte-identical 의무 영역 (= 보호 5 file default) 측 sha drift 발견 시 즉시 STOP default
@@ -35,6 +41,11 @@
 **우선순위**: P0
 
 **precedent**: master `CLAUDE.md §2` + `cycle-discipline.md §10` default
+
+**GSM** (= `gsm-measurement.md` form):
+- **G** — 보호 5 file 이 5-repo byte-identical 을 유지한다.
+- **S** — 보호 5 file 의 sha-256 측정값 vs `protected-file-hashes.md` baseline 대조 (= `shasum -a 256`).
+- **M** — 보호 5 sha drift 건수 `= 0`.
 
 ### A3 — Cycle scope expansion containment
 
@@ -46,6 +57,11 @@
 
 **precedent**: `CYCLE-PHASE-SCOPE-PUFFY-001` + master `CLAUDE.md §5` "Scope expansion" (= STOP #2 default)
 
+**GSM** (= `gsm-measurement.md` form):
+- **G** — 한 cycle 이 단일 scope 를 유지한다 (다른 영역이 묶이지 않음).
+- **S** — /plan ChangeBudget 표 + 변경 file × N 측정 + 신규 dirty 측정.
+- **M** — scope-외 신규 변경 file 건수 `= 0` (= pre-existing baseline dirty 제외).
+
 ### A4 — Cli infra single-direction propagation
 
 **Purpose**: cli infra 영역 = master 측 단일 source · 자식 측 직접 수정 차단 default — drift 발견 시 즉시 mitigation cycle default
@@ -55,6 +71,11 @@
 **우선순위**: P0
 
 **precedent**: master `CLAUDE.md §3 + §4` + `cycle-discipline.md §3 + §15` default
+
+**GSM** (= `gsm-measurement.md` form):
+- **G** — cli infra = master 단일 source · 자식 측 직접 수정이 0 이다.
+- **S** — 자식 `.claude/**` 직접 변경 시도 측정 + propagation 후 `verify-sync.sh` 결과.
+- **M** — 자식 cli infra drift 건수 `= 0` · propagation 후 5-repo byte-identical (`verify-sync` exit 0).
 
 ### A5 — Disk verification before recommendation
 
@@ -66,6 +87,11 @@
 
 **precedent**: `recommended-option-disk-verification.md` §2.1~§2.4 + `paste-authoring-disk-verification.md` §3 + `cycle-discipline.md §23 + §26` default
 
+**GSM** (= `gsm-measurement.md` form):
+- **G** — 추천 / scope 결정이 disk 실측에 근거한다 (표면 추측 0).
+- **S** — Recommended option / paste authoring 시점 grep / find / git ls-files / Read 측정 흔적.
+- **M** — 미검증 추천 건수 `= 0` · stale 후보 건수 `= 0`.
+
 ### A6 — Subscription pool integrity
 
 **Purpose**: cli session 측 영역 1 + 영역 2 = interactive subscription pool 정합 default + 영역 3 (= `claude -p`) 회피 default — 요금 폭탄 risk (= 49-subagent $8k~$15k / 23-subagent $47k/3d default) 차단
@@ -75,6 +101,11 @@
 **우선순위**: P0
 
 **precedent**: `cross-repo-parallel-exec.md §2.4`(kernel) + `cross-repo-parallel-exec-detail.md §3.4` + 부모 mount root `CLAUDE.md §4` default
+
+**GSM** (= `gsm-measurement.md` form):
+- **G** — 영역 1 + 영역 2 = interactive pool 정합 · 영역 3(`claude -p`) 회피 (= 요금 폭탄 risk 차단).
+- **S** — cross-repo cycle 진입 시 sub-agent 호출 결정 + Bash `claude -p` 호출 측정.
+- **M** — `claude -p` sub-process spawn 건수 `= 0` · sub-agent parallelism `≤ 3`.
 
 ### A7 — Filename + content dual grep
 
@@ -86,6 +117,11 @@
 
 **precedent**: `cycle-discipline.md §17` + §23.2 default
 
+**GSM** (= `gsm-measurement.md` form):
+- **G** — BASELINE 실측이 filename find + content grep 2단을 수행한다 (filename-only false negative 0).
+- **S** — find 1차 흔적 + container 내부 content grep 2차 흔적.
+- **M** — filename-only STOP/UNKNOWN 분류(content grep 미수행) 건수 `= 0`.
+
 ### A8 — Cross-repo paradigm selection autonomy
 
 **Purpose**: cross-repo paradigm 영역 1 vs 영역 2 선택 = cli session 자율 판단 default — 요청 본질 측정 후 결정
@@ -95,6 +131,11 @@
 **우선순위**: P1
 
 **precedent**: `cross-repo-parallel-exec-detail.md §2.1~§2.3` + 부모 mount root `CLAUDE.md §3.3` default
+
+**GSM** (= `gsm-measurement.md` form):
+- **G** — 영역 1 vs 영역 2 선택이 요청 본질 측정 후 자율 결정된다.
+- **S** — cross-repo 진입 시 paradigm 선택 근거 기록 흔적.
+- **M** — 본심 분기 미측정 진입 건수 `= 0` (= 선택 근거 명시율 100%).
 
 ### A9 — Domain SoT mandatory read
 
@@ -106,6 +147,11 @@
 
 **precedent**: `cowork-project-instructions §E-1-1` + `deferred-domains.md` + master `CLAUDE.md §5` STOP #1 (= DB migration / Money / Auth default) default
 
+**GSM** (= `gsm-measurement.md` form):
+- **G** — paste authoring / scope 결정 시 4 도메인(Auth/Data/Backend/Perf) 키워드 측정 + 도메인 SoT 정독을 수행한다.
+- **S** — 도메인 키워드 측정 흔적 + 도메인 SoT 인용.
+- **M** — 도메인 키워드 발견 후 SoT 미정독 건수 `= 0`.
+
 ### A10 — Responsibility split cowork vs cli
 
 **Purpose**: cowork chat = 기획 + paste source authoring + cross-verify 영역 default · cli session = 실 IMPL + ADB + emulator + Logcat + commit 영역 default — 책임 경계 침해 차단 default
@@ -115,6 +161,11 @@
 **우선순위**: P1
 
 **precedent**: `cowork-project-instructions §B-1~§B-3` + `runtime-crash-mitigation-process.md` + `paste-authoring-disk-verification.md` default
+
+**GSM** (= `gsm-measurement.md` form):
+- **G** — cowork(기획 + authoring + cross-verify) ↔ cli(실 IMPL + ADB + emulator + commit) 책임 경계가 유지된다.
+- **S** — 책임 경계 침해 시도 측정 (= 역할 밖 행동 흔적).
+- **M** — 경계 침해 건수 `= 0`.
 
 ## §3. 적용 trigger 종합
 
@@ -150,3 +201,4 @@
 
 - 2026-05-22 · `MASTER-CLI-CYCLE-2A-ANCHOR-LIST-HOT-INSTALL-001` · 본 file 신설 + reporting.md §13 append + cycle-discipline.md §27 pointer 신설 + 5-repo byte-identical propagation default
 - 2026-05-22 · `MASTER-CLI-CYCLE-2B-ANCHOR-LIST-COLD-INSTALL-001` · cold storage `anchor-list-COLD.md` 신설 default (= master only default · 본 § 본문 X default · Cycle 2b 측 본문 default)
+- 2026-06-02 · `MASTER-CLI-GSM-MEASUREMENT-LAYER-001` · A1~A10 각 anchor 에 G/S/M 3-tuple 외화 (= `gsm-measurement.md` canonical form 정합 · §1 본질 bullet 추가). 기존 Purpose / 적용 trigger / 우선순위(P0 6 + P1 4) / precedent 본문 무삭제 · 본질·우선순위·trigger 보존 (= 형식 GSM 정합 · 내용 약화 0). 5-repo byte-identical propagation.

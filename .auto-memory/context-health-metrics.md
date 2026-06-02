@@ -1,10 +1,23 @@
 # Context Health Metrics — 항상로드 char + 환각 패턴 수 (정기 측정 SoT)
 
-> **단일 목적**: CLI context 최적화 프로그램(Phase 0~4) 산출을 **회귀 방지**하기 위한 정기 측정 지표 SoT. 2 지표 family = (1) 항상로드 char(repo별 · proxy) + (2) 환각 패턴 수(disk 측정). `rule-routing-index.md §C` 행동별 GSM 의 **program-level 보완**(= 행동 무관 · context 건강 전체).
+> **단일 목적**: CLI context 최적화 프로그램(Phase 0~4) 산출을 **회귀 방지**하기 위한 정기 측정 지표 SoT. 2 지표 family = (1) 항상로드 char(repo별 · proxy) + (2) 환각 패턴 수(disk 측정).
+> **GSM 귀속** (= 2026-06-02 · MASTER-CLI-GSM-MEASUREMENT-LAYER-001): 본 2 family = [`gsm-measurement.md §2`](../.claude/rules/gsm-measurement.md) 의 **context 건강 Metric family**(= program-level · 행동 무관 · §0 G/S 연결). `rule-routing-index.md §C` 행동별 GSM 과는 별 layer(= 행동 무관 context 건강 전체) · cycle-health(DORA) family 와 함께 `gsm-measurement-dashboard.md` 종합 view 노출.
 > **신설**: MASTER-CLI-CONTEXT-OPT-PHASE4-SSOT-SWEEP-METRICS-001 (2026-06-01 · M5 · 프로그램 마지막 Phase).
 > **위치**: master only (`.auto-memory/` · propagation X · `*-COLD.md` 동급 audit memory). 자식 측 char 은 repo별 측정값(byte-identical 아님).
 > **⚠ proxy 주의**: char = UTF-8 codepoint(python) · **token 아님**. token 추정 시 proxy band(ASCII≈3.2~4 ch/tok · Hangul≈1.0~2.2 ch/tok) 라벨 의무 · over-claim 금지(`cc-audit-CONTEXT-OPT-PHASE0-001.md §0` 정합).
 > SOT: `CLAUDE.md`
+
+---
+
+## §0. GSM 귀속 (= `gsm-measurement.md` context 건강 Metric family · 2026-06-02 realign)
+
+본 file = GSM canonical 의 **context 건강 Metric family**(= `gsm-measurement.md §2` 지도 · program-level · 행동 무관). 측정 항목·값(§1~§3)은 그대로 두고 GSM 3-tuple 에 귀속만 정합:
+
+- **G** (의도) — 매 진입 항상로드 context 가 작게 유지되고, 환각 vector(stale pointer / 매몰)가 낮게 유지된다.
+- **S** (관측 신호) — 진입 paradigm 별 항상로드 char + disk 측 `stale_pointer` / `conflicting_sot` / `buried_ratio` (= §1 정의).
+- **M** (정량 지표) — §1~§3 의 측정값·목표 (= 항상로드 char 4 지표 + 환각 패턴 3 지표). master-only(전파 X) · `gsm-measurement-dashboard.md` 종합 view 노출.
+
+본 §0 = 위치/귀속 정합만 (= 측정 항목·값 보존 · `gsm-measurement.md` form 규약 복제 X · 단일 SoT 정합).
 
 ---
 
@@ -89,3 +102,4 @@
 ## §6. cycle 이력
 
 - 2026-06-01 · MASTER-CLI-CONTEXT-OPT-PHASE4-SSOT-SWEEP-METRICS-001 · 본 file 신설(= 항상로드 char 4 지표 + 환각 패턴 3 지표 정의 + Phase 0~4 trajectory + cadence). H6 sweep = SoftBudget canonical 1건 actioned(§G row 6) + DependencyDecision 1건 defer + 23 footer 보일러플레이트 비-dedup. master only(propagation X).
+- 2026-06-02 · MASTER-CLI-GSM-MEASUREMENT-LAYER-001 · GSM Metric family 재위치(= §0 GSM 귀속 신설 + 헤더 blurb reframe · `gsm-measurement.md §2` context 건강 family 귀속). 기존 2 family(항상로드 char + 환각 패턴) 측정 항목·값 무변경(= 위치/귀속만 GSM 정합 · program-level · 행동 무관). master-only(propagation X 유지).
