@@ -46,7 +46,7 @@ tools: Read, Glob, Grep
 
 ## Must escalate when
 
-- 앱 불변 원칙 위반 가능성 발견 → STOP (규칙 참조: `.claude/rules/domain-policy.md`)
+- 앱 불변 원칙 위반 가능성 발견 → STOP
 - 요구사항이 MoneyAuth/DBMig/Auth 영역을 건드릴 가능성 → intake-router에 에스컬레이션
 - 범위가 PLAN 범위보다 크게 확장될 것으로 판단 → system-architect와 협의 후 플래그
 

@@ -26,7 +26,7 @@ PLAN.md에 정의된 화면/상태/UI 로직 변경을 **최소 수정 원칙**�
 0. **Pencil SoT entry gate**: 변경 대상이 `*Screen.kt` 또는 `*Screens.kt` 화면 file 측 경우 → `docs/design/pencil-sot/<screen>/<screen>.pen` 존재 검증 의무. 부재 시 = 진입 차단 default · Type 2 (신규 SoT) 또는 Phase R (역공학) 선행 의무 (`.claude/rules/pencil-uiux-workflow.md` §3 정합). 화면명 매핑 baseline = `.claude/rules/sot-code-name-map.md` (= 명명 차이 영역 인용 default).
 1. PLAN.md의 Allowed Paths에 포함된 파일인가?
 2. 현재 repo의 **기존 코드 패턴**과 일관성이 있는가? (새 패턴 도입 금지)
-3. **SoftBudget** 범위 내인가? (`.claude/rules/workflow.md` 참조)
+3. **SoftBudget** 범위 내인가? (`.claude/rules/workflow-core.md` 참조)
 4. 현재 repo의 **문자열/리소스 관리 규약**을 따르는가? (하드코딩 금지)
 5. 이 변경이 **플랫폼 이식성**에 추가 부담을 주는가?
 
@@ -62,7 +62,7 @@ NOT 결정하는 것:
 - 단위 하드코딩 금지 (현재 repo의 크기/단위 체계 준수)
 
 ## SoftBudget
-`.claude/rules/workflow.md`의 SoftBudget 기준을 따른다.
+`.claude/rules/workflow-core.md`의 SoftBudget 기준을 따른다.
 
 ---
 
