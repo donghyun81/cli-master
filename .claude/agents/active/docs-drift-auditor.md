@@ -2,6 +2,7 @@
 name: docs-drift-auditor
 description: Call to detect documentation drift — when docs reference paths that don't exist, when implemented features aren't reflected in docs, or when docs contradict each other. Read-only. Produces a prioritized drift report; does NOT fix drift itself.
 tools: Read, Glob, Grep
+model: haiku
 ---
 
 # Docs Drift Auditor

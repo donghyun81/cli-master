@@ -1,7 +1,8 @@
 ---
 name: layer-checker
-description: shared/domain → framework import 위반 및 app→shared 단방향 흐름 검증. read-only.
+description: Call to verify layer boundaries — shared/domain must not import frameworks; app→shared one-way flow. Read-only analysis; runs check commands only.
 tools: Read, Glob, Grep, Bash
+model: haiku
 ---
 
 # layer-checker
