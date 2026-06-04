@@ -66,7 +66,7 @@ EXIT 0 = PASS | EXIT 1 = 아티팩트 누락 또는 시크릿 감지
 | 4. Architecture Integrity — Layer Boundaries | domain→data import 없음(I2 불변 원칙); 경계 매핑이 Repository·UseCase·ViewModel 에서만; UiState 가 DomainModel 과 분리됨; **app/feature/platform 레이어가 정책 계산을 새로 소유하지 않음**; **동일 UI 개념이 단일 출처 모델 또는 단일 포매터 경로를 사용함(단일 출처 표시 규칙)**; **서버 부재 경로가 live implementation으로 기술되지 않음(UNKNOWN/DEFERRED/contract-only만 허용)** | 블로커 |
 | 5. Model Separation | UiState 분리; UI 단방향 흐름; 경계 매핑 변환 위치 (해당 task 에 적용될 때) | 블로커 |
 | 6. Dependency Governance | libs.versions.toml 변경 시 PLAN DependencyDecision 8개 항목 존재 (없으면 FAIL) | 블로커 |
-| 7. TDD Evidence & Testability Seams | FakeXxx 존재 또는 N/A 사유; StateFlow 테스트; 심(clock·dispatcher·identity·logger·uuid) 테스트 또는 연기 사유 | 비블로커 |
+| 7. TDD Evidence & Testability Seams | 기존: FakeXxx 존재 또는 N/A 사유; StateFlow 테스트; 심(clock·dispatcher·identity·logger·uuid) 테스트 또는 연기 사유. 테스트 전략 확장: 변경분 ROI-coverage(고위험 Auth/Billing/Data/Backend 우선) · 여러 경우 완전성(happy+경계+에러+해당 시 empty/null/동시성) · 피라미드/test size 적정성 (SoT = `docs/agent/architecture/TESTING_STRATEGY.md` §5·§6·§3 · enforce=warn · follow-up TODO 권장 · blocking gate 신설 X) | 비블로커 |
 | 8. Error / Result Policy | typed Result/sealed 오류 모델 사용 여부; 기존 전면 교체 없음 (해당 task에 적용될 때) | 비블로커 |
 | 9. External Prep / Deferred Items | user-prep TODO 또는 stub 처리; 외부 의존으로 UI 불변 상태 침해 없음 | 비블로커 |
 | 10. DocSync | 문서-구현 드리프트 없음 | 비블로커 |

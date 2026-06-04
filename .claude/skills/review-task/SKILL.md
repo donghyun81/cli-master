@@ -42,7 +42,7 @@ exit code 와 stdout 을 기록한다.
 - 4. Architecture Integrity — Layer Boundaries
 - 5. Model Separation
 - 6. Dependency Governance
-- 7. TDD Evidence & Testability Seams — 기존 FakeXxx/StateFlow/심(clock·dispatcher·identity·logger·uuid) 점검 **보존** + 테스트 전략 점검 **확장**: 변경분 ROI-coverage(고위험 Auth/Billing/Data/Backend 우선) · 여러 경우 완전성(happy+경계+에러+해당 시 empty/null/동시성) · 피라미드/test size 적정성. SoT = `docs/agent/architecture/TESTING_STRATEGY.md` §5·§6·§3. enforce=warn(비블로커 · follow-up TODO 권장 · blocking gate 신설 X).
+- 7. TDD Evidence & Testability Seams — 판정 기준(기존 점검 + 테스트 전략 확장) SoT = `.claude/rules/verification-and-review.md` 12-section 체크리스트 row 7.
 - 8. Error / Result Policy
 - 9. External Prep / Deferred Items
 - 10. DocSync
