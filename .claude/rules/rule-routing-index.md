@@ -15,7 +15,7 @@
 
 ## §0. 계층 본질 + 사용법
 
-`.claude/rules/` 는 평면 폴더다(subfolder 0). 본 색인은 자신을 제외한 **45 rule** 을 그 평면 위에 **논리적 4층**으로 덮어 행동별로 무엇을 먼저 읽어야 하는지 가리킨다.
+`.claude/rules/` 는 평면 폴더다(subfolder 0). 본 색인은 자신을 제외한 **46 rule** 을 그 평면 위에 **논리적 4층**으로 덮어 행동별로 무엇을 먼저 읽어야 하는지 가리킨다.
 
 | 층 | 이름 | 로드 시점 | 본질 |
 |---|---|---|---|
@@ -28,7 +28,7 @@
 
 ---
 
-## §A. 계층 taxonomy (L0~L3 · 45 rule 배치)
+## §A. 계층 taxonomy (L0~L3 · 46 rule 배치)
 
 > 각 file 옆 1줄 = 1차 목적(분류 문구). 본문은 해당 file 단일 SoT — 여기서 복제하지 않는다. (보호) = 보호 5종 byte-identical 영역.
 
@@ -42,7 +42,7 @@
 
 > file 외 L0: master `CLAUDE.md §5`(STOP 9항 canonical) + 부모 mount root `CLAUDE.md`(5-repo umbrella). 두 헌법은 `.claude/rules/` 밖이라 본 42 집합에 포함되지 않으나 L0 로 항상 적용.
 
-### L1 — 프로세스·워크플로우 (작업 시작 시 · 19 rule)
+### L1 — 프로세스·워크플로우 (작업 시작 시 · 20 rule)
 
 | rule | 1차 목적 |
 |---|---|
@@ -54,6 +54,7 @@
 | [`mode-system.md`](./mode-system.md) | M1/M3/M5 행동 mode + Mode picker + 잘못 결정 recovery |
 | [`automation-policy.md`](./automation-policy.md) | Transport 자동화 OK / Inspection 자동화 X + sub-agent spawn 금지 |
 | [`plugin-policy.md`](./plugin-policy.md) | plugin 조건부 허용(공식+커스텀 불요) vs 회피(자식 차별화) 판단 기준 |
+| [`workflow-policy.md`](./workflow-policy.md) | `Workflow` 도구(dynamic workflows) 조건부 허용 + gate 실측(pool 귀속/버전/활성화 전제) + 허용·회피 영역 + 200k 토큰 예산 통제 |
 | [`legacy-cleanup-governance.md`](./legacy-cleanup-governance.md) | cleanup pass + 제거 허용 근거 + code removal vs file deletion STOP |
 | [`working-file-lifecycle.md`](./working-file-lifecycle.md) | cc-paste / cycle-prompt 등 working file archive + frontmatter 3키 |
 | [`recommended-option-disk-verification.md`](./recommended-option-disk-verification.md) | 추천/scope 결정 전 disk 실측 의무 (thin pointer → skill) |
@@ -132,7 +133,7 @@
 | **2. UI-UX형** | L1: `workflow-core` · `cycle-discipline` · `verification-and-review` · `reporting` / L2: `code-style-guide` · `design-to-code-sync` · `design-prompting-paradigm` · `code-principles` · 테스트 시 `TESTING_STRATEGY`(UI = Compose UI test/Roborazzi e2e 층) / L3: `ui-ux-analysis` · `ux-laws` · `uiux-sot-refresh`(보호) · `sot-code-name-map` + Pencil 사용 시 `pencil-uiux-workflow`(보호) 및 관련 Pencil cluster |
 | **3. API-서버형** | L1: `workflow-core` · `cycle-discipline` · `verification-and-review` · `reporting` / L2: `code-style-guide` · `code-principles` · 테스트 시 `TESTING_STRATEGY`(Backend/Data = high-ROI · Repository+Fake/EF 계약) / L3: `supabase-handling` · `auth-rules` · `billing-rules` · `deferred-domains`(Backend/Data STOP) |
 | **4. 빌드-릴리즈형** | L1: `cycle-discipline`(§13 환경 정합) · `libs-versions-cross-verify` · `launch-status-auto-sync` · `verification-and-review` · `reporting` · `working-file-lifecycle` |
-| **5. 정책-계획 점검형** | L1: `workflow-core` · `cycle-discipline` · `mode-system` · `automation-policy` · `plugin-policy` · `recommended-option-disk-verification` · `paste-authoring-disk-verification` · `terminology` · `text-degeneration-prevention` · `architecture-foundation-link-policy` · `reporting` |
+| **5. 정책-계획 점검형** | L1: `workflow-core` · `cycle-discipline` · `mode-system` · `automation-policy` · `plugin-policy` · `workflow-policy`(Workflow 도구 채택 가부 시) · `recommended-option-disk-verification` · `paste-authoring-disk-verification` · `terminology` · `text-degeneration-prevention` · `architecture-foundation-link-policy` · `reporting` |
 | **6. CLI 운영 레이어형** (cli-ops · M5) | L0 강조: `cross-repo-parallel-exec`(kernel · 단방향/subscription) · `safety-and-secrets`(보호 path) / L1: `cycle-discipline`(§3·§15) · `mode-system`(M5) · `automation-policy` · `reporting` · `working-file-lifecycle` · `recommended-option-disk-verification` · `paste-authoring-disk-verification` · `text-degeneration-prevention` · `gsm-measurement`(GSM 계측·amend 시) + **cross-repo 행동 시 `cross-repo-parallel-exec-detail`**(kernel demote 본문) |
 | **7. task 재개-후속형** (task-resume) | L1: `workflow-core`(Context Reset / HANDOFF) · `reporting`(§9 Subagent Return) · `cycle-discipline`(§8 future context 회복) |
 
@@ -164,7 +165,7 @@
 2. **rule 이동/통합/폐기 시**: §A 행 제거 또는 이동 + §B 의존 행 동기. 통합(예: 3 file → 1 SoT)은 흡수 후 단일 행으로 정리.
 3. **층 재배치 판단**: L0/L1/L2/L3 경계가 모호하면 "로드 시점"으로 판정(항상=L0 / 작업 시작=L1 / code-level=L2 / 키워드 trigger=L3). 재배치는 본 색인 1 file 변경으로 끝난다 — 물리 이동·frontmatter 불요.
 4. **갱신 trigger**: 신 rule 신설 cycle 마감 시 + `cycle-discipline §18` 분기 review 시 + Reading Mode 정의(`workflow-core` §Intake) 변경 시.
-5. **(선택) verify hook pointer**: 본 색인 §A 멤버 수 + 색인 자신 1 = `find .claude/rules -type f -name '*.md' | wc -l`(현재 45 + 1 = 46) 정합 검증을 분기 review(`cycle-discipline §18`) 측 측정 항목으로 둘 수 있다(자동 hook 신설은 별 cycle).
+5. **(선택) verify hook pointer**: 본 색인 §A 멤버 수 + 색인 자신 1 = `find .claude/rules -type f -name '*.md' | wc -l`(현재 46 + 1 = 47) 정합 검증을 분기 review(`cycle-discipline §18`) 측 측정 항목으로 둘 수 있다(자동 hook 신설은 별 cycle).
 6. **frontmatter 표준화 = 본 cycle 비포함**: 42 file 에 `layer:` frontmatter 일괄 부여는 자식 propagation cascade + 보호 resync 를 동시에 trigger 하므로 별 의제. 본 색인의 수기 유지가 `cycle-discipline §2`(양 최소·변동성 회피) 측 default.
 
 ---
@@ -187,6 +188,7 @@
 - 2026-06-01 · MASTER-CLI-TESTING-STRATEGY-001 · 테스트 전략 layer 배선. §A L2 pointer 줄에 `TESTING_STRATEGY` 추가(테스트 3 docs 분담 1줄: TDD_WORKFLOW=언제 / TESTABILITY_SEAMS=어떻게 / TESTING_STRATEGY=무엇을 ROI 순·여러 케이스·지속 유지) + §B 구현형/UI-UX형/API-서버형 3행 L2 에 `TESTING_STRATEGY` 테스트 pointer 추가 + §C 구현형 GSM 에 "고위험 변경 ROI-coverage 테스트 존재(enforce=warn)" 목표 1행 보강. 신 본문 0(pointer only · `docs/agent/architecture/TESTING_STRATEGY.md` 단일 SoT) · 기존 §A~§I 행 무삭제 · 보호 5종 무접촉. 동반: `test-strategist` deferred→active 재활성 + review-task §7 ROI/multi-case/피라미드 확장. 5-repo byte-identical propagation.
 - 2026-06-02 · MASTER-CLI-GSM-MEASUREMENT-LAYER-001 · GSM 계측 layer canonical 신설 + §C realign. **(§C realign)** 행동 7종 "복합 Goal 체크리스트" → G(의도)/S(관측 신호)/M(정량 지표) 3-tuple 재구성 (= `gsm-measurement.md` form 정합 · 3열→5열 표). **의미·강도 보존**: 모든 게이트(enforce=warn · `TESTING_STRATEGY §5·§10` · review §7) + deviation 경로 + 고위험 ROI-coverage 목표 = M 열 verbatim 보존 (= 형식 GSM 정합 · 약화 0). **(§A 등록 · Phase 3)** L1 표에 `gsm-measurement.md` 1행 추가(18→19 rule) + §0/§A 헤더/§D count reconcile(44→45 rule · §A 헤더 43→45 = pre-existing -1 stale[sub-header 합 44] + 본 cycle +1 · find 실측 정합 · 색인 자신 1 = 46). **(§B)** Mode 6(CLI 운영) L1 에 `gsm-measurement` consult 추가. **(amend 정량 trigger · Phase 4)** §C amend loop 단락에 "N(기본 3) cycle 연속 deviation → amend 후보 승격"(= `gsm-measurement.md §6` · `stop-reflect.sh` 임계 정합) pointer 추가. 신 본문 규약 복제 0(`gsm-measurement.md` 단일 SoT) · 기존 §A~§I 행 무삭제 · 보호 5종 무접촉. 5-repo byte-identical propagation.
 - 2026-06-02 · MASTER-CLI-DEPENDENCY-DECISION-RECONCILE-001 · §G SSOT map +2 row(6→8): **(7)** DependencyDecision 8항 → canonical `DEPENDENCY_DECISION_CHECKLIST.md` (= `code-principles` Android 빌드/보안 축(라이센스·CVE·APK/Bundle·ProGuard/R8·제거 절차·직접구현 LOC) grow-only merge → canonical ②④⑥⑦ 하위 기준 흡수 · workflow-core/code-principles 8항 본문 → pointer · **8 first-class 항 불변**(PLAN 스키마·compound-lint 게이트 정합)) · **(8)** UI 라이브러리 억제 → canonical `ui-ux-analysis.md §UI 라이브러리 억제 기본값` (= 가장 강한 게이트 "직접 구현 우선 default + 외부 UI 라이브러리 도입 금지 default + Coin 승인 필수" 채택 + 비대칭(억제=UI 한정·인프라 8항 허용)/UI-vs-인프라 판별 테스트 신설 + per-category(차트/애니/컴포넌트/이미지/Markdown) 보존 · CHECKLIST §3·code-principles UI·CLAUDE.md §10 → pointer). `conflicting_sot` 1→0(`context-health-metrics.md` master-only). 신 본문 0(canonical merge·pointer only · 정보 소실 0 · UI 강도 보존) · 기존 §A~§I 행 무삭제 · 보호 5종 무접촉. 진입 HEAD `f4691c2`. 5-repo byte-identical propagation(CHECKLIST + workflow-core + code-principles + ui-ux-analysis + rule-routing-index).
+- 2026-06-04 · MASTER-CLI-WORKFLOW-ADOPTION-POLICY-002 · §A L1 표에 `workflow-policy.md` 1행 추가(19→20 rule) + §0/§A 헤더(45→46) + §D #5 count(45+1=46 → 46+1=47) reconcile(= `find` 실측 46 file + 색인 자신 1 = 47 정합) + §B Reading Mode 5(정책-계획 점검형) L1 에 `workflow-policy` consult 추가. 동반(별 file): `workflow-policy.md` 신설(= `cross-repo-parallel-exec.md §2.4.1` 본문 이관·유실 0 + 채택 정책 전반 완성) + §2.4.1 = 1줄 kernel pointer 환원(L0 de-bloat · BILLING-GUARD-001 의 H4 역행 교정). 신 본문 복제 0(pointer only) · 기존 §A~§I 행 무삭제 · 보호 5종 무접촉. 5-repo byte-identical propagation(workflow-policy + cross-repo-parallel-exec + rule-routing-index).
 
 ---
 

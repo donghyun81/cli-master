@@ -63,20 +63,9 @@
 - search keyword: "Claude Code Max plan subscription pricing change 2026" / "Agent SDK credit pool June 15" / "claude -p print mode subscription policy"
 - 측정 시점 = 2026-05-19 KST (= `MASTER-CLI-CROSS-REPO-SUBSCRIPTION-AWARE-PARADIGM-001` cycle 진입 시점)
 
-### 2.4.1 Workflow 도구 dynamic subagent pool 귀속 + 토큰 예산 통제 (= 2026-06-04 신설 · `MASTER-CLI-WORKFLOW-SUBAGENT-BILLING-GUARD-001`)
+### 2.4.1 Workflow 도구 subagent pool 귀속 (= kernel pointer)
 
-> **본 sub-section = `Workflow` 도구(dynamic workflow) 기반 병렬 subagent 의 billing pool 귀속 + 토큰 예산 통제 절차**. 영역 3(`claude -p` sub-process)과 구분 — Workflow 도구 subagent 는 영역 3 이 아니다.
-
-**pool 귀속 (= gate ① · /usage 실측)**:
-
-- `Workflow` 도구로 spawn 한 subagent 는 /usage 의 "Subagents: workflow-subagent" 항목으로 **interactive plan pool 에 귀속** (= 2026-06-04 KST 실측 · 별 Agent SDK credit pool 표기 없음). 조건부 허용 — 영역 1·2 와 동일 pool 정합이며 영역 3 와 다르다.
-- **2026-06-15 billing split 발효 후 /usage 1회 재확인 의무**. 본 실측 = split 이전 baseline · split 후 귀속 변동 시 본 sub-section 갱신 cycle 진입.
-
-**토큰 예산 통제 (= advisory 한계 보강)**:
-
-- "use Nk tokens" 류 예산 지시 = **advisory** · 도구 차원 강제 없음 (2026-06-04 실측: 10k 지시 → workflow subagent 79.6k 실소비).
-- 200k 토큰 hard cap 통제 4-step: (a) agent prompt 에 예산 명시 · (b) `/workflows` 실시간 감시 · (c) 초과 징후 시 수동 stop(`TaskStop`) · (d) 전면 fan-out 전 소규모 슬라이스 선행 측정.
-- `anchor-list.md` A6(subscription pool integrity) 정합 · 영역 3 회피 원칙 불변.
+`Workflow` 도구(dynamic workflows) subagent = interactive plan pool 귀속 (= 영역 3 `claude -p` 아님 · A6 정합). 채택 가부 + gate 실측 + 토큰 예산 통제 본문 단일 SoT = [`workflow-policy.md`](./workflow-policy.md).
 
 
 ## 5. STOP 조건 (= cross-repo 영역 한정)
@@ -115,3 +104,4 @@
 - 2026-05-19 · MASTER-CLI-CROSS-REPO-SUBSCRIPTION-AWARE-PARADIGM-001 · 본 SoT 정정 강화: §2.2 영역 2 paradigm 본문 강화 (= 사용자 본인 측 의무 영역 표 + 자식 cli infra 자동 정합 영역 + subscription pool 정합 영역 + trade-off 영역 본문 추가) + §2.4 Subscription-aware paradigm sub-section 신설 (= 2026-06-15 Anthropic billing split 영역 + interactive pool vs Agent SDK credit pool 분기 + `claude -p` 사용 회피 paradigm) + §3.4 Sub-agent token cost warning sub-section 신설 (= 3-agent team token ~7× default + 실 사례 $8k~$15k / $47k 3 days + 권장 paradigm 정합) + 부모 mount root CLAUDE.md §4 정정 강화 + 5-repo byte-identical propagation
 - 2026-06-01 · MASTER-CLI-CONTEXT-OPT-PHASE3-L0-CHILD-DEDUP-001 · H4 L0 최소화 — 본 file = kernel(§2.4 subscription + 단방향 + 영역 1/2/3 1-줄 요약 + §5 STOP/§6 trigger/§7-§8)로 축소 · paradigm 본문(§2.1~§2.3 + §3~§4) verbatim → `cross-repo-parallel-exec-detail.md` 신설 demote(삭제 0). `rule-routing-index.md §A`(L0 kernel 표기) + §B(Reading Mode 6 cross-repo = detail 로드) 갱신. L0 항상로드 char ↓ · subscription/billing/단방향 kernel 잔류(환각·요금 안전). 5-repo byte-identical propagation.
 - 2026-06-04 · MASTER-CLI-WORKFLOW-SUBAGENT-BILLING-GUARD-001 · §2.4.1 신설 — `Workflow` 도구 dynamic subagent 의 interactive plan pool 귀속(gate ① · /usage "workflow-subagent" 실측 2026-06-04 · 별 Agent SDK credit pool 표기 0 · 영역 3 와 구분) + 2026-06-15 billing split 후 /usage 재확인 의무 + 토큰 예산 advisory 한계(10k 지시→79.6k 실소비) 200k hard cap 4-step 통제 절차(예산 prompt + /workflows 감시 + 수동 stop + 소규모 슬라이스 선행). 기존 §2.4 영역 1/2/3 본문 + 보호 5종 무접촉 · A6 정합 · 5-repo byte-identical propagation.
+- 2026-06-04 · MASTER-CLI-WORKFLOW-ADOPTION-POLICY-002 · §2.4.1 본문(gate ① pool 귀속 + 2026-06-15 재확인 의무 + 토큰 예산 4-step) → [`workflow-policy.md`](./workflow-policy.md) 별 rule 로 이관(유실 0) + §2.4.1 = 1줄 kernel pointer 환원(L0 de-bloat · 001 의 101→117줄 H4 역행 교정). 채택 정책 전반(본질·gate ②③·허용/회피 영역) = workflow-policy.md 에서 완성. 보호 5종 무접촉 · 5-repo byte-identical propagation.
