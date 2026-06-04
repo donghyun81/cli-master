@@ -1,8 +1,9 @@
 #!/bin/bash
-# measure-gsm-cycle.sh — GSM cycle 건강(DORA 4-key) 자동 측정 (Stop hook · non-blocking · 항상 exit 0)
+# measure-gsm-cycle.sh — GSM 측정 (DORA 4-key cycle 건강 + context 건강) 자동 측정 (Stop hook · non-blocking · 항상 exit 0)
 # 신설: MASTER-CLI-GSM-MEASUREMENT-LAYER-001 (2026-06-02)
-# 관련: .claude/rules/gsm-measurement.md §3 (DORA 정의) · §4 (측정 layer) ·
-#       .auto-memory/cycle-health-log.md (정량 append source) ·
+# 확장: MASTER-CLI-GSM-CONTEXT-HEALTH-ABSORB-001 (2026-06-04 · context-health 측정 흡수 · 신 hook 신설 X · settings.json 무접촉)
+# 관련: .claude/rules/gsm-measurement.md §2 (Metric family) · §3 (DORA 정의) · §4 (측정 layer) ·
+#       .auto-memory/cycle-health-log.md (DORA 정량 append) · .auto-memory/context-health-metrics.md §3.1 (context 건강 분기 append) ·
 #       stop-reflect.sh / stop-housekeeping.sh (= 동일 non-blocking advisory 철학)
 #
 # 동작:
@@ -10,6 +11,9 @@
 #   2. cycle-health-log.md 의 마지막 기록 HEAD 와 현재 master HEAD 대조 (= idempotent guard)
 #   3. 새 master cycle commit 발견 시에만 surface (= turn 단위 spam 회피 · cycle 단위)
 #   4. mode=append 시 한 행 정량 append (= cycle-health-log.md)
+#   5. (context 건강) 새 cycle 감지 + 분기(quarter) guard 통과 시 항상로드 char 4 + stale_pointer 측정·surface
+#      · mode=append 시 context-health-metrics.md §3.1 한 행 append (= 분기 1회 idempotent)
+#      · GSM_CONTEXT_HEALTH_FORCE=1 = new-cycle 게이팅 무관 즉시 평가 (self-test/수동 분기 · 분기 guard 유지)
 #
 # 판정 경계 (automation-policy.md 정합): git log 파싱 = Transport(자동 OK).
 #   지표가 건강한가의 판정 + amend 결정 = Inspection(수동 · gsm-measurement.md §4·§6).
@@ -18,15 +22,19 @@
 # Exit: 항상 exit 0 (= stop-gate.sh blocking 영역 무접촉)
 # mode (env GSM_MEASURE_ENFORCE):
 #   advisory (default) = 새 cycle 시 stderr surface · log append X
-#   append             = surface + cycle-health-log.md 한 행 append (idempotent)
+#   append             = surface + cycle-health-log.md (DORA) + context-health-metrics.md §3.1 (분기) 한 행 append (idempotent)
 #   silent             = 출력 0 (행동 유지)
-# self-test: bash .claude/hooks/measure-gsm-cycle.sh           (= master 측정)
-#            bash .claude/hooks/measure-gsm-cycle.sh <repo-dir> (= 지정 repo 측정)
+# context-health 강제 (env GSM_CONTEXT_HEALTH_FORCE=1): new-cycle 게이팅 무관 즉시 context-health 평가 (분기 guard 는 유지)
+# self-test: bash .claude/hooks/measure-gsm-cycle.sh                                  (= master DORA 측정)
+#            bash .claude/hooks/measure-gsm-cycle.sh <repo-dir>                        (= 지정 repo DORA 측정)
+#            GSM_CONTEXT_HEALTH_FORCE=1 GSM_MEASURE_ENFORCE=append bash .claude/hooks/measure-gsm-cycle.sh  (= context-health 분기 append)
 # macOS bash 3.x 호환 (associative array X / ${var,,} X)
 
 set -u
 
 MODE="${GSM_MEASURE_ENFORCE:-advisory}"
+# context-health 분기 측정 강제 (= self-test/수동 분기 · new-cycle 게이팅 무관 · 분기 guard 는 유지)
+CH_FORCE="${GSM_CONTEXT_HEALTH_FORCE:-0}"
 
 REPO_ROOT=$(git rev-parse --show-toplevel 2>/dev/null || echo ".")
 
@@ -53,6 +61,118 @@ LOG_FILE="$MASTER_DIR/.auto-memory/cycle-health-log.md"
 
 # cycle-marker = commit subject 안 cycle ID 패턴 (= 대문자 토큰 + -NNN)
 CYCLE_MARKER='[A-Z][A-Z0-9_-]+-[0-9]{3}'
+
+# === context-health 측정 (= MASTER-CLI-GSM-CONTEXT-HEALTH-ABSORB-001 · 2026-06-04 확장) ===
+# 본질: context 건강 지표(항상로드 char 4 + 환각 stale_pointer)를 신 hook 신설 없이 본 GSM Stop hook 으로 흡수.
+#   - cadence = 분기(quarter bucket 경과 guard) · 매 Stop X · advisory(non-blocking · cycle 차단 X · exit 0 보존)
+#   - 자동 = char 4(codepoint python3) + stale_pointer(상대경로 .md file-link 존재 grep)
+#   - 수기 = conflicting_sot / buried_ratio (판정 난이도 ↑ → row 에 manual · 값은 §2 수기 갱신)
+#   - append 대상 = context-health-metrics.md §3.1 (master-only · propagation X · 자식 진입도 master 측 append)
+#   - char = codepoint proxy(token 아님 · over-claim 금지 · proxy band 라벨 surface 보존)
+CONTEXT_HEALTH_FILE="$MASTER_DIR/.auto-memory/context-health-metrics.md"
+
+# UTF-8 codepoint count (= context-health-metrics.md §1 측정 명령 정합) · 부재/실패 시 0
+ch_count() {
+  [ -f "$1" ] || { echo 0; return 0; }
+  python3 -c "import sys; print(len(open(sys.argv[1], encoding='utf-8').read()))" "$1" 2>/dev/null || echo 0
+}
+
+# 다중 file codepoint 합 (= L0 kernel char)
+ch_sum() {
+  ch_total=0
+  for ch_f in "$@"; do
+    ch_n=$(ch_count "$ch_f")
+    ch_total=$(( ch_total + ch_n ))
+  done
+  echo "$ch_total"
+}
+
+# stale_pointer(auto) = .claude/rules/*.md 안 상대경로 .md 링크 → target 부재 수 (file-link 한정 · §-level = manual)
+stale_pointer_count() {
+  sp_dir="$1"
+  sp_count=0
+  [ -d "$sp_dir" ] || { echo 0; return 0; }
+  for sp_f in "$sp_dir"/*.md; do
+    [ -f "$sp_f" ] || continue
+    sp_base=$(dirname "$sp_f")
+    while IFS= read -r sp_link; do
+      [ -z "$sp_link" ] && continue
+      sp_target="${sp_link%%#*}"
+      case "$sp_target" in
+        http*|/*|"") continue ;;
+      esac
+      [ -f "$sp_base/$sp_target" ] || sp_count=$(( sp_count + 1 ))
+    done <<CH_EOF
+$(grep -oE '\]\(\.\.?/[^)]+\.md[^)]*\)' "$sp_f" 2>/dev/null | sed -E 's/^\]\(//; s/\)$//')
+CH_EOF
+  done
+  echo "$sp_count"
+}
+
+# context-health 측정 + 분기 guard + (append mode 시) §3.1 append + advisory surface
+run_context_health() {
+  [ -f "$CONTEXT_HEALTH_FILE" ] || return 0
+
+  # 분기 guard (= quarter bucket · 마지막 auto row 분기 대조 · 같은(또는 과거) 분기 = skip · idempotent)
+  ch_now_y=$(TZ='Asia/Seoul' date '+%Y' 2>/dev/null || date '+%Y')
+  ch_now_m=$(TZ='Asia/Seoul' date '+%m' 2>/dev/null || date '+%m')
+  ch_now_q=$(( (10#$ch_now_m - 1) / 3 ))
+  ch_now_bucket=$(( 10#$ch_now_y * 4 + ch_now_q ))
+  ch_last_date=$(grep -oE '<!-- ch-auto [0-9]{4}-[0-9]{2}-[0-9]{2} -->' "$CONTEXT_HEALTH_FILE" 2>/dev/null | tail -1 | grep -oE '[0-9]{4}-[0-9]{2}-[0-9]{2}')
+  if [ -n "$ch_last_date" ]; then
+    ch_last_y=$(echo "$ch_last_date" | cut -d'-' -f1)
+    ch_last_m=$(echo "$ch_last_date" | cut -d'-' -f2)
+    ch_last_q=$(( (10#$ch_last_m - 1) / 3 ))
+    ch_last_bucket=$(( 10#$ch_last_y * 4 + ch_last_q ))
+    [ "$ch_now_bucket" -le "$ch_last_bucket" ] && return 0
+  fi
+
+  # char 4 (codepoint · proxy)
+  ch_parent=$(ch_count "$MOUNT_ROOT/CLAUDE.md")
+  ch_master=$(ch_count "$MASTER_DIR/CLAUDE.md")
+  CH_RULES="$MASTER_DIR/.claude/rules"
+  ch_l0=$(ch_sum "$CH_RULES/safety-and-secrets.md" "$CH_RULES/anchor-list.md" "$CH_RULES/cross-repo-parallel-exec.md")
+  ch_child_md=""
+  for ch_c in GentlyBreath GentlyDay GentlyTable app-foundation; do
+    if [ -f "$MOUNT_ROOT/$ch_c/CLAUDE.md" ]; then ch_child_md="$MOUNT_ROOT/$ch_c/CLAUDE.md"; break; fi
+  done
+  ch_child=$(ch_count "$ch_child_md")
+
+  # stale_pointer(auto · file-link) · §-level anchor 검증 = manual
+  ch_stale=$(stale_pointer_count "$CH_RULES")
+
+  ch_now_kst=$(TZ='Asia/Seoul' date '+%Y-%m-%d %H:%M' 2>/dev/null || date '+%Y-%m-%d %H:%M')
+  ch_now_date=$(TZ='Asia/Seoul' date '+%Y-%m-%d' 2>/dev/null || date '+%Y-%m-%d')
+  ch_cyc=$(git -C "$MASTER_DIR" log -1 --format='%s' 2>/dev/null | grep -oE "$CYCLE_MARKER" | head -1)
+  [ -z "$ch_cyc" ] && ch_cyc="(unmarked)"
+
+  # append (= MODE=append 한정 · idempotent = 분기 guard) → §3.1 (행 = EOF 누적 · cycle-health-log.md 동일 패턴)
+  if [ "$MODE" = "append" ]; then
+    printf '| %s | %s | %s | %s | %s | %s | manual | manual | %s | <!-- ch-auto %s --> |\n' \
+      "$ch_now_kst" "$ch_parent" "$ch_master" "$ch_l0" "$ch_child" "$ch_stale" "$ch_cyc" "$ch_now_date" \
+      >> "$CONTEXT_HEALTH_FILE"
+  fi
+
+  # surface (= advisory · MODE != silent)
+  if [ "$MODE" != "silent" ]; then
+    echo "" >&2
+    echo "[GSM-CONTEXT-HEALTH] context 건강 분기 측정 (= advisory · 판정 수동 · context-health-metrics.md §1·§3.1):" >&2
+    echo "  항상로드 char(codepoint proxy≠token · band ASCII≈3.2~4 / Hangul≈1.0~2.2 ch/tok): parent_root ${ch_parent} · master ${ch_master} · L0_kernel ${ch_l0} · child ${ch_child}" >&2
+    echo "  stale_pointer(auto · file-link · 목표 0): ${ch_stale} · conflicting_sot/buried_ratio = 수기 advisory(§2 갱신 · §-level 판정 자동 X)" >&2
+    if [ "$MODE" = "append" ]; then
+      echo "  → context-health-metrics.md §3.1 분기 trajectory append (${ch_now_y}Q$(( ch_now_q + 1 )))" >&2
+    else
+      echo "  → append 미실행 (= advisory · GSM_MEASURE_ENFORCE=append 로 분기 trajectory 기록)" >&2
+    fi
+    echo "" >&2
+  fi
+}
+
+# FORCE = new-cycle 게이팅 무관 즉시 context-health 평가 (self-test/수동 분기) · 분기 guard 는 유지
+if [ "$CH_FORCE" = "1" ]; then
+  run_context_health
+  exit 0
+fi
 
 # --- 현재 / 직전 기록 HEAD ---
 CURRENT_HEAD=$(git -C "$MEASURED_DIR" rev-parse --short=12 HEAD 2>/dev/null || echo "")
@@ -130,5 +250,8 @@ if [ "$MODE" != "silent" ]; then
   echo "  규칙: gsm-measurement.md §6 amend 정량 trigger (N cycle 연속 deviation → 후보) · GSM_MEASURE_ENFORCE=silent 음소거" >&2
   echo "" >&2
 fi
+
+# context-health (= 새 cycle 감지 후 도달 · 분기 guard 통과 시만 측정/append · MASTER-CLI-GSM-CONTEXT-HEALTH-ABSORB-001)
+run_context_health
 
 exit 0

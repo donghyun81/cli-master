@@ -81,12 +81,26 @@
 
 ---
 
+## §3.1. 분기 자동 측정 trajectory (= `measure-gsm-cycle.sh` context-health 블록 · append-only · MASTER-CLI-GSM-CONTEXT-HEALTH-ABSORB-001)
+
+> **append 주체** = [`.claude/hooks/measure-gsm-cycle.sh`](../.claude/hooks/measure-gsm-cycle.sh) 의 context-health 블록(= 신 hook 신설 X · 기존 GSM Stop hook 확장 흡수). **분기 guard**(= quarter bucket 경과) 통과 시 1행 append(= idempotent · 같은 분기 중복 X) · `GSM_MEASURE_ENFORCE=append` 한정 · 수동 분기 실행 = `GSM_CONTEXT_HEALTH_FORCE=1`. 매 Stop X = 분기 cadence(§4) · advisory 본질(= non-blocking · cycle 차단 X).
+> **자동/수기 경계** = char 4 지표 + `stale_pointer` = **자동**(codepoint `python3` + 상대경로 .md file-link grep). `conflicting_sot` / `buried_ratio` = **수기 advisory**(판정 자동화 난이도 ↑ → row 에 `manual` 표기 · 값은 §2 수기 갱신 · over-claim 금지).
+> **⚠ proxy** = char = codepoint(token 아님 · 헤더 proxy band 라벨 정합). stale_pointer(auto) = file-link 존재 검증 한정(§-level anchor 검증 = manual · 자동 X).
+> **위치 주의** = auto append 행은 file 말미(아래 §6 이후)에 `>>` 누적된다(= `cycle-health-log.md` 동일 패턴 · 분기 guard = `<!-- ch-auto YYYY-MM-DD -->` marker grep · 위치 무관). 본 §3.1 = schema 선언 면(= 누적 행은 EOF).
+
+| 측정일 (KST) | parent_root | master | L0_kernel | child | stale_pointer(auto) | conflicting_sot | buried_ratio | cycle | marker |
+|---|---|---|---|---|---|---|---|---|---|
+
+---
+
 ## §4. 측정 cadence + 유지
 
 - **매 cli-infra cycle 마감 시**: 항상로드 char 영향 변경(헌법 §/L0 rule/자식 CLAUDE.md) 시 본 §2 갱신.
-- **분기 정기 review**(= `cycle-discipline.md §18` · 1/6·4/6·7/6·10/6 부근): 4 char 지표 + 3 환각 지표 전량 재측정 + trajectory append. `§18` 측정 항목 표에 "context health 지표(본 file)" 추가 후보(= 별 wiring cycle · 본 cycle 무접촉).
+- **분기 정기 review**(= `cycle-discipline.md §18` · 1/6·4/6·7/6·10/6 부근): 4 char 지표 + 3 환각 지표 전량 재측정 + trajectory append.
+  - **자동화**(= MASTER-CLI-GSM-CONTEXT-HEALTH-ABSORB-001 · 2026-06-04): [`measure-gsm-cycle.sh`](../.claude/hooks/measure-gsm-cycle.sh) context-health 블록이 **분기 guard**(quarter bucket 경과) 통과 시 char 4 + `stale_pointer`(auto)를 측정·surface(advisory) + `GSM_MEASURE_ENFORCE=append` 시 §3.1 append. 수동 분기 실행 = `GSM_CONTEXT_HEALTH_FORCE=1`(= new-cycle 게이팅 무관 즉시 평가 · 분기 guard 는 유지).
+  - **수기 잔여**: `conflicting_sot` / `buried_ratio` = 판정 자동화 난이도 ↑ → master cycle 측 수기 §2 갱신(= `automation-policy.md` Inspection 수동 의무 정합).
 - **`stop-reflect.sh`**(= `cycle-discipline.md §19`) self-improving loop 이 buried/conflict 누적 감지 시 silent 후보 → 본 file 갱신 trigger.
-- 유지 주체 = master cycle (자동 hook 신설 X · `automation-policy.md` Inspection = 수동 의무 정합).
+- 유지 주체 = master cycle + 자동 surface(= 기존 GSM Stop hook 확장 · **신 hook 신설 X** · `automation-policy.md` Transport=측정/surface 자동 + Inspection=판정 수동 정합).
 
 ---
 
@@ -104,3 +118,5 @@
 - 2026-06-01 · MASTER-CLI-CONTEXT-OPT-PHASE4-SSOT-SWEEP-METRICS-001 · 본 file 신설(= 항상로드 char 4 지표 + 환각 패턴 3 지표 정의 + Phase 0~4 trajectory + cadence). H6 sweep = SoftBudget canonical 1건 actioned(§G row 6) + DependencyDecision 1건 defer + 23 footer 보일러플레이트 비-dedup. master only(propagation X).
 - 2026-06-02 · MASTER-CLI-GSM-MEASUREMENT-LAYER-001 · GSM Metric family 재위치(= §0 GSM 귀속 신설 + 헤더 blurb reframe · `gsm-measurement.md §2` context 건강 family 귀속). 기존 2 family(항상로드 char + 환각 패턴) 측정 항목·값 무변경(= 위치/귀속만 GSM 정합 · program-level · 행동 무관). master-only(propagation X 유지).
 - 2026-06-02 · MASTER-CLI-DEPENDENCY-DECISION-RECONCILE-001 · `conflicting_sot` 1(defer)→0(actioned). DependencyDecision 8항 3 framing(workflow-core/code-principles/CHECKLIST) → `DEPENDENCY_DECISION_CHECKLIST.md` canonical + UI 억제 → `ui-ux-analysis.md` canonical 로 reconcile(= `rule-routing-index §G` row 7+8 · grow-only merge · 정보 소실 0 · UI 강도 보존). 지표 정의(§1) 무변경(= 환각 패턴 측정값만 갱신) · master-only(propagation X).
+- 2026-06-04 · MASTER-CLI-GSM-CONTEXT-HEALTH-ABSORB-001 · context-health 측정 **자동화 흡수**(= 신 hook 신설 X · 기존 `measure-gsm-cycle.sh` GSM Stop hook 확장 · settings.json 무접촉). §3.1 분기 자동 측정 trajectory(append-only · quarter-bucket guard · idempotent) 신설 + §4 cadence 에 자동화/수기 경계 명문화. 자동 범위 = char 4(codepoint) + `stale_pointer`(file-link grep) · 수기 잔여 = `conflicting_sot`/`buried_ratio`(판정 난이도 ↑). hook = 5-repo byte-identical 전파(= context-health 블록 포함) · 본 file(append 대상) = master-only(propagation X 유지). 지표 정의(§1) + Phase 0~4 trajectory(§3) 무변경(= 자동화 면만 추가). proxy band 라벨 보존(over-claim 금지).
+| 2026-06-04 14:01 | 8000 | 52652 | 25730 | 19260 | 0 | manual | manual | MASTER-CLI-WORKFLOW-ADOPTION-POLICY-002 | <!-- ch-auto 2026-06-04 --> |
