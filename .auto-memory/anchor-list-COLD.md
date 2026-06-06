@@ -36,7 +36,7 @@
 
 **precedent**: `cycle-discipline.md §13` (= Claude Code 환경 정합 default · self-test 3 항목 baseline default) + `CLAUDE-CODE-LATEST-CHASE-001` trail default
 
-#### A12 — App-foundation 6-repo scope
+#### A12 — App-foundation 5-repo scope
 
 **Purpose**: 5-repo 영역 (= master + app-foundation + GB + GD + GT default) cli infra propagation + verify-sync 영역 cover 의무 default — app-foundation 누락 사고 (= `MASTER-CLEANUP-PROPAGATION-BUNDLE-001` default) 회피 default
 

@@ -78,6 +78,23 @@ FORBIDDEN_CHECK = [
     "info", "gen", "util", "utils", "helper", "repo", "db", "dict", "act",
 ]
 
+# Framework / library API identifiers (abbreviation-policy.md §3.8 — 프레임워크/
+# 라이브러리 API 명 자동 포함). PascalCase SDK type names whose camelCase component
+# matches a forbidden token (e.g. 'params' in 'BillingFlowParams') but are official
+# framework API names, not user-defined abbreviations.
+# Disk-grounded seed: GB PlayBillingRepository.kt L21/137/178/208 (GB-BILLING-CLIENT-001).
+# Extend per abbreviation-policy.md §3.9 procedure (산업 표준 증빙 + master cycle).
+ALLOWED_FRAMEWORK_IDENTIFIERS = {
+    # Google Play Billing Library (3rd-party SDK)
+    "BillingFlowParams",
+    "ConsumeParams",
+    "ProductDetailsParams",
+    "QueryProductDetailsParams",
+    "QueryPurchasesParams",
+    "AcknowledgePurchaseParams",
+    "PendingPurchasesParams",
+}
+
 # Limit content size to avoid performance issues on large files
 content = content[:50000]
 
@@ -107,7 +124,23 @@ for lineno, line in enumerate(content.split('\n'), 1):
             r'(?<![A-Za-z0-9_])' + re.escape(token) + r'(?![a-z0-9_])'
             + r'|(?<=[a-z])' + re.escape(title) + r'(?![a-z])'
         )
-        if re.search(pattern, line):
+        token_hit = False
+        for m in re.finditer(pattern, line):
+            # Extract the contiguous identifier containing this match, then skip
+            # if it is a framework / library API name (abbreviation-policy.md §3.8).
+            # e.g. 'BillingFlowParams' (Play Billing SDK) matches 'params' but is a
+            # framework type name, not a user-defined abbreviation.
+            start = m.start()
+            while start > 0 and (line[start - 1].isalnum() or line[start - 1] == '_'):
+                start -= 1
+            end = m.end()
+            while end < len(line) and (line[end].isalnum() or line[end] == '_'):
+                end += 1
+            if line[start:end] in ALLOWED_FRAMEWORK_IDENTIFIERS:
+                continue  # framework API name — §3.8 auto-include
+            token_hit = True
+            break
+        if token_hit:
             hits.append((lineno, token, stripped[:80]))
             break  # one hit per line is sufficient
 

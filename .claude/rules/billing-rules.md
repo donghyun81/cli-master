@@ -51,7 +51,7 @@
 
 ## §5 entitlement / 잔액 paradigm (소비형 인앱 상품)
 
-- GT 의 한입 티켓 = Google Play 소비형 인앱 상품 (consumable in-app product)
+- 자식별 ticket 상품 = Google Play 소비형 인앱 상품 (consumable in-app product · 실 구현 예: GB `rest_tickets` 잔액 충전)
 - `consumePurchase` 호출 의무 (consumable 미consume 시 재구매 불가)
 - entitlement 잔액 = Supabase DB 단일 진실 (RLS 의무 · 클라이언트 조작 불가)
 - 클라이언트 측 잔액 = 캐시 (UI 표시 용도) · 결제 / 사용 시점 = 서버 검증 의무

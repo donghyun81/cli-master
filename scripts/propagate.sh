@@ -96,7 +96,10 @@ if [ "$PROPAGATE_ALL" = 1 ]; then
     ! -name '.DS_Store' \
     ! -name 'settings.local.json' \
     ! -path './.git/*' \
-    ! -path 'docs/release-readiness/*' 2>/dev/null)
+    ! -path 'docs/release-readiness/*' \
+    ! -path 'docs/agent/audits/*' 2>/dev/null)
+  # docs/agent/audits/* = master-only 점-측정 audit → --all propagation 제외
+  #   (verify-sync.sh 매트릭스 정합 · MASTER-PRELAUNCH3-SMALLFIX-001)
   # C5 박힘: root 공통 파일 5종 명시 추가
   for rf in .editorconfig .mcp.json gradle.properties gradlew gradlew.bat; do
     [ -f "$rf" ] && FILES+=("$rf")

@@ -25,7 +25,7 @@
 
 ### 1.2 progress roadmap (수기 판단 영역)
 
-**master — bootstrap 마감 → 정상 운영.** 초기 critical path (app-foundation 신설 → propagation 6-repo 확장 → repo-config SoT → architecture-foundation link → release-checklist template) 는 2026-05-11~12 에 끝났다. 그 뒤로 master 는 cli infra 를 다듬는 named cycle 을 이어 가는 정상 운영 단계다. 진행 이력의 live 원장 = `CLAUDE.md §15` (최근분 hot) + `.auto-memory/master-cycle-history-COLD.md` (전체 누적).
+**master — bootstrap 마감 → 정상 운영.** 초기 critical path (app-foundation 신설 → propagation 5-repo 확장 → repo-config SoT → architecture-foundation link → release-checklist template) 는 2026-05-11~12 에 끝났다. 그 뒤로 master 는 cli infra 를 다듬는 named cycle 을 이어 가는 정상 운영 단계다. 진행 이력의 live 원장 = `CLAUDE.md §15` (최근분 hot) + `.auto-memory/master-cycle-history-COLD.md` (전체 누적).
 
 **자식 출시 현황.** 각 자식의 출시 진척은 그 repo 가 직접 보유한 `docs/release-readiness/LAUNCH-STATUS.md` 가 단일 진실이다. 본 master 문서는 그 수치를 복제하지 않는다 — 복제가 곧 staleness 재발원이기 때문이다.
 
@@ -65,7 +65,7 @@ drift 검증: `bash scripts/verify-sync.sh` (master → 자식 byte-identical �
 | 구 ID | 항목 | 현 상태 |
 |---|---|---|
 | MASTER-T01 | app-foundation repo 신설 | ✓ 마감 (`MASTER-APP-FOUNDATION-SCAFFOLD-001` · 2026-05-11) |
-| MASTER-T02 | propagate / verify-sync 6-repo 확장 | ✓ 마감 (동 cycle) |
+| MASTER-T02 | propagate / verify-sync 5-repo 확장 | ✓ 마감 (동 cycle) |
 | MASTER-T03 | release-checklist.template.md 신설 | ✓ 마감 — `docs/templates/release-checklist.template.md` 실재 |
 | MASTER-T04 | 13 architecture → foundation link | ✓ 마감 (`MASTER-ARCHITECTURE-FOUNDATION-LINK-001`) |
 | MASTER-T05 | repo-config.sh PROTECTED_FILES / CHILD_REPOS | ✓ 마감 (`MASTER-REPO-CONFIG-SOT-001`) |
@@ -120,7 +120,7 @@ drift 검증: `bash scripts/verify-sync.sh` (master → 자식 byte-identical �
 
 ## 7. 한계 / 모름
 
-- foundation propagation 메커니즘 = cp byte-identical 로 확정 (app-foundation 신설 + propagate.sh 6-repo 확장 마감). submodule / Maven publish 는 미채택.
+- foundation propagation 메커니즘 = cp byte-identical 로 확정 (app-foundation 신설 + propagate.sh 5-repo 확장 마감). submodule / Maven publish 는 미채택.
 - iOS 빌드 활성화 시점 = 자식 결정 (foundation `iosApp/` scaffold 후). 현 baseline = Android staging flavor 단일.
 - 출시 마감일 = 미명시 (사용자 영역) → critical path 정체 7 일 = kill-switch 트리거 (§5).
 - 자식 도메인 task ID `<repo>-T<NN>` = Cowork 추천 명명. 사용자 변경 시 일괄 치환 cycle.

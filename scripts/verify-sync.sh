@@ -130,10 +130,14 @@ else
     ! -name 'settings.local.json' \
     ! -path './.git/*' \
     ! -path '*skills/run-*' \
-    ! -path 'docs/release-readiness/*' 2>/dev/null | sort)
+    ! -path 'docs/release-readiness/*' \
+    ! -path 'docs/agent/audits/*' 2>/dev/null | sort)
   # skills/run-* = 자식별 차별화 launch recipe (run-master/foundation/GB/GD/GT · 각 자식 한정 ·
   #   propagation X · §Q-2 / P0-4 NATIVE-RUN-VERIFY-SANDBOX) → byte-identical/MISS 검증 제외
   #   (MASTER-CLI-VERIFY-SYNC-DIFFERENTIATION-SCOPE-001)
+  # docs/agent/audits/* = master-only 점-측정 audit (TESTING-BACKFILL-AUDIT.md ·
+  #   자식 propagation 없음 · docs/release-readiness 격리 선례와 같은 결) → MISS 오인 제외
+  #   (MASTER-PRELAUNCH3-SMALLFIX-001)
   # C5 박힘: root 공통 파일 명시 추가 (gradle.properties 제외 = domain-specific · L1-3)
   for rf in .editorconfig .mcp.json gradlew gradlew.bat; do
     [ -f "$rf" ] && CHECK_FILES+=("$rf")
