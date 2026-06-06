@@ -15,16 +15,16 @@
 # 환경 변수 override 가능 (사용자 측 export 시 우선 채택):
 #   PARENT_DIR     기본: $HOME/AndroidStudioProjects
 #   MASTER_DIR     기본: $PARENT_DIR/claude-cli-master
-#   TARGET_REPOS   기본: "GentlyBreath GentlyDay GentlyTable app-foundation"
+#   TARGET_REPOS   기본: "GentlyBreath GentlyDay GentlyTable app-foundation gently-product-docs"
 #
 # 변경 정책:
-#   - master cycle 신설 + 4-repo propagation 의무 (`cycle-discipline.md` §15 패턴 1)
+#   - master cycle 신설 + 5-repo propagation 의무 (`cycle-discipline.md` §15 패턴 1)
 #   - 자식 repo 직접 수정 금지
 
 # === default 변수 ===
 : "${PARENT_DIR:=$HOME/AndroidStudioProjects}"
 : "${MASTER_DIR:=$PARENT_DIR/claude-cli-master}"
-: "${TARGET_REPOS:=GentlyBreath GentlyDay GentlyTable app-foundation}"
+: "${TARGET_REPOS:=GentlyBreath GentlyDay GentlyTable app-foundation gently-product-docs}"
 
 # === PROTECTED_FILES (5 종 보호 file 강제 byte-identical · master ↔ 4 자식) ===
 # 본 baseline = `.auto-memory/protected-file-hashes.md` 측 sha-256 인용.
