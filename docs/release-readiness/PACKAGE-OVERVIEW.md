@@ -1,31 +1,36 @@
-# 패키지 출시 거시 현황 — 5-repo (master + app-foundation + 자식 3)
+# 패키지 출시 거시 현황 — 6-repo (master + app-foundation + 자식 3 + product-docs)
 
-> **수기 갱신 SoT · 자동 생성 아님.** 본 문서는 사람이 직접 손보는 거시 출시 현황판이다. 박제 시점 = 2026-06-02 (`MASTER-CLI-PACKAGE-OVERVIEW-HYBRID-REFRESH-001`). HEAD sha · 보호 파일 sha 처럼 자주 바뀌는 값은 여기에 박지 않고 live baseline 으로 가리킨다 (§1 · §2 의 pointer). 본 문서 갱신 trigger = §6.
+> **수기 갱신 SoT · 자동 생성 아님.** 본 문서는 사람이 직접 손보는 거시 출시 현황판이다. 박제 시점 = 2026-06-02 (`MASTER-CLI-PACKAGE-OVERVIEW-HYBRID-REFRESH-001`) · 6-repo 정합 2026-06-06 (`MASTER-PACKAGE-OVERVIEW-6REPO-001`). HEAD sha · 보호 파일 sha 처럼 자주 바뀌는 값은 여기에 박지 않고 live baseline 으로 가리킨다 (§1 · §2 의 pointer). 본 문서 갱신 trigger = §6.
 >
-> **구성 (5-repo)**:
+> **구성 (6-repo)**:
 > - `claude-cli-master` — cli infra + 보호 파일 + 거시 propagation 의 단일 진실 (master)
 > - `app-foundation` — 공유 KMP/CMP foundation (`shared/*` + `core/*`) · 2026-05-11 신설 마감 · 자식 3 의 import source
 > - `GentlyBreath` / `GentlyDay` / `GentlyTable` — 도메인 자식 (호흡 / 일상 / 식단)
+> - `gently-product-docs` — 공통 제품 기획·비전 문서 (`docs/PRODUCT-VISION-SOT.md` + `docs/PRODUCT-STRATEGY-SOT.md` = 자식 3 공통 상위 헌법) · 도메인 코드 X · 빌드 X · 출시 산출물 X · master 단방향 cli infra propagation 대상 (2026-06-06 신설 · `MASTER-PRODUCT-DOCS-REPO-001`)
+>
+> **제품/출시 판단 선행 정독** (pointer · 본문은 PDOCS 단일 SoT · 복제 금지): 비전 SoT(왜 만드나) `../../../gently-product-docs/docs/PRODUCT-VISION-SOT.md` → 전략 SoT(어떻게 이기나) `../../../gently-product-docs/docs/PRODUCT-STRATEGY-SOT.md`. 충돌 시 상위(비전) 우선.
 
 ---
 
 ## 1. baseline + progress
 
-### 1.1 5-repo HEAD — live baseline pointer (수기 박제 안 함)
+### 1.1 repo HEAD — live baseline pointer (수기 박제 안 함)
 
-현재 5-repo HEAD 는 본 문서에 적어 두지 않는다. 진입 시점 실측값을 아래에서 읽는다:
+현재 각 repo HEAD 는 본 문서에 적어 두지 않는다. 진입 시점 실측값을 아래에서 읽는다:
 
 | 위치 | 담는 내용 | 재생성 |
 |---|---|---|
-| 세션 진입 hook `instructions-loaded-baseline-verify.sh` | 진입 즉시 5-repo HEAD + 보호 5 sha 를 live 로 표면화 (가장 신선) | InstructionsLoaded 자동 |
-| `.ai/baseline-snapshot/latest.json` | 5-repo HEAD + cycle-discipline sha + settings sha + 보호 5 sha (세션마다 재생성) | `.claude/hooks/baseline-snapshot.sh` |
-| `.ai/nightly-baseline/latest.md` | 5-repo HEAD + 보호 5 sha 매트릭스 + cli infra drift 집계 (야간 cron) | `bash scripts/nightly-baseline-report.sh` |
+| 세션 진입 hook `instructions-loaded-baseline-verify.sh` | 진입 즉시 5-repo(빌드·코드 repo) HEAD + 보호 5 sha 를 live 로 표면화 (가장 신선) | InstructionsLoaded 자동 |
+| `.ai/baseline-snapshot/latest.json` | 5-repo(빌드·코드 repo) HEAD + cycle-discipline sha + settings sha + 보호 5 sha (세션마다 재생성) | `.claude/hooks/baseline-snapshot.sh` |
+| `.ai/nightly-baseline/latest.md` | 6-repo HEAD + 보호 5 sha 매트릭스 + cli infra drift 집계 (야간 cron) | `bash scripts/nightly-baseline-report.sh` |
 
 > 신선도 주의: snapshot = 세션 단위 / nightly = 하루 1회. 둘 다 intra-day lag 가능하다. 진입 직후 정확한 값이 필요하면 세션 hook 표면화 또는 `git rev-parse HEAD` 직접 측정이 가장 앞선다.
+>
+> repo 범위 주의: per-session 표면화(진입 hook + snapshot)는 빌드·코드 repo 5종(master + app-foundation + 자식 3)만 HEAD 를 surface 한다. `gently-product-docs`(빌드·도메인 코드 X · 제품 문서 전용)는 nightly(6-repo) + `verify-sync.sh`(6-repo)가 cli infra/보호 sha drift 를 커버한다.
 
 ### 1.2 progress roadmap (수기 판단 영역)
 
-**master — bootstrap 마감 → 정상 운영.** 초기 critical path (app-foundation 신설 → propagation 5-repo 확장 → repo-config SoT → architecture-foundation link → release-checklist template) 는 2026-05-11~12 에 끝났다. 그 뒤로 master 는 cli infra 를 다듬는 named cycle 을 이어 가는 정상 운영 단계다. 진행 이력의 live 원장 = `CLAUDE.md §15` (최근분 hot) + `.auto-memory/master-cycle-history-COLD.md` (전체 누적).
+**master — bootstrap 마감 → 정상 운영.** 초기 critical path (app-foundation 신설 → propagation 5-repo 확장 → repo-config SoT → architecture-foundation link → release-checklist template) 는 2026-05-11~12 에 끝났다. 그 뒤로 master 는 cli infra 를 다듬는 named cycle 을 이어 가는 정상 운영 단계다. 그 named cycle 중 하나로 2026-06-06 제품 비전·전략 문서 전용 repo `gently-product-docs` 가 신설돼 propagation 대상이 5→6-repo 로 확장됐다 (`MASTER-PRODUCT-DOCS-REPO-001` · 빌드·도메인 코드 없음). 진행 이력의 live 원장 = `CLAUDE.md §15` (최근분 hot) + `.auto-memory/master-cycle-history-COLD.md` (전체 누적).
 
 **자식 출시 현황.** 각 자식의 출시 진척은 그 repo 가 직접 보유한 `docs/release-readiness/LAUNCH-STATUS.md` 가 단일 진실이다. 본 master 문서는 그 수치를 복제하지 않는다 — 복제가 곧 staleness 재발원이기 때문이다.
 
@@ -36,19 +41,20 @@
 | GentlyBreath | 호흡 도메인 | `GentlyBreath/docs/release-readiness/LAUNCH-STATUS.md` |
 | GentlyDay | 일상 도메인 | `GentlyDay/docs/release-readiness/LAUNCH-STATUS.md` |
 | GentlyTable | 식단 도메인 | `GentlyTable/docs/release-readiness/LAUNCH-STATUS.md` |
+| gently-product-docs | 공통 제품 기획·비전 문서 | 출시 도메인 없음 · 본문 = `gently-product-docs/docs/PRODUCT-VISION-SOT.md` + `PRODUCT-STRATEGY-SOT.md` |
 
 ---
 
 ## 2. 보호 파일 5 종 — live baseline pointer (수기 sha 박제 안 함)
 
-보호 파일 5 종은 master ↔ 자식 5-repo byte-identical 강제 대상이다. 현재 sha 값은 본 문서에 박지 않고 아래를 가리킨다:
+보호 파일 5 종은 6-repo byte-identical 강제 대상이다 (master 단일 source ↔ 5 propagation target · `verify-sync.sh` 가 gently-product-docs 포함 enumeration). 현재 sha 값은 본 문서에 박지 않고 아래를 가리킨다:
 
 | 위치 | 담는 내용 |
 |---|---|
 | `.auto-memory/protected-file-hashes.md` | 보호 5종 sha-256 authoritative 기록 (master-only) + algorithm 분기 설명 |
 | `CLAUDE.md §14a` | 보호 5종 git-sha1 (40 char) cycle baseline |
-| `.ai/nightly-baseline/latest.md §3` | 5-repo × 보호 5종 정합 매트릭스 + drift 집계 |
-| `.ai/baseline-snapshot/latest.json` | 보호 5종 sha-256 (runtime enforce) |
+| `.ai/nightly-baseline/latest.md §3` | 6-repo × 보호 5종 정합 매트릭스 + drift 집계 |
+| `.ai/baseline-snapshot/latest.json` | 보호 5종 sha-256 (runtime enforce · 빌드·코드 repo 5종) |
 
 보호 5종 목록: `docs/schemas/ui-spec.schema.json` · `.claude/rules/uiux-sot-refresh.md` · `docs/design/design-sot-policy.md` · `.claude/rules/pencil-uiux-workflow.md` · `docs/design/pencil-sot-policy.md`.
 
@@ -74,19 +80,20 @@ drift 검증: `bash scripts/verify-sync.sh` (master → 자식 byte-identical �
 | MASTER-T08 | foundation-fork.template.md (신규 앱 fork) | ☐ 미신설 (P2 lazy) — 미래 앱 신설 trigger 시 |
 | MASTER-T09 | text degeneration mitigation 정책 + hook | ✓ 마감 (`MASTER-DEGENERATION-PREVENTION-POLICY-001`) |
 
-이후 진행분(RULE-ARCH 4-phase · CONTEXT-OPT 4-phase · KTLINT-WARN-GATE · POSTCYCLE-AUTOMATION · TESTING-STRATEGY · GSM-MEASUREMENT · DEPENDENCY-DECISION 등)은 `CLAUDE.md §15` + cold 이력을 본다.
+이후 진행분(RULE-ARCH 4-phase · CONTEXT-OPT 4-phase · KTLINT-WARN-GATE · POSTCYCLE-AUTOMATION · TESTING-STRATEGY · GSM-MEASUREMENT · DEPENDENCY-DECISION · PRODUCT-DOCS-REPO(6-repo 확장) · STRATEGY-ROUTING 등)은 `CLAUDE.md §15` + cold 이력을 본다.
 
 ---
 
-## 4. propagation matrix (자식 영향도 · 5-repo)
+## 4. propagation matrix (자식 영향도 · 6-repo)
 
 | 변경 영역 | 영향 repo | propagation 방식 |
 |---|---|---|
-| 보호 파일 5종 sha 변동 | 5-repo 전체 | `propagate.sh` byte-identical cp + `verify-sync.sh` |
-| cli infra (`.claude/` + scripts propagation 도구 등) | 권장 byte-identical (5-repo) | `propagate.sh` · drift 시 mitigation cycle |
+| 보호 파일 5종 sha 변동 | 6-repo 전체 | `propagate.sh` byte-identical cp + `verify-sync.sh` |
+| cli infra (`.claude/` + scripts propagation 도구 등) | 권장 byte-identical (6-repo) | `propagate.sh` · drift 시 mitigation cycle |
 | 13 architecture 문서 | 자식 reading order | 자식 CLAUDE.md link 검증 |
 | app-foundation feature 마감 | 자식 LAUNCH-STATUS 의존 task unblock | 자식 LAUNCH-STATUS §3 검증 |
 | 자식 도메인 코드 | 자기 repo 한정 | propagation 없음 |
+| 제품 비전·전략 SoT 본문 (`gently-product-docs/docs/`) | gently-product-docs 한정 | master 무관 (PDOCS 자체 보유 본문 · cli infra 아님 = propagation 대상 X) |
 | `release-readiness/` (본 문서 · 자식 LAUNCH-STATUS) | repo-specific | propagation 대상 제외 (master-only / 자식-local) |
 
 > 단방향 원칙: cli infra 는 master 단일 source. 자식 직접 수정 금지 (`CLAUDE.md §3·§4`).
