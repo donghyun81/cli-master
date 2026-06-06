@@ -231,6 +231,7 @@
 
 | 행동(지침 작업) | 의무 로드 지침 | 위치 |
 |---|---|---|
+| 제품 기획 · 기능·화면 신설 · 수익화·가격·티켓 정책 결정 | `PRODUCT-STRATEGY-SOT` (+ 상위 `PRODUCT-VISION-SOT` 병기 · 충돌 시 비전 우선) | `../gently-product-docs/docs/` |
 | 문서/지침 작성·수정·드리프트 감사 | `DOC_GOVERNANCE_WORKFLOW` + `DOC_TASK_TYPES` + `REPO_FIRST_INTAKE_WORKFLOW` | `docs/agent/process/` |
 | commit 메시지 작성 | `COMMIT_CONVENTION` | `docs/agent/process/` |
 | 신규 의존성 추가(libs.versions.toml) | `DEPENDENCY_DECISION_CHECKLIST`(8항목) | `docs/agent/architecture/` |
@@ -240,3 +241,4 @@
 | 신 도메인 산출물 작성 | 해당 `*.template.md`(api-spec / data-model / screen-flow / setup-guide / billing / release-checklist / ai-prompt-guide / pencil-dev-prompt) | `docs/templates/` |
 
 > architecture 13 지침(Model/Error/Testability/TDD/KOIN/Compose/COMMON_ARCH/SSOT_PRINCIPLES/LEGACY 등)은 §A L2 pointer + §C deviation + §G SSOT map 에 이미 routed — 본 §I 중복 등록 X(원칙 1). 자식 repo-local 지침(implementation-guide / setup / plan 등)은 자식 `CLAUDE.md` + `DOC_GOVERNANCE_WORKFLOW` 관할(별 영역).
+> **cross-repo pointer 주의**: `PRODUCT-STRATEGY-SOT` / `PRODUCT-VISION-SOT` 행의 위치 `../gently-product-docs/docs/` = sibling 상대 경로다. 본 색인이 6-repo byte-identical 로 배포되므로 어느 repo cwd 에서도 유효하다(master-relative `docs/...` 금지). 두 SoT = GB·GD·GT 공통 상위 제품 헌법(`gently-product-docs`)이자 rule 아닌 docs 지침 → §I 관할.
