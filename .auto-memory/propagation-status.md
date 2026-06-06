@@ -191,12 +191,8 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 
 ## Last verify-sync
 
-- timestamp: 2026-06-04T22:51:14+0900
-- pass: 162
+- timestamp: 2026-06-06T02:03:22+0000
+- pass: 160
 - drift: 0
-- miss: 4
-- exit: 1
-
-### Drift 상세
-
-- docs/agent/audits/TESTING-BACKFILL-AUDIT.md  master=5261ce3e6b17  GentlyBreath=MISS  GentlyDay=MISS  GentlyTable=MISS  app-foundation=MISS
+- miss: 0
+- exit: 0

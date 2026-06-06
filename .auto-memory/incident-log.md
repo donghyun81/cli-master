@@ -369,3 +369,11 @@
 - trail: open 영역 4: (1) MASTER-CLI-SUBSCRIPTION-AWARE-PARADIGM-OFFICIAL-VERIFY-NNN (= 2026-06-15 이후 default · 공식 announce 본문 정합 측정 후 본 §2.4 본문 정정 영역 발견 시 별 cycle) (2) MASTER-CLI-CROSS-REPO-ORCHESTRATOR-FIRST-USE-NNN (= 직전 cycle TODO 정합 · 본 §3.4 paradigm 정합 측정 default) (3) MASTER-CLI-INTAKE-ROUTER-FND-DRIFT-MITIGATION-NNN (= 직전 cycle TODO 정합 · foundation 측 intake-router.md drift) (4) MASTER-CLI-BASELINE-SNAPSHOT-FOUNDATION-ADD-NNN (= 직전 cycle TODO 정합 · baseline-snapshot.sh 신설).
 ```
 
+
+## 2026-05-22T17:35:13+0900
+- type: blocked-tasks
+-   - MASTER-LIBS-VERSIONS-CROSS-VERIFY-HOOK-001: 누락= VERIFY.md
+
+## 2026-05-22T17:35:44+0900
+- type: blocked-tasks
+-   - MASTER-LIBS-VERSIONS-CROSS-VERIFY-HOOK-001: 누락= VERIFY.md
