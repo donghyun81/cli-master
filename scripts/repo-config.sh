@@ -26,7 +26,7 @@
 : "${MASTER_DIR:=$PARENT_DIR/claude-cli-master}"
 : "${TARGET_REPOS:=GentlyBreath GentlyDay GentlyTable app-foundation gently-product-docs}"
 
-# === PROTECTED_FILES (5 종 보호 file 강제 byte-identical · master ↔ 4 자식) ===
+# === PROTECTED_FILES (5 종 보호 file 강제 byte-identical · master ↔ 5 propagation target = 6-repo) ===
 # 본 baseline = `.auto-memory/protected-file-hashes.md` 측 sha-256 인용.
 # 변동 시 = mitigation cycle (CLAUDE.md §16 + cycle-discipline.md §10).
 PROTECTED_FILES=(

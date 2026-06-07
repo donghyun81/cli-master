@@ -6,9 +6,9 @@
 > - `claude-cli-master` — cli infra + 보호 파일 + 거시 propagation 의 단일 진실 (master)
 > - `app-foundation` — 공유 KMP/CMP foundation (`shared/*` + `core/*`) · 2026-05-11 신설 마감 · 자식 3 의 import source
 > - `GentlyBreath` / `GentlyDay` / `GentlyTable` — 도메인 자식 (호흡 / 일상 / 식단)
-> - `gently-product-docs` — 공통 제품 기획·비전 문서 (`docs/PRODUCT-VISION-SOT.md` + `docs/PRODUCT-STRATEGY-SOT.md` = 자식 3 공통 상위 헌법) · 도메인 코드 X · 빌드 X · 출시 산출물 X · master 단방향 cli infra propagation 대상 (2026-06-06 신설 · `MASTER-PRODUCT-DOCS-REPO-001`)
+> - `gently-product-docs` — 공통 제품 기획·비전 문서 (`docs/PRODUCT-VISION-SOT.md` + `docs/PRODUCT-PRINCIPLES-SOT.md` + `docs/PRODUCT-STRATEGY-SOT.md` = 자식 3 공통 상위 헌법 위계 · `docs/OKR.md` = live 분기 운영 층) · 도메인 코드 X · 빌드 X · 출시 산출물 X · master 단방향 cli infra propagation 대상 (2026-06-06 신설 · `MASTER-PRODUCT-DOCS-REPO-001`)
 >
-> **제품/출시 판단 선행 정독** (pointer · 본문은 PDOCS 단일 SoT · 복제 금지): 비전 SoT(왜 만드나) `../../../gently-product-docs/docs/PRODUCT-VISION-SOT.md` → 전략 SoT(어떻게 이기나) `../../../gently-product-docs/docs/PRODUCT-STRATEGY-SOT.md`. 충돌 시 상위(비전) 우선.
+> **제품/출시 판단 선행 정독** (pointer · 본문은 PDOCS 단일 SoT · 복제 금지): 비전 SoT(왜 만드나) `../../../gently-product-docs/docs/PRODUCT-VISION-SOT.md` → 원칙 SoT(충돌 판정 규칙) `../../../gently-product-docs/docs/PRODUCT-PRINCIPLES-SOT.md` → 전략 SoT(어떻게 이기나) `../../../gently-product-docs/docs/PRODUCT-STRATEGY-SOT.md`. 충돌 시 상위 우선. 분기 OKR(전략 하위 live 운영 층) = `../../../gently-product-docs/docs/OKR.md`.
 
 ---
 
@@ -41,7 +41,7 @@
 | GentlyBreath | 호흡 도메인 | `GentlyBreath/docs/release-readiness/LAUNCH-STATUS.md` |
 | GentlyDay | 일상 도메인 | `GentlyDay/docs/release-readiness/LAUNCH-STATUS.md` |
 | GentlyTable | 식단 도메인 | `GentlyTable/docs/release-readiness/LAUNCH-STATUS.md` |
-| gently-product-docs | 공통 제품 기획·비전 문서 | 출시 도메인 없음 · 본문 = `gently-product-docs/docs/PRODUCT-VISION-SOT.md` + `PRODUCT-STRATEGY-SOT.md` |
+| gently-product-docs | 공통 제품 기획·비전 문서 | 출시 도메인 없음 · 본문 = `gently-product-docs/docs/PRODUCT-VISION-SOT.md` + `PRODUCT-PRINCIPLES-SOT.md` + `PRODUCT-STRATEGY-SOT.md` + `OKR.md` |
 
 ---
 
@@ -93,7 +93,7 @@ drift 검증: `bash scripts/verify-sync.sh` (master → 자식 byte-identical �
 | 13 architecture 문서 | 자식 reading order | 자식 CLAUDE.md link 검증 |
 | app-foundation feature 마감 | 자식 LAUNCH-STATUS 의존 task unblock | 자식 LAUNCH-STATUS §3 검증 |
 | 자식 도메인 코드 | 자기 repo 한정 | propagation 없음 |
-| 제품 비전·전략 SoT 본문 (`gently-product-docs/docs/`) | gently-product-docs 한정 | master 무관 (PDOCS 자체 보유 본문 · cli infra 아님 = propagation 대상 X) |
+| 제품 비전·원칙·전략 SoT + OKR 본문 (`gently-product-docs/docs/`) | gently-product-docs 한정 | master 무관 (PDOCS 자체 보유 본문 · cli infra 아님 = propagation 대상 X) |
 | `release-readiness/` (본 문서 · 자식 LAUNCH-STATUS) | repo-specific | propagation 대상 제외 (master-only / 자식-local) |
 
 > 단방향 원칙: cli infra 는 master 단일 source. 자식 직접 수정 금지 (`CLAUDE.md §3·§4`).
