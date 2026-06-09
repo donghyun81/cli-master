@@ -171,8 +171,8 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 | `.claude/rules/uiux-sot-refresh.md` | `ee377dc2ac32` | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `docs/design/design-sot-policy.md` | `e5e3fe165ec3` | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `.claude/settings.json` | `9696afb38b0c` | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `.claude/rules/workflow-core.md` | `c38ac0befafd` | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `.claude/rules/cycle-discipline.md` | `93394843ebaf` | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `.claude/rules/workflow-core.md` | `97e0f346b355` | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `.claude/rules/cycle-discipline.md` | `09eb17e940d6` | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `.claude/rules/pencil-automation.md` | `aedb79780211` | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `.claude/rules/reporting.md` | `f5de353a3b4f` | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `.claude/rules/routing-and-delegation.md` | `4b3acd696389` | ✓ | ✓ | ✓ | ✓ | ✓ |
@@ -191,7 +191,7 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 
 ## Last verify-sync
 
-- timestamp: 2026-06-09T15:51:03+0900
+- timestamp: 2026-06-10T01:20:44+0900
 - pass: 160
 - drift: 0
 - miss: 0
