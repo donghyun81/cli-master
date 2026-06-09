@@ -54,7 +54,7 @@ allowed-tools: Bash, Read, Edit, Write
 
 - `/review` 또는 `/review-task` 실행 후 REVIEW.md PASS 판정 default
 - paste-back 본문 발행 직전 default (= cycle 마감 step default)
-- cli session 측 본 paradigm §3 3 의무 영역 진입 default
+- cli session 측 본 paradigm §3 5 의무 영역 진입 default
 
 ### §2.2 자식 propagation cycle 마감 시점 (= lazy 가능 영역)
 
@@ -69,15 +69,17 @@ allowed-tools: Bash, Read, Edit, Write
 
 ---
 
-## §3 3 의무 영역
+## §3 5 의무 영역 (= 3 file 갱신 ①~③ + 2 검증 gate ④~⑤)
 
-본 paradigm 핵심 의무 영역 default. cli session 측 cycle 마감 시점 다음 3 file 영역 모두 갱신 의무:
+본 paradigm 핵심 의무 영역 default. cli session 측 cycle 마감 시점 다음 5 의무 영역(= 3 file 갱신 ①~③ + 2 검증 gate ④~⑤) 진입 의무:
 
 | # | 영역 | 본질 | 위치 |
 |---|---|---|---|
 | 1 | **LAUNCH-STATUS 갱신 의무 default** ⭐ | task 상태 ☐ → ✓ default · §1 baseline HEAD sha 갱신 default · 신 cycle ID + 마감 sha 인용 default | `docs/release-readiness/LAUNCH-STATUS.md` |
 | 2 | **`.ai/tasks/INDEX.md` 갱신 의무 default** | 신 task entry append default · cycle ID + 마감 sha + mtime 명시 default | `.ai/tasks/INDEX.md` |
 | 3 | **`.ai/tasks/<CYCLE-ID>.md` 신 task file 생성 의무 default** | 본 cycle outcome + scope + 결정 paradigm + paste-back 본문 default · INDEX 측 인용 default | `.ai/tasks/<CYCLE-ID>.md` |
+| 4 | **④ KR 귀속 검증 gate default** | §3 active initiative 전수 KR 태그 1+ default (= 고아 0 의무 · `[—] (future-phase · no Q3 KR)` 예외 허용) · 고아 발견 = 등재 거부 / 표면화 default | `docs/release-readiness/LAUNCH-STATUS.md` §3 |
+| 5 | **⑤ 완료분 always-fresh default** | cycle 마감 시 완료 task ☐ → ✓ 정정 default + 신규 완료분 등재 default (= STALE 재발 방지 · audit #3 보강) | `docs/release-readiness/LAUNCH-STATUS.md` §3 |
 
 ### §3.1 LAUNCH-STATUS 갱신 본질
 
@@ -99,6 +101,19 @@ allowed-tools: Bash, Read, Edit, Write
 - 결정 paradigm (= cli session 자율 영역 default + 사용자 본심 정합 default) default
 - paste-back 본문 default (= 6 섹션 default · `cycle-discipline.md §7` 정합 default)
 - INDEX 측 인용 default
+
+### §3.4 ④ KR 귀속 검증 gate 본질
+
+- §3 active initiative 전수 KR(OKR Key Result · `OKR.md`) 귀속 태그 1+ default (= 고아 initiative 0 의무)
+- 예외 허용 = `[—] (future-phase · no Q3 KR)` 명시 future-phase initiative (= 현 분기 KR 미귀속 정당 영역 default)
+- 고아 발견(= KR 태그 부재 + future-phase 예외 미명시) = 등재 거부 또는 표면화 default (= audit #4 류 = KR 미귀속 출시 task 차단)
+- KR ↔ initiative 귀속 = 제품 SoT `OKR.md`(전략 하위 live 분기 운영 층 · `../gently-product-docs/docs/`) 단일 SoT 참조 default (= 본 gate = 귀속 *검증*만 · OKR 본문 편집 아님 default)
+
+### §3.5 ⑤ 완료분 always-fresh 본질
+
+- cycle 마감 시점 §3 측 완료 task 상태 ☐ → ✓ 정정 default (= STALE = 완료분이 ☐ 잔존하는 drift 재발 방지)
+- 신규 완료분 등재 default (= 본 cycle 마감 deliverable 가 §3 미등재면 등재 + ✓)
+- §A upstream 등재(plan)와 짝 default = upstream 등재(신규 식별) + downstream always-fresh(완료) 양단 차단 (= `workflow-core.md` §신규 출시 deliverable 등재 정합)
 
 ---
 
@@ -122,7 +137,7 @@ allowed-tools: Bash, Read, Edit, Write
 
 본 paradigm 본질 = self-consistent default · 본 skill 진입 cycle 측 paste-back 자체 = 본 paradigm 측 사례 default.
 
-단 master cli infra cycle = LAUNCH-STATUS file 부재 default + `.ai/tasks/` 영역 부재 default (= 자식 도메인 영역 default) → master cycle 측 3 의무 영역 진입 X default (= 자식 도메인 cycle 측 본 paradigm 본질 사례 default).
+단 master cli infra cycle = LAUNCH-STATUS file 부재 default + `.ai/tasks/` 영역 부재 default (= 자식 도메인 영역 default) → master cycle 측 5 의무 영역 진입 X default (= 자식 도메인 cycle 측 본 paradigm 본질 사례 default).
 
 ### §4.4 `cycle-discipline.md` §20 DocSync 정합 default
 
@@ -228,5 +243,6 @@ allowed-tools: Bash, Read, Edit, Write
 
 - 2026-05-22 · `MASTER-CLI-LAUNCH-STATUS-AUTO-SYNC-PARADIGM-001` · 직전 rule (`.claude/rules/launch-status-auto-sync.md`) 신설 (= paradigm 본질 + trigger 조건 + 3 의무 영역 + verify 의무 본문 + cli session 자율 paradigm + STOP 조건 + 적용 영역 + paste source authoring 영역 + commit body 본문 + 인접 paradigm 정합 default) + `cycle-discipline.md` §25 pointer 추가 default + CLAUDE.md §15 entry append default + 5-repo byte-identical propagation default
 - 2026-05-26 · `MASTER-CLI-SKILLS-MIGRATION-PHASE-1-001` · 본 skill 신설 default (= 직전 rule 본문 본질 보존 default · skill paradigm 정합 default · trigger 시점 lazy load default · `.claude/rules/launch-status-auto-sync.md` 측 thin pointer 갱신 default)
+- 2026-06-09 · `MASTER-CLI-P2-MECHANISM-001` · §C 의무 3 → 5 확장 (= ④ KR 귀속 검증 gate + ⑤ 완료분 always-fresh 추가 · §3 header + §2.1/§4.3 count 정합 + §3.4/§3.5 subsection 신설). Delivery Layer 재설계 Phase 2 (= 추적 2-세계 분리 차단 메커니즘 3 중 §C). 동반 (별 file): `workflow-core.md` §A(upstream 등재) + `rule-routing-index.md` §B(SoT→task drift trigger) + `cycle-discipline.md` §25.2 mirror 5 정합. 6-repo byte-identical propagation.
 - precedent: `MASTER-CLI-RUNTIME-CRASH-MITIGATION-PROCESS-PARADIGM-001` (2026-05-22 H32 마감 default · self-contained 11 section format default · 본 skill format 차용 default)
 - trigger baseline: H32-H34 마감 사이클 측 LAUNCH-STATUS HEAD drift 누적 default (= GB 14 commits / GD 18 commits / GT 12 commits drift default) + INDEX 갱신 drift (= GD 4 days 누락 / GT 6 days 누락 default) + 신 task file 누락 (= GB 2 / GD 0 / GT 1 default)

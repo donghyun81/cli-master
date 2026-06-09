@@ -663,21 +663,23 @@ verify 의무 본문 = step 7 핵심 영역 default (= compile + install + monke
 
 ### 25) LAUNCH-STATUS + INDEX + task file auto-sync paradigm (= 2026-05-22 신설 · `MASTER-CLI-LAUNCH-STATUS-AUTO-SYNC-PARADIGM-001`)
 
-> 본 § = 자식 repo (= GB / GD / GT + app-foundation) 측 cycle REVIEW PASS 시점 cli session 측 LAUNCH-STATUS + INDEX + task file 갱신 의무 paradigm 명시 영역 default. 본문 단일 SoT = [`launch-status-auto-sync.md`](./launch-status-auto-sync.md) (= trigger 기반 paradigm + 3 의무 영역 + paste-back verify 의무 본문 + cli session 자율 paradigm + STOP 조건 + paste source authoring 영역 default).
+> 본 § = 자식 repo (= GB / GD / GT + app-foundation) 측 cycle REVIEW PASS 시점 cli session 측 LAUNCH-STATUS + INDEX + task file 갱신 의무 paradigm 명시 영역 default. 본문 단일 SoT = [`launch-status-auto-sync.md`](./launch-status-auto-sync.md) → [`launch-status-sync` skill](../skills/launch-status-sync/SKILL.md) (= trigger 기반 paradigm + 5 의무 영역 + paste-back verify 의무 본문 + cli session 자율 paradigm + STOP 조건 + paste source authoring 영역 default).
 
 #### 25.1 paradigm 본질
 
 - trigger 기반 default (= 자식 cycle REVIEW PASS 시점 default · paste-back 본문 발행 직전 시점 default · 매 cycle 마감 시점 catch-up drift 회피 default)
-- cli session 측 LAUNCH-STATUS + INDEX + task file 갱신 의무 default (= 3 file 영역 default)
+- cli session 측 LAUNCH-STATUS + INDEX + task file 갱신 의무 default (= 3 file 갱신 ①~③ + 2 검증 gate ④~⑤ = 5 의무 영역 default · 본문 SoT = `launch-status-sync` skill §3)
 - paste-back `[EC]` 섹션 측 갱신 verify 본문 명시 default · `[Diff]` 섹션 측 갱신 file list 명시 default
 
-#### 25.2 3 의무 영역
+#### 25.2 5 의무 영역 (= 본문 SoT mirror · `launch-status-sync` skill §3)
 
 | # | 영역 | 본질 |
 |---|---|---|
 | 1 | LAUNCH-STATUS 갱신 default | `docs/release-readiness/LAUNCH-STATUS.md` 측 task 상태 ☐ → ✓ default · baseline HEAD sha 갱신 default · 신 cycle ID + 마감 sha 인용 default |
 | 2 | `.ai/tasks/INDEX.md` 갱신 default | 신 task entry append default · cycle ID + 마감 sha + mtime + 상태 명시 default |
 | 3 | `.ai/tasks/<CYCLE-ID>.md` 신 task file 생성 default | 본 cycle outcome + scope + 결정 paradigm + paste-back 본문 default · INDEX 측 인용 default |
+| 4 | ④ KR 귀속 검증 gate default | §3 active initiative 전수 KR 태그 1+ default (= 고아 0 · `[—] (future-phase · no Q3 KR)` 예외 허용) · 고아 = 등재 거부 / 표면화 default (= MASTER-CLI-P2-MECHANISM-001 추가) |
+| 5 | ⑤ 완료분 always-fresh default | cycle 마감 시 완료 task ☐ → ✓ 정정 + 신규 완료분 등재 default (= STALE 재발 방지 · MASTER-CLI-P2-MECHANISM-001 추가) |
 
 #### 25.3 trigger 본질 + precedent
 
