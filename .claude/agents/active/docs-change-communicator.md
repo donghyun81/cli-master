@@ -28,7 +28,7 @@ tools: Read, Glob, Grep, Write, Edit
 3. **운영 레이어 문서**(docs/agent/solutions/README.md 등)가 최신인가?
 4. Task 보고서가 완결되었는가? (EVIDENCE, PLAN, VERIFY, REVIEW)
 5. `.ai/tasks/INDEX.md` Status가 정확한가?
-6. 자식 repo **출시 영역 task 표** (`docs/release-readiness/LAUNCH-STATUS.md`) 안 본 cycle 영향 항목 갱신 필요한가? (= next release 영역 task 진척 / 마감 / 신규 추가 본질 정합)
+6. 자식 repo **출시 영역 task 표** (`docs/release-readiness/INITIATIVES.md`) 안 본 cycle 영향 항목 갱신 필요한가? (= next release 영역 task 진척 / 마감 / 신규 추가 본질 정합)
 7. 자식 repo **헌법** (`docs/CLAUDE.md` 또는 자식 root `CLAUDE.md`) 본문이 본 cycle 변경과 정합인가? (= 도메인 본문 / cli infra header / propagation baseline)
 8. 자식 repo **setup 가이드** (`docs/setup/**`) 안 환경 / dependency / 빌드 절차 갱신 필요한가? (= 새 환경변수 / 신규 라이브러리 / 빌드 step 변경)
 

@@ -454,7 +454,7 @@ cli infra 수정 필요?
 
 ### 20) DocSync 단계 본문 (= 자식 repo 출시 docs 영역 명시 · 2026-05-19 신설 · `MASTER-CLI-DOCS-AUTOSYNC-PARADIGM-001`)
 
-> 본 § = `workflow-core.md` §단계 흐름 안 DocSync 단계 본문 정합 + 매 cycle 마감 step 안 docs 갱신 의무 영역 단일 SoT. paste source baseline = H24 finding (= 3-repo 측 `LAUNCH-STATUS.md` + `docs/CLAUDE.md` + `docs/setup/*` 영역 7~8 일 stale 누적 default · 사용자 manual 갱신 영역 default).
+> 본 § = `workflow-core.md` §단계 흐름 안 DocSync 단계 본문 정합 + 매 cycle 마감 step 안 docs 갱신 의무 영역 단일 SoT. paste source baseline = H24 finding (= 3-repo 측 `INITIATIVES.md` + `docs/CLAUDE.md` + `docs/setup/*` 영역 7~8 일 stale 누적 default · 사용자 manual 갱신 영역 default).
 
 #### 20.1 갱신 대상 영역
 
@@ -464,7 +464,7 @@ cycle 마감 시 DocSync 단계 안 대상 본문:
 |---|---|---|
 | task 산출물 | 본 cycle 진행 EVIDENCE / PLAN / VERIFY / REVIEW (= 기존 영역) | `.ai/reports/<taskId>/*.md` |
 | 운영 레이어 | 아키텍처 / 프로세스 / 솔루션 (= 기존 영역) | `docs/agent/**` |
-| 자식 출시 docs (= 본 cycle 추가) | next release task 표 + 자식 헌법 + setup 가이드 | `docs/release-readiness/LAUNCH-STATUS.md` + `docs/CLAUDE.md` 또는 자식 root `CLAUDE.md` + `docs/setup/*` |
+| 자식 출시 docs (= 본 cycle 추가) | next release task 표 + 자식 헌법 + setup 가이드 | `docs/release-readiness/INITIATIVES.md` + `docs/CLAUDE.md` 또는 자식 root `CLAUDE.md` + `docs/setup/*` |
 
 #### 20.2 갱신 의무
 
@@ -661,21 +661,21 @@ verify 의무 본문 = step 7 핵심 영역 default (= compile + install + monke
 
 ---
 
-### 25) LAUNCH-STATUS + INDEX + task file auto-sync paradigm (= 2026-05-22 신설 · `MASTER-CLI-LAUNCH-STATUS-AUTO-SYNC-PARADIGM-001`)
+### 25) INITIATIVES + INDEX + task file auto-sync paradigm (= 2026-05-22 신설 · `MASTER-CLI-LAUNCH-STATUS-AUTO-SYNC-PARADIGM-001`)
 
-> 본 § = 자식 repo (= GB / GD / GT + app-foundation) 측 cycle REVIEW PASS 시점 cli session 측 LAUNCH-STATUS + INDEX + task file 갱신 의무 paradigm 명시 영역 default. 본문 단일 SoT = [`launch-status-auto-sync.md`](./launch-status-auto-sync.md) → [`launch-status-sync` skill](../skills/launch-status-sync/SKILL.md) (= trigger 기반 paradigm + 5 의무 영역 + paste-back verify 의무 본문 + cli session 자율 paradigm + STOP 조건 + paste source authoring 영역 default).
+> 본 § = 자식 repo (= GB / GD / GT + app-foundation) 측 cycle REVIEW PASS 시점 cli session 측 INITIATIVES + INDEX + task file 갱신 의무 paradigm 명시 영역 default. 본문 단일 SoT = [`initiatives-auto-sync.md`](./initiatives-auto-sync.md) → [`initiatives-sync` skill](../skills/initiatives-sync/SKILL.md) (= trigger 기반 paradigm + 5 의무 영역 + paste-back verify 의무 본문 + cli session 자율 paradigm + STOP 조건 + paste source authoring 영역 default).
 
 #### 25.1 paradigm 본질
 
 - trigger 기반 default (= 자식 cycle REVIEW PASS 시점 default · paste-back 본문 발행 직전 시점 default · 매 cycle 마감 시점 catch-up drift 회피 default)
-- cli session 측 LAUNCH-STATUS + INDEX + task file 갱신 의무 default (= 3 file 갱신 ①~③ + 2 검증 gate ④~⑤ = 5 의무 영역 default · 본문 SoT = `launch-status-sync` skill §3)
+- cli session 측 INITIATIVES + INDEX + task file 갱신 의무 default (= 3 file 갱신 ①~③ + 2 검증 gate ④~⑤ = 5 의무 영역 default · 본문 SoT = `initiatives-sync` skill §3)
 - paste-back `[EC]` 섹션 측 갱신 verify 본문 명시 default · `[Diff]` 섹션 측 갱신 file list 명시 default
 
-#### 25.2 5 의무 영역 (= 본문 SoT mirror · `launch-status-sync` skill §3)
+#### 25.2 5 의무 영역 (= 본문 SoT mirror · `initiatives-sync` skill §3)
 
 | # | 영역 | 본질 |
 |---|---|---|
-| 1 | LAUNCH-STATUS 갱신 default | `docs/release-readiness/LAUNCH-STATUS.md` 측 task 상태 ☐ → ✓ default · baseline HEAD sha 갱신 default · 신 cycle ID + 마감 sha 인용 default |
+| 1 | INITIATIVES 갱신 default | `docs/release-readiness/INITIATIVES.md` 측 task 상태 ☐ → ✓ default · baseline HEAD sha 갱신 default · 신 cycle ID + 마감 sha 인용 default |
 | 2 | `.ai/tasks/INDEX.md` 갱신 default | 신 task entry append default · cycle ID + 마감 sha + mtime + 상태 명시 default |
 | 3 | `.ai/tasks/<CYCLE-ID>.md` 신 task file 생성 default | 본 cycle outcome + scope + 결정 paradigm + paste-back 본문 default · INDEX 측 인용 default |
 | 4 | ④ KR 귀속 검증 gate default | §3 active initiative 전수 KR 태그 1+ default (= 고아 0 · `[—] (future-phase · no Q3 KR)` 예외 허용) · 고아 = 등재 거부 / 표면화 default (= MASTER-CLI-P2-MECHANISM-001 추가) |
@@ -685,11 +685,11 @@ verify 의무 본문 = step 7 핵심 영역 default (= compile + install + monke
 
 - 진입 trigger = 자식 cycle REVIEW PASS 시점 default (= 의무 영역 default) · 자식 propagation cycle 마감 시점 default (= lazy 가능 default) · catch-up cycle 진입 시점 default (= 별 cycle default)
 - precedent: `MASTER-CLI-RUNTIME-CRASH-MITIGATION-PROCESS-PARADIGM-001` (= H32 마감 default · self-contained 11 section format default)
-- baseline trigger: H32-H34 마감 사이클 측 LAUNCH-STATUS HEAD drift 누적 default (= GB 14 commits / GD 18 commits / GT 12 commits drift default) + INDEX 갱신 drift (= GD 4 days / GT 6 days 누락 default) + 신 task file 누락 (= GB 2 / GD 0 / GT 1 default)
+- baseline trigger: H32-H34 마감 사이클 측 INITIATIVES HEAD drift 누적 default (= GB 14 commits / GD 18 commits / GT 12 commits drift default) + INDEX 갱신 drift (= GD 4 days / GT 6 days 누락 default) + 신 task file 누락 (= GB 2 / GD 0 / GT 1 default)
 
 #### 25.4 명시 cycle 이력
 
-- 2026-05-22 · `MASTER-CLI-LAUNCH-STATUS-AUTO-SYNC-PARADIGM-001` · 본 § 신설 + `launch-status-auto-sync.md` 신 rule 신설 + 5-repo byte-identical propagation
+- 2026-05-22 · `MASTER-CLI-LAUNCH-STATUS-AUTO-SYNC-PARADIGM-001` · 본 § 신설 + `initiatives-auto-sync.md` 신 rule 신설 + 5-repo byte-identical propagation
 
 ---
 

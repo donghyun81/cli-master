@@ -16,10 +16,10 @@ allowed-tools: Bash, Read, Edit, Write
 > - `.claude/rules/cycle-discipline.md` §7 (commit body 6-section 표준 default)
 > - `.claude/rules/cycle-discipline.md` §15 패턴 1 (master 측 cli infra 단방향 propagation default)
 > - `.claude/rules/cycle-discipline.md` §23 (= Recommended option disk verification paradigm default · 동족 paradigm default)
-> - `.claude/rules/cycle-discipline.md` §25 (= LAUNCH-STATUS auto-sync paradigm default · format precedent default)
+> - `.claude/rules/cycle-discipline.md` §25 (= INITIATIVES auto-sync paradigm default · format precedent default)
 > - `.claude/rules/cycle-discipline.md` §26 (= 본 skill 측 pointer default)
 > - `.claude/skills/disk-verification/SKILL.md` (= 동족 paradigm 본질 default · cli session 측 disk 측정 의무 paradigm default · 본 skill 측 §8 자기 정합 paradigm 본질 정합 default)
-> - `.claude/skills/launch-status-sync/SKILL.md` (= format precedent default · self-contained 12 section format default)
+> - `.claude/skills/initiatives-sync/SKILL.md` (= format precedent default · self-contained 12 section format default)
 
 ---
 
@@ -174,9 +174,9 @@ allowed-tools: Bash, Read, Edit, Write
 
 본 paradigm 적용 cycle 측 paste source umbrella authoring 시점 자기 적용 의무 default. precedent cycle (= MASTER-CLI-PASTE-AUTHORING-DISK-VERIFICATION-PARADIGM-001) 측 paste source umbrella (= `cc-paste-MASTER-CLI-PASTE-AUTHORING-DISK-VERIFICATION-PARADIGM-001.md`) 자체 = 본 skill §3 3 의무 영역 본질 사례 default:
 
-- **§0.4 disk 측정 결과 인용 default** (= `paste-authoring-disk-verification` keyword grep `0 match` + `.claude/rules/` 측 기존 rule 수 `37 file` + `recommended-option-disk-verification.md` 존재 verify ✓ + `launch-status-auto-sync.md` 존재 verify ✓ + `cycle-discipline.md` 측 §26 영역 grep `0 match` + `scripts/propagate.sh` + `scripts/verify-sync.sh` 존재 verify ✓ default)
+- **§0.4 disk 측정 결과 인용 default** (= `paste-authoring-disk-verification` keyword grep `0 match` + `.claude/rules/` 측 기존 rule 수 `37 file` + `recommended-option-disk-verification.md` 존재 verify ✓ + `initiatives-auto-sync.md` 존재 verify ✓ + `cycle-discipline.md` 측 §26 영역 grep `0 match` + `scripts/propagate.sh` + `scripts/verify-sync.sh` 존재 verify ✓ default)
 - **§2.1 file path 모두 disk verify default** (= `.claude/rules/paste-authoring-disk-verification.md` 0 match grep verify ✓ + `.claude/rules/cycle-discipline.md` 존재 verify ✓ + `CLAUDE.md` 존재 verify ✓ default)
-- **§3 contract SoT byte-identical quote default** (= `launch-status-auto-sync.md` 12 section 인용 + `cycle-discipline.md §25` line 672~698 인용 + `recommended-option-disk-verification.md` §3 line 84~108 인용 default)
+- **§3 contract SoT byte-identical quote default** (= `initiatives-auto-sync.md` 12 section 인용 + `cycle-discipline.md §25` line 672~698 인용 + `recommended-option-disk-verification.md` §3 line 84~108 인용 default)
 
 본 paradigm 자체 = precedent cycle 측 첫 self-consistent 사례 default · 후속 cycle 측 본 skill 본질 적용 default.
 
@@ -187,11 +187,11 @@ allowed-tools: Bash, Read, Edit, Write
 | 인접 entry | 본질 |
 |---|---|
 | `.claude/rules/cycle-discipline.md` §23 (= Recommended option disk verification paradigm pointer) | 동족 paradigm default · cli session 측 disk 측정 의무 paradigm default · 본 skill = cowork chat 측 paste source authoring paradigm default · 별 file 분리 paradigm default |
-| `.claude/rules/cycle-discipline.md` §25 (= LAUNCH-STATUS auto-sync paradigm pointer) | format precedent default · self-contained 12 section format 차용 default |
+| `.claude/rules/cycle-discipline.md` §25 (= INITIATIVES auto-sync paradigm pointer) | format precedent default · self-contained 12 section format 차용 default |
 | `.claude/rules/cycle-discipline.md` §17 (= BASELINE 실측 표준) | 본 skill 측 §3.1 의무 1 본문 정합 default (= filename + content 동시 grep 의무 default) |
 | `.claude/rules/cycle-discipline.md` §7 (= commit body 6-section 표준) | 본 skill 측 §4.1 paste-back `[EC]` 섹션 정합 default |
 | `.claude/skills/disk-verification/SKILL.md` | 동족 paradigm 본질 default · 본 skill 측 §8 자기 정합 paradigm 본질 정합 default + §3 의무 영역 본문 정합 default |
-| `.claude/skills/launch-status-sync/SKILL.md` | format precedent default · self-contained 12 section default · 본 skill format 차용 default |
+| `.claude/skills/initiatives-sync/SKILL.md` | format precedent default · self-contained 12 section default · 본 skill format 차용 default |
 | `cowork-project-instructions v14 §B-1` | cowork chat 측 paste source 발행 책임 default · 본 skill paradigm 정합 default |
 | `cowork-project-instructions v14 §B-2` | 책임 분리 paradigm default · cli session 측 paste-back verify 책임 default · 본 skill §1.2 정합 default |
 | `cowork-project-instructions v14 §E-1` | prompt authoring cross-verify default · 본 skill paradigm 본질 정합 default |

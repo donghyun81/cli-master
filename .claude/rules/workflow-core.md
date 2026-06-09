@@ -32,7 +32,7 @@ implement → cleanup pass → Pre-DocSync Verify(PASS) → DocSync → /verify 
   `TODO.md` 에 deferred 로 적는다.
 - **DocSync** 는 cleanup pass + Pre-DocSync Verify PASS 이후, `/verify` 진입 전 단계다.
   갱신 대상 영역 = `.ai/reports/<taskId>/*.md` task 산출물 + `docs/agent/` 운영 레이어 문서 +
-  **자식 repo 출시 docs 영역** (= `docs/release-readiness/LAUNCH-STATUS.md` + `docs/CLAUDE.md`
+  **자식 repo 출시 docs 영역** (= `docs/release-readiness/INITIATIVES.md` + `docs/CLAUDE.md`
   또는 자식 root `CLAUDE.md` + `docs/setup/*`). 자식 출시 docs 갱신 본 paradigm =
   `MASTER-CLI-DOCS-AUTOSYNC-PARADIGM-001` 안 영구 정착. 세부 본문 = `cycle-discipline.md`
   §20 + `.claude/agents/active/docs-change-communicator.md` Key questions.
@@ -177,10 +177,10 @@ task-aware reading order와 공통 intake 절차:
 
 ### 신규 출시 deliverable 등재 (upstream · 추적 2-세계 분리 차단)
 
-/plan 단계에서 **사용자 대면 신규 deliverable(신규 기능 / 화면 / 수익화 task)** 이 식별되면, 해당 자식 출시 task 층(`docs/release-readiness/LAUNCH-STATUS.md` §3 · 개념 = INITIATIVES)에 **3축 분류 + KR 귀속 태그**로 등재하는 항목을 PLAN 산출물에 포함한다. 신규 출시 task 등재 = DocSync(downstream)뿐 아니라 plan(upstream) 의무다 — 구현 cycle 추적(`.ai/tasks/INDEX.md`)과 출시 목표 추적(§3)이 분리(2-세계)되어 신규 출시분이 §3 에 누락되는 drift 를 plan 단계에서 차단한다.
+/plan 단계에서 **사용자 대면 신규 deliverable(신규 기능 / 화면 / 수익화 task)** 이 식별되면, 해당 자식 출시 task 층(`docs/release-readiness/INITIATIVES.md` §3 · 개념 = INITIATIVES)에 **3축 분류 + KR 귀속 태그**로 등재하는 항목을 PLAN 산출물에 포함한다. 신규 출시 task 등재 = DocSync(downstream)뿐 아니라 plan(upstream) 의무다 — 구현 cycle 추적(`.ai/tasks/INDEX.md`)과 출시 목표 추적(§3)이 분리(2-세계)되어 신규 출시분이 §3 에 누락되는 drift 를 plan 단계에서 차단한다.
 
 - 대상: 사용자 대면 신규 기능 / 화면 / 수익화(결제·가격·티켓) task. 내부 리팩터 · cli infra · 문서 전용 = N/A 명시.
-- §3 등재 본문 + KR 귀속 검증 mechanics = downstream counterpart [`launch-status-sync` skill](../skills/launch-status-sync/SKILL.md)(REVIEW PASS 시점 ④ KR 귀속 gate · ⑤ 완료분 always-fresh) 단일 SoT. 본 § = upstream 게이트(plan 산출물 포함 의무)만 소유(본문 복제 0).
+- §3 등재 본문 + KR 귀속 검증 mechanics = downstream counterpart [`initiatives-sync` skill](../skills/initiatives-sync/SKILL.md)(REVIEW PASS 시점 ④ KR 귀속 gate · ⑤ 완료분 always-fresh) 단일 SoT. 본 § = upstream 게이트(plan 산출물 포함 의무)만 소유(본문 복제 0).
 
 ---
 

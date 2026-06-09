@@ -94,7 +94,7 @@ terminal C → cli session C (cwd = ~/AndroidStudioProjects/GentlyTable) → GT 
 **적용 case 예**:
 - "GB + GD + GT 측 동일 Auth bootstrap 신설 의뢰" (= 동족 자식 측 실 IMPL · 영역 2 권장 default)
 - "GB 측 Phase 2 Auth 도메인 무거운 IMPL cycle" (= GD/GT 무접촉 · 영역 2 단일 자식 진입)
-- "GT 측 daily-prescription 측 LAUNCH-STATUS 갱신 cycle" (= 다른 자식 무접촉 · 영역 2 단일 자식 진입)
+- "GT 측 daily-prescription 측 INITIATIVES 갱신 cycle" (= 다른 자식 무접촉 · 영역 2 단일 자식 진입)
 - "자식별 도메인 specific cycle 측 동시 운영" (= 사용자 본인 측 multi-tasking 영역 · 영역 2 다중 cli session 운영)
 
 #### 2.2.1 dispatch 체크리스트 (= cowork-role 측 영역 2 운영 step 본문)

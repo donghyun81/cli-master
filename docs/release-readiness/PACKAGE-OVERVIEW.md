@@ -32,15 +32,15 @@
 
 **master — bootstrap 마감 → 정상 운영.** 초기 critical path (app-foundation 신설 → propagation 5-repo 확장 → repo-config SoT → architecture-foundation link → release-checklist template) 는 2026-05-11~12 에 끝났다. 그 뒤로 master 는 cli infra 를 다듬는 named cycle 을 이어 가는 정상 운영 단계다. 그 named cycle 중 하나로 2026-06-06 제품 비전·전략 문서 전용 repo `gently-product-docs` 가 신설돼 propagation 대상이 5→6-repo 로 확장됐다 (`MASTER-PRODUCT-DOCS-REPO-001` · 빌드·도메인 코드 없음). 진행 이력의 live 원장 = `CLAUDE.md §15` (최근분 hot) + `.auto-memory/master-cycle-history-COLD.md` (전체 누적).
 
-**자식 출시 현황.** 각 자식의 출시 진척은 그 repo 가 직접 보유한 `docs/release-readiness/LAUNCH-STATUS.md` 가 단일 진실이다. 본 master 문서는 그 수치를 복제하지 않는다 — 복제가 곧 staleness 재발원이기 때문이다.
+**자식 출시 현황.** 각 자식의 출시 진척은 그 repo 가 직접 보유한 `docs/release-readiness/INITIATIVES.md` 가 단일 진실이다. 본 master 문서는 그 수치를 복제하지 않는다 — 복제가 곧 staleness 재발원이기 때문이다.
 
 | repo | 역할 | 출시 진척 단일 진실 |
 |---|---|---|
 | claude-cli-master | cli infra master | `CLAUDE.md §15` (master cycle 원장) |
 | app-foundation | 공유 foundation | 별도 출시 도메인 없음 (자식 import source) |
-| GentlyBreath | 호흡 도메인 | `GentlyBreath/docs/release-readiness/LAUNCH-STATUS.md` |
-| GentlyDay | 일상 도메인 | `GentlyDay/docs/release-readiness/LAUNCH-STATUS.md` |
-| GentlyTable | 식단 도메인 | `GentlyTable/docs/release-readiness/LAUNCH-STATUS.md` |
+| GentlyBreath | 호흡 도메인 | `GentlyBreath/docs/release-readiness/INITIATIVES.md` |
+| GentlyDay | 일상 도메인 | `GentlyDay/docs/release-readiness/INITIATIVES.md` |
+| GentlyTable | 식단 도메인 | `GentlyTable/docs/release-readiness/INITIATIVES.md` |
 | gently-product-docs | 공통 제품 기획·비전 문서 | 출시 도메인 없음 · 본문 = `gently-product-docs/docs/PRODUCT-VISION-SOT.md` + `PRODUCT-PRINCIPLES-SOT.md` + `PRODUCT-STRATEGY-SOT.md` + `OKR.md` |
 
 ---
@@ -76,7 +76,7 @@ drift 검증: `bash scripts/verify-sync.sh` (master → 자식 byte-identical �
 | MASTER-T04 | 13 architecture → foundation link | ✓ 마감 (`MASTER-ARCHITECTURE-FOUNDATION-LINK-001`) |
 | MASTER-T05 | repo-config.sh PROTECTED_FILES / CHILD_REPOS | ✓ 마감 (`MASTER-REPO-CONFIG-SOT-001`) |
 | MASTER-T06 | baseline-mismatch mitigation hook | ✓ 흡수 — `baseline-snapshot.sh` + `instructions-loaded-baseline-verify.sh` 실재 + anchor A1(baseline drift detection) 정착 |
-| MASTER-T07 | launch-status.template.md 신설 | ☐ 미신설 (P2 lazy) — 단 자식 3 은 LAUNCH-STATUS.md 를 템플릿 없이 이미 직접 운영 중 |
+| MASTER-T07 | initiatives.template.md 신설 | ☐ 미신설 (P2 lazy) — 단 자식 3 은 INITIATIVES.md 를 템플릿 없이 이미 직접 운영 중 |
 | MASTER-T08 | foundation-fork.template.md (신규 앱 fork) | ☐ 미신설 (P2 lazy) — 미래 앱 신설 trigger 시 |
 | MASTER-T09 | text degeneration mitigation 정책 + hook | ✓ 마감 (`MASTER-DEGENERATION-PREVENTION-POLICY-001`) |
 
@@ -91,10 +91,10 @@ drift 검증: `bash scripts/verify-sync.sh` (master → 자식 byte-identical �
 | 보호 파일 5종 sha 변동 | 6-repo 전체 | `propagate.sh` byte-identical cp + `verify-sync.sh` |
 | cli infra (`.claude/` + scripts propagation 도구 등) | 권장 byte-identical (6-repo) | `propagate.sh` · drift 시 mitigation cycle |
 | 13 architecture 문서 | 자식 reading order | 자식 CLAUDE.md link 검증 |
-| app-foundation feature 마감 | 자식 LAUNCH-STATUS 의존 task unblock | 자식 LAUNCH-STATUS §3 검증 |
+| app-foundation feature 마감 | 자식 INITIATIVES 의존 task unblock | 자식 INITIATIVES §3 검증 |
 | 자식 도메인 코드 | 자기 repo 한정 | propagation 없음 |
 | 제품 비전·원칙·전략 SoT + OKR 본문 (`gently-product-docs/docs/`) | gently-product-docs 한정 | master 무관 (PDOCS 자체 보유 본문 · cli infra 아님 = propagation 대상 X) |
-| `release-readiness/` (본 문서 · 자식 LAUNCH-STATUS) | repo-specific | propagation 대상 제외 (master-only / 자식-local) |
+| `release-readiness/` (본 문서 · 자식 INITIATIVES) | repo-specific | propagation 대상 제외 (master-only / 자식-local) |
 
 > 단방향 원칙: cli infra 는 master 단일 source. 자식 직접 수정 금지 (`CLAUDE.md §3·§4`).
 
@@ -106,7 +106,7 @@ drift 검증: `bash scripts/verify-sync.sh` (master → 자식 byte-identical �
 |---|---|---|
 | critical path 정체 ≥ 7 일 | master named cycle 또는 자식 P0 task 정체 | 별 cycle 신설 + 의존 재검토 |
 | 보호 파일 drift | `verify-sync.sh` exit 1 | 즉시 mitigation cycle (자식 byte-identical 복구) |
-| 자식 P0 progress 정체 (2 주간 0% 증가) | 자식 LAUNCH-STATUS §1 | scope 축소 또는 외부 의뢰 결정 cycle |
+| 자식 P0 progress 정체 (2 주간 0% 증가) | 자식 INITIATIVES §1 | scope 축소 또는 외부 의뢰 결정 cycle |
 | 자식 cli infra drift | master 측 sha 불일치 (`CLAUDE.md §5` STOP #6) | master 정정 cycle |
 
 > 구 게이트 "COWORK-PREP-BASELINE-MISMATCH ≥ 15회" 는 baseline 자동 표면화 hook(`instructions-loaded-baseline-verify.sh` + `baseline-snapshot.sh`)과 anchor A1 정착으로 해소됐다. 재발 시 hook enforce mode 승격으로 대응.
@@ -117,9 +117,9 @@ drift 검증: `bash scripts/verify-sync.sh` (master → 자식 byte-identical �
 
 | trigger | 행동 |
 |---|---|
-| 자식 cycle REVIEW PASS | 자식 LAUNCH-STATUS 갱신 (자식-local · `launch-status-auto-sync` skill) — 본 master 문서는 자식 수치를 복제하지 않으므로 무변경 |
+| 자식 cycle REVIEW PASS | 자식 INITIATIVES 갱신 (자식-local · `initiatives-auto-sync` skill) — 본 master 문서는 자식 수치를 복제하지 않으므로 무변경 |
 | 보호 파일 sha 변동 | `protected-file-hashes.md` + `CLAUDE.md §14a` resync + propagation cycle (§2 pointer 가 자동 추종) |
-| app-foundation feature 마감 | 자식 LAUNCH-STATUS COMMON-SETUP 인용 검증 |
+| app-foundation feature 마감 | 자식 INITIATIVES COMMON-SETUP 인용 검증 |
 | master cycle 마감 | `CLAUDE.md §15` entry append (§3 은 §15 를 가리킴 — 본 문서 무변경) |
 | 본 문서 framing / 구조 변경 | master cycle 신설 + 본 문서 직접 갱신 + 상단 박제 시점 갱신 |
 
@@ -131,4 +131,4 @@ drift 검증: `bash scripts/verify-sync.sh` (master → 자식 byte-identical �
 - iOS 빌드 활성화 시점 = 자식 결정 (foundation `iosApp/` scaffold 후). 현 baseline = Android staging flavor 단일.
 - 출시 마감일 = 미명시 (사용자 영역) → critical path 정체 7 일 = kill-switch 트리거 (§5).
 - 자식 도메인 task ID `<repo>-T<NN>` = Cowork 추천 명명. 사용자 변경 시 일괄 치환 cycle.
-- app-foundation 은 별도 LAUNCH-STATUS 가 없다 (공유 infra · 자식 import source 역할). 출시 도메인은 자식 3 만 보유.
+- app-foundation 은 별도 INITIATIVES 가 없다 (공유 infra · 자식 import source 역할). 출시 도메인은 자식 3 만 보유.
