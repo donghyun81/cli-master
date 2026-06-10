@@ -31,8 +31,8 @@ set -uo pipefail
 # Override: env var `PARENT_MOUNT_ROOT` 측 절대 path measurement.
 : "${PARENT_MOUNT_ROOT:=/Users/yundonghyeon/AndroidStudioProjects}"
 
-# 5-repo scan target (= cli infra 5-repo baseline · `MASTER-CLI-PARENT-MOUNT-PARALLEL-EXEC-PARADIGM-001` 정합).
-REPOS=("claude-cli-master" "app-foundation" "GentlyBreath" "GentlyDay" "GentlyTable")
+# 6-repo scan target (= cli infra 6-repo baseline · `MASTER-CLI-PARENT-MOUNT-PARALLEL-EXEC-PARADIGM-001` 정합 · gently-product-docs = pencil-sot dir 부재 → graceful skip).
+REPOS=("claude-cli-master" "app-foundation" "GentlyBreath" "GentlyDay" "GentlyTable" "gently-product-docs")
 
 # Trail target (= cli-master 단일 default).
 TRAIL_REPO="claude-cli-master"

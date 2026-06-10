@@ -4,7 +4,7 @@
 #
 # Purpose:
 #   진입(InstructionsLoaded) 시점에
-#     (1) 현재 5-repo HEAD + 보호 5 file sha 를 live 측정해 AI-readable 1-블록으로 표면화하고
+#     (1) 현재 6-repo HEAD + 보호 5 file sha 를 live 측정해 AI-readable 1-블록으로 표면화하고
 #         (= additionalContext · latest.json 신선도와 무관하게 매 진입 live 측정 →
 #            stale HEAD 인용 환각 vector 차단 · H3),
 #     (2) 보호 5 file sha 가 baseline(.ai/baseline-snapshot/latest.json)과 drift 하면 warn 한다 (A1/A2).
@@ -41,9 +41,9 @@ set -uo pipefail
 PROJECT_DIR="${CLAUDE_PROJECT_DIR:-$(pwd)}"
 BASELINE_FILE="$PROJECT_DIR/.ai/baseline-snapshot/latest.json"
 
-# mount root (= 5-repo 가 직접 놓인 디렉터리) robust 탐지 (baseline-snapshot.sh 와 동일 분기).
-#   §3.1 자식 단독 진입 → 5-repo = dirname(PROJECT_DIR) 하위
-#   §3.2 부모 mount 진입 → 5-repo = PROJECT_DIR 하위
+# mount root (= 6-repo 가 직접 놓인 디렉터리) robust 탐지 (baseline-snapshot.sh 와 동일 분기).
+#   §3.1 자식 단독 진입 → 6-repo = dirname(PROJECT_DIR) 하위
+#   §3.2 부모 mount 진입 → 6-repo = PROJECT_DIR 하위
 if [ -d "$PROJECT_DIR/claude-cli-master/.git" ]; then
   MOUNT_ROOT="$PROJECT_DIR"
 else
@@ -53,14 +53,14 @@ fi
 # stdin (hook event JSON) 소비 + 폐기 (gate 안 함 · settings.json matcher 가 담당).
 cat >/dev/null 2>&1 || true
 
-# live 측정(5-repo HEAD + 보호 5 sha) + baseline drift 비교 + additionalContext emit.
+# live 측정(6-repo HEAD + 보호 5 sha) + baseline drift 비교 + additionalContext emit.
 ILV_PROJECT="$PROJECT_DIR" ILV_MOUNT="$MOUNT_ROOT" ILV_BASELINE="$BASELINE_FILE" python3 - << 'PYEOF'
 import json, os, subprocess, sys
 
 mount_root = os.environ.get("ILV_MOUNT", "")
 baseline_path = os.environ.get("ILV_BASELINE", "")
 
-REPOS = ["claude-cli-master", "app-foundation", "GentlyBreath", "GentlyDay", "GentlyTable"]
+REPOS = ["claude-cli-master", "app-foundation", "GentlyBreath", "GentlyDay", "GentlyTable", "gently-product-docs"]
 PROTECTED = [
     "docs/schemas/ui-spec.schema.json",
     ".claude/rules/pencil-uiux-workflow.md",
@@ -78,7 +78,7 @@ def run(cmd):
         pass
     return ""
 
-# 1. live 5-repo HEAD (short)
+# 1. live 6-repo HEAD (short)
 head_parts = []
 for repo in REPOS:
     path = os.path.join(mount_root, repo)
@@ -126,7 +126,7 @@ else:
 # 4. always-fresh 1-블록 (= AI-readable baseline)
 block = "\n".join([
     "[baseline:always-fresh] InstructionsLoaded live 측정 (mount={})".format(mount_root),
-    "  5-repo HEAD: " + " · ".join(head_parts),
+    "  6-repo HEAD: " + " · ".join(head_parts),
     "  보호5 sha(12): " + " · ".join(sha_parts),
     "  보호 sha drift: " + drift_status,
 ])

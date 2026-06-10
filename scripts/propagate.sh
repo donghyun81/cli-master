@@ -106,6 +106,32 @@ if [ "$PROPAGATE_ALL" = 1 ]; then
   done
 fi
 
+# === C16: run-* recipe cp 가드 (= MASTER-CLI-INFRA-SMALL-BATCH-001) ===
+# .claude/skills/run-*  = 자식별 run/verify launch recipe (master=run-master · FND=run-foundation · GB/GD/GT=run-<자식>).
+#   각 자식 한정 repo-local (L1-3 polyrepo · byte-identical 아님) → master→자식 cp 금지.
+#   --prune EXCLUDE(PRUNE_EXCLUDE_PATHS · 동일 glob)는 역방향(orphan 오탐)만 막았고,
+#   순방향 cp(--all find 자동 포착 + 명시 인자 양 경로)엔 가드 부재 → run-master 재seeding 사고.
+#   실증: PROPAGATE-RUN-SKILL-RESEED-001 (incident-log · REPO-COUNT-VOCAB-SWEEP-001 중 자식 5 재seeding → 즉발 회수).
+#   주의: glob `run-*` 는 하이픈 경계라 runtime-crash-mitigation 은 매칭 X (= verify-sync.sh DIFFERENTIATION-SCOPE-001 선례 동형).
+if [ "${#FILES[@]}" -gt 0 ]; then
+  FILTERED_FILES=()
+  for f in "${FILES[@]}"; do
+    case "$f" in
+      .claude/skills/run-*)
+        echo "[propagate] WARN: run-* recipe 제외 (= 자식 repo-local · byte-identical 아님 · cp skip): $f" >&2
+        ;;
+      *)
+        FILTERED_FILES+=("$f")
+        ;;
+    esac
+  done
+  if [ "${#FILTERED_FILES[@]}" -gt 0 ]; then
+    FILES=("${FILTERED_FILES[@]}")
+  else
+    FILES=()
+  fi
+fi
+
 # === C15: --prune 모드 분기 (master 부재 파일 = 자식 자동 list / rm) ===
 # - 본 모드 = 일반 cp 모드와 별개. cp 흐름 전 분기.
 # - 입력 = master 의 propagate 대상 base path (find 가 master 에서 인덱스).
