@@ -9,7 +9,7 @@
 > - `design-sot-refresh.md` (보호) — refresh trigger 분류 (도구 무관)
 > - `pencil-automation.md` — Pencil .pen 자동화 절차
 > - `pencil-sot-binding.md` (보호) — Pencil ↔ ui-spec.json 도구 바인딩
-> - `.claude/hooks/pencil-auto-save.sh` (v2) + `.claude/hooks/save-as-result-check.sh`
+> - `.claude/hooks/pencil-auto-save.sh` (v2) + `scripts/save-as-result-check.sh`
 > SOT: `CLAUDE.md`
 
 ---

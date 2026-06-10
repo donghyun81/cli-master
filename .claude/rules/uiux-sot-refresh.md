@@ -24,7 +24,7 @@
 ## Seed Handling Policy
 
 - seed PNG/XML/route/state를 `latest/` 로 복사해 baseline으로 삼지 않는다.
-- seed와 latest의 연결은 `.ai/uiux-sot/lineage/seed_audit_reference.md` 로만 유지한다.
+- ~~seed와 latest의 연결은 `.ai/uiux-sot/lineage/seed_audit_reference.md` 로만 유지한다.~~ **(폐기 · MASTER-CLI-PROTECTED-STALE-PATH-FIX-001)** — lineage 계약 조항 폐기 (`.ai/uiux-sot/lineage/` 6-repo 전수 부재 · 이행 0회). seed↔latest 연결 추적 = git diff/commit 갈음 (= Latest-Only Policy 정합).
 
 ## Latest-Only Policy
 
@@ -58,7 +58,7 @@ Design SoT trigger 감지 시 `.claude/rules/design-to-code-sync.md` 5-type 분�
 
 ## Authoritative Read Order
 
-> placeholder 토큰 표기. 각 토큰은 해당 repo 의 `scripts/agent/repo-config.sh` 에서 export 된 변수로 매핑된다.
+> placeholder 토큰 표기. 각 토큰은 해당 repo 의 `scripts/repo-config.sh` 에서 export 된 변수로 매핑된다.
 > 매핑 표와 사용법은 `.claude/commands/uiux-refresh.md` "Placeholder 토큰" 표 + `docs/agent/architecture/PROPAGATION_PARAMETERS.md` 참조.
 
 0. UI 수정 의미를 해석할 때는 `.ai/uiux-sot/semantic/` 을 먼저 읽을 수 있다. 단, semantic layer는 runtime proof가 아니다.

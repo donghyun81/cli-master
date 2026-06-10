@@ -166,9 +166,9 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 | 파일 | master sha (12) | GentlyBreath | GentlyDay | GentlyTable | app-foundation | gently-product-docs |
 |---|---|---|---|---|---|---|
 | `docs/schemas/ui-spec.schema.json` | `f1edd39739d4` | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `.claude/rules/pencil-uiux-workflow.md` | `e6a4a2a1457b` | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `.claude/rules/pencil-uiux-workflow.md` | `52c075767388` | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `docs/design/pencil-sot-policy.md` | `96de2f5d10a7` | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `.claude/rules/uiux-sot-refresh.md` | `ee377dc2ac32` | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `.claude/rules/uiux-sot-refresh.md` | `75c0c47ee299` | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `docs/design/design-sot-policy.md` | `e5e3fe165ec3` | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `.claude/settings.json` | `9696afb38b0c` | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `.claude/rules/workflow-core.md` | `3ffdcf05a6c0` | ✓ | ✓ | ✓ | ✓ | ✓ |
@@ -191,7 +191,7 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 
 ## Last verify-sync
 
-- timestamp: 2026-06-10T17:47:35+0900
+- timestamp: 2026-06-10T18:14:56+0900
 - pass: 160
 - drift: 0
 - miss: 0
