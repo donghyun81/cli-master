@@ -397,3 +397,5 @@
 - mitigation: deprecated 명시 접근(완전 삭제 X · 대체 메커니즘 기록 보존). master 0e1f7e3 + propagate ok=20/0 + verify-sync 160/0/0 + 보호 5 sha drift 0(Phase B 미진입 · pencil 2 보호 무변동). cycle-discipline.md 무접촉(§25.2 WIP 동거 · :164/:227 = §25.2 land cycle 동반). **phantom drift 학습**: §25.2 WIP 가 propagated file(cycle-discipline.md)에 park 상태 → verify-sync 가 master-WT-overlay 를 drift 로 오탐(cycle-discipline 단일 5 drift) → verify-sync 전 §25.2 park 의무(= committed 정합 측정 → 160/0/0).
 - trail: Phase A close. open(별 cycle) = Phase B(보호 2: pencil-uiux-workflow.md + pencil-sot-policy.md · open_document → 현 메커니즘 · sha 3-layer 절차 · **Coin 승인 게이트**) + §25.2 de-dup land + propagate.sh run-* prune land + cycle-discipline.md:164/:227 동반.
 - 비고: CC 회귀 X(pencil 서버측 변경 단일 원인 · RECALIBRATE 동일 근원).
+
+- 2026-06-10 · PROPAGATE-RUN-SKILL-RESEED-001 · MASTER-CLI-REPO-COUNT-VOCAB-SWEEP-001 중 propagation file-set에 master repo-specific `run-master/SKILL.md` 오포함 → 자식 5 재seeding(create) → 동일 cycle 내 즉발 자체 회수(git rm + commit amend · 잔존 0). 근인 = propagate.sh 의 run-* 보호가 --prune EXCLUDE 측만 존재 · 명시-인자 cp 가드 부재 (DEAD-REF-SWEEP ⑤ PDOCS 전례 동족). mitigation 후보 = propagate.sh 명시-cp 시 `.claude/skills/run-*` 차단/경고 (별 cycle).
