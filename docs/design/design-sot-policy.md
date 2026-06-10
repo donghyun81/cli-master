@@ -35,8 +35,8 @@
 - `ui-spec.json` write → 도구 MCP 의 캔버스 ops 로 1b 투영 → `lastSyncedDesignToolStateHash` 갱신
 - 1b Coin GUI 수정 (Path B fallback) → 도구 MCP 의 read 로 복원 후 `ui-spec.json` 재생성 → `capturedAt` + `lastSyncedDesignToolStateHash` 갱신
 - 충돌: `capturedAt` 최신 쪽 우선. 동일 시각 충돌 시 STOP.
-- drift 기계 감지: `visualSotPath` 존재 && `lastSyncedDesignToolStateHash` 가 현 1b sha 불일치 → compound-lint warn.
-- 1a write 후 1b 재 export 누락 (또는 반대) → compound-lint FAIL (P9).
+- drift 기계 감지: `visualSotPath` 존재 && `lastSyncedDesignToolStateHash` 가 현 1b sha 불일치 → drift warn (수동 sha 대조 · 구 compound-lint warn = deprecated · 도구 부재 · MASTER-CLI-COMPOUND-LINT-DEPRECATE-001).
+- 1a write 후 1b 재 export 누락 (또는 반대) → REVIEW FAIL (P9 · 구 compound-lint FAIL = deprecated).
 
 도구별 구체 절차 = `docs/design/<design-tool>-sot-binding.md` 박힘.
 
@@ -115,7 +115,7 @@ lifecycle 전이 표 + 물리 파일 처리 + DELETE STOP 상세: `design-to-cod
 | `<tool>-vars-after.json` vs 1b export | 값 불일치 | 1b 재 export → JSON 덮어쓰기 |
 | `preview.{light,dark}.png` vs Code Preview | ΔE > 3 또는 layout ±2dp 초과 | 원인 규명 → 1b 또는 Code 수정 |
 | `<design-tool>-dev-prompt.md` [TARGET] vs `<tool>-vars-after.json` | 스펙과 수치 불일치 | 1b → export 재수행 |
-| `ui-spec.json.lastSyncedDesignToolStateHash` vs 1b 현재 sha | 불일치 | compound-lint warn · 1a ↔ 1b 재동기 (§1.1) |
+| `ui-spec.json.lastSyncedDesignToolStateHash` vs 1b 현재 sha | 불일치 | drift warn (구 compound-lint = deprecated) · 1a ↔ 1b 재동기 (§1.1) |
 | `ui-spec.json.visualSotPath` 존재 && 1b 부재 | 경로 끊김 | STOP · `visualSotPath` 갱신 또는 Phase R 진입 |
 | `lifecycle == "active"` && `visualSotPath == null` | 1b 미연결 active screen | Phase B (dual-layer migration) 후보 · 별도 task |
 | preview.png 파일 부재 | 검수 증거 없음 | `ui-spec.json.notes.previewSourceMap` 기록 · re-export task |

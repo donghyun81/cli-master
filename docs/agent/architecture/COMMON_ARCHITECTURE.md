@@ -35,7 +35,7 @@
 │   ├── skills/                        # fulfill-requirement, fulfill-doc-governance, uiux-sot-refresh
 │   └── commands/                      # 7개 슬래시 커맨드 (앱-중립)
 ├── scripts/agent/
-│   └── compound-lint.sh               # 산출물·시크릿 lint (앱-중립)
+│   └── frontmatter-grep.sh            # frontmatter 검사 helper (구 compound-lint.sh = deprecated · 부재 — 산출물·시크릿 검증 = verify-all + 시크릿 grep)
 ├── docs/agent/
 │   ├── architecture/                  # 이 문서 포함 — 공통 아키텍처 SoT
 │   ├── process/                       # intake / doc governance 워크플로

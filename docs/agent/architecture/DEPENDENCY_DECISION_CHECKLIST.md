@@ -1,7 +1,7 @@
 # Dependency Decision Checklist — 8개 항목
 
 > **목적**: `libs.versions.toml` 에 새 항목을 추가하기 전에 반드시 통과해야 할 8개 판정 항목.
-> **강제 메커니즘**: `compound-lint.sh` 8c 단계 — git status 기반 실제 파일 변경 감지. PLAN.md 텍스트 누락 시 REVIEW FAIL.
+> **강제 메커니즘**: reviewer 측 `git diff --name-only` 실측 — libs.versions.toml 변경 감지 (구 `compound-lint.sh` 8c 게이트 = deprecated · 도구 부재 · MASTER-CLI-COMPOUND-LINT-DEPRECATE-001). PLAN.md 텍스트 누락 시 REVIEW FAIL.
 
 ---
 
@@ -18,7 +18,7 @@
 | ⑦ | 직접 구현 대비 우위 | 직접 구현보다 라이브러리가 더 저렴하고 안전한 명확한 근거 (LOC + 유지비 정량 비교) |
 | ⑧ | UI 라이브러리 특별 정당화 | UI 라이브러리의 경우 KMP 호환 + Compose 기본 기능으로 불가하다는 증거 (상세 억제 정책 canonical = `.claude/rules/ui-ux-analysis.md` §UI 라이브러리 억제 기본값) |
 
-> **흡수 차원** (= MASTER-CLI-DEPENDENCY-DECISION-RECONCILE-001 · grow-only merge): 위 ②④⑥⑦ 하위 기준 = 직전 `code-principles.md` 의 고유 Android 빌드/보안 축(라이센스 호환성 · CVE history · APK/Bundle size · ProGuard/R8 keep rule · 제거 절차 · 직접 구현 LOC 비교)을 흡수한 결과. **8 first-class 항은 불변** — PLAN.md 스키마(`reporting.md §5`) + compound-lint 게이트 + REVIEW Dependency Governance 가 모두 8항을 기준으로 하므로 항 수를 늘리지 않고 하위 기준으로 흡수한다.
+> **흡수 차원** (= MASTER-CLI-DEPENDENCY-DECISION-RECONCILE-001 · grow-only merge): 위 ②④⑥⑦ 하위 기준 = 직전 `code-principles.md` 의 고유 Android 빌드/보안 축(라이센스 호환성 · CVE history · APK/Bundle size · ProGuard/R8 keep rule · 제거 절차 · 직접 구현 LOC 비교)을 흡수한 결과. **8 first-class 항은 불변** — PLAN.md 스키마(`reporting.md §5`) + REVIEW Dependency Governance 게이트(구 compound-lint 게이트 = deprecated)가 모두 8항을 기준으로 하므로 항 수를 늘리지 않고 하위 기준으로 흡수한다.
 
 ---
 
@@ -54,7 +54,7 @@ UI 라이브러리 억제 정책의 **canonical** = `.claude/rules/ui-ux-analysi
 
 ## 4. 라이브러리 변경 감지
 
-`compound-lint.sh` 가 git status 기반으로 `libs.versions.toml` 변경을 감지:
+reviewer 가 `git diff --name-only` 실측으로 `libs.versions.toml` 변경을 감지한다 (구 `compound-lint.sh` 자동 감지 = deprecated · 도구 부재):
 - 변경 있음 → PLAN.md `## 2. DependencyDecision` 섹션에 8개 항목 모두 존재해야 함
 - 8개 항목 중 하나라도 누락 또는 빈 값 → REVIEW FAIL
 - 변경 없음 → PLAN.md 에 `N/A` 명시 (섹션 자체는 유지)
@@ -74,7 +74,6 @@ PLAN.md 텍스트 참조 또는 EVIDENCE.md 텍스트 기반 판정은 사용하
 ## 6. 관련 문서
 
 - `KOIN_DI_BASELINE.md` — Koin 의존성 추가 시 ⑧ 항목 N/A 적용
-- `.claude/rules/workflow-core.md` §신규 의존성 승인 — PLAN `## 2. DependencyDecision` 위치 + REVIEW FAIL + compound-lint 8c 게이트 (8항 본문 canonical = 본 file)
+- `.claude/rules/workflow-core.md` §신규 의존성 승인 — PLAN `## 2. DependencyDecision` 위치 + REVIEW FAIL 게이트 (구 compound-lint 8c = deprecated · 8항 본문 canonical = 본 file)
 - `.claude/rules/code-principles.md` §신규 의존성 도입 의무 — 코드 원칙 맥락 (라이브러리 사용 최소화 · 8항 본문 canonical = 본 file)
 - `.claude/rules/ui-ux-analysis.md` §UI 라이브러리 억제 기본값 — UI 억제 강도 + per-category canonical (본 §3 가 가리킴)
-- `scripts/agent/compound-lint.sh` — 8c 단계 git status 감지

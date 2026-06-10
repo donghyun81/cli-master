@@ -69,7 +69,7 @@ docs/agent/**          # 문서 파일 — 실물 존재 여부
 
 | 등급 | 정의 | 예시 |
 |---|---|---|
-| Critical | 운영 불가 수준 — 참조 경로 파괴, STOP 조건 참조 파일 없음 | compound-lint.sh 참조 경로 없음 |
+| Critical | 운영 불가 수준 — 참조 경로 파괴, STOP 조건 참조 파일 없음 | 구 compound-lint.sh 참조 경로 없음 (실 사례 · MASTER-CLI-COMPOUND-LINT-DEPRECATE-001 일괄 deprecate 마감) |
 | High | 운영에 영향 — 에이전트가 없는 파일을 참조, routing 오류 | intake-router.md 참조 규칙 파일 없음 |
 | Medium | 혼선 유발 — 문서와 구현 불일치, INDEX Status 불일치 | Task Status DONE이나 REVIEW.md 없음 |
 | Low | 유지보수 부채 — 오래된 설명, 불완전한 섹션 | UNKNOWN 미해소 항목 |

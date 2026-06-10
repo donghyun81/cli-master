@@ -46,8 +46,7 @@ NOT 결정하는 것 (제약):
 
 ## Evidence to gather
 
-repo-config.sh 가 자동으로 source 되는 환경에서 (예: compound-lint.sh 호출 후) 또는
-직접 호출 시 `. scripts/agent/repo-config.sh` 를 먼저 실행한 뒤 사용한다.
+직접 호출 시 `. scripts/agent/repo-config.sh` 를 먼저 실행한 뒤 사용한다 (구 compound-lint.sh 호출 후 자동 source 환경 = deprecated · 도구 부재).
 
 ```bash
 . scripts/agent/repo-config.sh

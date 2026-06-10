@@ -196,7 +196,7 @@
     },
     "lastSyncedPencilStateHash": {
       "type": ["string", "null"],
-      "description": "visualSotPath 의 .pen 과 마지막 동기화 시점 해시 (sha256-prefix 12자). CLI batch_get 결과를 canonical serialize 후 hash 처리. null=미동기 상태(신규 생성 또는 .pen 부재). drift 감지 기준: visualSotPath 존재 && hash mismatch → compound-lint warn, hash null && visualSotPath 존재 → warn."
+      "description": "visualSotPath 의 .pen 과 마지막 동기화 시점 해시 (sha256-prefix 12자). CLI batch_get 결과를 canonical serialize 후 hash 처리. null=미동기 상태(신규 생성 또는 .pen 부재). drift 감지 기준: visualSotPath 존재 && hash mismatch → drift warn (구 compound-lint warn = deprecated), hash null && visualSotPath 존재 → warn."
     }
   },
   "$defs": {

@@ -1,5 +1,5 @@
 ---
-description: compound-lint 실행 후 REVIEW.md 12-section + PromptFit 평가 생성 및 INDEX append
+description: 시크릿 grep 실행 후 REVIEW.md 12-section + PromptFit 평가 생성 및 INDEX append
 allowed-tools:
   - Bash
   - Read

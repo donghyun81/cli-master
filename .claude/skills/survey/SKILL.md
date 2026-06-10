@@ -71,7 +71,7 @@ allowed-tools:
 - `rg -n "<keyword>" <path>` — 수집 근거 재확인
 - `find <dir> -maxdepth N -type f` — 부재 증거 재확인
 - `git log --oneline -n 5 -- <path>` — 최근 변경 이력 확인
-- `bash scripts/agent/compound-lint.sh <taskId>` — 보고서 정합성
+- `ls .ai/reports/<taskId>/` — 보고서 산출물 존재 (구 compound-lint 정합성 검사 = deprecated · 도구 부재)
 
 각 명령 CMD/EXIT/STDOUT 을 VERIFY.md 표 + LOG 에 기록.
 

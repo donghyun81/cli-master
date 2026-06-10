@@ -128,7 +128,7 @@ description: Use for documentation governance — drift audit, SoT boundary anal
 - REVIEW.md 존재 + Verdict PASS
 - REVIEW.md에 PromptFit 섹션 존재
 - `.ai/promptfit/INDEX.md`에 해당 task 한 줄 append
-- 제품 코드 변경 없음 (compound-lint scope=ops_doc)
+- 제품 코드 변경 없음 (= `git status --porcelain` 실측 제품 경로 0 · 구 compound-lint scope=ops_doc = deprecated)
 - `EVIDENCE.md` 에 intake normalization / pre-EVIDENCE 계약 존재
 
 공통 intake / reading order:

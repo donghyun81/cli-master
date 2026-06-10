@@ -54,7 +54,7 @@ NOT 결정하는 것:
 우선 순위:
 0. `.ai/tasks/<taskId>.md` 의 Measurable Exit Criteria 항목 (있으면 전수 실행)
 1. PLAN.md VerifyCmds에 명시된 명령
-2. compound-lint: `bash scripts/agent/compound-lint.sh <taskId>`
+2. 산출물·시크릿 grep: `ls .ai/reports/<taskId>/` + 시크릿 패턴 grep (패턴 SoT = `safety-and-secrets.md` §시크릿 스캔 패턴 · 구 compound-lint = deprecated)
 3. git diff: `git diff -- <file>`
 4. 빌드/테스트: `./gradlew assembleDebug`, `./gradlew test`
 5. grep 패턴 검증: `grep -n "<pattern>" <file>`

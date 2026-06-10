@@ -90,7 +90,7 @@ ch_sum() {
 # stale_pointer(auto) = .claude/rules/*.md 안 죽은 내부 인용 수:
 #   (a) 상대경로 .md markdown-link (sp_base 기준 해소 · 기존)
 #   (b) backtick-wrap repo-root-relative .sh/.json/.md 경로 (sp_repo_root 기준 해소 · MASTER-CLI-DEAD-REF-SWEEP-001 확장)
-#       = §-link 외 죽은 backtick 인용(예: `scripts/agent/compound-lint.sh`) 검출. master-owned cli-infra dir 한정(= 절대 존재 의무 영역).
+#       = §-link 외 죽은 backtick 인용(예: 구 `scripts/agent/compound-lint.sh` · deprecated — 의도적 죽은-인용 예시) 검출. master-owned cli-infra dir 한정(= 절대 존재 의무 영역).
 #       FP 억제: placeholder(<>)·glob(*)·var($)·공백·URL·절대(/)·cross-repo(../·./) 제외 +
 #                whitelist prefix(.claude/ scripts/ .auto-memory/ docs/agent/ docs/schemas/) 한정(= 자식-context docs/ 경로 오검출 회피).
 #   scope 한계(= surface label 명시 의무 · proxy band 라벨 동형): non-backtick bare 경로 · 자식-context(docs/CLAUDE.md 등) ·

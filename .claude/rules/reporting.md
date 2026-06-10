@@ -26,7 +26,7 @@
 | PLAN | `.ai/reports/<taskId>/PLAN.md` | ChangeBudget + 작업 계획 |
 | VERIFY | `.ai/reports/<taskId>/VERIFY.md` | 검증 명령 + 결과 |
 | REVIEW | `.ai/reports/<taskId>/REVIEW.md` | 최종 판정 |
-| COMPOUND | `.ai/reports/<taskId>/COMPOUND.md` | compound-lint 결과 |
+| COMPOUND | `.ai/reports/<taskId>/COMPOUND.md` | 종합 검증 결과 (구 compound-lint = deprecated) |
 | TODO | `.ai/reports/<taskId>/TODO.md` | 후속 작업 목록 |
 
 ---
@@ -214,7 +214,7 @@ _테스트 변경 없으면 `N/A` 명시. 있으면 새 테스트 파일명과 F
 ## 8. VerificationPlan
 | 항목 | 값 |
 |---|---|
-| VerifyCmds | `bash scripts/agent/compound-lint.sh <taskId>` |
+| VerifyCmds | `./gradlew test` (예시 — 실행 가능 명령만 기입) |
 
 > **Risk 기반 경량화**: Low Risk task는 §1 GATESv2, §2 ChangeBudget, §9 VerificationPlan + 작업 목록만 필수. 나머지 N/A. Medium 이상은 전체 10-section 필수.
 
@@ -267,7 +267,7 @@ STDOUT: [핵심 출력]
 ```
 
 > **명령 흔적 필수**: 백틱 래핑 명령(테이블) 또는 `CMD:` 패턴(LOG) 이 1개 이상 있어야 한다.
-> UNKNOWN 사유만 있는 VERIFY.md 는 미통과 — compound-lint 3b 검사 대상 (FAIL).
+> UNKNOWN 사유만 있는 VERIFY.md 는 미통과 — reviewer 판정 FAIL (구 compound-lint 3b 검사 = deprecated · 도구 부재).
 
 ---
 
@@ -327,7 +327,7 @@ STDOUT: [핵심 출력]
 - 문서-구현 드리프트 없음: <확인>
 
 ### 11. Secrets Safety
-- 시크릿 노출 없음: <compound-lint 결과> (스캔 범위: `.ai/reports/<taskId>/` 아래만 — product code 전체 스캔 아님)
+- 시크릿 노출 없음: <시크릿 grep 결과> (스캔 범위: `.ai/reports/<taskId>/` 아래만 — product code 전체 스캔 아님 · 패턴 SoT = `safety-and-secrets.md` §시크릿 스캔 패턴)
 
 ### 12. Rollback Viability
 - 롤백 지점 실행 가능성: <확인>

@@ -58,7 +58,7 @@ shasum -a 256 docs/design/pencil-sot/<screen>.pen | awk '{print $1}'
 1. Coin 이 Pencil GUI 에서 .pen 직접 편집 + Cmd+S
 2. agent: `mcp__pencil__batch_get` 으로 캔버스 상태 read
 3. agent: ui-spec.json 재생성 + `capturedAt` + `lastSyncedDesignToolStateHash` 갱신
-4. compound-lint 재검증
+4. 재검증 (= P1~P3 dual-layer sha 대조 · `design-to-code-sync.md` §4 · 구 compound-lint 재검증 = deprecated · 도구 부재 · MASTER-CLI-COMPOUND-LINT-DEPRECATE-001)
 
 ---
 

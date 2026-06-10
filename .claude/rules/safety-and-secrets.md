@@ -126,13 +126,13 @@ export SUPABASE_ACCESS_TOKEN_GB
 본 paradigm 측 token 평문 commit / file 기록 차단 (= 기존 §시크릿 기록 금지 규칙 정합):
 - `.mcp.json` 측 `${SUPABASE_ACCESS_TOKEN_<자식>}` env interpolation 정합 (= 평문 token 본문 X)
 - wrap script 측 subshell `$()` capture + 변수 미echo (= stdout / stderr 노출 차단)
-- commit log 측 `eyJ` (= JWT prefix) / `sbp_` (= Supabase PAT prefix) 평문 0 match 의무 (= compound-lint 정합)
+- commit log 측 `eyJ` (= JWT prefix) / `sbp_` (= Supabase PAT prefix) 평문 0 match 의무 (= §시크릿 스캔 패턴 grep 정합)
 
 ---
 
 ## 시크릿 스캔 패턴
 
-compound-lint(`scripts/agent/compound-lint.sh`)가 다음을 검사한다:
+시크릿 grep 스캔 (= `grep -rE` 직접 실행 · 구 compound-lint 도구 = deprecated · 6-repo 부재 · MASTER-CLI-COMPOUND-LINT-DEPRECATE-001) 이 다음 패턴을 검사한다:
 
 ```
 AKIA[0-9A-Z]{16}          # AWS Access Key
@@ -145,10 +145,10 @@ AIza[0-9A-Za-z\-_]{35}    # Google API Key
 
 보고서 디렉터리(`.ai/reports/`)에서 위 패턴이 발견되면 즉시 삭제 또는 마스킹.
 
-> ⚠ **스캔 범위 제한**: compound-lint 시크릿 스캔은 `.ai/reports/<taskId>/` 아래만 검사한다.
+> ⚠ **스캔 범위 제한**: 시크릿 grep 스캔은 `.ai/reports/<taskId>/` 아래만 검사한다.
 > product code / app source / server code 전체 스캔이 아니다.
 > product code 내 시크릿은 별도 수동 확인이 필요하다.
-> `COMPOUND_LINT_PRODUCT_SCAN=1` 환경변수로 `app/`, `shared/`, `iosApp/` 대상 warn-only 스캔 활성화 가능 (기본 비활성, false positive 방지).
+> product code 확장 스캔 = 위 패턴 `grep -rE` 의 대상 경로(`app/`, `shared/`, `iosApp/`)를 직접 지정해 warn-only 로 수행 (구 COMPOUND_LINT_PRODUCT_SCAN=1 환경변수 스위치 = deprecated · 도구 부재).
 
 ---
 

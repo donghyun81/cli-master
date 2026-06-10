@@ -204,7 +204,7 @@
 | 4 | /verify · /review 규칙 | `.claude/rules/verification-and-review.md` | `workflow-core.md` §/verify·§/review (hub 1줄 + pointer) |
 | 5 | 코드 리뷰 12-section 체크리스트 | `.claude/rules/verification-and-review.md` §"12-section 체크리스트" | `reviewer.md` Expected outputs (→ pointer + 역할 고유 보존) · `code-principles.md §4` (기존 pointer 유지) |
 | 6 | SoftBudget (Risk별 LOC budget 200/120/60) + Risk 기반 산출물 경량화 | `.claude/rules/workflow-core.md §implement` | `mode-system.md` M1 Verification policy + §7 (→ pointer · 이전 `code-principles.md §SoftBudget` = 부재 § stale pointer 정정 · MASTER-CLI-CONTEXT-OPT-PHASE4-SSOT-SWEEP-METRICS-001) |
-| 7 | DependencyDecision 8항 (libs.versions.toml 신규 의존성 판정) | `docs/agent/architecture/DEPENDENCY_DECISION_CHECKLIST.md` | `workflow-core.md §신규 의존성 승인` (→ 게이트 REVIEW FAIL·compound-lint 8c·PLAN §2 위치만 + 8항 pointer) · `code-principles.md §신규 의존성 도입 의무` (→ 코드 원칙 맥락 pointer · Android 빌드/보안 축 고유 차원 = canonical ②④⑥⑦ 하위 기준 grow-only 흡수 · 8 first-class 항 불변) |
+| 7 | DependencyDecision 8항 (libs.versions.toml 신규 의존성 판정) | `docs/agent/architecture/DEPENDENCY_DECISION_CHECKLIST.md` | `workflow-core.md §신규 의존성 승인` (→ 게이트 REVIEW FAIL·git diff 실측 감지(구 compound-lint 8c = deprecated)·PLAN §2 위치만 + 8항 pointer) · `code-principles.md §신규 의존성 도입 의무` (→ 코드 원칙 맥락 pointer · Android 빌드/보안 축 고유 차원 = canonical ②④⑥⑦ 하위 기준 grow-only 흡수 · 8 first-class 항 불변) |
 | 8 | UI 라이브러리 억제 / 직접 구현 우선 | `.claude/rules/ui-ux-analysis.md §UI 라이브러리 억제 기본값` | `DEPENDENCY_DECISION_CHECKLIST.md §3` (→ pointer · ⑧ 게이트 항만 유지) · `code-principles.md §UI 라이브러리 억제 default` (→ pointer) · master `CLAUDE.md §10` (→ pointer) |
 
 > 형식 vs 기준 분리: REVIEW.md 채우는 **형식 스키마** SoT = `reporting.md §7` · **체크리스트(판정 기준 + 블로커)** SoT = `verification-and-review.md`. 둘은 별개 canonical.

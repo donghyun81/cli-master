@@ -12,7 +12,7 @@
 | live route authority sanity | `. scripts/agent/repo-config.sh && rg -n "composable\(\|navigate\(" "$REPO_APP_ROUTES" "$REPO_APP_ROOT_COMPOSABLE"` | route inventory stays live-code-first |
 | unresolved gap authority sanity | repo-specific gap route grep over the repo's screen / shared / manifest sources — concrete route names, state gates, and query params live in the repo's `PRECONDITIONS.md` when maintained | target routes, state gates, query params, and no-deep-link constraints are evidence-backed |
 | precondition/doc sync | `rg -n "precondition\|blocked\|unknown\|authoritative proof\|XML" .ai/uiux-sot/refresh/*.md .ai/uiux-sot/semantic/*.md .ai/uiux-sot/latest/*.md` | preconditions and blocked/unknown rationale are synced across refresh/semantic/latest docs |
-| task artifact completeness | `bash scripts/agent/compound-lint.sh <taskId>` | task reports complete |
+| task artifact completeness | `ls .ai/reports/<taskId>/` (구 compound-lint = deprecated) | task reports complete |
 | scope summary | `git diff --stat -- .ai/uiux-sot CLAUDE.md .claude docs/agent` | changed scope is visible |
 
 ## Refresh Completion Gate

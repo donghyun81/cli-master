@@ -478,9 +478,6 @@ Supabase 실제 정책 SQL 은 Coin 이 Dashboard SQL Editor 에서 수동 반�
 | `test -f docs/backend/rls-matrix.md` | 0 |
 | `grep -c "^| " docs/backend/rls-matrix.md` | 0 (stdout ≥ 11) |
 
-compound-lint 이 존재하면 추가 실행:
-- `bash scripts/agent/compound-lint.sh RLS-DOC-GB-001`
-
 ## 출력물 경로 (모두 필수)
 - `docs/backend/rls-matrix.md` (신설)
 - `.ai/tasks/RLS-DOC-GB-001.md` (신설)
@@ -599,9 +596,6 @@ Supabase 실제 정책 SQL 은 Coin 이 Dashboard SQL Editor 에서 수동 반�
 | `test -f docs/backend/rls-matrix.md` | 0 |
 | `grep -c "^| " docs/backend/rls-matrix.md` | 0 (stdout ≥ 13) |
 | `grep "ai_insights" docs/backend/rls-matrix.md` | 0 |
-
-compound-lint 존재 시:
-- `bash scripts/agent/compound-lint.sh RLS-DOC-GD-001`
 
 ## 출력물 경로
 - `docs/backend/rls-matrix.md`
@@ -730,9 +724,6 @@ Supabase 실제 정책 SQL 은 Coin 이 Dashboard SQL Editor 에서 수동 반�
 | `grep "food_db.*\| D \|" docs/backend/rls-matrix.md` | 0 |
 | `grep -cE "^\| [a-z_]+ \|.*PERMANENT_ONLY" docs/backend/rls-matrix.md` | 1 (stdout = 0, 매트릭스 행에 PERMANENT_ONLY 없음) |
 
-compound-lint 존재 시:
-- `bash scripts/agent/compound-lint.sh RLS-DOC-GT-001`
-
 ## 출력물 경로
 - `docs/backend/rls-matrix.md`
 - `.ai/tasks/RLS-DOC-GT-001.md`
@@ -832,9 +823,6 @@ Supabase 에 직접 접근하지 않고 DDL 도 수정하지 않는다.
 | `test -f docs/backend/rls-matrix.md` | 0 |
 | `grep "^| ai_logs " docs/backend/rls-matrix.md` | 0 |
 | `grep "\`ai_logs\`" docs/backend/rls-matrix.md` | 0 |
-
-compound-lint 존재 시:
-- `bash scripts/agent/compound-lint.sh RLS-DOC-GB-002`
 
 ## 출력물 경로
 - `docs/backend/rls-matrix.md` (편집)
@@ -941,9 +929,6 @@ DDL 도 수정하지 않는다.
 | `test -f docs/backend/rls-matrix.md` | 0 |
 | `grep "^| ai_insights " docs/backend/rls-matrix.md` | 0 |
 | `grep "ai_insights.*BLOCK_ALL" docs/backend/rls-matrix.md` | 0 |
-
-compound-lint 존재 시:
-- `bash scripts/agent/compound-lint.sh RLS-DOC-GD-002`
 
 ## 출력물 경로
 - `docs/backend/rls-matrix.md` (편집)
@@ -1245,9 +1230,6 @@ EXTERNAL_PREP_COMPLETE 이지만 본 task 는 Sub-task 1 이므로:
 | `./gradlew :app:testDebugUnitTest --tests "*FakeIntegrityTokenProviderTest"` | 0 |
 | `grep -c "play-integrity" gradle/libs.versions.toml` | 0 (stdout = 2) |
 
-compound-lint:
-- `bash scripts/agent/compound-lint.sh INTEGRITY-GB-001`
-
 ## PLAN.md 섹션 필수 (10-section, Medium Risk 전체)
 - §1 ChangeBudget: FilesN=5, Risk=Medium, DBMig=No, MoneyAuth=Auth 인접
 - §2 DependencyDecision: play-integrity 8항목 모두 기술 (위 2-C-1 참조)
@@ -1312,9 +1294,6 @@ GB 와 동일. 단:
 | `./gradlew :app:testDebugUnitTest --tests "*FakeIntegrityTokenProviderTest"` | 0 |
 | `grep -c "play-integrity" gradle/libs.versions.toml` | 0 (stdout = 2) |
 
-compound-lint:
-- `bash scripts/agent/compound-lint.sh INTEGRITY-GD-001`
-
 ## PLAN.md / REVIEW.md
 GB 와 동일 10-section / 12-section 구조. §2 DependencyDecision 8항목 전체 작성.
 
@@ -1374,9 +1353,6 @@ GB 와 동일. 단:
 | `./gradlew :app:compileDebugKotlin` | 0 |
 | `./gradlew :app:testDebugUnitTest --tests "*FakeIntegrityTokenProviderTest"` | 0 |
 | `grep -c "play-integrity" gradle/libs.versions.toml` | 0 (stdout = 2) |
-
-compound-lint:
-- `bash scripts/agent/compound-lint.sh INTEGRITY-GT-001`
 
 ## PLAN.md / REVIEW.md
 동일 10-section / 12-section.

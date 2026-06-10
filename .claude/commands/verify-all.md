@@ -1,5 +1,5 @@
 ---
-description: architecture check + unit test + compound-lint 일괄 실행 (최대 2회 재시도)
+description: architecture check + unit test + 산출물·시크릿 grep 검증 일괄 실행 (최대 2회 재시도)
 allowed-tools:
   - Bash
 ---

@@ -58,7 +58,7 @@ NOT 결정하는 것:
 | 성공 조건 충족 | `.ai/tasks/<taskId>.md` 측정 기준 대조 | 블로커 |
 | 회귀 안전성 | 변경 영향 범위 + VERIFY.md 결과 | 블로커 |
 | 아키텍처 건전성 | 레이어 방향 규칙 (앱 컨텍스트 참조) | 블로커 |
-| 시크릿 안전 | compound-lint 결과 | 블로커 |
+| 시크릿 안전 | 시크릿 패턴 grep 결과 (패턴 SoT = `safety-and-secrets.md` §시크릿 스캔 패턴) | 블로커 |
 | 기술 부채 | TODO.md + 미완 항목 | 비블로커 (PARTIAL 허용) |
 | 문서-구현 정합 | DocSync 여부 | 비블로커 (PARTIAL 허용) |
 
@@ -113,9 +113,9 @@ Skeptic tuning 을 지킨 리뷰는 REVIEW.md `## Findings` 에 "가장 약한 �
 
 PASS 시:
 ```bash
-bash scripts/agent/compound-lint.sh <taskId>
+grep -rEn 'AKIA[0-9A-Z]{16}|sk-[a-zA-Z0-9]{32,}|ghp_[a-zA-Z0-9]{36}|xox[baprs]-[0-9a-zA-Z-]+|ya29\.[a-zA-Z0-9._-]+|AIza[0-9A-Za-z_-]{35}' .ai/reports/<taskId>/
 ```
-`.ai/reports/<taskId>/COMPOUND.md` 갱신.
+시크릿 grep 무매치(exit 1) 확인 (구 compound-lint = deprecated · 도구 부재) 후 `.ai/reports/<taskId>/COMPOUND.md` 갱신.
 `.ai/tasks/INDEX.md` → DONE
 
 stdout:
@@ -126,7 +126,7 @@ stdout:
 - 기술 부채: <있음/없음>
 
 [LOG]
-- compound-lint: PASS/FAIL
+- 시크릿 grep: PASS/FAIL
 - DONE: Yes/No
 - 다음: DONE 또는 replan (사유)
 ```

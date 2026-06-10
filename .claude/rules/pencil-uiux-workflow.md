@@ -6,7 +6,7 @@
 > **연관 파일**:
 > - `design-to-code-sync.md` — 도구 무관 일반 패턴 (5-type 분류 / Output Checklist P1-P9 / STOP)
 > - `design-sot-policy.md` (보호) — dual-layer SoT 정책 (도구 무관)
-> - `design-sot-refresh.md` (보호) — refresh trigger 분류 (도구 무관)
+> - `uiux-sot-refresh.md` (보호) — refresh trigger 분류 (도구 무관 · 의미 = design-sot-refresh)
 > - `pencil-automation.md` — Pencil .pen 자동화 절차
 > - `pencil-sot-binding.md` (보호) — Pencil ↔ ui-spec.json 도구 바인딩
 > - `.claude/hooks/pencil-auto-save.sh` (v2) + `scripts/save-as-result-check.sh`

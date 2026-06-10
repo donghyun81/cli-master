@@ -19,7 +19,7 @@
 - UI/UX baseline companion SoT는 `.ai/uiux-sot/` 아래에 둔다.
 - `semantic/` 은 해석층이고 `latest/` 는 evidence layer다.
 - `latest/` 만 current baseline으로 취급한다.
-- `lineage/` 는 historical reference only다.
+- ~~`lineage/` 는 historical reference only다.~~ **(폐기 · MASTER-CLI-COMPOUND-LINT-DEPRECATE-001)** — :27 lineage 계약 조항 폐기(MASTER-CLI-PROTECTED-STALE-PATH-FIX-001)의 연장 (`.ai/uiux-sot/lineage/` 6-repo 전수 부재 · historical reference 추적 = git diff/commit 갈음).
 
 ## Seed Handling Policy
 

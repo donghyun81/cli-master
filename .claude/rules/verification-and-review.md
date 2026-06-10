@@ -11,7 +11,7 @@
 - **0 command 금지**: 검증 명령 없이 VERIFY.md만 만드는 것은 허용되지 않는다
 - 최소 1개 검증 명령을 실행하고 exit code를 기록한다
 - 검증 명령은 PLAN.md의 VerifyCmds에 명시된 것을 우선 사용
-- **명령 흔적 필수**: VERIFY.md 에 백틱 래핑 명령(테이블) 또는 `CMD:` 패턴(LOG) 이 1개 이상 있어야 한다 — compound-lint 3b 검사 대상 (FAIL)
+- **명령 흔적 필수**: VERIFY.md 에 백틱 래핑 명령(테이블) 또는 `CMD:` 패턴(LOG) 이 1개 이상 있어야 한다 — 부재 시 VERIFY 미통과 (reviewer 판정 블로커 · 구 compound-lint 3b 검사 = deprecated · 도구 부재)
 - **native `/verify` bundled skill (2026-05-27 · MASTER-CLI-NATIVE-RUN-VERIFY-SANDBOX-INTEGRATION-001)**: Anthropic v2.1.145+ 의 `/verify` 는 build + 실 앱 실행으로 코드 변경을 확인한다(test/type-check fallback 회피). manual 검증 명령(`./gradlew ...` + `adb ...`) 또는 `/verify` bundled skill 양쪽 사용 가능 — cli session 자율 · 단 "0 command 금지" 정합. 자식별 launch recipe = `.claude/skills/run-<name>/SKILL.md`(`/run-skill-generator` capture) · staging flavor 한정
 
 ### 검증 명령 실행 불가 시
@@ -31,16 +31,20 @@
 | 유형 | 예시 |
 |---|---|
 | 정적 파일 확인 | `git diff -- <file>`, `grep -n <pattern> <file>` |
-| Lint | `bash scripts/agent/compound-lint.sh <taskId>` |
+| Lint | `./gradlew ktlintCheck` (자식 product-layer warn-gate) |
 | Git ignore 확인 | `git check-ignore -v <path>` |
 | 빌드 (제품 변경 없는) | `./gradlew assembleDebug` (설정 변경 없을 때만) |
 | 단위 테스트 | `./gradlew test` |
 
-### Compound Lint 실행 (권장)
+### 산출물·시크릿 검증 (권장 · 구 Compound Lint = deprecated)
+
+> 구 compound-lint 도구 = 6-repo 부재 (deprecated · MASTER-CLI-COMPOUND-LINT-DEPRECATE-001). 검증 의무는 아래 실존 명령으로 수행한다.
+
 ```bash
-bash scripts/agent/compound-lint.sh <taskId>
+ls .ai/reports/<taskId>/        # 산출물 존재 확인 (형식 SoT = reporting.md §1 표 대조)
+grep -rEn 'AKIA[0-9A-Z]{16}|sk-[a-zA-Z0-9]{32,}|ghp_[a-zA-Z0-9]{36}|xox[baprs]-[0-9a-zA-Z-]+|ya29\.[a-zA-Z0-9._-]+|AIza[0-9A-Za-z_-]{35}' .ai/reports/<taskId>/
 ```
-EXIT 0 = PASS | EXIT 1 = 아티팩트 누락 또는 시크릿 감지
+시크릿 grep (패턴 SoT = `safety-and-secrets.md` §시크릿 스캔 패턴): 무매치(exit 1) = PASS · 매치(exit 0) = FAIL (시크릿 감지 — 즉시 STOP)
 
 ---
 
@@ -70,11 +74,11 @@ EXIT 0 = PASS | EXIT 1 = 아티팩트 누락 또는 시크릿 감지
 | 8. Error / Result Policy | typed Result/sealed 오류 모델 사용 여부; 기존 전면 교체 없음 (해당 task에 적용될 때) | 비블로커 |
 | 9. External Prep / Deferred Items | user-prep TODO 또는 stub 처리; 외부 의존으로 UI 불변 상태 침해 없음 | 비블로커 |
 | 10. DocSync | 문서-구현 드리프트 없음 | 비블로커 |
-| 11. Secrets Safety | compound-lint 시크릿 스캔 결과 | 블로커 |
+| 11. Secrets Safety | 시크릿 패턴 grep 결과 (패턴 SoT = `safety-and-secrets.md` §시크릿 스캔 패턴 · 구 compound-lint = deprecated) | 블로커 |
 | 12. Rollback Viability | 롤백 지점 실행 가능성; 비가역 변경 없음 | 비블로커 |
 | 13. Cleanup Governance | code-level task: EVIDENCE.md에 `## Cleanup Assessment` 존재; 제거 근거 충분성; 핵심 경로 STOP 처리; code removal vs file deletion 구분 준수. ops-layer·조사형·문서형 task: N/A | 비블로커 |
 
-추가 항목 (compound-lint 에서 별도 검사):
+추가 항목 (reviewer 수동 검사 · 구 compound-lint 별도 검사 = deprecated):
 - PromptFit 섹션 존재: `REVIEW.md` 내 PromptFitScore, PromptFitBreakdown, PromptFitNextActions
 - `.ai/promptfit/INDEX.md` 갱신: 해당 task 한 줄 append 여부
 
@@ -102,8 +106,8 @@ verifier 또는 reviewer가 reject 시:
 |---|---|---|---|
 | 컴파일 실패 (빌드 에러) | implementer 즉시 수정 | 2 | STOP |
 | 테스트 실패 (기존 테스트 깨짐) | change-planner 재계획 | 2 | STOP |
-| compound-lint FAIL (아티팩트 누락) | 누락 아티팩트 보충 후 재검증 | 1 | STOP |
-| compound-lint FAIL (시크릿 감지) | 즉시 STOP (재시도 없음) | 0 | STOP |
+| 산출물 검증 FAIL (아티팩트 누락) | 누락 아티팩트 보충 후 재검증 | 1 | STOP |
+| 시크릿 grep 매치 (시크릿 감지) | 즉시 STOP (재시도 없음) | 0 | STOP |
 | REVIEW FAIL (블로커 항목) | change-planner / system-architect 루프 | 2 | STOP |
 | REVIEW PARTIAL (비블로커 TODO) | TODO.md 기록 후 DONE 가능 | — | — |
 | Context 고갈 (compaction 1회+) | HANDOFF.md 작성 → 새 세션 재진입 | 1 | STOP |
@@ -127,7 +131,7 @@ VERIFY.md 내 또는 `.ai/reports/<taskId>/LOG` 파일:
 
 ```
 [LOG] 2026-MM-DD HH:MM KST
-CMD: bash scripts/agent/compound-lint.sh SW-UI-001
+CMD: ls .ai/reports/SW-UI-001/
 EXIT: 0
-STDOUT: [LINT:PASS] SW-UI-001 — all required artifacts present
+STDOUT: EVIDENCE.md PLAN.md VERIFY.md REVIEW.md TODO.md
 ```

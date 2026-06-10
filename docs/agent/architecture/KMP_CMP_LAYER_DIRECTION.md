@@ -42,9 +42,10 @@ shared/data/**  →  shared/{feature-state,app}/**            # 금지 (data는 
 ```
 
 검사 방법:
-- `compound-lint.sh` 의 I2 source check (레포 패키지 패턴으로 파라미터화)
 - `.claude/agents/layer-checker.md` 의 read-only 스캔
 - `.claude/commands/check-layer.md` 슬래시 커맨드
+
+(구 `compound-lint.sh` I2 source check = deprecated · 도구 부재 · MASTER-CLI-COMPOUND-LINT-DEPRECATE-001 — I2 검사 의무는 위 2 실존 수단이 담당)
 
 ---
 

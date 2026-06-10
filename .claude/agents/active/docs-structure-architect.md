@@ -28,7 +28,7 @@ tools: Read, Glob, Grep
 2. 동일 정보가 **여러 위치**에 중복 기록되어 있는가?
 3. **SOT 경계**가 명확한가? (CLAUDE.md vs docs/agent vs .claude/rules)
 4. 제안하는 구조 변경이 **기존 참조**를 깨뜨리는가?
-5. 변경 후 **compound-lint**나 **routing** 규칙 업데이트가 필요한가?
+5. 변경 후 **검증 gate(verify-all 등)**나 **routing** 규칙 업데이트가 필요한가?
 
 ## Decision authority
 

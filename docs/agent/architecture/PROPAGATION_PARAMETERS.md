@@ -10,7 +10,7 @@
 
 ## 1. 목적
 
-운영 자산(`scripts/agent/compound-lint.sh`, `.claude/agents/active/layer-checker.md`, `.claude/rules/domain-roles.md`, `.claude/commands/{check-layer,uiux-refresh}.md`, `.claude/rules/uiux-sot-refresh.md`) 은 generic 하다 — 어떤 repo 에도 byte-identical 로 propagation 가능하다. (= domain-roles.md = MASTER-CLI-CLEANUP-7CYCLE-001 S3 안 `.claude/agents/active/` → `.claude/rules/` 이동 마감)
+운영 자산(구 `scripts/agent/compound-lint.sh`(deprecated · 도구 부재 · MASTER-CLI-COMPOUND-LINT-DEPRECATE-001), `.claude/agents/active/layer-checker.md`, `.claude/rules/domain-roles.md`, `.claude/commands/{check-layer,uiux-refresh}.md`, `.claude/rules/uiux-sot-refresh.md`) 은 generic 하다 — 어떤 repo 에도 byte-identical 로 propagation 가능하다. (= domain-roles.md = MASTER-CLI-CLEANUP-7CYCLE-001 S3 안 `.claude/agents/active/` → `.claude/rules/` 이동 마감)
 
 repo 고유 값(패키지/경로/파일명/이름) 은 각 repo 가 자체 `scripts/agent/repo-config.sh` 에서 export 한다.
 운영 스크립트는 실행 시점에 `repo-config.sh` 를 source 해 env var 를 로드한다.
@@ -36,7 +36,7 @@ repo 고유 값(패키지/경로/파일명/이름) 은 각 repo 가 자체 `scri
 
 ### 패키지 (필수)
 
-`compound-lint.sh` 는 `REPO_APP_PKG`, `REPO_DOMAIN_PKG` 가 미설정이면 FATAL (exit 2) 한다.
+`REPO_APP_PKG`, `REPO_DOMAIN_PKG` = I2 검사 소비자(layer-checker / check-layer)의 필수 입력이다 (구 compound-lint.sh FATAL(exit 2) 게이트 = deprecated · 도구 부재).
 
 | 변수 | 의미 | 사용처 |
 |---|---|---|
@@ -66,7 +66,7 @@ repo 고유 값(패키지/경로/파일명/이름) 은 각 repo 가 자체 `scri
 - **default 값은 repo-config.sh 가 소유**, source 자산은 placeholder 만 사용
 - repo-config.sh 는 값 export 전용 — 로직/검증 금지
 - 빈 값 허용 (해당 검사/read order 단계는 skip)
-- regex escape 는 compound-lint.sh 가 자동 처리 (`REPO_APP_PKG_ESCAPED="${REPO_APP_PKG//./\\.}"`, bash 3.x 호환)
+- ~~regex escape 는 compound-lint.sh 가 자동 처리~~ (deprecated · 도구 부재 — 현 소비자 layer-checker 는 rg 인용 직접 처리)
 
 ---
 
@@ -113,18 +113,9 @@ target repo 는 `.claude/commands/uiux-refresh.md` 의 placeholder 토큰을 자
 
 각 repo 의 `repo-config.sh` 가 정확한 값을 export 하면 운영 스크립트는 그 repo 의 baseline 결과를 재현한다.
 
-검증 명령 (각 repo 의 root 에서 실행):
-```bash
-# repo-config.sh 가 자동 source 되어 env var 가 로드됨
-bash scripts/agent/compound-lint.sh <taskId>
+검증 (구 compound-lint stdout 검증 = deprecated · 도구 부재): repo-config 값 정합은 실존 소비자 실행 시점에 확인한다 — `layer-checker` agent §Evidence to gather 의 직접 source + `rg` 실행이 실존 수단.
 
-# stdout 에 다음 라인이 출력되어야 함:
-# [LINT] Repo: <REPO_NAME> (<REPO_PREFIX>)
-# [LINT] I2 scope: REPO_DOMAIN_PKG=... REPO_APP_PKG=...
-# [LINT] I2 path: ...
-```
-
-`repo-config.sh` 부재 시 compound-lint.sh 는 FATAL (exit 2) 한다 — 운영 스크립트 무력화 방지.
+`repo-config.sh` 부재/변수 미설정 시 소비자(layer-checker 등)는 UNKNOWN(경로 없음) 기록 — 운영 스크립트 무력화 방지 (구 compound-lint.sh FATAL(exit 2) 게이트 = deprecated).
 
 ---
 

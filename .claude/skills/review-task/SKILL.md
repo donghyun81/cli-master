@@ -1,6 +1,6 @@
 ---
 name: review-task
-description: Use to regenerate REVIEW.md only for a given taskId — runs compound-lint, reads VERIFY.md + PLAN.md + EVIDENCE.md, produces evidence-based 12-section judgment + PromptFit, appends .ai/promptfit/INDEX.md. Manual trigger with /review-task <taskId>.
+description: Use to regenerate REVIEW.md only for a given taskId — runs secret-pattern grep, reads VERIFY.md + PLAN.md + EVIDENCE.md, produces evidence-based 12-section judgment + PromptFit, appends .ai/promptfit/INDEX.md. Manual trigger with /review-task <taskId>.
 allowed-tools:
   - Bash
   - Read
@@ -13,17 +13,17 @@ disable-model-invocation: true
 
 # review-task
 
-> Purpose: 구현이 끝난 task 의 compound-lint 재실행 + REVIEW.md 재생성 + PromptFit 갱신 + INDEX append.
+> Purpose: 구현이 끝난 task 의 시크릿 grep 재실행 (구 compound-lint = deprecated · 도구 부재 · MASTER-CLI-COMPOUND-LINT-DEPRECATE-001) + REVIEW.md 재생성 + PromptFit 갱신 + INDEX append.
 
 인자: `$ARGUMENTS` — taskId (예: `SW-UI-001`)
 
 ## 실행 절차
 
-### 1. compound-lint 실행
+### 1. 시크릿 grep 실행 (구 compound-lint 단계 대체)
 ```bash
-bash scripts/agent/compound-lint.sh $ARGUMENTS 2>&1
+grep -rEn 'AKIA[0-9A-Z]{16}|sk-[a-zA-Z0-9]{32,}|ghp_[a-zA-Z0-9]{36}|xox[baprs]-[0-9a-zA-Z-]+|ya29\.[a-zA-Z0-9._-]+|AIza[0-9A-Za-z_-]{35}' .ai/reports/$ARGUMENTS/ 2>&1
 ```
-exit code 와 stdout 을 기록한다.
+exit code 와 stdout 을 기록한다 — 무매치(exit 1) = 시크릿 0 = PASS · 매치(exit 0) = 시크릿 감지 = FAIL. 패턴 SoT = `safety-and-secrets.md` §시크릿 스캔 패턴.
 
 ### 2. 필수 아티팩트 확인
 `.ai/reports/$ARGUMENTS/` 디렉터리에서 다음을 확인:
@@ -46,7 +46,7 @@ exit code 와 stdout 을 기록한다.
 - 8. Error / Result Policy
 - 9. External Prep / Deferred Items
 - 10. DocSync
-- 11. Secrets Safety (compound-lint 결과 인용)
+- 11. Secrets Safety (시크릿 grep 결과 인용)
 - 12. Rollback Viability
 - 13. Cleanup Governance
 
@@ -69,6 +69,6 @@ REVIEW.md 마지막 섹션에 PromptFit 평가 추가:
 ```
 
 ## 금지
-- compound-lint FAIL 상태에서 REVIEW.md Verdict=PASS 판정 금지
+- 시크릿 grep 매치(시크릿 감지) 상태에서 REVIEW.md Verdict=PASS 판정 금지
 - VERIFY.md 존재하지 않으면 REVIEW Verdict=PASS 금지
 - 시크릿·키 값 기록 금지

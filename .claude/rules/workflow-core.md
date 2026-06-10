@@ -230,7 +230,7 @@ SoftBudget 초과 예상 시 추상화 레이어 추가보다 task 분할을 우
 `libs.versions.toml` 에 새 항목을 추가하기 전 PLAN `## 2. DependencyDecision` 섹션에 8개 항목(①~⑧)을 모두 기술해야 한다. 8항 본문 + 평가 기준 + 흡수 하위 차원의 canonical = [`docs/agent/architecture/DEPENDENCY_DECISION_CHECKLIST.md`](../../docs/agent/architecture/DEPENDENCY_DECISION_CHECKLIST.md) (= 본 file 은 게이트만 소유 · 8항 본문 복제 X).
 
 `## 2. DependencyDecision` 섹션 없이 `libs.versions.toml` 변경이 감지되면 REVIEW FAIL 조건이다.
-감지 방식: compound-lint 8c — git status 기반 실제 파일 변경 감지 (단일 기준). PLAN.md 텍스트 참조 또는 EVIDENCE.md 텍스트 기반 판정은 사용하지 않는다.
+감지 방식: `git diff --name-only` 실측 — git 변경 사실 기반 단일 기준 (reviewer 수동 · 구 compound-lint 8c 게이트 = deprecated · 도구 부재). PLAN.md 텍스트 참조 또는 EVIDENCE.md 텍스트 기반 판정은 사용하지 않는다.
 
 ### TDD 우선 흐름
 
@@ -322,13 +322,10 @@ Anthropic v2.1.145+ bundled skill (`/run` + `/verify` + `/run-skill-generator`) 
 
 ## COMPOUND / TODO
 
-- `COMPOUND.md`: compound-lint 결과 + 종합 판정
+- `COMPOUND.md`: 종합 검증 판정 (audit/evidence-heavy task 한정 · 구 compound-lint 결과 영역 = deprecated · 도구 부재 · MASTER-CLI-COMPOUND-LINT-DEPRECATE-001)
 - `TODO.md`: 완료 후 남은 후속 작업 목록
 
-compound-lint 실행:
-```bash
-bash scripts/agent/compound-lint.sh <taskId>
-```
+검증 일괄 실행 = `/verify-all <taskId>` (= architecture + test + 산출물·시크릿 grep · 구 compound-lint 단독 실행 = deprecated).
 
 ---
 
