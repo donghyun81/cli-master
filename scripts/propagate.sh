@@ -120,6 +120,12 @@ if [ "$PRUNE_MODE" = 1 ]; then
   PRUNE_BASE_PATHS=(.claude)
   PRUNE_ROOT_FILES=()  # root 파일 = 자식 build 영향 (gradlew 등) → default prune 제외
   PRUNE_EXCLUDE_NAMES=(.DS_Store settings.local.json)
+  # path-glob EXCLUDE = basename 으로 표현 불가한 자식 repo-local 영역 (case-glob · '*' 는 '/' 포함 매칭)
+  #   .claude/skills/run-*  = 자식별 run/verify recipe (master=run-master · FND=run-foundation · GB/GD/GT=run-<자식>)
+  #   = byte-identical 아님 · L1-3 polyrepo 자식 차별화 영역 (workflow-core.md Native run/verify integration)
+  #   → master 부재가 정상(false-orphan) · basename=SKILL.md 라 PRUNE_EXCLUDE_NAMES 로 표현 불가
+  #   주의: run-* subtree 만 제외 · 진짜 orphan(master SoT cli-infra file 자식 잔존분)은 여전히 검출
+  PRUNE_EXCLUDE_PATHS=('.claude/skills/run-*')
 
   # target 해결
   if [ -z "$TARGETS" ] || [ "$TARGETS" = "all" ]; then
@@ -161,12 +167,21 @@ if [ "$PRUNE_MODE" = 1 ]; then
     for base in "${PRUNE_BASE_PATHS[@]}"; do
       [ -d "$REPO_DIR/$base" ] || continue
       while IFS= read -r f; do
-        # exclude name 검사
+        # exclude name 검사 (basename 정확일치)
         BN=$(basename "$f")
         SKIP=0
         for ex in "${PRUNE_EXCLUDE_NAMES[@]}"; do
           [ "$BN" = "$ex" ] && SKIP=1 && break
         done
+        # exclude path-glob 검사 (자식 repo-local 영역 · basename 으로 표현 불가 · run-* subtree)
+        if [ "$SKIP" = 0 ] && [ "${#PRUNE_EXCLUDE_PATHS[@]}" -gt 0 ]; then
+          for exp in "${PRUNE_EXCLUDE_PATHS[@]}"; do
+            # shellcheck disable=SC2254  # unquoted case pattern = glob 매칭 의도 ('*' 는 '/' 포함)
+            case "$f" in
+              $exp) SKIP=1; break ;;
+            esac
+          done
+        fi
         [ "$SKIP" = 1 ] && continue
         # master 부재 여부
         if [ ! -f "$MASTER_DIR/$f" ]; then

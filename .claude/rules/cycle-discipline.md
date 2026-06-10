@@ -671,15 +671,9 @@ verify 의무 본문 = step 7 핵심 영역 default (= compile + install + monke
 - cli session 측 INITIATIVES + INDEX + task file 갱신 의무 default (= 3 file 갱신 ①~③ + 2 검증 gate ④~⑤ = 5 의무 영역 default · 본문 SoT = `initiatives-sync` skill §3)
 - paste-back `[EC]` 섹션 측 갱신 verify 본문 명시 default · `[Diff]` 섹션 측 갱신 file list 명시 default
 
-#### 25.2 5 의무 영역 (= 본문 SoT mirror · `initiatives-sync` skill §3)
+#### 25.2 5 의무 영역 (= 3 file 갱신 ①~③ + 2 검증 gate ④~⑤)
 
-| # | 영역 | 본질 |
-|---|---|---|
-| 1 | INITIATIVES 갱신 default | `docs/release-readiness/INITIATIVES.md` 측 task 상태 ☐ → ✓ default · baseline HEAD sha 갱신 default · 신 cycle ID + 마감 sha 인용 default |
-| 2 | `.ai/tasks/INDEX.md` 갱신 default | 신 task entry append default · cycle ID + 마감 sha + mtime + 상태 명시 default |
-| 3 | `.ai/tasks/<CYCLE-ID>.md` 신 task file 생성 default | 본 cycle outcome + scope + 결정 paradigm + paste-back 본문 default · INDEX 측 인용 default |
-| 4 | ④ KR 귀속 검증 gate default | §3 active initiative 전수 KR 태그 1+ default (= 고아 0 · `[—] (future-phase · no Q3 KR)` 예외 허용) · 고아 = 등재 거부 / 표면화 default (= MASTER-CLI-P2-MECHANISM-001 추가) |
-| 5 | ⑤ 완료분 always-fresh default | cycle 마감 시 완료 task ☐ → ✓ 정정 + 신규 완료분 등재 default (= STALE 재발 방지 · MASTER-CLI-P2-MECHANISM-001 추가) |
+본문 단일 SoT = [`initiatives-sync` skill §3](../skills/initiatives-sync/SKILL.md) (= ① INITIATIVES 갱신 + ② `.ai/tasks/INDEX.md` append + ③ `.ai/tasks/<CYCLE-ID>.md` 생성 + ④ KR 귀속 검증 gate + ⑤ 완료분 always-fresh · 각 본질·위치 = skill §3 table + §3.1~§3.5 단일 SoT). 본 §은 가리키기만 (= 본문 복제 0 · L1-4 단일 SoT). ④ KR gate + ⑤ always-fresh = `MASTER-CLI-P2-MECHANISM-001` 추가분.
 
 #### 25.3 trigger 본질 + precedent
 
