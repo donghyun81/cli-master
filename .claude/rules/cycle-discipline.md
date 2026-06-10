@@ -161,7 +161,7 @@ PLAN.md / VERIFY.md / REVIEW.md / TODO.md
 
 1. `claude --version` raw output 캡처 — EVIDENCE.md 안 그대로 박음.
 2. `claude mcp list` 안 `pencil ✓ Connected` 명시 — 출력 안 verbatim 박음.
-3. CLI 세션 안 `ToolSearch query="pencil"` 결과 ≥ 13 tools (`mcp__pencil__*` prefix · `CLAUDE-CODE-VERSION-UNPIN-VERIFY-001` baseline 명단: batch_design / batch_get / export_nodes / find_empty_space_on_canvas / get_editor_state / get_guidelines / get_screenshot / get_variables / open_document / replace_all_matching_properties / search_all_unique_properties / set_variables / snapshot_layout).
+3. CLI 세션 안 `ToolSearch query="pencil"` 결과 = 아래 9 종 `mcp__pencil__*` **전수 존재** (= named-set 전수 판정 · 단순 ≥N 카운트 X · `MASTER-CLI-PENCIL-SELFTEST-GATE-RECALIBRATE-001` baseline · Pencil app v1.1.62 측 4 종 제거 반영): batch_design / batch_get / export_nodes / get_editor_state / get_guidelines / get_screenshot / get_variables / set_variables / snapshot_layout. (구 13 종 중 제거 4 = find_empty_space_on_canvas / open_document / replace_all_matching_properties / search_all_unique_properties · **pencil 서버 측 제거 · Claude Code 버전 무관** · 2-환경 corroborate: cli ToolSearch 9 + cowork deferred 9 동일.)
 
 3 항목 모두 PASS = cycle 진행 가능. 1+ FAIL = 즉시 STOP + 아래 복귀 절차.
 

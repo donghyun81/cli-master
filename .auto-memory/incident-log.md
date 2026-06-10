@@ -377,3 +377,15 @@
 ## 2026-05-22T17:35:44+0900
 - type: blocked-tasks
 -   - MASTER-LIBS-VERSIONS-CROSS-VERIFY-HOOK-001: 누락= VERIFY.md
+
+## 2026-06-10T15:02:10+0900 — PENCIL-MCP-TOOLSET-RECALIBRATE-001 trail entry
+- type: 도메인 도구 한계 + cli infra self-test baseline 재보정 (§13 pencil 도구 13→9 · pencil 서버 변경 반영)
+- cycle: MASTER-CLI-PENCIL-SELFTEST-GATE-RECALIBRATE-001
+- summary: §13 매 cycle 진입 self-test item 3 = `ToolSearch query="pencil"` ≥ 13 tools 게이트가 pencil 서버 도구 축소(13→9)로 noise FAIL. Pencil app v1.1.62 측 4 종 제거(find_empty_space_on_canvas / open_document / replace_all_matching_properties / search_all_unique_properties) → 현재 노출 = 9 종(batch_design / batch_get / export_nodes / get_editor_state / get_guidelines / get_screenshot / get_variables / set_variables / snapshot_layout). 원인 = pencil 측 toolset 변경이며 Claude Code 버전(2.1.156)과 무관 — 2 환경 corroborate(cli ToolSearch 9 + cowork deferred pencil 목록 9 동일). 게이트 self-exception 적용: 본 진입 FAIL = 본 cycle 의 인가된 주제(게이트 노후화)이므로 §13 known-working 2.1.139 다운그레이드 복귀 절차는 기각(= CC 회귀가 아닌 잘못된 remedy).
+- mitigation: §13 item 3 = 단순 ≥N 카운트 → 9 종 named-set 전수 존재 판정으로 재보정 + 제거 4 종 명시 + 본 cycle attribution + Pencil app v1.1.62 명시. 재보정 후 self-test 재실행 → 9 종 전수 PASS(self-validating). 6-repo byte-identical propagation(cycle-discipline.md) · 보호 5 file sha drift 0(pencil-uiux-workflow.md / pencil-sot-policy.md 무변동). 구 baseline attribution = CLAUDE-CODE-VERSION-UNPIN-VERIFY-001(13 종) → 본 cycle(9 종).
+- trail: close (= 1회 재보정). 후속(별 cycle) = 광역 pencil stale sweep = PENCIL-TOOLSET-REMOVAL-STALE-SWEEP(가칭) — 보호 file 2(pencil-uiux-workflow.md + pencil-sot-policy.md · open_document) + 활성 agent ux-auditor.md(find_empty_space_on_canvas 런타임 호출 위험) + pencil-mcp-tools-reference.md + pencil-cli/pencil-pen-save skills + cycle-discipline.md:227 Path 2-A open_document step 재설계.
+- 비고: CLAUDE-CODE-LATEST-CHASE-001 회귀 entry 아님(= CC 회귀 X · pencil 서버측 변경 단일 원인).
+
+## 2026-06-10T15:07:41+0900
+- type: blocked-tasks
+-   - MASTER-CLI-PENCIL-SELFTEST-GATE-RECALIBRATE-001: 누락= VERIFY.md REVIEW.md
