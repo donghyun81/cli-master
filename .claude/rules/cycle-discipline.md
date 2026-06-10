@@ -202,6 +202,25 @@ hash -r && claude --version
 - `NATIVE-VS-NPM-INSTALL-DUAL-PATH-001` (PATH 충돌)
 - `/CLEAR-MCP-RELOAD-MISCONCEPTION-001` (`/clear` ≠ MCP 재attach)
 
+**native installer 재검토 trigger 조건 (2026-06-11 · MASTER-CLI-CC-VERSION-UPDATE-NATIVE-EVAL-001 평가):**
+
+native installer 전환 평가 결론 = **npm 유지 · native 전환 X (현 시점)**. 근거 3:
+
+1. native 백그라운드 auto-update 가 `autoUpdates: false` 를 무시한다 (#60956 OPEN · 2026-06-11 GitHub live-verify · `~/.claude.json` 설정 무력 + launch 시 silent jump 2.1.100→2.1.145 보고 · supply-chain 통제 상실 우려). 위 이중 차단(의도 X 자동 jump 차단) 정책을 native 가 보장하지 못한다.
+2. native auto-updater 가 `~/.local/bin/claude` symlink 를 강제 재생성한다 (#41602 / #3010 / #28625 · 위 본문 근거 정합 · open/stale). 이중 차단을 우회하는 경로.
+3. 설치 후 버전 pin 부재 + `claude update` = latest 점프 + 다운그레이드 명령 부재. 통제형 수동 갱신(npm scope) 과 self-test FAIL 시 known-working 복귀 절차를 동시에 파괴한다.
+
+npm 상태 = deprecated (2026-01 v2.1.15~) 이나 게시 지속 (현 latest 2.1.170 · 하드 EOL 미공지) = **deprecated-but-retained**. 현 시점 npm scope 유지가 통제 우위.
+
+**재검토 trigger 4조건** (1+ 충족 시 native 전환 별 cycle 진입):
+
+1. native `autoUpdates: false` (또는 `--no-auto-update`) 실효 확인 — launch 시 silent jump 0 (#60956 류 해소/close).
+2. native auto-updater 의 `~/.local/bin/claude` symlink 강제 재생성 해소 (#41602 / #28625 close 확인).
+3. 설치 후 버전 pin 또는 다운그레이드 실효 명령 제공.
+4. 또는 npm 패키지 하드 EOL 공지 (= 강제 전환 시점 · native 통제 한계 감수 + mitigation 설계 별 cycle).
+
+세부 trail = `.auto-memory/incident-log.md` 의 `CLAUDE-CODE-NATIVE-MIGRATION-EVAL-001` (평가 close). 위 §13 본문(npm scope · 이중 차단 · self-test 9 종 · FAIL 복귀 절차)은 무변경.
+
 ---
 
 ### 14) Phase C — Pencil → Compose 파이프라인 5-type 분류

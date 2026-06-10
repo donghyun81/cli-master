@@ -406,3 +406,27 @@
 - mitigation: sha 3-layer resync = manifest sha-256(pencil-uiux `2ec100bf…`→`b09b8d50…` · sot-policy `ae20a79c…`→`2bfc81c5…`) + CLAUDE.md §14a git-sha1(`22570f97…`→`aba157e0…` · `acf88d95…`→`ce9c0d3e…`) + `.ai/baseline-snapshot/latest.json` 재생성(직전 2-cycle stale `e6a4a2a1…`/`96de2f5d…` 정합 + PDOCS block 첫 포함). 6-repo propagation + verify-sync PASS. 나머지 보호 3 변동 0(git-sha1 실측 일치).
 - trail: TOOLSET-REMOVAL-STALE-SWEEP-001 trail의 open 항 "Phase B(보호 2 · Coin 승인 게이트)" close. cycle-discipline.md:164 = §13 게이트 본문(제거 4종 열거 = 정합 서술) → 정정 대상 아님 확인.
 - 비고: 진입 §13 self-test 3/3 PASS (CC 2.1.170 · pencil ✓ Connected · ToolSearch 9종 전수 + 제거 4종 부재). 기존 dirty 무접촉(GB 2 · GD/GT 각 1).
+
+## 2026-06-11T00:40:00+0900 — CLAUDE-CODE-LATEST-CHASE-001 trail entry
+
+- trail: CLAUDE-CODE-LATEST-CHASE-001 (open · 회귀 누적 영역)
+- entry type: PASS (자연 PASS case · 회귀 X)
+- 날짜: 2026-06-11 KST
+- cycle: MASTER-CLI-CC-VERSION-UPDATE-NATIVE-EVAL-001
+- 버전: 2.1.170 (= npm @latest · 진입 시점 이미 latest 설치 = `npm install -g @latest` no-op 확인 · 통제형 수동 갱신 정합)
+- self-test 결과: 3/3 PASS (`claude --version` = 2.1.170 ✓ + `claude mcp list` `pencil ✓ Connected` ✓ + `ToolSearch query="pencil"` 9 종 named-set 전수 존재 ✓ [batch_design/batch_get/export_nodes/get_editor_state/get_guidelines/get_screenshot/get_variables/set_variables/snapshot_layout])
+- 검증 출처: MASTER-CLI-CC-VERSION-UPDATE-NATIVE-EVAL-001 EVIDENCE.md
+- 직전 PASS entry: 2.1.139 (2026-05-12 · 본 trail 첫 PASS entry)
+- 회귀 상태: X
+- 비고: 직전 PASS(2.1.139) 이래 2.1.156 lazy 설치분 미기록(정상 · lazy 정책) → 본 entry = 2.1.170 신 PASS. self-test 게이트 = 9 종 named-set (PENCIL-SELFTEST-GATE-RECALIBRATE-001 baseline · 구 ≥13 카운트 폐기). native 전환 X (동 cycle CLAUDE-CODE-NATIVE-MIGRATION-EVAL-001 참조).
+
+## 2026-06-11T00:42:00+0900 — CLAUDE-CODE-NATIVE-MIGRATION-EVAL-001 trail entry
+
+- type: cli infra 정책 평가 박제 (native installer 전환 평가)
+- cycle: MASTER-CLI-CC-VERSION-UPDATE-NATIVE-EVAL-001
+- 평가 결론: npm 유지 (native 전환 X · 현 시점)
+- 근거: (1) native 백그라운드 auto-update 가 `autoUpdates: false` 무시 = #60956 OPEN (2026-06-11 GitHub live-verify · 제목 `[BUG] autoUpdates: false in ~/.claude.json is not respected on native installation — CLI self-updates on launch` · launch 시 silent jump 2.1.100→2.1.145 보고 · supply-chain 통제 상실 우려) (2) native auto-updater `~/.local/bin/claude` symlink 강제 재생성 미해결 #41602/#3010/#28625 (§13 기존 근거 정합 · open/stale) (3) 설치 후 버전 pin 부재 + `claude update`=latest 점프 + 다운그레이드 명령 부재 → 통제형 수동 갱신(npm scope) + self-test FAIL 시 known-working 복귀 절차 동시 파괴
+- npm 상태: deprecated (2026-01 v2.1.15~) · 게시 지속 (현 latest 2.1.170 · 하드 EOL 미공지) · deprecated-but-retained
+- 재검토 trigger: §13 native installer 재검토 trigger 4조건 참조 (#60956 close + symlink 재생성 해소 + 설치 후 버전 pin 제공 + npm 하드 EOL 공지 중 1+ 충족 시 native 전환 별 cycle)
+- trail: close (= 평가 1회 결론 · 후속 = trigger 충족 시 별 cycle) · 동족 = CLAUDE-CODE-NATIVE-AUTO-UPDATER-SYMLINK-RESTORE-001 + NATIVE-VS-NPM-INSTALL-DUAL-PATH-001
+- 비고: #60956 = web research 1차 인용분 → 2026-06-11 cli session 측 live GitHub verify 완료 (OPEN 확인 · §3 calibration 충족). #41602/#3010/#28625 = §13 기존 이중 차단 근거 본문 정합 (재유도 X).
