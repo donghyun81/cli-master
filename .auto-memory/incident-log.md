@@ -389,3 +389,11 @@
 ## 2026-06-10T15:07:41+0900
 - type: blocked-tasks
 -   - MASTER-CLI-PENCIL-SELFTEST-GATE-RECALIBRATE-001: 누락= VERIFY.md REVIEW.md
+
+## 2026-06-10T16:05:10+0900 — PENCIL-TOOLSET-REMOVAL-STALE-SWEEP Phase A
+- type: 도메인 도구 한계 후속 (cli infra stale 정리 · Pencil v1.1.62 4종 제거 광역 sweep Phase A)
+- cycle: MASTER-CLI-PENCIL-TOOLSET-REMOVAL-STALE-SWEEP-001
+- summary: RECALIBRATE-001 후속. Pencil v1.1.62 제거 4종(find_empty_space_on_canvas / search_all_unique_properties / replace_all_matching_properties / open_document)을 참조하는 live cli infra 정리. 제거 4종 = 전부 §2.5(D7) headless-PRIMARY 의 ALTERNATIVE(desktop-app+MCP) 경로 소속 → 정리 = 참조 정합 + 도구수 13→9 + ux-auditor 런타임 위험 1건. Phase A(비보호 4 file) land: ① pencil-mcp-tools-reference.md(도구 SoT 13→9 · §0.1 제거표+대체 · §2.2/§3.1/§3.2/§7 ⚠REMOVED stub) ② ux-auditor.md find_empty_space_on_canvas 실호출→snapshot_layout(maxDepth=0) (런타임 호출 실패 위험 해소 · grep 0 검증) ③ pencil-cli/pencil-pen-save skill open_document→headless-primary redirect(Save-As 교훈 보존).
+- mitigation: deprecated 명시 접근(완전 삭제 X · 대체 메커니즘 기록 보존). master 0e1f7e3 + propagate ok=20/0 + verify-sync 160/0/0 + 보호 5 sha drift 0(Phase B 미진입 · pencil 2 보호 무변동). cycle-discipline.md 무접촉(§25.2 WIP 동거 · :164/:227 = §25.2 land cycle 동반). **phantom drift 학습**: §25.2 WIP 가 propagated file(cycle-discipline.md)에 park 상태 → verify-sync 가 master-WT-overlay 를 drift 로 오탐(cycle-discipline 단일 5 drift) → verify-sync 전 §25.2 park 의무(= committed 정합 측정 → 160/0/0).
+- trail: Phase A close. open(별 cycle) = Phase B(보호 2: pencil-uiux-workflow.md + pencil-sot-policy.md · open_document → 현 메커니즘 · sha 3-layer 절차 · **Coin 승인 게이트**) + §25.2 de-dup land + propagate.sh run-* prune land + cycle-discipline.md:164/:227 동반.
+- 비고: CC 회귀 X(pencil 서버측 변경 단일 원인 · RECALIBRATE 동일 근원).
