@@ -172,7 +172,7 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 | `docs/design/design-sot-policy.md` | `4c5666152f09` | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `.claude/settings.json` | `9696afb38b0c` | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `.claude/rules/workflow-core.md` | `286d71f043ab` | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `.claude/rules/cycle-discipline.md` | `a09d07560f40` | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `.claude/rules/cycle-discipline.md` | `d75cc2e24f43` | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `.claude/rules/pencil-automation.md` | `aedb79780211` | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `.claude/rules/reporting.md` | `22a75fc50541` | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `.claude/rules/routing-and-delegation.md` | `bf53648f520e` | ✓ | ✓ | ✓ | ✓ | ✓ |
@@ -191,7 +191,7 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 
 ## Last verify-sync
 
-- timestamp: 2026-06-10T23:56:39+0900
+- timestamp: 2026-06-11T00:16:19+0900
 - pass: 160
 - drift: 0
 - miss: 0
