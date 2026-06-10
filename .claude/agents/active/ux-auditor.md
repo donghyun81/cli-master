@@ -105,6 +105,6 @@ stdout:
 Pencil SoT 측 design 의도 측 audit 시점 본 paradigm 적용:
 
 - **layout problems audit**: `mcp__pencil__snapshot_layout(problemsOnly=true)` 호출 → issues 만 추출 → EVIDENCE.md 안 "Layout Problems" 섹션 인용. issues 0 = "0 problems found" 명시 의무 (부재 증거 = 양성 증거 정합).
-- **empty space placement audit**: 신규 요소 배치 결정 직전 `mcp__pencil__find_empty_space_on_canvas` 호출 → 결과 region 인용. 권장 배치 영역 vs 실 배치 영역 mismatch 발견 시 PLAN.md replan 의뢰.
+- **empty space placement audit**: 신규 요소 배치 결정 직전 `mcp__pencil__snapshot_layout(maxDepth=0)` 호출 → top-level node bounds 측 빈 영역 도출 → 결과 region 인용. 권장 배치 영역 vs 실 배치 영역 mismatch 발견 시 PLAN.md replan 의뢰. (구 `find_empty_space_on_canvas` = Pencil v1.1.62 제거 · `pencil-mcp-tools-reference.md §0.1` 대체.)
 - **screenshot 검증 의무 강화** (P10 정합): 복잡 layout (3+ section · 5+ child) 측 `mcp__pencil__get_screenshot` 호출 → PNG byte 측정 + disk 갱신 검증. screenshot skip 시 REVIEW FAIL 위험 (`design-prompting-paradigm.md` §5.1 정합).
-- **tool reference**: 12 official + 1 package-verified 도구 surface = `.claude/rules/pencil-mcp-tools-reference.md` 단일 SoT.
+- **tool reference**: 현 9 종 도구 surface (Pencil v1.1.62) = `.claude/rules/pencil-mcp-tools-reference.md` 단일 SoT.

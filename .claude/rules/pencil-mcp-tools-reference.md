@@ -1,6 +1,6 @@
-# Pencil MCP Tools Reference (12 official + 1 package-verified)
+# Pencil MCP Tools Reference (9 tools · Pencil v1.1.62 surface)
 
-> **단일 목적**: Pencil MCP server 측 `mcp__pencil__*` 도구 전체 reference. 공식 12 + 본 패키지 검증 추가 1 분리 명시.
+> **단일 목적**: Pencil MCP server 측 `mcp__pencil__*` 도구 전체 reference. 현 surface = 9 종 (Pencil v1.1.62) · 구 13 종(공식 12 + package-verified 1) 중 4 종 제거 = deprecated 기록 보존.
 > **신설**: MASTER-CLI-PENCIL-OPTIMIZATION-001 (2026-05-19).
 > **공식 근거**: pencil.dev `/getting-started/ai-integration` (2026-04-03 last updated).
 > **연관 파일**:
@@ -11,18 +11,29 @@
 
 ---
 
-## 0. 분리 원칙
+## 0. 분리 원칙 + 현 surface
 
 본 SoT 안 도구 2 그룹 분리:
 
-- **Part A (Official 12)** — pencil.dev 공식 doc 2026-04-03 명시. 호환 표준 = pencil.dev 모든 client.
-- **Part B (Package-verified 1)** — 공식 doc 안 명시 X. 본 패키지 실 검증된 영역. 다른 client 측 동작 보장 없음.
+- **Part A (Official · 현 9)** — pencil.dev 공식 doc 명시. 호환 표준 = pencil.dev 모든 client. (구 12 중 3 제거 = Pencil v1.1.62.)
+- **Part B (Package-verified · 현 0)** — 구 1 (`open_document`) = Pencil v1.1.62 제거. 본 패키지 검증 영역 폐기.
 
 신규 cli session 진입 시 = 본 SoT 단일 참조. 그 외 file (`pencil-uiux-workflow.md` 등) 안 도구 목록 중복 금지.
 
+### 0.1 제거 도구 (= Pencil v1.1.62 surface 축소 · `MASTER-CLI-PENCIL-TOOLSET-REMOVAL-STALE-SWEEP-001`)
+
+구 13 종 surface 중 아래 4 종 = Pencil v1.1.62 측 제거 (= `ToolSearch query="pencil"` 측정 9 종 정합 · 게이트 baseline = `cycle-discipline.md §13`). 본 SoT 안 §2.2 / §3.1 / §3.2 / §7 = deprecated 기록 (호출 X).
+
+| 제거 도구 | 구 위치 | 본질 (구) | 대체 메커니즘 (현) |
+|---|---|---|---|
+| `find_empty_space_on_canvas` | §2.2 | empty region 산출 (placement audit) | `snapshot_layout(maxDepth=0)` 측 top-level bounds 기반 빈 영역 판단 |
+| `search_all_unique_properties` | §3.1 | unique property 재귀 검색 (token audit) | `batch_get` (= §1.2 pattern 검색) 또는 headless 평문-JSON 경로 (`pencil-uiux-workflow.md §2.5` PRIMARY) |
+| `replace_all_matching_properties` | §3.2 | matching property 재귀 교체 (token migration) | `batch_design` (= §1.1) 또는 headless 평문-JSON 경로 (`pen_recolor.py` style · §2.5 PRIMARY) |
+| `open_document` | §7 (Part B) | `.pen` 진입점 (new canvas) | headless `pencil interactive -o <path>` (`pencil-cli` skill PRIMARY) 또는 desktop visual = `open -a Pencil <abspath>` (Bash) + `batch_design` (active-doc MCP) |
+
 ---
 
-# Part A — Official 12 tools (pencil.dev 2026-04-03)
+# Part A — Official tools (현 9 · 구 12 중 3 제거 = Pencil v1.1.62)
 
 ## 1. Design Operations (5 tools)
 
@@ -104,7 +115,7 @@ batch_get({
 })
 ```
 
-`search_all_unique_properties` (= §3.1) + `replace_all_matching_properties` (= §3.2) 측 통합 audit + migration paradigm 정합 default.
+token audit + migration 통합 paradigm = `batch_get` (= 위 pattern 검색) + `batch_design` (= §1.1 교체) 또는 headless 평문-JSON 경로 (`pencil-uiux-workflow.md §2.5` PRIMARY) default. (구 `search_all_unique_properties`/`replace_all_matching_properties` = Pencil v1.1.62 제거 · §0.1.)
 
 ### 1.3 `get_variables`
 
@@ -125,35 +136,35 @@ batch_get({
 
 ---
 
-## 2. Layout / Structure tools (2)
+## 2. Layout / Structure tools (1 · 구 2 중 find_empty_space_on_canvas 제거)
 
 ### 2.1 `snapshot_layout`
 
 - 본질: document structure + computed bounds 산출
-- 핵심 옵션: `problemsOnly=true` (issues 만 반환 · 본 패키지 권장 default)
+- 핵심 옵션: `problemsOnly=true` (issues 만 반환 · 본 패키지 권장 default) · `maxDepth=0` (top-level node bounds = 빈 영역 도출 · 구 `find_empty_space_on_canvas` 대체)
 - export / screenshot 미수행 시 RCA-4 미해당 (F-1/F-2 검증 PASS · `pencil-automation.md` §12 정합)
 
-### 2.2 `find_empty_space_on_canvas`
+### 2.2 `find_empty_space_on_canvas` — ⚠ REMOVED (Pencil v1.1.62)
 
-- 본질: 신규 요소 배치 가능한 empty region 산출
-- 사용처: ux-auditor 측 new-element placement audit / batch 신설 시 자동 배치
-- 본 cycle 안 신규 인용 도구 (`pencil-uiux-workflow.md` §1 추가 5종 중 1)
+- **제거 도구 · 호출 X** (= `ToolSearch query="pencil"` 측정 부재 · §0.1).
+- 구 본질: 신규 요소 배치 가능한 empty region 산출 (placement audit).
+- **대체**: `snapshot_layout(maxDepth=0)` 측 top-level node bounds 기반 빈 영역 판단.
 
 ---
 
-## 3. Property manipulation (2 · 본 cycle 안 신규 인용)
+## 3. Property manipulation (0 · 구 2 = Pencil v1.1.62 제거)
 
-### 3.1 `search_all_unique_properties`
+### 3.1 `search_all_unique_properties` — ⚠ REMOVED (Pencil v1.1.62)
 
-- 본질: node tree 안 unique property 재귀 검색
-- 사용처: design system 측 token 정합 audit / hardcode hex 검출
-- pattern: "모든 button 의 fill color 값 추출" 등
+- **제거 도구 · 호출 X** (= §0.1).
+- 구 본질: node tree 안 unique property 재귀 검색 (token audit / hardcode hex 검출).
+- **대체**: `batch_get` (= §1.2 pattern 검색) 또는 headless 평문-JSON 경로 (`pencil-uiux-workflow.md §2.5` PRIMARY).
 
-### 3.2 `replace_all_matching_properties`
+### 3.2 `replace_all_matching_properties` — ⚠ REMOVED (Pencil v1.1.62)
 
-- 본질: node tree 안 matching property 재귀 교체
-- 사용처: token migration / design system v2 일괄 갱신
-- pattern: "deprecated color `#FF0000` → token `error.primary` 일괄 교체"
+- **제거 도구 · 호출 X** (= §0.1).
+- 구 본질: node tree 안 matching property 재귀 교체 (token migration / design system v2 일괄 갱신).
+- **대체**: `batch_design` (= §1.1) 또는 headless 평문-JSON 경로 (`pen_recolor.py` style · §2.5 PRIMARY).
 
 ---
 
@@ -211,16 +222,15 @@ G(nodeId, "stock", "coffee morning workspace")
 
 ---
 
-# Part B — Package-verified extension (1)
+# Part B — Package-verified extension (0 · 구 1 = Pencil v1.1.62 제거)
 
-## 7. `open_document` (공식 doc 명시 X · 본 패키지 검증 영역)
+## 7. `open_document` — ⚠ REMOVED (Pencil v1.1.62)
 
-- 본질: 신규 또는 기존 `.pen` 측 진입점
-- 호출 패턴: `open_document(filePathOrTemplate="new")` 또는 `open_document(filePathOrTemplate="<path>.pen")`
-- 본 패키지 검증된 한계: `filePathOrTemplate` 안 **"new" literal 만 유효** (path argument 미지원 · 신규 빈 canvas 신설 한정)
-- 기존 `.pen` 편집 = desktop app 측 file open + `mcp__pencil__batch_design` 호출 (open_document path 형식 미지원)
-- 공식 doc 명시 X = pencil.dev 측 client 업데이트 시 변경 가능 영역 · §FREEDOM
-- 본 cycle (`MASTER-CLI-PENCIL-OPTIMIZATION-001`) 진입 시 baseline 명시 (= 후속 cycle 안 변동 시 STOP + Coin 재확인 의뢰)
+- **제거 도구 · 호출 X** (= `ToolSearch query="pencil"` 측정 부재 · §0.1). 구 Part B (package-verified · 공식 doc 명시 X) 영역 폐기.
+- 구 본질: 신규/기존 `.pen` 진입점 (`filePathOrTemplate="new"` literal 만 유효).
+- **대체 (현 open/new 메커니즘)**:
+  - PRIMARY = headless 평문-JSON 직접 read/write (`pencil-uiux-workflow.md §2.5` D7 · open 자체 불요) · 신규 doc = `pencil interactive -o <path>` (`pencil-cli` skill).
+  - visual-verify alternative = `open -a Pencil <abspath>` (Bash) + active-doc MCP (`batch_design` / `batch_get`).
 
 ---
 
@@ -251,9 +261,9 @@ CI/CD 통합 = `pencil-cli-headless.md` §10 (lazy default · 별 cycle).
 
 ## 10. STOP 조건
 
-- 공식 doc (pencil.dev) 측 12 tool list 변경 검출 → 본 SoT 갱신 cycle 진입 의무 (`MASTER-CLI-PENCIL-MCP-TOOLS-UPDATE-NNN` 패턴)
-- `open_document` 측 path argument 지원 검출 → Part B 갱신 + 본 패키지 검증된 한계 영역 폐기
-- 신규 도구 발견 (예: 12 → 13 official) → Part A 안 행 추가 + 본 cycle scope 외 별 trail
+- 현 9 tool surface 변경 검출 (`ToolSearch query="pencil"` ≠ 9 종) → 본 SoT 갱신 cycle 진입 의무 (`MASTER-CLI-PENCIL-MCP-TOOLS-UPDATE-NNN` 패턴 · `cycle-discipline.md §13` 게이트 동기).
+- 제거 4 종 (§0.1) 부활 검출 → 본 SoT + §13 게이트 재보정 cycle 진입.
+- 신규 도구 발견 (예: 9 → N) → Part A 안 행 추가 + 본 cycle scope 외 별 trail.
 
 ---
 
@@ -268,3 +278,4 @@ CI/CD 통합 = `pencil-cli-headless.md` §10 (lazy default · 별 cycle).
 ## 12. 명시 cycle 이력
 
 - 2026-05-19 · MASTER-CLI-PENCIL-OPTIMIZATION-001 · 본 SoT 신설 (12 official + 1 package-verified 분리 명시) + 5-repo byte-identical propagation
+- 2026-06-10 · MASTER-CLI-PENCIL-TOOLSET-REMOVAL-STALE-SWEEP-001 · 도구 surface 13→9 정정 (Pencil v1.1.62 측 find_empty_space_on_canvas / search_all_unique_properties / replace_all_matching_properties / open_document 제거) — §0.1 제거 도구 표 + 대체 메커니즘 신설 · §2.2/§3.1/§3.2/§7 deprecated stub · header/count/§1.2.3/§10 STOP 정합 · 6-repo byte-identical propagation. PENCIL-SELFTEST-GATE-RECALIBRATE-001 (§13 게이트 9종) 후속.

@@ -165,7 +165,7 @@ pencil --tasks batch.json
 ## 6. Save As 모달 회피 paradigm
 
 `.claude/skills/pencil-pen-save/SKILL.md` 측 baseline 사고:
-- desktop app + `mcp__pencil__open_document(filePathOrTemplate="new")` 호출 → in-memory canvas 생성 → 첫 Cmd+S 시 macOS Save As 다이얼로그 활성 → Coin 1회 GUI 클릭 의무.
+- (구) desktop app + `mcp__pencil__open_document(filePathOrTemplate="new")` 호출 → in-memory canvas 생성 → 첫 Cmd+S 시 macOS Save As 다이얼로그 활성 → Coin 1회 GUI 클릭 의무. (`open_document` MCP = Pencil v1.1.62 제거 · `pencil-mcp-tools-reference.md §0.1` · 현 desktop 신규 doc = 앱 UI 수동 생성 또는 `open -a Pencil <abspath>` · 이로써 headless-primary 강화.)
 
 headless interactive mode 의 mitigation:
 - `pencil interactive -o <path>` → shell 안 `save()` 명령 → 지정 path 에 직접 기록.

@@ -25,11 +25,13 @@ allowed-tools: Bash, Read
 - **headless mode 우회** = §13 (Pencil CLI headless reference) 활용 시 Save As 모달 자체 회피 가능. desktop app paradigm 과 분기 결정은 §13 표 참조.
 
 **근거**: GB-PHASE-B-WORKFLOW-V12-REWRITE-AND-EXPAND-V3-001 (Cycle 8) 검증.
-Pencil MCP `open_document` 로 신규 doc 생성 시 in-memory 만 형성. 첫 Cmd+S 시 macOS Save As 모달 다이얼로그 활성. 모달이 keyboard 입력을 가로채 자동 keystroke 차단. 우회 RCA cost 가 1회 사람 클릭보다 높음.
+(구) Pencil MCP `open_document` 로 신규 doc 생성 시 in-memory 만 형성. 첫 Cmd+S 시 macOS Save As 모달 다이얼로그 활성. 모달이 keyboard 입력을 가로채 자동 keystroke 차단. 우회 RCA cost 가 1회 사람 클릭보다 높음.
+
+> **⚠ `open_document` 제거 (Pencil v1.1.62 · `pencil-mcp-tools-reference.md §0.1`)**: 아래 desktop-app 신규 doc 워크플로우의 진입 도구 `open_document` MCP 가 제거됨. 현 신규 doc 정식 경로 = **headless `pencil interactive -o <path>`** (`pencil-cli` skill / §13) — Save As 모달 자체 미발생(Coin 클릭 0)으로 본 RCA 교훈이 headless-primary 로 영구 해소. desktop visual 검증 필요 시에만 `open -a Pencil <abspath>` (Bash) + active-doc MCP(`batch_design`). 아래 11-step = desktop-app 역사 기록(`open_document` 의존 step 1 = 폐기).
 
 **신규 .pen 생성 워크플로우** (1회성 Coin 협조):
 0. agent: 환경 검증 — Pencil 우측 하단 "Update Ready" 모달 활성 여부 확인. 활성 시 "Install on next launch" 클릭 의무 (Cmd+S keystroke 가로챔 회피). 근거: `PENCIL-UPDATE-MODAL-INTERCEPT-001` (CYCLE-PHASE-F-1-NEW-SCREEN-DEFINE-001 검증).
-1. agent: `mcp__pencil__open_document(filePathOrTemplate="new")` — 빈 캔버스 생성 (path 명시 미지원 · "new" 리터럴만 유효)
+1. agent: (구) `mcp__pencil__open_document(filePathOrTemplate="new")` — 빈 캔버스 생성. **⚠ Pencil v1.1.62 제거** → 현 신규 doc = headless `pencil interactive -o <path>` (`pencil-cli` skill) 또는 desktop 앱 UI 수동 신규 doc + `open -a Pencil <abspath>` (Bash · active-doc MCP).
 2. agent: `mcp__pencil__batch_design` — **children inline 강제 + 25 op limit 시 분할 호출 patterns**:
    - X (flatten 발생): `root=I("document",{...}); child=I(root,{...})` (별 호출 추가한 patterns)
    - O (정상): `I("document",{children:[...]})` — 단일 호출에 inline
