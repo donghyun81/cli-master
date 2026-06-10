@@ -37,6 +37,7 @@ REPOS=(
   "GentlyBreath"
   "GentlyDay"
   "GentlyTable"
+  "gently-product-docs"
 )
 
 PROTECTED_FILES=(
@@ -121,7 +122,7 @@ cp "$OUT_FILE" "$LATEST_FILE" 2>/dev/null
 MASTER_CYCLE=$(grep -A 4 '"claude-cli-master"' "$OUT_FILE" | grep cycleDisciplineSha | head -1 | sed -E 's/.*"([a-f0-9]{64}|MISSING)".*/\1/')
 DRIFT_COUNT=0
 DRIFT_LIST=""
-for child in app-foundation GentlyBreath GentlyDay GentlyTable; do
+for child in app-foundation GentlyBreath GentlyDay GentlyTable gently-product-docs; do
   CHILD_CYCLE=$(grep -A 4 "\"$child\"" "$OUT_FILE" | grep cycleDisciplineSha | head -1 | sed -E 's/.*"([a-f0-9]{64}|MISSING)".*/\1/')
   if [ -n "$CHILD_CYCLE" ] && [ "$CHILD_CYCLE" != "$MASTER_CYCLE" ] && [ "$CHILD_CYCLE" != "MISSING" ]; then
     DRIFT_COUNT=$((DRIFT_COUNT+1))

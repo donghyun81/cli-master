@@ -125,7 +125,7 @@ scan 통과 후 출력 → PostToolUse hook (§6) 가 사후 재검증.
 - 사용자가 직접 "/clear" 또는 "context reset" 을 요청
 
 신호 발견 시 절차:
-1. 진행 중 cycle 의 PLAN / EVIDENCE / TODO 의 path pointer 를 handoff.md (또는 `cycle-handoff.md`) 에 보존
+1. 진행 중 cycle 의 PLAN / EVIDENCE / TODO 의 path pointer 를 `.ai/reports/<taskId>/HANDOFF.md` (= 현행 handoff 체계 · `workflow-core.md §Context Reset Policy` 정합) 에 보존
 2. 사용자에게 session reset 권장 (= 새 conversation 진입 후 handoff 기준 재개)
 3. 새 conversation 첫 출력 = handoff path pointer 만 읽고 시작 (bulk read 금지)
 

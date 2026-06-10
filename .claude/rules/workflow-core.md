@@ -144,8 +144,8 @@ task-aware reading order와 공통 intake 절차:
 ### 수집 대상 (우선순위)
 1. `CLAUDE.md`, `.claude/rules/`, `.claude/agents/`
 2. `.ai/tasks/INDEX.md`, 기존 관련 보고서
-3. 제품 개요: `docs/app_overview.ko.md`
-4. 아키텍처: `docs/multiplatform-*/**`
+3. 제품 개요: `docs/CLAUDE.md` + 제품 상위 SoT (`../gently-product-docs/docs/PRODUCT-VISION-SOT.md` → `PRODUCT-PRINCIPLES-SOT.md` → `PRODUCT-STRATEGY-SOT.md` · sibling 상대경로 · rule-routing-index §I)
+4. 아키텍처: `docs/agent/architecture/**`
 5. 실제 소스 파일 (요구사항 관련 영역)
 
 ---

@@ -267,7 +267,7 @@ hash -r && claude --version
 
 - **Phase C 진입**: 6 화면 SoT (`.pen` + `ui-spec.json`) 과 Compose 사이 drift 또는 paradigm 충돌 감지.
 - **Phase C 마감**: 6 화면 5-type 명시됨 + 별 trail close 3건 (SOT-TO-COMPOSE-AUTO-CONVERSION-001 · PHASE-C-COMMIT-VERIFY-ORDER-001 · PHASE-C-PRESENTATION-DOMAIN-BOUNDARY-MAPPING-001).
-- **Phase D 진입 신호**: Phase C 통합 cycle (`CYCLE-PHASE-C-INTEGRATION-001` 통합-A/B/C) 마감 + 별 trail close 3건 영구 명시됨. `.auto-memory/cycle-handoff.md` Phase D baseline rolling rewrite 됨 (외부 검증 PASS · 2026-04-30).
+- **Phase D 진입 신호**: Phase C 통합 cycle (`CYCLE-PHASE-C-INTEGRATION-001` 통합-A/B/C) 마감 + 별 trail close 3건 영구 명시됨. `.auto-memory/cycle-handoff.md`(= 역사 인용 · 현 부재 · 당시 handoff 체계 · 현행 = `.ai/reports/<taskId>/HANDOFF.md`) Phase D baseline rolling rewrite 됨 (외부 검증 PASS · 2026-04-30).
 - **Phase D 부분 마감 신호** (2026-05-01 갱신 · Coin 결정): D-2 마감 (Roborazzi + Robolectric 채택 + 6/6 first capture + verify 자동 fire) 만으로 Phase D **부분 마감**. D-1/D-3 lazy (별 trail · 화면 수 12+ 도달 후 trigger). `SOT-TO-COMPOSE-VISUAL-VERIFY-MANUAL-001` 은 Coin 손 검증 30min/round 부담 명시됨 (lazy close). Phase F 진입 가능.
 - **Phase D 완전 마감 신호** (장래): D-1/D-3 trigger 후 정착 + 매 commit 자동 fire + Coin 시각 검증 manual 부담 0 도달 시.
 - **Phase F 진입 신호** (2026-05-01 신설): Phase D 부분 마감 명시됨 + Phase B-DETAIL 마감 6 화면 baseline 명시됨. Phase F-1 부터 진입 (7번째 화면 도메인 결정 + Pencil canvas 작성 → SoT → Compose → Roborazzi snapshot 한 묶음 mini lifecycle).

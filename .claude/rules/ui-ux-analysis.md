@@ -8,9 +8,9 @@
 ## 수집 대상 (UI/UX)
 
 ```
-docs/app_overview.ko.md           # 앱 개요 + UX 정책
-docs/multiplatform-reboot-package/40_UI_UX_DIRECTION_CMP.md
-docs/multiplatform-implementation/30_UI_UX_DIRECTION.md
+docs/CLAUDE.md                                      # 자식 도메인 개요 + UX 정책 (자식 repo)
+docs/design/screen-flow.md                          # 자식 화면 흐름·UX 방향 (자식 repo · 있을 때)
+../gently-product-docs/docs/PRODUCT-STRATEGY-SOT.md # 3앱 공통 UX 상위 방향 (비전→원칙→전략 위계 · sibling 상대경로 · rule-routing-index §I)
 feature/**/res/values/strings.xml # 화면 문구
 app/src/main/res/values/strings.xml
 app/src/main/java/**/*Screen*.kt  # 화면 컴포저블
@@ -121,7 +121,7 @@ UiState 정책:
 
 자식 repo 측 UI 변경 시:
 - app-foundation 측 shared 영역 (= `shared/feature-state` + `shared/data` + `shared/domain` + `core/*`) 인용 default · 자식 측 도메인 코드 = `app/src/main/java/**` 영역 default
-- `docs/multiplatform-reboot-package/40_UI_UX_DIRECTION_CMP.md` 방향과 정합성 확인
+- 자식 design SoT (`docs/design/`) + 제품 상위 SoT (`../gently-product-docs/docs/PRODUCT-STRATEGY-SOT.md` · sibling 상대경로 · rule-routing-index §I) 방향과 정합성 확인
 - Compose 측 hex/sp/dp 하드코딩은 `ui/theme/` 외부에서 금지 (= 리뷰 블로커 default · `pencil-uiux-workflow.md` 정합 default)
 - Android-only 영역 (= `androidMain` 한정) vs cross-platform 영역 (= `commonMain` 진입) 측 분기 영역 default · 자식 repo `app/` = 단일 platform 진입점 default 단 점진 KMP/CMP 확장 default
 

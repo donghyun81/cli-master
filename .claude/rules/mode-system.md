@@ -68,7 +68,7 @@
 - 현 5-repo 측 default mode = M1 (= production-graduated default)
 - 미래 자식별 mode 발산 = 본인 명시 결정 + migration cycle default
 - 본 protocol 진입 시점 = 자식별 mode 본문 측 Why + How + B 14 항 침해 검증 + cold storage 측 누적 default
-- migration cycle outcome = 자식별 `<repo>/.claude/CLAUDE.md` 측 mode 명시 default + master mode-system.md 측 발산 entry append default
+- migration cycle outcome = 자식별 `<repo>/CLAUDE.md` 측 mode 명시 default + master mode-system.md 측 발산 entry append default
 
 ---
 

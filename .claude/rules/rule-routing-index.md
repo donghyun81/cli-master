@@ -40,7 +40,7 @@
 | [`anchor-list.md`](./anchor-list.md) | 누락 시 cycle 실패하는 10 anchor(A1~A10 · baseline drift / 보호 sha / scope / propagation 등) |
 | [`cross-repo-parallel-exec.md`](./cross-repo-parallel-exec.md) **(kernel)** | 5-repo 단방향 propagation(A4) + subscription pool 정합(A6 · `claude -p` 회피 · billing) + 영역 1/2/3 1-줄 요약 + STOP/trigger · 실행 본문 = `cross-repo-parallel-exec-detail.md`(behavior-triggered · L1) |
 
-> file 외 L0: master `CLAUDE.md §5`(STOP 9항 canonical) + 부모 mount root `CLAUDE.md`(5-repo umbrella). 두 헌법은 `.claude/rules/` 밖이라 본 42 집합에 포함되지 않으나 L0 로 항상 적용.
+> file 외 L0: master `CLAUDE.md §5`(STOP 9항 canonical) + 부모 mount root `CLAUDE.md`(5-repo umbrella). 두 헌법은 `.claude/rules/` 밖이라 본 46 집합에 포함되지 않으나 L0 로 항상 적용.
 
 ### L1 — 프로세스·워크플로우 (작업 시작 시 · 20 rule)
 

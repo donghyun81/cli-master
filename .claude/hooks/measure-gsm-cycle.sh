@@ -87,14 +87,25 @@ ch_sum() {
   echo "$ch_total"
 }
 
-# stale_pointer(auto) = .claude/rules/*.md 안 상대경로 .md 링크 → target 부재 수 (file-link 한정 · §-level = manual)
+# stale_pointer(auto) = .claude/rules/*.md 안 죽은 내부 인용 수:
+#   (a) 상대경로 .md markdown-link (sp_base 기준 해소 · 기존)
+#   (b) backtick-wrap repo-root-relative .sh/.json/.md 경로 (sp_repo_root 기준 해소 · MASTER-CLI-DEAD-REF-SWEEP-001 확장)
+#       = §-link 외 죽은 backtick 인용(예: `scripts/agent/compound-lint.sh`) 검출. master-owned cli-infra dir 한정(= 절대 존재 의무 영역).
+#       FP 억제: placeholder(<>)·glob(*)·var($)·공백·URL·절대(/)·cross-repo(../·./) 제외 +
+#                whitelist prefix(.claude/ scripts/ .auto-memory/ docs/agent/ docs/schemas/) 한정(= 자식-context docs/ 경로 오검출 회피).
+#   scope 한계(= surface label 명시 의무 · proxy band 라벨 동형): non-backtick bare 경로 · 자식-context(docs/CLAUDE.md 등) ·
+#       cross-repo(../) 경로 · §-level anchor = 미검출 → 값(0 포함)은 scope-한정 신호 · 전역 dead-ref 부재 보증 X.
 stale_pointer_count() {
   sp_dir="$1"
   sp_count=0
   [ -d "$sp_dir" ] || { echo 0; return 0; }
+  # backtick repo-root-relative 경로 해소 base (= sp_dir 의 repo root · .claude/rules → ../..)
+  sp_repo_root=$(cd "$sp_dir/../.." 2>/dev/null && pwd)
+  [ -z "$sp_repo_root" ] && sp_repo_root="$sp_dir"
   for sp_f in "$sp_dir"/*.md; do
     [ -f "$sp_f" ] || continue
     sp_base=$(dirname "$sp_f")
+    # (a) markdown-link 상대경로 .md (sp_base 기준)
     while IFS= read -r sp_link; do
       [ -z "$sp_link" ] && continue
       sp_target="${sp_link%%#*}"
@@ -105,9 +116,37 @@ stale_pointer_count() {
     done <<CH_EOF
 $(grep -oE '\]\(\.\.?/[^)]+\.md[^)]*\)' "$sp_f" 2>/dev/null | sed -E 's/^\]\(//; s/\)$//')
 CH_EOF
+    # (b) backtick repo-root-relative .sh/.json/.md (master-owned dir 한정 · FP 억제 · sp_repo_root 기준)
+    while IFS= read -r sp_bt; do
+      [ -z "$sp_bt" ] && continue
+      sp_t="${sp_bt%%#*}"
+      case "$sp_t" in
+        *'<'*|*'>'*|*'*'*|*'$'*|*' '*|http*|/*|../*|./*) continue ;;
+        */settings.local.json|settings.local.json) continue ;;  # 선택적 personal override (propagate.sh PRUNE_EXCLUDE_NAMES 정합 · 부재=정상)
+      esac
+      case "$sp_t" in
+        .claude/*|scripts/*|.auto-memory/*|docs/agent/*|docs/schemas/*) ;;
+        *) continue ;;
+      esac
+      [ -f "$sp_repo_root/$sp_t" ] || [ -d "$sp_repo_root/$sp_t" ] || sp_count=$(( sp_count + 1 ))
+    done <<BT_EOF
+$(grep -oE '`[^`]+\.(sh|json|md)`' "$sp_f" 2>/dev/null | tr -d '`')
+BT_EOF
   done
   echo "$sp_count"
 }
+
+# self-test: stale_pointer 확장 scan fixture 검증 (= MASTER-CLI-DEAD-REF-SWEEP-001 · §7 paste-back)
+#   사용: GSM_STALE_SELFTEST=1 bash .claude/hooks/measure-gsm-cycle.sh <fixture-repo>/.claude/rules
+if [ "${GSM_STALE_SELFTEST:-0}" = "1" ]; then
+  st_dir="${1:-}"
+  if [ -d "$st_dir" ]; then
+    echo "stale_pointer_count($st_dir) = $(stale_pointer_count "$st_dir")"
+  else
+    echo "GSM_STALE_SELFTEST: dir arg 필요 (예: bash $0 <fixture-repo>/.claude/rules)" >&2
+  fi
+  exit 0
+fi
 
 # context-health 측정 + 분기 guard + (append mode 시) §3.1 append + advisory surface
 run_context_health() {
@@ -158,7 +197,8 @@ run_context_health() {
     echo "" >&2
     echo "[GSM-CONTEXT-HEALTH] context 건강 분기 측정 (= advisory · 판정 수동 · context-health-metrics.md §1·§3.1):" >&2
     echo "  항상로드 char(codepoint proxy≠token · band ASCII≈3.2~4 / Hangul≈1.0~2.2 ch/tok): parent_root ${ch_parent} · master ${ch_master} · L0_kernel ${ch_l0} · child ${ch_child}" >&2
-    echo "  stale_pointer(auto · file-link · 목표 0): ${ch_stale} · conflicting_sot/buried_ratio = 수기 advisory(§2 갱신 · §-level 판정 자동 X)" >&2
+    echo "  stale_pointer(auto · md-link + backtick .sh/.json/.md[master-owned dir] · 목표 0): ${ch_stale} (= scope-한정 신호 · non-backtick bare/자식-context docs/cross-repo(../)/§-level = 미검출 · 전역 dead-ref 부재 보증 X)" >&2
+    echo "  conflicting_sot/buried_ratio = 수기 advisory(§2 갱신 · §-level 판정 자동 X)" >&2
     if [ "$MODE" = "append" ]; then
       echo "  → context-health-metrics.md §3.1 분기 trajectory append (${ch_now_y}Q$(( ch_now_q + 1 )))" >&2
     else

@@ -248,7 +248,7 @@ reviewer → REVIEW.md
 위 기준 중 하나라도 해당하면 독립 파일:
 1. `.claude/agents/active/<role>.md` 신규 파일 생성 (DEFERRED 인 경우 `.claude/agents/deferred/<role>.md`) (전문가 프레임 형식)
 2. 이 파일 매핑 테이블에 독립 파일 경로 반영
-3. `docs/agent/solutions/README.md` 역할표 갱신
+3. `.claude/rules/domain-roles.md` 의 agent→domain/rule 소유 매트릭스 갱신 (= 직전 `docs/agent/solutions/README.md` 역할표 흡수 · 부재 file · MASTER-CLI-AGENT-ROLE-MATRIX-001)
 
 "호출 빈도"는 보조 신호다 — 고위험 역할은 드물게 호출되더라도 독립 파일이어야 한다.
 

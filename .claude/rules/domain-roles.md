@@ -74,7 +74,8 @@
 1. `.claude/agents/<role-name>.md` 생성 (전문가 프레임 형식)
 2. 이 파일의 **매트릭스에 1행 추가** (generic vs repo-only 구분 · 소유 SoT·상태·STOP 권한 열 disk 실측 채움)
 3. `.claude/rules/routing-and-delegation.md` 매핑 갱신 (trigger→역할 차원)
-4. `docs/agent/solutions/README.md` 역할표 갱신
+
+> 역할표 = step 2 의 본 file 매트릭스 단일. 직전 `docs/agent/solutions/README.md` 역할표는 본 매트릭스로 흡수됨 (= 부재 file · MASTER-CLI-AGENT-ROLE-MATRIX-001).
 
 ### 역할 파일 필수 섹션
 
