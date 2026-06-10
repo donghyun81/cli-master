@@ -168,8 +168,31 @@ run_context_health() {
   fi
 }
 
+# === master CLAUDE.md §15 hot 재증식 advisory (= MASTER-CLI-AUTO-DEMOTE-CONTEXT-DIET-001 · 2026-06-10 확장) ===
+# 본질: §15 hot entry 수 > trigger(10) 도달 시 cold 재이전 advisory 자동 surface (= 재증식 자동 감시).
+#   - trigger 수치 SoT = .auto-memory/context-health-metrics.md §2 ("≥ ~10 도달 시 cold 재이전 trigger")
+#   - cadence = 새 master cycle commit 감지 시 (= §15 entry append 발생 시점) + GSM_CONTEXT_HEALTH_FORCE=1 self-test
+#   - warn-only · exit 0 보존 · 이전(demote) 절차 자체 = 수동 (= COLD-002 전례 · automation-policy.md
+#     Transport=측정/surface 자동 + Inspection=판정·이전 수동 경계 정합)
+S15_HOT_TRIGGER=10
+run_s15_hot_check() {
+  s15_md="$MASTER_DIR/CLAUDE.md"
+  [ -f "$s15_md" ] || return 0
+  # §15 표 data row 수 = "## 15." ~ 다음 "## " 사이 "| " 시작 행 - header 행("| cycle ID")
+  s15_count=$(awk '/^## 15\./{f=1; next} /^## /{f=0} f && /^\| /{print}' "$s15_md" 2>/dev/null | grep -cv '^| cycle ID')
+  [ -z "$s15_count" ] && s15_count=0
+  if [ "$s15_count" -gt "$S15_HOT_TRIGGER" ] && [ "$MODE" != "silent" ]; then
+    echo "" >&2
+    echo "[GSM-S15-HOT] master CLAUDE.md §15 hot entry = ${s15_count} > ${S15_HOT_TRIGGER} (= cold 재이전 trigger · context-health-metrics.md §2):" >&2
+    echo "  → cold 재이전 advisory (= COLD-002 전례 절차 · 무손실 verbatim · .auto-memory/master-cycle-history-COLD.md append + hot = 최근 5 + 본 cycle entry)" >&2
+    echo "  → advisory only (= 자동 이전 X · 판정·이전 = master cycle 수동 · automation-policy.md Inspection)" >&2
+    echo "" >&2
+  fi
+}
+
 # FORCE = new-cycle 게이팅 무관 즉시 context-health 평가 (self-test/수동 분기) · 분기 guard 는 유지
 if [ "$CH_FORCE" = "1" ]; then
+  run_s15_hot_check
   run_context_health
   exit 0
 fi
@@ -250,6 +273,9 @@ if [ "$MODE" != "silent" ]; then
   echo "  규칙: gsm-measurement.md §6 amend 정량 trigger (N cycle 연속 deviation → 후보) · GSM_MEASURE_ENFORCE=silent 음소거" >&2
   echo "" >&2
 fi
+
+# §15 hot 재증식 advisory (= 새 cycle 감지 후 도달 = §15 append 시점 · MASTER-CLI-AUTO-DEMOTE-CONTEXT-DIET-001)
+run_s15_hot_check
 
 # context-health (= 새 cycle 감지 후 도달 · 분기 guard 통과 시만 측정/append · MASTER-CLI-GSM-CONTEXT-HEALTH-ABSORB-001)
 run_context_health

@@ -53,9 +53,9 @@
 | repo 영역 | char | 비고 |
 |---|---|---|
 | parent root CLAUDE.md | 8,000 | §3.2 진입 항상 |
-| master CLAUDE.md (FULL) | 25,392 | §15 = hot 8 entry + cold pointer(전체 이력 = `master-cycle-history-COLD.md`) |
+| master CLAUDE.md (FULL) | ~26K (2026-06-10 재측정 · 23,716 + 본 cycle entry) | §15 = hot 최근 5 + 본 cycle entry + cold pointer(전체 이력 = `master-cycle-history-COLD.md` 103 entry) |
 | L0 kernel (safety+anchor+cross-repo kernel) | 21,561 | cross-repo = kernel 8.2K (Phase 3 H4 · 본문 12.6K demote) |
-| child CLAUDE.md (deduped · ×4 byte-identical) | 19,260 | 운영 §2/§3/§6~§13/§16+§14a = master pointer |
+| child CLAUDE.md (deduped · ×4 byte-identical) | 9,581 (2026-06-10 재측정 · AUTO-DEMOTE) | 운영 §2/§3/§6~§13/§14a/§15/§16 = master pointer (= §15 박제 폐지 포함) |
 
 ### 환각 패턴 수
 
@@ -63,7 +63,7 @@
 |---|---|---|
 | `stale_pointer` | 0 (genuine) | H7(Phase 0) reviewer.md 실존 · figma = 의도 placeholder · SoftBudget→code-principles wrong pointer(Phase 4 정정) |
 | `conflicting_sot` | 0 (actioned) | DependencyDecision 8항 3 framing → `DEPENDENCY_DECISION_CHECKLIST.md` canonical + UI 억제 → `ui-ux-analysis.md` canonical 로 reconcile 마감 (MASTER-CLI-DEPENDENCY-DECISION-RECONCILE-001 · `rule-routing-index §G` row 7+8 · grow-only merge 정보 소실 0) |
-| `master §15 hot entry` | 8 | cold 재배치(Phase 1) 후 hot · ≥ ~10 도달 시 cold 재이전 trigger(`CLAUDE.md §15` note) |
+| `master §15 hot entry` | 6 | 6회차 cold 재이전(MASTER-CLI-AUTO-DEMOTE-CONTEXT-DIET-001 · 2026-06-10 · hot 14→5+본 cycle) 후 · ≥ ~10 도달 시 cold 재이전 trigger — **재증식 자동 감시** = `measure-gsm-cycle.sh` §15 hot check(> 10 시 Stop hook advisory surface · warn-only · 이전 판정 = 수동) |
 
 ---
 
@@ -99,6 +99,7 @@
 - **분기 정기 review**(= `cycle-discipline.md §18` · 1/6·4/6·7/6·10/6 부근): 4 char 지표 + 3 환각 지표 전량 재측정 + trajectory append.
   - **자동화**(= MASTER-CLI-GSM-CONTEXT-HEALTH-ABSORB-001 · 2026-06-04): [`measure-gsm-cycle.sh`](../.claude/hooks/measure-gsm-cycle.sh) context-health 블록이 **분기 guard**(quarter bucket 경과) 통과 시 char 4 + `stale_pointer`(auto)를 측정·surface(advisory) + `GSM_MEASURE_ENFORCE=append` 시 §3.1 append. 수동 분기 실행 = `GSM_CONTEXT_HEALTH_FORCE=1`(= new-cycle 게이팅 무관 즉시 평가 · 분기 guard 는 유지).
   - **수기 잔여**: `conflicting_sot` / `buried_ratio` = 판정 자동화 난이도 ↑ → master cycle 측 수기 §2 갱신(= `automation-policy.md` Inspection 수동 의무 정합).
+- **§15 hot 재증식 자동 감시**(= MASTER-CLI-AUTO-DEMOTE-CONTEXT-DIET-001 · 2026-06-10): `measure-gsm-cycle.sh` 의 §15 hot check 가 새 master cycle commit 감지 시 hot entry 수 측정 → **> 10 도달 시 cold 재이전 advisory surface**(warn-only · trigger 수치 SoT = 본 file §2 행). 이전(demote) 실행·판정 = master cycle 수동(= COLD-002 전례 절차 · Inspection 수동 경계).
 - **`stop-reflect.sh`**(= `cycle-discipline.md §19`) self-improving loop 이 buried/conflict 누적 감지 시 silent 후보 → 본 file 갱신 trigger.
 - 유지 주체 = master cycle + 자동 surface(= 기존 GSM Stop hook 확장 · **신 hook 신설 X** · `automation-policy.md` Transport=측정/surface 자동 + Inspection=판정 수동 정합).
 
@@ -119,4 +120,5 @@
 - 2026-06-02 · MASTER-CLI-GSM-MEASUREMENT-LAYER-001 · GSM Metric family 재위치(= §0 GSM 귀속 신설 + 헤더 blurb reframe · `gsm-measurement.md §2` context 건강 family 귀속). 기존 2 family(항상로드 char + 환각 패턴) 측정 항목·값 무변경(= 위치/귀속만 GSM 정합 · program-level · 행동 무관). master-only(propagation X 유지).
 - 2026-06-02 · MASTER-CLI-DEPENDENCY-DECISION-RECONCILE-001 · `conflicting_sot` 1(defer)→0(actioned). DependencyDecision 8항 3 framing(workflow-core/code-principles/CHECKLIST) → `DEPENDENCY_DECISION_CHECKLIST.md` canonical + UI 억제 → `ui-ux-analysis.md` canonical 로 reconcile(= `rule-routing-index §G` row 7+8 · grow-only merge · 정보 소실 0 · UI 강도 보존). 지표 정의(§1) 무변경(= 환각 패턴 측정값만 갱신) · master-only(propagation X).
 - 2026-06-04 · MASTER-CLI-GSM-CONTEXT-HEALTH-ABSORB-001 · context-health 측정 **자동화 흡수**(= 신 hook 신설 X · 기존 `measure-gsm-cycle.sh` GSM Stop hook 확장 · settings.json 무접촉). §3.1 분기 자동 측정 trajectory(append-only · quarter-bucket guard · idempotent) 신설 + §4 cadence 에 자동화/수기 경계 명문화. 자동 범위 = char 4(codepoint) + `stale_pointer`(file-link grep) · 수기 잔여 = `conflicting_sot`/`buried_ratio`(판정 난이도 ↑). hook = 5-repo byte-identical 전파(= context-health 블록 포함) · 본 file(append 대상) = master-only(propagation X 유지). 지표 정의(§1) + Phase 0~4 trajectory(§3) 무변경(= 자동화 면만 추가). proxy band 라벨 보존(over-claim 금지).
+- 2026-06-10 · MASTER-CLI-AUTO-DEMOTE-CONTEXT-DIET-001 · ① §15 hot 6회차 cold 재이전(14→5+본 cycle entry · cold 94→103 verbatim · 무손실) ② **§15 hot 재증식 자동 감시** = `measure-gsm-cycle.sh` §15 hot check 확장(> 10 시 advisory surface · 신 hook 신설 X · settings.json 무접촉 · ABSORB-001 동형) ③ 자식 4 CLAUDE.md §15 박제 → master cold pointer 후퇴(19,260→9,581 cp · 6 entry cold verbatim 기포함 확인) ④ cycle-discipline §23~§29 pointer 후퇴(§21/§22 보존 · 43,819→36,866 cp) ⑤ §22.2 확장/이동 cycle 마감 dual grep sweep gate 1행. §2 측정값 갱신(master/child char + §15 hot 6) · §4 cadence §15 자동 감시 1줄 추가.
 | 2026-06-04 14:01 | 8000 | 52652 | 25730 | 19260 | 0 | manual | manual | MASTER-CLI-WORKFLOW-ADOPTION-POLICY-002 | <!-- ch-auto 2026-06-04 --> |

@@ -574,6 +574,7 @@ cli infra 5-repo byte-identical 영역 cycle 진입 시점 표준:
 | 4 | `git diff --cached --name-only` 측 list 측정 (= stage 영역 측 전체 file 확인 default) |
 | 5 | `git status` 측 working tree 측 unstaged 영역 0 확인 default |
 | 6 | commit 진입 (= `cycle-discipline.md` §5 v2 정합) |
+| 7 | **확장/이동 cycle 마감 gate** — repo 추가 / 대량 rename / file 이동 cycle 마감 시 구명·구경로 dual grep sweep (= A7 정합 · 6-repo 측 구 명칭 + 구 경로 잔존 참조 grep) 보고 의무 default (= 동일 양식 사고 4+회 재발 mitigation · `MASTER-CLI-AUTO-DEMOTE-CONTEXT-DIET-001` 신설) |
 
 본 paradigm 측 step 3 (`git add -u`) 누락 = 사고 발화 baseline default. 본 § 측 의무 영역 default.
 
@@ -604,167 +605,38 @@ cli infra 5-repo byte-identical 영역 cycle 진입 시점 표준:
 
 ### 23) Recommended option disk verification paradigm (= 2026-05-21 신설 · `MASTER-CLI-RECOMMENDED-OPTION-DISK-VERIFICATION-PARADIGM-001`)
 
-> 본 § = 후속 cycle 후보 / Recommended option / paste source umbrella 발행 시점 disk 측 이미 구현 여부 측정 의무 paradigm 명시 영역 default. 본문 단일 SoT = [`recommended-option-disk-verification.md`](./recommended-option-disk-verification.md) (= 4 의무 영역 + paste source authoring ⑤ 자기 정합 paradigm + 예시 case 3 + 위반 mitigation cycle default).
-
-#### 23.1 cycle scope 결정 영역 측 적용
-
-cycle scope file 영역 결정 시점 (= master cycle 또는 자식 cycle 측) 본 paradigm 정합 의무 default:
-
-- cycle scope file × N 측 측정 명령 호출 default (= `find` + `grep` + `git hash-object` + `git ls-files`)
-- 측정 결과 = 중복 신설 차단 default + 갱신 vs 신설 결정 default + 부분 구현 영역 측 scope 재 정의 default
-- 측정 결과 인용 default (= paste source 본문 §0 baseline 영역 + §3 contract SoT 영역 default)
-
-#### 23.2 §17 BASELINE 실측 표준 정합
-
-본 paradigm 측 의무 ① (= disk 측 이미 구현 여부 측정 의무) 측 측정 명령 영역 정합 default = §17 BASELINE 실측 표준 의무 절차 (= filename + content 동시 grep 의무) 본문 정합 default.
-
-- filename find 1차 + container 내부 content grep 2차 의무 default (= §17 정합 default)
-- lifecycle / deprecated 키워드 grep 의무 default (= §17 §14a 6 절차 정합 default)
-- filename + content 둘 다 부재 시점만 STOP / UNKNOWN 분류 가능 default
-
-본 §23 + §17 = 본 paradigm 측 측정 영역 본문 단일 default.
-
-#### 23.3 위반 시 mitigation
-
-본 paradigm 측 위반 mitigation 본문 단일 SoT = `recommended-option-disk-verification.md` §5 위반 시 mitigation cycle paradigm 정합 default.
-
-#### 23.4 명시 cycle 이력
-
-- 2026-05-21 · `MASTER-CLI-RECOMMENDED-OPTION-DISK-VERIFICATION-PARADIGM-001` · 본 § 신설 + `recommended-option-disk-verification.md` 신 rule 신설 + 5-repo byte-identical propagation
+> 본문 단일 SoT = [`recommended-option-disk-verification.md`](./recommended-option-disk-verification.md) → [`disk-verification` skill](../skills/disk-verification/SKILL.md) (= 4 의무 영역 + cycle scope 결정 영역 적용 + §17 BASELINE 실측 표준 정합 = 구 §23.2 본문 흡수(filename + content 동시 grep + lifecycle/deprecated grep) + 위반 mitigation cycle + 신설 이력). 본 §은 가리키기만 (= 본문 복제 0 · L1-4 단일 SoT · `MASTER-CLI-AUTO-DEMOTE-CONTEXT-DIET-001` pointer 후퇴).
 
 ---
 
 ### 24) Runtime crash mitigation process paradigm (= 2026-05-22 신설 · `MASTER-CLI-RUNTIME-CRASH-MITIGATION-PROCESS-PARADIGM-001`)
 
-> 본 § = 자식 repo (= GB / GD / GT) 측 Android runtime crash 발견 시점 cli session 측 mitigation process paradigm 명시 영역 default. 본문 단일 SoT = [`runtime-crash-mitigation-process.md`](./runtime-crash-mitigation-process.md) (= trigger 기반 paradigm + 9-step mitigation process + verify 의무 본문 + cli session 자율 paradigm + STOP 조건 + paste source authoring 영역 default).
-
-#### 24.1 paradigm 본질
-
-- trigger 기반 default (= 매번 runtime verify 회피 default · 외부 동기화 덜 된 영역 false positive 회피 default)
-- 진입 trigger = 사용자 보고 default 또는 cli session 측 의도 시점 verify default
-- cli session 측 ADB + emulator + Logcat 영역 default (= cowork chat 측 영역 X default · `cowork-project-instructions v14 §B-2` 책임 분리 정합 default)
-
-#### 24.2 9-step process + verify 의무
-
-본 paradigm 측 9-step mitigation process (= 1.paste 발행 + 2.terminal paste + 3.Logcat 수집 + 4.stack trace 측정 + 5.root cause 측정 + 6.mitigation IMPL + 7.emulator runtime verify + 8.commit + 9.paste-back default) 본문 단일 SoT = `runtime-crash-mitigation-process.md` §2 정합 default.
-
-verify 의무 본문 = step 7 핵심 영역 default (= compile + install + monkey launch + crash buffer FATAL 0 + process alive 의무 default · staging flavor 한정 default · production push X 의무 default · `runtime-crash-mitigation-process.md` §3 정합 default).
-
-#### 24.3 precedent + 인접 paradigm
-
-- precedent: `3REPO-RUNTIME-CRASH-DIAGNOSIS-001` (2026-05-22 H32 마감 default · Sentry `SentryInitProvider` 자동 init 측 empty DSN crash 차단 default · 3 자식 byte-identical mitigation default)
-- 인접 paradigm: `cycle-discipline.md` §5 v2 ([agent-commit: yes] 묵시 동의) + §7 (commit body 6-section) + `cross-repo-parallel-exec.md` §2 (영역 1/2 paradigm 분기) + `safety-and-secrets.md` (production push X) + `recommended-option-disk-verification.md` (disk 측정 의무)
-
-#### 24.4 명시 cycle 이력
-
-- 2026-05-22 · `MASTER-CLI-RUNTIME-CRASH-MITIGATION-PROCESS-PARADIGM-001` · 본 § 신설 + `runtime-crash-mitigation-process.md` 신 rule 신설 + 5-repo byte-identical propagation
+> 본문 단일 SoT = [`runtime-crash-mitigation-process.md`](./runtime-crash-mitigation-process.md) → [`runtime-crash-mitigation` skill](../skills/runtime-crash-mitigation/SKILL.md) (= trigger 기반 paradigm + 9-step mitigation process + step 7 emulator verify 의무(staging 한정 · production push X) + precedent `3REPO-RUNTIME-CRASH-DIAGNOSIS-001`(skill 헤더 + §13) + STOP 조건 + 신설 이력). 본 §은 가리키기만 (= 본문 복제 0 · L1-4 단일 SoT · `MASTER-CLI-AUTO-DEMOTE-CONTEXT-DIET-001` pointer 후퇴).
 
 ---
 
 ### 25) INITIATIVES + INDEX + task file auto-sync paradigm (= 2026-05-22 신설 · `MASTER-CLI-LAUNCH-STATUS-AUTO-SYNC-PARADIGM-001`)
 
-> 본 § = 자식 repo (= GB / GD / GT + app-foundation) 측 cycle REVIEW PASS 시점 cli session 측 INITIATIVES + INDEX + task file 갱신 의무 paradigm 명시 영역 default. 본문 단일 SoT = [`initiatives-auto-sync.md`](./initiatives-auto-sync.md) → [`initiatives-sync` skill](../skills/initiatives-sync/SKILL.md) (= trigger 기반 paradigm + 5 의무 영역 + paste-back verify 의무 본문 + cli session 자율 paradigm + STOP 조건 + paste source authoring 영역 default).
-
-#### 25.1 paradigm 본질
-
-- trigger 기반 default (= 자식 cycle REVIEW PASS 시점 default · paste-back 본문 발행 직전 시점 default · 매 cycle 마감 시점 catch-up drift 회피 default)
-- cli session 측 INITIATIVES + INDEX + task file 갱신 의무 default (= 3 file 갱신 ①~③ + 2 검증 gate ④~⑤ = 5 의무 영역 default · 본문 SoT = `initiatives-sync` skill §3)
-- paste-back `[EC]` 섹션 측 갱신 verify 본문 명시 default · `[Diff]` 섹션 측 갱신 file list 명시 default
+> 본문 단일 SoT = [`initiatives-auto-sync.md`](./initiatives-auto-sync.md) → [`initiatives-sync` skill](../skills/initiatives-sync/SKILL.md) (= trigger 기반 paradigm = 자식 cycle REVIEW PASS 시점 의무(skill §2) + paste-back `[EC]`/`[Diff]` verify 의무 + trigger baseline H32-H34 drift 누적(skill 헤더 + §14) + STOP 조건 + 신설 이력). 구 §25.1 + §25.3 + §25.4 본문 = skill 단일 SoT 측 기존재 흡수 (= `MASTER-CLI-AUTO-DEMOTE-CONTEXT-DIET-001` pointer 후퇴 · 정보 손실 0).
 
 #### 25.2 5 의무 영역 (= 3 file 갱신 ①~③ + 2 검증 gate ④~⑤)
 
 본문 단일 SoT = [`initiatives-sync` skill §3](../skills/initiatives-sync/SKILL.md) (= ① INITIATIVES 갱신 + ② `.ai/tasks/INDEX.md` append + ③ `.ai/tasks/<CYCLE-ID>.md` 생성 + ④ KR 귀속 검증 gate + ⑤ 완료분 always-fresh · 각 본질·위치 = skill §3 table + §3.1~§3.5 단일 SoT). 본 §은 가리키기만 (= 본문 복제 0 · L1-4 단일 SoT). ④ KR gate + ⑤ always-fresh = `MASTER-CLI-P2-MECHANISM-001` 추가분.
 
-#### 25.3 trigger 본질 + precedent
-
-- 진입 trigger = 자식 cycle REVIEW PASS 시점 default (= 의무 영역 default) · 자식 propagation cycle 마감 시점 default (= lazy 가능 default) · catch-up cycle 진입 시점 default (= 별 cycle default)
-- precedent: `MASTER-CLI-RUNTIME-CRASH-MITIGATION-PROCESS-PARADIGM-001` (= H32 마감 default · self-contained 11 section format default)
-- baseline trigger: H32-H34 마감 사이클 측 INITIATIVES HEAD drift 누적 default (= GB 14 commits / GD 18 commits / GT 12 commits drift default) + INDEX 갱신 drift (= GD 4 days / GT 6 days 누락 default) + 신 task file 누락 (= GB 2 / GD 0 / GT 1 default)
-
-#### 25.4 명시 cycle 이력
-
-- 2026-05-22 · `MASTER-CLI-LAUNCH-STATUS-AUTO-SYNC-PARADIGM-001` · 본 § 신설 + `initiatives-auto-sync.md` 신 rule 신설 + 5-repo byte-identical propagation
-
 ---
 
 ### 26) Paste source umbrella authoring 측 disk 실측 의무 paradigm (= 2026-05-22 신설 · `MASTER-CLI-PASTE-AUTHORING-DISK-VERIFICATION-PARADIGM-001`)
 
-> 본 § = cowork chat 측 paste source umbrella authoring 시점 disk 실측 의무 paradigm 명시 영역 default. 본문 단일 SoT = [`paste-authoring-disk-verification.md`](./paste-authoring-disk-verification.md) (= trigger 기반 paradigm + 3 의무 영역 + paste-back verify 의무 본문 + cli session 자율 paradigm + STOP 조건 + 자기 정합 paradigm 본질 default).
-
-#### 26.1 paradigm 본질
-
-- trigger 기반 default (= cowork chat 측 paste source umbrella authoring 시점 default · 매 cycle 강제 X default)
-- cowork chat 측 paste source umbrella `§1 cycle 본질` + `§2 scope` + `§3 contract SoT` 영역 본문 작성 시점 default
-- 책임 분리 default (= cowork chat 측 paste source authoring 측 disk 실측 의무 default · cli session 측 paste-back verify 의무 default · `cowork-project-instructions v14 §B-1 + §B-2` 정합 default)
-
-#### 26.2 3 의무 영역
-
-| # | 영역 | 본질 |
-|---|---|---|
-| 1 | paste source umbrella §1 + §1.3 disk 측정 결과 섹션 명시 의무 default | scope file × N 측 disk 측정 결과 본문 인용 default (= grep / find / git ls-files / Read 측정 결과 default · 가정 X default) |
-| 2 | paste source umbrella §3 contract SoT 섹션 byte-identical quote 의무 default | precedent rule + 인용 entry × N 측 byte-identical quote default (= line number 인용 default · 가정 X default) |
-| 3 | paste source umbrella §2 scope 섹션 file path 모두 disk 측정 의무 default | 변경 file × N 측 `git ls-files` / `find` / `Read` 측정 의무 default · 부재 발견 시 scope 재 정의 의무 default (= `recommended-option-disk-verification.md` §2.3 + §2.4 정합 default) |
-
-#### 26.3 trigger 본질 + precedent
-
-- 진입 trigger = cowork chat 측 paste source umbrella authoring 시점 default (= 의무 영역 default)
-- precedent: `MASTER-CLI-RECOMMENDED-OPTION-DISK-VERIFICATION-PARADIGM-001` (= H29 마감 default · 동족 paradigm 본질 default · cli session 측 disk 측정 의무 paradigm default · 본 § = cowork chat 측 paste source authoring paradigm default · 별 file 분리 paradigm default) + `MASTER-CLI-LAUNCH-STATUS-AUTO-SYNC-PARADIGM-001` (= H35 마감 default · self-contained 12 section format default)
-- baseline trigger: H36 chat 측 3REPO-CRITICAL-PATH-PROGRESS-001 cycle GB scope 재 정의 사고 default (= paste source umbrella 측 `BreathSessionRepository.kt` + `BreathSessionDao.kt` 명시 default · 실 disk 부재 default · 실 disk = `MeditationSessionsListRepository.kt` 정합 default · cli session 측 자율 scope 재 정의 마감 default)
-
-#### 26.4 명시 cycle 이력
-
-- 2026-05-22 · `MASTER-CLI-PASTE-AUTHORING-DISK-VERIFICATION-PARADIGM-001` · 본 § 신설 + `paste-authoring-disk-verification.md` 신 rule 신설 + 5-repo byte-identical propagation
+> 본문 단일 SoT = [`paste-authoring-disk-verification.md`](./paste-authoring-disk-verification.md) → [`paste-source-authoring` skill](../skills/paste-source-authoring/SKILL.md) (= trigger 기반 paradigm = cowork chat 측 paste source umbrella authoring 시점 + 3 의무 영역(skill §3) + 책임 분리(cowork authoring 실측 / cli paste-back verify) + trigger baseline H36 GB scope 재 정의 사고(skill 헤더) + 자기 정합 paradigm + 신설 이력). 본 §은 가리키기만 (= 본문 복제 0 · L1-4 단일 SoT · `MASTER-CLI-AUTO-DEMOTE-CONTEXT-DIET-001` pointer 후퇴).
 
 ### 27) Anchor list paradigm (= 2026-05-22 신설 default · `MASTER-CLI-CYCLE-2A-ANCHOR-LIST-HOT-INSTALL-001`)
 
-> 본 § = anchor list (= 누락 시 cycle 무조건 실패 본질 영역 default · purpose 수준 default) paradigm 명시 영역 default. 본문 단일 SoT = [`anchor-list.md`](./anchor-list.md) (= 10 anchor hot default · P0 6 + P1 4 default).
-
-#### 27.1 paradigm 본질
-
-- purpose 수준 default (= method 어휘 X default)
-- 본인 confirm 영역 default (= hot 영역 default)
-- hot 제외 후보 = cold storage (= `.auto-memory/anchor-list-COLD.md` default · master only default · Cycle 2b 마감 default) 측 누적 default
-
-#### 27.2 cycle 보고 format negative space line
-
-매 cycle 보고 끝 1 줄 "고려했으나 hot 제외 영역" 의무 default · 본문 단일 SoT = `reporting.md §13` default.
-
-#### 27.3 명시 cycle 이력
-
-- 2026-05-22 · `MASTER-CLI-CYCLE-2A-ANCHOR-LIST-HOT-INSTALL-001` · 본 § 신설 + `anchor-list.md` 신설 + `reporting.md §13` append + 5-repo byte-identical propagation default
-- 2026-05-22 · `MASTER-CLI-CYCLE-2B-ANCHOR-LIST-COLD-INSTALL-001` · cold storage `anchor-list-COLD.md` 신설 default (= master only default · propagation X default)
+> 본문 단일 SoT = [`anchor-list.md`](./anchor-list.md) (= 10 anchor hot · P0 6 + P1 4 · purpose 수준 + cold storage = `.auto-memory/anchor-list-COLD.md`(master only) + negative space line 의무 = `reporting.md §13` + 신설 이력 = anchor-list §7). 본 §은 가리키기만 (= 본문 복제 0 · `MASTER-CLI-AUTO-DEMOTE-CONTEXT-DIET-001` pointer 후퇴).
 
 ### 28) Automation policy paradigm (= 2026-05-22 신설 default · `MASTER-CLI-CYCLE-3-AUTOMATION-POLICY-INSTALL-001`)
 
-> 본 § = automation policy (= Transport OK / Inspection X 원칙 default) paradigm 명시 영역 default. 본문 단일 SoT = [`automation-policy.md`](./automation-policy.md) (= 11 영역 분류 표 + 4 Inspection cadence + Sub-agent spawn 금지 + Cowork chat disk 직접 read 의무 default).
-
-#### 28.1 원칙 본질
-
-- 원칙 1: Transport 자동화 OK / Inspection 자동화 X default
-- 원칙 2: 자동화 자리에 명시적 inspection checkpoint default (= 변경 직후 calibration 강화 3~5 cycle default)
-
-#### 28.2 Sub-agent spawn 금지 (= B-5 정합 default)
-
-sub-agent spawn 영역 신설 X 의무 default · 신 sub-agent 신설 시점 본인 confirm 의무 default.
-
-#### 28.3 명시 cycle 이력
-
-- 2026-05-22 · `MASTER-CLI-CYCLE-3-AUTOMATION-POLICY-INSTALL-001` · 본 § 신설 + `automation-policy.md` 신설 + 5-repo byte-identical propagation default
+> 본문 단일 SoT = [`automation-policy.md`](./automation-policy.md) (= Transport 자동화 OK / Inspection 자동화 X 원칙 + 11 영역 분류 표 + 4 Inspection cadence + Sub-agent spawn 금지 = automation-policy §4 + cowork chat 측 disk 직접 read 의무 = §5 + 신설 이력 = §7). 본 §은 가리키기만 (= 본문 복제 0 · `MASTER-CLI-AUTO-DEMOTE-CONTEXT-DIET-001` pointer 후퇴).
 
 ### 29) Mode 시스템 paradigm (= 2026-05-22 신설 default · `MASTER-CLI-CYCLE-4A-MODE-SYSTEM-HOT-INSTALL-001`)
 
-> 본 § = Mode 시스템 (= AI 행동 layer default · Phase A/B/C/D/F orthogonal default · L1-2 정합 default) paradigm 명시 영역 default. 본문 단일 SoT = [`mode-system.md`](./mode-system.md) (= 3 mode hot default · M1 + M3 + M5 default · Mode picker 워크플로우 default · 현 5-repo 동일 mode / 미래 자식별 발산 protocol default · L1-6 정합 default).
-
-#### 29.1 Mode 본질
-
-- Mode = AI 행동 layer default · Phase = 작업 lifecycle 위치 layer default · orthogonal default · 동시 활성 default
-- 자산 본문 측 mode + Phase 명시 의무 default
-
-#### 29.2 Mode 잘못 결정 recovery (= L1-7 정합 default)
-
-- STOP 조건 9 sub-case 흡수 default · 신 recovery 절차 신설 X default · `verification-and-review.md §에러 유형별 복구 경로` 정합 default
-
-#### 29.3 명시 cycle 이력
-
-- 2026-05-22 · `MASTER-CLI-CYCLE-4A-MODE-SYSTEM-HOT-INSTALL-001` · 본 § 신설 + `mode-system.md` 신설 + 5-repo byte-identical propagation default
-- 2026-05-22 · `MASTER-CLI-CYCLE-4B-MODE-BUNDLE-COLD-INSTALL-001` · cold storage `mode-bundle-COLD.md` 신설 default (= master only default · propagation X default)
+> 본문 단일 SoT = [`mode-system.md`](./mode-system.md) (= M1/M3/M5 mode bundle + Mode picker 워크플로우 + Mode 잘못 결정 recovery = STOP 조건 9 sub-case 흡수(L1-7) + 자식별 발산 protocol(L1-6) + cold storage = `mode-bundle-COLD.md`(master only) + 신설 이력 = mode-system §8). 본 §은 가리키기만 (= 본문 복제 0 · `MASTER-CLI-AUTO-DEMOTE-CONTEXT-DIET-001` pointer 후퇴).
