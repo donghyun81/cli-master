@@ -1,0 +1,10 @@
+docs(infra): MASTER-CLI-S15-HOT-DEMOTE-003 §15 hot 13→6 (8 entry cold 7회차 재이전)
+
+[Goal] Pencil→Compose 파이프라인 OPS 정비 — master §15 항상로드 context diet (GSM-S15-HOT advisory 3 cycle 연속 발화 해소).
+[Diff] CLAUDE.md §15 (13→6 row · cold pointer 103→111+range end · table-split 빈 줄 제거) · master-cycle-history-COLD.md (oldest 8 verbatim append · 103→111 · §1 heading stale 94→111 reconcile) · context-health-metrics.md §2 (master char 40464→27432 · hot entry 7회차 desc). 3 file · master char −13K.
+[Sha] 보호 5 불변 (8502c014/b09b8d50/2bfc81c5/e3b9891d/4c566615 · edit-set ∩ 보호 = ∅).
+[EC] hot 13→6 (hook awk) · 무손실 대칭 8=8 exact-string (vs HEAD a2e4adf baseline) · GSM-S15-HOT 재실행 silent (s15_count=6 ≤ 10) · production 0 LOC · 자식 5 repo 무접촉.
+[Next] (없음) — 다음 hot > 10 도달 시 8회차 재이전 advisory.
+[Refs] parent a2e4adf · MASTER-CLI-S15-HOT-DEMOTE-003 · 전례 COLD-002 / AUTO-DEMOTE-CONTEXT-DIET-001.
+
+Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>

@@ -53,7 +53,7 @@
 | repo 영역 | char | 비고 |
 |---|---|---|
 | parent root CLAUDE.md | 8,000 | §3.2 진입 항상 |
-| master CLAUDE.md (FULL) | ~26K (2026-06-10 재측정 · 23,716 + 본 cycle entry) | §15 = hot 최근 5 + 본 cycle entry + cold pointer(전체 이력 = `master-cycle-history-COLD.md` 103 entry) |
+| master CLAUDE.md (FULL) | ~27K (2026-06-11 재측정 · 27432 · S15-HOT-DEMOTE-003 hot 13→6 · 직전 "~26K/23,716" = §15 비대 누적분 미반영 stale) | §15 = hot 최근 5 + 본 cycle entry + cold pointer(전체 이력 = `master-cycle-history-COLD.md` 111 entry) |
 | L0 kernel (safety+anchor+cross-repo kernel) | 21,561 | cross-repo = kernel 8.2K (Phase 3 H4 · 본문 12.6K demote) |
 | child CLAUDE.md (deduped · ×4 byte-identical) | 9,581 (2026-06-10 재측정 · AUTO-DEMOTE) | 운영 §2/§3/§6~§13/§14a/§15/§16 = master pointer (= §15 박제 폐지 포함) |
 
@@ -63,7 +63,7 @@
 |---|---|---|
 | `stale_pointer` | 0 (genuine) | H7(Phase 0) reviewer.md 실존 · figma = 의도 placeholder · SoftBudget→code-principles wrong pointer(Phase 4 정정) |
 | `conflicting_sot` | 0 (actioned) | DependencyDecision 8항 3 framing → `DEPENDENCY_DECISION_CHECKLIST.md` canonical + UI 억제 → `ui-ux-analysis.md` canonical 로 reconcile 마감 (MASTER-CLI-DEPENDENCY-DECISION-RECONCILE-001 · `rule-routing-index §G` row 7+8 · grow-only merge 정보 소실 0) |
-| `master §15 hot entry` | 6 | 6회차 cold 재이전(MASTER-CLI-AUTO-DEMOTE-CONTEXT-DIET-001 · 2026-06-10 · hot 14→5+본 cycle) 후 · ≥ ~10 도달 시 cold 재이전 trigger — **재증식 자동 감시** = `measure-gsm-cycle.sh` §15 hot check(> 10 시 Stop hook advisory surface · warn-only · 이전 판정 = 수동) |
+| `master §15 hot entry` | 6 | 7회차 cold 재이전(MASTER-CLI-S15-HOT-DEMOTE-003 · 2026-06-11 · hot 13→5+본 cycle · 직전 6회차 = AUTO-DEMOTE-CONTEXT-DIET-001 2026-06-10) 후 · ≥ ~10 도달 시 cold 재이전 trigger — **재증식 자동 감시** = `measure-gsm-cycle.sh` §15 hot check(> 10 시 Stop hook advisory surface · warn-only · 이전 판정 = 수동) |
 
 ---
 
