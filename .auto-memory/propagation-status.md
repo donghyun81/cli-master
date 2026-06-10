@@ -166,13 +166,13 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 | 파일 | master sha (12) | GentlyBreath | GentlyDay | GentlyTable | app-foundation | gently-product-docs |
 |---|---|---|---|---|---|---|
 | `docs/schemas/ui-spec.schema.json` | `8502c01428fb` | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `.claude/rules/pencil-uiux-workflow.md` | `2ec100bfc601` | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `docs/design/pencil-sot-policy.md` | `ae20a79c42dc` | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `.claude/rules/pencil-uiux-workflow.md` | `b09b8d5091a7` | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `docs/design/pencil-sot-policy.md` | `2bfc81c538b2` | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `.claude/rules/uiux-sot-refresh.md` | `e3b9891d4be5` | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `docs/design/design-sot-policy.md` | `4c5666152f09` | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `.claude/settings.json` | `9696afb38b0c` | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `.claude/rules/workflow-core.md` | `286d71f043ab` | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `.claude/rules/cycle-discipline.md` | `3333e4983e38` | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `.claude/rules/cycle-discipline.md` | `a09d07560f40` | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `.claude/rules/pencil-automation.md` | `aedb79780211` | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `.claude/rules/reporting.md` | `22a75fc50541` | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `.claude/rules/routing-and-delegation.md` | `bf53648f520e` | ✓ | ✓ | ✓ | ✓ | ✓ |
@@ -191,7 +191,7 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 
 ## Last verify-sync
 
-- timestamp: 2026-06-10T22:29:43+0900
+- timestamp: 2026-06-10T23:56:39+0900
 - pass: 160
 - drift: 0
 - miss: 0
