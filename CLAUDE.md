@@ -265,19 +265,19 @@ PLAN / VERIFY / REVIEW / PromptFit 정규 스키마: `.claude/rules/reporting.md
 
 ---
 
-## 14a. 보호 파일 sha baseline (2026-06-10 · MASTER-CLI-COMPOUND-LINT-DEPRECATE-001 마감 · git-sha1)
+## 14a. 보호 파일 sha baseline (2026-06-10 · MASTER-CLI-PENCIL-PHASE-B-PROTECTED-001 마감 · git-sha1)
 
-5종 보호 파일 git-sha1 (= `git hash-object` · post-cycle baseline · 본 cycle 안 보호 5 file 전수 변경 = compound-lint 5줄 deprecate + :22 lineage 폐기 연장 + :9 명칭 오기 정정):
+5종 보호 파일 git-sha1 (= `git hash-object` · post-cycle baseline · 본 cycle 변경 = Pencil 2 file 한정 — v1.1.62 제거 4종 stale sweep Phase B (open_document 등 참조 → 현 메커니즘 + 도구수 9 정합 + sot-binding 명칭 정합) · 나머지 3 무변동):
 
 | 보호 파일 | git-sha1 | 본 cycle 변동 |
 |---|---|---|
-| `docs/schemas/ui-spec.schema.json` | `8b46bb4952be03a7631b66096ba2b47e27a1c72a` | **갱신** (이전 `5b84cd9e...` · description drift 감지 기준 1곳 라벨 정정 · JSON 구조 무결) |
-| `.claude/rules/pencil-uiux-workflow.md` | `22570f97b7cabd4584feae323c1cfffc9896ae36` | **갱신** (이전 `bac8e801...` · :9 연관 파일 명칭 design-sot-refresh→uiux-sot-refresh 정정) |
-| `docs/design/pencil-sot-policy.md` | `acf88d95875094f415280e84345078bea5604fdc` | **갱신** (이전 `b27fbe16...` · Path B step 4 재검증 수단 재배선) |
-| `.claude/rules/uiux-sot-refresh.md` | `d2c62265ceb0dfe934bb703f3a7c604c3c896f0f` | **갱신** (이전 `b9a0c584...` · :22 lineage Package Boundary 서술 폐기) |
-| `docs/design/design-sot-policy.md` | `69649a36c75a221e1995a5f8437b2694db17fc42` | **갱신** (이전 `e580b6d7...` · §1.1 2줄 + §6 표 1줄 검증 수단 재배선) |
+| `docs/schemas/ui-spec.schema.json` | `8b46bb4952be03a7631b66096ba2b47e27a1c72a` | 무변동 (= COMPOUND-LINT-DEPRECATE-001 baseline 유지) |
+| `.claude/rules/pencil-uiux-workflow.md` | `aba157e0a6fdfd180dfab68167270bdfb542e94f` | **갱신** (이전 `22570f97...` · :20/:22 도구수 12+1→9 + 추가 5종 lineage 정합 · :45/:56/:68 open_document step→현 메커니즘 · :93 STOP moot 항 교체 · :11 pencil-sot-binding 죽은 명칭→실 file 병기) |
+| `docs/design/pencil-sot-policy.md` | `ce9c0d3e54534eb6eab3c7133cbb71a0e17ca6de` | **갱신** (이전 `acf88d95...` · :40 캔버스 열기 행→현 메커니즘 · :77 STOP moot 항 교체) |
+| `.claude/rules/uiux-sot-refresh.md` | `d2c62265ceb0dfe934bb703f3a7c604c3c896f0f` | 무변동 (= COMPOUND-LINT-DEPRECATE-001 baseline 유지) |
+| `docs/design/design-sot-policy.md` | `69649a36c75a221e1995a5f8437b2694db17fc42` | 무변동 (= COMPOUND-LINT-DEPRECATE-001 baseline 유지) |
 
-> **algorithm 분기 주의** (`protected-file-hashes.md §CONVENTION` 정합): 본 §14a = **git-sha1 (40 char)** · `.auto-memory/protected-file-hashes.md` manifest + `.ai/baseline-snapshot/latest.json` = **sha-256 (64 char)**. pencil-uiux-workflow.md 측 sha-256 = `2ec100bfc601d8f5b28f4559e972cb850a4d7a1e667d9029f2b1a4a851669b9b` (= manifest 측 baseline). 두 algorithm 직접 비교 금지.
+> **algorithm 분기 주의** (`protected-file-hashes.md §CONVENTION` 정합): 본 §14a = **git-sha1 (40 char)** · `.auto-memory/protected-file-hashes.md` manifest + `.ai/baseline-snapshot/latest.json` = **sha-256 (64 char)**. pencil-uiux-workflow.md 측 sha-256 = `b09b8d5091a748e80a062e766ef51352a6f26a3afdffccc15d51ade4d643364e` (= manifest 측 baseline). 두 algorithm 직접 비교 금지.
 
 `.auto-memory/protected-file-hashes.md` 와의 정합 의무 (`cycle-discipline.md` §10 정합).
 

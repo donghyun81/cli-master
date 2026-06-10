@@ -8,7 +8,7 @@
 > - `design-sot-policy.md` (보호) — dual-layer SoT 정책 (도구 무관)
 > - `uiux-sot-refresh.md` (보호) — refresh trigger 분류 (도구 무관 · 의미 = design-sot-refresh)
 > - `pencil-automation.md` — Pencil .pen 자동화 절차
-> - `pencil-sot-binding.md` (보호) — Pencil ↔ ui-spec.json 도구 바인딩
+> - `pencil-sot-policy.md` (보호 · 의미 = pencil-sot-binding · C2.5 파일명 유지) — Pencil ↔ ui-spec.json 도구 바인딩
 > - `.claude/hooks/pencil-auto-save.sh` (v2) + `scripts/save-as-result-check.sh`
 > SOT: `CLAUDE.md`
 
@@ -17,9 +17,9 @@
 ## 1. 전제 (Pencil 공식 근거)
 
 - Pencil.dev = macOS 캔버스 디자인 도구 + .pen 파일 형식
-- Pencil MCP server (stdio) = `mcp__pencil__*` tools = **12 official** (pencil.dev 공식 doc 2026-04-03 기준) + **1 package-verified** (`open_document` · 공식 doc 명시 X / 본 패키지 검증된 영역 · §FREEDOM)
+- Pencil MCP server (stdio) = `mcp__pencil__*` tools = **9 종** (= Pencil v1.1.62 surface · 구 12 official + 1 package-verified 중 4 종 제거 · 제거표 + 대체 메커니즘 = `pencil-mcp-tools-reference.md` §0.1)
 - 도구 list 전체 단일 SoT = `pencil-mcp-tools-reference.md` (본 file 내 도구 목록 중복 금지)
-- 본 cycle (`MASTER-CLI-PENCIL-OPTIMIZATION-001` · 2026-05-19) 안 명시적 추가 5 종 = `search_all_unique_properties` / `replace_all_matching_properties` / `find_empty_space_on_canvas` / `get_guidelines` / `export_nodes` (각 도구 본문 = 참조 file)
+- 구 cycle (`MASTER-CLI-PENCIL-OPTIMIZATION-001` · 2026-05-19) 안 명시적 추가 5 종 중 현존 2 종 = `get_guidelines` / `export_nodes` (각 도구 본문 = 참조 file) · 나머지 3 종 (`search_all_unique_properties` / `replace_all_matching_properties` / `find_empty_space_on_canvas`) = Pencil v1.1.62 제거 (= 대체 메커니즘 = `pencil-mcp-tools-reference.md` §0.1)
 - Claude Code 환경 = `cycle-discipline.md` §13 latest-chase 정책 (= 특정 버전 pin 박지 X · MCP discovery 회귀 발견 시 §13 trail 마지막 PASS known-working 복귀)
 
 ## 2. Pencil 도구 바인딩 매핑
@@ -42,7 +42,7 @@
 > **경로 위계** (= §2.5 · D7): 본 §3 desktop-app + MCP 흐름 = **실시간 시각 검증 alternative 경로**. `.pen` 변형 **기본 경로 = §9 headless 평문-JSON**. 아래 Type 1~5 절차 = 시각 검증 진입 시 적용 (= 절차 step 자체 무변경).
 
 ### Type 1: drift 정정 (Path 2-A 표준)
-1. `mcp__pencil__open_document(filePathOrTemplate=<.pen 절대경로>)` — 기존 .pen 열기
+1. `open -a Pencil <.pen 절대경로>` (Bash) — 기존 .pen 열기 (= active-doc 진입 · 구 `mcp__pencil__open_document` = Pencil v1.1.62 제거 · `pencil-mcp-tools-reference.md` §0.1)
 2. `mcp__pencil__batch_design(...)` — 변경 적용 (children inline · 25 op limit)
 3. `bash .claude/hooks/pencil-auto-save.sh` — Cmd+S 자동
 4. `sleep 2`
@@ -53,7 +53,7 @@
 
 ### Type 2: SoT 신설 (신규 .pen)
 1. **환경 검증** — Pencil 우측 하단 "Update Ready" 모달 활성 여부 확인. 활성 시 "Install on next launch" 클릭 의무 (`workflow-core.md` §implement Step 0).
-2. `mcp__pencil__open_document(filePathOrTemplate="new")` — 빈 캔버스
+2. 신규 .pen 진입 — headless `pencil interactive -o <절대경로>` (= `pencil-cli` skill) 신설 후 `open -a Pencil <절대경로>` (Bash) 시각 진입 (= 구 `mcp__pencil__open_document("new")` = Pencil v1.1.62 제거)
 3. `mcp__pencil__batch_design(children=[...inline...])` — 25 op limit + 분할 호출 patterns (F-1/F-2 검증)
 4. `mcp__pencil__set_variables` — A-0_design-tokens inherit
 5. `mcp__pencil__snapshot_layout(problemsOnly=true)` — layout 문제 0건 확인
@@ -65,7 +65,7 @@
 
 ### Type 3: Phase R (역공학)
 1. preview.png 분석 + Compose 코드 분석으로 [CURRENT] 추정
-2. `mcp__pencil__open_document(filePathOrTemplate="new")` + 추정 frame 추가
+2. 신규 .pen 진입 (= Type 2 step 2 동일 메커니즘 · 구 `open_document("new")` = 제거) + 추정 frame 추가
 3. ui-spec.json `lifecycle: reverse-engineered` 명시 + Coin 명시 승인 의무
 4. 이후 Type 1 흐름 적용
 
@@ -90,7 +90,7 @@
 
 - ToolSearch query="pencil" empty (= MCP discovery 회귀 · `cycle-discipline.md` §13)
 - Save As 모달 keystroke 차단 + filename 자동 입력 실패 → Coin GUI 손 작업 fallback
-- `mcp__pencil__open_document(filePathOrTemplate=<path>)` 가 path 명시 미지원 (= "new" 리터럴만)
+- 제거 4 종 (= `open_document` 등 · `pencil-mcp-tools-reference.md` §0.1) 부활 또는 9 종 surface 변동 검출 (= `cycle-discipline.md` §13 named-set 게이트 FAIL) → tools-reference 갱신 cycle 진입
 
 도구 무관 STOP = `design-to-code-sync.md` §5 명시됨.
 

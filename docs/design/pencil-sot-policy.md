@@ -37,7 +37,7 @@
 
 | ops | Pencil MCP tool |
 |---|---|
-| 1b 캔버스 열기 | `mcp__pencil__open_document(filePathOrTemplate=<.pen 절대경로 \| "new">)` |
+| 1b 캔버스 열기 | headless 평문-JSON 직접 read/write (= open 불요 · `pencil-uiux-workflow.md` §2.5 PRIMARY) · 시각 검증 = `open -a Pencil <.pen 절대경로>` (Bash) · 신규 = `pencil interactive -o <path>` (`pencil-cli` skill) — 구 `open_document` = Pencil v1.1.62 제거 |
 | 1b 캔버스 편집 | `mcp__pencil__batch_design(...)` (children inline · 25 op limit) |
 | 1b → 1a 복원 | `mcp__pencil__batch_get(...)` |
 | 1b layout 검증 | `mcp__pencil__snapshot_layout(problemsOnly=true)` |
@@ -74,7 +74,7 @@ shasum -a 256 docs/design/pencil-sot/<screen>.pen | awk '{print $1}'
 `design-sot-policy.md` §8 도구 무관 STOP 외 추가:
 
 - ToolSearch query="pencil" empty (= MCP discovery 회귀 · `cycle-discipline.md` §13)
-- `mcp__pencil__open_document(filePathOrTemplate=<path>)` 가 path 명시 미지원 → "new" 리터럴만 사용
+- 제거 도구 (= `open_document` 등 4 종 · Pencil v1.1.62 · `pencil-mcp-tools-reference.md` §0.1) 호출 시도 → STOP + 현 메커니즘 (= §2 표 캔버스 열기 행) 재진입
 - Pencil app Update Ready 모달 활성 → Cmd+S keystroke 차단 위험 (Step 0 환경 검증 의무 · `pencil-uiux-workflow.md`)
 - macOS Save As 모달 keystroke 차단 + filename 자동 입력 실패 → Coin GUI fallback
 

@@ -399,3 +399,10 @@
 - 비고: CC 회귀 X(pencil 서버측 변경 단일 원인 · RECALIBRATE 동일 근원).
 
 - 2026-06-10 · PROPAGATE-RUN-SKILL-RESEED-001 · MASTER-CLI-REPO-COUNT-VOCAB-SWEEP-001 중 propagation file-set에 master repo-specific `run-master/SKILL.md` 오포함 → 자식 5 재seeding(create) → 동일 cycle 내 즉발 자체 회수(git rm + commit amend · 잔존 0). 근인 = propagate.sh 의 run-* 보호가 --prune EXCLUDE 측만 존재 · 명시-인자 cp 가드 부재 (DEAD-REF-SWEEP ⑤ PDOCS 전례 동족). mitigation 후보 = propagate.sh 명시-cp 시 `.claude/skills/run-*` 차단/경고 (별 cycle).
+
+- type: 도메인 도구 한계 후속 (cli infra stale 정리 · Pencil v1.1.62 4종 제거 광역 sweep Phase B · 보호 2)
+- cycle: MASTER-CLI-PENCIL-PHASE-B-PROTECTED-001
+- summary: Phase A(0e1f7e3)가 Coin 승인 게이트로 defer한 보호 2 file 잔여 마감. pencil-uiux-workflow.md 7곳(:11 pencil-sot-binding 죽은 명칭→실 file `pencil-sot-policy.md` 병기(의미 alias 보존) · :20 도구수 12+1→9 · :22 OPTIMIZATION-001 추가 5종 lineage = 현존 2(get_guidelines/export_nodes) + 제거 3 명시 · :45/:56/:68 Type 1/2/3 open_document step→현 메커니즘(Type 1 = `open -a Pencil <abspath>` · Type 2/3 = headless `pencil interactive -o` 신설+시각 진입) · :93 STOP moot 항→제거 4종 부활/9종 변동 검출 STOP) + pencil-sot-policy.md 2곳(:40 §2 표 캔버스 열기 행→headless PRIMARY + 시각 alternative · :77 §4 STOP moot 항→제거 도구 호출 시도 STOP) + 동반 cycle-discipline.md:227(Path 2-A 요약 행 · 비보호 · 오늘 diet cycle 후 잔존 실측 → 본 cycle 동반 정정 허용 계약 적용). §2.5/§9 headless-primary 본질 무접촉.
+- mitigation: sha 3-layer resync = manifest sha-256(pencil-uiux `2ec100bf…`→`b09b8d50…` · sot-policy `ae20a79c…`→`2bfc81c5…`) + CLAUDE.md §14a git-sha1(`22570f97…`→`aba157e0…` · `acf88d95…`→`ce9c0d3e…`) + `.ai/baseline-snapshot/latest.json` 재생성(직전 2-cycle stale `e6a4a2a1…`/`96de2f5d…` 정합 + PDOCS block 첫 포함). 6-repo propagation + verify-sync PASS. 나머지 보호 3 변동 0(git-sha1 실측 일치).
+- trail: TOOLSET-REMOVAL-STALE-SWEEP-001 trail의 open 항 "Phase B(보호 2 · Coin 승인 게이트)" close. cycle-discipline.md:164 = §13 게이트 본문(제거 4종 열거 = 정합 서술) → 정정 대상 아님 확인.
+- 비고: 진입 §13 self-test 3/3 PASS (CC 2.1.170 · pencil ✓ Connected · ToolSearch 9종 전수 + 제거 4종 부재). 기존 dirty 무접촉(GB 2 · GD/GT 각 1).

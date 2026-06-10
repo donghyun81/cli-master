@@ -224,7 +224,7 @@ hash -r && claude --version
 
 | type | 진입 cycle 형태 | 후속 cycle |
 |---|---|---|
-| 1 | Path 2-A 13 STEP (BASELINE → cmd+W cleanup → open_document → batch_design → hook save → commit → cmd+W close) | 6 화면 단위 반복. |
+| 1 | Path 2-A 13 STEP (BASELINE → cmd+W cleanup → `open -a Pencil` 열기 (= 구 open_document · Pencil v1.1.62 제거) → batch_design → hook save → commit → cmd+W close) | 6 화면 단위 반복. |
 | 2 | EVIDENCE-only cycle (Compose 검증 + ui-spec.json append) | drift 정정이 필요하면 type 1 후속. |
 | 3 | Phase R-1~4 (역공학 → [CURRENT] → [TARGET] → [LOCKED]) | type 1 후속으로 정착. |
 | 4 | system-architect 분리 cycle | 파급 영향 평가 후 PLAN 재작성. |
