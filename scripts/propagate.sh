@@ -2,8 +2,8 @@
 # scripts/propagate.sh — master → 자식 repo 단방향 cp + 자동 stage
 #
 # 사용:
-#   bash scripts/propagate.sh <relative-path> [<relative-path> ...] [--targets GB,GD,GT|all]
-#   bash scripts/propagate.sh --all [--targets GB,GD,GT|all]
+#   bash scripts/propagate.sh <relative-path> [<relative-path> ...] [--targets GB,GD,GT,FND|all]
+#   bash scripts/propagate.sh --all [--targets GB,GD,GT,FND|all]
 #
 # 환경 변수:
 #   PARENT_DIR     기본: ~/AndroidStudioProjects (자식 repo 들이 있는 곳)

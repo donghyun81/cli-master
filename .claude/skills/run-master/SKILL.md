@@ -13,7 +13,7 @@ allowed-tools: Bash, Read
 
 | # | command | PASS 조건 |
 |---|---|---|
-| 1 | `bash scripts/verify-sync.sh` | exit 0 · 5-repo cli infra sha 정합 (drift 0 / miss 0) |
+| 1 | `bash scripts/verify-sync.sh` | exit 0 · 6-repo cli infra sha 정합 (drift 0 / miss 0) |
 | 2 | `bash scripts/test-protected-file-hooks.sh` | 5 fixture PASS (보호 5 file hook self-test) |
 
 `verify-sync.sh` 가 launchd daemon 점검에서 멈추면 `bash scripts/verify-sync.sh --skip-daemon-check` 로 우회 가능.

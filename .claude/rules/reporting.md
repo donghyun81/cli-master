@@ -451,8 +451,8 @@ subagent 가 상위 agent 에게 돌려주는 최소 요약은 아래 5 개 섹�
 
 ## §11 본 SoT 의 변경 정책
 
-- cli infra 권장 byte-identical (= 5-repo · master + app-foundation + GentlyBreath + GentlyDay + GentlyTable · 보호 5 file 외)
-- 변경 시 master cycle 신설 + 5-repo propagation (`cycle-discipline.md` §15 패턴 1)
+- cli infra 권장 byte-identical (= 6-repo · master + app-foundation + GentlyBreath + GentlyDay + GentlyTable + gently-product-docs · 보호 5 file 외)
+- 변경 시 master cycle 신설 + 6-repo propagation (`cycle-discipline.md` §15 패턴 1)
 - 자식 repo 직접 수정 금지
 
 ---

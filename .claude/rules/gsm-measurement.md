@@ -1,6 +1,6 @@
 # GSM Measurement — Goal → Signal → Metric canonical form (계측 layer 단일 SoT)
 
-> **단일 목적**: 5-repo cli infra 의 **측정 가능 목표**를 표현하는 canonical 3-tuple form(Goal–Signal–Metric) + 측정 layer(anchor / 행동 / context-health / cycle-health) 의 단일 기준. 흩어진 측정 인접 자산(anchor-list A1~A10 · `rule-routing-index §C` 행동 7종 · `context-health-metrics`)이 본 form 에 **정합**한다.
+> **단일 목적**: 6-repo cli infra 의 **측정 가능 목표**를 표현하는 canonical 3-tuple form(Goal–Signal–Metric) + 측정 layer(anchor / 행동 / context-health / cycle-health) 의 단일 기준. 흩어진 측정 인접 자산(anchor-list A1~A10 · `rule-routing-index §C` 행동 7종 · `context-health-metrics`)이 본 form 에 **정합**한다.
 > **신설**: MASTER-CLI-GSM-MEASUREMENT-LAYER-001 (2026-06-02 · M5 cli-infra-ops · v2 realign-oriented).
 > **계층**: L1 (프로세스·워크플로우) — `rule-routing-index.md §A L1` 등록. 계측·amend 시점 consult.
 > **본 form 정합 자산 (pointer · 본문은 각 file 단일 SoT)**:
@@ -39,7 +39,7 @@ cli infra 는 "무엇을 지켜야 하는가"(목표)를 가지고 있었으나,
 작성 순서 = **G → S → M** (Goal-first 강제). M 부터 적으면 streetlight.
 
 예 (anchor A2 · 보호 file 무결성):
-- **G** — 보호 5 file 이 5-repo byte-identical 을 유지한다.
+- **G** — 보호 5 file 이 6-repo byte-identical 을 유지한다.
 - **S** — 보호 5 file 의 sha-256 측정값 vs `protected-file-hashes.md` baseline 대조.
 - **M** — sha drift 건수 `= 0` (목표).
 
@@ -51,8 +51,8 @@ cli infra 는 "무엇을 지켜야 하는가"(목표)를 가지고 있었으나,
 
 | family | 측정 대상 | G/S/M 위치 (본문 SoT) | 전파 |
 |---|---|---|---|
-| **anchor** | 누락 시 cycle 실패하는 10 anchor(A1~A10) | `anchor-list.md` 각 anchor 의 G/S/M | 5-repo byte-identical |
-| **행동(Reading Mode)** | 7종 행동별 목표·deviation | `rule-routing-index.md §C` | 5-repo byte-identical |
+| **anchor** | 누락 시 cycle 실패하는 10 anchor(A1~A10) | `anchor-list.md` 각 anchor 의 G/S/M | 6-repo byte-identical |
+| **행동(Reading Mode)** | 7종 행동별 목표·deviation | `rule-routing-index.md §C` | 6-repo byte-identical |
 | **context 건강** | 항상로드 char + 환각 패턴(program-level) | `context-health-metrics.md` | master-only |
 | **cycle 건강(DORA)** | 운영 흐름 4-key(아래 §3) | `cycle-health-log.md` | master-only |
 
@@ -79,7 +79,7 @@ cli infra 는 "무엇을 지켜야 하는가"(목표)를 가지고 있었으나,
 
 | 구성 | 역할 | 위치 | 전파 |
 |---|---|---|---|
-| `measure-gsm-cycle.sh` | Stop hook · git log 에서 DORA proxy 산출 + surface(advisory) | `.claude/hooks/` | 5-repo byte-identical |
+| `measure-gsm-cycle.sh` | Stop hook · git log 에서 DORA proxy 산출 + surface(advisory) | `.claude/hooks/` | 6-repo byte-identical |
 | `cycle-health-log.md` | DORA 4-key 정량 append(cycle 단위 · idempotent) | `.auto-memory/` | master-only |
 | `gsm-measurement-dashboard.md` | anchor G/S/M + cycle 건강 종합 view | `.auto-memory/` | master-only |
 
@@ -120,8 +120,8 @@ trigger 는 게이트가 아니다. "이 목표는 현재 규칙으로 안 잡�
 
 ## §8. 본 file 의 변경 정책
 
-- cli infra 권장 byte-identical (5-repo · master + 4 자식 · 보호 5종 아님).
-- 변경 시 master cycle 신설 + 5-repo propagation (`cycle-discipline.md §15` 패턴 1).
+- cli infra 권장 byte-identical (6-repo · master + 5 자식 · 보호 5종 아님).
+- 변경 시 master cycle 신설 + 6-repo propagation (`cycle-discipline.md §15` 패턴 1).
 - 자식 repo 직접 수정 금지.
 
 ---

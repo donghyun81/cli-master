@@ -1,6 +1,6 @@
 # Anchor list (= 누락 시 cycle 무조건 실패 본질 영역 default)
 
-> 본 file = 5-repo 측 anchor list 영구 SoT default · purpose 수준 default · hot 영역 default
+> 본 file = 6-repo 측 anchor list 영구 SoT default · purpose 수준 default · hot 영역 default
 > 위치 = `claude-cli-master/.claude/rules/anchor-list.md`
 > Cold storage = `claude-cli-master/.auto-memory/anchor-list-COLD.md` (= Cycle 2b 신설 default · master only default · propagation X default)
 > 신설: `MASTER-CLI-CYCLE-2A-ANCHOR-LIST-HOT-INSTALL-001` · 2026-05-22
@@ -29,12 +29,12 @@
 
 **GSM** (= `gsm-measurement.md` form):
 - **G** — cowork 인용 baseline 과 cli disk 실측 baseline 이 일치한다 (표면 인용이 실측을 대체하지 않음).
-- **S** — 진입 첫 turn 의 5-repo HEAD 실측 + 박제 표 대조 흔적.
+- **S** — 진입 첫 turn 의 6-repo HEAD 실측 + 박제 표 대조 흔적.
 - **M** — baseline mismatch 미reconcile 건수 `= 0` (drift 발견 시 forward-progress 판정 + 기록 100%).
 
 ### A2 — Protected file integrity guard
 
-**Purpose**: 5-repo 측 byte-identical 의무 영역 (= 보호 5 file default) 측 sha drift 발견 시 즉시 STOP default
+**Purpose**: 6-repo 측 byte-identical 의무 영역 (= 보호 5 file default) 측 sha drift 발견 시 즉시 STOP default
 
 **적용 trigger**: 매 cycle 진입 baseline 측정 + 보호 file 변경 commit 직후 + propagation cycle verify 시점 default
 
@@ -43,7 +43,7 @@
 **precedent**: master `CLAUDE.md §2` + `cycle-discipline.md §10` default
 
 **GSM** (= `gsm-measurement.md` form):
-- **G** — 보호 5 file 이 5-repo byte-identical 을 유지한다.
+- **G** — 보호 5 file 이 6-repo byte-identical 을 유지한다.
 - **S** — 보호 5 file 의 sha-256 측정값 vs `protected-file-hashes.md` baseline 대조 (= `shasum -a 256`).
 - **M** — 보호 5 sha drift 건수 `= 0`.
 
@@ -75,7 +75,7 @@
 **GSM** (= `gsm-measurement.md` form):
 - **G** — cli infra = master 단일 source · 자식 측 직접 수정이 0 이다.
 - **S** — 자식 `.claude/**` 직접 변경 시도 측정 + propagation 후 `verify-sync.sh` 결과.
-- **M** — 자식 cli infra drift 건수 `= 0` · propagation 후 5-repo byte-identical (`verify-sync` exit 0).
+- **M** — 자식 cli infra drift 건수 `= 0` · propagation 후 6-repo byte-identical (`verify-sync` exit 0).
 
 ### A5 — Disk verification before recommendation
 

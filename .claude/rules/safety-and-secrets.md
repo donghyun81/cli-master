@@ -165,7 +165,7 @@ AIza[0-9A-Za-z\-_]{35}    # Google API Key
 
 ## 비가역 변경 STOP 정책
 
-> **본 § = pointer 영역 default**. 본문 단일 SoT = [`CLAUDE.md §5`](../../CLAUDE.md) (= `MASTER-CLI-CYCLE-1-STOP-CANONICAL-INTEGRATION-001` 마감 default · 9 STOP 항 default). 본 § 본문 변경 시 = master cycle 신설 + 5-repo propagation 의무 default.
+> **본 § = pointer 영역 default**. 본문 단일 SoT = [`CLAUDE.md §5`](../../CLAUDE.md) (= `MASTER-CLI-CYCLE-1-STOP-CANONICAL-INTEGRATION-001` 마감 default · 9 STOP 항 default). 본 § 본문 변경 시 = master cycle 신설 + 6-repo propagation 의무 default.
 
 ---
 
@@ -191,4 +191,4 @@ AIza[0-9A-Za-z\-_]{35}    # Google API Key
 - 발화 시점 = stderr 측 warn 출력 default + post-rename `git add -u` 의무 paradigm 안내 default
 - mode = warn default (= exit 0 · non-blocking default · enforce mode 별 cycle default)
 
-상세 paradigm step + STOP 조건 = `cycle-discipline.md` §22 단일 SoT default. 본 § 본문 변경 시 = master cycle 신설 + 5-repo propagation 의무 default (= `cycle-discipline.md` §15 패턴 1 정합).
+상세 paradigm step + STOP 조건 = `cycle-discipline.md` §22 단일 SoT default. 본 § 본문 변경 시 = master cycle 신설 + 6-repo propagation 의무 default (= `cycle-discipline.md` §15 패턴 1 정합).

@@ -191,7 +191,7 @@ allowed-tools: Bash, Read, Edit, Write
 
 | section | 본질 |
 |---|---|
-| §0 Baseline | 5-repo HEAD sha + 보호 5 file sha + drift 영역 측정 결과 default |
+| §0 Baseline | 6-repo HEAD sha + 보호 5 file sha + drift 영역 측정 결과 default |
 | §0.3 사고 영역 disk 측정 | INITIATIVES HEAD drift + INDEX 갱신 drift + 신 task file 누락 영역 disk 측정 결과 인용 default (= `.claude/skills/disk-verification/SKILL.md` §3 정합) |
 | §1 Cycle 본질 | outcome + cli session 자율 paradigm + 사용자 본심 정합 default |
 | §2 Scope | 변경 영역 + 무접촉 영역 default |
@@ -233,8 +233,8 @@ allowed-tools: Bash, Read, Edit, Write
 
 ## §11 본 skill 의 변경 정책
 
-- cli infra 권장 byte-identical (= 5-repo · master + app-foundation + GentlyBreath + GentlyDay + GentlyTable)
-- 변경 시 master cycle 신설 + 5-repo propagation 의무 (= `cycle-discipline.md` §15 패턴 1 정합)
+- cli infra 권장 byte-identical (= 6-repo · master + app-foundation + GentlyBreath + GentlyDay + GentlyTable + gently-product-docs)
+- 변경 시 master cycle 신설 + 6-repo propagation 의무 (= `cycle-discipline.md` §15 패턴 1 정합)
 - 자식 repo 측 직접 수정 금지
 
 ---

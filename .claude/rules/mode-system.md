@@ -1,6 +1,6 @@
 # Mode 시스템 (= AI 행동 layer · Phase 와 orthogonal default)
 
-> 본 file = 5-repo 측 Mode 시스템 영구 SoT default · Mode = AI 행동 layer default · Phase A/B/C/D/F = 작업 lifecycle 위치 layer default
+> 본 file = 6-repo 측 Mode 시스템 영구 SoT default · Mode = AI 행동 layer default · Phase A/B/C/D/F = 작업 lifecycle 위치 layer default
 > 위치 = `claude-cli-master/.claude/rules/mode-system.md`
 > Cold storage = `claude-cli-master/.auto-memory/mode-bundle-COLD.md` (= Cycle 4b 신설 default · master only default · propagation X default)
 > 신설: `MASTER-CLI-CYCLE-4A-MODE-SYSTEM-HOT-INSTALL-001` · 2026-05-22
@@ -35,8 +35,8 @@
 
 ### M5 — cli-infra-ops (= cli infra propagation default)
 
-- **Purpose**: cli infra (= `.claude/` + `docs/schemas/` + 보호 file + `scripts/` default) 변경 + 5-repo byte-identical propagation default — production code 무접촉 + 단방향 propagation 정합 default
-- **Method defaults**: master 측 단방향 source default + scripts/propagate.sh + scripts/verify-sync.sh + 5-repo cross-verify + propagation-reports/<cycle-id>/REPORT.md 자동 생성 + production code touch 0 LOC 의무 default
+- **Purpose**: cli infra (= `.claude/` + `docs/schemas/` + 보호 file + `scripts/` default) 변경 + 6-repo byte-identical propagation default — production code 무접촉 + 단방향 propagation 정합 default
+- **Method defaults**: master 측 단방향 source default + scripts/propagate.sh + scripts/verify-sync.sh + 6-repo cross-verify + propagation-reports/<cycle-id>/REPORT.md 자동 생성 + production code touch 0 LOC 의무 default
 - **Verification policy**: Lightweight 4 file default (= `cycle-discipline.md §11` default · PLAN.md + VERIFY.md + REVIEW.md + TODO.md default) + cross-repo sha 정합 표 의무 + 보호 5 file sha 변동 0 verify 의무 default
 - **적용 trigger**: cli infra 변경 + 보호 file 변경 + propagation cycle 진입 + master cycle 신설 default · `cycle-discipline.md §15` 패턴 1 정합 default
 - **Anti-pattern**: "production code touch default" + "자식 repo cli infra 직접 수정 default" + "propagation skip default" + "보호 5 file sha drift default" 발견 시 즉시 STOP default
@@ -63,9 +63,9 @@
 
 ---
 
-## §4. 현 단계 = 5-repo 동일 mode / 미래 = 자식별 발산 protocol (= L1-6 정합 default)
+## §4. 현 단계 = 6-repo 동일 mode / 미래 = 자식별 발산 protocol (= L1-6 정합 default)
 
-- 현 5-repo 측 default mode = M1 (= production-graduated default)
+- 현 6-repo 측 default mode = M1 (= production-graduated default)
 - 미래 자식별 mode 발산 = 본인 명시 결정 + migration cycle default
 - 본 protocol 진입 시점 = 자식별 mode 본문 측 Why + How + B 14 항 침해 검증 + cold storage 측 누적 default
 - migration cycle outcome = 자식별 `<repo>/CLAUDE.md` 측 mode 명시 default + master mode-system.md 측 발산 entry append default

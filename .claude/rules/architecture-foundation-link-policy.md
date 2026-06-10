@@ -3,7 +3,7 @@
 > **단일 목적**: 13 architecture 문서 (`docs/agent/architecture/**`) 의 코드 path 인용 영역 → `app-foundation` 의 실제 file 측 markdown link 의무 + relative path baseline + 예외 영역 + 추가 architecture 신설 시 자동 적용 patterns 정의.
 > **신설**: MASTER-ARCHITECTURE-FOUNDATION-LINK-001 (= ledger MASTER-T04 마감 · 2026-05-12).
 > **연관 파일**:
-> - `cycle-discipline.md` §15 패턴 1 (master cycle 신설 + 5-repo propagation 의무)
+> - `cycle-discipline.md` §15 패턴 1 (master cycle 신설 + 6-repo propagation 의무)
 > - `cycle-discipline.md` §3 (3-repo byte-identical 강제 범위 vs cli infra 권장 byte-identical)
 > - `docs/agent/architecture/COMMON_ARCHITECTURE.md` §1 (운영 레이어 vs 제품 레이어 경계)
 > SOT: `CLAUDE.md`
@@ -44,11 +44,11 @@ architecture file 측 코드 path 인용 영역 측:
 
 ### 2.3 relative path baseline
 
-5-repo 측 file 위치 = `<repo>/docs/agent/architecture/<FILE>.md` (= 5-repo 동일 path).
+6-repo 측 file 위치 = `<repo>/docs/agent/architecture/<FILE>.md` (= 6-repo 동일 path).
 → `app-foundation/` 측 실제 영역 기준 relative path = **`../../../../app-foundation/<path>`** (= 4 step 상위).
 
-5-repo 모두 동일 표기 (= byte-identical 정합):
-- claude-cli-master + GB + GD + GT + app-foundation 모두 `../../../../app-foundation/<path>` 채택.
+6-repo 모두 동일 표기 (= byte-identical 정합):
+- claude-cli-master + GB + GD + GT + app-foundation + gently-product-docs 모두 `../../../../app-foundation/<path>` 채택.
 - foundation 측 자기 참조 영역 = 동일 (= 위치 `app-foundation/docs/agent/architecture/<FILE>.md` → `../../../../app-foundation/<path>/` 해석 결과 = `AndroidStudioProjects/app-foundation/<path>/` = correct ✓).
 
 ---
@@ -118,8 +118,8 @@ sealed interface Result<out T, out E>
 
 ## 6. 변경 정책
 
-- 본 file = cli infra 권장 byte-identical (= 5-repo · 보호 5 sha 외).
-- 변경 시 master cycle 신설 + 5-repo propagation 의무 (`cycle-discipline.md` §15 패턴 1 정합).
+- 본 file = cli infra 권장 byte-identical (= 6-repo · 보호 5 sha 외).
+- 변경 시 master cycle 신설 + 6-repo propagation 의무 (`cycle-discipline.md` §15 패턴 1 정합).
 - 자식 repo 측 직접 수정 X (= cli infra 단방향 정합 · CLAUDE.md §3 정합).
 
 ---

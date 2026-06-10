@@ -8,7 +8,7 @@
 > - `auth-rules.md` §1 — GoTrue REST 익명 부트스트랩
 > - `deferred-domains.md` §1 STOP trigger (Backend / API) + §5 trigger 키워드
 > - `routing-and-delegation.md` — auth-security-privacy + billing-payments-guardian + server-implementer 매핑
-> - `cycle-discipline.md` §15 패턴 1 (master cycle 신설 + 5-repo propagation)
+> - `cycle-discipline.md` §15 패턴 1 (master cycle 신설 + 6-repo propagation)
 > SOT: `CLAUDE.md`
 
 ---
@@ -174,8 +174,8 @@ SUPABASE_ACCESS_TOKEN / SUPABASE_ACCESS_TOKEN_GB / SUPABASE_ACCESS_TOKEN_GD / SU
 
 ## §8 본 rule 의 변경 정책
 
-- cli infra 권장 byte-identical (5-repo · master + app-foundation + GentlyBreath + GentlyDay + GentlyTable)
-- 변경 시 master cycle 신설 + 5-repo propagation 의무 (`cycle-discipline.md` §15 패턴 1)
+- cli infra 권장 byte-identical (6-repo · master + app-foundation + GentlyBreath + GentlyDay + GentlyTable + gently-product-docs)
+- 변경 시 master cycle 신설 + 6-repo propagation 의무 (`cycle-discipline.md` §15 패턴 1)
 - 자식 repo 직접 수정 금지
 
 ---
@@ -194,7 +194,7 @@ SUPABASE_ACCESS_TOKEN / SUPABASE_ACCESS_TOKEN_GB / SUPABASE_ACCESS_TOKEN_GD / SU
 
 ### §10.1 MCP server 등록 + 호출 paradigm
 
-`.mcp.json` 측 등록 영역 (= 5-repo byte-identical · `claude-cli-master` + `app-foundation` + `GentlyBreath` + `GentlyDay` + `GentlyTable`):
+`.mcp.json` 측 등록 영역 (= 6-repo byte-identical · `claude-cli-master` + `app-foundation` + `GentlyBreath` + `GentlyDay` + `GentlyTable` + `gently-product-docs`):
 
 | server | project_ref | 자식 도메인 |
 |---|---|---|
@@ -240,7 +240,7 @@ token 보관 + 추출 영역 = macOS Keychain (= `supabase-gb-token` / `supabase
 
 ### §10.6 자식별 3 instance paradigm
 
-5-repo byte-identical propagation (= master `.mcp.json` 본문 = 5-repo 동일 · 3 server 모두 등록). 자식 cwd 측 cli session 진입 시점 = 3 server 모두 진입 가능 default · 단 호출 namespace 측 자식 도메인 정합 의무 (= GB repo 측 `mcp__supabase-gb__*` 호출 default).
+6-repo byte-identical propagation (= master `.mcp.json` 본문 = 6-repo 동일 · 3 server 모두 등록). 자식 cwd 측 cli session 진입 시점 = 3 server 모두 진입 가능 default · 단 호출 namespace 측 자식 도메인 정합 의무 (= GB repo 측 `mcp__supabase-gb__*` 호출 default).
 
 ### §10.7 기존 `cli_...` token 폐기 paradigm
 

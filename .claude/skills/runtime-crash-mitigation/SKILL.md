@@ -133,7 +133,7 @@ Anthropic v2.1.145+ 측 bundled skill (`/run` + `/verify` + `/run-skill-generato
 | emulator 측 runtime verify 부재 마감 시점 (= step 7 skip 시도) | 즉시 STOP default (= 본 paradigm 핵심 의무 영역 default) |
 | DB schema 변경 / migration 영역 root cause 발견 | 즉시 STOP + 사용자 회수 default (= deferred Data 도메인 default) |
 | Auth / Billing 영역 root cause 발견 시점 production 영역 진입 시도 | 즉시 STOP + 사용자 회수 default (= `auth-rules.md` + `billing-rules.md` 정합) |
-| 사용자 본심 분기 의제 본질 발견 (= mitigation paradigm 본질 결정 default · scope expansion default · 5-repo paradigm 영역 default) | AskUserQuestion 회수 default |
+| 사용자 본심 분기 의제 본질 발견 (= mitigation paradigm 본질 결정 default · scope expansion default · 6-repo paradigm 영역 default) | AskUserQuestion 회수 default |
 
 ---
 
@@ -155,7 +155,7 @@ Anthropic v2.1.145+ 측 bundled skill (`/run` + `/verify` + `/run-skill-generato
 
 | section | 본질 |
 |---|---|
-| §0 Baseline | 5-repo HEAD sha + 보호 5 file sha + 직전 H<chat> 마감 default |
+| §0 Baseline | 6-repo HEAD sha + 보호 5 file sha + 직전 H<chat> 마감 default |
 | §0.3 가설 우선순위 | disk 측정 결과 인용 default (= cowork chat 측 측정 결과 + cli session 측 재 verify 의무 default · `.claude/skills/disk-verification/SKILL.md` §3 정합) |
 | §1 Cycle 본질 | outcome + cli session 자율 paradigm + 사용자 본심 정합 default |
 | §2 Scope | 변경 영역 + 무접촉 영역 default |
@@ -197,8 +197,8 @@ Anthropic v2.1.145+ 측 bundled skill (`/run` + `/verify` + `/run-skill-generato
 
 ## §10 본 skill 의 변경 정책
 
-- cli infra 권장 byte-identical (= 5-repo · master + app-foundation + GentlyBreath + GentlyDay + GentlyTable)
-- 변경 시 master cycle 신설 + 5-repo propagation 의무 (= `cycle-discipline.md` §15 패턴 1 정합)
+- cli infra 권장 byte-identical (= 6-repo · master + app-foundation + GentlyBreath + GentlyDay + GentlyTable + gently-product-docs)
+- 변경 시 master cycle 신설 + 6-repo propagation 의무 (= `cycle-discipline.md` §15 패턴 1 정합)
 - 자식 repo 측 직접 수정 금지
 
 ---

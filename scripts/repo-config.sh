@@ -18,7 +18,7 @@
 #   TARGET_REPOS   기본: "GentlyBreath GentlyDay GentlyTable app-foundation gently-product-docs"
 #
 # 변경 정책:
-#   - master cycle 신설 + 5-repo propagation 의무 (`cycle-discipline.md` §15 패턴 1)
+#   - master cycle 신설 + 6-repo propagation 의무 (`cycle-discipline.md` §15 패턴 1)
 #   - 자식 repo 직접 수정 금지
 
 # === default 변수 ===

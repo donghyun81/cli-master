@@ -9,7 +9,7 @@
 >
 > **연관 파일**:
 > - `design-sot-policy.md` (보호 · dual-layer SoT 정책)
-> - `design-sot-refresh.md` (보호 · refresh trigger 분류)
+> - `uiux-sot-refresh.md` (보호 · refresh trigger 분류 · 의미 = design-sot-refresh)
 > - `pencil-uiux-workflow.md` (Pencil 도구 바인딩 구체화)
 > SOT: `CLAUDE.md`
 
@@ -84,7 +84,7 @@
 
 ## 7. Refresh Trigger 연계
 
-`design-sot-refresh.md` (보호) 의 FULL / PARTIAL / DOC-ONLY 분류 따름.
+`uiux-sot-refresh.md` (보호 · 의미 = design-sot-refresh) 의 FULL / PARTIAL / DOC-ONLY 분류 따름.
 
 ---
 

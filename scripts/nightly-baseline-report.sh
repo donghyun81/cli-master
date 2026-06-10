@@ -64,7 +64,7 @@ log_append "start · claude_bin=${CLAUDE_BIN:-(부재)}"
 
 REPOS_ALL="claude-cli-master $TARGET_REPOS"
 
-# === 측정 A — 5-repo HEAD ===
+# === 측정 A — 6-repo HEAD ===
 read_head() {
   local repo_dir="$1"
   if [ -d "$repo_dir/.git" ]; then
@@ -83,7 +83,7 @@ build_head_block() {
   done
 }
 
-# === 측정 B — 보호 파일 5 종 × 5-repo sha matrix ===
+# === 측정 B — 보호 파일 5 종 × 6-repo sha matrix ===
 sha_short() {
   local f="$1"
   if [ -f "$f" ]; then
@@ -219,11 +219,11 @@ PROMPT_BODY=$(cat <<PROMPT
 
 ## raw 측정 데이터
 
-### A. 5-repo HEAD
+### A. 6-repo HEAD
 
 $HEAD_BLOCK
 
-### B. 보호 파일 5 종 × 5-repo sha matrix
+### B. 보호 파일 5 종 × 6-repo sha matrix
 
 $PROTECTED_BLOCK
 
@@ -256,7 +256,7 @@ $CYCLE_BLOCK
 
 (보호 파일 정합 + cli infra drift + 진행 중 cycle 1 순위 · 사람 1 분 읽기 분량)
 
-## 2. 5-repo HEAD
+## 2. 6-repo HEAD
 
 (A 표 그대로)
 
@@ -320,7 +320,7 @@ if [ "$CLAUDE_EXIT" -ne 0 ] || [ -z "$CLAUDE_OUT" ]; then
     echo "> 측정 KST: $TS_KST · 측정 UTC: $TS_UTC"
     echo "> claude exit = $CLAUDE_EXIT · 종합 단계 skip · 아래 raw 측정 데이터 그대로 박음"
     echo ""
-    echo "## A. 5-repo HEAD"
+    echo "## A. 6-repo HEAD"
     echo ""
     printf "%s\n" "$HEAD_BLOCK"
     echo ""

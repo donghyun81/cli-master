@@ -3,7 +3,7 @@
 > **단일 목적**: `gradle/libs.versions.toml` 안 `[versions]` ↔ `[libraries]` artifact 명 ↔ source `.kt` import 의 3-source 정합 사후 검증 (post-edit).
 > **신설**: MASTER-LIBS-VERSIONS-CROSS-VERIFY-HOOK-001 (= 본 chat baseline ingest stale 사고 #2 + #3 본질 mitigation · 2026-05-13).
 > **연관**:
-> - `cycle-discipline.md` §15 패턴 1 (master cycle 신설 + 5-repo propagation)
+> - `cycle-discipline.md` §15 패턴 1 (master cycle 신설 + 6-repo propagation)
 > - `.claude/hooks/libs-versions-cross-verify.sh` (PostToolUse Edit|Write matcher 자동 검사)
 > - `text-degeneration-prevention.md` (동일 hook scaffold patterns)
 > SOT: `CLAUDE.md`
@@ -65,7 +65,7 @@
 1. 본 §3 측 새 sub-section 추가 (R<n>).
 2. `.claude/hooks/libs-versions-cross-verify.sh` 안 RULES 영역 갱신.
 3. master cycle 신설 (`MASTER-LIBS-VERSIONS-CROSS-VERIFY-RULE-ADD-NNN` 또는 동등).
-4. 5-repo propagate 의무.
+4. 6-repo propagate 의무.
 
 ---
 
@@ -95,7 +95,7 @@ PostToolUse `Edit|Write` matcher 안 본 hook 발화. 본 hook 안 = 다음 영�
 ## 6. self-test 방법
 
 ```bash
-# 자체 baseline 검증 (= mismatch 0 의무 · 5-repo 마감 후 PASS)
+# 자체 baseline 검증 (= mismatch 0 의무 · 6-repo 마감 후 PASS)
 bash .claude/hooks/libs-versions-cross-verify.sh
 
 # 특정 파일 simulate (= positional arg fallback)
@@ -136,8 +136,8 @@ bash .claude/hooks/libs-versions-cross-verify.sh gradle/libs.versions.toml
 
 ## 10. 본 SoT 의 변경 정책
 
-- cli infra 권장 byte-identical (5-repo · master + 4 자식)
-- 변경 시 master cycle 신설 + 5-repo propagation (`cycle-discipline.md` §15 패턴 1)
+- cli infra 권장 byte-identical (6-repo · master + 5 자식)
+- 변경 시 master cycle 신설 + 6-repo propagation (`cycle-discipline.md` §15 패턴 1)
 - 자식 repo 직접 수정 금지
 
 ---

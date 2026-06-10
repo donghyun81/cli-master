@@ -3,7 +3,7 @@
 > **단일 목적**: 모든 task 의 단계 흐름 + 각 단계 (intake / collect / plan / implement / verify / review) 규칙.
 > **분할 출처**: 기존 workflow.md (662 줄) 의 line 1~340 발췌 (C2-RULES-RESTRUCTURE-001).
 > **연관 파일**:
-> - `cycle-discipline.md` — Cycle Discipline §1~11 + §13~14a (5-repo 정합 / commit 표준 / 환경 정합)
+> - `cycle-discipline.md` — Cycle Discipline §1~11 + §13~14a (6-repo 정합 / commit 표준 / 환경 정합)
 > - `pencil-automation.md` — Pencil .pen 저장 자동화 (§12)
 > - `verification-and-review.md` — /verify 와 /review 세부 규칙
 > SOT: `CLAUDE.md`

@@ -1,6 +1,6 @@
 # Workflow adoption policy (= dynamic workflows 전면 미정 → 조건부 허용)
 
-> 본 file = 5-repo 측 `Workflow` 도구(dynamic workflows) 채택 정책 단일 SoT. 판단 기준 + gate 실측 + 토큰 예산 통제의 유일 본문.
+> 본 file = 6-repo 측 `Workflow` 도구(dynamic workflows) 채택 정책 단일 SoT. 판단 기준 + gate 실측 + 토큰 예산 통제의 유일 본문.
 > 위치 = `claude-cli-master/.claude/rules/workflow-policy.md`
 > 신설: `MASTER-CLI-WORKFLOW-ADOPTION-POLICY-002` · 2026-06-04
 > 본질: `MASTER-CLI-WORKFLOW-SUBAGENT-BILLING-GUARD-001`(2026-06-04) 이 `cross-repo-parallel-exec.md §2.4.1` 에 정착시킨 gate ① + 토큰 예산 통제 본문을 별 rule 로 교정 이관(유실 0) + 채택 정책 전반 완성.
@@ -83,7 +83,7 @@
 
 - 본 file = `Workflow` 도구 채택 정책 + gate 실측 + 토큰 예산 통제의 유일 본문.
 - `cross-repo-parallel-exec.md §2.4.1` = 본 file pointer 만 보유한다 (kernel 1줄 잔존 · 본문 중복 금지).
-- 기준 변경 시 = 본 file 단일 변경 + 5-repo byte-identical propagation.
+- 기준 변경 시 = 본 file 단일 변경 + 6-repo byte-identical propagation.
 
 ---
 
@@ -99,8 +99,8 @@
 
 ## §8. 변경 정책
 
-- cli infra 권장 byte-identical (5-repo · master + 4 자식 · 보호 5종 아님).
-- 변경 시 master cycle 신설 + 5-repo propagation (`cycle-discipline.md §15` 패턴 1).
+- cli infra 권장 byte-identical (6-repo · master + 5 자식 · 보호 5종 아님).
+- 변경 시 master cycle 신설 + 6-repo propagation (`cycle-discipline.md §15` 패턴 1).
 - 자식 repo 직접 수정 금지.
 
 ---

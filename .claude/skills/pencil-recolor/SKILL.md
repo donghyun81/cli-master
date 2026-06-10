@@ -113,8 +113,8 @@ NEW_SHA=$(shasum -a 256 docs/design/pencil-sot/<screen>/<screen>.pen | cut -d' '
 
 ## 7. 본 skill 의 변경 정책
 
-- cli infra 권장 byte-identical (= 5-repo · master + 4 자식 · 보호 5 file 외)
-- 변경 시 master cycle 신설 + 5-repo propagation (`cycle-discipline.md` §15 패턴 1)
+- cli infra 권장 byte-identical (= 6-repo · master + 5 자식 · 보호 5 file 외)
+- 변경 시 master cycle 신설 + 6-repo propagation (`cycle-discipline.md` §15 패턴 1)
 - 자식 repo 직접 수정 금지
 
 ---

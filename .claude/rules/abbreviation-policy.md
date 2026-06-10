@@ -1,6 +1,6 @@
 # Abbreviation Policy — Unified SoT
 
-> **단일 목적**: 5-repo 패키지 (claude-cli-master + app-foundation + GentlyBreath + GentlyDay + GentlyTable) 의 구현 코드레벨에서 사용자 정의 축약 변수/함수/클래스/파일/패키지명 금지 정책 + 금지 seed list + 허용 표준 약어 list 통합 SoT.
+> **단일 목적**: 6-repo 패키지 (claude-cli-master + app-foundation + GentlyBreath + GentlyDay + GentlyTable + gently-product-docs) 의 구현 코드레벨에서 사용자 정의 축약 변수/함수/클래스/파일/패키지명 금지 정책 + 금지 seed list + 허용 표준 약어 list 통합 SoT.
 > **신설**: MASTER-CLI-CLEANUP-7CYCLE-001 (2026-05-21) · 직전 3 file (`no-abbreviation-policy.md` + `forbidden-abbreviations.md` + `allowed-acronyms.md`) 본문 통합 default (= GLOBAL-NO-ABBREV-POLICY-001 + 002 baseline 흡수).
 > **연관 파일**:
 > - `.claude/hooks/check-abbreviation.sh` — PreToolUse 자동화 검증 hook (본 file 단일 SoT 인용)
@@ -104,7 +104,7 @@ hook 이 자동으로 검사를 건너뛰는 라인/경로:
 
 1. 본 file §3 에 PR 형식으로 추가 제안
 2. 산업 표준 증빙 필요 (RFC / 공식 사양 / 언어 공식 문서 인용)
-3. master repo cycle 신설 + 5-repo propagation 의무
+3. master repo cycle 신설 + 6-repo propagation 의무
 4. 본 file 변경 = cli infra 변경 → master 단방향 정책 적용
 
 ### §1.7 위반 시 mitigation
@@ -258,7 +258,7 @@ pattern = (
 
 1. 신규 금지 토큰 발견 → §2.1 목록에 행 추가
 2. master cycle 신설 (`GLOBAL-NO-ABBREV-SEEDADD-NNN`)
-3. 5-repo propagation 의무
+3. 6-repo propagation 의무
 4. `check-abbreviation.sh` 의 `FORBIDDEN_CHECK` 세트 동기 업데이트 의무
 
 ---
@@ -363,7 +363,7 @@ pattern = (
 1. 본 §3 에 새 행 추가 (표 형식 유지)
 2. **산업 표준 증빙** 필수: RFC / W3C / ISO / 공식 플랫폼 문서 링크
 3. master repo cycle 신설 (`GLOBAL-NO-ABBREV-ACRONYM-ADD-NNN`)
-4. 5-repo propagation (`scripts/propagate.sh --targets all`)
+4. 6-repo propagation (`scripts/propagate.sh --targets all`)
 5. `verify-sync.sh` PASS 확인
 6. CLAUDE.md §15 표에 cycle entry 추가
 
@@ -383,8 +383,8 @@ hook 본문 변경 시 본 file 갱신 의무 default (= cli infra 단방향 정
 
 ## §5 본 file 의 변경 정책
 
-- cli infra 권장 byte-identical (= 5-repo · 보호 5 file 외)
-- 변경 시 master cycle 신설 + 5-repo propagation (`cycle-discipline.md` §15 패턴 1)
+- cli infra 권장 byte-identical (= 6-repo · 보호 5 file 외)
+- 변경 시 master cycle 신설 + 6-repo propagation (`cycle-discipline.md` §15 패턴 1)
 - 자식 repo 직접 수정 금지
 
 ---

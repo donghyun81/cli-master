@@ -1,6 +1,6 @@
 #!/bin/bash
 # baseline-snapshot.sh — SessionStart hook
-# 목적: 5-repo (claude-cli-master + app-foundation + Gently 3) HEAD + cycle-discipline.md sha +
+# 목적: 6-repo (claude-cli-master + app-foundation + Gently 3 + gently-product-docs) HEAD + cycle-discipline.md sha +
 #       보호 파일 5종 sha + settings.json sha 자동 측정 +
 #       .ai/baseline-snapshot/<timestamp>.json 출력 + latest.json 복사.
 # 신설: MASTER-COWORK-HANDOFF-BASELINE-AUTOVERIFY-HOOK-001 (2026-05-12)
@@ -20,10 +20,10 @@ TIMESTAMP=$(date +"%Y%m%dT%H%M%S%z")
 OUT_FILE="$SNAPSHOT_DIR/${TIMESTAMP}.json"
 LATEST_FILE="$SNAPSHOT_DIR/latest.json"
 
-# mount root (= 5-repo 가 직접 놓인 디렉터리) robust 탐지.
+# mount root (= 6-repo 가 직접 놓인 디렉터리) robust 탐지.
 # 부모 mount root CLAUDE.md §3 진입 paradigm 2 영역 정합:
-#   §3.1 자식 단독 진입  → PROJECT_DIR = <mount>/<child> · 5-repo = dirname(PROJECT_DIR) 하위
-#   §3.2 부모 mount 진입  → PROJECT_DIR = <mount> 자체    · 5-repo = PROJECT_DIR 하위
+#   §3.1 자식 단독 진입  → PROJECT_DIR = <mount>/<child> · 6-repo = dirname(PROJECT_DIR) 하위
+#   §3.2 부모 mount 진입  → PROJECT_DIR = <mount> 자체    · 6-repo = PROJECT_DIR 하위
 # claude-cli-master 존재 위치로 분기 (= dirname-only 가정이 §3.2 측 5-repo 전부 MISSING 산출하던 결함 정정).
 if [ -d "$PROJECT_DIR/claude-cli-master/.git" ]; then
   PARENT_DIR="$PROJECT_DIR"

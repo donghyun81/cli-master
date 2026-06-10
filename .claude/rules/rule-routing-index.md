@@ -38,9 +38,9 @@
 |---|---|
 | [`safety-and-secrets.md`](./safety-and-secrets.md) | 금지 명령 / 금지 경로 / 시크릿·PII 기록 금지 / 역할별 경로 매트릭스 |
 | [`anchor-list.md`](./anchor-list.md) | 누락 시 cycle 실패하는 10 anchor(A1~A10 · baseline drift / 보호 sha / scope / propagation 등) |
-| [`cross-repo-parallel-exec.md`](./cross-repo-parallel-exec.md) **(kernel)** | 5-repo 단방향 propagation(A4) + subscription pool 정합(A6 · `claude -p` 회피 · billing) + 영역 1/2/3 1-줄 요약 + STOP/trigger · 실행 본문 = `cross-repo-parallel-exec-detail.md`(behavior-triggered · L1) |
+| [`cross-repo-parallel-exec.md`](./cross-repo-parallel-exec.md) **(kernel)** | 6-repo 단방향 propagation(A4) + subscription pool 정합(A6 · `claude -p` 회피 · billing) + 영역 1/2/3 1-줄 요약 + STOP/trigger · 실행 본문 = `cross-repo-parallel-exec-detail.md`(behavior-triggered · L1) |
 
-> file 외 L0: master `CLAUDE.md §5`(STOP 9항 canonical) + 부모 mount root `CLAUDE.md`(5-repo umbrella). 두 헌법은 `.claude/rules/` 밖이라 본 46 집합에 포함되지 않으나 L0 로 항상 적용.
+> file 외 L0: master `CLAUDE.md §5`(STOP 9항 canonical) + 부모 mount root `CLAUDE.md`(6-repo umbrella). 두 헌법은 `.claude/rules/` 밖이라 본 46 집합에 포함되지 않으나 L0 로 항상 적용.
 
 ### L1 — 프로세스·워크플로우 (작업 시작 시 · 20 rule)
 
@@ -152,7 +152,7 @@
 | 3. API-서버형 | 서버 변경이 secret 안전·EF 단일 진입점·RLS 검증을 충족 | secret 평문 / Edge Function 진입점 / RLS role별 SELECT | secret 평문 0 + Edge Function 단일 진입점 + RLS role별 SELECT 검증 | production push/RLS 첫 적용 = 사용자 명시 승인(`supabase-handling §3`) |
 | 4. 빌드-릴리즈형 | 빌드·릴리즈가 의존성 정합·출시 상태 정합·승인된 push 를 충족 | libs 3-source / INITIATIVES HEAD / production push 승인 | libs 3-source mismatch 0 + INITIATIVES HEAD 정합 + production push 승인 존재 | 검증 명령 불가 = `UNKNOWN(사유)` + STOP(`verification-and-review`) |
 | 5. 정책-계획 점검형 | 정책·계획이 disk 실측 근거·표현 건강·단일 SoT 를 충족 | disk 실측 인용 / degeneration M1·M2·M3 / 단일 SoT 중복 | disk 실측 인용 존재 + degeneration metric(M1/M2/M3) PASS + 단일 SoT 중복 0 | 신 rule 도메인 매칭 실패 = `cycle-discipline §2`(OPS 신설 금지) 또는 L1-1 예외 본심 회수 |
-| 6. CLI 운영 레이어형 | cli infra 변경이 보호 무결성·production 무접촉·5-repo 정합을 충족 | 보호 5 sha / production touch LOC / 5-repo byte-identical | 보호 5 file sha 변동 0 + production code touch 0 LOC + 5-repo byte-identical | 보호 sha drift / 자식 cli infra 직접 수정 징후 = 즉시 STOP(`CLAUDE.md §5` #5·#6) |
+| 6. CLI 운영 레이어형 | cli infra 변경이 보호 무결성·production 무접촉·6-repo 정합을 충족 | 보호 5 sha / production touch LOC / 6-repo byte-identical | 보호 5 file sha 변동 0 + production code touch 0 LOC + 6-repo byte-identical | 보호 sha drift / 자식 cli infra 직접 수정 징후 = 즉시 STOP(`CLAUDE.md §5` #5·#6) |
 | 7. task 재개-후속형 | 재개가 HANDOFF 우선·최소 read·직전 상태 정합을 충족 | HANDOFF read 순서 / bulk read / 직전 PASS 정합 | HANDOFF.md 우선 read + bulk read 0 + 직전 PASS 단계와 정합 | reset 금지 조건(verify 진행 중·STOP 신호·계약 미완) 시 reset 보류(`workflow-core`) |
 
 **amend loop (색인·규칙 진화 통로)**: 행동 수행 중 "기존 규칙으로 안 잡히는 반복 패턴"을 발견하면 `cli infra rule candidate` 로 누적한다. 자동 신설하지 않는다 — `cycle-discipline §19`(stop-reflect.sh self-improving loop · silent 후보 제안) + `§18`(분기 정기 review cadence) + `automation-policy §1.2`(자동화 직후 calibration 강화) 를 통해 사용자 confirm 후 master cycle 로 정착시킨다(`cycle-discipline §2` L1-1 예외 = 사용자 본심 외화 영역만 신 rule 허용). **정량 trigger** (= [`gsm-measurement.md §6`](./gsm-measurement.md)): 동일 행동/anchor 의 M 이 **N(기본 3) cycle 연속 deviation** 이면 amend 후보로 승격한다(= `stop-reflect.sh` 임계 정합 · 게이트 X · 사람 판단 신호).
@@ -172,7 +172,7 @@
 
 ## §E. propagation 정책
 
-- 본 file = cli infra **권장 byte-identical** 영역(`.claude/rules/` · 보호 5종 아님 · `cycle-discipline §3`). 42 rule 이 5-repo byte-identical 이므로 본 색인도 5-repo 에서 동일하게 유효 → `propagate.sh` 대상.
+- 본 file = cli infra **권장 byte-identical** 영역(`.claude/rules/` · 보호 5종 아님 · `cycle-discipline §3`). 42 rule 이 6-repo byte-identical 이므로 본 색인도 6-repo 에서 동일하게 유효 → `propagate.sh` 대상.
 - **본 cycle(RULE-ARCH-PHASE1-001) = master 신설 only**. 5-repo byte-identical propagation = 별 follow-up cycle(`MASTER-CLI-RULE-ROUTING-INDEX-PROPAGATE-NNN` 가칭 · `cycle-discipline §15` 패턴 1). 자식 직접 수정 금지(`CLAUDE.md §4`).
 
 ---

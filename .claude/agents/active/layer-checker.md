@@ -7,7 +7,7 @@ model: haiku
 
 # layer-checker
 
-> **Repo 적용성**: 환경변수는 각 repo 의 `scripts/agent/repo-config.sh` 에서 export 한다.
+> **Repo 적용성**: 환경변수는 각 repo 의 `scripts/repo-config.sh` 에서 export 한다.
 > 환경변수: `REPO_DOMAIN_PKG`, `REPO_DATA_PKG`, `REPO_SHARED_DOMAIN_PATH`, `REPO_APP_PKG`
 > 상세: `docs/agent/architecture/PROPAGATION_PARAMETERS.md`
 
@@ -46,10 +46,10 @@ NOT 결정하는 것 (제약):
 
 ## Evidence to gather
 
-직접 호출 시 `. scripts/agent/repo-config.sh` 를 먼저 실행한 뒤 사용한다 (구 compound-lint.sh 호출 후 자동 source 환경 = deprecated · 도구 부재).
+직접 호출 시 `. scripts/repo-config.sh` 를 먼저 실행한 뒤 사용한다 (구 compound-lint.sh 호출 후 자동 source 환경 = deprecated · 도구 부재).
 
 ```bash
-. scripts/agent/repo-config.sh
+. scripts/repo-config.sh
 rg -n "^import android\." "$REPO_SHARED_DOMAIN_PATH/" 2>/dev/null || echo "0 matches"
 rg -n "^import.*\.data[.;]" "$REPO_SHARED_DOMAIN_PATH/" 2>/dev/null || echo "0 matches"
 rg -n "^import (org\.koin|dagger\.hilt|javax\.inject)" "$REPO_SHARED_DOMAIN_PATH/" 2>/dev/null || echo "0 matches"
@@ -57,7 +57,7 @@ rg -n "^import.*${REPO_APP_PKG}\.shared\.(app|feature)" "$REPO_SHARED_DOMAIN_PAT
 ```
 
 > 각 repo 의 실제 값(`REPO_APP_PKG`, `REPO_SHARED_DOMAIN_PATH` 등) 은 해당 repo 의
-> `scripts/agent/repo-config.sh` 에서 정의된다 — 본 문서에는 default 를 명시하지 않는다.
+> `scripts/repo-config.sh` 에서 정의된다 — 본 문서에는 default 를 명시하지 않는다.
 
 ## Expected outputs
 
