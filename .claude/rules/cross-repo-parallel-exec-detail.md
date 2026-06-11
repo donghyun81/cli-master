@@ -1,8 +1,8 @@
 # Cross-Repo Parallel Execution — Detail (behavior-triggered 본문)
 
-> **단일 목적**: L0 kernel [`cross-repo-parallel-exec.md`](./cross-repo-parallel-exec.md) 에서 demote 된 cross-repo 실행 paradigm **본문** — 영역 1/2/3 paradigm + dispatch checklist + 경계 + 자식별 cwd 분리 + sub-agent token cost + cross-repo 정합 처리. cross-repo **행동 진입 시** 로드 (= `rule-routing-index.md §B` Reading Mode 6 cli-ops cross-repo).
+> **단일 목적**: L0 kernel [`cross-repo-parallel-exec.md`](./cross-repo-parallel-exec.md) 에서 demote 된 cross-repo 실행 paradigm **본문** — 영역 1/1.5/2/3 paradigm + dispatch checklist + 경계 + 자식별 cwd 분리 + sub-agent token cost + cross-repo 정합 처리. cross-repo **행동 진입 시** 로드 (= `rule-routing-index.md §B` Reading Mode 6 cli-ops cross-repo).
 > **신설**: MASTER-CLI-CONTEXT-OPT-PHASE3-L0-CHILD-DEDUP-001 (2026-06-01 · H4 · kernel↔detail 분리 · 삭제 0 verbatim demote · 본문 = 직전 `cross-repo-parallel-exec.md` §2.1~§2.3 + §3~§4 verbatim).
-> **kernel 잔류 (= L0 항상-on)**: subscription/billing guard(§2.4 · A6 · `claude -p` 회피) + 단방향 propagation(A4) + 영역 1/2/3 1-줄 요약.
+> **kernel 잔류 (= L0 항상-on)**: subscription/billing guard(§2.4 · A6 · `claude -p` 회피) + 단방향 propagation(A4) + 영역 1/1.5/2/3 1-줄 요약.
 > SOT: `CLAUDE.md`
 
 ---
@@ -39,6 +39,61 @@ main agent 측 결과 통합 + cross-repo 정합 결정
 - 단일 sub-agent return ≤ 4,000 token 요약
 - Verdict + Top Findings + Counter-example + Recommended Next Step + Pointers 5 섹션 의무
 - raw output 그대로 return 금지 (= main agent context 압박 회피)
+
+### 2.1.5 영역 1.5 — git worktree 격리 paradigm (= within-repo 병렬 · 본문 canonical)
+
+> **신설**: `MASTER-CLI-WORKTREE-PARADIGM-001` (2026-06-11 · Coin 본심 D1~D8 확정). 본 §2.1.5 = 영역 1.5 **유일 본문 canonical** default (= kernel `cross-repo-parallel-exec.md` §2 = 1-bullet 요약 + pointer · 부모 mount root `CLAUDE.md` §3.3/§4 + `automation-policy.md` §2 #12 = pointer 행 · L1-4 단일 SoT 정합).
+
+git worktree = 한 repo 측 추가 working tree 를 별 디렉터리 × 별 branch 로 동시 checkout 하는 git 표준 기능 default. 영역 1 (= sub-agent fan-out) + 영역 2 (= 다중 cli session) = **repo 사이** 병렬 영역 · 영역 1.5 = **같은 repo 안** 동시 workstream 격리 영역 default (= 직교 · 영역 2 대체 X).
+
+**적용 범위** (= D1 · 2 영역 채택 + 1 보류):
+
+| # | 적용 영역 | 본질 |
+|---|---|---|
+| ① | **within-repo 병렬** | 같은 repo 안 동시 2+ workstream (= 독립 cycle × N) 측 worktree × branch 격리 default (= 단일 working tree 측 동시 변경 충돌 차단) |
+| ② | **master propagation 격리** | propagation cycle 진행 중 별도 master cycle 측 worktree 격리 default (= main checkout = propagation 전용 보존) |
+| ③ | 영역 1 sub-agent 격리 | **보류 default** (= 현 영역 1 = read-only 측정 용도 · worktree 격리 실수요 0 실측 · 재평가 = 실수요 발생 시점 별 cycle) |
+
+**운영 계약** (= D6 결과 계약 · 방법 세부 = §FREEDOM 영역):
+
+- **배치 위치**: worktree dir = repo working tree **외부 경로 의무** (= repo 내부 생성 금지 · propagation / .gitignore 오염 차단). 규약 = `~/AndroidStudioProjects/.worktrees/<repo>--<cycle-id>/` (= 부모 mount root 측 git-외 영역 · .gitignore 처리 불요 default).
+- **branch 규약**: worktree branch = `wt/<cycle-id>` default · worktree 측 commit = 자기 branch 한정 의무 (= main 직접 commit 유출 금지).
+- **보호 5 file**: 변경 = main checkout 한정 의무 (= worktree 내 보호 file 편집 금지 · A2 정합).
+- **propagation 실행**: `propagate.sh` + `verify-sync.sh` 실행 = main checkout 한정 default (= worktree 측 실행 금지 · 단방향 propagation source = main 단일 · A4 정합).
+- **영역 2 직교**: worktree 는 영역 2 (= cross-repo 다중 cli session) 를 **대체하지 않음** (= polyrepo = repo 사이 이미 디렉터리 분리 default · worktree 가치 = 같은 repo 안 한정).
+- **Transport / Inspection 분리**: worktree 생성·제거·검출 = Transport (= 기계 · `automation-policy.md` §2 #12 정합) · 무엇을 격리할지 + merge 판단 = Inspection (= 사람 영역 default).
+
+**명령 sequence 규약** (= §FREEDOM 확정):
+
+```bash
+# 생성 (= 신 branch 동시 생성)
+git -C <repo> worktree add ~/AndroidStudioProjects/.worktrees/<repo>--<cycle-id> -b wt/<cycle-id>
+# 검출 (= cycle 진입 / 마감 시점 측정)
+git -C <repo> worktree list --porcelain
+# self-clean (= D8 순서 의무: merge 완료 → worktree 제거 → branch 정리)
+git -C <repo> merge --no-ff wt/<cycle-id>      # main checkout 측
+git -C <repo> worktree remove ~/AndroidStudioProjects/.worktrees/<repo>--<cycle-id>
+git -C <repo> branch -d wt/<cycle-id>
+```
+
+**merge 소유** (= D8):
+
+- worktree branch 합류 (= merge) = **해당 workstream cycle 마감 step 포함 의무** (= merge + verify + self-clean 후 paste-back · 별도 통합 task 상시 분리 X).
+- conflict 검출 시 = **자동 해소 금지** (= 보고 → 사람 판단 · STOP #4 해석 default). 대형 conflict = STOP 후 별도 cycle 분기 default.
+- **병렬 분기 전제** (= 분기 결정 시점 의무): 파일 겹침 측정 = cowork paste 발행 단계 의무 (= Inspection · 사람 영역) — 같은 file 접촉 workstream = 병렬 금지 · 순차 의무.
+
+**guard 3** (= D3+D7 · 신 STOP 항 신설 X = 기존 STOP 9항 해석 적용):
+
+| # | guard | 본질 |
+|---|---|---|
+| ① | self-clean 의무 | cycle 마감 시 merge 완료 → worktree 제거 → branch 정리 순 의무 (= D8 정합 · orphan 잔존 차단) |
+| ② | orphan / 미커밋 WIP | orphan worktree 검출 또는 worktree 내 미커밋 WIP 존재 + prune 징후 = 기존 STOP #3 (비가역) · #4 (예상 외 상태) 발동 default |
+| ③ | prune 자동 실행 회피 | `git worktree prune` 자동 실행 금지 default (= 검출 → 보고 → 사람 판단) |
+
+**subscription 경계** (= D4 · A6 정합):
+
+- worktree = 단순 git checkout (= 추가 AI 호출 0) default — **interactive pool 정합 ✓ · 영역 3 (= Agent SDK credit pool) 무관**.
+- worktree 격리 자체 = sub-agent 수 증가 영역 X — 기존 sub-agent 병렬 cap ≤ 3 (= §3.4) 불변 의무 (= 모순 금지).
 
 ### 2.2 영역 2 — 다중 cli session 운영 paradigm (= 권장 paradigm default · 2026-05-19 본문 강화)
 

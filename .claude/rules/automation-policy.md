@@ -19,7 +19,7 @@
 
 ---
 
-## §2. 영역 분류 표 (= 11 영역 default)
+## §2. 영역 분류 표 (= 12 영역 default)
 
 | # | 영역 | Transport (OK) | Inspection (X) | paradigm 본문 file |
 |---|---|---|---|---|
@@ -34,6 +34,7 @@
 | 9 | Cross-repo cross-verify | — | ✓ main agent 측 sub-agent verdict 비교 default | `cross-repo-parallel-exec-detail.md §4.1` |
 | 10 | REVIEW.md 12-section 판정 | — | ✓ 수동 판정 default (= 블로커 1·2·3·4·6·9 default) | `reporting.md §7` |
 | 11 | Recommended option 최종 confirm | — | ✓ 사용자 본심 회수 의무 default | `recommended-option-disk-verification.md §2.2` |
+| 12 | git worktree 생성·정리 (= 영역 1.5 · 격리 대상/merge 판단 = Inspection 사람 영역) | ✓ worktree add / remove / list 명령 default | — | `cross-repo-parallel-exec-detail.md §2.1.5` |
 
 ---
 
