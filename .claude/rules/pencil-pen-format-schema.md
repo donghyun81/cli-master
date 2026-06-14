@@ -1,6 +1,6 @@
 # .pen Format Schema SoT
 
-> **단일 목적**: `.pen` file format version `"2.11"` TypeScript schema 본문 + 13 Entity type 단일 reference + AI agent 측 `batch_design` / `batch_get` 호출 시 schema 정합 의무.
+> **단일 목적**: `.pen` file format (현 version `"2.13"`) TypeScript schema 본문 + 13 Entity type 단일 reference + AI agent 측 `batch_design` / `batch_get` 호출 시 schema 정합 의무. ⚠ **본 body (§2~§5) = 2.11-shape · 2.13 structural delta = §1.1a 배너 참조 · body rewrite PENDING** (= `MASTER-CLI-PENCIL-SCHEMA-UPDATE-001`).
 > **신설**: MASTER-CLI-PENCIL-OPTIMIZATION-002 (2026-05-19 H26 단계 1 마감).
 > **공식 근거**: pencil.dev `/for-developers/the-pen-format` (2026-04-03 last updated).
 > **연관 파일**:
@@ -21,7 +21,7 @@
 
 ```typescript
 export interface Document {
-  version: "2.11";
+  version: "2.13";
   themes?: { [key: string]: string[] };
   imports?: { [key: string]: string };
   variables?: { [key: string]: Variable };
@@ -31,11 +31,32 @@ export interface Document {
 
 | key | 본질 |
 |---|---|
-| `version` | `"2.11"` 고정 (= 현 시점 baseline · 후속 minor 변경 시 본 SoT 갱신 cycle 진입 의무) |
+| `version` | `"2.13"` 고정 (= 2026-06-15 live MCP 측정 baseline · 2.13 structural delta body = §1.1a 배너 PENDING · 후속 변경 시 본 SoT 갱신 cycle 진입 의무) |
 | `themes` | multi-axis theme map (= `mode` / `spacing` / `device` 등 axis 별 string[] · 상세 = `pencil-theme-multi-axis.md`) |
 | `imports` | 외부 library import map (= `<alias>: <library-id>` · `.lib.pen` reference) |
 | `variables` | document-scope variable map (= `<name>: Variable` · 본 §5 참조) |
 | `children` | 최상위 Child[] (= 13 Entity type 측 union · 본 §2 참조) |
+
+### 1.1a ⚠ 2.13 structural delta (= body rewrite PENDING · MASTER-CLI-PENCIL-SCHEMA-UPDATE-001)
+
+> **본 SoT body (§2 union + §2.2~§2.8 + §4 graphics + §5 variable) 는 아직 2.11-shape 다.** 2026-06-15 live Pencil MCP (`get_editor_state(include_schema:true)` · active editor `GentlyTable/docs/design/pencil-sot/report-screen/report-screen.pen`) 측정 결과 disk `.pen` 5종이 2.13 auto-migration 됐고, 2.13 schema 는 minor bump 이 아니라 **structural** 이다. 본 cycle 은 version label 만 2.13 정합 (= "최소 정직") · body 전면 rewrite + 형제 Pencil rule 4종 정합 = **별 follow-up cycle**.
+>
+> **AI agent 의무**: `batch_design` / `batch_get` 전 반드시 `get_editor_state(include_schema:true)` 로 live 2.13 schema 를 pull 한다 (= 본 body 의 2.11-shape 표기를 신뢰하지 말 것 · MCP server 측 자체 지시 정합).
+
+측정된 2.11 → 2.13 structural delta (8 건):
+
+| # | 영역 | 2.11 (본 body 현 표기) | 2.13 (live 실측) |
+|---|---|---|---|
+| 1 | Entity union | `line` 포함 (§2 #3 · §2.2) | **`line` 제거** |
+| 2 | Entity union | `icon_font` / `IconFont` (`iconFontName` · `iconFontFamily`) (§2 #12 · §2.7) | **`icon` / `Icon` rename** (`icon` · `library`) |
+| 3 | Entity union | (부재) | **`script` / `Script` 신규** (`scriptUri` · `inputs` · `clip`) |
+| 4 | Variable | `Variable = string` · raw 값 (§1.2 · §5) | **typed 선언** `{ type: "boolean"\|"color"\|"number"\|"string"; value }` |
+| 5 | Stroke | `stroke?: Stroke` (nested · `pencil-visual-primitives.md §2`) | **flatten** `stroke?: Fills` + `strokeWidth` · `strokeLinecap` · `strokeLinejoin` · `strokeAlignment` |
+| 6 | Fill | color / gradient / image / mesh_gradient (§4 · visual-primitives §1) | **`shader` fill 추가** |
+| 7 | Text | `TextContent = StringOrVariable \| TextStyle[]` (§2.3) | **`StringOrVariable`** (array 형 제거) |
+| 8 | Group | Layout + width / height 보유 (§2.5) | **Layout + width / height 상실** |
+
+(minor) `Path.viewBox?` 추가 (§2.2) · `Entity` `CanHaveRotation` inline (§2.1). union count = 13 유지 (= −line −icon_font +icon +script). 형제 ripple (= 별 cycle): `pencil-visual-primitives.md` (stroke / shader / icon) · `pencil-mcp-tools-reference.md` (icon enum) · `pencil-component-paradigm.md §4.3.2` (iconFontFamily 예시) · `pencil-theme-multi-axis.md §2` (변수 raw-값 예시). 보호 `ui-spec.schema.json` = `.pen` ref 0 → 무접촉.
 
 ### 1.2 Variable / 측정 단위 type
 
@@ -381,7 +402,7 @@ batch_design({ ops: [
 
 | trigger | mitigation |
 |---|---|
-| `version` field 측 `"2.11"` 외 measurement | 공식 doc 측 schema upgrade 측정 + 본 SoT 갱신 cycle 진입 (= `MASTER-CLI-PENCIL-SCHEMA-UPDATE-NNN`) |
+| `version` field 측 `"2.13"` 외 measurement | 공식 doc 측 schema upgrade 측정 + 본 SoT 갱신 cycle 진입 (= `MASTER-CLI-PENCIL-SCHEMA-UPDATE-NNN`) |
 | 14 번째 Entity type 발견 (= 공식 doc 측 신규 추가) | 본 SoT §2 union type 갱신 + 6-repo propagation cycle 진입 |
 | `Ref` 측 `ref` field 미명시 + `type: "ref"` 호출 시도 | batch_design 측 FAIL 발화 · agent prompt 측 component id 명시 의뢰 |
 | Variable reference 측 `$` prefix 부재 + 존재 X token 시도 | document `variables` map 측 등록 의무 (= 등록 X 시 raw string default) |
@@ -401,3 +422,4 @@ batch_design({ ops: [
 
 - 2026-05-19 · MASTER-CLI-PENCIL-OPTIMIZATION-002 · 본 SoT 신설 (= H26 단계 1 마감 · pencil.dev 공식 doc anchor §C #1 흡수 · 13 Entity type 통합 reference) + 5-repo byte-identical propagation
 - 2026-05-31 · MASTER-CLI-PENCIL-RECOLOR-GENERATOR-001 · `.pen` version baseline `"2.10"` → `"2.11"` 갱신 (= 실 disk `.pen` 측 version `"2.11"` 실측 정합 default · §1.1 Document interface + §1.1 표 + §7 STOP 조건 + 본 목적 line 동기) + 5-repo byte-identical propagation. 13 Entity type union + Variable / Theme system 본문 무변경 (= minor version bump · schema 구조 동일 default).
+- 2026-06-15 · MASTER-CLI-PENCIL-SCHEMA-UPDATE-001 · `.pen` version label `"2.11"` → `"2.13"` 갱신 (= 2026-06-15 live Pencil MCP `get_editor_state(include_schema:true)` 측정 · active editor `report-screen.pen` · disk 5종 v2.13 auto-migration 정합 · §1.1 Document interface + §1.1 표 + §7 STOP trigger + 목적 line 동기) + §1.1a structural delta 배너 신설. **2026-05-31 recolor 선례와 대비 = minor bump 아님 · structural** (= 8 delta: −line · −icon_font · +icon · +script · typed variables · stroke flatten · shader fill · TextContent · Group). Coin 본심 = "최소 정직" (= version label + §1.1a 유예 배너 · body §2 13 union + §2.2~§2.8 + §4 + §5 = 2.11-shape 유지 PENDING). body 전면 rewrite + 형제 Pencil rule 4종 (`pencil-visual-primitives.md` / `pencil-mcp-tools-reference.md` / `pencil-component-paradigm.md` / `pencil-theme-multi-axis.md`) 정합 = 별 follow-up cycle. 보호 `ui-spec.schema.json` = `.pen` ref 0 무접촉 + 6-repo byte-identical propagation.
