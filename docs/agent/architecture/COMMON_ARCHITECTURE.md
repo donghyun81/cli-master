@@ -66,7 +66,22 @@
 
 ---
 
-## 4. Propagation Discipline
+## 4. 사용자 데이터 source of truth (앱-중립 데이터 아키텍처 원칙)
+
+> 결정 기록: `LOCK-DATA-SOT-SERVER-AUTHORITATIVE-001` (Coin 확정 2026-06-15). 본 절 = 그 결정의 아키텍처 명문화이며, 변경은 foundational(STOP 영역).
+
+모든 propagation 대상 앱이 공유하는 **사용자 데이터 흐름 계약**이다. 도메인 정책이 아니라 persistence 아키텍처 원칙이므로 운영 레이어 SoT에 둔다(`SSOT_PRINCIPLES` · `MODEL_SEPARATION` 와 동족). 특정 도메인 스키마·테이블·앱별 적용 상태는 본 절에 박지 않는다(앱-고유).
+
+- **source of truth = 서버(Supabase Postgres).** 사용자가 생성한 데이터(세션·로그·기록 등)는 서버가 authoritative. 클라이언트 로컬 저장소를 단독 SoT로 두지 않는다.
+- **Room = offline-first 캐시 + 서버 hydration(복원) 층.** 빠른·오프라인 렌더를 위한 종속 캐시이며, 서버에서 read-back으로 복원된다. Room 단독 SoT 금지.
+- **집계(곡선·통계·리포트) = 서버 Edge Function.** 모든 앱 일관. 클라이언트는 서버 집계 결과를 소비·캐시한다.
+- **durability 요건**: 재설치·기기 변경 후에도 이력 생존. 모든 신규 사용자 데이터는 서버 SoT + hydration 경로를 가져야 한다(업로드 전용 sync = 미충족).
+
+근거(요약): 제품 thesis = 리셋되지 않는 누적 곡선 → 로컬-only는 재설치 시 리셋 → durability ⇒ 서버 SoT. 상세 근거·기각안(Room authoritative)·앱별 현 적용 상태 및 정합(gap 보완) 방향은 `LOCK-DATA-SOT-SERVER-AUTHORITATIVE-001` 및 각 repo 데이터층 문서에서 추적한다.
+
+---
+
+## 5. Propagation Discipline
 
 1. **SoT 원본**: 변경은 SteadyWell repo에서 먼저 반영
 2. **Verify in source**: SteadyWell에서 lint·verify·review PASS
@@ -78,7 +93,7 @@
 
 ---
 
-## 5. 관련 문서
+## 6. 관련 문서
 
 - `KMP_CMP_LAYER_DIRECTION.md` — shared/domain ← shared/feature-state ← shared/app ← app/iosApp 흐름
 - `KOIN_DI_BASELINE.md` — Koin DI 배치 정책
