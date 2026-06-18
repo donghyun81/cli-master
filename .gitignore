@@ -36,3 +36,7 @@ cc-batch-pencil.json
 *.tmp
 *.swp
 *.swo
+
+# secrets — never commit
+docs/ops/production-cli-access-tokens.md
+*-access-tokens.md
