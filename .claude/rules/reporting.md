@@ -278,7 +278,7 @@ STDOUT: [핵심 출력]
 ```markdown
 ## Technical Review
 
-> **Risk 기반 경량화**: Low Risk task는 §1 Requirements Coverage, §2 Regression Risk, §11 Secrets Safety만 필수. **UI 레이어 변경(Screen/ViewModel/UiState 신규·수정) 포함 시 §5 Model Separation 추가 필수.** 나머지 N/A. Medium 이상은 전체 12-section 필수.
+> **Risk 기반 경량화**: Low Risk task는 §1 Requirements Coverage, §2 Regression Risk, §11 Secrets Safety만 필수. **UI 레이어 변경(Screen/ViewModel/UiState 신규·수정) 포함 시 §5 Model Separation + §14 Design SoT Sync 추가 필수.** 나머지 N/A. Medium 이상은 전체 12-section 필수.
 
 ### 1. Requirements Coverage
 - [ ] 요구사항 성공조건 충족: <근거 (CONFIRMED/INFERRED/UNKNOWN)>
@@ -339,6 +339,12 @@ _code-level task에만 적용. ops-layer·조사형·문서형 task는 N/A 명�
 - 제거 판단 근거 충분성: <N/A / CONFIRMED / INFERRED / UNKNOWN>
 - 핵심 경로 후보 task-level STOP 처리: <N/A / 없음 / 확인>
 - code removal vs file deletion 구분 준수: <N/A / 확인>
+
+### 14. Design SoT Sync
+_UI visible-state(FULL) 변경 포함 task에만 적용. UI 무변경·ops-layer·문서형 task는 N/A 명시._
+- 변경 화면 `.pen` + `.ui-spec.json` 선행/동반 refresh: <N/A / 확인 / 누락>
+- 누락 시 `DESIGN-DEBT.md` 등재 (deferred lane): <N/A / 등재 / 미등재(WARN)>
+- 출시 후 net-new visual 선행 의무 충족: <N/A / 확인 / 위반(release FAIL)>
 
 ## Findings
 [근거 기반 판정. 근거 없으면 UNKNOWN.]

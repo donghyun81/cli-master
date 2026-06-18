@@ -75,7 +75,10 @@ lifecycle 전이 표 + 물리 파일 처리 + DELETE STOP 상세: `design-to-cod
 ### 원칙
 
 - Design SoT → Code = 유일한 정방향
-- Code 를 먼저 수정하고 사후 Design 에 반영 → REVIEW §1 Requirements Coverage FAIL
+- Code 먼저 + 사후 Design 반영 (code-first) = **Deferred (design-debt) lane 등재 시 한정 허용** (`uiux-sot-refresh.md` "즉시 의무 vs Deferred" 분기 정합):
+  - 미등재 code-first = REVIEW [Design SoT Sync] WARN
+  - 출시 후 net-new visual code-first = 위반(선행 의무) → release 게이트 FAIL
+  - deferred 항목 = DESIGN-DEBT.md 등재 + 출시 전 해소 (release backstop)
 
 ### Phase R (Design SoT Recovery) 한정 역공학 예외
 

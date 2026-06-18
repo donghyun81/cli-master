@@ -63,6 +63,7 @@
 - **P8**: VERIFY.md exit code 기록
 - **P9**: REVIEW.md PromptFit 평가 + INDEX.md 갱신
 - **P10**: 시각 검증 자산 disk 갱신 — `get_screenshot` (PNG render) 또는 `export_nodes` (PNG / JPEG / WEBP / PDF) 호출 후 결과 file 의 sha 변동 확인 (preview.png paradigm 정합 · `MASTER-CLI-PENCIL-OPTIMIZATION-001` 안 추가)
+- **P11**: deferred (code-first) 시 `DESIGN-DEBT.md` 등재 확인 (해당 시 · §10 Deferred Design Debt lane 정합 · 즉시 의무 type 은 N/A)
 
 ---
 
@@ -231,3 +232,30 @@ fun <Child>Theme(
 - "Validate that all Pencil cross-axis variable combinations resolve in Compose runtime"
 
 상세 prompt paradigm = `design-prompting-paradigm.md` §1~§3 (= measurable + context + reference) 정합 의무. multi-axis 단일 SoT = `pencil-theme-multi-axis.md`.
+
+---
+
+## 10. Deferred Design Debt lane (= code-first 허용 시 등재 의무)
+
+> design SoT 갱신을 즉시 하지 않고 code-first 로 진행할 때 (= `uiux-sot-refresh.md` "즉시 의무 vs Deferred" 분기의 deferred 칸) 해당 화면의 시각 부채를 **per-repo 원장에 명시 등재**한다. deferred = "조용한 skip" 아님 · 등재 = 추적 + 출시 전 해소(backstop) 의 진입점.
+
+### 10.1 원장 위치 + 형식
+
+- 위치: 자식 repo root `DESIGN-DEBT.md` (per-repo · markdown · `ui-spec.schema.json` 무접촉 = status 는 원장 row 가 보유 · schema 필드 추가 X)
+- INITIATIVES 연계: 해소 task = `docs/release-readiness/INITIATIVES.md` §3 출시 task 층의 동일 화면과 매핑 (= 출시 전 해소 추적)
+- 권장 컬럼:
+
+| 화면 | 변경 (visible state) | 등재 cycle/date | 분류 | 해소 task | status |
+|---|---|---|---|---|---|
+| `<screen>` | `<추가된 visible state 요약>` | `<cycle-id> / YYYY-MM-DD` | `net-new \| reuse` · `pre \| post-launch` | `<해소 cycle-id>` | `OPEN \| RESOLVED` |
+
+### 10.2 등재 / 해소 / backstop 규칙
+
+- **등재 의무**: deferred 허용 항목 (reuse visual / PARTIAL / 미출시 net-new) = 원장 row 추가 의무. 미등재 deferred = REVIEW [Design SoT Sync] WARN (`verification-and-review.md` §14 정합).
+- **해소**: 해당 화면 `.pen` + `.ui-spec.json` refresh + dual-layer sha-sync (§4 P1~P3) → row status `RESOLVED` 또는 row 제거.
+- **release backstop**: 출시 대상 화면의 OPEN row = release / production-push 게이트 **hard FAIL** (= `verification-and-review.md` §14 release 조항 · `rule-routing-index.md §C` 빌드-릴리즈형 M 정합). 출시 후 net-new visual 은 deferred 불가 (= 선행 의무).
+
+### 10.3 본 lane 의 scope 경계
+
+- per-repo `DESIGN-DEBT.md` 실 entry seeding = 본 lane 신설 cycle 밖 (= 자식별 부채 등재 = 후속 cycle · master = format/규칙 SoT 만 보유).
+- 본 lane = code-first 허용의 추적 장치 · 정방향 원칙 (Design SoT → Code) 폐기 아님 (= `design-sot-policy.md` §3 정합).

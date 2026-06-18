@@ -51,7 +51,7 @@ grep -rEn 'AKIA[0-9A-Z]{16}|sk-[a-zA-Z0-9]{32,}|ghp_[a-zA-Z0-9]{36}|xox[baprs]-[
 ## /review 규칙
 
 ### Risk 기반 리뷰 경량화
-- **Low Risk**: VERIFY.md (빌드/테스트 통과 확인) + 3-section REVIEW (Requirements, Regression, Secrets). **UI 레이어 변경(Screen/ViewModel/UiState 신규·수정) 포함 시 §5 Model Separation 추가 필수** (= [`docs/agent/architecture/MODEL_SEPARATION.md`](../../docs/agent/architecture/MODEL_SEPARATION.md) 정합). PromptFit 선택.
+- **Low Risk**: VERIFY.md (빌드/테스트 통과 확인) + 3-section REVIEW (Requirements, Regression, Secrets). **UI 레이어 변경(Screen/ViewModel/UiState 신규·수정) 포함 시 §5 Model Separation 추가 필수** (= [`docs/agent/architecture/MODEL_SEPARATION.md`](../../docs/agent/architecture/MODEL_SEPARATION.md) 정합); **UI visible-state(FULL) 변경 포함 시 §14 Design SoT Sync 추가** (= `uiux-sot-refresh.md` "즉시 의무 vs Deferred" 분기 정합). PromptFit 선택.
 - **Medium Risk**: 현행 12-section REVIEW + PromptFit 필수.
 - **High Risk**: 12-section REVIEW + PromptFit + 독립 reviewer 실행 필수.
 
@@ -77,10 +77,13 @@ grep -rEn 'AKIA[0-9A-Z]{16}|sk-[a-zA-Z0-9]{32,}|ghp_[a-zA-Z0-9]{36}|xox[baprs]-[
 | 11. Secrets Safety | 시크릿 패턴 grep 결과 (패턴 SoT = `safety-and-secrets.md` §시크릿 스캔 패턴 · 구 compound-lint = deprecated) | 블로커 |
 | 12. Rollback Viability | 롤백 지점 실행 가능성; 비가역 변경 없음 | 비블로커 |
 | 13. Cleanup Governance | code-level task: EVIDENCE.md에 `## Cleanup Assessment` 존재; 제거 근거 충분성; 핵심 경로 STOP 처리; code removal vs file deletion 구분 준수. ops-layer·조사형·문서형 task: N/A | 비블로커 |
+| 14. Design SoT Sync | UI visible-state(FULL) 변경 시 해당 화면 `.pen`+`.ui-spec.json` 선행/동반 refresh OR `DESIGN-DEBT.md` 등재(`uiux-sot-refresh.md` "즉시 의무 vs Deferred" 분기 정합); 출시 후 net-new visual 선행 누락 = 위반. UI visible-state 변경 무 = N/A | 비블로커 (release cycle = 아래 backstop 으로 hard FAIL 승격) |
 
 추가 항목 (reviewer 수동 검사 · 구 compound-lint 별도 검사 = deprecated):
 - PromptFit 섹션 존재: `REVIEW.md` 내 PromptFitScore, PromptFitBreakdown, PromptFitNextActions
 - `.ai/promptfit/INDEX.md` 갱신: 해당 task 한 줄 append 여부
+
+> **Release backstop (§14 enforce)**: release / production-push REVIEW cycle 한정 — 출시 대상 화면의 `DESIGN-DEBT.md` OPEN row = 0 이어야 PASS, else **FAIL (release cycle 한정 blocker)**. 매 cycle §14 = 비블로커(warn) 이나 release 게이트에서만 hard FAIL 로 승격 (= `design-to-code-sync.md` §10.2 backstop 정합 · `uiux-sot-refresh.md` 출시 backstop 정합 · blocking gate 신설 X · enforce=warn default + release 한정 backstop).
 
 ### Verdict 판정
 
