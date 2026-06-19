@@ -191,13 +191,12 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 
 ## Last verify-sync
 
-- timestamp: 2026-06-19T15:35:33+0900
-- pass: 159
-- drift: 1
+- timestamp: 2026-06-19T16:31:12+0900
+- pass: 160
+- drift: 0
 - miss: 5
 - exit: 1
 
 ### Drift 상세
 
-- docs/backend/RLS_AND_PLAY_INTEGRITY_GUIDE.md  master=dee1d4170623  GentlyBreath=✓  GentlyDay=✓  GentlyTable=6c47d056e503(✗)  app-foundation=✓  gently-product-docs=✓
-- docs/ops/production-cli-access-tokens.md  master=33064f09f4e2  GentlyBreath=MISS  GentlyDay=MISS  GentlyTable=MISS  app-foundation=MISS  gently-product-docs=MISS
+- docs/ops/production-cli-access-tokens.md  master=2fec95080753  GentlyBreath=MISS  GentlyDay=MISS  GentlyTable=MISS  app-foundation=MISS  gently-product-docs=MISS
