@@ -79,10 +79,34 @@
 
 비가역성 / 영향 범위 / Dashboard 우월성 측면에서 첫 적용 시 사용자 명시 승인 후 진행.
 
-### §3.1 Production `supabase db push --linked`
-- 비가역 schema 변경 포함 가능 (column drop / type 변경 등)
-- 2단계 권장 흐름: staging push → 검증 PASS → production push
-- 사용자 "production push OK" 명시 의무
+### §3.1 Production apply — "승인-후-cli-push" recipe (`db push` 금지 · Management API 단일 경로)
+
+> **본질**: prod DDL/RLS/EF 적용 = **"staging 자율 → Coin 명시 승인 → cli prod push"** 단일 표준 recipe. cli 는 GB/GD/GT prod 에 이미 적용해 온 경로(Management API + prod Keychain 토큰 + 명시 승인)를 박제 → 매 세션 재발명 + 토큰 캡처 단계 누락 시 "prod 도달 불가 STOP"(예: daily_tips GT) 재발 차단. **정책/capability 문제 아님** — recipe 미박제가 원인.
+> **검증 선례**: GT-USERS-FK-RESTORE-001 (`_ops/prod-apply.ts` · Management API · parity 14/14 · prod history 12→13 · "사용자 명시 승인 후") · GB·GD-PROD-APPLY-001 (EF prod deploy · GD 측 prod DB pw slot 부재 실측).
+
+#### Phase 1 — staging (cli 자율)
+- env `SUPABASE_ACCESS_TOKEN_<self>` = staging org 토큰 (`~/bin/claude-wrap.sh` inject 기존 · §10.5 staging tier). 마이그 멱등 적용 + 수렴 verify + `functions deploy` + e2e → 보고.
+
+#### Phase 2 — 승인 게이트 (Coin 명시 "prod OK")
+- staging 검증 PASS 보고 후 Coin 명시 **"prod OK"** 수신 전까지 **prod 무접촉**. 승인 없는 prod = §5 STOP (master `CLAUDE.md` §5 STOP #1 정합).
+
+#### Phase 3 — prod (승인 후 cli push · 8 step)
+1. **prod 토큰 inline 캡처**: `security find-generic-password -s supabase-g<self>-prod-token -a "$USER" -w` (subshell `$()` only · echo 0 · 즉시 unset · env 영구 적재 X · 평문 file/commit 0 · `safety-and-secrets.md` 정합 · §10.5 prod tier).
+2. **prod ref 가시 확인**: `GET /v1/projects` (prod 토큰) → `<self>` prod ref 가시 확인. 부재 = STOP (= env 토큰 = staging org → prod Keychain slot 로드 필요).
+3. **PHASE A — 측정 (read-only)**: Management API `/database/query` (`read_only=true`) 로 prod 라이브 shape/RLS 측정 → 기대치 대조. 상이 = STOP.
+4. **apply (atomic)**: Management API `/database/query` (`read_only=false`) direct-apply. ★`supabase db push` 금지 (prod DB pw slot 부재 + live ≠ migrations) · `curl` 아님 (Deno fetch / MCP).
+5. **schema_migrations INSERT**: `version` + `name` · `ON CONFLICT DO NOTHING` (history 정합).
+6. **PHASE B — 수렴 verify**: 마이그 history N→N+1 수렴 확인.
+7. **EF deploy**: `supabase functions deploy <name> --project-ref <prod-ref>` (prod 토큰) — DDL/RLS 성공 後.
+8. **smoke + 보고**: parity · prod history N→N+1 · EF version · secret 0 출력.
+
+#### 불변식
+1. staging = cli 자율 · prod = **Coin 명시 승인 후에만** (승인 없는 prod = §5 STOP).
+2. prod 토큰 = **inline 캡처 · ephemeral · env 미적재** (= 상시 prod 권한 회피 · prod opt-in 유지) · 평문 0.
+3. prod write = Management API `/database/query` `read_only=false` **단일 경로** (`db push` / `psql` / `migration list --linked` 차단 = prod DB pw slot 부재).
+4. PHASE A 기대치 상이 / 파괴적 변경 필요 / 승인 미수신 / prod 토큰 부재 = STOP.
+
+> prod ref 표 + 토큰 연결 절차 = master-only 운영 runbook (`docs/ops/production-cli-access-tokens.md` · 6-repo propagation 대상 X). 본 recipe 는 ref 를 step 2 (`GET /v1/projects`) 로 런타임 발견 → 하드코딩 X (= 6-repo byte-identical 보존).
 
 ### §3.2 RLS policy migration
 - 첫 적용 시 Dashboard 시각 검증 후 migration `.sql` 정착 권장
@@ -129,7 +153,7 @@
 - §4 영역 키워드 감지 시 사용자 확인 의무
 - `safety-and-secrets.md` 안 `curl` / `wget` deny 정합 어긋남 (admin API curl 강제 시도 차단 · `supabase` CLI 또는 SDK 우선)
 - `service_role` key 파일 안 평문 작성 시도 (env 주입 의무 · `safety-and-secrets.md` 시크릿 기록 금지 정합)
-- production `supabase db push` 사용자 명시 승인 부재
+- production write (= §3.1 Phase 3 · Management API `/database/query` `read_only=false`) 측 Coin 명시 승인 부재 / prod 토큰 부재 / PHASE A 기대치 상이 (= `supabase db push` prod 금지 · prod DB pw slot 부재 = §3.1 불변식 3)
 - production `supabase db reset` 시도 (비가역 · local 한정 의무)
 - `vault.create_secret` 첫 등록 사용자 확인 부재 (§4.3 정합)
 
@@ -184,6 +208,7 @@ SUPABASE_ACCESS_TOKEN / SUPABASE_ACCESS_TOKEN_GB / SUPABASE_ACCESS_TOKEN_GD / SU
 
 - 2026-05-16 · CLI-INFRA-SUPABASE-HANDLING-001 · 본 rule 신설 + intake-router supabase 분기 1 섹션 추가 + 4-repo propagation (= master + GB + GD + GT · 본 시점 app-foundation §9 scope 외 default · 본 cycle baseline)
 - 2026-05-18 · MASTER-CLI-SUPABASE-COMPREHENSIVE-001 · §10 신설 (= MCP server 호출 paradigm + supabase CLI 통합 paradigm + 자식별 3 instance + Keychain wrap reference + read-only baseline + `cli_...` token 폐기) + §6 키워드 trigger list append + 5-repo byte-identical propagation (= master + app-foundation + GB + GD + GT)
+- 2026-06-19 · MASTER-SUPABASE-PROD-APPLY-RECIPE-001 · §3.1 확장 (Production apply = "staging 자율 → Coin 명시 승인 → cli prod push" 8-step recipe · `db push` prod 금지 → Management API `/database/query` `read_only=false` 단일 경로 · 검증 선례 GT-USERS-FK-RESTORE-001 / GB·GD-PROD-APPLY-001) + §10.5 정정 (staging 토큰 `supabase-g{b,d,t}-token` env inject vs prod 토큰 `supabase-g{b,d,t}-prod-token` inline 캡처·env 미적재 2-tier 구분 + prod DB pw slot 부재) + §5 STOP prod write 승인/토큰/PHASE A 게이트 정정 · 반복된 "prod 도달 불가 STOP"(daily_tips GT) 근본 해소 · production code 무접촉 · 6-repo byte-identical propagation
 
 ---
 
@@ -232,9 +257,17 @@ supabase-gb projects list   # alias supabase-gb='SUPABASE_ACCESS_TOKEN="$SUPABAS
 
 write paradigm 확장 영역 (= `apply_migration` / write SQL 호출) = 별 cycle `MASTER-CLI-MCP-SUPABASE-WRITE-ACTIVATE-001` 분리 default. 본 cycle scope 측 write paradigm 시도 = STOP (= §5 STOP 조건 정합).
 
-### §10.5 Keychain wrap script paradigm
+### §10.5 Keychain wrap script paradigm (= staging 토큰 vs prod 토큰 2-tier 구분)
 
-token 보관 + 추출 영역 = macOS Keychain (= `supabase-gb-token` / `supabase-gd-token` / `supabase-gt-token` 3 slot · `security find-generic-password` 측 추출 + wrap script 측 env var inject).
+token 보관 + 추출 영역 = macOS Keychain · `security find-generic-password` 추출. **2-tier 구분 의무** (= staging 상시 inject vs prod opt-in 캡처 · 혼용 금지):
+
+| tier | Keychain slot | 적재 방식 | org | 사용 |
+|---|---|---|---|---|
+| **staging** | `supabase-g{b,d,t}-token` (3 slot) | `~/bin/claude-wrap.sh` → env `SUPABASE_ACCESS_TOKEN_<self>` **상시 inject** | staging org | §2 CLI 자동 + §10.2 (cli 자율) |
+| **prod** | `supabase-g{b,d,t}-prod-token` (3 slot · **별 slot** · 2026-06-02 등록) | **inline 캡처만** (subshell `$()` · env 미적재 · 즉시 unset) | prod org (GB `bfdt…` · GD/GT `xhcug…` · staging org 와 별개) | §3.1 Phase 3 (Coin 승인 후 한정) |
+
+- prod 토큰 = staging 토큰과 **별 slot** · **env 영구 적재 X** (= 상시 prod 권한 회피 · prod opt-in 유지). staging env 토큰으로 prod ref 불가시 = prod Keychain slot 로드 필요 (§3.1 Phase 3 step 2).
+- prod DB password Keychain slot = **부재** → `supabase db push` / `migration list --linked` / `psql` 측 prod 직접 접근 차단 → Management API `/database/query` 가 **prod write 단일 경로** (§3.1 불변식 3).
 
 본문 SoT = [`safety-and-secrets.md` §macOS Keychain 측 secret 보관 paradigm](./safety-and-secrets.md). token 평문 commit / file 기록 차단 의무 (= 기존 §"시크릿 기록 금지 규칙" 정합).
 
