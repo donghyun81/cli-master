@@ -203,7 +203,7 @@ CREATE POLICY <name>_select ON <table> FOR SELECT
 | food_db | PUBLIC_READ | **BLOCK_ALL** | **BLOCK_ALL** | — | D | 공용 참조 데이터, 서버만 쓰기 |
 | meal_recommendations | ALLOW_OWN | ALLOW_OWN | ALLOW_OWN | — | A | 익명/영구 공통. AI 어뷰즈 방어는 Edge Function(Integrity+quota+티켓) 담당 |
 | exercise_recommendations | ALLOW_OWN | ALLOW_OWN | ALLOW_OWN | — | A | 익명/영구 공통. 동일 Edge Function 게이트 |
-| daily_tips | ALLOW_OWN | **BLOCK_ALL** | — | — | C | 서버 생성 (AI) |
+| daily_tips | ALLOW_OWN | **BLOCK_ALL** | — | — | C | 서버 생성 (AI) · EF generate-daily-tip persist (GT-AI-FEEDBACK-HISTORY-PERSIST-001 · read=`gt_daily_tips_select`) |
 | weekly_reports | ALLOW_OWN | **BLOCK_ALL** | — | — | C | 서버 생성만 |
 | monthly_reports | ALLOW_OWN | **BLOCK_ALL** | — | — | C | 서버 생성만 |
 | ticket_balances | ALLOW_OWN | **BLOCK_ALL** | **BLOCK_ALL** | — | C | **금전 경로** |
