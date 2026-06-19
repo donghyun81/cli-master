@@ -168,17 +168,17 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 | `docs/schemas/ui-spec.schema.json` | `8502c01428fb` | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `.claude/rules/pencil-uiux-workflow.md` | `b09b8d5091a7` | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `docs/design/pencil-sot-policy.md` | `2bfc81c538b2` | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `.claude/rules/uiux-sot-refresh.md` | `e3b9891d4be5` | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `docs/design/design-sot-policy.md` | `4c5666152f09` | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `.claude/rules/uiux-sot-refresh.md` | `4d0b52798cb4` | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `docs/design/design-sot-policy.md` | `92a5e99804ff` | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `.claude/settings.json` | `9696afb38b0c` | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `.claude/rules/workflow-core.md` | `286d71f043ab` | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `.claude/rules/cycle-discipline.md` | `d75cc2e24f43` | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `.claude/rules/pencil-automation.md` | `aedb79780211` | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `.claude/rules/reporting.md` | `22a75fc50541` | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `.claude/rules/reporting.md` | `9fd34ebcb167` | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `.claude/rules/routing-and-delegation.md` | `bf53648f520e` | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `.claude/rules/deferred-domains.md` | `9804c9e1d257` | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `.claude/rules/code-principles.md` | `0775ddf0b78e` | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `.claude/rules/design-to-code-sync.md` | `746cb9a25014` | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `.claude/rules/design-to-code-sync.md` | `dfb2b1472f76` | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `.claude/rules/ux-laws.md` | `0f63f399e52e` | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `docs/agent/architecture/COMMON_ARCHITECTURE.md` | `09d1f17381f6` | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `docs/agent/architecture/TDD_WORKFLOW.md` | `1e5103a7443c` | ✓ | ✓ | ✓ | ✓ | ✓ |
@@ -191,8 +191,13 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 
 ## Last verify-sync
 
-- timestamp: 2026-06-15T02:12:44+0900
-- pass: 160
-- drift: 0
-- miss: 0
-- exit: 0
+- timestamp: 2026-06-19T15:35:33+0900
+- pass: 159
+- drift: 1
+- miss: 5
+- exit: 1
+
+### Drift 상세
+
+- docs/backend/RLS_AND_PLAY_INTEGRITY_GUIDE.md  master=dee1d4170623  GentlyBreath=✓  GentlyDay=✓  GentlyTable=6c47d056e503(✗)  app-foundation=✓  gently-product-docs=✓
+- docs/ops/production-cli-access-tokens.md  master=33064f09f4e2  GentlyBreath=MISS  GentlyDay=MISS  GentlyTable=MISS  app-foundation=MISS  gently-product-docs=MISS
