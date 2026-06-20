@@ -79,6 +79,17 @@
 
 근거(요약): 제품 thesis = 리셋되지 않는 누적 곡선 → 로컬-only는 재설치 시 리셋 → durability ⇒ 서버 SoT. 상세 근거·기각안(Room authoritative)·앱별 현 적용 상태 및 정합(gap 보완) 방향은 `LOCK-DATA-SOT-SERVER-AUTHORITATIVE-001` 및 각 repo 데이터층 문서에서 추적한다.
 
+### 4.1 다중 값 컬럼 타입 표현 규약 (앱-중립 · persistence 한정)
+
+다중 값 컬럼은 의미 구조에 따라 일관된 Postgres 타입으로 표현한다(앱 무관).
+
+- **문자열 리스트 = `TEXT[]`** (네이티브 배열). 예: 태그·선호·제한·환경 목록. CSV 문자열(쉼표 구분 한 컬럼) 금지 — 타입 미강제·파싱 오류 회피.
+- **중첩/구조화 객체 = `JSONB`**. 예: 분석 결과·분포·외부 페이로드 등 키-값/중첩.
+- **단일 스칼라 = scalar**(`TEXT`/`BOOLEAN`/`TIMESTAMPTZ` 등). 배열로 승격하지 않는다.
+- **승격 규칙**: 새 다중 값 컬럼은 `TEXT[]` 기본. 항목에 **중첩 구조**가 필요해질 때만 `JSONB`로 승격한다.
+
+> 도메인 의미(verbatim recognition·enum 라벨 금지 등)는 본 절이 아니라 각 앱 design SoT·product 원칙에서 다룬다(본 절 = persistence 표현 한정).
+
 ---
 
 ## 5. Propagation Discipline
