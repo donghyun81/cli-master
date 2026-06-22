@@ -468,9 +468,30 @@ subagent 가 상위 agent 에게 돌려주는 최소 요약은 아래 5 개 섹�
 - (직전) C2-RULES-RESTRUCTURE-001 (2026-05-02) · `evidence-and-reporting.md` (438 line) → `report-paths.md` (line 1~70) + `report-formats.md` (line 71~end) 분리 신설
 - 2026-05-21 · MASTER-CLI-CLEANUP-7CYCLE-001 · 본 file 신설 (= `report-paths.md` + `report-formats.md` 2 file 본문 통합 default · 본질 변경 X · 단일 SoT 정합 default) + 2 file 삭제 + 9 file 인용 갱신 + 5-repo byte-identical propagation
 - 2026-05-22 · MASTER-CLI-CYCLE-2A-ANCHOR-LIST-HOT-INSTALL-001 · §13 Negative Space Line append default (= anchor list paradigm 정합 default)
+- 2026-06-22 · MASTER-CLI-CROSSREPO-RECONCILE-AUTONOMY-PARADIGM-001 · §14 동족 구현 정합 surface 규약 append (= cross-repo cycle 한정 · 같은 맥락 2+ repo 구현 paste-back 회수 시점 3-bucket 정합 표 형식 + dispatch checklist `cross-repo-parallel-exec-detail.md §2.2.1` step 5 정합 · advisory · auto-converge 금지 · 본문 canonical = detail §4.4 · 본 §은 형식만 소유). 6-repo byte-identical propagation.
 
 ---
 
 ## §13 Negative Space Line (= 2026-05-22 신설 default · `MASTER-CLI-CYCLE-2A-ANCHOR-LIST-HOT-INSTALL-001`)
 
 매 cycle 보고 끝 1 줄 "고려했으나 hot 제외 영역: <영역 default>" 의무 default. 본 line = anchor list 진화 signal default (= 사용자 본심 정합 default). 비어 있는 영역 = "(없음)" 명시 default. 발행 영역 = REVIEW.md 본문 끝 + paste-back 본문 끝 default. 본문 단일 SoT = [`anchor-list.md §4`](./anchor-list.md) (= 10 anchor hot default · P0 6 + P1 4 default).
+
+---
+
+## §14 동족 구현 정합 surface (= cross-repo cycle 한정 · 2026-06-22 신설 default · `MASTER-CLI-CROSSREPO-RECONCILE-AUTONOMY-PARADIGM-001`)
+
+같은 맥락(= 동일 개념 / feature / contract)을 **2+ repo** 에 구현·변경한 cross-repo cycle 의 **paste-back 회수 시점** 보고에 동족 구현 정합 표 1 개를 surface 한다. 매 cycle 아님 (= 같은 맥락일 때만). 본문 doctrine 단일 canonical = [`cross-repo-parallel-exec-detail.md §4.4`](./cross-repo-parallel-exec-detail.md) (= trigger / 주체 / 행동 / 경계 본문 · 본 §은 **보고 형식만** 소유 · 본문 복제 X).
+
+**trigger 시점**: dispatch checklist(= [`cross-repo-parallel-exec-detail.md §2.2.1`](./cross-repo-parallel-exec-detail.md)) step 5(= cowork-role 측 paste-back × N 회수 + session × session 직접 cross-verify) 시점에 정합.
+
+**주체**: cowork chat (= N 개 paste-back + N repo disk 전체를 보는 유일 지점 · Inspection = 수렴 결정은 본심 · `automation-policy.md §5` 정합).
+
+**형식 — 정합 표 1 개** (= 3-bucket):
+
+| 화면 / 개념 | bucket | 근거 | pointer |
+|---|---|---|---|
+| `<같은-맥락 항목>` | 공통화 권장 / 분리 유지 / 보류·본심 | `<수렴 권장 1 안 또는 자율 보존 근거>` | `<repo>/<file>:line` × N |
+
+- **advisory** — 표 surface 만 의무 · 수렴 *실행*은 후속 cycle(= 본심 또는 cli HOW)로 분리. **auto-rewrite / auto-converge 금지** (= `cross-repo-parallel-exec-detail.md §4.4` 경계 정합 · 도메인 자율 default 불변).
+- **발행 영역**: paste-back 본문 inline default (= 불필요 산출물 박제 회피 · 별 file 박제는 cli 자율). 같은 맥락 2+ repo 구현 cycle 무 = 본 § N/A (= 표 생략).
+- **A8 정합**: 같은 맥락 2+ repo 구현 후 미surface 건수 `= 0` 측정 (= `anchor-list.md` A8 GSM-M).

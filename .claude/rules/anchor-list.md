@@ -130,12 +130,12 @@
 
 **우선순위**: P1
 
-**precedent**: `cross-repo-parallel-exec-detail.md §2.1~§2.3` + 부모 mount root `CLAUDE.md §3.3` default
+**precedent**: `cross-repo-parallel-exec-detail.md §2.1~§2.3` + 부모 mount root `CLAUDE.md §3.3` default · 동족 구현 정합 step = `cross-repo-parallel-exec-detail.md §4.4`
 
 **GSM** (= `gsm-measurement.md` form):
-- **G** — 영역 1 vs 영역 2 선택이 요청 본질 측정 후 자율 결정된다.
-- **S** — cross-repo 진입 시 paradigm 선택 근거 기록 흔적.
-- **M** — 본심 분기 미측정 진입 건수 `= 0` (= 선택 근거 명시율 100%).
+- **G** — 영역 1 vs 영역 2 선택이 요청 본질 측정 후 자율 결정된다 · 같은 맥락(= 동일 개념 / feature / contract)을 2+ repo 에 구현한 cycle 은 paste-back 회수 시점에 동족 구현 정합 advisory(= 3-bucket: 공통화 권장 / 분리 유지 / 보류)를 수행한다.
+- **S** — cross-repo 진입 시 paradigm 선택 근거 기록 흔적 · 같은-맥락 2+ repo 구현 cycle 의 정합 표(= bucket + 근거 + `file:line`) 산출 흔적.
+- **M** — 본심 분기 미측정 진입 건수 `= 0` (= 선택 근거 명시율 100%) · 같은 맥락 2+ repo 구현 후 동족 구현 정합 advisory 미수행 건수 `= 0` (= advisory surface 의무 · 강제 수렴 아님 · auto-converge 금지).
 
 ### A9 — Domain SoT mandatory read
 
@@ -154,18 +154,18 @@
 
 ### A10 — Responsibility split cowork vs cli
 
-**Purpose**: cowork chat = 기획 + paste source authoring + cross-verify 영역 default · cli session = 실 IMPL + ADB + emulator + Logcat + commit 영역 default — 책임 경계 침해 차단 default
+**Purpose**: cowork chat = 기획 + paste source authoring(= WHAT: outcome / scope / contract SoT / STOP) + cross-verify 영역 default · cli session = 실 IMPL + ADB + emulator + Logcat + commit + 도메인 구현 HOW(= 방식 / 명령 / 편집 순서 / 알고리즘) §FREEDOM 자율 영역 default — 책임 경계 침해 차단 + 구현 model 동일 risk(= cowork 측 HOW 과잉 포함 유혹) 대응 default
 
 **적용 trigger**: 매 cycle 진입 시점 + paste source 발행 시점 + runtime crash mitigation cycle 진입 시점 default
 
 **우선순위**: P1
 
-**precedent**: `cowork-project-instructions §B-1~§B-3` + `runtime-crash-mitigation-process.md` + `paste-authoring-disk-verification.md` default
+**precedent**: `cowork-project-instructions §B-1~§B-3` + `§B-5`(= WHAT vs HOW authoring 경계) + `runtime-crash-mitigation-process.md` + `paste-authoring-disk-verification.md` default
 
 **GSM** (= `gsm-measurement.md` form):
-- **G** — cowork(기획 + authoring + cross-verify) ↔ cli(실 IMPL + ADB + emulator + commit) 책임 경계가 유지된다.
-- **S** — 책임 경계 침해 시도 측정 (= 역할 밖 행동 흔적).
-- **M** — 경계 침해 건수 `= 0`.
+- **G** — cowork(기획 + WHAT authoring + cross-verify) ↔ cli(실 IMPL + 도메인 구현 HOW 자율 + ADB + emulator + commit) 책임 경계가 유지된다.
+- **S** — 책임 경계 침해 시도 측정 (= 역할 밖 행동 흔적) · paste source 측 HOW-leak(= cowork 이 구현 방식을 명시한 건수) 측정.
+- **M** — 경계 침해 건수 `= 0` · **paste source HOW-leak 건수 `= 0`** (= cowork 이 paste `§4` 보호/HIGH RISK 외 영역에 구현 방식을 명시 = leak · enforcement signal). 단 cli 자율 = **도메인 구현 HOW 한정** — STOP 9(특히 #1 Money/Auth/DB) · 보호 5(= A2) · cli-infra byte-identical(= A4) 까지 확대 X (= 그 선 밖 = STOP).
 
 ## §3. 적용 trigger 종합
 
@@ -202,3 +202,4 @@
 - 2026-05-22 · `MASTER-CLI-CYCLE-2A-ANCHOR-LIST-HOT-INSTALL-001` · 본 file 신설 + reporting.md §13 append + cycle-discipline.md §27 pointer 신설 + 5-repo byte-identical propagation default
 - 2026-05-22 · `MASTER-CLI-CYCLE-2B-ANCHOR-LIST-COLD-INSTALL-001` · cold storage `anchor-list-COLD.md` 신설 default (= master only default · 본 § 본문 X default · Cycle 2b 측 본문 default)
 - 2026-06-02 · `MASTER-CLI-GSM-MEASUREMENT-LAYER-001` · A1~A10 각 anchor 에 G/S/M 3-tuple 외화 (= `gsm-measurement.md` canonical form 정합 · §1 본질 bullet 추가). 기존 Purpose / 적용 trigger / 우선순위(P0 6 + P1 4) / precedent 본문 무삭제 · 본질·우선순위·trigger 보존 (= 형식 GSM 정합 · 내용 약화 0). 5-repo byte-identical propagation.
+- 2026-06-22 · `MASTER-CLI-CROSSREPO-RECONCILE-AUTONOMY-PARADIGM-001` · A8 확장(= 동족 구현 정합 advisory step · G/S/M 에 "같은 맥락 2+ repo 구현 후 paste-back 회수 시점 정합 advisory 수행 · 미수행 = 0 · auto-converge 금지" + precedent `cross-repo-parallel-exec-detail.md §4.4`) + A10 확장(= cli 도메인 구현 HOW §FREEDOM 자율 폭 명시 + S/M 에 "paste source HOW-leak 건수 = 0" GSM-M + cli 자율 = 도메인 HOW 한정 경계[STOP 9 #1 Money/Auth/DB · 보호5 A2 · cli-infra byte-identical A4 미확대] + precedent `§B-5`). **신 hot anchor 신설 X** (= hot 10 baseline 유지 · 기존 A8/A10 확장 default · P0 6 + P1 4 불변). req1(동족 구현 정합 advisory) + req2(cli HOW 자율 확대 범위 한정) 한 쌍 정합. 6-repo byte-identical propagation.

@@ -260,6 +260,8 @@ main agent 측 sub-agent 결과 통합 paradigm (= `reporting.md` §9 Subagent R
 
 ## 4. cross-repo 정합 처리 paradigm (= 영역 1 적용 시 default)
 
+> **3층 구분 (혼동 금지)**: cross-repo 정합은 세 층이 직교한다 — ① **정확성 cross-verify**(§4.1 · sub-agent verdict 통합 = disk PASS 대조 · A1) ≠ ② **동족 구현 정합**(§4.4 · 같은 맥락 2+ repo 구현 결과의 advisory 비교 · 사후 surface) ≠ ③ **cli-infra byte-identical**(§4.2 sha + 보호 file · A4 강제 수렴). ②는 ①의 정확성 판정도 ③의 강제 수렴도 아니며, 도메인 자율(§4.2 source 행 · §4.3 lazy 항) 위에 얹는 advisory 층이다(= 그 본문 불변).
+
 ### 4.1 main agent 측 sub-agent 결과 통합
 
 자식별 sub-agent 결과 통합 시점 main agent 측 의무:
@@ -284,4 +286,29 @@ drift 발견 시점 main agent 측 mitigation:
 - cli infra rule SoT 측 drift 발견 시 = master 측 정합 cycle 진입 (= `cycle-discipline.md` §15 패턴 1 정합 · 단방향 propagation cycle 진입)
 - 보호 5 file sha drift 발견 시 = 즉시 STOP + 사용자 회수 (= `cycle-discipline.md` §10 + master CLAUDE.md §5 정합)
 - 자식 도메인 source drift 발견 시 = lazy default (= 자식 자율 영역 default · cross-repo 정합 의무 X)
+
+### 4.4 동족 구현 정합 advisory (= 사후 surface · 강제 X · 도메인 자율 위 advisory 층)
+
+> **본 §4.4 = §4.2/§4.3 도메인 자율 default 위에 얹는 사후 advisory 층** (= 그 본문 덮어쓰기 X · 불변). §4.1 정확성 cross-verify(= disk PASS 대조)도, §4.2 cli-infra byte-identical 강제(= A4)도 아니다 — 같은 맥락을 2+ repo 에 구현한 결과를 비교·권장하는 **advisory** 단일. 도메인 구현 정합 doctrine 부재(= §4.2 source 행 · §4.3 lazy 항이 명시한 자식 자율 위의 빈자리) 채움.
+
+**trigger**: 같은 맥락(= 동일 개념 / feature / contract)을 **2+ repo** 에 구현·변경한 cycle 의 **paste-back 회수 시점**. 매 cross-repo cycle 아님 (= 같은 맥락일 때만 발동). dispatch 운영(§2.2.1) 측 step 5(= paste-back × N 회수 + cross-verify) 시점에 정합.
+
+**주체**: cowork chat (= N 개 paste-back + N repo disk 전체를 보는 유일 지점). 같은-맥락 부분 disk 측정 = Transport(= 자동화 OK) · 수렴 결정 = Inspection(= 본심 또는 cli 영역 · `automation-policy.md §1.1` 정합).
+
+**행동**: 같은-맥락 부분 disk 측정(= diff / grep · 필요 시 영역 1 sub-agent ≤ 3 fan-out · §3.4) → **3-bucket 분류**:
+
+| bucket | 본질 | 산출 |
+|---|---|---|
+| **공통화 권장** | 같은 맥락인데 갈라짐 · 더 나은 1 안 수렴 권장 | 권장 1 안 + 근거 + `file:line` |
+| **분리 유지** | 도메인 specific 정당 · 자식 자율 보존 (= §4.2/§4.3 정합) | 보존 판정 + 근거 |
+| **보류 / 본심** | 우열 불명 | 본심 회수 |
+
+**산출**: 정합 표 1 개 (= bucket + 근거 + `file:line` pointer · 형식·발행 위치 = `reporting.md §14`). **advisory** — 수렴 *실행*은 후속 cycle(= 본심 또는 cli HOW)로 분리. **auto-rewrite / auto-converge 금지**.
+
+**경계 (불변)**:
+- 도메인 자율 default(= §4.2 source 행 · §4.3 lazy 항)는 **불변** — 본 층은 그 위 사후 surface(= 강제 X).
+- **강제 byte-identical 수렴 = cli-infra 전용**(= A4 · §4.2 sha 행) 불변 — 도메인 source 를 byte-identical 수렴 대상으로 끌어들이지 않는다.
+- 영역 1 fan-out 적용 시 **≤ 3 sub-agent + interactive pool**(= A6 · §3.4) 불변.
+
+본 §4.4 신설 = `MASTER-CLI-CROSSREPO-RECONCILE-AUTONOMY-PARADIGM-001` (2026-06-22 · req1 동족 구현 정합 advisory 층 · req2 cli HOW 자율 확대와 한 쌍 = 사후 비교가 divergence catch).
 
