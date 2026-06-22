@@ -47,10 +47,22 @@
 
 ## §5 JSON backup paradigm
 
-- `formatVersion` + `exportedFromRepo` guard 의무 (mismatch = `BackupError.FormatMismatch`)
-- top-level keys exact match 강제 (오타 = REVIEW FAIL)
-- entity `userId` 재매핑 의무 (import 시 현재 익명 userId 로)
-- SAF (`ActivityResultContracts.CreateDocument` / `OpenDocument`) 사용 의무 (외부 storage 권한 회피)
+> **export ↔ restore/import 분기 명확화** (= 2026-06-22 실측 정합 · MASTER-CLI-AUTH-DOMAIN-RECONCILE-001): 본 §5 = 두 경로 분리. **export 경로 = 3 앱 live (§5.1)** · **restore/import 경로 = 미구현 forward-looking spec (§5.2)** (= disk 실측 0 match). 두 경로 혼동 금지 — import 가 live 인 듯 서술 X.
+
+### §5.1 export 경로 (= live · 3 앱 구현됨)
+
+- 3 앱별 export 진입점 = GB `DataExportUseCase` (`domain/export`) · GD `DataExportRepository` (`data/export`) · GT `BuildDataExportUseCase` (`domain/dataexport`) — 모두 live (ViewModel + DI + test 동반).
+- `formatVersion` 발행 의무 (= export bundle 측 포맷 버전 · 예: GT `FORMAT_VERSION = 1` · 구조 변경 시 증가).
+- top-level keys exact match 강제 (= export bundle 구조 계약 · 오타 = REVIEW FAIL).
+- SAF (`ActivityResultContracts.CreateDocument`) 사용 의무 (= 외부 storage 권한 회피 · export 저장 경로).
+
+### §5.2 restore/import 경로 (= forward-looking · 미구현 spec)
+
+> 본 §5.2 = 향후 import/restore cycle 진입 시점 구현 의무 spec. 현 시점 3 앱 + foundation 모두 미구현 (= `BackupError.FormatMismatch` / `exportedFromRepo` / userId 재매핑 / SAF `OpenDocument` 실측 0 match). 실 도입 = 별 trail.
+
+- `formatVersion` + `exportedFromRepo` guard 의무 (mismatch = `BackupError.FormatMismatch` · 현 미구현 typed error).
+- entity `userId` 재매핑 의무 (import 시 현재 익명 userId 로 — restore 시 신규 익명 identity 정합).
+- SAF (`ActivityResultContracts.OpenDocument`) 사용 의무 (= 외부 storage 권한 회피 · import 읽기 경로).
 
 ---
 
