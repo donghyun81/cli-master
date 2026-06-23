@@ -200,12 +200,26 @@ agent 안 자동화 sequence 예:
 | CI/CD nightly refresh | CLI headless `--tasks` |
 | macOS 외 환경 (Linux CI runner) | CLI headless 단일 |
 | design drift 정정 + 시각 검증 동시 | desktop stdio MCP |
+| **멀티-repo `.pen` (= 자기 active-workspace 아닌 repo · §7.3)** | **CLI headless / 평문-JSON 단일** (= desktop MCP 금지 · 타 repo 오염 risk) |
+| **cross-version 버전업 마이그 (= 2.11→2.13 · §7.3)** | **delta-aware 변환 + pre-scan** (= `save()` 재직렬화 금지 · 0 byte risk) |
 
 ### 7.2 도구 surface 일치성
 
 두 진입점 모두 동일한 12 + 1 도구 surface 노출 (`pencil-mcp-tools-reference.md` 단일 SoT). 호출 형식만 차이:
 - desktop stdio: `mcp__pencil__batch_design({...})`
 - CLI headless shell: `batch_design({...})`
+
+### 7.3 멀티-repo umbrella caveat (= headless 필수 · 버전업 = delta-aware · pre-scan) — `MASTER-CLI-PENCIL-MULTIREPO-HEADLESS-001` (2026-06-24)
+
+본 패키지 = 6-repo umbrella · 자식 3 (GB/GD/GT) 측 `.pen` 보유. desktop-stdio MCP 는 **single active workspace** (= 관측상 GT) 에 anchored (= `pencil-mcp-tools-reference.md §0.2`). 따라서 (= SSOT 5-rule 중 본 skill 소관 = 2·4·5):
+
+2. **멀티-repo `.pen` = headless 필수**: 자기 active-workspace 가 아닌 repo 의 `.pen` 작업 = headless 경로만 — ① 평문-JSON disk read/write (= `pencil-uiux-workflow.md §2.5` 기본) 또는 ② `pencil interactive -i/-o <path>` (= 파일 경로 동작 · §4.2). desktop-stdio MCP active-editor 의존 금지 (= 타 repo 측 GT file 반환·오염 risk). desktop MCP active-editor 진입 (= §7.1 desktop 행) = Coin 본인 단일 repo 실시간 시각 검증 한정.
+
+4. **버전업 마이그 ≠ `save()` 재직렬화**: cross-version schema 마이그 (= 예 2.11→2.13 · delta canonical = `pencil-pen-format-schema.md §1.1a`) 는 `pencil interactive -i/-o` 측 `save()` 로 불가. CLI (= 관측 0.2.6) 측 입력 `.pen` 을 target schema 로 검증 → 입력 측 target-invalid (legacy) construct 잔존 시 load 실패 → `save()` 가 0 byte 출력 (= 실 file 파괴 risk). `save()` = 동일-version 재직렬화 한정. 버전업 = delta-aware 변환만 (= desktop app lenient auto-migrate semantic 재매핑 또는 전-delta surgical 평문-JSON 변환).
+
+5. **마이그 전 pre-scan 의무**: 버전업 전 대상 `.pen` 측 target-invalid token grep (= 2.13 기준 예 `alignItems:"stretch"` · inline `note` property · `type:"line"` · `iconFontName`/icon_font · delta 참조 = `pencil-pen-format-schema.md §1.1a`) → 검출 시 mechanical re-save 금지 · delta-aware 경로 · content/layout-affecting (= 예 enum 축소) 시 **STOP + Coin 본심** (= 임의 변경 금지). 실측 선례 = HOME-PEN-2.13 (= GB home.pen 역공학 2.11-era `alignItems:stretch`×1 + inline note×2 → CLI `save()` 0 byte · GD/GT 미보유 통과 = GB-only 실패 근본 원인).
+
+> 본 §7.3 = 멀티-repo headless + 버전업 delta-aware 본문 canonical (= rule 2/4/5) · rule 1 (MCP single workspace) + rule 3 (cross-verify disk) = `pencil-mcp-tools-reference.md §0.2` 단일. 본문 복제 X.
 
 ---
 
@@ -269,3 +283,4 @@ agent 안 자동화 sequence 예:
 
 - 2026-05-19 · `MASTER-CLI-PENCIL-OPTIMIZATION-001` · 직전 rule (`.claude/rules/pencil-cli-headless.md`) 신설 + 5-repo byte-identical propagation
 - 2026-05-26 · `MASTER-CLI-SKILLS-MIGRATION-PHASE-1-001` · 본 skill 신설 default (= 직전 rule 본문 본질 보존 default · skill paradigm 정합 default · trigger 시점 lazy load default · `.claude/rules/pencil-cli-headless.md` 측 thin pointer 갱신 default)
+- 2026-06-24 · `MASTER-CLI-PENCIL-MULTIREPO-HEADLESS-001` · §7.3 멀티-repo umbrella caveat 신설 (= rule 2 멀티-repo `.pen` = headless 필수[평문-JSON 또는 `pencil interactive -i/-o`] · desktop-stdio MCP active-editor 의존 금지[GT anchored] · rule 4 버전업 마이그 = delta-aware only[`save()` cross-version 불가 · CLI 0.2.6 target-schema 검증 → 0 byte] · rule 5 마이그 전 target-invalid token pre-scan 의무 · content/layout-affecting 시 STOP+Coin) + §7.1 분기표 2-row 추가 (멀티-repo `.pen` / cross-version 마이그) · rule 1/3 본문 canonical = `pencil-mcp-tools-reference.md §0.2`. pointer only (= add-only) · 6-repo byte-identical propagation. HOME-PEN-2.13 혼선 근본 mitigation.

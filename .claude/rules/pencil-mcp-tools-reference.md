@@ -31,6 +31,18 @@
 | `replace_all_matching_properties` | §3.2 | matching property 재귀 교체 (token migration) | `batch_design` (= §1.1) 또는 headless 평문-JSON 경로 (`pen_recolor.py` style · §2.5 PRIMARY) |
 | `open_document` | §7 (Part B) | `.pen` 진입점 (new canvas) | headless `pencil interactive -o <path>` (`pencil-cli` skill PRIMARY) 또는 desktop visual = `open -a Pencil <abspath>` (Bash) + `batch_design` (active-doc MCP) |
 
+### 0.2 멀티-repo workspace + cross-version 마이그 caveat (= `MASTER-CLI-PENCIL-MULTIREPO-HEADLESS-001` · 2026-06-24)
+
+본 패키지 = 6-repo umbrella (= master + app-foundation + GB + GD + GT + gently-product-docs) · 자식 3 (GB/GD/GT) 측 `.pen` 보유. 아래 §1~§6 desktop-stdio 도구 운영 시점 3 caveat 정합 의무 (= HOME-PEN-2.13 혼선 근본 mitigation).
+
+1. **MCP = single active workspace**: 본 §1~§6 desktop-stdio 도구 (`get_editor_state` · `batch_get` · `batch_design` · `get_screenshot` · `snapshot_layout` 등) 는 **현재 active editor/workspace 하나**에만 작동한다. 6-repo umbrella 측 MCP 는 단일 workspace (= 관측상 GentlyTable) 에 anchored default → 자기 active-workspace 가 아닌 다른 repo (GB/GD) 의 `.pen` 을 MCP 로 측정·편집 시도 시 **GT 측 file 이 반환·편집됨** (= 타 repo 오염 risk). 멀티-repo `.pen` 작업 경로 = `pencil-cli` skill §7.3 headless 의무.
+
+3. **cross-verify = disk**: 멀티-repo `.pen` 검증 = `shasum -a 256` + 평문-JSON grep 단일. `get_editor_state` 측 검증 금지 (= active-workspace 따라 타 repo 반환). dual-sha = `.pen` shasum == `ui-spec.json` 측 `lastSyncedDesignToolStateHash`.
+
+4. **버전업 마이그 ≠ `save()` 재직렬화**: cross-version schema 마이그 (= 예 2.11→2.13 · delta canonical = `pencil-pen-format-schema.md §1.1a`) 는 headless `pencil interactive -i/-o` 측 `save()` 로 불가. CLI (= 관측 0.2.6) 측 입력 `.pen` 을 **target schema 로 검증** → 입력 측 target-invalid (legacy) construct 잔존 시 load 실패 → `save()` 가 **0 byte** 출력 (= 실 file 파괴 risk). `save()` = **동일-version 재직렬화 한정** 안전. 버전업 = delta-aware 변환만 (= desktop app lenient auto-migrate semantic 재매핑 또는 전-delta surgical 평문-JSON 변환) · 마이그 전 pre-scan 의무 (= `pencil-cli` skill §7.3).
+
+> 본 §0.2 = 멀티-repo 운영 caveat pointer (= SSOT 5-rule 중 1·3·4 소관 · 번호 정합 유지) · 나머지 2 (멀티-repo headless 필수) + 5 (pre-scan) 본문 canonical = `pencil-cli` skill §7.3 단일. 본문 복제 X.
+
 ---
 
 # Part A — Official tools (현 9 · 구 12 중 3 제거 = Pencil v1.1.62)
@@ -279,3 +291,4 @@ CI/CD 통합 = `pencil-cli-headless.md` §10 (lazy default · 별 cycle).
 
 - 2026-05-19 · MASTER-CLI-PENCIL-OPTIMIZATION-001 · 본 SoT 신설 (12 official + 1 package-verified 분리 명시) + 5-repo byte-identical propagation
 - 2026-06-10 · MASTER-CLI-PENCIL-TOOLSET-REMOVAL-STALE-SWEEP-001 · 도구 surface 13→9 정정 (Pencil v1.1.62 측 find_empty_space_on_canvas / search_all_unique_properties / replace_all_matching_properties / open_document 제거) — §0.1 제거 도구 표 + 대체 메커니즘 신설 · §2.2/§3.1/§3.2/§7 deprecated stub · header/count/§1.2.3/§10 STOP 정합 · 6-repo byte-identical propagation. PENCIL-SELFTEST-GATE-RECALIBRATE-001 (§13 게이트 9종) 후속.
+- 2026-06-24 · MASTER-CLI-PENCIL-MULTIREPO-HEADLESS-001 · §0.2 멀티-repo workspace + cross-version 마이그 caveat 신설 (= rule 1 MCP single active workspace anchored[GT] → 타 repo `.pen` MCP 측정·편집 = 오염 risk · rule 3 cross-verify = disk shasum/평문-JSON · rule 4 버전업 ≠ `save()` 재직렬화[CLI 0.2.6 target-schema 검증 → legacy construct 시 0 byte 파괴]) · 멀티-repo 작업 + rule 2/5 본문 canonical = `pencil-cli` skill §7.3. pointer only (본문 복제 X · 도구 surface 9종 무변동 · add-only) · 6-repo byte-identical propagation. HOME-PEN-2.13 혼선 근본 mitigation.
