@@ -43,7 +43,7 @@ export interface Document {
 >
 > **AI agent 의무**: `batch_design` / `batch_get` 전 반드시 `get_editor_state(include_schema:true)` 로 live 2.13 schema 를 pull 한다 (= 본 body 의 2.11-shape 표기를 신뢰하지 말 것 · MCP server 측 자체 지시 정합).
 
-측정된 2.11 → 2.13 structural delta (8 건):
+측정된 2.11 → 2.13 structural delta (10 건):
 
 | # | 영역 | 2.11 (본 body 현 표기) | 2.13 (live 실측) |
 |---|---|---|---|
@@ -55,6 +55,10 @@ export interface Document {
 | 6 | Fill | color / gradient / image / mesh_gradient (§4 · visual-primitives §1) | **`shader` fill 추가** |
 | 7 | Text | `TextContent = StringOrVariable \| TextStyle[]` (§2.3) | **`StringOrVariable`** (array 형 제거) |
 | 8 | Group | Layout + width / height 보유 (§2.5) | **Layout + width / height 상실** |
+| 9 | Layout `alignItems` enum (정의 = `pencil-visual-primitives.md §5`) | `[start\|center\|end\|stretch]` (2.11 .pen 실측 `stretch` 허용 · doc enum 미포착) | **`stretch` 제거** → `[start\|center\|end]` (cross-axis 채움 = 2.13 별 idiom · ⚠ content-affecting · mechanical 치환 ❌) |
+| 10 | inline `note` property | 임의 node `note` (annotation memo) 허용 (2.11 .pen 실측) | **inline `note` 제거** · annotation = `Note` entity (`type:"note"` · §2.6) 또는 `*.ui-spec.json` companion (CLI "unexpected note property" reject) |
+
+> **delta 9·10 측정 출처** (= `MASTER-CLI-PENCIL-SCHEMA-DELTA-AUGMENT-001` · 2026-06-24 KST · HOME-PEN-2.13-MIGRATE 실측 2026-06-23): GB home.pen(2.11) `alignItems:"stretch"`×1 + inline `note`×2 · GT 11 .pen(2.13) `stretch` 0 + inline `note` 0(= annotation `*.ui-spec.json` 한정) · GD home(2.13) `stretch` 0 · CLI validator reject 양건. **delta 9·10 = content-affecting** (특히 9 = layout semantic) → 2.13 마이그 = **delta-aware + visual parity 의무** (mechanical enum/property 치환 ❌ · 정확 idiom = live 2.13 schema `get_editor_state(include_schema:true)` 확인 · `pencil-mcp-tools-reference.md §0.2` rule 4 `save()` 0-byte 함정 + `pencil-cli` skill §7.3 pre-scan 정합).
 
 (minor) `Path.viewBox?` 추가 (§2.2) · `Entity` `CanHaveRotation` inline (§2.1). union count = 13 유지 (= −line −icon_font +icon +script). 형제 ripple (= 별 cycle): `pencil-visual-primitives.md` (stroke / shader / icon) · `pencil-mcp-tools-reference.md` (icon enum) · `pencil-component-paradigm.md §4.3.2` (iconFontFamily 예시) · `pencil-theme-multi-axis.md §2` (변수 raw-값 예시). 보호 `ui-spec.schema.json` = `.pen` ref 0 → 무접촉.
 
@@ -423,3 +427,4 @@ batch_design({ ops: [
 - 2026-05-19 · MASTER-CLI-PENCIL-OPTIMIZATION-002 · 본 SoT 신설 (= H26 단계 1 마감 · pencil.dev 공식 doc anchor §C #1 흡수 · 13 Entity type 통합 reference) + 5-repo byte-identical propagation
 - 2026-05-31 · MASTER-CLI-PENCIL-RECOLOR-GENERATOR-001 · `.pen` version baseline `"2.10"` → `"2.11"` 갱신 (= 실 disk `.pen` 측 version `"2.11"` 실측 정합 default · §1.1 Document interface + §1.1 표 + §7 STOP 조건 + 본 목적 line 동기) + 5-repo byte-identical propagation. 13 Entity type union + Variable / Theme system 본문 무변경 (= minor version bump · schema 구조 동일 default).
 - 2026-06-15 · MASTER-CLI-PENCIL-SCHEMA-UPDATE-001 · `.pen` version label `"2.11"` → `"2.13"` 갱신 (= 2026-06-15 live Pencil MCP `get_editor_state(include_schema:true)` 측정 · active editor `report-screen.pen` · disk 5종 v2.13 auto-migration 정합 · §1.1 Document interface + §1.1 표 + §7 STOP trigger + 목적 line 동기) + §1.1a structural delta 배너 신설. **2026-05-31 recolor 선례와 대비 = minor bump 아님 · structural** (= 8 delta: −line · −icon_font · +icon · +script · typed variables · stroke flatten · shader fill · TextContent · Group). Coin 본심 = "최소 정직" (= version label + §1.1a 유예 배너 · body §2 13 union + §2.2~§2.8 + §4 + §5 = 2.11-shape 유지 PENDING). body 전면 rewrite + 형제 Pencil rule 4종 (`pencil-visual-primitives.md` / `pencil-mcp-tools-reference.md` / `pencil-component-paradigm.md` / `pencil-theme-multi-axis.md`) 정합 = 별 follow-up cycle. 보호 `ui-spec.schema.json` = `.pen` ref 0 무접촉 + 6-repo byte-identical propagation.
+- 2026-06-24 · MASTER-CLI-PENCIL-SCHEMA-DELTA-AUGMENT-001 · §1.1a structural delta 목록 8 → 10 보강 (= HOME-PEN-2.13-MIGRATE 실측 2건 추가 · delta 9 = Layout `alignItems` enum `stretch` 제거 → `[start|center|end]` · delta 10 = inline `note` property 제거 → `Note` entity[`type:"note"` §2.6] / `*.ui-spec.json` companion) + delta 9·10 측정 출처/content-affecting 각주 신설 (= delta-aware + visual parity 마이그 의무 · mechanical 치환 ❌ · 정확 idiom = live 2.13 schema 확인 · `pencil-mcp-tools-reference.md §0.2` rule 4 + `pencil-cli` skill §7.3 pre-scan 정합). **무접촉** (= 추가만): 기존 8 delta · version `"2.13"` label · body §2~§5 (2.11-shape PENDING) · 형제 Pencil rule 4종 = 전면 rewrite = MASTER-CLI-PENCIL-SCHEMA-UPDATE-001 별 cycle 불변. 보호 `ui-spec.schema.json` = `.pen` ref 0 무접촉 · 본 file = cli infra 권장 byte-identical (보호 5 아님) + 6-repo byte-identical propagation.
