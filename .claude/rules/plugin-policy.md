@@ -46,7 +46,7 @@ plugin 도입 가부는 아래 2 분기로 판정한다. 본 §2가 판단 기�
 
 plugin 도입은 `cross-repo-parallel-exec.md §2.4` Subscription-aware paradigm을 깨지 않아야 한다.
 
-- 허용 대상 plugin이 **영역 3**(= `claude -p` sub-process spawn / Agent SDK credit pool)을 유발하면 = 허용 불가 default (= 2026-06-15 Anthropic billing split 측 별 monthly credit pool + full API rate + roll over X · 요금 폭탄 risk).
+- 허용 대상 plugin이 **영역 3**(= `claude -p` sub-process spawn / Agent SDK credit pool)을 유발하면 = 허용 불가 default (= 2026-06-15 Anthropic billing split 측 별 monthly credit pool + full API rate + roll over X · 요금 폭탄 risk · ⚠ billing split 서술 = 공식 근거 UNVERIFIED — 2026-07-10 공식 문서 전수 조회 미발견 · 현행 공식 = 전 표면 구독 합산 · 행동 규정 불변 · T7).
 - plugin이 interactive pool(= 영역 1 + 영역 2) 내에서 동작 = 정합 ✓.
 - 판단 시점 = plugin이 자체적으로 sub-process spawn / 별 credit pool 호출을 트리거하는지 가용성 재확인 step(§5)에서 측정.
 

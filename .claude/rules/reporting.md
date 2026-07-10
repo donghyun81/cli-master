@@ -136,110 +136,9 @@ _이 섹션이 없으면 stop-gate가 차단한다. 조사형·문서형 task는
 
 ## §5 PLAN.md 형식 (10-section 정규 스키마)
 
-> 각 섹션은 이름이 있는 독립 관심사다. 해당하지 않으면 `N/A` 명시 — 섹션 삭제 금지.
-
-```markdown
-## GATESv2
-| Field | Value |
-|---|---|
-| TaskId | ... |
-| Mode | ... |
-| Workflow | Collect -> Plan -> Implement -> Verify -> Review |
-| Requirements Source | .ai/tasks/<taskId>.md |
-
-## 1. ChangeBudget
-| 항목 | 값 |
-|---|---|
-| FilesN | N |
-| Modules | ... |
-| Risk | Low / Medium / High |
-| DBMig | Yes / No |
-| MoneyAuth | Yes / No |
-
-## 2. DependencyDecision
-_libs.versions.toml 변경이 없으면 `N/A` 명시. 변경이 있으면 라이브러리별 8개 항목 모두 기술._
-
-| 항목 | 값 |
-|---|---|
-| Library | N/A |
-| ①공식·표준 지위 | N/A |
-| ②유지보수 품질 | N/A |
-| ③KMP·CMP 호환 | N/A |
-| ④transitive 비용 | N/A |
-| ⑤기존 기능 중복 여부 | N/A |
-| ⑥제거 난이도 | N/A |
-| ⑦직접 구현 대비 우위 | N/A |
-| ⑧UI 라이브러리 특별 정당화 | N/A |
-
-## 3. ArchitectureImpact
-_새 인터페이스·추상화 없으면 `N/A` 명시._
-
-- 새 인터페이스/추상화: N/A
-- 변동성 경계 유형: N/A
-- 레이어 누수 위험: N/A
-- shared-first 경계 영향: N/A
-
-## 4. ModelBoundaryPlan
-_모델 레이어 분리 변경 없으면 `N/A` 명시._
-
-- DTO 변경: N/A
-- Entity 변경: N/A
-- DomainModel 변경: N/A
-- UiState 변경: N/A
-- 경계 매핑 추가/변경 (Repository·UseCase·ViewModel 위치): N/A
-- I2 import 방향 영향: N/A
-
-## 5. ErrorPolicy
-_새 UseCase·Repository 작성 없으면 `N/A` 명시._
-
-- typed Result 사용 여부: N/A
-- 오류 모델 (sealed class/interface 명): N/A
-- 기존 코드 교체 범위: N/A (전면 교체는 범위 초과 — 별도 task)
-
-## 6. UIStateFlowPlan
-_UI 또는 ViewModel 변경 없으면 `N/A` 명시._
-
-- UiState 변경: N/A
-- ViewModel 단방향 흐름 유지: N/A
-- SharedUiState<T> 변형 사용: N/A
-
-## 7. TestabilitySeams
-_테스트 변경 없으면 `N/A` 명시. 있으면 새 테스트 파일명과 FakeXxx 여부 필수 명시._
-
-- 테스트 파일: N/A
-- FakeXxx 사용: N/A
-- 심 주입 대상 (clock·dispatcher·identity·logger·uuid): N/A
-- 심 연기 시 명시적 사유: N/A
-
-## 8. VerificationPlan
-| 항목 | 값 |
-|---|---|
-| VerifyCmds | `./gradlew test` (예시 — 실행 가능 명령만 기입) |
-
-> **Risk 기반 경량화**: Low Risk task는 §1 GATESv2, §2 ChangeBudget, §9 VerificationPlan + 작업 목록만 필수. 나머지 N/A. Medium 이상은 전체 10-section 필수.
-
-## 9. RollbackStrategy
-_문서 전용 변경: "git revert <commit>으로 즉시 복구 가능" 명시._
-_제품 코드 변경: 아래 항목 모두 기술 필수 (N/A 불허)._
-
-- 롤백 가능 지점: N/A
-- 롤백 조건 (언제 실행하는가): N/A
-- 복구 경로 (롤백 후 다음 단계): N/A
-
-## 10. ExternalPrep / DeferredItems
-_외부 의존 연기 항목 없으면 `N/A` 명시._
-
-- 연기 항목: N/A
-- user-prep 선행 조건: N/A
-- stub/TODO(user-prep) 위치: N/A
-
-## Plan
-
-1. ...
-2. ...
-
-## Notes
-```
+> **스키마 본문 = [`docs/templates/plan-10-section.template.md`](../../docs/templates/plan-10-section.template.md)** (= verbatim 이전 · MASTER-CLI-CONTEXT-DIET-2-001 T3). **Risk ≥ Medium 시만 템플릿 Read** — Low Risk = GATESv2 + ChangeBudget + VerificationPlan + 작업 목록 경량 (템플릿 Read 불요 · `workflow-core.md` §implement Risk 표 정합).
+> 10-section = GATESv2 / ①ChangeBudget ②DependencyDecision ③ArchitectureImpact ④ModelBoundaryPlan ⑤ErrorPolicy ⑥UIStateFlowPlan ⑦TestabilitySeams ⑧VerificationPlan ⑨RollbackStrategy ⑩ExternalPrep·DeferredItems + Plan + Notes.
+> **N/A 처리 (T3 개정)**: 해당 없는 섹션 = 개별 "N/A" 나열 대신 **말미 1줄 집계 허용** (예: `N/A: §3·§4·§5·§6·§7·§10`) — 섹션 판단 의무 자체는 불변 (= 스키마 약화 아님 · 표기만 압축).
 
 ---
 
@@ -273,107 +172,9 @@ STDOUT: [핵심 출력]
 
 ## §7 REVIEW.md 형식 (12-section 정규 스키마)
 
-> 각 섹션은 이름이 있는 독립 판정 영역이다. 해당 없으면 "N/A" 명시.
-
-```markdown
-## Technical Review
-
-> **Risk 기반 경량화**: Low Risk task는 §1 Requirements Coverage, §2 Regression Risk, §11 Secrets Safety만 필수. **UI 레이어 변경(Screen/ViewModel/UiState 신규·수정) 포함 시 §5 Model Separation + §14 Design SoT Sync 추가 필수.** 나머지 N/A. Medium 이상은 전체 12-section 필수.
-
-### 1. Requirements Coverage
-- [ ] 요구사항 성공조건 충족: <근거 (CONFIRMED/INFERRED/UNKNOWN)>
-- [ ] 성공 조건 항목별 대조: <확인>
-- [ ] Intake normalization / pre-EVIDENCE 계약 존재: <확인 / N/A>
-
-### 2. Regression Risk
-- 변경 영향 범위: <확인>
-- 회귀 위험 없음: <근거>
-
-### 3. Architecture Integrity — SOLID
-- SOLID 영향: <없음 / 단일 책임 위반 여부 / 과도한 추상화 여부>
-- DTO·Entity·DomainModel·UiState 분리 유지: <확인>
-- 오류 모델 선택 근거 명시: <N/A / 확인>
-
-### 4. Architecture Integrity — Layer Boundaries
-- 아키텍처 경계 준수: <확인>
-- I2 불변 원칙 (domain→data import 금지): <N/A / 확인>
-- 경계 매핑 위치 (Repository·UseCase·ViewModel 에서만): <N/A / 확인>
-
-### 5. Model Separation
-- UiState 가 DomainModel 과 분리됨: <N/A / 확인>
-- UI 단방향 흐름 유지: <N/A / 확인>
-- 경계 매핑 변환 위치: <N/A / 확인>
-
-### 6. Dependency Governance
-- libs.versions.toml 변경: <Yes/No>
-- DependencyDecision 8개 항목 기술 여부: <N/A / PASS>
-- 신규 의존성 승인: <N/A / PASS / FAIL>
-
-### 7. TDD Evidence & Testability Seams
-- FakeXxx 테스트 존재 또는 N/A 사유: <확인>
-- StateFlow 테스트: <N/A / 존재>
-- 심 기반 테스트 (clock·dispatcher·identity·logger·uuid): <N/A / 존재 / 연기 사유>
-
-### 8. Error / Result Policy
-- typed Result 사용 여부: <N/A / Yes>
-- sealed 오류 모델: <N/A / 확인>
-- 기존 코드 전면 교체 없음: <확인>
-
-### 9. External Prep / Deferred Items
-- user-prep TODO 또는 stub 처리: <N/A / 확인>
-- 외부 의존으로 인한 UI 불변 상태 침해 없음: <확인>
-
-### 10. DocSync
-- 문서-구현 드리프트 없음: <확인>
-
-### 11. Secrets Safety
-- 시크릿 노출 없음: <시크릿 grep 결과> (스캔 범위: `.ai/reports/<taskId>/` 아래만 — product code 전체 스캔 아님 · 패턴 SoT = `safety-and-secrets.md` §시크릿 스캔 패턴)
-
-### 12. Rollback Viability
-- 롤백 지점 실행 가능성: <확인>
-- 비가역 변경 없음: <확인>
-
-### 13. Cleanup Governance
-_code-level task에만 적용. ops-layer·조사형·문서형 task는 N/A 명시._
-- Cleanup assessment 흔적 (EVIDENCE.md `## Cleanup Assessment` 섹션): <N/A / 확인 / 누락>
-- 제거 판단 근거 충분성: <N/A / CONFIRMED / INFERRED / UNKNOWN>
-- 핵심 경로 후보 task-level STOP 처리: <N/A / 없음 / 확인>
-- code removal vs file deletion 구분 준수: <N/A / 확인>
-
-### 14. Design SoT Sync
-_UI visible-state(FULL) 변경 포함 task에만 적용. UI 무변경·ops-layer·문서형 task는 N/A 명시._
-- 변경 화면 `.pen` + `.ui-spec.json` 선행/동반 refresh: <N/A / 확인 / 누락>
-- 누락 시 `DESIGN-DEBT.md` 등재 (deferred lane): <N/A / 등재 / 미등재(WARN)>
-- 출시 후 net-new visual 선행 의무 충족: <N/A / 확인 / 위반(release FAIL)>
-
-## Findings
-[근거 기반 판정. 근거 없으면 UNKNOWN.]
-
-## Verdict
-PASS / FAIL / PARTIAL
-
-## Remaining Risks
-[향후 주의사항 — 이유와 함께 명시]
-
----
-
-## PromptFit
-
-PromptFitScore:
-PromptFitVerdict:
-PromptFitBreakdown:
-- Requirement Alignment: /25
-- Scope Control: /20
-- Evidence/Verify Quality: /20
-- Risk/STOP Handling: /10
-- Output Contract Compliance: /10
-- Prompt Efficiency/Clarity: /15
-PromptFitIssues:
--
-PromptFitNextActions:
--
-PromptFitConfidence:
-```
+> **스키마 본문 = [`docs/templates/review-12-section.template.md`](../../docs/templates/review-12-section.template.md)** (= verbatim 이전 · T3). **Risk ≥ Medium 시만 템플릿 Read** — Low Risk = §1 Requirements + §2 Regression + §11 Secrets 3-section (+ UI 레이어 변경 시 §5 Model Separation + §14 Design SoT Sync 추가 · `verification-and-review.md` 정합).
+> 섹션 = ①Requirements ②Regression ③SOLID ④Layer Boundaries ⑤Model Separation ⑥Dependency ⑦TDD·Testability ⑧Error·Result ⑨External Prep ⑩DocSync ⑪Secrets ⑫Rollback ⑬Cleanup ⑭Design SoT Sync + Findings + Verdict + Remaining Risks + **PromptFit (불변 의무)**.
+> **N/A 처리 (T3 개정)**: N/A 섹션 = 말미 1줄 집계 허용 (판단 의무 불변 · 표기 압축). 판정 기준/블로커 SoT = `verification-and-review.md` (형식 vs 기준 분리 불변).
 
 ---
 
@@ -386,6 +187,8 @@ PromptFitConfidence:
 | UNKNOWN | `[UNKNOWN]` | 레포 내 근거 없음 (확인 위치 명시) |
 | RESOLVABLE_IN_REPO | `[RESOLVABLE_IN_REPO]` | 아직 안 읽었거나 검색 범위를 좁히면 repo 안에서 확인 가능 |
 | BLOCKED | `[BLOCKED]` | 권한/환경/누락 도구/승인 부족 때문에 진행 불가 |
+
+> **측정/self-test 기록 형식 (T3 · MASTER-CLI-CONTEXT-DIET-2-001)**: raw output verbatim 박제 회피 — **판정 + 핵심 수치/sha 12자리 + 원문 파일 pointer** 로 기록한다 (예: `PASS · sha 3aa71c62d9e4 · 원문 = .ai/reports/<id>/logs/verify-sync.txt`). 긴 로그 = 파일로 남기고 pointer 만 (= `cycle-discipline.md` §13 self-test 기록 정합 · §9.1 path pointer 원칙 동형).
 
 ---
 
@@ -457,9 +260,7 @@ subagent 가 상위 agent 에게 돌려주는 최소 요약은 아래 5 개 섹�
 
 ## §11 본 SoT 의 변경 정책
 
-- cli infra 권장 byte-identical (= 6-repo · master + app-foundation + GentlyBreath + GentlyDay + GentlyTable + gently-product-docs · 보호 5 file 외)
-- 변경 시 master cycle 신설 + 6-repo propagation (`cycle-discipline.md` §15 패턴 1)
-- 자식 repo 직접 수정 금지
+> 변경 정책 = [`rule-footer-common.md`](./rule-footer-common.md) (= 6-repo 권장 byte-identical · master cycle + propagation · 자식 직접 수정 금지 · T6).
 
 ---
 

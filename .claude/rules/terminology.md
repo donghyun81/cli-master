@@ -68,5 +68,4 @@
 
 ## 3. 본 file 의 변경 정책
 
-본 file = cli infra 권장 byte-identical (6-repo · master + app-foundation + GentlyBreath + GentlyDay + GentlyTable + gently-product-docs).
-변경 시 master cycle 신설 + 6-repo propagation 의무 (`cycle-discipline.md` §15 패턴 1).
+> 변경 정책 = [`rule-footer-common.md`](./rule-footer-common.md) (= 6-repo 권장 byte-identical · master cycle + propagation · 자식 직접 수정 금지 · T6).

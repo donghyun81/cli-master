@@ -29,7 +29,7 @@
 
 **GSM** (= `gsm-measurement.md` form):
 - **G** — cowork 인용 baseline 과 cli disk 실측 baseline 이 일치한다 (표면 인용이 실측을 대체하지 않음).
-- **S** — 진입 첫 turn 의 6-repo HEAD 실측 + 박제 표 대조 흔적.
+- **S** — 진입 첫 turn 의 6-repo HEAD 실측 + 박제 표 대조 흔적 (= **세션 최초 1회 실측 · 이후 cycle = SessionStart hook 주입값 + 경량 git 실측 인용 갈음 · drift 신호 시 즉시 재실측** — T5 · MASTER-CLI-CONTEXT-DIET-2-001).
 - **M** — baseline mismatch 미reconcile 건수 `= 0` (drift 발견 시 forward-progress 판정 + 기록 100%).
 
 ### A2 — Protected file integrity guard
@@ -44,7 +44,7 @@
 
 **GSM** (= `gsm-measurement.md` form):
 - **G** — 보호 5 file 이 6-repo byte-identical 을 유지한다.
-- **S** — 보호 5 file 의 sha-256 측정값 vs `protected-file-hashes.md` baseline 대조 (= `shasum -a 256`).
+- **S** — 보호 file (= manifest 실측 전수 · "보호 5" 기억 단정 금지) 의 sha-256 측정값 vs `protected-file-hashes.md` baseline 대조 (= `shasum -a 256` · **세션 최초 1회 실측 · 이후 cycle = hook 주입 baseline + manifest 대조 갈음 · drift 신호 = 즉시 재실측** — T5 · STOP #5 로직 불변).
 - **M** — 보호 5 sha drift 건수 `= 0`.
 
 ### A3 — Cycle scope expansion containment
@@ -106,6 +106,8 @@
 - **G** — 영역 1 + 영역 2 = interactive pool 정합 · 영역 3(`claude -p`) 회피 (= 요금 폭탄 risk 차단).
 - **S** — cross-repo cycle 진입 시 sub-agent 호출 결정 + Bash `claude -p` 호출 측정.
 - **M** — `claude -p` sub-process spawn 건수 `= 0` · sub-agent parallelism `≤ 3`.
+
+> ⚠ precedent 측 "2026-06-15 billing split" 서술 = **공식 근거 UNVERIFIED** (2026-07-10 공식 문서 전수 조회 미발견 · 현행 공식 = 전 표면 구독 합산). 본 anchor 의 **행동 규정 (= `claude -p` 0 · sub-agent ≤ 3) 불변** (MASTER-CLI-CONTEXT-DIET-2-001 T7).
 
 ### A7 — Filename + content dual grep
 

@@ -4,6 +4,7 @@
 > **신설**: MASTER-CLI-CLEANUP-7CYCLE-001 (2026-05-21) · 직전 3 file (`no-abbreviation-policy.md` + `forbidden-abbreviations.md` + `allowed-acronyms.md`) 본문 통합 default (= GLOBAL-NO-ABBREV-POLICY-001 + 002 baseline 흡수).
 > **연관 파일**:
 > - `.claude/hooks/check-abbreviation.sh` — PreToolUse 자동화 검증 hook (본 file 단일 SoT 인용)
+> **context 상시 로드 불요 (T4)**: 본 file = Reading Mode 의무 로드(L2) 제외 — enforcement SoT = `check-abbreviation.sh` hook (`enforce` mode · 위반 시 hook stderr 노출 · MASTER-CLI-CONTEXT-DIET-2-001). 정독 = seed/약어 추가 cycle 한정.
 > SOT: `CLAUDE.md`
 
 ---
@@ -383,9 +384,7 @@ hook 본문 변경 시 본 file 갱신 의무 default (= cli infra 단방향 정
 
 ## §5 본 file 의 변경 정책
 
-- cli infra 권장 byte-identical (= 6-repo · 보호 5 file 외)
-- 변경 시 master cycle 신설 + 6-repo propagation (`cycle-discipline.md` §15 패턴 1)
-- 자식 repo 직접 수정 금지
+> 변경 정책 = [`rule-footer-common.md`](./rule-footer-common.md) (= 6-repo 권장 byte-identical · master cycle + propagation · 자식 직접 수정 금지 · T6).
 
 ---
 

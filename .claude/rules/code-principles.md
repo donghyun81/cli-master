@@ -144,5 +144,4 @@ reviewer agent 가 REVIEW.md 12-section 작성 시 본 체크리스트 적용 �
 
 ## 6. 본 rule 의 변경 정책
 
-본 파일 = cli infra 권장 byte-identical (보호 파일 X).
-변경 시 master 에서 cycle 신설 + propagation (`cycle-discipline.md` §3 §15 패턴 1).
+> 변경 정책 = [`rule-footer-common.md`](./rule-footer-common.md) (= 6-repo 권장 byte-identical · master cycle + propagation · 자식 직접 수정 금지 · T6).

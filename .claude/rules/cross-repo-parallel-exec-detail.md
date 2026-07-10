@@ -134,7 +134,7 @@ terminal C → cli session C (cwd = ~/AndroidStudioProjects/GentlyTable) → GT 
 - 자식 `.claude/rules/*` 정합 ✓ (= 자식 측 cli infra rule 본문 자동 적용)
 - 자식 `.claude/agents/*` 정합 ✓ (= 자식 측 active/deferred agent 자동 인식)
 
-**subscription pool 정합 영역** (= `2026-06-15 Anthropic billing split` 정합 · §2.4 정합):
+**subscription pool 정합 영역** (= `2026-06-15 Anthropic billing split` 정합 · §2.4 정합 · ⚠ billing split 서술 = 공식 근거 UNVERIFIED — 2026-07-10 공식 문서 전수 조회 미발견 · 현행 공식 = 전 표면 구독 합산 · 행동 규정 불변 = kernel §2.4 주석 정합 · T7):
 
 - 본 paradigm 측 모든 cli session = **interactive pool 정합 default** ✓ (= `claude` 단순 interactive 진입 default)
 - 2026-06-15 이후 billing split 영역 **무 영향 default** (= Agent SDK credit pool 분리 영역 미해당)

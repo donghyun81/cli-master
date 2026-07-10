@@ -23,6 +23,7 @@
 
 - `Workflow` 도구로 spawn 한 subagent 는 /usage 의 "Subagents: workflow-subagent" 항목으로 집계되며 **interactive plan pool 에 귀속**한다 (2026-06-04 KST 실측 · 별 Agent SDK credit pool 표기 0). 영역 1·2 와 동일 pool 정합이고, 영역 3(`claude -p` sub-process spawn)과는 다르다 — **`Workflow` 도구 subagent 는 영역 3 이 아니다**.
 - **2026-06-15 Anthropic billing split 발효 후 /usage 1회 재확인 의무**. 현 실측 = split 이전 baseline · split 후 pool 귀속이 바뀌면 본 file 갱신 cycle 진입.
+- ⚠ 위 "billing split" 서술 = **공식 근거 UNVERIFIED** (2026-07-10 공식 문서 전수 조회 미발견 · 현행 공식 = 전 표면 구독 합산) — /usage 재확인 의무 = 유지 · 행동 규정 불변 (MASTER-CLI-CONTEXT-DIET-2-001 T7).
 
 ### gate ② — 버전 + 활성화 전제 (실측)
 
@@ -99,9 +100,7 @@
 
 ## §8. 변경 정책
 
-- cli infra 권장 byte-identical (6-repo · master + 5 자식 · 보호 5종 아님).
-- 변경 시 master cycle 신설 + 6-repo propagation (`cycle-discipline.md §15` 패턴 1).
-- 자식 repo 직접 수정 금지.
+> 변경 정책 = [`rule-footer-common.md`](./rule-footer-common.md) (= 6-repo 권장 byte-identical · master cycle + propagation · 자식 직접 수정 금지 · T6).
 
 ---
 

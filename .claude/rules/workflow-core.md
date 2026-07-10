@@ -122,7 +122,7 @@ Remaining Work / Next Entry Conditions / Known Risks)만으로 동작한다.
 - 필요한 read-only fan-out
 - implementer 진입 가능 여부
 
-> **Reading Mode consult**: 판정된 Reading Mode 의 의무 로드 규칙 집합 = [`rule-routing-index.md`](./rule-routing-index.md) §B 에서 consult 한다 (= L0 항상 + 해당 L1/L2/L3 subset 만 · bulk read 금지).
+> **Reading Mode consult**: 판정된 Reading Mode 의 의무 로드 규칙 집합 = [`rule-routing-table.md`](./rule-routing-table.md) 에서 consult 한다 (= L0 + 해당 L1/L2/L3 subset 만 · bulk read 금지 · index 전문 정독 = 색인 갱신 cycle 한정 · T2).
 
 task-aware reading order와 공통 intake 절차:
 `docs/agent/process/REPO_FIRST_INTAKE_WORKFLOW.md`
@@ -188,7 +188,7 @@ task-aware reading order와 공통 intake 절차:
 
 - **최소 변경 원칙**: 요청된 것만, 그 이상 변경 금지
 - intake normalization과 pre-EVIDENCE 계약 완료 전 implement direct entry 금지
-- **색인 consult**: 구현 진입 시 [`rule-routing-index.md`](./rule-routing-index.md) §B 의 해당 행동 의무 로드 집합(L0 + L1/L2/L3 subset)을 따른다 — code-level 이면 L2 [`code-style-guide.md`](./code-style-guide.md) 포함(bulk read 금지)
+- **색인 consult**: 구현 진입 시 [`rule-routing-table.md`](./rule-routing-table.md) 의 해당 행동 의무 로드 집합(L0 + L1/L2/L3 subset)을 따른다 — code-level 이면 L2 [`code-style-guide.md`](./code-style-guide.md) 포함(bulk read 금지)
 - SoftBudget 기준 (단일 Screen+ViewModel+UiState 실측 기반):
   - Low Risk: 200 LOC 이하
   - Medium Risk: 120 LOC 이하
