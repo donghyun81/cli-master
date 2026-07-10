@@ -52,10 +52,12 @@
 
 | repo 영역 | char | 비고 |
 |---|---|---|
-| parent root CLAUDE.md | 8,000 | §3.2 진입 항상 |
-| master CLAUDE.md (FULL) | ~29K (2026-06-22 재측정 · 28865 · S15-HOT-DEMOTE-004 hot 15→6 · 직전 27432 = S15-HOT-DEMOTE-003 06-11 hot 6 시점 측정 · 이후 9 entry 추가 누적분 demote 반영) | §15 = hot 최근 5 + 본 cycle entry + cold pointer(전체 이력 = `master-cycle-history-COLD.md` 121 entry) |
-| L0 kernel (safety+anchor+cross-repo kernel) | 21,561 | cross-repo = kernel 8.2K (Phase 3 H4 · 본문 12.6K demote) |
+| parent root CLAUDE.md | 9,094 (2026-07-10 재측정 · DIET-2) | §3.2 진입 항상 |
+| master CLAUDE.md (FULL) | 47,004 (2026-07-10 재측정 · DIET-2 §15 entry append 후 · **§15 hot 13 > 10 = cold 재이전 advisory 발화 상태**) | §15 = hot 13 entry + cold pointer(전체 이력 = `master-cycle-history-COLD.md` 121 entry) · 직전 ~29K (06-22 hot 6 시점) — 증가분 = hot 재증식 (9회차 demote 후보) |
+| L0 kernel (safety+anchor+cross-repo kernel) | 29,761 (2026-07-10 재측정 · anchor GSM/T7 + kernel T7 성장 누적) | **T5 재정독 개정 (DIET-2)**: 세션 최초 1회 Read → 이후 cycle = hook 주입값+경량 실측 갈음 = **per-cycle 재정독 실효 0** · drift 시만 재Read |
 | child CLAUDE.md (deduped · ×4 byte-identical) | 9,581 (2026-06-10 재측정 · AUTO-DEMOTE) | 운영 §2/§3/§6~§13/§14a/§15/§16 = master pointer (= §15 박제 폐지 포함) |
+| intake 정독 표 `rule-routing-table.md` (신설 · DIET-2) | 2,867 | intake 시 유일 정독 (index 전문 = 색인 갱신 cycle 한정 · 직전 index 전문 정독 관례 대비 −92%) |
+| cycle-discipline hot | 9,854 (2026-07-10 · DIET-2 · 직전 ~40K cp) | 전문 verbatim = `cycle-discipline-COLD.md` (master-only) · Mode 1 가정 정독 합계 = 235,005→145,199 byte (세션 최초) / 107,180 (2+ cycle) |
 
 ### 환각 패턴 수
 
@@ -121,4 +123,5 @@
 - 2026-06-02 · MASTER-CLI-DEPENDENCY-DECISION-RECONCILE-001 · `conflicting_sot` 1(defer)→0(actioned). DependencyDecision 8항 3 framing(workflow-core/code-principles/CHECKLIST) → `DEPENDENCY_DECISION_CHECKLIST.md` canonical + UI 억제 → `ui-ux-analysis.md` canonical 로 reconcile(= `rule-routing-index §G` row 7+8 · grow-only merge · 정보 소실 0 · UI 강도 보존). 지표 정의(§1) 무변경(= 환각 패턴 측정값만 갱신) · master-only(propagation X).
 - 2026-06-04 · MASTER-CLI-GSM-CONTEXT-HEALTH-ABSORB-001 · context-health 측정 **자동화 흡수**(= 신 hook 신설 X · 기존 `measure-gsm-cycle.sh` GSM Stop hook 확장 · settings.json 무접촉). §3.1 분기 자동 측정 trajectory(append-only · quarter-bucket guard · idempotent) 신설 + §4 cadence 에 자동화/수기 경계 명문화. 자동 범위 = char 4(codepoint) + `stale_pointer`(file-link grep) · 수기 잔여 = `conflicting_sot`/`buried_ratio`(판정 난이도 ↑). hook = 5-repo byte-identical 전파(= context-health 블록 포함) · 본 file(append 대상) = master-only(propagation X 유지). 지표 정의(§1) + Phase 0~4 trajectory(§3) 무변경(= 자동화 면만 추가). proxy band 라벨 보존(over-claim 금지).
 - 2026-06-10 · MASTER-CLI-AUTO-DEMOTE-CONTEXT-DIET-001 · ① §15 hot 6회차 cold 재이전(14→5+본 cycle entry · cold 94→103 verbatim · 무손실) ② **§15 hot 재증식 자동 감시** = `measure-gsm-cycle.sh` §15 hot check 확장(> 10 시 advisory surface · 신 hook 신설 X · settings.json 무접촉 · ABSORB-001 동형) ③ 자식 4 CLAUDE.md §15 박제 → master cold pointer 후퇴(19,260→9,581 cp · 6 entry cold verbatim 기포함 확인) ④ cycle-discipline §23~§29 pointer 후퇴(§21/§22 보존 · 43,819→36,866 cp) ⑤ §22.2 확장/이동 cycle 마감 dual grep sweep gate 1행. §2 측정값 갱신(master/child char + §15 hot 6) · §4 cadence §15 자동 감시 1줄 추가.
+- 2026-07-10 · MASTER-CLI-CONTEXT-DIET-2-001 · rule 코어 다이어트 T1~T8 (= cc-paste-MASTER-CONTEXT-DIET2-001 · 정보 소실 0 · verbatim diff 4/4 + 표본 grep 15/15). §2 재측정: cycle-discipline hot 9,854 cp (전문 = `cycle-discipline-COLD.md`) · intake 정독 = `rule-routing-table.md` 2,867 cp 신설 (index 전문 = 색인 갱신 한정 · §B/§F 원문 = `rule-routing-index-COLD.md`) · PLAN/REVIEW 스키마 = `docs/templates/` 이전 (Risk≥Medium 시만 Read) · abbreviation-policy 의무 로드 제외 · **T5 L0 재정독 개정 = per-cycle L0 파일 재Read 실효 0** (세션 최초 1회 + hook/경량 실측 갈음 · STOP #5 불변) · Mode 1 가정 정독 합계 235,005→145,199/107,180 byte (−38%/−54%). master 47,004 cp = **§15 hot 13 > 10 advisory 발화 상태** (9회차 demote = 별 cycle 후보). rule 26 편집 + 신설 4 (table/footer-common/템플릿 2) 6-repo propagation · COLD 2 = master-only.
 | 2026-06-04 14:01 | 8000 | 52652 | 25730 | 19260 | 0 | manual | manual | MASTER-CLI-WORKFLOW-ADOPTION-POLICY-002 | <!-- ch-auto 2026-06-04 --> |

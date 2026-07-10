@@ -171,15 +171,15 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 | `.claude/rules/uiux-sot-refresh.md` | `4d0b52798cb4` | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `docs/design/design-sot-policy.md` | `92a5e99804ff` | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `.claude/settings.json` | `9696afb38b0c` | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `.claude/rules/workflow-core.md` | `286d71f043ab` | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `.claude/rules/cycle-discipline.md` | `d75cc2e24f43` | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `.claude/rules/workflow-core.md` | `8573747adae9` | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `.claude/rules/cycle-discipline.md` | `664386085376` | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `.claude/rules/pencil-automation.md` | `aedb79780211` | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `.claude/rules/reporting.md` | `351f9d7420fb` | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `.claude/rules/reporting.md` | `0c7ccad0646d` | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `.claude/rules/routing-and-delegation.md` | `bf53648f520e` | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `.claude/rules/deferred-domains.md` | `26fce91cff37` | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `.claude/rules/code-principles.md` | `0775ddf0b78e` | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `.claude/rules/code-principles.md` | `6894a2804b49` | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `.claude/rules/design-to-code-sync.md` | `dfb2b1472f76` | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `.claude/rules/ux-laws.md` | `0f63f399e52e` | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `.claude/rules/ux-laws.md` | `13d582696e15` | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `docs/agent/architecture/COMMON_ARCHITECTURE.md` | `6177dda18914` | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `docs/agent/architecture/TDD_WORKFLOW.md` | `1e5103a7443c` | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `docs/agent/architecture/MODEL_SEPARATION.md` | `85cadc9e2043` | ✓ | ✓ | ✓ | ✓ | ✓ |
@@ -191,8 +191,8 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 
 ## Last verify-sync
 
-- timestamp: 2026-07-03T12:52:09+0900
-- pass: 160
+- timestamp: 2026-07-10T16:42:49+0900
+- pass: 164
 - drift: 0
 - miss: 5
 - exit: 1
