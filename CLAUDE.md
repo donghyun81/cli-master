@@ -188,11 +188,12 @@ verify / review 없이 완료 금지.
 
 ## 9. Context Hygiene
 
-- **공통 불변**: 매 진입 시 `CLAUDE.md` + `.claude/settings.json` 만 먼저 읽음.
+- **공통 불변 (= 진입 정독 범위 canonical · 부모 root `CLAUDE.md §3.1/§3.2` + 자식 배너 reading order 가 본 §9 를 가리킴)**: 매 진입 시 `.claude/settings.json` + `CLAUDE.md` **발췌** 먼저 읽음 — master 는 **§5 STOP(9항) + §2 정합 강제 3등급**만, 자식은 inline 필수 §(§0·§0.1·§1·§4·§5·§14). **전문·bulk 정독 X**(= just-in-time). 안전 조항(STOP 9 · 보호 5 · 단방향 propagation)은 발췌에 포함되어 손실 0.
 - **역할별**: reading mode 에 맞는 `.claude/rules/**` / `.claude/agents/**` / `.claude/skills/**` 만 추가 열기.
 - **just-in-time 로드 (= eager 회피 · `rule-routing-index.md §B` 정합)**: 역할별 로드 집합 = [`rule-routing-index.md`](.claude/rules/rule-routing-index.md) §B Reading Mode → 의무 로드 표(L0 항상 + 해당 L1/L2/L3 subset 만). 큰 paradigm 본문(예: cross-repo 실행 = `cross-repo-parallel-exec-detail.md`)은 항상 로드 X · 해당 **행동 trigger 시점**에만 연다. L0 = kernel(safety + anchor + cross-repo kernel + 헌법 §5)만 항상.
 - **task-local**: `.ai/tasks/<taskId>.md` + 현재 `.ai/reports/<taskId>/` + touched files 마지막 레이어.
 - **bulk read 금지**: `.claude/**` 전체 일괄 읽지 않음.
+- **Compaction 보존 (auto-compact 시)**: context 요약(auto-compact) 발생 시 요약에 **반드시 보존** = ① 진행 cycle-id ② Mode(M1/M3/M5) ③ git branch ④ 미완 step ⑤ 다음 행동 ⑥ STOP 상태. (= CLAUDE.md 는 compaction 시점 in-context → 본 지시가 요약에 반영 · compact 후 rule 전량 재정독·baseline 재측정 재발 방지 · `cycle-discipline.md §12` 세션 운영 정합)
 
 ---
 

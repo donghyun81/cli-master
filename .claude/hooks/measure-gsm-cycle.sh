@@ -66,7 +66,7 @@ CYCLE_MARKER='[A-Z][A-Z0-9_-]+-[0-9]{3}'
 # 본질: context 건강 지표(항상로드 char 4 + 환각 stale_pointer)를 신 hook 신설 없이 본 GSM Stop hook 으로 흡수.
 #   - cadence = 분기(quarter bucket 경과 guard) · 매 Stop X · advisory(non-blocking · cycle 차단 X · exit 0 보존)
 #   - 자동 = char 4(codepoint python3) + stale_pointer(상대경로 .md file-link 존재 grep)
-#   - 수기 = conflicting_sot / buried_ratio (판정 난이도 ↑ → row 에 manual · 값은 §2 수기 갱신)
+#   - 수기 = conflicting_sot / buried_ratio / ctx_실측(/context) / model_effort_전환수 (판정 난이도 ↑ 또는 세션 상태 → row 에 manual · 값은 §2/수기 갱신 · DIET-2 T5)
 #   - append 대상 = context-health-metrics.md §3.1 (master-only · propagation X · 자식 진입도 master 측 append)
 #   - char = codepoint proxy(token 아님 · over-claim 금지 · proxy band 라벨 surface 보존)
 CONTEXT_HEALTH_FILE="$MASTER_DIR/.auto-memory/context-health-metrics.md"
@@ -187,7 +187,7 @@ run_context_health() {
 
   # append (= MODE=append 한정 · idempotent = 분기 guard) → §3.1 (행 = EOF 누적 · cycle-health-log.md 동일 패턴)
   if [ "$MODE" = "append" ]; then
-    printf '| %s | %s | %s | %s | %s | %s | manual | manual | %s | <!-- ch-auto %s --> |\n' \
+    printf '| %s | %s | %s | %s | %s | %s | manual | manual | manual | manual | %s | <!-- ch-auto %s --> |\n' \
       "$ch_now_kst" "$ch_parent" "$ch_master" "$ch_l0" "$ch_child" "$ch_stale" "$ch_cyc" "$ch_now_date" \
       >> "$CONTEXT_HEALTH_FILE"
   fi
@@ -199,6 +199,7 @@ run_context_health() {
     echo "  항상로드 char(codepoint proxy≠token · band ASCII≈3.2~4 / Hangul≈1.0~2.2 ch/tok): parent_root ${ch_parent} · master ${ch_master} · L0_kernel ${ch_l0} · child ${ch_child}" >&2
     echo "  stale_pointer(auto · md-link + backtick .sh/.json/.md[master-owned dir] · 목표 0): ${ch_stale} (= scope-한정 신호 · non-backtick bare/자식-context docs/cross-repo(../)/§-level = 미검출 · 전역 dead-ref 부재 보증 X)" >&2
     echo "  conflicting_sot/buried_ratio = 수기 advisory(§2 갱신 · §-level 판정 자동 X)" >&2
+    echo "  ctx_실측(/context) + model_effort_전환수 = 수기 advisory (= /context 실점유 값[codepoint proxy 보완 · 분기 스냅샷 시 수기 기록] + 세션 중 model/effort 전환 사건 수[= cli 판단·수기 · 목표 0 · cycle-discipline §12 정합] · DIET-2 T5)" >&2
     if [ "$MODE" = "append" ]; then
       echo "  → context-health-metrics.md §3.1 분기 trajectory append (${ch_now_y}Q$(( ch_now_q + 1 )))" >&2
     else

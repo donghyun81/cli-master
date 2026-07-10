@@ -61,6 +61,19 @@
 4. cowork → paste source 발행 default (= mode + 목적 명시 default · paste source §1 본문 default)
 5. cli session → mode 안에서 작동 default (= paste source §1 인용 default · REVIEW.md mode 명시 default · commit body mode 명시 default)
 
+### §3.3 모델 / effort 계층 (= cycle 본질별 권장 · 2026-07-10 신설 · `MASTER-CLI-CONTEXT-DIET-2-002` T4)
+
+Mode 확정 시점(= §3.2 step 1~3) 모델 + effort 동반 확정 default (= intake 시 고정 · 세션 중 전환 금지 · `cycle-discipline.md §12` ① 정합 = prompt cache 키 보존).
+
+| cycle 본질 | 권장 모델 | 권장 effort | 경계 |
+|---|---|---|---|
+| **기계적 cycle** (= propagation 검증 / re-smoke / lint / doc 정리 / 산출물·시크릿 grep) | Sonnet | low | 권장 default · cli 자율 상향 가능 |
+| **설계 / Money / Auth / DB / 비가역** (= M3 migration-safe · STOP #1 영역 · 보호 file · 아키텍처 결정) | **Opus** | **high 이상** | **고정 · 하향 금지** (= Sonnet/low 하향 시도 = STOP 영역 · 사용자 본심 회수) |
+| 일반 도메인 IMPL (= M1) | Opus 또는 Sonnet | medium~high | cli 자율 (= Risk 기반 · `workflow-core.md §implement` 정합) |
+| Haiku 활용 | **보류** | — | 후속 검증 cycle (= 품질 게이트 미측정 · 본 cycle scope X) |
+
+- **장세션 `opusplan` 회피 default**: 장세션 측 plan-mode auto-switch(= `opusplan`)는 캐시 무효 + effort 예측 불가 → 회피 default (= 세션 진입 시 단일 모델·effort 확정 · `cycle-discipline.md §12` ①).
+
 ---
 
 ## §4. 현 단계 = 6-repo 동일 mode / 미래 = 자식별 발산 protocol (= L1-6 정합 default)
@@ -105,3 +118,4 @@
 
 - 2026-05-22 · `MASTER-CLI-CYCLE-4A-MODE-SYSTEM-HOT-INSTALL-001` · 본 file 신설 + cycle-discipline.md §29 pointer 신설 + 5-repo byte-identical propagation default
 - 2026-05-22 · `MASTER-CLI-CYCLE-4B-MODE-BUNDLE-COLD-INSTALL-001` · cold storage `mode-bundle-COLD.md` 신설 default (= master only default · 본 § 본문 X default · Cycle 4b 측 본문 default)
+- 2026-07-10 · `MASTER-CLI-CONTEXT-DIET-2-002` · §3.3 모델/effort 계층 표 신설 (= 기계적 cycle Sonnet + low 권장 · 설계/Money/Auth/DB/비가역 Opus + high 이상 고정[하향 금지 = STOP 영역] · Haiku 보류 · 장세션 `opusplan` 회피) · `cycle-discipline.md §12` 세션 운영 정합 · 6-repo byte-identical propagation.
