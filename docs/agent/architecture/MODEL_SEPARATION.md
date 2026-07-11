@@ -113,4 +113,4 @@ reviewer 가 `## 5. Model Separation` 섹션에서 검사:
 - `KMP_CMP_LAYER_DIRECTION.md` — 레이어 흐름과 import 방향
 - `SSOT_PRINCIPLES.md` — 단일 출처 표시 규칙
 - `.claude/rules/workflow.md` — 모델 분리 원칙
-- `.claude/rules/ui-ux-analysis.md` — UiState 정책
+- `docs/rules/ui-ux-analysis.md` — UiState 정책

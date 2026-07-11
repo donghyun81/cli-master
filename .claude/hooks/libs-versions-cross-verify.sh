@@ -11,7 +11,7 @@
 #   bash .claude/hooks/libs-versions-cross-verify.sh
 #   bash .claude/hooks/libs-versions-cross-verify.sh gradle/libs.versions.toml
 #
-# Policy SoT: .claude/rules/libs-versions-cross-verify.md
+# Policy SoT: docs/rules/libs-versions-cross-verify.md
 #
 # macOS bash 3.x compatible. python3 required.
 
@@ -213,7 +213,7 @@ print("[libs-versions-cross-verify] mismatches detected:", file=sys.stderr)
 for rule_id, severity, msg in violations:
     print(f"  [{rule_id}] {severity}: {msg}", file=sys.stderr)
 print(f"  trigger file: {trigger}", file=sys.stderr)
-print(f"  policy SoT: .claude/rules/libs-versions-cross-verify.md §3 (R1)", file=sys.stderr)
+print(f"  policy SoT: docs/rules/libs-versions-cross-verify.md §3 (R1)", file=sys.stderr)
 
 # Signal violation via exit code 1; bash wrapper decides warn vs enforce.
 sys.exit(1)

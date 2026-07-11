@@ -93,4 +93,4 @@ SoftBudget 초과 예상 시 추상화 추가보다 task 분할.
 - `TESTABILITY_SEAMS.md` — 심 주입 대상 상세
 - `MODEL_SEPARATION.md` — 테스트 시 모델 경계
 - `.claude/rules/workflow.md` — TDD 우선 흐름
-- `.claude/rules/verification-and-review.md` — 검증 명령 의무
+- `docs/rules/verification-and-review.md` — 검증 명령 의무

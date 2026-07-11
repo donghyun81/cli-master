@@ -11,7 +11,7 @@
 >
 > **구분**: 일반 macOS 터미널 / shell script / bash 명령은 'shell' 또는 'bash' 로 표기 (cli 와 구분 의무).
 > **신규 cli 표현 추가 시**: 본 정의 그대로 적용 (별도 cycle 불필요).
-> **그 외 일반 어휘** (SoT/SSOT 등): `.claude/rules/terminology.md` 참조.
+> **그 외 일반 어휘** (SoT/SSOT 등): `docs/rules/terminology.md` 참조.
 
 ---
 
@@ -59,7 +59,7 @@
 
 | 등급 | 대상 | 강제 수준 | drift 발생 시 |
 |---|---|---|---|
-| **보호 파일 (강제)** | 5 종 — `docs/schemas/ui-spec.schema.json` · `.claude/rules/pencil-uiux-workflow.md` · `docs/design/pencil-sot-policy.md` · `.claude/rules/uiux-sot-refresh.md` · `docs/design/design-sot-policy.md` | master ↔ 자식 byte-identical 의무 | 즉시 mitigation cycle (리뷰 블로커) |
+| **보호 파일 (강제)** | 5 종 — `docs/schemas/ui-spec.schema.json` · `docs/rules/pencil-uiux-workflow.md` · `docs/design/pencil-sot-policy.md` · `docs/rules/uiux-sot-refresh.md` · `docs/design/design-sot-policy.md` | master ↔ 자식 byte-identical 의무 | 즉시 mitigation cycle (리뷰 블로커) |
 | **cli infra (권장)** | 53 + α — `.claude/` 전체 + `.claude/settings.json` 등 | 권장 byte-identical | lazy 가능 · 다음 cycle 영향 시 mitigation |
 | **repo-specific (자유)** | 도메인 코드 / 화면 / `app/` / `<repo>/CLAUDE.md` 본문 도메인 섹션 / `settings.local.json` | 정합 강제 X | 자연 발생 |
 
@@ -124,7 +124,7 @@ prompt receive → intake normalization → /collect → /plan → implement →
 
 Plan Mode (Shift+Tab 두 번) 에서 intake normalization + pre-EVIDENCE 계약 먼저 고정 후 구현 모드 전환.
 
-세부 단계 정의: `.claude/rules/workflow-core.md` + `cycle-discipline.md` + `pencil-automation.md`.
+세부 단계 정의: `docs/rules/workflow-core.md` + `cycle-discipline.md` + `pencil-automation.md`.
 
 ---
 
@@ -176,7 +176,7 @@ Claude Code 는 자동 완성형 AI 가 아니라 **repo-first 해석 보조형 
 | intake normalization | pre-EVIDENCE 계약을 먼저 고정. implementer direct entry 금지. |
 | /collect | 제품 변경 금지. 검색 / 수집만. 0 matches 도 기록. build / .gradle / generated 제외. |
 | /plan | ChangeBudget 표 필수. 경미한 불일치 → PLAN 갱신. 리스크 상승 → STOP. |
-| implement | 최소 변경 원칙. SoftBudget: `.claude/rules/workflow-core.md` + `cycle-discipline.md` + `pencil-automation.md` 참조. |
+| implement | 최소 변경 원칙. SoftBudget: `docs/rules/workflow-core.md` + `cycle-discipline.md` + `pencil-automation.md` 참조. |
 | /verify | 0 command 금지. 불가 시 UNKNOWN(사유) + STOP. exit code 기록. |
 | /review | 근거 기반 판정. 근거 없으면 UNKNOWN. |
 
@@ -190,7 +190,7 @@ verify / review 없이 완료 금지.
 
 - **공통 불변 (= 진입 정독 범위 canonical · 부모 root `CLAUDE.md §3.1/§3.2` + 자식 배너 reading order 가 본 §9 를 가리킴)**: 매 진입 시 `.claude/settings.json` + `CLAUDE.md` **발췌** 먼저 읽음 — master 는 **§5 STOP(9항) + §2 정합 강제 3등급**만, 자식은 inline 필수 §(§0·§0.1·§1·§4·§5·§14). **전문·bulk 정독 X**(= just-in-time). 안전 조항(STOP 9 · 보호 5 · 단방향 propagation)은 발췌에 포함되어 손실 0.
 - **역할별**: reading mode 에 맞는 `.claude/rules/**` / `.claude/agents/**` / `.claude/skills/**` 만 추가 열기.
-- **just-in-time 로드 (= eager 회피 · `rule-routing-index.md §B` 정합)**: 역할별 로드 집합 = [`rule-routing-index.md`](.claude/rules/rule-routing-index.md) §B Reading Mode → 의무 로드 표(L0 항상 + 해당 L1/L2/L3 subset 만). 큰 paradigm 본문(예: cross-repo 실행 = `cross-repo-parallel-exec-detail.md`)은 항상 로드 X · 해당 **행동 trigger 시점**에만 연다. L0 = kernel(safety + anchor + cross-repo kernel + 헌법 §5)만 항상.
+- **just-in-time 로드 (= eager 회피 · `rule-routing-index.md §B` 정합)**: 역할별 로드 집합 = [`rule-routing-index.md`](docs/rules/rule-routing-index.md) §B Reading Mode → 의무 로드 표(L0 항상 + 해당 L1/L2/L3 subset 만). 큰 paradigm 본문(예: cross-repo 실행 = `cross-repo-parallel-exec-detail.md`)은 항상 로드 X · 해당 **행동 trigger 시점**에만 연다. L0 = kernel(safety + anchor + cross-repo kernel + 헌법 §5)만 항상.
 - **task-local**: `.ai/tasks/<taskId>.md` + 현재 `.ai/reports/<taskId>/` + touched files 마지막 레이어.
 - **bulk read 금지**: `.claude/**` 전체 일괄 읽지 않음.
 - **Compaction 보존 (auto-compact 시)**: context 요약(auto-compact) 발생 시 요약에 **반드시 보존** = ① 진행 cycle-id ② Mode(M1/M3/M5) ③ git branch ④ 미완 step ⑤ 다음 행동 ⑥ STOP 상태. (= CLAUDE.md 는 compaction 시점 in-context → 본 지시가 요약에 반영 · compact 후 rule 전량 재정독·baseline 재측정 재발 방지 · `cycle-discipline.md §12` 세션 운영 정합)
@@ -200,7 +200,7 @@ verify / review 없이 완료 금지.
 ## 10. 구현 / 설계 기본값 (3-repo 공통 · 변경 불가)
 
 - 직접 구현 우선 (새 추상화 추가 전 직접 구현 단순성 평가)
-- 신규 의존성 승인: `libs.versions.toml` 신규 항목 = PLAN `## 2. DependencyDecision` 8 항목 필수 (8항 canonical = `docs/agent/architecture/DEPENDENCY_DECISION_CHECKLIST.md` · UI 라이브러리 억제 canonical = `.claude/rules/ui-ux-analysis.md §UI 라이브러리 억제 기본값`)
+- 신규 의존성 승인: `libs.versions.toml` 신규 항목 = PLAN `## 2. DependencyDecision` 8 항목 필수 (8항 canonical = `docs/agent/architecture/DEPENDENCY_DECISION_CHECKLIST.md` · UI 라이브러리 억제 canonical = `docs/rules/ui-ux-analysis.md §UI 라이브러리 억제 기본값`)
 - TDD 우선: 새 UseCase / Coordinator 는 `FakeXxx` 기반 테스트 먼저 또는 함께
 - 외부 준비 연기: 외부 콘솔 / 인프라 미준비 = `TODO(user-prep)` 또는 stub
 - 모델 분리: DTO · Entity · DomainModel · UiState 레이어 간 혼용 금지
@@ -209,7 +209,7 @@ verify / review 없이 완료 금지.
 - 불변 UI 상태: UiState 불변 + ViewModel → UI 단방향
 - DI baseline: 3-repo 모두 `Koin`. 위치는 `app/` (또는 향후 `shared/app` glue)
 
-세부: `.claude/rules/workflow-core.md` + `cycle-discipline.md` + `pencil-automation.md` + `.claude/rules/ui-ux-analysis.md`.
+세부: `docs/rules/workflow-core.md` + `cycle-discipline.md` + `pencil-automation.md` + `docs/rules/ui-ux-analysis.md`.
 아키텍처 공통 SoT: 각 자식 repo 의 `docs/agent/architecture/` (각 자식 repo 가 SteadyWell propagation 받음).
 
 ---
@@ -227,7 +227,7 @@ verify / review 없이 완료 금지.
 
 stdout 출력 순서: `[EVIDENCE] → [DIFF] → [LOG]`
 
-PLAN / VERIFY / REVIEW / PromptFit 정규 스키마: `.claude/rules/reporting.md` §5~§7 + §1 경로 규약 (= 직전 report-formats.md + report-paths.md 본문 통합 default · MASTER-CLI-CLEANUP-7CYCLE-001 M1 마감).
+PLAN / VERIFY / REVIEW / PromptFit 정규 스키마: `docs/rules/reporting.md` §5~§7 + §1 경로 규약 (= 직전 report-formats.md + report-paths.md 본문 통합 default · MASTER-CLI-CLEANUP-7CYCLE-001 M1 마감).
 
 ### Task ID 형식
 
@@ -255,14 +255,14 @@ PLAN / VERIFY / REVIEW / PromptFit 정규 스키마: `.claude/rules/reporting.md
 
 ## 14. UI/UX 규칙 하이라이트
 
-- `.claude/rules/pencil-uiux-workflow.md` (보호) — UI/UX 변경 = Pencil SoT → Compose 순서 강제 + `.ai/uiux-sot/latest/` 필수 (GT-strong patterns 채택)
+- `docs/rules/pencil-uiux-workflow.md` (보호) — UI/UX 변경 = Pencil SoT → Compose 순서 강제 + `.ai/uiux-sot/latest/` 필수 (GT-strong patterns 채택)
 - `docs/design/pencil-sot-policy.md` (보호) — Pencil SoT 정책 §1.1 디자인 도구 바인딩 / [CURRENT] / [TARGET] / [LOCKED] 라벨 / §3 Phase R 예외 / §8 고위험 STOP / §9 마이그레이션 escape
-- `.claude/rules/uiux-sot-refresh.md` (보호) — refresh trigger FULL / PARTIAL / DOC-ONLY 분류
+- `docs/rules/uiux-sot-refresh.md` (보호) — refresh trigger FULL / PARTIAL / DOC-ONLY 분류
 
 신규 Pencil 측 cli infra (MASTER-CLI-PENCIL-OPTIMIZATION-001 · 2026-05-19):
-- `.claude/rules/pencil-cli-headless.md` — `@pencil.dev/cli` headless 진입점 + batch tasks.json + Save As 모달 회피 + CI/CD 통합 paradigm
-- `.claude/rules/pencil-mcp-tools-reference.md` — 12 official + 1 package-verified (`open_document`) 도구 단일 SoT
-- `.claude/rules/design-prompting-paradigm.md` — Effective Prompting 4 원칙 + verification 4-step + §FREEDOM
+- `docs/rules/pencil-cli-headless.md` — `@pencil.dev/cli` headless 진입점 + batch tasks.json + Save As 모달 회피 + CI/CD 통합 paradigm
+- `docs/rules/pencil-mcp-tools-reference.md` — 12 official + 1 package-verified (`open_document`) 도구 단일 SoT
+- `docs/rules/design-prompting-paradigm.md` — Effective Prompting 4 원칙 + verification 4-step + §FREEDOM
 
 ---
 
@@ -273,12 +273,12 @@ PLAN / VERIFY / REVIEW / PromptFit 정규 스키마: `.claude/rules/reporting.md
 | 보호 파일 | git-sha1 | 본 cycle 변동 |
 |---|---|---|
 | `docs/schemas/ui-spec.schema.json` | `8b46bb4952be03a7631b66096ba2b47e27a1c72a` | 무변동 (= COMPOUND-LINT-DEPRECATE-001 baseline 유지) |
-| `.claude/rules/pencil-uiux-workflow.md` | `aba157e0a6fdfd180dfab68167270bdfb542e94f` | 무변동 (= PENCIL-PHASE-B-PROTECTED-001 baseline 유지) |
+| `docs/rules/pencil-uiux-workflow.md` | `68c6c213b18ed958aec21f5dc527aa5625c64424` | 무변동 (= PENCIL-PHASE-B-PROTECTED-001 baseline 유지) |
 | `docs/design/pencil-sot-policy.md` | `ce9c0d3e54534eb6eab3c7133cbb71a0e17ca6de` | 무변동 (= PENCIL-PHASE-B-PROTECTED-001 baseline 유지) |
-| `.claude/rules/uiux-sot-refresh.md` | `0aeac86d9d86532c893503dda8c09cbfc4cfc228` | **갱신** (이전 `d2c62265...` · "Refresh Trigger Classification" 직후 "즉시 의무 vs Deferred (design-debt) 분기" subsection 신설 + 게이트 line REVIEW §1 FAIL→[Design SoT Sync] WARN 재배선) |
+| `docs/rules/uiux-sot-refresh.md` | `7e70e365bb3085c0be9378a851685874e2c020da` | **갱신** (이전 `d2c62265...` · "Refresh Trigger Classification" 직후 "즉시 의무 vs Deferred (design-debt) 분기" subsection 신설 + 게이트 line REVIEW §1 FAIL→[Design SoT Sync] WARN 재배선) |
 | `docs/design/design-sot-policy.md` | `0d265e0bbc6f0f848f1b34dc510a9d6d7d9f0bd9` | **갱신** (이전 `69649a36...` · §3 "원칙" code-first 역방향 항→Deferred (design-debt) lane 한정 허용 3-bullet · Phase R 예외 무접촉) |
 
-> **algorithm 분기 주의** (`protected-file-hashes.md §CONVENTION` 정합): 본 §14a = **git-sha1 (40 char)** · `.auto-memory/protected-file-hashes.md` manifest + `.ai/baseline-snapshot/latest.json` = **sha-256 (64 char)**. pencil-uiux-workflow.md 측 sha-256 = `b09b8d5091a748e80a062e766ef51352a6f26a3afdffccc15d51ade4d643364e` (= manifest 측 baseline). 두 algorithm 직접 비교 금지.
+> **algorithm 분기 주의** (`protected-file-hashes.md §CONVENTION` 정합): 본 §14a = **git-sha1 (40 char)** · `.auto-memory/protected-file-hashes.md` manifest + `.ai/baseline-snapshot/latest.json` = **sha-256 (64 char)**. pencil-uiux-workflow.md 측 sha-256 = `202d3f4f29c0668eb5f1a33b6d40d5153888cf1f1e55da9958f9ab605c68f40a` (= manifest 측 baseline). 두 algorithm 직접 비교 금지.
 
 `.auto-memory/protected-file-hashes.md` 와의 정합 의무 (`cycle-discipline.md` §10 정합).
 
@@ -319,6 +319,6 @@ PLAN / VERIFY / REVIEW / PromptFit 정규 스키마: `.claude/rules/reporting.md
 
 `Sources:`
 - [.claude/settings.json](computer:///Users/yundonghyeon/AndroidStudioProjects/claude-cli-master/.claude/settings.json)
-- [.claude/rules/workflow-core.md](computer:///Users/yundonghyeon/AndroidStudioProjects/claude-cli-master/.claude/rules/workflow-core.md)
-- [.claude/rules/cycle-discipline.md](computer:///Users/yundonghyeon/AndroidStudioProjects/claude-cli-master/.claude/rules/cycle-discipline.md)
+- [docs/rules/workflow-core.md](computer:///Users/yundonghyeon/AndroidStudioProjects/claude-cli-master/docs/rules/workflow-core.md)
+- [docs/rules/cycle-discipline.md](computer:///Users/yundonghyeon/AndroidStudioProjects/claude-cli-master/docs/rules/cycle-discipline.md)
 - [.auto-memory/protected-file-hashes.md](computer:///Users/yundonghyeon/AndroidStudioProjects/claude-cli-master/.auto-memory/protected-file-hashes.md)

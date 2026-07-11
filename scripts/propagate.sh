@@ -270,9 +270,9 @@ cd "$MASTER_DIR"
 PROTECTED_MANIFEST=".auto-memory/protected-file-hashes.md"
 PROTECTED_BASELINE_FILES=(
   docs/schemas/ui-spec.schema.json
-  .claude/rules/pencil-uiux-workflow.md
+  docs/rules/pencil-uiux-workflow.md
   docs/design/pencil-sot-policy.md
-  .claude/rules/uiux-sot-refresh.md
+  docs/rules/uiux-sot-refresh.md
   docs/design/design-sot-policy.md
 )
 EXPECTED_BASELINE=$(for f in "${PROTECTED_BASELINE_FILES[@]}"; do

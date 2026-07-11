@@ -24,7 +24,7 @@
 # Reference SoT:
 #   - .claude/rules/anchor-list.md §2 A1 (Baseline drift detection) + A2 (Protected file integrity guard)
 #   - .auto-memory/protected-file-hashes.md (보호 5 file sha-256 baseline reference)
-#   - .claude/rules/automation-policy.md §3 row 3 (Hook 발화 = Transport OK)
+#   - docs/rules/automation-policy.md §3 row 3 (Hook 발화 = Transport OK)
 #   - .claude/hooks/baseline-snapshot.sh (baseline capture SoT · SessionStart event)
 #   - 부모 mount root CLAUDE.md §3 (자식 단독 §3.1 vs 부모 mount §3.2 진입 paradigm)
 #
@@ -63,9 +63,9 @@ baseline_path = os.environ.get("ILV_BASELINE", "")
 REPOS = ["claude-cli-master", "app-foundation", "GentlyBreath", "GentlyDay", "GentlyTable", "gently-product-docs"]
 PROTECTED = [
     "docs/schemas/ui-spec.schema.json",
-    ".claude/rules/pencil-uiux-workflow.md",
+    "docs/rules/pencil-uiux-workflow.md",
     "docs/design/pencil-sot-policy.md",
-    ".claude/rules/uiux-sot-refresh.md",
+    "docs/rules/uiux-sot-refresh.md",
     "docs/design/design-sot-policy.md",
 ]
 

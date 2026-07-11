@@ -34,7 +34,7 @@
 
 ### 1-3. STOP 경계
 
-아래 영역 변경은 모두 **Auth · DB migration · Money/Billing** 중첩 → 각 repo 의 `.claude/rules/deferred-domains.md` 기준 즉시 STOP 경로.
+아래 영역 변경은 모두 **Auth · DB migration · Money/Billing** 중첩 → 각 repo 의 `docs/rules/deferred-domains.md` 기준 즉시 STOP 경로.
 - RLS SQL 실제 적용: **Coin 수동 only** (agent 자동 적용 금지)
 - DDL 파일 (`docs/setup/01_*_supabase_ddl.sql`) 수정: CLI 프롬프트 대상 아님 — repo 문서 `docs/backend/rls-matrix.md` 신설만 담당
 - Edge Function 실제 배포: **Coin 수동** (Supabase CLI `supabase functions deploy`)
@@ -623,7 +623,7 @@ Supabase 실제 정책 SQL 은 Coin 이 Dashboard SQL Editor 에서 수동 반�
 2. `.claude/rules/workflow.md`
 3. `.claude/rules/evidence-and-reporting.md`
 4. `.claude/rules/safety-and-secrets.md`
-5. `.claude/rules/pencil-uiux-workflow.md` — 참고 (UI/UX trigger 아님, 무관함 명시 목적)
+5. `docs/rules/pencil-uiux-workflow.md` — 참고 (UI/UX trigger 아님, 무관함 명시 목적)
 6. `docs/setup/01_gt_supabase_ddl.sql` — 현재 정책 목록 (읽기 only)
 7. `GT_AUTH_ANON_MIGRATION_GUIDE.md` (workspace root, 있으면) — Phase 0 맥락
 8. `.ai/tasks/INDEX.md` (있으면)
@@ -753,7 +753,7 @@ Supabase 에 직접 접근하지 않고 DDL 도 수정하지 않는다.
 2. `.claude/rules/workflow.md` — Low Risk 경량화 기준
 3. `.claude/rules/evidence-and-reporting.md` — PLAN.md 3-section · REVIEW.md 3-section 형식
 4. `.claude/rules/safety-and-secrets.md` — 시크릿 기록 금지
-5. `.claude/rules/legacy-cleanup-governance.md` — ops-layer task cleanup 규약
+5. `docs/rules/legacy-cleanup-governance.md` — ops-layer task cleanup 규약
 6. `docs/backend/rls-matrix.md` — 현재 매트릭스 (수정 대상)
 7. `docs/setup/01_gb_supabase_ddl.sql` — 현재 테이블 목록 (읽기 only, 수정 금지)
 8. `.ai/reports/RLS-DOC-GB-001/` 산출물 — 1차 task 증거 (참조)
@@ -856,7 +856,7 @@ DDL 도 수정하지 않는다.
 2. `.claude/rules/workflow.md` — Low Risk 경량화 기준
 3. `.claude/rules/evidence-and-reporting.md` — PLAN.md 3-section · REVIEW.md 3-section 형식
 4. `.claude/rules/safety-and-secrets.md` — 시크릿 기록 금지
-5. `.claude/rules/legacy-cleanup-governance.md` — ops-layer task cleanup 규약
+5. `docs/rules/legacy-cleanup-governance.md` — ops-layer task cleanup 규약
 6. `docs/backend/rls-matrix.md` — 현재 매트릭스 (수정 대상)
 7. `docs/setup/01_gd_supabase_ddl.sql` — 현재 테이블·정책 목록 (읽기 only, 수정 금지)
 8. `.ai/reports/RLS-DOC-GD-001/` 산출물 — 1차 task 증거 (참조)
@@ -1083,8 +1083,8 @@ Medium Risk 의 SoftBudget 는 단일 Screen+ViewModel+UiState 기준 120 LOC �
 2. `.claude/rules/workflow.md` — Medium Risk 전체 10-section PLAN 요건 / 변동성 경계 원칙
 3. `.claude/rules/evidence-and-reporting.md` — 10-section PLAN / 12-section REVIEW 형식
 4. `.claude/rules/safety-and-secrets.md` — 시크릿 기록 금지
-5. `.claude/rules/routing-and-delegation.md` — Planner/Generator/Evaluator 경계
-6. `.claude/rules/legacy-cleanup-governance.md` — code-level task Cleanup Assessment 필수
+5. `docs/rules/routing-and-delegation.md` — Planner/Generator/Evaluator 경계
+6. `docs/rules/legacy-cleanup-governance.md` — code-level task Cleanup Assessment 필수
 7. `gradle/libs.versions.toml`
 8. `app/src/main/java/com/example/gentlybreath/di/AppModule.kt` (있으면)
 9. `app/src/main/java/**/data/remote/SupabaseClientFactory.kt` (또는 동등 파일)
@@ -1328,9 +1328,9 @@ curl · wget · sudo · rm · git commit · git push · git reset · git clean �
 2. `.claude/rules/workflow.md`
 3. `.claude/rules/evidence-and-reporting.md`
 4. `.claude/rules/safety-and-secrets.md`
-5. `.claude/rules/routing-and-delegation.md`
-6. `.claude/rules/legacy-cleanup-governance.md`
-7. `.claude/rules/pencil-uiux-workflow.md` — 참고 (본 task 는 UI/UX trigger 아님 명시)
+5. `docs/rules/routing-and-delegation.md`
+6. `docs/rules/legacy-cleanup-governance.md`
+7. `docs/rules/pencil-uiux-workflow.md` — 참고 (본 task 는 UI/UX trigger 아님 명시)
 8. `gradle/libs.versions.toml`
 9. `app/src/main/java/com/example/gentlytable/di/AppModule.kt`
 10. `app/src/main/java/com/example/gentlytable/data/remote/SupabaseClientFactory.kt` — 참고 (Integrity 는 remote 계층 아님, data/integrity 로 분리)

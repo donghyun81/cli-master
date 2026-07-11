@@ -76,7 +76,7 @@ rg -n "^import.*${REPO_APP_PKG}\.shared\.(app|feature)" "$REPO_SHARED_DOMAIN_PAT
 
 ## 교차권한 금지 (Evaluator 경계)
 
-본 agent = Evaluator bucket (read-only 검증/판정 역할). `.claude/rules/routing-and-delegation.md` §Planner/Generator/Evaluator 경계 5 규칙 중 **#3 "Evaluator 는 고치지 않는다"** 정합:
+본 agent = Evaluator bucket (read-only 검증/판정 역할). `docs/rules/routing-and-delegation.md` §Planner/Generator/Evaluator 경계 5 규칙 중 **#3 "Evaluator 는 고치지 않는다"** 정합:
 
 - layer 위반 발견 시 직접 코드 수정 X.
 - FAIL / PARTIAL 판정 + 구체적 수정 방향 제시 (file:line + import 내용 + 수정 방향) 의무.

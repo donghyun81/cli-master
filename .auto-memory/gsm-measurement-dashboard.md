@@ -2,7 +2,7 @@
 
 > **단일 목적**: GSM 계측 layer 의 4 Metric family 를 한 화면으로 모은 종합 view. anchor(A1~A10) M 목표 + 행동 7종 + context 건강 + cycle 건강(DORA) 을 pointer 로 모으고, 현재 스냅샷을 둔다. 본문 측정값의 단일 SoT 는 각 source file (= 본 view 는 복제 X · 요약 + pointer).
 > **신설**: MASTER-CLI-GSM-MEASUREMENT-LAYER-001 (2026-06-02 · M5 cli-infra-ops).
-> **위치**: master only (`.auto-memory/` · propagation X · audit memory). canonical form = [`gsm-measurement.md`](../.claude/rules/gsm-measurement.md).
+> **위치**: master only (`.auto-memory/` · propagation X · audit memory). canonical form = [`gsm-measurement.md`](../docs/rules/gsm-measurement.md).
 > SOT: `CLAUDE.md`
 
 ---
@@ -28,7 +28,7 @@
 
 ## §2. 행동 family (Reading Mode 7종 · 본문 = `rule-routing-index.md §C`)
 
-> G/S/M 3-tuple 본문 = `.claude/rules/rule-routing-index.md §C`. 7 행동(구현형 / UI-UX형 / API-서버형 / 빌드-릴리즈형 / 정책-계획 / CLI 운영 / task 재개) 각각 G/S/M + deviation. 게이트(enforce=warn · ROI-coverage · 보호 sha 0 등) = §C M 열 보존.
+> G/S/M 3-tuple 본문 = `docs/rules/rule-routing-index.md §C`. 7 행동(구현형 / UI-UX형 / API-서버형 / 빌드-릴리즈형 / 정책-계획 / CLI 운영 / task 재개) 각각 G/S/M + deviation. 게이트(enforce=warn · ROI-coverage · 보호 sha 0 등) = §C M 열 보존.
 
 ---
 

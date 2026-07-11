@@ -9,8 +9,8 @@ allowed-tools: Bash, Read
 
 > **단일 목적**: Pencil .pen 저장 자동화 — 신규 doc 첫 저장 (Coin 1회 GUI 클릭 의무) + 기존 .pen 변경 저장 (agent 직접 호출 자동) 의 워크플로우.
 > **연관 paradigm**:
-> - `.claude/rules/pencil-uiux-workflow.md` (보호) — Pencil → Compose 본 작업 정책
-> - `.claude/rules/cycle-discipline.md` §13 — Claude Code 환경 정합 (최신 추격 정책)
+> - `docs/rules/pencil-uiux-workflow.md` (보호) — Pencil → Compose 본 작업 정책
+> - `docs/rules/cycle-discipline.md` §13 — Claude Code 환경 정합 (최신 추격 정책)
 > - `.claude/hooks/pencil-auto-save.sh` (v2 · master 채택) — 자동 호출 hook
 > - `scripts/save-as-result-check.sh` (= 수동 helper · MASTER-CLI-CLEANUP-7CYCLE-001 S4 마감 후 위치 default · settings.json 등록 X default · GD-only 흡수 baseline) — Save As 결과 검증
 > - `.claude/skills/pencil-cli/SKILL.md` — CLI headless mode 분기 단일 SoT
@@ -96,4 +96,4 @@ allowed-tools: Bash, Read
 
 ## §14 명시 cycle 이력
 
-- 2026-05-26 · `MASTER-CLI-SKILLS-MIGRATION-PHASE-1-001` · 본 skill 신설 default (= 직전 rule (`.claude/rules/pencil-automation.md`) 본문 본질 보존 default · skill paradigm 정합 default · trigger 시점 lazy load default · `.claude/rules/pencil-automation.md` 측 thin pointer 갱신 default)
+- 2026-05-26 · `MASTER-CLI-SKILLS-MIGRATION-PHASE-1-001` · 본 skill 신설 default (= 직전 rule (`docs/rules/pencil-automation.md`) 본문 본질 보존 default · skill paradigm 정합 default · trigger 시점 lazy load default · `docs/rules/pencil-automation.md` 측 thin pointer 갱신 default)

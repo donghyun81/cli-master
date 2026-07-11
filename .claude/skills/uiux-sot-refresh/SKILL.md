@@ -33,7 +33,7 @@ description: Use to refresh .ai/uiux-sot/latest/ baseline (FULL/PARTIAL/DOC-ONLY
 ## Required Read Order
 
 1. `CLAUDE.md`
-2. `.claude/rules/uiux-sot-refresh.md`
+2. `docs/rules/uiux-sot-refresh.md`
 3. `.ai/uiux-sot/semantic/README.md`
 4. `.ai/uiux-sot/latest/manifest.md`
 5. `.ai/uiux-sot/refresh/TRIGGERS.md`
@@ -44,7 +44,7 @@ description: Use to refresh .ai/uiux-sot/latest/ baseline (FULL/PARTIAL/DOC-ONLY
 10. iOS shell files if needed
 11. `.ai/uiux-sot/lineage/seed_audit_reference.md`
 
-> Placeholder resolution: `<APP_ROUTES>` / `<APP_ROOT_COMPOSABLE>` / `<APP_ROOT_STATE>` 는 `.claude/rules/uiux-sot-refresh.md` "Authoritative Read Order" 의 토큰 규칙을 따른다.
+> Placeholder resolution: `<APP_ROUTES>` / `<APP_ROOT_COMPOSABLE>` / `<APP_ROOT_STATE>` 는 `docs/rules/uiux-sot-refresh.md` "Authoritative Read Order" 의 토큰 규칙을 따른다.
 
 ## Guardrails
 

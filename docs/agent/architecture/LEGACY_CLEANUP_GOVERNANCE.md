@@ -1,6 +1,6 @@
 # Legacy Cleanup Governance — Architecture Companion
 
-> **목적**: `.claude/rules/legacy-cleanup-governance.md` 의 architecture-level 보충.
+> **목적**: `docs/rules/legacy-cleanup-governance.md` 의 architecture-level 보충.
 > **요약**: code-level task 마다 cleanup assessment 는 기본 절차다. 자동 삭제는 금지. EVIDENCE.md `## Cleanup Assessment` 섹션 누락 시 stop-gate 차단.
 
 ---
@@ -114,7 +114,7 @@ shell hook 이 제품 코드를 직접 자동수정/자동삭제하는 구조는
 
 ## 8. 관련 문서
 
-- `.claude/rules/legacy-cleanup-governance.md` — 정식 운영 규칙
+- `docs/rules/legacy-cleanup-governance.md` — 정식 운영 규칙
 - `.claude/rules/workflow.md` — Cleanup Assessment 의무 항목
 - `.claude/rules/safety-and-secrets.md` — `rm` deny + 비가역 변경 STOP
 - `SSOT_PRINCIPLES.md` — 단일 출처 표시 규칙

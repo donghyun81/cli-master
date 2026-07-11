@@ -58,8 +58,8 @@ bash scripts/activate-agent.sh deactivate billing-payments-guardian
 
 기능:
 - `.claude/agents/deferred/<name>.md` ↔ `.claude/agents/active/<name>.md` mv
-- `.claude/rules/routing-and-delegation.md` 의 `[DEFERRED]` 라벨 toggle
-- `.claude/rules/deferred-domains.md` 의 "현재 상태" 표 갱신
+- `docs/rules/routing-and-delegation.md` 의 `[DEFERRED]` 라벨 toggle
+- `docs/rules/deferred-domains.md` 의 "현재 상태" 표 갱신
 - propagation 호출 (3-repo 동기)
 
 ### 5. `/cycle-report` slash command (`.claude/commands/cycle-report.md`)

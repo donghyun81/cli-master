@@ -96,7 +96,7 @@ if [ -n "$BLOCKED_TASKS" ]; then
     echo "" >&2
     echo "  /verify 와 /review 단계를 완료하거나" >&2
     echo "  BLOCKED/STOP 사유를 VERIFY.md에 기록하세요." >&2
-    echo "  규칙: .claude/rules/verification-and-review.md" >&2
+    echo "  규칙: docs/rules/verification-and-review.md" >&2
     echo "" >&2
     append_incident "blocked-tasks" "$BLOCKED_TASKS"
     exit 2
@@ -110,7 +110,7 @@ if [ -n "$CLEANUP_MISSING" ]; then
     echo "  EVIDENCE.md 에 '## Cleanup Assessment' 섹션을 추가하세요." >&2
     echo "  code-level task: 실제 cleanup 점검 결과를 기록하세요." >&2
     echo "  ops-layer task: 'N/A (ops-layer task)' 로 명시하세요." >&2
-    echo "  규칙: .claude/rules/legacy-cleanup-governance.md" >&2
+    echo "  규칙: docs/rules/legacy-cleanup-governance.md" >&2
     echo "" >&2
     append_incident "cleanup-missing" "$CLEANUP_MISSING"
     exit 1

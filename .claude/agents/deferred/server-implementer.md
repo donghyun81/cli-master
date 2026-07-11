@@ -5,4 +5,4 @@ tools: Read
 ---
 # Server Implementer — DEFERRED
 서버 미연결 상태. 활성화 조건: Supabase Edge Functions 등 서버 연동 시작 시.
-SoftBudget: `.claude/rules/workflow-core.md` 참조.
+SoftBudget: `docs/rules/workflow-core.md` 참조.

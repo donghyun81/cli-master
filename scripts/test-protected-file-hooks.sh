@@ -58,10 +58,11 @@ trap 'rm -rf "$SANDBOX"' EXIT
 mkdir -p "$SANDBOX/.ai/baseline-snapshot"
 mkdir -p "$SANDBOX/docs/schemas"
 mkdir -p "$SANDBOX/docs/design"
+mkdir -p "$SANDBOX/docs/rules"
 mkdir -p "$SANDBOX/.claude/rules"
 
 # Copy 5 protected files into sandbox so shasum yields identical hashes.
-for rel in docs/schemas/ui-spec.schema.json .claude/rules/pencil-uiux-workflow.md docs/design/pencil-sot-policy.md .claude/rules/uiux-sot-refresh.md docs/design/design-sot-policy.md; do
+for rel in docs/schemas/ui-spec.schema.json docs/rules/pencil-uiux-workflow.md docs/design/pencil-sot-policy.md docs/rules/uiux-sot-refresh.md docs/design/design-sot-policy.md; do
     src="$REPO_ROOT/$rel"
     dst="$SANDBOX/$rel"
     if [ -f "$src" ]; then
@@ -75,9 +76,9 @@ import json, os, subprocess, sys
 sandbox = os.environ["SANDBOX_PATH"]
 PROTECTED = [
     "docs/schemas/ui-spec.schema.json",
-    ".claude/rules/pencil-uiux-workflow.md",
+    "docs/rules/pencil-uiux-workflow.md",
     "docs/design/pencil-sot-policy.md",
-    ".claude/rules/uiux-sot-refresh.md",
+    "docs/rules/uiux-sot-refresh.md",
     "docs/design/design-sot-policy.md",
 ]
 pf = {}
@@ -146,7 +147,7 @@ fi
 # Fixture #3 — PreToolUse · Edit on protected file
 # Expected: exit 0 (warn mode), stderr contains "protected"
 # ─────────────────────────────────────────────────────────────
-F3_INPUT='{"tool_name":"Edit","tool_input":{"file_path":"/Users/yundonghyeon/AndroidStudioProjects/claude-cli-master/.claude/rules/pencil-uiux-workflow.md"}}'
+F3_INPUT='{"tool_name":"Edit","tool_input":{"file_path":"/Users/yundonghyeon/AndroidStudioProjects/claude-cli-master/docs/rules/pencil-uiux-workflow.md"}}'
 F3_STDERR=$(mktemp)
 F3_EXIT=$(PROTECTED_FILE_EDIT_ENFORCE=warn \
     bash -c "echo '$F3_INPUT' | bash '$HOOK_PFE' 2>'$F3_STDERR'; echo \$?")
@@ -165,7 +166,7 @@ fi
 # Fixture #4 — PreToolUse · Edit on non-protected file
 # Expected: exit 0, stderr empty
 # ─────────────────────────────────────────────────────────────
-F4_INPUT='{"tool_name":"Edit","tool_input":{"file_path":"/Users/yundonghyeon/AndroidStudioProjects/claude-cli-master/.claude/rules/code-principles.md"}}'
+F4_INPUT='{"tool_name":"Edit","tool_input":{"file_path":"/Users/yundonghyeon/AndroidStudioProjects/claude-cli-master/docs/rules/code-principles.md"}}'
 F4_STDERR=$(mktemp)
 F4_EXIT=$(PROTECTED_FILE_EDIT_ENFORCE=warn \
     bash -c "echo '$F4_INPUT' | bash '$HOOK_PFE' 2>'$F4_STDERR'; echo \$?")

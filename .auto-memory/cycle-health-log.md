@@ -1,6 +1,6 @@
 # Cycle Health Log — DORA 4-key 정량 append (GSM cycle 건강 Metric family)
 
-> **단일 목적**: 운영 흐름 건강(DORA 4-key) 의 cycle 단위 정량 기록. `measure-gsm-cycle.sh`(Stop hook) 가 새 master cycle 마감 감지 시 한 행 append(= `GSM_MEASURE_ENFORCE=append`). DORA 4-key **정의** 단일 SoT = [`gsm-measurement.md §3`](../.claude/rules/gsm-measurement.md).
+> **단일 목적**: 운영 흐름 건강(DORA 4-key) 의 cycle 단위 정량 기록. `measure-gsm-cycle.sh`(Stop hook) 가 새 master cycle 마감 감지 시 한 행 append(= `GSM_MEASURE_ENFORCE=append`). DORA 4-key **정의** 단일 SoT = [`gsm-measurement.md §3`](../docs/rules/gsm-measurement.md).
 > **신설**: MASTER-CLI-GSM-MEASUREMENT-LAYER-001 (2026-06-02 · M5 cli-infra-ops).
 > **위치**: master only (`.auto-memory/` · propagation X · `*-COLD.md` / `context-health-metrics.md` 동급 audit memory).
 > **⚠ proxy 주의**: 아래 값 = `git log` 측 **coarse proxy**(= master commit subject 의 cycle/task ID 토큰 dedup · revert commit 수). 정밀 cycle-close 측정 아님 · token/정확 cadence over-claim 금지(`context-health-metrics.md §⚠` 정합). 판정·amend = 수동(`gsm-measurement.md §4·§6`).

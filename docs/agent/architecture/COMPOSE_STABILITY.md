@@ -2,7 +2,7 @@
 
 > 이 문서는 multi-repo propagation 대상이며 byte-identical 로 복사된다.
 > SOT: `docs/agent/architecture/COMPOSE_STABILITY.md`
-> 관련: `docs/agent/architecture/DEPENDENCY_DECISION_CHECKLIST.md`, `.claude/rules/ui-ux-analysis.md`
+> 관련: `docs/agent/architecture/DEPENDENCY_DECISION_CHECKLIST.md`, `docs/rules/ui-ux-analysis.md`
 
 ---
 
@@ -199,6 +199,6 @@ cold start 와 첫 scroll 의 jank 를 유의미하게 줄일 수 있다.
 ## 10. 관련 문서
 
 - `docs/agent/architecture/DEPENDENCY_DECISION_CHECKLIST.md` — 새 라이브러리 (예: kotlinx.collections.immutable) 도입 시 8항목 체크
-- `.claude/rules/ui-ux-analysis.md` — UI 라이브러리 억제 기본값, UiState 분리 원칙
+- `docs/rules/ui-ux-analysis.md` — UI 라이브러리 억제 기본값, UiState 분리 원칙
 - `docs/agent/architecture/MODEL_SEPARATION.md` — UiState/DomainModel/DTO 경계 (해당 문서가 존재하는 경우)
 - `docs/agent/architecture/ADR_TEMPLATE.md` — stability/perf 결정이 설계 수준 변경을 수반하면 ADR 로 기록

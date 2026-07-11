@@ -1,7 +1,7 @@
 # Context Health Metrics — 항상로드 char + 환각 패턴 수 (정기 측정 SoT)
 
 > **단일 목적**: CLI context 최적화 프로그램(Phase 0~4) 산출을 **회귀 방지**하기 위한 정기 측정 지표 SoT. 2 지표 family = (1) 항상로드 char(repo별 · proxy) + (2) 환각 패턴 수(disk 측정).
-> **GSM 귀속** (= 2026-06-02 · MASTER-CLI-GSM-MEASUREMENT-LAYER-001): 본 2 family = [`gsm-measurement.md §2`](../.claude/rules/gsm-measurement.md) 의 **context 건강 Metric family**(= program-level · 행동 무관 · §0 G/S 연결). `rule-routing-index.md §C` 행동별 GSM 과는 별 layer(= 행동 무관 context 건강 전체) · cycle-health(DORA) family 와 함께 `gsm-measurement-dashboard.md` 종합 view 노출.
+> **GSM 귀속** (= 2026-06-02 · MASTER-CLI-GSM-MEASUREMENT-LAYER-001): 본 2 family = [`gsm-measurement.md §2`](../docs/rules/gsm-measurement.md) 의 **context 건강 Metric family**(= program-level · 행동 무관 · §0 G/S 연결). `rule-routing-index.md §C` 행동별 GSM 과는 별 layer(= 행동 무관 context 건강 전체) · cycle-health(DORA) family 와 함께 `gsm-measurement-dashboard.md` 종합 view 노출.
 > **신설**: MASTER-CLI-CONTEXT-OPT-PHASE4-SSOT-SWEEP-METRICS-001 (2026-06-01 · M5 · 프로그램 마지막 Phase).
 > **위치**: master only (`.auto-memory/` · propagation X · `*-COLD.md` 동급 audit memory). 자식 측 char 은 repo별 측정값(byte-identical 아님).
 > **⚠ proxy 주의**: char = UTF-8 codepoint(python) · **token 아님**. token 추정 시 proxy band(ASCII≈3.2~4 ch/tok · Hangul≈1.0~2.2 ch/tok) 라벨 의무 · over-claim 금지(`cc-audit-CONTEXT-OPT-PHASE0-001.md §0` 정합).

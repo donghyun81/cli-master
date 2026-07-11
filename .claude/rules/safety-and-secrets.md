@@ -22,7 +22,7 @@
 | `git reset` | 비가역 상태 변경 금지 |
 | `git clean` | 추적 외 파일 삭제 금지 |
 
-> **`git commit` 영역 우선순위 정합**: `.claude/rules/cycle-discipline.md §5 agent commit 한시 허가 정책 (v2)` 우선 · 본 표 = 응급 백스탑 default 영역. v2 자동 허용 카테고리 (docs / cleanup / propagation / report / refactor / test / chore / audit / discipline) + app/src/ 변경 + 빌드 PASS + Coin 명시 승인 영역 측 agent commit 허용 정합.
+> **`git commit` 영역 우선순위 정합**: `docs/rules/cycle-discipline.md §5 agent commit 한시 허가 정책 (v2)` 우선 · 본 표 = 응급 백스탑 default 영역. v2 자동 허용 카테고리 (docs / cleanup / propagation / report / refactor / test / chore / audit / discipline) + app/src/ 변경 + 빌드 PASS + Coin 명시 승인 영역 측 agent commit 허용 정합.
 
 ---
 
@@ -87,7 +87,7 @@ read-only 역할(ux-auditor, backend-api-architect 등)은 Write/Edit 권한이 
 ## macOS Keychain 측 secret 보관 paradigm
 
 > **신설**: 2026-05-18 · `MASTER-CLI-SUPABASE-COMPREHENSIVE-001` · macOS native Keychain 측 secret 보관 + wrap script 측 추출 paradigm 단일 진실 영역.
-> **연관**: `.claude/rules/supabase-handling.md` §10.5 (= MCP server 측 Keychain reference) + `~/bin/claude-wrap.sh` (= 본 paradigm 측 진입점).
+> **연관**: `docs/rules/supabase-handling.md` §10.5 (= MCP server 측 Keychain reference) + `~/bin/claude-wrap.sh` (= 본 paradigm 측 진입점).
 
 ### 등록 paradigm (= 사용자 manual 진입 영역)
 
@@ -181,7 +181,7 @@ AIza[0-9A-Za-z\-_]{35}    # Google API Key
 
 ## git commit 측 stage 정합 paradigm (= 2026-05-21 신설 · pointer)
 
-> **본 § = pointer 영역 default**. 본문 단일 SoT = [`cycle-discipline.md` §22](./cycle-discipline.md) (= `MASTER-CLI-GIT-MV-SED-STAGE-PARADIGM-CHECK-001` 마감 default). 본 § = 안내 + trigger 영역 단일 default · 보호 영역 본질 X default.
+> **본 § = pointer 영역 default**. 본문 단일 SoT = [`cycle-discipline.md` §22](../../docs/rules/cycle-discipline.md) (= `MASTER-CLI-GIT-MV-SED-STAGE-PARADIGM-CHECK-001` 마감 default). 본 § = 안내 + trigger 영역 단일 default · 보호 영역 본질 X default.
 
 `git mv` 측 rename 호출 후 동족 file 측 sed content 정정 영역 측 stage 누락 사고 mitigation. post-rename `git add -u` 의무 paradigm 정합 의무 default. GB+GD 동족 사고 baseline default (= GT 측 자율 회피 default).
 

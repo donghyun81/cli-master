@@ -2,7 +2,7 @@
 # measure-gsm-cycle.sh — GSM 측정 (DORA 4-key cycle 건강 + context 건강) 자동 측정 (Stop hook · non-blocking · 항상 exit 0)
 # 신설: MASTER-CLI-GSM-MEASUREMENT-LAYER-001 (2026-06-02)
 # 확장: MASTER-CLI-GSM-CONTEXT-HEALTH-ABSORB-001 (2026-06-04 · context-health 측정 흡수 · 신 hook 신설 X · settings.json 무접촉)
-# 관련: .claude/rules/gsm-measurement.md §2 (Metric family) · §3 (DORA 정의) · §4 (측정 layer) ·
+# 관련: docs/rules/gsm-measurement.md §2 (Metric family) · §3 (DORA 정의) · §4 (측정 layer) ·
 #       .auto-memory/cycle-health-log.md (DORA 정량 append) · .auto-memory/context-health-metrics.md §3.1 (context 건강 분기 append) ·
 #       stop-reflect.sh / stop-housekeeping.sh (= 동일 non-blocking advisory 철학)
 #

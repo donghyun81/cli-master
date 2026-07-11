@@ -7,7 +7,7 @@
 #   warn    (default, Cycle 1~3) — warn to stderr, always exit 0
 #   enforce (Cycle 4+ upgrade)   — block with exit 2 on violation
 #
-# Policy SoT: .claude/rules/abbreviation-policy.md (§1 정책 + §2 금지 seed + §3 허용 acronym 통합 SoT)
+# Policy SoT: docs/rules/abbreviation-policy.md (§1 정책 + §2 금지 seed + §3 허용 acronym 통합 SoT)
 #   (직전 3 file no-abbreviation-policy.md / forbidden-abbreviations.md / allowed-acronyms.md
 #    본문 통합 default · MASTER-CLI-CLEANUP-7CYCLE-001 마감)
 #
@@ -172,7 +172,7 @@ if echo "$ANALYSIS" | grep -q "^FORBIDDEN:"; then
 
     BLOCK_MSG="[NO-ABBREV] ${COUNT} forbidden abbreviation(s) in ${FILE_PATH}
 ${DETAILS}
-→ Policy: .claude/rules/abbreviation-policy.md (§1 policy + §2 forbidden seed + §3 allowed acronym)
+→ Policy: docs/rules/abbreviation-policy.md (§1 policy + §2 forbidden seed + §3 allowed acronym)
 → Action: use full descriptive names instead of abbreviations"
 
     if [ "$NO_ABBREV_ENFORCE" = "enforce" ]; then

@@ -23,10 +23,10 @@ PLAN.md에 정의된 화면/상태/UI 로직 변경을 **최소 수정 원칙**�
 
 ## Key questions
 
-0. **Pencil SoT entry gate**: 변경 대상이 `*Screen.kt` 또는 `*Screens.kt` 화면 file 측 경우 → `docs/design/pencil-sot/<screen>/<screen>.pen` 존재 검증 의무. 부재 시 = 진입 차단 default · Type 2 (신규 SoT) 또는 Phase R (역공학) 선행 의무 (`.claude/rules/pencil-uiux-workflow.md` §3 정합). 화면명 매핑 baseline = `.claude/rules/sot-code-name-map.md` (= 명명 차이 영역 인용 default).
+0. **Pencil SoT entry gate**: 변경 대상이 `*Screen.kt` 또는 `*Screens.kt` 화면 file 측 경우 → `docs/design/pencil-sot/<screen>/<screen>.pen` 존재 검증 의무. 부재 시 = 진입 차단 default · Type 2 (신규 SoT) 또는 Phase R (역공학) 선행 의무 (`docs/rules/pencil-uiux-workflow.md` §3 정합). 화면명 매핑 baseline = `docs/rules/sot-code-name-map.md` (= 명명 차이 영역 인용 default).
 1. PLAN.md의 Allowed Paths에 포함된 파일인가?
 2. 현재 repo의 **기존 코드 패턴**과 일관성이 있는가? (새 패턴 도입 금지)
-3. **SoftBudget** 범위 내인가? (`.claude/rules/workflow-core.md` 참조)
+3. **SoftBudget** 범위 내인가? (`docs/rules/workflow-core.md` 참조)
 4. 현재 repo의 **문자열/리소스 관리 규약**을 따르는가? (하드코딩 금지)
 5. 이 변경이 **플랫폼 이식성**에 추가 부담을 주는가?
 
@@ -54,7 +54,7 @@ NOT 결정하는 것:
 
 ## 구현 원칙
 
-현재 repo의 UI 구현 환경과 규약은 `.claude/rules/ui-ux-analysis.md` 를 참조한다.
+현재 repo의 UI 구현 환경과 규약은 `docs/rules/ui-ux-analysis.md` 를 참조한다.
 공통 원칙:
 - 현재 repo 코드 스타일 우선 (새 패턴 도입 금지)
 - UI는 상태 소비, 비즈니스 로직은 상위 레이어에 위임
@@ -62,7 +62,7 @@ NOT 결정하는 것:
 - 단위 하드코딩 금지 (현재 repo의 크기/단위 체계 준수)
 
 ## SoftBudget
-`.claude/rules/workflow-core.md`의 SoftBudget 기준을 따른다.
+`docs/rules/workflow-core.md`의 SoftBudget 기준을 따른다.
 
 ---
 
@@ -106,6 +106,6 @@ stdout:
 
 UI 변경이 Pencil SoT 측 design 의도 흡수를 동반할 때 본 paradigm 적용:
 
-- **headless mode 진입점**: 다중 screen 일괄 신설 / Save As 모달 회피 / CI 자동화 cycle 측 = `.claude/rules/pencil-cli-headless.md` 단일 SoT 참조. desktop stdio (`mcp__pencil__*`) vs CLI headless 분기 = 본 SoT §7.
+- **headless mode 진입점**: 다중 screen 일괄 신설 / Save As 모달 회피 / CI 자동화 cycle 측 = `docs/rules/pencil-cli-headless.md` 단일 SoT 참조. desktop stdio (`mcp__pencil__*`) vs CLI headless 분기 = 본 SoT §7.
 - **design system context 호출**: design system 측 styles / guidelines 의도 흡수 시 `mcp__pencil__get_guidelines` 호출 → 결과 prompt context 안 인용. 새 token / hex 신설 진입 시 의무.
-- **Variables ↔ Theme.kt sync 책임**: 변경 영역이 `app-foundation/core/designsystem/.../Theme.kt` 또는 Pencil variable 둘 중 하나에 닿을 때 = `.claude/rules/design-to-code-sync.md` §9 양방향 sync paradigm 적용 의무. drift 발견 시 STOP + change-planner 재호출.
+- **Variables ↔ Theme.kt sync 책임**: 변경 영역이 `app-foundation/core/designsystem/.../Theme.kt` 또는 Pencil variable 둘 중 하나에 닿을 때 = `docs/rules/design-to-code-sync.md` §9 양방향 sync paradigm 적용 의무. drift 발견 시 STOP + change-planner 재호출.

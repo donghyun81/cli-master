@@ -123,7 +123,7 @@
 | Type 2 (Drift Audit), Type 3 (Restructuring), Type 4 (Creation) | 적용 안 함 (선택) |
 | Type 5 (Policy Update) | 제품 코드 변경 없으면 N/A 명시 |
 
-상세: `.claude/rules/legacy-cleanup-governance.md`
+상세: `docs/rules/legacy-cleanup-governance.md`
 
 ---
 

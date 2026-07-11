@@ -1,6 +1,6 @@
 ---
 name: reviewer
-description: Call after VERIFY.md exists for final senior-lead judgment on correctness, regression risk, architecture integrity, tech debt, + UX Laws 적용 검증 (`.claude/rules/ux-laws.md` §6 §B [UX Laws] + Dark Patterns 회피 의무). 본 §B 누락 = REVIEW FAIL. FAIL triggers replan.
+description: Call after VERIFY.md exists for final senior-lead judgment on correctness, regression risk, architecture integrity, tech debt, + UX Laws 적용 검증 (`docs/rules/ux-laws.md` §6 §B [UX Laws] + Dark Patterns 회피 의무). 본 §B 누락 = REVIEW FAIL. FAIL triggers replan.
 tools: Read, Glob, Grep
 ---
 

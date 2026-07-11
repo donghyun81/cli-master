@@ -13,7 +13,7 @@
 - 본인 confirm 영역 default (= 10 anchor default · hot 영역 default)
 - hot 제외 후보 = cold storage (= `.auto-memory/anchor-list-COLD.md` default) 측 누적 default · master only default · propagation X default
 - hot 복귀 trigger = 본 cold anchor 영역 재발 사고 1+ 회 발견 시점 default
-- **GSM 외화** (= MASTER-CLI-GSM-MEASUREMENT-LAYER-001 · 2026-06-02): 각 anchor = G/S/M 3-tuple 로 외화 (= [`gsm-measurement.md`](./gsm-measurement.md) canonical form 정합). G(의도) = 기존 Purpose 의 측정 restatement · 본질·우선순위(P0/P1)·적용 trigger 보존 · purpose 수준 유지 (= M 은 목표값 한정 · method 어휘 X). Metric family = `gsm-measurement.md §2` anchor family.
+- **GSM 외화** (= MASTER-CLI-GSM-MEASUREMENT-LAYER-001 · 2026-06-02): 각 anchor = G/S/M 3-tuple 로 외화 (= [`gsm-measurement.md`](../../docs/rules/gsm-measurement.md) canonical form 정합). G(의도) = 기존 Purpose 의 측정 restatement · 본질·우선순위(P0/P1)·적용 trigger 보존 · purpose 수준 유지 (= M 은 목표값 한정 · method 어휘 X). Metric family = `gsm-measurement.md §2` anchor family.
 
 ## §2. Hot anchor list (= 10 anchor default · P0 6 + P1 4 default)
 

@@ -61,8 +61,8 @@ cross-repo conductor 처럼 사고: "어느 자식 측 sub-agent 측 어떤 정�
 
 - 부모 mount root `CLAUDE.md` (= 6-repo umbrella 정합)
 - `.claude/rules/cross-repo-parallel-exec.md` (= 본 paradigm 본문 단일 SoT)
-- `.claude/rules/cycle-discipline.md` §21 (= cross-repo cycle 영역)
-- `.claude/rules/routing-and-delegation.md` §실행 방식 규칙 (= cross-repo sub-section)
+- `docs/rules/cycle-discipline.md` §21 (= cross-repo cycle 영역)
+- `docs/rules/routing-and-delegation.md` §실행 방식 규칙 (= cross-repo sub-section)
 - `.auto-memory/propagation-status.md` (= 6-repo HEAD sha 정합 baseline)
 - `.auto-memory/protected-file-hashes.md` (= 보호 5 file sha baseline)
 - 자식별 `CLAUDE.md` (= 자식 도메인 specific 영역 측 인지 의무 · lazy default)
@@ -85,7 +85,7 @@ main 측 결과 통합 + cross-repo 정합 결정
 
 sub-agent prompt 본문 의무 항목:
 - **Working directory 명시** (= `cwd = ~/AndroidStudioProjects/<repo>` 인용)
-- **측정 영역 명시** (= file path + measure method · 예: `git hash-object .claude/rules/cycle-discipline.md`)
+- **측정 영역 명시** (= file path + measure method · 예: `git hash-object docs/rules/cycle-discipline.md`)
 - **return format 명시** (= Verdict + Top Findings + Counter-example + Recommended Next Step + Pointers 5 섹션 · `reporting.md` §9 Subagent Return Contract 정합)
 - **return 본문 한도** (= ≤ 2,000 token 권장 / ≤ 4,000 token 의무 · 4k 초과 시 path pointer paradigm 정합)
 

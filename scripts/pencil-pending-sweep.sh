@@ -18,7 +18,7 @@
 #   - 1 = repo scan FAIL (= cli session 측 회수 의무)
 #
 # Reference SoT:
-#   - .claude/rules/pencil-uiux-workflow.md §3 (5-type IMPL · Type 1 drift 정정)
+#   - docs/rules/pencil-uiux-workflow.md §3 (5-type IMPL · Type 1 drift 정정)
 #   - docs/design/pencil-sot-policy.md §1 (SoT 우선순위 · lastSyncedDesignToolStateHash field)
 #   - docs/schemas/ui-spec.schema.json (= structural SoT schema)
 #

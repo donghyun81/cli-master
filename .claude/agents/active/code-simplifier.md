@@ -37,8 +37,8 @@ tools: Read, Glob, Grep, Edit
 NOT 결정하는 것 (제약):
 - whole-file deletion 금지 (Edit tool 라인 제거만 허용)
 - package-level deletion 금지
-- cleanup-governance 규칙 준수 필수: `.claude/rules/legacy-cleanup-governance.md`
-- SoftBudget: `.claude/rules/workflow-core.md` 참조
+- cleanup-governance 규칙 준수 필수: `docs/rules/legacy-cleanup-governance.md`
+- SoftBudget: `docs/rules/workflow-core.md` 참조
 
 ## Must escalate when
 

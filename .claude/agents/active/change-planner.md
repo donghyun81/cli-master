@@ -130,7 +130,7 @@ _외부 의존 연기 없으면 N/A._
 - UNKNOWN 항목
 ```
 
-전체 섹션 형식: `.claude/rules/reporting.md`
+전체 섹션 형식: `docs/rules/reporting.md`
 
 `.ai/tasks/INDEX.md` 상태 → PLAN
 

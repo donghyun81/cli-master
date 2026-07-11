@@ -10,9 +10,9 @@ allowed-tools: Bash, Read, Edit
 > **신설**: MASTER-CLI-RUNTIME-CRASH-MITIGATION-PROCESS-PARADIGM-001 (2026-05-22).
 > **precedent**: `3REPO-RUNTIME-CRASH-DIAGNOSIS-001` (= H32 chat 마감 default · Sentry `SentryInitProvider` 자동 init 측 empty DSN crash 차단 default · `<meta-data android:name="io.sentry.auto-init" android:value="false" />` × 3 자식 byte-identical mitigation default).
 > **연관 paradigm**:
-> - `.claude/rules/cycle-discipline.md` §5 v2 ([agent-commit: yes] 묵시 동의 paradigm default)
-> - `.claude/rules/cycle-discipline.md` §7 (commit body 6-section 표준 default)
-> - `.claude/rules/cycle-discipline.md` §24 (= 본 skill 측 pointer default)
+> - `docs/rules/cycle-discipline.md` §5 v2 ([agent-commit: yes] 묵시 동의 paradigm default)
+> - `docs/rules/cycle-discipline.md` §7 (commit body 6-section 표준 default)
+> - `docs/rules/cycle-discipline.md` §24 (= 본 skill 측 pointer default)
 > - `.claude/rules/cross-repo-parallel-exec.md` §2 (= 영역 1 sub-agent 병렬 vs 영역 2 다중 cli session paradigm default)
 > - `.claude/rules/safety-and-secrets.md` (= production push X paradigm default · 시크릿 기록 금지 default)
 > - `.claude/skills/disk-verification/SKILL.md` (= disk 측정 의무 paradigm default · 본 skill 정합)
@@ -186,12 +186,12 @@ Anthropic v2.1.145+ 측 bundled skill (`/run` + `/verify` + `/run-skill-generato
 
 | 인접 entry | 본질 |
 |---|---|
-| `.claude/rules/cycle-discipline.md` §5 v2 line 75 | [agent-commit: yes] 묵시 동의 paradigm default · 본 paradigm 측 commit step 8 정합 default |
-| `.claude/rules/cycle-discipline.md` §7 | commit body 6-section 표준 default · 본 paradigm 측 step 8 정합 default |
+| `docs/rules/cycle-discipline.md` §5 v2 line 75 | [agent-commit: yes] 묵시 동의 paradigm default · 본 paradigm 측 commit step 8 정합 default |
+| `docs/rules/cycle-discipline.md` §7 | commit body 6-section 표준 default · 본 paradigm 측 step 8 정합 default |
 | `.claude/rules/cross-repo-parallel-exec.md` §2 | 영역 1 sub-agent fan-out vs 영역 2 다중 cli session paradigm default · 본 paradigm 측 3 자식 동족 진입 시점 정합 default |
 | `.claude/rules/safety-and-secrets.md` | production push X paradigm default · 시크릿 기록 금지 default · 본 paradigm 측 staging flavor 한정 의무 정합 default |
 | `.claude/skills/disk-verification/SKILL.md` | disk 측정 의무 paradigm default · 본 paradigm 측 step 5 root cause 측정 + paste source authoring 영역 정합 default |
-| `.claude/rules/auth-rules.md` + `.claude/rules/billing-rules.md` | HIGH RISK 도메인 진입 시점 STOP 조건 default · 본 paradigm 측 §5 STOP 조건 정합 default |
+| `docs/rules/auth-rules.md` + `docs/rules/billing-rules.md` | HIGH RISK 도메인 진입 시점 STOP 조건 default · 본 paradigm 측 §5 STOP 조건 정합 default |
 
 ---
 
@@ -205,7 +205,7 @@ Anthropic v2.1.145+ 측 bundled skill (`/run` + `/verify` + `/run-skill-generato
 
 ## §11 명시 cycle 이력
 
-- 2026-05-22 · `MASTER-CLI-RUNTIME-CRASH-MITIGATION-PROCESS-PARADIGM-001` · 직전 rule (`.claude/rules/runtime-crash-mitigation-process.md`) 신설 (= paradigm 본질 + 9-step process + verify 의무 본문 + cli session 자율 paradigm + STOP 조건 + 적용 영역 + paste source authoring 영역 + commit body 본문 + 인접 paradigm 정합 default) + `cycle-discipline.md` §24 pointer 추가 default + CLAUDE.md §15 entry append default + 5-repo byte-identical propagation default
-- 2026-05-26 · `MASTER-CLI-SKILLS-MIGRATION-PHASE-1-001` · 본 skill 신설 default (= 직전 rule 본문 본질 보존 default · skill paradigm 정합 default · trigger 시점 lazy load default · `.claude/rules/runtime-crash-mitigation-process.md` 측 thin pointer 갱신 default)
+- 2026-05-22 · `MASTER-CLI-RUNTIME-CRASH-MITIGATION-PROCESS-PARADIGM-001` · 직전 rule (`docs/rules/runtime-crash-mitigation-process.md`) 신설 (= paradigm 본질 + 9-step process + verify 의무 본문 + cli session 자율 paradigm + STOP 조건 + 적용 영역 + paste source authoring 영역 + commit body 본문 + 인접 paradigm 정합 default) + `cycle-discipline.md` §24 pointer 추가 default + CLAUDE.md §15 entry append default + 5-repo byte-identical propagation default
+- 2026-05-26 · `MASTER-CLI-SKILLS-MIGRATION-PHASE-1-001` · 본 skill 신설 default (= 직전 rule 본문 본질 보존 default · skill paradigm 정합 default · trigger 시점 lazy load default · `docs/rules/runtime-crash-mitigation-process.md` 측 thin pointer 갱신 default)
 - 2026-05-27 · `MASTER-CLI-NATIVE-RUN-VERIFY-SANDBOX-INTEGRATION-001` · §3.3 신설 default (= Anthropic v2.1.145+ native bundled skill `/run` + `/verify` + `/run-skill-generator` 통합 + `/sandbox` isolation mention default · staging flavor 한정 + production push X 의무 강화 default · 본문 본질 보존 default · 추가 영역 한정 default) + 5-repo byte-identical propagation default
 - precedent: `3REPO-RUNTIME-CRASH-DIAGNOSIS-001` (2026-05-22 H32 마감 default · Sentry `SentryInitProvider` 자동 init 측 empty DSN crash 차단 default · `<meta-data android:name="io.sentry.auto-init" android:value="false" />` × 3 자식 byte-identical mitigation default · GB `616bec5` + GD `317e74a` + GT `664a092`)

@@ -175,7 +175,7 @@ EF 트랙(1·2)은 Kotlin kover 와 분리된 별 신호다. Deno test 도입 �
 
 - [`../architecture/TESTING_STRATEGY.md`](../architecture/TESTING_STRATEGY.md) — §5 ROI 우선순위 · §9 커버리지=신호 · §11 per-layer 케이스(11.1 UseCase / 11.2 Repository / 11.3 ViewModel / 11.4 mapper / 11.5 Auth·Billing) · §12 프레임워크 매핑
 - [`../architecture/TDD_WORKFLOW.md`](../architecture/TDD_WORKFLOW.md) · [`../architecture/TESTABILITY_SEAMS.md`](../architecture/TESTABILITY_SEAMS.md) — 언제/어떻게
-- `.claude/rules/billing-rules.md`(§1 Mock-first · §2 EF 단일 진입점 · §5 entitlement 불변식) · `.claude/rules/auth-rules.md` · `.claude/rules/supabase-handling.md` · `.claude/rules/mode-system.md`(M3) · `CLAUDE.md §5`(STOP #1)
+- `docs/rules/billing-rules.md`(§1 Mock-first · §2 EF 단일 진입점 · §5 entitlement 불변식) · `docs/rules/auth-rules.md` · `docs/rules/supabase-handling.md` · `docs/rules/mode-system.md`(M3) · `CLAUDE.md §5`(STOP #1)
 - 소비처: PRELAUNCH CI 게이트(test=warn) + 후속 kover 신호가 본 빈 곳을 상시 숫자화
 
 ---

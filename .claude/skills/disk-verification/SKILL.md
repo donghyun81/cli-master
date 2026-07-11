@@ -9,9 +9,9 @@ allowed-tools: Bash, Read, Grep, Glob
 > **단일 목적**: 후속 cycle 후보 / Recommended option / paste source umbrella 측 발행 직전 disk 측 이미 구현 여부 측정 의무 paradigm. cowork chat + cli session 양쪽 적용 default.
 > **신설**: MASTER-CLI-RECOMMENDED-OPTION-DISK-VERIFICATION-PARADIGM-001 (2026-05-21).
 > **연관 paradigm**:
-> - `.claude/rules/cycle-discipline.md` §23 (= 본 skill 측 pointer default)
-> - `.claude/rules/workflow-core.md` §implement Testability Seams (= 동족 paradigm default · 변동성 경계 측 인터페이스 측정 본질 정합 default)
-> - `.claude/rules/code-principles.md` §2 YAGNI (= "나중에 쓸 것 으로 추가하지 않음" 정합 default · 본 paradigm 측 표면 후보 추측 차단 본질 정합)
+> - `docs/rules/cycle-discipline.md` §23 (= 본 skill 측 pointer default)
+> - `docs/rules/workflow-core.md` §implement Testability Seams (= 동족 paradigm default · 변동성 경계 측 인터페이스 측정 본질 정합 default)
+> - `docs/rules/code-principles.md` §2 YAGNI (= "나중에 쓸 것 으로 추가하지 않음" 정합 default · 본 paradigm 측 표면 후보 추측 차단 본질 정합)
 > - `.claude/skills/paste-source-authoring/SKILL.md` (= 동족 paradigm default · cowork chat 측 paste source authoring 측 disk 실측 의무 default)
 
 ---
@@ -108,7 +108,7 @@ precedent cycle 측 측정 결과 인용 default (= precedent cycle 진입 시�
 | 측정 영역 | 측정 결과 | precedent cycle 측 의미 |
 |---|---|---|
 | master `.claude/rules/` 측 `recommended-option-disk-verification` grep | 0 match default | 신 rule 신설 영역 default (= 중복 X default) |
-| master `.claude/rules/cycle-discipline.md` 측 신 paradigm grep | 0 match default | 갱신 영역 default (= 신 § 신설 default) |
+| master `docs/rules/cycle-discipline.md` 측 신 paradigm grep | 0 match default | 갱신 영역 default (= 신 § 신설 default) |
 | master `.claude/hooks/` 측 신 hook grep | 0 match default (= 12 hook 기존 default) | 신 hook 신설 영역 default (= optional default) |
 | `scripts/propagate.sh` + `scripts/verify-sync.sh` 존재 verify | 모두 존재 default | 6-repo propagation paradigm 정합 default |
 
@@ -236,11 +236,11 @@ mitigation = paste-back 본문 측 명시 default
 
 | 인접 entry | 본질 |
 |---|---|
-| `.claude/rules/cycle-discipline.md` §17 BASELINE 실측 표준 (= filename + content 동시 grep 의무) | 본 paradigm 측 의무 ① 측정 명령 영역 정합 default (= filename find 1차 + container 내부 content grep 2차) |
-| `.claude/rules/cycle-discipline.md` §23 (= 본 skill 측 pointer default · 신 § 신설 default) | 본 paradigm 본질 명시 영역 default · cycle scope 결정 영역 default |
+| `docs/rules/cycle-discipline.md` §17 BASELINE 실측 표준 (= filename + content 동시 grep 의무) | 본 paradigm 측 의무 ① 측정 명령 영역 정합 default (= filename find 1차 + container 내부 content grep 2차) |
+| `docs/rules/cycle-discipline.md` §23 (= 본 skill 측 pointer default · 신 § 신설 default) | 본 paradigm 본질 명시 영역 default · cycle scope 결정 영역 default |
 | `.claude/skills/paste-source-authoring/SKILL.md` | 동족 paradigm default · cowork chat 측 paste source authoring 측 disk 실측 의무 default · 본 skill 측 §3 + §4.3 정합 default |
-| `.claude/rules/workflow-core.md` §implement Testability Seams | 동족 paradigm default (= 변동성 경계 측 인터페이스 측정 본질 정합 default) |
-| `.claude/rules/code-principles.md` §2 YAGNI | "나중에 쓸 것 으로 추가하지 않음" 정합 default · 본 paradigm 측 표면 후보 추측 차단 본질 정합 default |
+| `docs/rules/workflow-core.md` §implement Testability Seams | 동족 paradigm default (= 변동성 경계 측 인터페이스 측정 본질 정합 default) |
+| `docs/rules/code-principles.md` §2 YAGNI | "나중에 쓸 것 으로 추가하지 않음" 정합 default · 본 paradigm 측 표면 후보 추측 차단 본질 정합 default |
 
 ---
 
@@ -254,5 +254,5 @@ mitigation = paste-back 본문 측 명시 default
 
 ## §11 명시 cycle 이력
 
-- 2026-05-21 · `MASTER-CLI-RECOMMENDED-OPTION-DISK-VERIFICATION-PARADIGM-001` · 직전 rule (`.claude/rules/recommended-option-disk-verification.md`) 신설 (= paradigm 본질 + 4 의무 영역 + paste source authoring ⑤ 자기 정합 paradigm + 예시 case 3 + 위반 mitigation cycle + 적용 영역 + 인접 paradigm 정합 default) + cycle-discipline.md §23 신설 default + 5-repo byte-identical propagation
-- 2026-05-26 · `MASTER-CLI-SKILLS-MIGRATION-PHASE-1-001` · 본 skill 신설 default (= 직전 rule 본문 본질 보존 default · skill paradigm 정합 default · trigger 시점 lazy load default · `.claude/rules/recommended-option-disk-verification.md` 측 thin pointer 갱신 default)
+- 2026-05-21 · `MASTER-CLI-RECOMMENDED-OPTION-DISK-VERIFICATION-PARADIGM-001` · 직전 rule (`docs/rules/recommended-option-disk-verification.md`) 신설 (= paradigm 본질 + 4 의무 영역 + paste source authoring ⑤ 자기 정합 paradigm + 예시 case 3 + 위반 mitigation cycle + 적용 영역 + 인접 paradigm 정합 default) + cycle-discipline.md §23 신설 default + 5-repo byte-identical propagation
+- 2026-05-26 · `MASTER-CLI-SKILLS-MIGRATION-PHASE-1-001` · 본 skill 신설 default (= 직전 rule 본문 본질 보존 default · skill paradigm 정합 default · trigger 시점 lazy load default · `docs/rules/recommended-option-disk-verification.md` 측 thin pointer 갱신 default)

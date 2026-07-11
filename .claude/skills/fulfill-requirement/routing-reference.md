@@ -1,7 +1,7 @@
 # Routing Reference — fulfill-requirement
 
 > intake-router가 사용하는 빠른 참조표.
-> 세부 규칙: `.claude/rules/routing-and-delegation.md`
+> 세부 규칙: `docs/rules/routing-and-delegation.md`
 
 ---
 

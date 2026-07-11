@@ -1,7 +1,7 @@
 #!/bin/bash
 # stop-reflect.sh — paradigm 누적 자동 추출 hook (Stop hook · silent-success default)
 # 신설: MASTER-CLI-INFRA-SELFIMPROVING-REVIEW-CADENCE-001 (2026-05-17)
-# 관련: .claude/rules/cycle-discipline.md §19 (Hooks self-improving loop)
+# 관련: docs/rules/cycle-discipline.md §19 (Hooks self-improving loop)
 #
 # 동작:
 #   .ai/reports/<taskId>/REVIEW.md 또는 EVIDENCE.md 안 paradigm 누적 패턴 grep
@@ -63,7 +63,7 @@ if [ -n "$CANDIDATES" ] && [ "$MODE" != "silent" ]; then
     printf "%b" "$CANDIDATES" >&2
     echo "" >&2
     echo "  채택 의사 = 사용자 자율 (CLAUDE.md / .auto-memory 갱신 후보 silent 제안 영역)." >&2
-    echo "  규칙: .claude/rules/cycle-discipline.md §19" >&2
+    echo "  규칙: docs/rules/cycle-discipline.md §19" >&2
     echo "" >&2
 fi
 

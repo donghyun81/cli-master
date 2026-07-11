@@ -86,7 +86,7 @@ mv "$SRC" "$DST"
 echo "[activate-agent] mv $SRC → $DST"
 
 # === 2. routing-and-delegation.md 의 path + 라벨 갱신 ===
-ROUTING=".claude/rules/routing-and-delegation.md"
+ROUTING="docs/rules/routing-and-delegation.md"
 if [ -f "$ROUTING" ]; then
   # path 갱신
   sed -i.bak "s|$OLD_PATH|$NEW_PATH|g" "$ROUTING"
@@ -115,7 +115,7 @@ case "$NAME" in
   *) DOMAIN="" ;;
 esac
 
-DEFERRED_DOMAINS=".claude/rules/deferred-domains.md"
+DEFERRED_DOMAINS="docs/rules/deferred-domains.md"
 if [ -n "$DOMAIN" ] && [ -f "$DEFERRED_DOMAINS" ]; then
   if [ "$ACTION" = "activate" ]; then
     NEW_STATUS="ACTIVE"

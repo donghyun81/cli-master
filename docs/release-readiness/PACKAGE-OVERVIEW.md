@@ -56,7 +56,7 @@
 | `.ai/nightly-baseline/latest.md §3` | 6-repo × 보호 5종 정합 매트릭스 + drift 집계 |
 | `.ai/baseline-snapshot/latest.json` | 보호 5종 sha-256 (runtime enforce · 빌드·코드 repo 5종) |
 
-보호 5종 목록: `docs/schemas/ui-spec.schema.json` · `.claude/rules/uiux-sot-refresh.md` · `docs/design/design-sot-policy.md` · `.claude/rules/pencil-uiux-workflow.md` · `docs/design/pencil-sot-policy.md`.
+보호 5종 목록: `docs/schemas/ui-spec.schema.json` · `docs/rules/uiux-sot-refresh.md` · `docs/design/design-sot-policy.md` · `docs/rules/pencil-uiux-workflow.md` · `docs/design/pencil-sot-policy.md`.
 
 drift 검증: `bash scripts/verify-sync.sh` (master → 자식 byte-identical 비교 · exit 1 = drift).
 

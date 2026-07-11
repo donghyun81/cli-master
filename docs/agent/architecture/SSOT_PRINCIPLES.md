@@ -81,4 +81,4 @@
 
 - `COMMON_ARCHITECTURE.md` — 운영 레이어 vs 제품 레이어 경계
 - `MODEL_SEPARATION.md` — 모델 SoT 분리
-- `.claude/rules/verification-and-review.md` — 12-section 체크리스트
+- `docs/rules/verification-and-review.md` — 12-section 체크리스트

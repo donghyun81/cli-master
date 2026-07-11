@@ -10,8 +10,8 @@
 # Self-test:
 #   bash .claude/hooks/post-edit-degeneration-check.sh <relative-or-absolute-path>
 #
-# Policy SoT: .claude/rules/text-degeneration-prevention.md
-# Whitelist additionally pulls from: .claude/rules/abbreviation-policy.md (§3 allowed acronym list)
+# Policy SoT: docs/rules/text-degeneration-prevention.md
+# Whitelist additionally pulls from: docs/rules/abbreviation-policy.md (§3 allowed acronym list)
 #   (직전 allowed-acronyms.md 본문 흡수 default · MASTER-CLI-CLEANUP-7CYCLE-001 마감)
 #
 # macOS bash 3.x compatible. python3 required (already required by other hooks).
@@ -21,7 +21,7 @@ set -uo pipefail
 : "${DEGEN_ENFORCE:=warn}"
 
 REPO_ROOT=$(git rev-parse --show-toplevel 2>/dev/null || echo ".")
-ALLOWED_ACRONYMS_PATH="$REPO_ROOT/.claude/rules/abbreviation-policy.md"
+ALLOWED_ACRONYMS_PATH="$REPO_ROOT/docs/rules/abbreviation-policy.md"
 
 # --- Input resolution: stdin JSON (PostToolUse) OR positional argument (self-test) ---
 INPUT=""
@@ -241,7 +241,7 @@ for tok, n, sample in m2[:5]:
 for tok, n, info in m3[:5]:
     print("  [M3 file] '%s' x%d  · %s" % (tok, n, info), file=sys.stderr)
 
-print("  policy: .claude/rules/text-degeneration-prevention.md  (mode=%s)" % os.environ.get("DEGEN_ENFORCE", "warn"), file=sys.stderr)
+print("  policy: docs/rules/text-degeneration-prevention.md  (mode=%s)" % os.environ.get("DEGEN_ENFORCE", "warn"), file=sys.stderr)
 
 if os.environ.get("DEGEN_ENFORCE", "warn") == "enforce":
     sys.exit(2)

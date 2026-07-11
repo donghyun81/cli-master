@@ -16,8 +16,8 @@
 #
 # Reference SoT:
 #   - docs/design/pencil-sot-policy.md §1 (SoT 우선순위)
-#   - .claude/rules/pencil-uiux-workflow.md §3 (5-type IMPL 흐름 · Type 2 / Phase R)
-#   - .claude/rules/sot-code-name-map.md (명명 차이 영역 baseline · false positive 시 본 file 인용)
+#   - docs/rules/pencil-uiux-workflow.md §3 (5-type IMPL 흐름 · Type 2 / Phase R)
+#   - docs/rules/sot-code-name-map.md (명명 차이 영역 baseline · false positive 시 본 file 인용)
 #
 # Neutralization:
 #   - master repo (claude-cli-master) = cli infra source · `*Screen.kt` 무존재 default · matcher 자연 skip
@@ -104,9 +104,9 @@ if echo "$ANALYSIS" | grep -q "^ABSENT:"; then
 File: ${FILE_PATH}
 ${DETAILS}
 → Policy: docs/design/pencil-sot-policy.md §1 (SoT 우선순위)
-→ Flow:   .claude/rules/pencil-uiux-workflow.md §3 (Type 2 신규 또는 Phase R 역공학)
+→ Flow:   docs/rules/pencil-uiux-workflow.md §3 (Type 2 신규 또는 Phase R 역공학)
 → Action: 신 .pen 신설 (Type 2) 또는 역공학 (Phase R) 진입 후 Compose 변경 진행
-→ Note:   화면명 매핑 baseline = .claude/rules/sot-code-name-map.md (명명 차이 가능 · false positive 시 본 file 인용)"
+→ Note:   화면명 매핑 baseline = docs/rules/sot-code-name-map.md (명명 차이 가능 · false positive 시 본 file 인용)"
 
     if [ "$PEN_CHECK_ENFORCE" = "enforce" ]; then
         printf '%s\n' "$BLOCK_MSG" >&2
@@ -115,8 +115,8 @@ ${DETAILS}
         printf '[PEN-CHECK:WARN] (mode=warn) .pen absent for %s\n' "$SCREEN_NAME" >&2
         printf '%s\n' "$DETAILS" >&2
         printf '  → Policy: docs/design/pencil-sot-policy.md §1\n' >&2
-        printf '  → Flow:   .claude/rules/pencil-uiux-workflow.md §3 (Type 2 / Phase R)\n' >&2
-        printf '  → Map:    .claude/rules/sot-code-name-map.md (mismatch 시 인용)\n' >&2
+        printf '  → Flow:   docs/rules/pencil-uiux-workflow.md §3 (Type 2 / Phase R)\n' >&2
+        printf '  → Map:    docs/rules/sot-code-name-map.md (mismatch 시 인용)\n' >&2
         printf '  (upgrade to enforce: export PEN_CHECK_ENFORCE=enforce)\n' >&2
     fi
 fi

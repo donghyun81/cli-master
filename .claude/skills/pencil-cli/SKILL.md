@@ -12,8 +12,8 @@ allowed-tools: Bash, Read
 > **공식 근거**: pencil.dev `/for-developers/pencil-cli` (2026-04-03 last updated).
 > **연관 paradigm**:
 > - `.claude/skills/pencil-pen-save/SKILL.md` — 본 skill 측 §13 (desktop vs headless 분기 표) 정합
-> - `.claude/rules/pencil-uiux-workflow.md` §9 — Pencil CLI binding 진입점
-> - `.claude/rules/pencil-mcp-tools-reference.md` — headless shell 안에서도 동일 tool surface 호출
+> - `docs/rules/pencil-uiux-workflow.md` §9 — Pencil CLI binding 진입점
+> - `docs/rules/pencil-mcp-tools-reference.md` — headless shell 안에서도 동일 tool surface 호출
 
 ---
 
@@ -289,7 +289,7 @@ agent 안 자동화 sequence 예:
 
 ## 12. 명시 cycle 이력
 
-- 2026-05-19 · `MASTER-CLI-PENCIL-OPTIMIZATION-001` · 직전 rule (`.claude/rules/pencil-cli-headless.md`) 신설 + 5-repo byte-identical propagation
-- 2026-05-26 · `MASTER-CLI-SKILLS-MIGRATION-PHASE-1-001` · 본 skill 신설 default (= 직전 rule 본문 본질 보존 default · skill paradigm 정합 default · trigger 시점 lazy load default · `.claude/rules/pencil-cli-headless.md` 측 thin pointer 갱신 default)
+- 2026-05-19 · `MASTER-CLI-PENCIL-OPTIMIZATION-001` · 직전 rule (`docs/rules/pencil-cli-headless.md`) 신설 + 5-repo byte-identical propagation
+- 2026-05-26 · `MASTER-CLI-SKILLS-MIGRATION-PHASE-1-001` · 본 skill 신설 default (= 직전 rule 본문 본질 보존 default · skill paradigm 정합 default · trigger 시점 lazy load default · `docs/rules/pencil-cli-headless.md` 측 thin pointer 갱신 default)
 - 2026-06-24 · `MASTER-CLI-PENCIL-MULTIREPO-HEADLESS-001` · §7.3 멀티-repo umbrella caveat 신설 (= rule 2 멀티-repo `.pen` = headless 필수[평문-JSON 또는 `pencil interactive -i/-o`] · desktop-stdio MCP active-editor 의존 금지[GT anchored] · rule 4 버전업 마이그 = delta-aware only[`save()` cross-version 불가 · CLI 0.2.6 target-schema 검증 → 0 byte] · rule 5 마이그 전 target-invalid token pre-scan 의무 · content/layout-affecting 시 STOP+Coin) + §7.1 분기표 2-row 추가 (멀티-repo `.pen` / cross-version 마이그) · rule 1/3 본문 canonical = `pencil-mcp-tools-reference.md §0.2`. pointer only (= add-only) · 6-repo byte-identical propagation. HOME-PEN-2.13 혼선 근본 mitigation.
 - 2026-06-24 · `MASTER-CLI-PENCIL-PRESCAN-EXHAUSTIVE-001` · §7.3 rule 5 pre-scan 전수화 + rule 6 post-check assert 신설 (= ONBOARDING-2.13 GB onboarding.pen `thickness`×7 미flatten[#5] → version 만 2.13 = inconsistent 2.13 재발 근본 차단). rule 5 = target-invalid 점검을 §1.1a delta 1~10 **전수**로 강화 (= 예시 토큰 [`stretch`/`note`/`line`/`icon_font`] 한정 금지 · mechanical delta[#1~#8] delta-aware 적용 / content-affecting [#9/#10] STOP+Coin). rule 6 = 마이그 후 version `"2.13"` 선언·dual-sha resync·commit 전 모든 2.11-form construct grep=0 assert (= 최소 set `thickness`/`icon_font`·`iconFontName`·`iconFontFamily`/`"type":"line"`/`alignItems:"stretch"`/inline `"note":` · ≠0 = inconsistent 2.13 · `json.load` 통과 = syntax-valid ≠ schema-valid 명시). 헤더 SSOT 6-rule(소관 2·4·5·6) + footer canonical rule 2/4/5/6 + §7.1 cross-version row post-check 반영. mcp-tools §0.2 = rule 4 말미 post-check pointer 1줄 (= 상호 pointer · 본문 canonical = 본 §7.3). 기존 rule 1~5 의미 무변경(5 강화 + 6 신설) · §1.1a 본문 무편집(참조만) · add-only · pointer only · 6-repo byte-identical propagation.

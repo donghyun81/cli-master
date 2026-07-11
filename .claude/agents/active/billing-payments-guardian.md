@@ -71,9 +71,9 @@ NOT 결정하는 것 (= 별 cycle 의무 · `routing-and-delegation.md` Planner/
 
 ## Evidence to gather
 
-- 앱 컨텍스트 SoT: `.claude/rules/billing-rules.md` (10 섹션 · §1 Mock-first paradigm · §2 Edge Function 단일 진입점 · §3 시크릿 저장 · §4 BillingRepository 패턴 · §5 entitlement / 소비형 paradigm · §6 RevenueCat Phase 2 · §7 STOP trigger · §8 절대 금지)
-- active 매핑: `.claude/rules/routing-and-delegation.md:55` (`결제 플로우, entitlement 보호` → `billing-payments-guardian` → `.claude/agents/active/billing-payments-guardian.md`)
-- 도메인 활성화 상태: `.claude/rules/deferred-domains.md` §2 매트릭스 (Billing = ACTIVE × 4-repo · MASTER-BILLING-DOMAIN-ACTIVATE-001 baseline)
+- 앱 컨텍스트 SoT: `docs/rules/billing-rules.md` (10 섹션 · §1 Mock-first paradigm · §2 Edge Function 단일 진입점 · §3 시크릿 저장 · §4 BillingRepository 패턴 · §5 entitlement / 소비형 paradigm · §6 RevenueCat Phase 2 · §7 STOP trigger · §8 절대 금지)
+- active 매핑: `docs/rules/routing-and-delegation.md:55` (`결제 플로우, entitlement 보호` → `billing-payments-guardian` → `.claude/agents/active/billing-payments-guardian.md`)
+- 도메인 활성화 상태: `docs/rules/deferred-domains.md` §2 매트릭스 (Billing = ACTIVE × 4-repo · MASTER-BILLING-DOMAIN-ACTIVATE-001 baseline)
 - 결제 코드: 현재 repo 의 `BillingRepository` / `EntitlementRepository` / `BillingClient` 직접 호출 영역 검색
 - 시크릿 처리: 현재 repo 의 Google Service Account JSON / API key 참조 영역 검색 (`safety-and-secrets.md` 정합)
 - **0 matches 도 반드시 기록** (부재 증거가 중요할 수 있음 — 예: Edge Function 미구현 시점 mock-first 정합 판정 근거)

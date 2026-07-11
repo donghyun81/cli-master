@@ -57,8 +57,8 @@ NOT 결정하는 것:
 
 ## 근거 수집 방식
 
-- 앱 컨텍스트: `.claude/rules/auth-rules.md` 참조
-- 인증 코드: 현재 repo의 인증 관련 경로 직접 검색 (`.claude/rules/auth-rules.md` 수집 경로 참조)
+- 앱 컨텍스트: `docs/rules/auth-rules.md` 참조
+- 인증 코드: 현재 repo의 인증 관련 경로 직접 검색 (`docs/rules/auth-rules.md` 수집 경로 참조)
 - PII 처리: 현재 repo의 PII, 개인정보 관련 코드 검색
 - **0 matches도 반드시 기록** (부재 증거가 중요할 수 있음)
 

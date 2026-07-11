@@ -5,8 +5,8 @@
 > **연관 문서**:
 > - [`TDD_WORKFLOW.md`](./TDD_WORKFLOW.md) — *언제* 테스트가 의무인가(UseCase/Repository/Coordinator/StateFlow ViewModel) + Red→Green→Refactor
 > - [`TESTABILITY_SEAMS.md`](./TESTABILITY_SEAMS.md) — *어떻게* 테스트 가능하게 하는가(8 seam · clock/dispatcher/identity/logger/uuid + network/DB/file)
-> - `.claude/rules/code-principles.md` §4.E — 코드 리뷰 시 테스트 체크리스트
-> - `.claude/rules/workflow-core.md` §implement — PLAN `## 7. TestabilitySeams` 기록 의무
+> - `docs/rules/code-principles.md` §4.E — 코드 리뷰 시 테스트 체크리스트
+> - `docs/rules/workflow-core.md` §implement — PLAN `## 7. TestabilitySeams` 기록 의무
 > SOT: `CLAUDE.md`
 
 ---

@@ -32,7 +32,7 @@ tools: Read, Glob, Grep, Write, Edit
 7. 자식 repo **헌법** (`docs/CLAUDE.md` 또는 자식 root `CLAUDE.md`) 본문이 본 cycle 변경과 정합인가? (= 도메인 본문 / cli infra header / propagation baseline)
 8. 자식 repo **setup 가이드** (`docs/setup/**`) 안 환경 / dependency / 빌드 절차 갱신 필요한가? (= 새 환경변수 / 신규 라이브러리 / 빌드 step 변경)
 
-> Questions 6~8 = `MASTER-CLI-DOCS-AUTOSYNC-PARADIGM-001` (2026-05-19) 안 추가. 정합 SoT = `.claude/rules/cycle-discipline.md` §20.
+> Questions 6~8 = `MASTER-CLI-DOCS-AUTOSYNC-PARADIGM-001` (2026-05-19) 안 추가. 정합 SoT = `docs/rules/cycle-discipline.md` §20.
 
 ## Decision authority
 

@@ -6,7 +6,7 @@
 # Purpose:
 #   Before Edit/Write touches one of the 5 protected files (cli infra byte-identical
 #   invariants across 6-repo), surface a warning so cli session escalates to a
-#   master cycle (per .claude/rules/cycle-discipline.md §3 + §10) rather than
+#   master cycle (per docs/rules/cycle-discipline.md §3 + §10) rather than
 #   editing in-place. In enforce mode, block the tool call with structured JSON
 #   deny output.
 #
@@ -16,15 +16,15 @@
 #
 # Protected file list (explicit · matches .auto-memory/protected-file-hashes.md SoT):
 #   - docs/schemas/ui-spec.schema.json
-#   - .claude/rules/pencil-uiux-workflow.md
+#   - docs/rules/pencil-uiux-workflow.md
 #   - docs/design/pencil-sot-policy.md
-#   - .claude/rules/uiux-sot-refresh.md
+#   - docs/rules/uiux-sot-refresh.md
 #   - docs/design/design-sot-policy.md
 #
 # Reference SoT:
 #   - .claude/rules/anchor-list.md §2 A2 (Protected file integrity guard)
 #   - .auto-memory/protected-file-hashes.md (보호 5 file sha-256 baseline SoT)
-#   - .claude/rules/cycle-discipline.md §3 (3-repo byte-identical 강제 범위) + §10 (보호 file 변경 의무)
+#   - docs/rules/cycle-discipline.md §3 (3-repo byte-identical 강제 범위) + §10 (보호 file 변경 의무)
 #   - .claude/rules/safety-and-secrets.md (시크릿 + 비가역 변경 STOP)
 #
 # Precedent:
@@ -64,9 +64,9 @@ if not file_path:
 # Protected files — match on path suffix (handles both absolute and relative paths).
 PROTECTED = [
     "docs/schemas/ui-spec.schema.json",
-    ".claude/rules/pencil-uiux-workflow.md",
+    "docs/rules/pencil-uiux-workflow.md",
     "docs/design/pencil-sot-policy.md",
-    ".claude/rules/uiux-sot-refresh.md",
+    "docs/rules/uiux-sot-refresh.md",
     "docs/design/design-sot-policy.md",
 ]
 
@@ -106,13 +106,13 @@ SUMMARY=$(echo "$ANALYSIS" | grep "^PROTECTED:" | head -1)
 PROTECTED_REL=$(echo "$SUMMARY" | cut -d: -f2)
 FILE_PATH=$(echo "$SUMMARY" | cut -d: -f3-)
 
-BLOCK_REASON="Protected file edit blocked: ${PROTECTED_REL}. Protected files require a master cycle (see .claude/rules/cycle-discipline.md §3 + §10) — direct edit bypasses 6-repo byte-identical invariants."
+BLOCK_REASON="Protected file edit blocked: ${PROTECTED_REL}. Protected files require a master cycle (see docs/rules/cycle-discipline.md §3 + §10) — direct edit bypasses 6-repo byte-identical invariants."
 
 BLOCK_MSG="[pre-protected-file-edit] Protected file edit attempted
 File:      ${FILE_PATH}
 Protected: ${PROTECTED_REL}
 → Anchor:  .claude/rules/anchor-list.md §2 A2 (Protected file integrity guard)
-→ Policy:  .claude/rules/cycle-discipline.md §3 (byte-identical 강제 범위) + §10 (보호 file 변경 의무)
+→ Policy:  docs/rules/cycle-discipline.md §3 (byte-identical 강제 범위) + §10 (보호 file 변경 의무)
 → SoT:     .auto-memory/protected-file-hashes.md (보호 5 file sha-256 baseline)
 → Action:  master cycle 신설 → propagate.sh → verify-sync.sh PASS → commit body [Sha] 새 sha 명시"
 
@@ -133,7 +133,7 @@ else
     printf '[pre-protected-file-edit:WARN] (mode=warn) protected file edit attempted: %s\n' "$PROTECTED_REL" >&2
     printf '  File: %s\n' "$FILE_PATH" >&2
     printf '  → Anchor: .claude/rules/anchor-list.md §2 A2\n' >&2
-    printf '  → Policy: .claude/rules/cycle-discipline.md §3 + §10 (master cycle required)\n' >&2
+    printf '  → Policy: docs/rules/cycle-discipline.md §3 + §10 (master cycle required)\n' >&2
     printf '  → SoT:    .auto-memory/protected-file-hashes.md\n' >&2
     printf '  (upgrade to enforce: export PROTECTED_FILE_EDIT_ENFORCE=enforce)\n' >&2
 fi

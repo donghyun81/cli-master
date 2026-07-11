@@ -33,7 +33,7 @@ exit code 와 stdout 을 기록한다 — 무매치(exit 1) = 시크릿 0 = PASS
 
 ### 3. REVIEW.md 생성 (12-section 정규 스키마)
 `.ai/reports/$ARGUMENTS/REVIEW.md` 를 생성한다.
-형식: `.claude/rules/reporting.md` 의 REVIEW.md 12-section 스키마 준수.
+형식: `docs/rules/reporting.md` 의 REVIEW.md 12-section 스키마 준수.
 
 필수 포함 항목:
 - 1. Requirements Coverage
@@ -42,7 +42,7 @@ exit code 와 stdout 을 기록한다 — 무매치(exit 1) = 시크릿 0 = PASS
 - 4. Architecture Integrity — Layer Boundaries
 - 5. Model Separation
 - 6. Dependency Governance
-- 7. TDD Evidence & Testability Seams — 판정 기준(기존 점검 + 테스트 전략 확장) SoT = `.claude/rules/verification-and-review.md` 12-section 체크리스트 row 7.
+- 7. TDD Evidence & Testability Seams — 판정 기준(기존 점검 + 테스트 전략 확장) SoT = `docs/rules/verification-and-review.md` 12-section 체크리스트 row 7.
 - 8. Error / Result Policy
 - 9. External Prep / Deferred Items
 - 10. DocSync

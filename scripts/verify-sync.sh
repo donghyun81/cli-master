@@ -90,22 +90,22 @@ cd "$MASTER_DIR"
 # === 검증 대상 파일 list ===
 PROTECTED=(
   docs/schemas/ui-spec.schema.json
-  .claude/rules/pencil-uiux-workflow.md
+  docs/rules/pencil-uiux-workflow.md
   docs/design/pencil-sot-policy.md
-  .claude/rules/uiux-sot-refresh.md
+  docs/rules/uiux-sot-refresh.md
   docs/design/design-sot-policy.md
 )
 CORE_CLI=(
   .claude/settings.json
-  .claude/rules/workflow-core.md
-  .claude/rules/cycle-discipline.md
-  .claude/rules/pencil-automation.md
-  .claude/rules/reporting.md
-  .claude/rules/routing-and-delegation.md
-  .claude/rules/deferred-domains.md
-  .claude/rules/code-principles.md
-  .claude/rules/design-to-code-sync.md
-  .claude/rules/ux-laws.md
+  docs/rules/workflow-core.md
+  docs/rules/cycle-discipline.md
+  docs/rules/pencil-automation.md
+  docs/rules/reporting.md
+  docs/rules/routing-and-delegation.md
+  docs/rules/deferred-domains.md
+  docs/rules/code-principles.md
+  docs/rules/design-to-code-sync.md
+  docs/rules/ux-laws.md
   docs/agent/architecture/COMMON_ARCHITECTURE.md
   docs/agent/architecture/TDD_WORKFLOW.md
   docs/agent/architecture/MODEL_SEPARATION.md

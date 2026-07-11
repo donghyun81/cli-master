@@ -44,7 +44,7 @@ tools: Read, Glob, Grep
 
 ## Supabase keyword routing (= CLI 자동 / 권장 검토 / Dashboard 한정 분기)
 
-`.claude/rules/supabase-handling.md` 안 §6 trigger 키워드 (supabase / edge function / EF / migration / RLS / Vault / psql / supabase db / supabase functions / supabase secrets / supabase gen types / supabase storage / supabase link / auth admin / service_role 등) 감지 시 본 rule reading 의무 + 다음 분기 적용:
+`docs/rules/supabase-handling.md` 안 §6 trigger 키워드 (supabase / edge function / EF / migration / RLS / Vault / psql / supabase db / supabase functions / supabase secrets / supabase gen types / supabase storage / supabase link / auth admin / service_role 등) 감지 시 본 rule reading 의무 + 다음 분기 적용:
 
 - **§2 CLI 자동 처리 영역** (EF lifecycle / EF secrets / migration scaffold + edit / `supabase db diff` + dump / staging `supabase db push` / `supabase gen types` / storage 파일 / read-only `psql` / local seed / `supabase link`) → 별도 확인 없이 자체 진행
 - **§3 권장 검토 영역** (production `supabase db push` / RLS policy 첫 적용 / admin API / Vault 시크릿 첫 등록) → 사용자 명시 승인 후 진행
@@ -55,7 +55,7 @@ tools: Read, Glob, Grep
 
 ## Auth keyword routing (= 익명 부트스트랩 / OAuth / 토큰 / PII 분기)
 
-`.claude/rules/auth-rules.md` §7 trigger 키워드 (로그인 / 회원가입 / 인증 / 토큰 저장 / 세션 / OAuth / SSO / login / signup / signin / auth / token / session / 익명 / anonymous / email / password / PII / EncryptedSharedPreferences / GoTrue / `auth.admin` 등) 감지 시 본 rule reading 의무 + 다음 분기 적용:
+`docs/rules/auth-rules.md` §7 trigger 키워드 (로그인 / 회원가입 / 인증 / 토큰 저장 / 세션 / OAuth / SSO / login / signup / signin / auth / token / session / 익명 / anonymous / email / password / PII / EncryptedSharedPreferences / GoTrue / `auth.admin` 등) 감지 시 본 rule reading 의무 + 다음 분기 적용:
 
 - **§1 익명 부트스트랩 paradigm** (`POST /auth/v1/signup` body `{}` · `SecureTokenStore` 저장 · `AnonymousAuthBootstrap` 진입점) → default 채택 영역 · CLI 자동 진입 가능
 - **§2 identity 변동성 경계** (`UserIdentityProvider` 인터페이스 단일 진입점 · domain 계층 SDK 직접 호출 금지) → 위반 시 STOP + 인터페이스 분리 의뢰
@@ -85,7 +85,7 @@ tools: Read, Glob, Grep
 - `docs/agent/process/REPO_FIRST_INTAKE_WORKFLOW.md` — task-aware reading order
 - 필요한 경우에만 앱 컨텍스트 규칙 참조: `.claude/rules/` (영역별로 선택적으로)
 
-**BASELINE 실측 의무 (filename + content 동시 grep)**: 파일 부재 주장 전 의무 검증. filename find 결과 부재 시점에서 즉시 STOP/UNKNOWN 분류 금지 — container 내부 동일 의미의 symbol/object/function grep 의무. 예: "Routes.kt 부재" 주장 전 `grep -rn "object Routes\|fun Nav.*Graph" --include="*.kt"` 의무. ui-spec.json BASELINE 실측 시 lifecycle/deprecated/replaced-by 키워드 grep 의무. 근거: `.claude/rules/cycle-discipline.md §17 BASELINE 실측 표준`.
+**BASELINE 실측 의무 (filename + content 동시 grep)**: 파일 부재 주장 전 의무 검증. filename find 결과 부재 시점에서 즉시 STOP/UNKNOWN 분류 금지 — container 내부 동일 의미의 symbol/object/function grep 의무. 예: "Routes.kt 부재" 주장 전 `grep -rn "object Routes\|fun Nav.*Graph" --include="*.kt"` 의무. ui-spec.json BASELINE 실측 시 lifecycle/deprecated/replaced-by 키워드 grep 의무. 근거: `docs/rules/cycle-discipline.md §17 BASELINE 실측 표준`.
 
 프로젝트 문서(앱 개요, 아키텍처 문서 등)는 전문가 역할들이 각 도메인 판단에 필요할 때 참조한다.
 intake-router는 라우팅 판단에 필요한 최소한만 읽는다.
@@ -112,7 +112,7 @@ intake-router는 라우팅 판단에 필요한 최소한만 읽는다.
 | DocSync·문서 갱신 | docs-change-communicator | 순차 (마지막) |
 
 모든 역할 파일: `.claude/agents/active/<role>.md` 또는 `.claude/agents/deferred/<role>.md` (= active/deferred 분기 default · `deferred-domains.md` §2 매트릭스 정합)
-역할 인덱스 및 분리 기준: `.claude/rules/domain-roles.md` (= navigation index 본질 default · cli infra rule 영역 default · MASTER-CLI-CLEANUP-7CYCLE-001 S3 이동 마감)
+역할 인덱스 및 분리 기준: `docs/rules/domain-roles.md` (= navigation index 본질 default · cli infra rule 영역 default · MASTER-CLI-CLEANUP-7CYCLE-001 S3 이동 마감)
 
 ## Expected outputs
 

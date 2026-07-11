@@ -56,7 +56,7 @@ allowed-tools:
 
 ### 4. EVIDENCE.md 작성
 경로: `.ai/reports/<taskId>/EVIDENCE.md`
-포함 항목 (`.claude/rules/reporting.md` 형식):
+포함 항목 (`docs/rules/reporting.md` 형식):
 - Requirements Source
 - Intake Normalization 표
 - Pre-EVIDENCE Contract — `Implement entry: Blocked (survey task)`

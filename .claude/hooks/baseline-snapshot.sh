@@ -6,7 +6,7 @@
 # 신설: MASTER-COWORK-HANDOFF-BASELINE-AUTOVERIFY-HOOK-001 (2026-05-12)
 # 갱신: MASTER-CLI-BASELINE-SNAPSHOT-REPOS-V6-MITIGATION-001 (2026-05-19 · 5-repo paradigm 정합)
 # 갱신: MASTER-CLI-CONTEXT-OPT-PHASE2-BASELINE-SURFACE-001 (2026-06-01 · mount root robust 탐지 = 부모 mount 진입 시 dirname mis-resolve 정정)
-# 관련: .claude/rules/cycle-discipline.md §14a (Cowork prep ↔ CLI baseline 동기화 6 의무 절차)
+# 관련: docs/rules/cycle-discipline.md §14a (Cowork prep ↔ CLI baseline 동기화 6 의무 절차)
 # 동작: 비차단 (warn-only · exit 0).
 # self-test: bash .claude/hooks/baseline-snapshot.sh
 
@@ -42,13 +42,13 @@ REPOS=(
 
 PROTECTED_FILES=(
   "docs/schemas/ui-spec.schema.json"
-  ".claude/rules/pencil-uiux-workflow.md"
+  "docs/rules/pencil-uiux-workflow.md"
   "docs/design/pencil-sot-policy.md"
-  ".claude/rules/uiux-sot-refresh.md"
+  "docs/rules/uiux-sot-refresh.md"
   "docs/design/design-sot-policy.md"
 )
 
-CYCLE_DISCIPLINE_PATH=".claude/rules/cycle-discipline.md"
+CYCLE_DISCIPLINE_PATH="docs/rules/cycle-discipline.md"
 SETTINGS_PATH=".claude/settings.json"
 
 sha_of() {

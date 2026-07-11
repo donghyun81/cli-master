@@ -31,9 +31,9 @@
 # 변동 시 = mitigation cycle (CLAUDE.md §16 + cycle-discipline.md §10).
 PROTECTED_FILES=(
   "docs/schemas/ui-spec.schema.json"
-  ".claude/rules/uiux-sot-refresh.md"
+  "docs/rules/uiux-sot-refresh.md"
   "docs/design/design-sot-policy.md"
-  ".claude/rules/pencil-uiux-workflow.md"
+  "docs/rules/pencil-uiux-workflow.md"
   "docs/design/pencil-sot-policy.md"
 )
 

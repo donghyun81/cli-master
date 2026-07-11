@@ -3,7 +3,7 @@
 > **단일 목적**: Claude CLI (Claude Code) 가 **자식 repo 안에서 앱 구현 task 진입 시 첫 reading 의무 문서**.
 > **C6-COMMON-DOCS-AND-TEMPLATES-001 신설**.
 > **공식 근거**: Anthropic Claude Code Best Practices + Google Android Developers (Compose Architecture / SSOT / UDF).
-> **연관**: `docs/agent/architecture/COMMON_ARCHITECTURE.md` (13 architecture 문서 ToC) + `.claude/rules/code-principles.md` (SOLID + 코드 리뷰) + 도메인 templates (`docs/templates/`).
+> **연관**: `docs/agent/architecture/COMMON_ARCHITECTURE.md` (13 architecture 문서 ToC) + `docs/rules/code-principles.md` (SOLID + 코드 리뷰) + 도메인 templates (`docs/templates/`).
 
 ---
 
@@ -191,7 +191,7 @@ Compose @Composable → ViewModel.onEvent(Event) → state mutation
 
 모든 UI/UX task 진입 시 `intake-router` 가 work type 식별 후 `ux-auditor` agent 가 자동 호출:
 
-1. `.claude/rules/ux-laws.md` 자동 reading
+1. `docs/rules/ux-laws.md` 자동 reading
 2. §5 task 유형별 매트릭스 row 자동 선별 (예: 신규 화면 → A-1~4 + B-3 + F-1~5 + I-3)
 3. 권장 22 법칙 → PLAN.md / IMPL / REVIEW.md §B [UX Laws] 자동 인용
 4. 신중 12 → 양면 박음 (적용 패턴 + 위험 패턴 분리)
@@ -208,7 +208,7 @@ Compose @Composable → ViewModel.onEvent(Event) → state mutation
 | 결제 / 가입 | Tesler + Postel + 긍정 완료 모먼트 + **Dark Pattern 5종 STOP 검증 의무** |
 | Navigation / 버튼 / list / 검색 등 | `ux-laws.md` §5 매트릭스 참조 |
 
-세부: `.claude/rules/ux-laws.md`.
+세부: `docs/rules/ux-laws.md`.
 
 ---
 
