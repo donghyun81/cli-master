@@ -48,6 +48,8 @@
 
 ## §2. 현재 측정값 (2026-06-01 · Phase 4 마감 시점 · disk 실측)
 
+> **§2 재측정 (2026-07-11 · MASTER-CLI-CONTEXT-DIET-2-003)**: `.claude/rules/` **자동 주입 rule = 49 → 5** (44 rule → `docs/rules/` 이동 = Reading Mode Read-only 경로 · 자동주입 ↔ Read 이중 적재 해소). L0 kernel `ch_l0`(3-file proxy = safety-and-secrets + anchor-list + cross-repo-parallel-exec = **잔존 · 경로 무변동**) 값 = sweep(상대링크 경계 수복)로 미세 char 변동만. 진입 base tok(subagent 실측 프로브 A/B ≈288K) 감축 = **신 세션 확증 필요** (project instructions = 세션 시작 1회 로드 · 프로브 B 동일 세션 미반영).
+
 ### 항상로드 char (codepoint · proxy)
 
 | repo 영역 | char | 비고 |

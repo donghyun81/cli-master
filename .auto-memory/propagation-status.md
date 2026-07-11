@@ -166,24 +166,24 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 | 파일 | master sha (12) | GentlyBreath | GentlyDay | GentlyTable | app-foundation | gently-product-docs |
 |---|---|---|---|---|---|---|
 | `docs/schemas/ui-spec.schema.json` | `8502c01428fb` | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `.claude/rules/pencil-uiux-workflow.md` | `b09b8d5091a7` | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `docs/rules/pencil-uiux-workflow.md` | `202d3f4f29c0` | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `docs/design/pencil-sot-policy.md` | `2bfc81c538b2` | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `.claude/rules/uiux-sot-refresh.md` | `4d0b52798cb4` | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `docs/rules/uiux-sot-refresh.md` | `31c0da56aeec` | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `docs/design/design-sot-policy.md` | `92a5e99804ff` | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `.claude/settings.json` | `9696afb38b0c` | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `.claude/rules/workflow-core.md` | `8573747adae9` | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `.claude/rules/cycle-discipline.md` | `664386085376` | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `.claude/rules/pencil-automation.md` | `aedb79780211` | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `.claude/rules/reporting.md` | `0c7ccad0646d` | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `.claude/rules/routing-and-delegation.md` | `bf53648f520e` | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `.claude/rules/deferred-domains.md` | `26fce91cff37` | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `.claude/rules/code-principles.md` | `6894a2804b49` | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `.claude/rules/design-to-code-sync.md` | `dfb2b1472f76` | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `.claude/rules/ux-laws.md` | `13d582696e15` | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `docs/rules/workflow-core.md` | `5d93b9d73f10` | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `docs/rules/cycle-discipline.md` | `c22ce5927112` | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `docs/rules/pencil-automation.md` | `a2506a34d797` | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `docs/rules/reporting.md` | `e86e8315e46d` | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `docs/rules/routing-and-delegation.md` | `46f10fe90629` | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `docs/rules/deferred-domains.md` | `26fce91cff37` | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `docs/rules/code-principles.md` | `3338feafe832` | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `docs/rules/design-to-code-sync.md` | `9a7ac4314a0c` | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `docs/rules/ux-laws.md` | `febd74dcacf8` | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `docs/agent/architecture/COMMON_ARCHITECTURE.md` | `6177dda18914` | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `docs/agent/architecture/TDD_WORKFLOW.md` | `1e5103a7443c` | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `docs/agent/architecture/MODEL_SEPARATION.md` | `85cadc9e2043` | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `docs/agent/architecture/SSOT_PRINCIPLES.md` | `4a9b895e3956` | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `docs/agent/architecture/TDD_WORKFLOW.md` | `209f9aa3f69c` | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `docs/agent/architecture/MODEL_SEPARATION.md` | `d6262ba37923` | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `docs/agent/architecture/SSOT_PRINCIPLES.md` | `5d531efb0bda` | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `docs/agent/process/COMMIT_CONVENTION.md` | `9a6c17c1f1f3` | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `scripts/agent/frontmatter-grep.sh` | `a387a4dc26dc` | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `.editorconfig` | `e6eb4cfe06a8` | ✓ | ✓ | ✓ | ✓ | ✓ |
@@ -191,7 +191,7 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 
 ## Last verify-sync
 
-- timestamp: 2026-07-10T17:27:33+0900
+- timestamp: 2026-07-11T19:47:20+0900
 - pass: 164
 - drift: 0
 - miss: 5
@@ -199,4 +199,4 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 
 ### Drift 상세
 
-- docs/ops/production-cli-access-tokens.md  master=2fec95080753  GentlyBreath=MISS  GentlyDay=MISS  GentlyTable=MISS  app-foundation=MISS  gently-product-docs=MISS
+- docs/ops/production-cli-access-tokens.md  master=3b0e8131fb67  GentlyBreath=MISS  GentlyDay=MISS  GentlyTable=MISS  app-foundation=MISS  gently-product-docs=MISS

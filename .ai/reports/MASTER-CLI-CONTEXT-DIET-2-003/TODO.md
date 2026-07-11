@@ -8,5 +8,11 @@
 - **measure-gsm ch_l0 정의**: 잔존 3 file(safety/anchor/cross-repo) 합 유지 · 잔존 5 전체(+table+footer) 반영 확대 = 지표 정의 변경 → 별 판단(무변경 default).
 - **context-health / cycle-health / gsm-dashboard**: cli-infra 아닌 master-only metric doc — 자식 propagation X.
 
+## Deferred (본 cycle 사고 → 후속)
+- **프로브 B 신 세션 확증**: 다음 `claude` 진입 시 `/context` 또는 probe 로 `.claude/rules` 주입 = 5-kernel 감축 확인 (in-session 미확증 = 세션 시작 1회 로드 기전).
+- **propagate.sh docs/ops exclude 부재**: `--all` 이 `docs/ops/production-cli-access-tokens.md`(문서화 master-only)를 자식에 유입 → 본 cycle 자식 surgical rm 복원. 근본 = propagate.sh find 에 `! -path 'docs/ops/*'` 추가(release-readiness/agent-audits 선례) = 별 cycle.
+- **GD 동시 세션**: GD-PEN-BACKSTOP-001 도메인 커밋 2개 유입(cli-infra 무접촉 · e9494bc 무결) = 영역 2 다중 세션 정상 · 조율 불요.
+- **.auto-memory 서술 stale-ref (non-blocking)**: verify-sync advisory 5(manifest 44/45 descriptive + cycle-history-log 100 + propagation-status 8 historical commentary) = 이력/서술 prose · verbatim 보존 default · 별 판단.
+
 ## 잔여 블로커
-- 없음 (T4 propagation + verify-sync 마감 후 DONE).
+- 없음. §15 hot 15>10 = **S15-HOT-DEMOTE-005** advisory (measure-gsm Stop hook 자동 surface · 별 cycle).
