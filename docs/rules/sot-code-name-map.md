@@ -54,6 +54,8 @@
 | SoT 화면명 (ui-spec) | 코드 화면명 | 카테고리 | 라우트 | 비고 |
 |---|---|---|---|---|
 | auth-screen | (UI 미구현) | SoT only | — | GB 와 동일 패턴 (`AnonymousAuthBootstrap` 자동) |
+| daily-journal (detail) | JournalDetailScreen.kt | 1:1 명명 차이 | `Destination.JournalDetail` | 2026-07-12 등재 · daily-journal.pen GDde1 artboard · shared/daily |
+| daily-journal (shelf) | JournalShelfScreen.kt | 1:1 명명 차이 | `Destination.Shelf` | 2026-07-12 등재 · daily-journal.pen GDsh1 artboard · shared/daily · route 명 = "Shelf" |
 | design-tokens-screen | (없음) | SoT only | — | 디자인 시스템 SoT |
 | habit-tracking-screen | RoutineScreen.kt | 1:1 (라우트 명 잔재) | `Routes.Habits` | route 명 = "habits" 잔재 / 화면 본문은 routine. SoT 정정 또는 deprecated 검토 |
 | home-screen | HomeScreen.kt | 1:1 직매핑 | `Routes.Home` | — |
@@ -61,7 +63,11 @@
 | night-routine-empty-screen | RoutineScreen.kt | N:1 통합 | (위 동) | RoutineType.NIGHT empty state |
 | night-routine-progress-screen | RoutineScreen.kt | N:1 통합 | (위 동) | RoutineType.NIGHT progress state |
 | onboarding-screen | OnboardingScreen.kt | 1:1 직매핑 | `Routes.Onboarding` | — |
+| reply (compose) | ReplyComposeSheet.kt | 1:1 명명 차이 | (시트 · 라우트 X) | 2026-07-12 등재 · reply.pen GDrc1 · shared/reply · JournalShelf/Detail 화면에서 modal overlay (App.kt `composeOrigin`) |
+| reply (detail) | ReplyDetailScreen.kt | 1:1 명명 차이 | `Destination.ReplyDetail` | 2026-07-12 등재 · reply.pen GDrd1 · shared/reply · 뒤로 대상 dynamic (App.kt `replyDetailBackTarget`) |
+| reply (shelf) | ReplyShelfScreen.kt | 1:1 명명 차이 | `Destination.ReplyShelf` | 2026-07-12 등재 · reply.pen GDrs1 · shared/reply |
 | report-screen | ReportScreen.kt | 1:1 직매핑 | `Routes.Reports` | — |
+| return-notes | ReturnNotesScreen.kt | 1:1 직매핑 | `Destination.ReturnNotes` | 2026-07-12 등재 · shared/settings · return-notes.pen GDrn1 · Settings 진입 (back=Settings) · "돌아온 날의 기록" |
 | routine-item-add-screen | RoutineScreen.kt 일부 | N:1 통합 | `Routes.Habits` | RoutineScreen 안 Generate / 추가 항목 (별 라우트 X) |
 | settings-screen | SettingsScreen.kt | 1:1 직매핑 | `Routes.Settings` | — |
 | sleep-screen | SleepScreen.kt | 1:1 직매핑 | `Routes.Sleep` | — |
@@ -127,6 +133,7 @@
 - GB ProfileSetupScreen / TicketPurchaseScreen → SoT 신설 vs 기존 SoT 통합 결정.
 - GD habit-tracking-screen → RoutineScreen 통합 인정 (SoT 폐기) vs SoT 분리 (별 화면 신설) 결정.
 - GD routine-item-add-screen → RoutineScreen 일부 인정 (현 매핑) vs 별 라우트 분리 결정.
+- GD (2026-07-12 발견 · MASTER-CLI-SOTMAP-REGISTER-001) daily-journal.pen `GDdj1` (적기 바텀시트 [TARGET] · design-debt/L4 = 기존 `DailyJournalScreen.kt` (shared/daily · ModalBottomSheet) 의 design→code follow 대상) + reply.pen `GDrx1` (SourcesSheet · "참고한 기록" 소스 시트 · 전용 코드 화면 부재) = 신규 artboard 등재 보류분 (§2 T1 pending-4-외). 매핑 확정 = 별 판단.
 - GT DietDetailScreen → 새 SoT 신설 (diet-detail-screen) 검토.
 - 자동화 hook 신설 (`design-to-code-sync` 와 통합) → 별 cycle.
 - **전면 재매핑 + 구조결정** (= 자동도출 hook vs byte-identical 강등 vs 자식별 분리) → `ENTRY-PROMPT-rule-architecture-establishment.md` 프로그램 이관 (= GAP-2 행동→규칙 라우팅 색인 + L3 도메인층 + 원칙 1/4 · 상단 STALENESS 배너 정합).
