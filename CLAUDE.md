@@ -39,6 +39,8 @@
 
 자식 repo 는 위 3 개에 의존만 함. 자식 repo 가 cli infra 직접 수정 금지 (단방향 정합 강제).
 
+> **역할 정합 진행중** (2026-07-13 · Coin): 본 repo = CLI/agent 도구 SoT. 제품/앱 표준(templates·schemas·design·backend·guides·architecture·도메인 rules·보호 5)은 역할상 분리 대상 → 감사·분리 지도 = `docs/architecture/CLI-MASTER-SCOPE-SEPARATION-CHARTER.md`. 물리 분리 = 필요 시(Coin 결정).
+
 ---
 
 ## 1. 자식 repo 등록 (placeholder · 변경 가능)
