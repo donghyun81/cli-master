@@ -26,6 +26,8 @@
 | 6 | IARC 등급 신청 | ☐ | 설문 응답 + 등급 확정 |
 | 7 | 데이터 안전 폼 | ☐ | 수집 / 공유 / 보안 모두 명시 |
 | 8 | 가격대 / 가용 지역 / 카테고리 / 베타 closed track | ☐ | <예: 무료 + IAP 한입 티켓 · KR + JP + US> |
+| 9 | 비공개 테스트: 12명 × 14일 연속 opt-in (신규 개인 계정 · 2023-11-13+) | ☐ | production 신청 前 필수 · 앱별 각각 · 중단 시 카운터 리셋 · answer/14151465 |
+| 10 | Google Payments 판매자 프로필 수립 + 개발자 계정 연결 | ☐ | 유료 IAP(티켓 SKU) 판매 前 전제 · 세금/판매자 정보 · answer/3092739 |
 
 **도메인 특수 disclosure**: `<domain-special-disclosure>`
 <예: 광고 X · 정부 ID 미수집 (GentlyBreath) / health data 처리 (GentlyDay) / 사진 업로드 + AI 처방 + 의료 X 책임 한계 (GentlyTable)>
