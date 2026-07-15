@@ -36,7 +36,7 @@ allowed-tools: Bash, Read
    - X (flatten 발생): `root=I("document",{...}); child=I(root,{...})` (별 호출 추가한 patterns)
    - O (정상): `I("document",{children:[...]})` — 단일 호출에 inline
    - O (25 op 초과 시 분할 patterns 정착 · F-1/F-2 검증): frame insert 1 op + children 22-25 op = 첫 호출 / 추가 children = 후속 호출 (각 호출마다 children inline 강제). 분할 호출 추가한 patterns 도 RCA-4 미해당 (export/screenshot 미수행 시).
-2-1. agent: `mcp__pencil__set_variables` — A-0_design-tokens inherit 적용 (color/typography 자동 inherit)
+2-1. agent: (구) `mcp__pencil__set_variables` — A-0_design-tokens inherit 적용 (color/typography 자동 inherit). **⚠ Pencil v1.1.69 제거** (`pencil-mcp-tools-reference.md §0.1a`) → 현 variable/theme write = headless 평문-JSON 측 `variables`/`themes` map 직접 편집 (`pencil-uiux-workflow.md §2.5` PRIMARY)
 2-2. agent: `mcp__pencil__batch_design` — 6 영역 컴포넌트 모두 추가 (필요 시 분할 호출 · F-1/F-2 검증 patterns 차용)
 2-3. agent: `mcp__pencil__snapshot_layout(problemsOnly=true)` — layout 문제 0건 확인 (export/screenshot 미수행 → RCA-4 미해당 · F-1/F-2 검증 PASS)
 2-4. agent: `mcp__pencil__get_editor_state` — 6 영역 컴포넌트 모두 활성 확인

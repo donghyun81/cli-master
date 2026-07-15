@@ -66,7 +66,7 @@ cleanup / docs / propagation / discipline 류 task = 4 파일 (PLAN / VERIFY / R
 ### 13) Claude Code 환경 정합 (latest-chase · 요약 — 서사/복귀 명령 원문 = COLD)
 
 - **버전 정책 = 최신 추격 (latest-chase · pin 폐기)**: npm scope `@anthropic-ai/claude-code` 의무 · `DISABLE_AUTOUPDATER=1` + `DISABLE_UPDATES=1` 이중 차단 유지 (해제 금지 · `~/.zshrc` + `~/.claude/settings.json` env 양쪽) · 능동 갱신 = 사용자 직접 `npm install -g @anthropic-ai/claude-code@latest` (주 1회 권장).
-- **매 cycle 진입 self-test 3 항목 (모두 PASS 의무)**: ① `claude --version` ② `claude mcp list` 안 `pencil ✓ Connected` ③ ToolSearch pencil **9종 named-set 전수** (= batch_design / batch_get / export_nodes / get_editor_state / get_guidelines / get_screenshot / get_variables / set_variables / snapshot_layout · 단순 ≥N 카운트 X). 기록 = **판정 + 핵심 수치 + 원문 pointer** (raw verbatim 박제 X · T3 · `reporting.md` §8).
+- **매 cycle 진입 self-test 3 항목 (모두 PASS 의무)**: ① `claude --version` ② `claude mcp list` 안 `pencil ✓ Connected` ③ ToolSearch pencil **9종 named-set 전수** (= batch_design / batch_get / export_html / export_nodes / get_editor_state / get_guidelines / get_screenshot / get_variables / snapshot_layout · 단순 ≥N 카운트 X). 기록 = **판정 + 핵심 수치 + 원문 pointer** (raw verbatim 박제 X · T3 · `reporting.md` §8).
 - **1+ FAIL = 즉시 STOP** + known-working 복귀 (= `.auto-memory/incident-log.md` `CLAUDE-CODE-LATEST-CHASE-001` trail 마지막 PASS entry 기준 · 복귀 명령 sequence + native installer 재검토 trigger 4조건 원문 = COLD).
 
 ### 14) Phase C — Pencil → Compose 5-type 분류 (pointer)

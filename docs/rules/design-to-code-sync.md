@@ -139,7 +139,7 @@ agent prompt 패턴:
 | Theme.kt 측 신규 color 추가 (Compose 측 prototype 우선) | Theme.kt | Theme.kt → Pencil |
 | 두 측 동시 충돌 | UNKNOWN | STOP → Coin 명시 결정 의뢰 |
 
-Pencil 측 variable 변경 → Phase C type 5 (일괄 갱신) flow 진입. `mcp__pencil__set_variables` 호출 후 inherit 적용된 모든 screen 자동 반영.
+Pencil 측 variable 변경 → Phase C type 5 (일괄 갱신) flow 진입. headless 평문-JSON 측 document `variables`/`themes` map 직접 편집 (`pencil-uiux-workflow.md §2.5` PRIMARY · 구 `mcp__pencil__set_variables` = Pencil v1.1.69 MCP 제거 · `pencil-mcp-tools-reference.md §0.1a`) 후 inherit 적용된 모든 screen 자동 반영.
 
 ### 9.5 Multi-axis paradigm (= `MASTER-CLI-PENCIL-OPTIMIZATION-002` 강화 본문)
 

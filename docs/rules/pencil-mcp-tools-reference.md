@@ -1,6 +1,6 @@
-# Pencil MCP Tools Reference (9 tools · Pencil v1.1.62 surface)
+# Pencil MCP Tools Reference (9 tools · Pencil v1.1.69 surface)
 
-> **단일 목적**: Pencil MCP server 측 `mcp__pencil__*` 도구 전체 reference. 현 surface = 9 종 (Pencil v1.1.62) · 구 13 종(공식 12 + package-verified 1) 중 4 종 제거 = deprecated 기록 보존.
+> **단일 목적**: Pencil MCP server 측 `mcp__pencil__*` 도구 전체 reference. 현 surface = 9 종 (Pencil v1.1.69) · 구 13 종(공식 12 + package-verified 1) 중 4 종 = Pencil v1.1.62 제거 · v1.1.69 측 `set_variables` 제거 + `export_html` 추가 (net 9 유지 · named-set 1-swap) = deprecated 기록 보존 (§0.1 / §0.1a).
 > **신설**: MASTER-CLI-PENCIL-OPTIMIZATION-001 (2026-05-19).
 > **공식 근거**: pencil.dev `/getting-started/ai-integration` (2026-04-03 last updated).
 > **연관 파일**:
@@ -15,7 +15,7 @@
 
 본 SoT 안 도구 2 그룹 분리:
 
-- **Part A (Official · 현 9)** — pencil.dev 공식 doc 명시. 호환 표준 = pencil.dev 모든 client. (구 12 중 3 제거 = Pencil v1.1.62.)
+- **Part A (Official · 현 9)** — pencil.dev 공식 doc 명시. 호환 표준 = pencil.dev 모든 client. (구 12 중 3 = Pencil v1.1.62 제거 · v1.1.69 측 `set_variables` 제거 + `export_html` 추가 = 현 9 유지.)
 - **Part B (Package-verified · 현 0)** — 구 1 (`open_document`) = Pencil v1.1.62 제거. 본 패키지 검증 영역 폐기.
 
 신규 cli session 진입 시 = 본 SoT 단일 참조. 그 외 file (`pencil-uiux-workflow.md` 등) 안 도구 목록 중복 금지.
@@ -31,6 +31,15 @@
 | `replace_all_matching_properties` | §3.2 | matching property 재귀 교체 (token migration) | `batch_design` (= §1.1) 또는 headless 평문-JSON 경로 (`pen_recolor.py` style · §2.5 PRIMARY) |
 | `open_document` | §7 (Part B) | `.pen` 진입점 (new canvas) | headless `pencil interactive -o <path>` (`pencil-cli` skill PRIMARY) 또는 desktop visual = `open -a Pencil <abspath>` (Bash) + `batch_design` (active-doc MCP) |
 
+### 0.1a v1.1.69 surface 1-swap (= `set_variables` 제거 + `export_html` 추가 · `MASTER-CLI-PENCIL-SELFTEST-GATE-RECALIBRATE-002`)
+
+Pencil app v1.1.62 → v1.1.69 측 MCP surface **1-swap** (= count 9 유지 · named-set 변경). `set_variables` 제거 + `export_html` 신규 → 게이트 `cycle-discipline.md §13` self-test ③ named-set 재보정 (= 2 환경 corroborate · Pencil app 서버측 toolset 재변경 · CC 2.1.210 무관). count 불변 → §10 count STOP 미발동 · named-set 게이트가 검출.
+
+| 변경 | 도구 | 위치 | 본질 | 대체 메커니즘 (현) |
+|---|---|---|---|---|
+| ⚠ 제거 | `set_variables` | §1.4 | design 측 variable 갱신 (token v2 / inherit 일괄 / Phase C type 5) | headless 평문-JSON 측 document `variables`/`themes` map 직접 편집 (`pencil-uiux-workflow.md §2.5` PRIMARY · 구 `replace_all_matching_properties` 대체 정합) |
+| ＋ 추가 | `export_html` | §4.3 | node → HTML(+Tailwind/CSS) export | 신규 등재 (= MCP surface 실측 기준 · 공식 doc web 조회 X) |
+
 ### 0.2 멀티-repo workspace + cross-version 마이그 caveat (= `MASTER-CLI-PENCIL-MULTIREPO-HEADLESS-001` · 2026-06-24)
 
 본 패키지 = 6-repo umbrella (= master + app-foundation + GB + GD + GT + gently-product-docs) · 자식 3 (GB/GD/GT) 측 `.pen` 보유. 아래 §1~§6 desktop-stdio 도구 운영 시점 3 caveat 정합 의무 (= HOME-PEN-2.13 혼선 근본 mitigation).
@@ -45,9 +54,9 @@
 
 ---
 
-# Part A — Official tools (현 9 · 구 12 중 3 제거 = Pencil v1.1.62)
+# Part A — Official tools (현 9 · 구 12 중 3 = Pencil v1.1.62 제거 · v1.1.69 측 set_variables 제거 + export_html 추가)
 
-## 1. Design Operations (5 tools)
+## 1. Design Operations (4 · 구 5 중 set_variables 제거 = Pencil v1.1.69)
 
 ### 1.1 `batch_design`
 
@@ -135,10 +144,11 @@ token audit + migration 통합 paradigm = `batch_get` (= 위 pattern 검색) + `
 - 응답: variable map (name → value)
 - Variables ↔ Code Sync paradigm 진입점 (`design-to-code-sync.md` §9 정합)
 
-### 1.4 `set_variables`
+### 1.4 `set_variables` — ⚠ REMOVED (Pencil v1.1.69)
 
-- 본질: design 측 variable 갱신
-- 사용처: design token v2 도입 / inherit 적용 screen 일괄 반영 / Phase C type 5
+- **제거 도구 · 호출 X** (= `ToolSearch query="pencil"` 측정 부재 · §0.1a).
+- 구 본질: design 측 variable 갱신 (design token v2 도입 / inherit 적용 screen 일괄 반영 / Phase C type 5).
+- **대체**: headless 평문-JSON 측 document `variables`/`themes` map 직접 편집 (`pencil-uiux-workflow.md §2.5` PRIMARY · 구 `replace_all_matching_properties` 대체 정합).
 
 ### 1.5 `get_editor_state`
 
@@ -180,7 +190,7 @@ token audit + migration 통합 paradigm = `batch_get` (= 위 pattern 검색) + `
 
 ---
 
-## 4. Visual Operations (2)
+## 4. Visual Operations (3 · v1.1.69 export_html 추가)
 
 ### 4.1 `get_screenshot`
 
@@ -193,6 +203,15 @@ token audit + migration 통합 paradigm = `batch_get` (= 위 pattern 검색) + `
 - 본질: 특정 node → 외부 file (PNG / JPEG / WEBP / PDF) export
 - 사용처: docs/design/pencil-exports/ 안 preview asset 갱신 / 디자인 리뷰 자료 산출
 - 옵션: scale (1x / 2x / 3x) · type (png/jpeg/webp/pdf)
+
+### 4.3 `export_html`
+
+- 본질: 특정 node array → HTML file export (= design → HTML/Tailwind 코드 초안)
+- format: `html-tailwind` (default) / `html-css`
+- 옵션: `includeHtmlScaffold` (default true · full HTML doc scaffold) · `includeLayerNames` (default true · layer name → data attr) · `includeLayerIds` (default false)
+- 필수 파라미터: `filePath` (.pen) · `nodeIds` (array) · `outputPath` → HTML file 기록 후 절대 경로 반환
+- image asset = 항상 상대 경로 참조 (embed X)
+- 신규: Pencil v1.1.69 등재 (= MCP surface 실측 기준 · 공식 doc web 조회 X · §0.1a)
 
 ---
 
@@ -273,7 +292,7 @@ CI/CD 통합 = `pencil-cli-headless.md` §10 (lazy default · 별 cycle).
 
 ## 10. STOP 조건
 
-- 현 9 tool surface 변경 검출 (`ToolSearch query="pencil"` ≠ 9 종) → 본 SoT 갱신 cycle 진입 의무 (`MASTER-CLI-PENCIL-MCP-TOOLS-UPDATE-NNN` 패턴 · `cycle-discipline.md §13` 게이트 동기).
+- 현 surface 변경 검출 (`ToolSearch query="pencil"` named-set ≠ §0 표 9종 — **count 동일 1-swap 포함** · 선례 = v1.1.69 `set_variables`↔`export_html`) → 본 SoT 갱신 cycle 진입 의무 (`MASTER-CLI-PENCIL-MCP-TOOLS-UPDATE-NNN` 패턴 · `cycle-discipline.md §13` 게이트 동기).
 - 제거 4 종 (§0.1) 부활 검출 → 본 SoT + §13 게이트 재보정 cycle 진입.
 - 신규 도구 발견 (예: 9 → N) → Part A 안 행 추가 + 본 cycle scope 외 별 trail.
 
@@ -291,3 +310,4 @@ CI/CD 통합 = `pencil-cli-headless.md` §10 (lazy default · 별 cycle).
 - 2026-06-10 · MASTER-CLI-PENCIL-TOOLSET-REMOVAL-STALE-SWEEP-001 · 도구 surface 13→9 정정 (Pencil v1.1.62 측 find_empty_space_on_canvas / search_all_unique_properties / replace_all_matching_properties / open_document 제거) — §0.1 제거 도구 표 + 대체 메커니즘 신설 · §2.2/§3.1/§3.2/§7 deprecated stub · header/count/§1.2.3/§10 STOP 정합 · 6-repo byte-identical propagation. PENCIL-SELFTEST-GATE-RECALIBRATE-001 (§13 게이트 9종) 후속.
 - 2026-06-24 · MASTER-CLI-PENCIL-MULTIREPO-HEADLESS-001 · §0.2 멀티-repo workspace + cross-version 마이그 caveat 신설 (= rule 1 MCP single active workspace anchored[GT] → 타 repo `.pen` MCP 측정·편집 = 오염 risk · rule 3 cross-verify = disk shasum/평문-JSON · rule 4 버전업 ≠ `save()` 재직렬화[CLI 0.2.6 target-schema 검증 → legacy construct 시 0 byte 파괴]) · 멀티-repo 작업 + rule 2/5 본문 canonical = `pencil-cli` skill §7.3. pointer only (본문 복제 X · 도구 surface 9종 무변동 · add-only) · 6-repo byte-identical propagation. HOME-PEN-2.13 혼선 근본 mitigation.
 - 2026-06-24 · MASTER-CLI-PENCIL-PRESCAN-EXHAUSTIVE-001 · §0.2 rule 4 말미 post-check pointer 1줄 추가 (= 마이그 후 version `"2.13"` 선언·commit 전 모든 2.11-form construct grep = 0 assert · `json.load` 통과 = syntax-valid ≠ schema-valid · 본문 canonical = `pencil-cli` skill §7.3 rule 6) + footer SSOT 5-rule→6-rule reconcile + rule 4 pre-scan 참조에 "§1.1a delta 1~10 전수" 명시. 본문 canonical (= rule 5 전수화 + rule 6 post-check) = `pencil-cli` skill §7.3 단일 · 본 §0.2 = pointer only (= 본문 복제 X · 도구 surface 9종 무변동 · add-only). 6-repo byte-identical propagation. ONBOARDING-2.13 GB onboarding.pen `thickness`×7 미flatten = inconsistent 2.13 재발 근본 mitigation.
+- 2026-07-15 · MASTER-CLI-PENCIL-SELFTEST-GATE-RECALIBRATE-002 · Pencil app v1.1.62 → v1.1.69 MCP surface **1-swap** 반영 (`set_variables` 제거 + `export_html` 추가 · count 9 유지 · named-set 변경): §0.1a v1.1.69 1-swap 기록 신설 + §1.4 `set_variables` → REMOVED (v1.1.69) stub + §4.3 `export_html` 신규 등재(ToolSearch schema 실측) + header/line3/§0 Part A/§1(5→4)/§4(2→3)/§10 named-set STOP 정합. 역사 서술(v1.1.62 4종 제거 = §0.1) 무접촉. 게이트 `cycle-discipline.md §13` self-test ③ named-set 재보정 동기 · 보호 5 무접촉 · 6-repo byte-identical propagation. PENCIL-SELFTEST-GATE-RECALIBRATE-001 (13→9) 후속.

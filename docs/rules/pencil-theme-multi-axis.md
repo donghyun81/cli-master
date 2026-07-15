@@ -6,7 +6,7 @@
 > **연관 파일**:
 > - `pencil-pen-format-schema.md` §1.1 Document + §5 Variable / Theme system — 본 paradigm 측 schema 본문
 > - `design-to-code-sync.md` §9 Variables ↔ Code Sync paradigm — 본 SoT 측 multi-axis 강화 본문
-> - `pencil-mcp-tools-reference.md` §1.3 `get_variables` + §1.4 `set_variables` — multi-axis variable 측 호출 paradigm
+> - `pencil-mcp-tools-reference.md` §1.3 `get_variables` (read) + §0.1a `set_variables` REMOVED (v1.1.69) — multi-axis variable read = `get_variables` · write = headless 평문-JSON (`pencil-uiux-workflow.md §2.5` PRIMARY)
 > - `pencil-component-paradigm.md` — Component 측 theme axis 적용 paradigm
 > SOT: `CLAUDE.md`
 
@@ -282,7 +282,7 @@ agent prompt 정합 → Compose 측 multi-axis Theme.kt 자동 갱신 default.
 - MobileTypography + TabletTypography + DesktopTypography → device axis"
 ```
 
-`mcp__pencil__set_variables` 호출 측 multi-axis assignment 자동 생성 default.
+headless 평문-JSON 측 document `variables`/`themes` map 직접 편집 측 multi-axis assignment surgical 기재 (`pencil-uiux-workflow.md §2.5` PRIMARY · 구 `mcp__pencil__set_variables` = Pencil v1.1.69 MCP 제거 · `pencil-mcp-tools-reference.md §0.1a` · auto-생성 편의 상실 → 수동 편집).
 
 ### 5.3 sync 방향 결정 (drift 발생 시)
 
@@ -333,7 +333,7 @@ Validate that all cross-axis variable combinations resolve in Compose."
 | `themes` field 측 axis 명 측 reserved word 충돌 (= `mode` / `spacing` / `device` 측 다른 의미 적용 시도) | 표준 axis 명 권장 default · 변경 시 `pencil-component-paradigm.md` §3 Slot suggested + 본 SoT §1.2 정합 cycle 진입 |
 | Cross-axis combination 측 fallback measurement 부재 발견 | document `variables` 측 default value 측정 의무 default · 미측정 시 raw string default (= variable substitution X) |
 | Compose Theme.kt 측 axis CompositionLocal 측 Provider 누락 | runtime FAIL 발화 · `Theme.kt` 측 root Provider 측 axis 측 CompositionLocalProvider 묶음 의무 |
-| Pencil multi-axis variable assignment 측 axis 측 invalid measurement (= `themes` 측 array 측 부재 token) | `set_variables` 측 FAIL · agent prompt 측 axis enumeration 재 확인 의뢰 |
+| Pencil multi-axis variable assignment 측 axis 측 invalid measurement (= `themes` 측 array 측 부재 token) | headless 평문-JSON write 전 axis enumeration 재확인 + `snapshot_layout(problemsOnly=true)` post-check (구 `set_variables` FAIL = Pencil v1.1.69 MCP 제거) |
 
 ---
 
