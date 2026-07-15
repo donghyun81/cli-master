@@ -17,12 +17,13 @@
 | `curl`, `wget` | 외부 네트워크 접근 금지 |
 | `sudo` | 권한 상승 금지 |
 | `rm` | 비가역 삭제 금지 |
-| `git commit` | 코드 변경 자동 커밋 금지 |
-| `git push` | 원격 전송 금지 |
+| `git push` | 원격 전송 금지 (Coin 소관) |
 | `git reset` | 비가역 상태 변경 금지 |
 | `git clean` | 추적 외 파일 삭제 금지 |
+| `git rebase` | 이력 재작성 금지 (Coin 소관) |
+| `git filter-branch` | 이력 파괴 재작성 금지 (Coin 소관) |
 
-> **`git commit` 영역 우선순위 정합**: `docs/rules/cycle-discipline.md §5 agent commit 한시 허가 정책 (v2)` 우선 · 본 표 = 응급 백스탑 default 영역. v2 자동 허용 카테고리 (docs / cleanup / propagation / report / refactor / test / chore / audit / discipline) + app/src/ 변경 + 빌드 PASS + Coin 명시 승인 영역 측 agent commit 허용 정합.
+> **`git commit` / git log = cli 소관 (§5 v3 위임 · deny 아님)**: `docs/rules/cycle-discipline.md §5 git 역할 경계 정책 (v3)` 우선 — commit + git log 위생 = cli 가 cycle 마감 step 에서 수행(전 카테고리 · 영구). 본 표 = **push + 파괴 연산(reset / clean / rebase / filter-branch) 응급 백스탑 한정**. `git push` + 고위험 git(`--amend` / `--force` / `reflog expire` 등 · deny 패턴 불가분) = Coin 소관(승인+실행) · cli 실행 절대 X · 필요 시 STOP + Coin 회수. (v2 한시 허가 → v3 영구 정정 = 2026-07-15 · `settings.json` `Bash(git:*)` allow 실측 + 실운영 정합)
 
 ---
 

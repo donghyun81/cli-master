@@ -2,7 +2,7 @@
 
 > 이 문서는 multi-repo propagation 대상이며 byte-identical 로 복사된다.
 > SOT: `docs/agent/process/COMMIT_CONVENTION.md`
-> 관련: `.claude/rules/safety-and-secrets.md` (git commit/push 금지 정책), `.github/pull_request_template.md`
+> 관련: `.claude/rules/safety-and-secrets.md` (git push + 고위험 git 금지 · commit=cli 소관 §5 v3), `.github/pull_request_template.md`
 
 ---
 
@@ -16,12 +16,12 @@ Conventional Commits 표준을 사용한다.
 
 ---
 
-## 2. Claude 와 사람의 역할 경계 (중요)
+## 2. Claude 와 사람의 역할 경계 (중요 · v3)
 
-- **Claude Code 는 git commit / git push / git reset / git clean 을 실행하지 않는다**
-  (`.claude/settings.json` deny list 로 차단됨)
-- 이 문서는 **사용자가 수동으로 커밋을 만들 때 참고하는 가이드**다
-- Claude 가 PR 을 대신 생성할 때는 사용자가 최종 문구를 검토·승인한다
+- **commit + git log 위생 = Claude Code 소관 (cli · 전 카테고리 · 영구)**: cli 가 cycle 마감 step 에서 add/commit 을 수행하며 본 문서(Conventional Commits)의 준수 주체다. (근거: `.claude/rules/cycle-discipline.md §5 git 역할 경계 정책 (v3)` + `.claude/settings.json` allow `Bash(git:*)`)
+- **push + 고위험 git = 사용자(Coin) 소관 (승인+실행)**: `git push`(원격 반영) · 이력 조작/파괴 = `git reset` · `git clean` · `git rebase` · `git filter-branch`(`settings.json` deny 차단) + `git commit --amend` · `--force` 계열 · `reflog expire`. cli 는 이들을 실행하지 않으며 필요 시 STOP + Coin 회수.
+- Claude 가 PR 을 대신 생성할 때는 사용자가 최종 문구를 검토·승인한다.
+- 정정 근거: 구 §2("Claude 는 commit / push / reset / clean 을 실행하지 않는다")는 `settings.json` 실측(commit 은 deny 아님 · `Bash(git:*)` allow)과 실운영에 모순이었다 (2026-07-15 · MASTER-GIT-ROLE-COMMIT-V3-001 정정).
 
 ---
 
@@ -181,5 +181,5 @@ docs: clarify DependencyDecision 8-item checklist usage
 
 - `.github/pull_request_template.md` — PR 작성 템플릿
 - `docs/agent/architecture/DEPENDENCY_DECISION_CHECKLIST.md` — 의존성 추가 시 커밋 body 에 8항목 요약 권장
-- `.claude/rules/safety-and-secrets.md` — git 자동 실행 금지 정책
+- `.claude/rules/safety-and-secrets.md` — git push + 고위험 git 금지 정책 (commit=cli 소관 · §5 v3)
 - `.claude/rules/workflow.md` — 최소 변경 원칙

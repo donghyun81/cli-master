@@ -25,12 +25,13 @@
 
 task ID prefix = source repo (`GB-*` → GB source · `GD-*` → GD · `GT-*` → GT · `C<n>-*`/`MASTER-*` → master). 보호 파일은 어느 source 든 byte-identical 결과 강제.
 
-### 5) agent commit 한시 허가 정책 (v2)
+### 5) git 역할 경계 정책 (v3 · commit=cli 소관 · push+고위험 git=Coin)
 
-- **자동 허용**: docs / cleanup / propagation / report / refactor / test / chore / audit / discipline + **`app/src/` 변경 + 빌드 PASS + STEP "go" 단계 Coin 명시 승인**.
-- **Coin direct 강제 (HIGH RISK)**: DB migration · auth/billing · secret 접촉 · 빌드 스크립트 자체 변경 · 빌드 검증 미수행 변경.
-- 분류 모호 = 한 번 멈추고 Coin 명시 한 줄. 묵시 동의 = task 프롬프트 `[agent-commit: yes]`.
-- 우선순위: 본 §5 v2 우선 · `safety-and-secrets.md` deny 표 = 응급 백스탑. (v2 도입 근거 서사 = COLD)
+- **commit = cli 소관 default (전 카테고리 · 영구)**: cycle 산출물의 add/commit + 커밋 메시지(§6/§7 표준 · `COMMIT_CONVENTION.md` 준수 주체 = cli) + git log 위생 = cli 가 cycle 마감 step 에서 수행. (v2 의 자동 허용 카테고리 나열 · `[agent-commit: yes]` 묵시 신호 = 폐지 — 전면 default 라 불요.)
+- **품질 게이트(기계) 유지**: `app/src/` 변경 커밋 = 빌드 PASS 선행. §9 자기검증 · stage 정합(`pre-commit-stage-check.sh`) · §10 보호 파일 sha 의무 = 불변.
+- **STOP#1/M3 도메인(DB migration · auth/billing · secret) 산출물 커밋도 cli 소관**: cycle 자체가 승인된 paste 하에서만 진행되므로 그 산출물 commit 도 cli 가 수행 (v2 의 "Coin direct 강제" 행 폐지). **단 paste 없는 자율 cycle 개시 금지 = 기존 규칙 그대로** (commit 권한 ≠ cycle 개시 권한).
+- **Coin 소관 = push + 고위험 git 연산 (승인+실행)**: `git push`(원격 반영) · 이력 조작/파괴 = `git reset` · `git clean` · `git rebase` · `git filter-branch`(이상 `settings.json` deny 차단) + `git commit --amend` · `reflog expire` · 브랜치 강제 삭제 · `--force` 계열(deny 패턴 불가분 = **문서 금지 · cli 실행 절대 X · 필요 시 STOP + Coin 회수**).
+- 우선순위: 본 §5 v3 우선 · `safety-and-secrets.md` deny 표 = 응급 백스탑(push + 파괴 연산 한정). (v2→v3 정정 = 2026-07-15 Coin 본심 · `settings.json` `Bash(git:*)` allow 실측 + 실운영 정합 · v2/v3 도입 근거 서사 = COLD)
 
 ### 6) commit subject 표준
 
@@ -132,3 +133,4 @@ rename + content 변경 동시 cycle = **post-rename `git add -u` 의무** → `
 ## 변경 정책 + demote 이력
 
 > 변경 정책 = [`rule-footer-common.md`](../../.claude/rules/rule-footer-common.md). 2026-07-10 · MASTER-CLI-CONTEXT-DIET-2-001 T1 · 본 file diet (49.4K → hot 실행 규약 · 원문 전문 = COLD verbatim snapshot · 정보 소실 0).
+> 2026-07-15 · MASTER-GIT-ROLE-COMMIT-V3-001 · §5 = agent commit 한시 허가 (v2) → **git 역할 경계 정책 (v3)** 재작성 — commit + git log 위생 = cli 소관 default(전 카테고리·영구) · push + 고위험 git(reset/clean/rebase/filter-branch/amend/force/reflog) = Coin 소관. v2 카테고리 나열 · `[agent-commit: yes]` 묵시 신호 폐지. 4개 층(§5 · `safety-and-secrets.md` deny 표 · `COMMIT_CONVENTION.md` §2 · `settings.json` deny) 문언 모순 일괄 정합.
