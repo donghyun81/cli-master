@@ -172,13 +172,13 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 | `docs/design/design-sot-policy.md` | `92a5e99804ff` | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `.claude/settings.json` | `313fec8d0023` | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `docs/rules/workflow-core.md` | `5d93b9d73f10` | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `docs/rules/cycle-discipline.md` | `d07235e1c7ea` | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `docs/rules/cycle-discipline.md` | `551899306fbd` | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `docs/rules/pencil-automation.md` | `a2506a34d797` | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `docs/rules/reporting.md` | `e86e8315e46d` | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `docs/rules/routing-and-delegation.md` | `46f10fe90629` | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `docs/rules/deferred-domains.md` | `26fce91cff37` | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `docs/rules/code-principles.md` | `3338feafe832` | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `docs/rules/design-to-code-sync.md` | `9a7ac4314a0c` | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `docs/rules/design-to-code-sync.md` | `81a52a9bc694` | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `docs/rules/ux-laws.md` | `febd74dcacf8` | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `docs/agent/architecture/COMMON_ARCHITECTURE.md` | `6177dda18914` | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `docs/agent/architecture/TDD_WORKFLOW.md` | `209f9aa3f69c` | ✓ | ✓ | ✓ | ✓ | ✓ |
@@ -191,7 +191,7 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 
 ## Last verify-sync
 
-- timestamp: 2026-07-15T17:41:50+0900
+- timestamp: 2026-07-15T18:32:24+0900
 - pass: 163
 - drift: 5
 - miss: 10
