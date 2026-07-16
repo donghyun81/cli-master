@@ -455,3 +455,17 @@
 - 직전 PASS entry: 2.1.170 (2026-06-11 · MASTER-CLI-CC-VERSION-UPDATE-NATIVE-EVAL-001)
 - 회귀 상태: X
 - 비고: UPGRADE-001(CLAUDE-CODE-LATEST-CHASE-001 trail) 잔여 = 2.1.210 PASS entry 미기록분 → 본 entry 로 겸결 마감(별 세션 재투입 생략 · 묶음 선례 = MASTER-CLEANUP-PROPAGATION-BUNDLE-001 3-trail close). 2.1.170 → 2.1.210 사이 lazy 설치분 미기록(정상 · lazy 정책). self-test 게이트 = 9종 named-set(v1.1.69 1-swap 재보정 baseline · set_variables→export_html · 구 v1.1.62 named-set 폐기). native 전환 X(NATIVE-MIGRATION-EVAL-001 결론 유지).
+
+## 2026-07-17T01:31:55+0900 — MASTER-SELFWARD-CLAUDE-PARITY-001 trail entry
+
+- trail: MASTER-SELFWARD-CLAUDE-PARITY-001 (⑦ Selfward `.claude` parity · master cycle · close)
+- entry type: PASS (초회 propagation · 회귀 X)
+- 날짜: 2026-07-17 KST
+- 본질: Selfward = `.claude` 부재로 T1~T5 paste 문면이 유일 rule 가드 → master 단방향 propagate **6번째 편입**(`repo-config.sh` TARGET_REPOS += Selfward) + **165 file 초회 전파**(`--all` set − master-only 2). rule 백스탑 확보(T6 정체성·repo 재편 전 backstop).
+- 보호 manifest 처리: `repo-config.sh` = `.auto-memory/protected-file-hashes.md` 직접 grep 실측 → 보호 5(ui-spec.schema/pencil-uiux-workflow/pencil-sot-policy/uiux-sot-refresh/design-sot-policy) ∌ scripts/* 확인 → **비보호 · manifest 갱신 불요**("기억 단정" 회피 · 실측 선행 준수).
+- Selfward 전파: propagate ok=165/0 · 89 file 실변(신규 83 = `.claude/**` 76 + `.editorconfig`·`.mcp.json`·`.github/PR`·`.ai/uiux-sot` 3·`.ai/promptfit` 1 + 갱신 5 stale cli-infra→master SoT + `.gitignore` C14 patch) · 무변 77 byte-identical no-op · commit `8e2a45d`.
+- master-only 2 제외: `docs/ops/production-cli-access-tokens.md`(header "6-repo propagation 대상 X · master-only") + `docs/architecture/CLI-MASTER-SCOPE-SEPARATION-CHARTER.md`(master-scope 감사 헌장) = 기존 5자식 동일 MISS pre-existing 정합.
+- CLAUDE.md 처분: Selfward 기존 top-level CLAUDE.md = 4-repo byte-identical 자식 clone `753a2e0`(== GB/GD/GT/FND) 실존 → **propagate 절대 금지 준수 · 무접촉** · 대량 저작 불요(STOP 미발동 · §1 registry Selfward 미등재 = T6 몫).
+- 검증: verify-sync 6-repo Selfward **164 PASS/DRIFT 0/MISS 2**(master-only 2) · 전체 DRIFT 5(release-checklist 5자식 stale · Selfward=✓ 신규 drift 0)/MISS 12 · 보호 5 sha drift 0(edit-set ∩ 보호 = ∅) · 기존 5자식 무접촉(dirty 104/77/70/0/0 불변 · env TARGET_REPOS=Selfward isolation).
+- 회귀 상태: X
+- 비고: git commit v3 = master 2 commit(content `0c62052` + audit) + Selfward 1(`8e2a45d`) · push = Coin(cli 실행 X). 후속(scope 외) = Selfward run-* launch recipe(자식별 별 cycle) · CLAUDE.md §1 registry Selfward 등재 + repo 재편 = T6 · §15 hot 20>10 = S15-HOT-DEMOTE-005 advisory.

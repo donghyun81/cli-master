@@ -159,46 +159,46 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 ## Auto-generated (verify-sync · live · 직접 편집 금지)
 
 > 본 영역 = `verify-sync.sh` 매 실행 시 live sha 재생성. 수기 편집 금지 (= 영구 stale 차단).
-> targets: GentlyBreath GentlyDay GentlyTable app-foundation gently-product-docs
+> targets: GentlyBreath GentlyDay GentlyTable app-foundation gently-product-docs Selfward
 
 ### 보호 5 + 핵심 cli infra sha 매트릭스 (live)
 
-| 파일 | master sha (12) | GentlyBreath | GentlyDay | GentlyTable | app-foundation | gently-product-docs |
-|---|---|---|---|---|---|---|
-| `docs/schemas/ui-spec.schema.json` | `8502c01428fb` | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `docs/rules/pencil-uiux-workflow.md` | `202d3f4f29c0` | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `docs/design/pencil-sot-policy.md` | `2bfc81c538b2` | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `docs/rules/uiux-sot-refresh.md` | `31c0da56aeec` | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `docs/design/design-sot-policy.md` | `92a5e99804ff` | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `.claude/settings.json` | `313fec8d0023` | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `docs/rules/workflow-core.md` | `5d93b9d73f10` | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `docs/rules/cycle-discipline.md` | `551899306fbd` | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `docs/rules/pencil-automation.md` | `a2506a34d797` | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `docs/rules/reporting.md` | `e86e8315e46d` | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `docs/rules/routing-and-delegation.md` | `46f10fe90629` | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `docs/rules/deferred-domains.md` | `26fce91cff37` | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `docs/rules/code-principles.md` | `3338feafe832` | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `docs/rules/design-to-code-sync.md` | `81a52a9bc694` | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `docs/rules/ux-laws.md` | `febd74dcacf8` | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `docs/agent/architecture/COMMON_ARCHITECTURE.md` | `6177dda18914` | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `docs/agent/architecture/TDD_WORKFLOW.md` | `209f9aa3f69c` | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `docs/agent/architecture/MODEL_SEPARATION.md` | `d6262ba37923` | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `docs/agent/architecture/SSOT_PRINCIPLES.md` | `5d531efb0bda` | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `docs/agent/process/COMMIT_CONVENTION.md` | `e2e8c636d82a` | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `scripts/agent/frontmatter-grep.sh` | `a387a4dc26dc` | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `.editorconfig` | `e6eb4cfe06a8` | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `.mcp.json` | `1e6c13bac563` | ✓ | ✓ | ✓ | ✓ | ✓ |
+| 파일 | master sha (12) | GentlyBreath | GentlyDay | GentlyTable | app-foundation | gently-product-docs | Selfward |
+|---|---|---|---|---|---|---|---|
+| `docs/schemas/ui-spec.schema.json` | `8502c01428fb` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `docs/rules/pencil-uiux-workflow.md` | `202d3f4f29c0` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `docs/design/pencil-sot-policy.md` | `2bfc81c538b2` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `docs/rules/uiux-sot-refresh.md` | `31c0da56aeec` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `docs/design/design-sot-policy.md` | `92a5e99804ff` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `.claude/settings.json` | `313fec8d0023` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `docs/rules/workflow-core.md` | `5d93b9d73f10` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `docs/rules/cycle-discipline.md` | `551899306fbd` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `docs/rules/pencil-automation.md` | `a2506a34d797` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `docs/rules/reporting.md` | `e86e8315e46d` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `docs/rules/routing-and-delegation.md` | `46f10fe90629` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `docs/rules/deferred-domains.md` | `26fce91cff37` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `docs/rules/code-principles.md` | `3338feafe832` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `docs/rules/design-to-code-sync.md` | `81a52a9bc694` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `docs/rules/ux-laws.md` | `febd74dcacf8` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `docs/agent/architecture/COMMON_ARCHITECTURE.md` | `6177dda18914` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `docs/agent/architecture/TDD_WORKFLOW.md` | `209f9aa3f69c` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `docs/agent/architecture/MODEL_SEPARATION.md` | `d6262ba37923` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `docs/agent/architecture/SSOT_PRINCIPLES.md` | `5d531efb0bda` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `docs/agent/process/COMMIT_CONVENTION.md` | `e2e8c636d82a` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `scripts/agent/frontmatter-grep.sh` | `a387a4dc26dc` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `.editorconfig` | `e6eb4cfe06a8` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `.mcp.json` | `1e6c13bac563` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 
 ## Last verify-sync
 
-- timestamp: 2026-07-15T18:32:24+0900
+- timestamp: 2026-07-17T01:29:08+0900
 - pass: 163
 - drift: 5
-- miss: 10
+- miss: 12
 - exit: 1
 
 ### Drift 상세
 
-- docs/architecture/CLI-MASTER-SCOPE-SEPARATION-CHARTER.md  master=f7ca0507f2fe  GentlyBreath=MISS  GentlyDay=MISS  GentlyTable=MISS  app-foundation=MISS  gently-product-docs=MISS
-- docs/ops/production-cli-access-tokens.md  master=3b0e8131fb67  GentlyBreath=MISS  GentlyDay=MISS  GentlyTable=MISS  app-foundation=MISS  gently-product-docs=MISS
-- docs/templates/release-checklist.template.md  master=e6c62fb280f4  GentlyBreath=30fc93967106(✗)  GentlyDay=30fc93967106(✗)  GentlyTable=30fc93967106(✗)  app-foundation=30fc93967106(✗)  gently-product-docs=30fc93967106(✗)
+- docs/architecture/CLI-MASTER-SCOPE-SEPARATION-CHARTER.md  master=f7ca0507f2fe  GentlyBreath=MISS  GentlyDay=MISS  GentlyTable=MISS  app-foundation=MISS  gently-product-docs=MISS  Selfward=MISS
+- docs/ops/production-cli-access-tokens.md  master=3b0e8131fb67  GentlyBreath=MISS  GentlyDay=MISS  GentlyTable=MISS  app-foundation=MISS  gently-product-docs=MISS  Selfward=MISS
+- docs/templates/release-checklist.template.md  master=e6c62fb280f4  GentlyBreath=30fc93967106(✗)  GentlyDay=30fc93967106(✗)  GentlyTable=30fc93967106(✗)  app-foundation=30fc93967106(✗)  gently-product-docs=30fc93967106(✗)  Selfward=✓
