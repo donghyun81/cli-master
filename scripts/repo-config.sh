@@ -18,7 +18,7 @@
 #   TARGET_REPOS   기본: "app-foundation gently-product-docs Selfward"
 #
 # 변경 정책:
-#   - master cycle 신설 + 6-repo propagation 의무 (`cycle-discipline.md` §15 패턴 1)
+#   - master cycle 신설 + 4-repo propagation 의무 (`cycle-discipline.md` §15 패턴 1)
 #   - 자식 repo 직접 수정 금지
 
 # === default 변수 ===
@@ -28,7 +28,7 @@
 # propagate 대상 6→4 재편 (GB/GD/GT 전파 제거) = MASTER-T6-REPO-REALIGN-001 (2026-07-17 · 전파 자식 3: app-foundation/gently-product-docs/Selfward · GB/GD/GT 원본 보존 · GitHub archive=Coin 콘솔)
 : "${TARGET_REPOS:=app-foundation gently-product-docs Selfward}"
 
-# === PROTECTED_FILES (5 종 보호 file 강제 byte-identical · master ↔ 5 propagation target = 6-repo) ===
+# === PROTECTED_FILES (5 종 보호 file 강제 byte-identical · master ↔ 3 propagation target = 4-repo) ===
 # 본 baseline = `.auto-memory/protected-file-hashes.md` 측 sha-256 인용.
 # 변동 시 = mitigation cycle (CLAUDE.md §16 + cycle-discipline.md §10).
 PROTECTED_FILES=(

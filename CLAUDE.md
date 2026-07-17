@@ -16,7 +16,7 @@
 ---
 
 > **이 repo 는 cli infra + 보호 파일의 단일 source-of-truth.**
-> 자식 repo (GentlyBreath / GentlyDay / GentlyTable / 향후 추가) 는 본 repo 에서 단방향 propagation 을 받는다.
+> 자식 repo (app-foundation / gently-product-docs / Selfward / 향후 추가) 는 본 repo 에서 단방향 propagation 을 받는다 (= 4-repo · 2026-07-17 T6 재편 · GB/GD/GT = 동결 계승 원천 = 전파 대상 X · §1.3).
 > 시간대: Asia/Seoul (KST) · 운영 CLI: Claude Code 단일.
 
 ---
@@ -24,14 +24,15 @@
 ## 0. master repo 의 책임 (3 개)
 
 > **이 repo = generic cli infra master · 도메인 코드 hub 아님.**
-> 현재 Gently 패키지 (3 자식 repo: GB/GD/GT) 한정으로 운영되나, `scripts/` + `.claude/` cli infra + `docs/agent/`·`docs/schemas/`·`docs/templates/` 는 도메인 무관 = 다른 앱 패키지 (예: SteadyWell · 향후 신규) 로 확장 가능.
+> 현재 활성 도메인 자식 = Selfward 「나에게로」 단일 (= 1 앱 N 도메인 · §1.1 · 구 Gently 패키지 3 자식 GB/GD/GT = 2026-07-17 T6 동결 계승 원천 · §1.3) 한정으로 운영되나, `scripts/` + `.claude/` cli infra + `docs/agent/`·`docs/schemas/`·`docs/templates/` 는 도메인 무관 = 다른 앱 패키지 (예: SteadyWell · 향후 신규) 로 확장 가능.
 > 자칭 = `claude-cli-master` (`.auto-memory/decision-log.md` / `.auto-memory/protected-file-hashes.md` / `.auto-memory/child-claude-md-header.template.md` 일치). 폴더 이름 = 본 의도 명시.
 
 ### 0.1 baseline 3 줄 (= 2026-05-22 신설 default · `MASTER-CLI-CYCLE-0-OPS-EXCEPTION-BASELINE-3LINE-001`)
 
-- **3 앱 = 도메인별 독립 사용자 + 공유 인프라 default** (L1-3 정합 default). GB (= 마음 가꾸기) + GD (= 배움) + GT (= 몸 돌봄) 측 사용자 base 분리 default · "한 사용자가 3 앱 묶어서 산다" 가설 무효 default. 공유 = cli infra + app-foundation default. 미공유 = 사용자 base default.
+- **1 앱 N 도메인 = Selfward 「나에게로」 단일 사용자 base default** (= 2026-07-17 T6/T7 현행 default). 구 GB (= 마음 가꾸기) + GD (= 배움) + GT (= 몸 돌봄) 3 도메인 = Selfward 흡수 계승 default (= §1.1 · `shared/` 실측 mood / learning / daily 등) · 사용자 base 분리 X default. 공유 = cli infra + app-foundation default.
+  - **supersession 이력** (= 구 baseline 보존 · 삭제 0): 직전 판 = "**3 앱 = 도메인별 독립 사용자 + 공유 인프라 default** (L1-3 정합 default) · GB/GD/GT 측 사용자 base 분리 default · '한 사용자가 3 앱 묶어서 산다' 가설 무효 default · 미공유 = 사용자 base default" (= 2026-05-22 `MASTER-CLI-CYCLE-0-OPS-EXCEPTION-BASELINE-3LINE-001` 신설 · L1-3 인용). 본 가설 = **1 앱 N 도메인 재편(T6)으로 supersede** default (= 3 앱 분리 전제 자체가 소멸 · L1-3 서술 = 이력 영역 보존 default).
 - **1 인 운영 + AI reviewer = 의식적 선택 default** (L1-5 정합 default). 인간 reviewer 부재 = 의도된 architecture default · cli session 측 reviewer 역할 default (= `routing-and-delegation.md` reviewer 영역 default · `verification-and-review.md §독립 reviewer` 영역 default).
-- **현 단계 = 6-repo 동일 mode / 미래 = 자식별 발산 허용 default** (L1-6 정합 default). 현 6-repo 측 default mode = production-graduated default (= `mode-system.md` Cycle 4 신설 시점 default · 본 cycle 측 implicit default 영역 default) · 미래 자식별 mode 발산 = 본인 명시 결정 + migration cycle default.
+- **현 단계 = 4-repo (= master + 자식 3 · §1.2) 동일 mode / 미래 = 자식별 발산 허용 default** (L1-6 정합 default · 2026-07-17 T6 재편 = 구 "6-repo 동일 mode" 판 현행화). 현 4-repo 측 default mode = production-graduated default (= `mode-system.md` Cycle 4 신설 시점 default · 본 cycle 측 implicit default 영역 default) · 미래 자식별 mode 발산 = 본인 명시 결정 + migration cycle default.
 
 1. **cli infra SoT 보유** — `.claude/` (agents/commands/hooks/rules/skills/settings) + `docs/schemas/` + `docs/design/pencil-sot-policy.md` 의 정합 source.
 2. **propagation 도구 제공** — `scripts/propagate.sh` / `scripts/verify-sync.sh` / `scripts/activate-agent.sh` / `scripts/report-gen.sh` (C3 에서 신설).
@@ -43,17 +44,37 @@
 
 ---
 
-## 1. 자식 repo 등록 (placeholder · 변경 가능)
+## 1. 자식 repo 등록 (2026-07-17 재편 · `MASTER-T6-REPO-REALIGN-001` + `MASTER-T7-INSTRUCTIONS-REALIGN-001` · placeholder · 변경 가능)
 
-| 자식 repo | 도메인 | 패키지 | 절대 경로 (placeholder) |
-|---|---|---|---|
-| GentlyBreath (GB) | 마음 가꾸기 | `com.example.gentlybreath` | `<PARENT>/GentlyBreath` |
-| GentlyDay (GD · 앱 GentlyLearn) | 배움 | `com.example.gentlyday` | `<PARENT>/GentlyDay` |
-| GentlyTable (GT) | 몸 돌봄 | `com.example.gentlytable` | `<PARENT>/GentlyTable` |
+### 1.1 활성 도메인 자식 (= Selfward 단일 · 1 앱 N 도메인)
+
+| 자식 repo | 표시명 | 도메인 | 패키지 (appId) | 절대 경로 (placeholder) |
+|---|---|---|---|---|
+| Selfward (SW) | 「나에게로」 | **1 앱 N 도메인** (= `shared/` 실측 = mood · learning · daily · record · reply · companioninsight · ticketshop 등 · 구 GB+GD+GT 3 도메인 계승 흡수) | `com.gently.selfward` (staging = `com.gently.selfward.staging`) | `<PARENT>/Selfward` |
+
+### 1.2 propagation 대상 자식 3 (= master 단방향 propagate · SoT = `scripts/repo-config.sh` TARGET_REPOS)
+
+| 자식 repo | 역할 | 절대 경로 (placeholder) |
+|---|---|---|
+| app-foundation (FND) | shared KMP/CMP foundation | `<PARENT>/app-foundation` |
+| gently-product-docs (PDOCS) | 공통 제품 기획·비전 문서 | `<PARENT>/gently-product-docs` |
+| Selfward (SW) | 활성 도메인 자식 (= §1.1) | `<PARENT>/Selfward` |
+
+cli infra byte-identical 형상 = **4-repo** (= master + 위 자식 3).
+
+### 1.3 동결 계승 원천 (= 2026-07-17 `MASTER-T6-REPO-REALIGN-001` 전파 대상 제거 · 원본 보존 · 쓰기 0)
+
+| 자식 repo | 도메인 | 패키지 | 절대 경로 (placeholder) | 처분 |
+|---|---|---|---|---|
+| GentlyBreath (GB) | 마음 가꾸기 | `com.example.gentlybreath` | `<PARENT>/GentlyBreath` | 동결 · 전파 대상 제거 (2026-07-17 T6) · GitHub archive 보류 (= Coin 콘솔 몫) · 원본 보존 |
+| GentlyDay (GD · 앱 GentlyLearn) | 배움 | `com.example.gentlyday` | `<PARENT>/GentlyDay` | 동일 |
+| GentlyTable (GT) | 몸 돌봄 | `com.example.gentlytable` | `<PARENT>/GentlyTable` | 동일 |
+
+동결 = **계승 원천** (= Selfward 가 위 3 도메인 흡수 계승 · §1.1). repo 삭제 X · cli session 측 **쓰기 0** (= read-only 인용만 · 쓰기 필요 = STOP). `GB-*` / `GD-*` / `GT-*` task ID prefix + 기존 §15 이력 인용 = 보존 (= 이력 소실 0).
 
 `<PARENT>` 는 환경별 변수 (예: `~/AndroidStudioProjects` · `$ANDROID_PROJECTS_ROOT`). `scripts/propagate.sh` 가 자동 해결.
 
-신규 자식 repo 추가는 본 표에 행 추가 + 첫 propagation cycle 진입.
+신규 자식 repo 추가는 §1.2 표에 행 추가 + `repo-config.sh` TARGET_REPOS 등재 + 첫 propagation cycle 진입.
 
 ---
 
@@ -71,7 +92,7 @@
 
 ```
 1. master 에서 cli infra 또는 보호 파일 변경 + commit
-2. bash scripts/propagate.sh <relative-path> [--targets FND,GB,GD,GT|all]   # C3 에서 신설
+2. bash scripts/propagate.sh <relative-path> [--targets FND,gently-product-docs,Selfward|all]   # C3 에서 신설 · alias = GB/GD/GT/FND 만 · 그 외 = 폴더명 verbatim
 3. 각 자식 repo 에서 staged commit (master commit body 인용)
 4. bash scripts/verify-sync.sh   # cross-verify · sha 비교
 5. propagation-reports/<cycle-id>/REPORT.md 자동 생성 (report-gen.sh)
@@ -82,7 +103,7 @@
 
 ---
 
-## 4. 절대 금지 (3-repo 공통)
+## 4. 절대 금지 (4-repo 공통)
 
 - 명령어 차단: `settings.json` deny list 참조 (`curl` `wget` `sudo` `git push` `git reset` `git clean` `git rebase` `git filter-branch` `*tmp*` `rm -rf /...`)
 - 경로: `/tmp` · `$TMPDIR` 계열
@@ -94,7 +115,7 @@
 
 ## 5. STOP 조건 단일 SoT (= 본 cycle 통합 default · 2026-05-22 신설 default · `MASTER-CLI-CYCLE-1-STOP-CANONICAL-INTEGRATION-001`)
 
-본 § = 6-repo 측 STOP 조건 단일 SoT default. 나머지 4 군데 (= `safety-and-secrets.md §비가역 변경 STOP 정책` + `cycle-discipline.md §21.4` + `cycle-discipline.md §22.4` + `cross-repo-parallel-exec.md §5`) = 본 § pointer 영역 default · 본문 무접촉 default. `cowork-project-instructions.md §D-1` = cowork sandbox 영역 default · 본 cycle scope X default · 본인 manual paste replace default.
+본 § = 4-repo 측 STOP 조건 단일 SoT default. 나머지 4 군데 (= `safety-and-secrets.md §비가역 변경 STOP 정책` + `cycle-discipline.md §21.4` + `cycle-discipline.md §22.4` + `cross-repo-parallel-exec.md §5`) = 본 § pointer 영역 default · 본문 무접촉 default. `cowork-project-instructions.md §D-1` = cowork sandbox 영역 default · 본 cycle scope X default · 본인 manual paste replace default.
 
 ### STOP 영역 (= 9 항 default · 즉시 중단 + 자동 수정/되돌리기 금지)
 
@@ -106,7 +127,7 @@
 | 4 | 예상 외 시스템 상태 | sandbox 진입 시 baseline mismatch default | 사용자 회수 default |
 | 5 | 보호 5 file sha drift | byte-identical 의무 영역 default · `protected-file-hashes.md` baseline 정합 default | 즉시 mitigation cycle default · 리뷰 블로커 default |
 | 6 | 자식 cli infra drift | master 측 단방향 propagation 위반 default | master 측 정정 cycle 신설 default |
-| 7 | Cross-repo HIGH RISK 도메인 진입 | 6-repo 측 동시 영향 영역 default (= DB migration / Money / Auth / production push) | 사용자 본심 회수 default |
+| 7 | Cross-repo HIGH RISK 도메인 진입 | 4-repo 측 동시 영향 영역 default (= DB migration / Money / Auth / production push) | 사용자 본심 회수 default |
 | 8 | git mv + sed stage 누락 | rename + content 변경 동시 영역 측 unstaged 잔존 default | post-rename `git add -u` 의무 default |
 | 9 | 사용자 본심 분기 의제 본질 | 본인 결정 본질 영역 default · **Mode 잘못 결정 sub-case 흡수 default** (L1-7 정합 default) | AskUserQuestion 회수 default |
 
@@ -160,7 +181,7 @@ Plan Mode (Shift+Tab 두 번) 에서 intake normalization + pre-EVIDENCE 계약 
 
 ---
 
-## 8. Repo-First Intake (3-repo 공통)
+## 8. Repo-First Intake (4-repo 공통)
 
 Claude Code 는 자동 완성형 AI 가 아니라 **repo-first 해석 보조형 AI**.
 프롬프트 수신 직후 아래 고정:
@@ -199,7 +220,7 @@ verify / review 없이 완료 금지.
 
 ---
 
-## 10. 구현 / 설계 기본값 (3-repo 공통 · 변경 불가)
+## 10. 구현 / 설계 기본값 (4-repo 공통 · 변경 불가)
 
 - 직접 구현 우선 (새 추상화 추가 전 직접 구현 단순성 평가)
 - 신규 의존성 승인: `libs.versions.toml` 신규 항목 = PLAN `## 2. DependencyDecision` 8 항목 필수 (8항 canonical = `docs/agent/architecture/DEPENDENCY_DECISION_CHECKLIST.md` · UI 라이브러리 억제 canonical = `docs/rules/ui-ux-analysis.md §UI 라이브러리 억제 기본값`)
@@ -209,7 +230,7 @@ verify / review 없이 완료 금지.
 - 명시적 오류 처리: typed 도메인 오류 또는 Result 우선
 - 테스트 심 주입: clock · dispatcher · identity · logger · uuid 인터페이스 주입
 - 불변 UI 상태: UiState 불변 + ViewModel → UI 단방향
-- DI baseline: 3-repo 모두 `Koin`. 위치는 `app/` (또는 향후 `shared/app` glue)
+- DI baseline: 4-repo 모두 `Koin`. 위치는 `app/` (또는 향후 `shared/app` glue)
 
 세부: `docs/rules/workflow-core.md` + `cycle-discipline.md` + `pencil-automation.md` + `docs/rules/ui-ux-analysis.md`.
 아키텍처 공통 SoT: 각 자식 repo 의 `docs/agent/architecture/` (각 자식 repo 가 SteadyWell propagation 받음).
@@ -249,7 +270,7 @@ PLAN / VERIFY / REVIEW / PromptFit 정규 스키마: `docs/rules/reporting.md` �
 
 ## 13. propagation status (실측 baseline)
 
-현 master HEAD sha + 3 자식 repo 동기 상태는 `.auto-memory/propagation-status.md` 에서 동적 파악.
+현 master HEAD sha + 자식 3 (= FND / PDOCS / SW · §1.2) 동기 상태는 `.auto-memory/propagation-status.md` 에서 동적 파악.
 
 `scripts/verify-sync.sh` 가 매 cycle 자동 갱신 (C3 에서 신설).
 
@@ -311,6 +332,8 @@ PLAN / VERIFY / REVIEW / PromptFit 정규 스키마: `docs/rules/reporting.md` �
 | MASTER-CLI-PENCIL-SELFTEST-GATE-RECALIBRATE-002 | 2026-07-15 | §13 pencil self-test named-set **1-swap 재보정** (`set_variables` 제거 → `export_html` 삽입 · count 9 유지 · Pencil app v1.1.62→v1.1.69 MCP surface 재변경 반영) + 도구 surface SoT 정합 + CC 2.1.210 trail PASS 겸결 (Mode M5 cli-infra-ops · production 0 LOC · doc(rule/skill) 5 file · 비보호 · CC 2.1.210 무관·유지 · 선례 = RECALIBRATE-001 동형[13→9] · cowork contract cc-paste-MASTER-CLI-PENCIL-SELFTEST-GATE-RECALIBRATE-002). **발동**: 진입 self-test ③ named-set FAIL = 실측 toolset(set_variables 부재 + export_html 존재 · 9종) ≠ §13 구 named-set → 게이트 self-exception(본 cycle 인가 주제) · 2 환경 corroborate(cli VS Code endpoint ToolSearch [`select:set_variables` 미해결·`export_html` 해결] + cowork desktop-proxy). count 불변(9=9)이라 §10 count STOP 미발동 → **named-set 게이트가 검출**(RECALIBRATE-001 13→9 count 축소와 대비 = count-invariant 1-swap). **scope = 비보호 5 file(6-repo byte-identical)**: T1 `cycle-discipline.md` §13 L69 named-set 1-swap(알파벳 batch_get 다음·9종 유지) · T2 `pencil-mcp-tools-reference.md`(§0.1a v1.1.69 1-swap 기록 신설 + §1.4 `set_variables` REMOVED stub + §4.3 `export_html` 신규[ToolSearch schema 실측·web 조회 X] + header/§0 Part A/§1[5→4]/§4[2→3]/§10 named-set STOP 정합 · 역사 서술[v1.1.62 4종=§0.1] 무접촉) · T3 3 file(`design-to-code-sync.md` L142 · `pencil-theme-multi-axis.md` L9/L285/L336 · `pencil-pen-save/SKILL.md` L39 = `mcp__pencil__set_variables`→headless 평문-JSON[`pencil-uiux-workflow §2.5` PRIMARY]). **보류(별 surface · §6-4 부분 land)** = `pencil-cli/SKILL.md`(L96/L176 `pencil interactive` REPL set_variables + L270 label = 헤드리스 CLI REPL surface[관측 0.2.6 · MCP 와 별 endpoint · 본 cycle 미측정] → 측정 후 별 판단). **T4 겸결** = `.auto-memory/incident-log.md` 2 entry(① PENCIL-MCP-TOOLSET-RECALIBRATE-002 1-swap 기록 · ② CLAUDE-CODE-LATEST-CHASE-001 **PASS entry** 2.1.210·self-test 3/3·직전 PASS 2.1.170[06-11] = UPGRADE-001 잔여 마감). **검증**: propagate ok=25/0 · verify-sync **163 PASS**(신규 DRIFT 0 · 기존 DRIFT 5[release-checklist P4-lazy] + MISS 10[CHARTER + production-cli-access-tokens master-only] = pre-existing 무관) · 5 file 6-repo byte-identical(cycle-discipline `551899306fbd` · pencil-mcp-tools-reference `f87443053e1a` · design-to-code-sync `81a52a9bc694` · pencil-theme-multi-axis `42fa0fbdd9b2` · pencil-pen-save `f77763ff80fe`) · 보호 5 file sha drift 0(edit-set ∩ 보호 = ∅ · pencil-uiux-workflow/pencil-sot-policy 무접촉 · manifest 갱신 불요) · production 0 LOC · self-test **3/3 PASS**(CC 2.1.210 ✓ + pencil ✔ Connected ✓ + ToolSearch 9종 named-set 전수 ✓). **§0 gate**: 진입 재측정 HEAD 5d8d485 + 7 blob(cycle-discipline 3bfd634 등) + 보호 2(ce9c0d3/68c6c21) 전량 §0 표 일치(STOP#4 미발동). **사고**: 없음(git-lock daemon 미활성 advisory = 비차단 · follow-up launchctl load · verify-sync stale-ref 5 = DIET-2-003 후속 pre-existing non-blocking). **후속(scope 외)**: pencil-cli CLI REPL surface 측정 + Phase B(보호 2 set_variables 잔존[pencil-sot-policy:45 + pencil-uiux-workflow:58/:76] + open_document 묶음) + pencil scope-conflict(user/project endpoint 정리) + git-lock daemon launchctl load + §15 hot 19>10 = **S15-HOT-DEMOTE-005** advisory. Negative Space: production/EF/DB/Money 0 · 보호 5 sha 0 · 역사 서술(§0.1) 무접촉 · pencil-cli/보호 2/scope-conflict/.pen 무접촉 · blanket --prune 미사용. | **6-repo 적용** (master content `f38e6fd` + 5 자식 propagate byte-identical 5 file: GB `a67a5a3`/GD `912e80a`/GT `6612e4d`/FND `6d6a601`/PDOCS `2e91d1b` · incident-log T4 2 entry + §15 + propagation-status + REPORT = master-only audit commit · REPORT = propagation-reports/MASTER-CLI-PENCIL-SELFTEST-GATE-RECALIBRATE-002/REPORT.md) |
 | MASTER-SELFWARD-CLAUDE-PARITY-001 | 2026-07-17 | ⑦ Selfward `.claude/` 초회 propagate 편입 — T1~T5 내내 paste 문면이 유일 rule 가드였던 Selfward 에 rule 백스탑 확보 (Mode M5 cli-infra-ops · production 0 LOC · cli-infra propagate only · 도메인 rule 내용 변경 0 · T6 정체성·repo 재편 전 backstop). **본질**: master 단방향 propagate 대상 Selfward **6번째 편입**(`repo-config.sh` TARGET_REPOS += Selfward) + `--all` set − master-only 2 = **165 file 초회 전파**. **scope**: master `repo-config.sh`(비보호 = manifest 직접 grep 실측 확인 · propagate.sh/verify-sync/ensure-child-gitignore = repo-config live source · SoT 1행 수정 충분) + Selfward 89 file(신규 83: `.claude/**` 76[agents 25·skills 20·hooks 17·commands 8·rules 5·settings.json 1] + `.editorconfig`·`.mcp.json`·`.github/PR template`·`.ai/uiux-sot` 3·`.ai/promptfit` 1 · 갱신 5: stale cli-infra→master SoT[cycle-discipline·design-to-code-sync·pencil-mcp-tools-reference·pencil-theme-multi-axis·release-checklist.template] · `.gitignore` C14 patch · 무변 77 byte-identical no-op). **master-only 2 제외**: `docs/ops/production-cli-access-tokens.md`(header "6-repo propagation 대상 X · master-only") + `docs/architecture/CLI-MASTER-SCOPE-SEPARATION-CHARTER.md`(master-scope 감사 헌장) = 5자식 동일 MISS pre-existing 정합. **CLAUDE.md 처분**: Selfward top-level CLAUDE.md = 4-repo byte-identical 자식 clone `753a2e0`(== GB/GD/GT/FND) 이미 실존 → **propagate 절대 금지 준수 · 무접촉**(§1 registry Selfward 미등재 = T6 몫). **검증**: propagate ok=165/0 · verify-sync 6-repo Selfward **164 PASS/DRIFT 0/MISS 2**(master-only 2 = 5자식 동일 pre-existing) · 전체 163 PASS/DRIFT 5(release-checklist 5자식 stale · **Selfward=✓** 신규 drift 0)/MISS 12(+2 Selfward master-only) · 보호 5 sha drift 0(edit-set ∩ 보호 = ∅ · repo-config 비보호 · manifest 갱신 불요) · 기존 5자식 무접촉(dirty 104/77/70/0/0 불변 · .gitignore/.claude 무변 = env TARGET_REPOS=Selfward isolation) · secret grep 0 · production/도메인/build 0 LOC(gradlew/build.gradle.kts master 부재 · gradle.properties byte-identical no-op). **사고**: 없음(verify-sync stale-ref 5[.claude/rules/* in status docs] = DIET-2-003 후속 pre-existing non-blocking · git-lock daemon advisory 비차단). **후속(scope 외)**: Selfward run-* launch recipe 신설(자식별 = 별 cycle) · CLAUDE.md §1 registry Selfward 등재 + repo 재편 = T6 · §15 hot 20>10 = S15-HOT-DEMOTE-005 advisory. | **Selfward 단독** (master content `0c62052` [repo-config TARGET_REPOS += Selfward] + Selfward `.claude` propagate `8e2a45d` [89 file byte-identical master 1163a71] · 기존 5자식[GB/GD/GT/FND/PDOCS] 무접촉 · §15/propagation-status/incident-log/REPORT = master-only audit commit · REPORT = propagation-reports/MASTER-SELFWARD-CLAUDE-PARITY-001/REPORT.md) |
 | MASTER-T6-REPO-REALIGN-001 | 2026-07-17 | propagate 대상 6→4 재편 — `TARGET_REPOS` 기본값에서 GB/GD/GT 3 토큰 제거 → 전파 자식 3(app-foundation/gently-product-docs/Selfward) (Mode M5 cli-infra-ops · production 0 LOC · master 측 targets 문자열 한정 · 도메인 rule 내용 변경 0 · CLAUDE.md propagate 금지 불변 · cowork contract cc-paste-MASTER-T6-REPO-REALIGN-001 · BLUEPRINT-T6-IDENTITY-REPO FINAL 본심 ⓒ). **본질**: ⑦(SELFWARD-PARITY) Selfward 편입 후, GB/GD/GT 를 단방향 propagation 대상에서 제거(GitHub archive = Coin 콘솔 몫 · 원본 = 계승 원천 보존) → cli-infra propagate 형상 = master + FND/PDOCS/Selfward(= 4-repo byte-identical). 제거 = **master 측 targets 문자열 한정**(자식 repo 파일/커밋 0 · repos 삭제 X · resolver 보존). **보호 manifest**: `.auto-memory/protected-file-hashes.md` 직접 grep 실측 선행 → 보호 5(ui-spec.schema/uiux-sot-refresh/design-sot-policy/pencil-uiux-workflow/pencil-sot-policy) ∌ scripts/* + advisory-tracked(settings.json/check-abbreviation.sh) ∌ scripts/* → edit-set(repo-config.sh + propagate.sh) ∩ 보호 = ∅ → **비보호 · manifest 갱신 불요**('기억 단정' 회피 · 실측 선행 준수). **scope = 비보호 2 script(master-only tooling · top-level `scripts/` = verify-sync 매트릭스 밖 · 자식 propagate X)**: ① `repo-config.sh`(SoT · L28 default `GentlyBreath GentlyDay GentlyTable app-foundation gently-product-docs Selfward`→`app-foundation gently-product-docs Selfward` + L18 default 주석 동일 정합 + L27 lineage 'Selfward 6th target'→T6 재편 attribution 1행 add) ② `propagate.sh:11`(stale 5자식 default 주석[⑦ 미반영]→3자식 정합). **검증**: `bash -n` 2/2 OK · TARGET_REPOS clean-env resolve = 3 토큰(GB/GD/GT 제거 확증) · verify-sync **신 형상**(targets=app-foundation/gently-product-docs/Selfward · GB/GD/GT 매트릭스 배제 확인) = **163 PASS / DRIFT 2 / MISS 6**(exit 1 = MISS/DRIFT 비차단) — DRIFT 2 = release-checklist.template FND/PDOCS(P4-lazy · RELEASECHECKLIST-LAUNCHGAP-001 의도적 미전파 · Selfward=✓) · MISS 6 = CHARTER + production-cli-access-tokens 2 master-only × 3자식 = **전량 pre-existing**(⑦ 6-child baseline 163/5/12 대비 DRIFT 5→2·MISS 12→6 = GB/GD/GT 배제 산술 · **신규 drift 0**) · 보호 5 sha drift 0 · production/도메인 0 LOC · GB/GD/GT **파일/커밋 0**(HEAD a67a5a3/912e80a/6612e4d 불변 · ahead 0/0 · dirty 104/77/70 = §0 baseline 불변 · GD staged 3 = concurrent 세션 pencil WIP `docs/design/pencil-sot/monthly-stats/*` = 본 cycle 무관). **§0 gate**: master HEAD aae09ab(⑦ 마감 · ahead 0/0) + repo-config Selfward 포함(6target) + GB/GD/GT/FND/PDOCS ahead 0 = §0 baseline 정확 일치(STOP#4 미발동). **사고**: 없음(git-lock daemon 미활성 advisory 비차단 · verify-sync stale-ref 5 = DIET-2-003 후속 pre-existing non-blocking). **후속(scope 외 · T7 회부)**: `propagate.sh:5-6` `--targets GB,GD,GT,FND|all` 사용례 + resolver(propagate `:75-86`/`:164-166` · verify-sync `:150`) = repos 원본 보존 → 명시 `--targets GB` 유효 문법 유지(targets 문자열 한정 정합 · 보존) · topology-count 주석(`repo-config.sh:20-22` '6-repo propagation 의무' + `:30` '5 propagation target = 6-repo' · `verify-sync.sh:13` + `ensure-child-gitignore-patches.sh:11/29` stale) = rule/문서 본격 개정 = T7 · GitHub archive GB/GD/GT ×3 = Coin 콘솔 · CLAUDE.md §1 registry GB/GD/GT 처분 = T6 후속 · §15 hot 21>10 = S15-HOT-DEMOTE-005 advisory. Negative Space: 자식 repo 파일/커밋 0 · resolver/repos 보존(삭제 X) · 보호 5 sha 0 · verify-sync 매트릭스 콘텐츠(cli-infra) 0 변경 · blanket --prune 미사용 · CLAUDE.md propagate 0. | **master-only** (master 본 commit · `scripts/repo-config.sh` + `scripts/propagate.sh`[targets 문자열 realign · top-level scripts = 자식 propagate X] + `.auto-memory/propagation-status.md`[verify-sync auto-regen 3-child 매트릭스] + CLAUDE.md §15 + `.auto-memory/incident-log.md` = master-only audit commit · GB/GD/GT/FND/PDOCS/Selfward 파일·커밋 0 · propagation-reports 없음[propagate 미실행 · targets 문자열 realign만 · RELEASECHECKLIST-LAUNCHGAP-001/S15-HOT-DEMOTE-004 master-only 선례] · push=Coin) |
+
+| MASTER-T7-INSTRUCTIONS-REALIGN-001 | 2026-07-17 | T6 재편(propagate 6→4)의 **서술/주석 층 stale 전량 현행화** — §1 registry 재저작(활성 도메인 자식 = Selfward 단일 + 전파 자식 3 + GB/GD/GT 동결 계승 원천) + CLAUDE.md 내부 topology 12곳 + scripts 주석 4 file + 부모 root umbrella 재정합 (Mode M5 cli-infra-ops · production/EF/DB/Money 0 LOC · master-only · doc/주석 한정 · 코드 behavior 0 · cowork contract cc-paste-MASTER-T7-INSTRUCTIONS-REALIGN-001 · HANDOFF-SELFWARD-T7 §1-B). **본질**: T6 = `TARGET_REPOS` 문자열 한정 재편(6→4) → 실 전파 형상은 이미 4-repo 인데 **문서/주석 서술은 6-repo·3자식·GB/GD/GT 전제** 잔존(T6 §15 후속 "rule/문서 본격 개정 = T7" 회부분) → 본 cycle 이 서술 층을 실측 형상에 수렴(문서가 실측을 뒤따르는 정정 · `MASTER-GIT-ROLE-COMMIT-V3-001` 동형). **scope = master-only 6 file**: ① `CLAUDE.md §1` registry 재저작(§1.1 활성 = Selfward「나에게로」`com.gently.selfward`(+`.staging`)·1앱 N도메인[`shared/` 실측 mood/learning/daily/record/reply/companioninsight/ticketshop] / §1.2 전파 자식 3 = FND·PDOCS·SW + 4-repo byte-identical 형상 / §1.3 **동결 계승 원천** GB·GD·GT = 구 3행 정보[도메인·`com.example.*` 패키지·경로] **전량 보존** + 처분[전파 제거 T6 · GitHub archive 보류=Coin 콘솔 · 원본 보존 · 쓰기 0 · task ID prefix/이력 인용 보존] = **이력 소실 0**) ② CLAUDE.md 내부 topology **12곳**(L19 header 자식 나열 · L27 §0 "3 자식 GB/GD/GT 한정" · L32 §0.1 "3앱=독립 사용자" 가설→**1앱 N도메인 현행 + supersession 이력 bullet**[구 판 문면 verbatim 인용 + L1-3 서술 이력 보존 · 삭제 0] · L34 "6-repo 동일 mode"→4-repo · §3 propagate 사용례 · §4/§8/§10 "(3-repo 공통)"→4-repo · §5 intro "6-repo"→4-repo · **STOP#7 어휘만**[9항 구조·의미·행 수 불변] · §10 DI baseline "3-repo"→4-repo · §13 "3 자식 repo"→자식 3) ③ scripts 주석 4 file(**문면 한정 · 코드 0**): `repo-config.sh`(L21 "6-repo propagation 의무"→4-repo · L31 PROTECTED_FILES 헤더 "master ↔ 5 propagation target = 6-repo"→"3 target = 4-repo") · `verify-sync.sh`(L2 header 6-repo→4-repo · L8 `--target GB`→`--target Selfward` · L13 TARGET_REPOS 기본 5자식 문자열→3자식 · :160 runtime echo "6-repo sha 동기 검증"→4-repo) · `ensure-child-gitignore-patches.sh`(L7 `--target GB`→Selfward · L11 기본 "GB GD GT"→3자식 · L27-29 "repo-config 4 repo 자동 흡수(= GB GD GT FND)" drift 주석→현행 TARGET_REPOS + T6 supersede 명시) · `propagate.sh`(L5-6 사용례 ×2) ④ 부모 root `~/AndroidStudioProjects/CLAUDE.md`(git repo X · §7 관례 준수 = 본 §15 entry 동반): title/§1/§2 = **7-repo umbrella (= 4-active + 3 동결)** 재정합(§2.1 4-active[master·FND·PDOCS·**SW 신 row** = 「나에게로」·appId·1앱N도메인] / §2.2 3 동결[GB/GD/GT 기존 descriptor **전량 보존** + 쓰기 0]) + §3.1 진입 예시 `cd .../GentlyBreath`→`Selfward` + §3.3/§4 표 + 영역 2 terminal 예시 ×3(GB/GD/GT→SW/FND/PDOCS) + reading trigger 키워드(**현행 + 구 판 이력 인용 trigger 보존**) + §5 propagate 사용례 · sha-256 `374c4a43…`→`ca8221e6…`. **★alias resolver 실측 정정**(A5 · paste 문면 교정): propagate/verify-sync resolver 실측 = alias **GB/GD/GT/FND 4종만** · 그 외 = 폴더명 verbatim fallthrough(`*)`) → `--targets FND,PDOCS,SW` = **PDOCS/SW 미해결 = 존재하지 않는 dir**(사용례 오기 risk) → 사용례 = `--targets FND,gently-product-docs,Selfward|all` + alias 경계 주석 병기로 확정(= 문서가 실행 가능한 명령을 보이도록 · resolver 코드 **무접촉**[alias 추가 = 코드 변경 = scope 밖 · T6 "GB alias 문법 보존" 정합]). **검증**: `bash -n` 4/4 OK · **TARGET_REPOS clean-env resolve = 3 토큰 불변**(= 주석 편집이 behavior 무영향 확증) · verify-sync **163 PASS / DRIFT 2 / MISS 6** = T6 post-state와 **동일**(= **신규 drift 0** · DRIFT 2 = release-checklist.template FND/PDOCS[P4-lazy 의도적 미전파 · Selfward=✓] · MISS 6 = CHARTER + production-cli-access-tokens 2 master-only × 3자식 = 전량 pre-existing · 자율 해소 X) · 보호 5 file sha-256 drift 0(manifest **직접 grep 실측 선행** = edit-set[CLAUDE.md + scripts 4 + COLD + context-health + 부모root] ∩ 보호 5 = ∅ · advisory-tracked[settings.json/check-abbreviation.sh] ∩ ∅ → **manifest resync 불요** · 8502c014/31c0da56/92a5e998/202d3f4f/2bfc81c5 전후 불변) · production/도메인 0 LOC · §15 기존 행 **diff 0**(= 박제 무접촉 실측) · propagate **미실행**(edit-set 전량 master-only 실측 = top-level `scripts/` + `CLAUDE.md` + `.auto-memory/**` = propagation scan set[`find .claude docs scripts/agent .ai/promptfit .ai/uiux-sot/refresh .github`] **밖** · context-health-metrics = `.auto-memory/` + 자식 3 부재 실측) · 자식 3 + GB/GD/GT **파일/커밋 0**. **§0 gate**: master HEAD `c3ae191` ahead 0 WT clean 정확 일치 · FND `6d6a601` + GB/GD/GT `a67a5a3`/`912e80a`/`6612e4d` 일치 · **PDOCS `2e91d1b`→`d7f6120`(ahead 1) + SW `bad809b`→`87ac760`(ahead 1·dirty 2)** = **A1 forward-progress**(동시 세션 도메인 commit = PDOCS-AI-BACKGROUNDING-001[제품 SoT 2 file] + SELFWARD-AI-QUIET-SURFACE-001[client/design 6 file] · **cli-infra edit-set 무접촉 실측** · SW dirty 2 = `.ai/reports`+`supabase/_ops` untracked = §0 허용 노이즈 · `MASTER-GIT-ROLE-COMMIT-V3-001`/`SOTMAP-REGISTER-001` §0 gate 선례 정합 · **STOP#4 미발동** · raw 보고). **사고**: 없음(git-lock daemon plist 존재·load 안 됨 advisory = 비차단 · verify-sync stale-ref 5 = DIET-2-003 후속 pre-existing non-blocking). **후속(scope 외)**: `.claude/rules`·`docs/rules` 층 topology 어휘 sweep(= 별 cycle 등재 예정 · 본 cycle 접촉 = STOP#2 → 무접촉 준수) · 부모 root §8 Refs 측 `.claude/rules/{cycle-discipline,routing-and-delegation}.md` = DIET-2-003 `docs/rules/` 이전 미반영 stale path(= topology 아님 · 별 class · 별 판단) · verify-sync stale-ref 5 · release-checklist P4-lazy DRIFT + CHARTER MISS reconcile · git-lock daemon launchctl load · GitHub archive GB/GD/GT ×3 = Coin 콘솔. **Negative Space**: production/EF/DB/Money 0 · 보호 5 sha 0 · §15 기존 행 0 · resolver/alias 코드 0(문면만) · GB/GD/GT repo 0 · 자식 3 파일 0 · rules 층 어휘 sweep 0(scope 준수) · blanket --prune 미사용. | **master-only** (master content+audit commit · `CLAUDE.md`[§1 registry + topology 12 + §15] + `scripts/`{repo-config,verify-sync,ensure-child-gitignore-patches,propagate}.sh[주석 한정] + `.auto-memory/propagation-status.md`[verify-sync auto-regen] + `.auto-memory/incident-log.md` = master-only · 부모 root `CLAUDE.md` = git repo X 직접 갱신(sha-256 `ca8221e6…`) · 자식 3(FND/PDOCS/SW) + GB/GD/GT 파일·커밋 0 · propagation-reports 없음(propagate 미실행 = edit-set 전량 master-only · T6/RELEASECHECKLIST-LAUNCHGAP-001/S15-HOT-DEMOTE-004 선례) · push=Coin) |
 
 > **§15 cold 재배치** (= `MASTER-CLI-CONTEXT-OPT-PHASE1-CYCLE-HISTORY-COLD-001` 2026-06-01 + `MASTER-CLI-CONTEXT-OPT-CYCLE-HISTORY-COLD-002` 2026-06-04 2회차 + `MASTER-S15-PRELAUNCH-EXEC2-B-001` 2026-06-05 3회차 + `MASTER-S15-PRELAUNCH-EXEC3-001` 2026-06-05 4회차 + `MASTER-S15-PRELAUNCH-EXEC3-002` 2026-06-05 5회차 + `MASTER-CLI-AUTO-DEMOTE-CONTEXT-DIET-001` 2026-06-10 6회차 + `MASTER-CLI-S15-HOT-DEMOTE-003` 2026-06-11 7회차 + `MASTER-CLI-S15-HOT-DEMOTE-004` 2026-06-22 8회차): 위 표 = 최근 5 entry + 본 cycle entry 만 hot 유지 default. master cycle **121 entry 전체 이력** (= `C1-MASTER-BOOTSTRAP-001` ~ `MASTER-CLI-DESIGN-SOT-ENFORCEMENT-CRITERIA-001`) = verbatim 보존 → [`.auto-memory/master-cycle-history-COLD.md`](.auto-memory/master-cycle-history-COLD.md) (= 삭제 0 · 감사 추적 영구 보존 · lifecycle = 매 5 cycle 또는 분기 review). 신규 master cycle = 본 표 append (§16 절차) + hot > 10 도달 시 cold 재이전 (= `measure-gsm-cycle.sh` Stop hook 자동 advisory surface · 판정·이전 = 수동).
 

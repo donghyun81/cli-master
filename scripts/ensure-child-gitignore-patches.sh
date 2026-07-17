@@ -4,11 +4,11 @@
 # 사용:
 #   bash scripts/ensure-child-gitignore-patches.sh                    # 모든 자식 patch (없으면 추가)
 #   bash scripts/ensure-child-gitignore-patches.sh --verify           # patch 적용 여부만 확인 (수정 X)
-#   bash scripts/ensure-child-gitignore-patches.sh --target GB        # 특정 자식 만
+#   bash scripts/ensure-child-gitignore-patches.sh --target Selfward  # 특정 자식 만
 #
 # 환경 변수:
 #   PARENT_DIR     기본: ~/AndroidStudioProjects
-#   TARGET_REPOS   기본: "GentlyBreath GentlyDay GentlyTable"
+#   TARGET_REPOS   기본: "app-foundation gently-product-docs Selfward"
 #
 # 정책:
 #   - 자식 .gitignore = 자식 자율 영역 (Android Studio build/gradle 패턴 등 repo-specific)
@@ -26,7 +26,9 @@ set -uo pipefail
 
 # === 환경 변수 default (single SoT · MASTER-REPO-CONFIG-SOT-001) ===
 # drift 정정: 기존 literal default 측 3 repo (app-foundation 미포함) →
-# repo-config.sh source 측 4 repo 자동 흡수 (TARGET_REPOS = GB GD GT FND).
+# repo-config.sh source 측 자동 흡수 (= literal 재기입 X · TARGET_REPOS 단일 SoT).
+# 현행 TARGET_REPOS = app-foundation gently-product-docs Selfward (= 2026-07-17 MASTER-T6-REPO-REALIGN-001
+# 전파 대상 6→4 재편 · GB/GD/GT 전파 제거 = 동결 계승 원천 · 구 "4 repo = GB GD GT FND" 서술 supersede).
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 # shellcheck source=./repo-config.sh
 . "$SCRIPT_DIR/repo-config.sh"

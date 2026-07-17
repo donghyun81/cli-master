@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
-# scripts/verify-sync.sh — 6-repo cli infra + 보호 파일 sha 동기 검증
+# scripts/verify-sync.sh — 4-repo cli infra + 보호 파일 sha 동기 검증 (= master + 자식 3 · 2026-07-17 T6 재편)
 #
 # 사용:
 #   bash scripts/verify-sync.sh                         # 전체 검증 + propagation-status.md 자동 갱신
 #   bash scripts/verify-sync.sh --quick                 # 보호 파일 4 종 + 핵심 cli infra 만
 #   bash scripts/verify-sync.sh --no-update             # 검증만 (propagation-status.md 갱신 X)
-#   bash scripts/verify-sync.sh --target GB             # 특정 자식 repo 만
+#   bash scripts/verify-sync.sh --target Selfward       # 특정 자식 repo 만
 #
 # 환경 변수:
 #   PARENT_DIR     기본: ~/AndroidStudioProjects
 #   MASTER_DIR     기본: $PARENT_DIR/claude-cli-master
-#   TARGET_REPOS   기본: "GentlyBreath GentlyDay GentlyTable app-foundation gently-product-docs"
+#   TARGET_REPOS   기본: "app-foundation gently-product-docs Selfward"
 #
 # 동작:
 #   1. master 의 모든 cli infra + 보호 파일 sha 계산
@@ -158,7 +158,7 @@ else
 fi
 
 echo "═══════════════════════════════════════════════════════"
-echo "[verify-sync] 6-repo sha 동기 검증"
+echo "[verify-sync] 4-repo sha 동기 검증"
 echo "  master:  $MASTER_DIR"
 echo "  targets: $(echo $TARGET_LIST | xargs)"
 echo "  files:   ${#CHECK_FILES[@]}$([ "$QUICK" = 1 ] && echo ' (quick)' || echo ' (전체)')"
