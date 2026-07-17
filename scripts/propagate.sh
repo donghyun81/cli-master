@@ -8,7 +8,7 @@
 # 환경 변수:
 #   PARENT_DIR     기본: ~/AndroidStudioProjects (자식 repo 들이 있는 곳)
 #   MASTER_DIR     기본: $PARENT_DIR/claude-cli-master
-#   TARGET_REPOS   기본: "GentlyBreath GentlyDay GentlyTable app-foundation gently-product-docs"
+#   TARGET_REPOS   기본: "app-foundation gently-product-docs Selfward"
 #
 # 동작:
 #   1. master 의 지정 파일을 자식 repo 동일 path 로 cp
