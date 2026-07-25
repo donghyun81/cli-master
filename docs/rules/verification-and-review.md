@@ -12,6 +12,10 @@
 - 최소 1개 검증 명령을 실행하고 exit code를 기록한다
 - 검증 명령은 PLAN.md의 VerifyCmds에 명시된 것을 우선 사용
 - **명령 흔적 필수**: VERIFY.md 에 백틱 래핑 명령(테이블) 또는 `CMD:` 패턴(LOG) 이 1개 이상 있어야 한다 — 부재 시 VERIFY 미통과 (reviewer 판정 블로커 · 구 compound-lint 3b 검사 = deprecated · 도구 부재)
+- **production 바인딩 실체 검증 의무** (DI / seam / 조합 루트 변경 시): "production 조합의 X 가 **실제로 무엇인지**" 를 검증 항목으로 둔다. 형태 2 가지 **모두** 요구:
+  - **① identity assertion** — `assertSame(기대 인스턴스, 해석 결과)`. **타입 assertion 은 부족하다**: `assertTrue(x is EntitlementRepository)` 는 NoOp 기본값 부활을 **못 잡는다**(NoOp 도 같은 타입 · `FND-BILLING-SEAMS-S1-001` 실증). "무엇이 아닌지"(`assertNotSame` / `assertFalse(x is NoOpX)`)까지 명시.
+  - **② 음성 대조(negative control)** — 가드를 **일부러 깨보고 FAIL 하는지** 확인한 흔적. 통과만 기록된 테스트는 **공허한 테스트와 구분되지 않는다** (`SELFWARD-ENTITLEMENT-WIRE-S0-001` / `SELFWARD-COMPOSITION-ROOT-S2-001` 실증 = 음성 대조 3/3 FAIL 확인).
+  - 근거 정합: `code-principles.md` §2 암묵 기본값 금지 · `billing-rules.md` §1 명시 조합 paradigm (도구는 *structural presence* 만 본다).
 - **native `/verify` bundled skill (2026-05-27 · MASTER-CLI-NATIVE-RUN-VERIFY-SANDBOX-INTEGRATION-001)**: Anthropic v2.1.145+ 의 `/verify` 는 build + 실 앱 실행으로 코드 변경을 확인한다(test/type-check fallback 회피). manual 검증 명령(`./gradlew ...` + `adb ...`) 또는 `/verify` bundled skill 양쪽 사용 가능 — cli session 자율 · 단 "0 command 금지" 정합. 자식별 launch recipe = `.claude/skills/run-<name>/SKILL.md`(`/run-skill-generator` capture) · staging flavor 한정
 
 ### 검증 명령 실행 불가 시
@@ -70,7 +74,7 @@ grep -rEn 'AKIA[0-9A-Z]{16}|sk-[a-zA-Z0-9]{32,}|ghp_[a-zA-Z0-9]{36}|xox[baprs]-[
 | 4. Architecture Integrity — Layer Boundaries | domain→data import 없음(I2 불변 원칙); 경계 매핑이 Repository·UseCase·ViewModel 에서만; UiState 가 DomainModel 과 분리됨; **app/feature/platform 레이어가 정책 계산을 새로 소유하지 않음**; **동일 UI 개념이 단일 출처 모델 또는 단일 포매터 경로를 사용함(단일 출처 표시 규칙)**; **서버 부재 경로가 live implementation으로 기술되지 않음(UNKNOWN/DEFERRED/contract-only만 허용)** | 블로커 |
 | 5. Model Separation | UiState 분리; UI 단방향 흐름; 경계 매핑 변환 위치 (해당 task 에 적용될 때) | 블로커 |
 | 6. Dependency Governance | libs.versions.toml 변경 시 PLAN DependencyDecision 8개 항목 존재 (없으면 FAIL) | 블로커 |
-| 7. TDD Evidence & Testability Seams | 기존: FakeXxx 존재 또는 N/A 사유; StateFlow 테스트; 심(clock·dispatcher·identity·logger·uuid) 테스트 또는 연기 사유. 테스트 전략 확장: 변경분 ROI-coverage(고위험 Auth/Billing/Data/Backend 우선) · 여러 경우 완전성(happy+경계+에러+해당 시 empty/null/동시성) · 피라미드/test size 적정성 (SoT = `docs/agent/architecture/TESTING_STRATEGY.md` §5·§6·§3 · enforce=warn · follow-up TODO 권장 · blocking gate 신설 X) | 비블로커 |
+| 7. TDD Evidence & Testability Seams | 기존: FakeXxx 존재 또는 N/A 사유; StateFlow 테스트; 심(clock·dispatcher·identity·logger·uuid) 테스트 또는 연기 사유. **DI/seam/조합 루트 변경 시: production 바인딩이 identity assertion(`assertSame`)으로 고정되고 음성 대조(가드를 깨보고 FAIL 확인) 흔적이 있음 — 타입 assertion 단독 = 미충족**(`/verify` §기본 원칙 "production 바인딩 실체 검증 의무" 정합). 테스트 전략 확장: 변경분 ROI-coverage(고위험 Auth/Billing/Data/Backend 우선) · 여러 경우 완전성(happy+경계+에러+해당 시 empty/null/동시성) · 피라미드/test size 적정성 (SoT = `docs/agent/architecture/TESTING_STRATEGY.md` §5·§6·§3 · enforce=warn · follow-up TODO 권장 · blocking gate 신설 X) | 비블로커 |
 | 8. Error / Result Policy | typed Result/sealed 오류 모델 사용 여부; 기존 전면 교체 없음 (해당 task에 적용될 때) | 비블로커 |
 | 9. External Prep / Deferred Items | user-prep TODO 또는 stub 처리; 외부 의존으로 UI 불변 상태 침해 없음 | 비블로커 |
 | 10. DocSync | 문서-구현 드리프트 없음 | 비블로커 |

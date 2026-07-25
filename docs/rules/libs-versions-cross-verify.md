@@ -134,6 +134,20 @@ bash .claude/hooks/libs-versions-cross-verify.sh gradle/libs.versions.toml
 
 ---
 
+## 9a. Koin 4.0.0 → 4.2 + Compiler Plugin 상향 (후행 · 선택)
+
+현 baseline = `koin = "4.0.0"` (app-foundation + Selfward `libs.versions.toml` 실측 · 2026-07-26).
+
+- 상향 시 4-repo 동시 검증: master 정의 → `propagate.sh` → 자식별 `./gradlew test` + 조합 회귀 가드
+  (production 바인딩 identity assertion · `verification-and-review.md` §/verify) 재실행 → `verify-sync.sh` exit 0.
+- **★선결 조건이 아님을 명기**: Koin Compiler Plugin 은 **F1 을 잡지 못한다.** 플러그인의 검증 범위는
+  *"structural dependency presence, **not semantic correctness**"* 이므로 **NoOp 기본값은 언제나
+  정상 해석된다.** 구조적 방어는 플러그인이 아니라 **기본값 제거**다
+  (`code-principles.md` §2 암묵 기본값 금지 · `billing-rules.md` §1 명시 조합). 도입은 **후행 선택**이며
+  **안전성 근거가 될 수 없다** — "플러그인을 넣었으니 기본값을 되살려도 된다" = 금지된 추론.
+
+---
+
 ## 10. 본 SoT 의 변경 정책
 
 > 변경 정책 = [`rule-footer-common.md`](../../.claude/rules/rule-footer-common.md) (= 6-repo 권장 byte-identical · master cycle + propagation · 자식 직접 수정 금지 · T6).
@@ -143,3 +157,4 @@ bash .claude/hooks/libs-versions-cross-verify.sh gradle/libs.versions.toml
 ## 11. 명시 cycle 이력
 
 - 2026-05-13 · MASTER-LIBS-VERSIONS-CROSS-VERIFY-HOOK-001 · 본 SoT 신설 + hook `libs-versions-cross-verify.sh` + settings.json PostToolUse 등록 + 5-repo propagation.
+- 2026-07-26 · MASTER-CLI-COMPOSITION-RULES-S3-001 · §9a Koin 4.0.0 → 4.2 + Compiler Plugin 상향 절차 신설 (= 후행·선택 · 플러그인이 F1 을 잡지 못함을 명기 = 안전성 근거 오용 차단). R1~R3 매칭 규칙 + hook 로직 무접촉. 4-repo byte-identical propagation.

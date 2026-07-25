@@ -56,6 +56,26 @@
 - 적용 예: API stub 의 응답 형식을 미래 가정으로 확장 X / 실제 필요 시점에 추가.
 - DEFERRED domain 정책 (`deferred-domains.md`) = YAGNI 의 큰 적용.
 
+### 암묵 기본값 금지 — 누락은 컴파일 오류여야 한다
+
+- 라이브러리 / 공용 모듈(foundation)은 **계약(interface) 과 구현(impl) 을 제공**할 뿐,
+  **호출자를 대신해 기본 선택을 하지 않는다.** 선택은 소비하는 앱의 **조합 루트** 몫이다.
+- 필수 협력자에 기본값(`= NoOpX` / `= MockX()`)을 두지 않는다 → **빠뜨리면 컴파일 오류**가 나야 한다.
+- **★핵심 근거**: DI 검증 도구는 **구조적 존재**만 본다. Koin verify / Compiler Plugin 의 계약은
+  *"structural dependency presence, **not semantic correctness**"* 다. **존재하지만 의미가 틀린
+  바인딩은 어떤 도구도 잡지 못한다. 그래서 기본값을 없애는 것이 유일한 구조적 방어다.**
+- 실측 사례:
+  - **F1** — foundation 이 "production-safe NoOp 기본 bind" 를 제공 → 자식이 실 impl 등록을
+    빠뜨려도 컴파일·기동 전부 성공 → production `EntitlementRepository` 가 **잔액 0 하드코딩 NoOp**
+    으로 잔존 (`billing-rules.md §1.1` supersede 절).
+  - **`core/designsystem` `GentlyTheme`** — **같은 계열의 반대 방향**. 기본값을 제거해
+    `colorScheme` / `typography` 를 필수화하자 호출부 미갱신이 **컴파일 오류로 즉시 드러났다**.
+    "기본값 제거 = 누락이 보인다" 의 실증.
+- 공식 근거: Google 수동 DI 가이드 — **컨테이너 + 생성자 주입**. 컨테이너는 **`object` 싱글턴이 아니라**
+  앱이 수명을 소유하는 인스턴스여야 교체·테스트가 가능하다.
+- **deviation**: 기본값이 **의미상 유일 정답**이고 틀린 선택이 성립하지 않을 때만(예: 순수 포맷 옵션).
+  협력자 · 정책 · I/O 경계 · 결제/권한 경계에는 **적용 금지**.
+
 ---
 
 ## 3. 라이브러리 사용 최소화 (의존성 정책)
@@ -94,6 +114,8 @@ reviewer agent 가 REVIEW.md 12-section 작성 시 본 체크리스트 적용 �
 - [ ] ViewModel → UI 단방향 (UI state mutation X)?
 - [ ] shared/domain → framework import X (layer-checker 자동 검증)?
 - [ ] 신규 Koin 모듈 = `app/` 또는 `shared/app` 안만?
+- [ ] 필수 협력자에 암묵 기본값(`= NoOpX` / `= MockX()`) 없나 — 누락이 **컴파일 오류**로 드러나나?
+- [ ] 조합 루트가 seam 실체를 **한 곳에서 명시**하나 (module 후행 등록 override 의존 X)?
 
 ### D. 의존성
 - [ ] 신규 의존성 = DependencyDecision 8 항목 모두 작성?

@@ -69,6 +69,7 @@
 ### 가이드라인 (비강제 · Kotlin 공식 스타일 수준)
 
 - **scope function 의미 분담** (`let` / `run` / `apply` / `also` / `with`): 의도된 의미로만 쓰고 2단계 이상 중첩은 피한다 — **권장(비강제)**. 의미 선택 자체는 주관 여지가 있어(원칙 4) 하드 규칙이 아니라 가이드라인으로 둔다. 본문은 Kotlin 공식 coding conventions.
+- **클래스 위임 `by` = 상속 없는 조합** — 인터페이스 구현을 다른 객체에 넘길 때 상속 대신 위임을 쓴다(`class A(b: B) : I by b`). 조합은 결합을 낮추고 교체 지점을 드러낸다. **★Kotlin 공식 주의(반드시 인지)**: *위임 대상(delegate)은 위임하는 클래스의 `override` 를 보지 못한다* — 파생 클래스가 override 한 멤버는 delegate 내부 호출에서 **호출되지 않고**, delegate 는 **자신의 구현만** 참조한다. 따라서 **"일부만 갈아끼우면 나머지가 따라온다"를 가정하지 말 것.** 부분 교체가 필요하면 위임이 아니라 **명시 조합**(필요한 협력자를 전부 이름으로 주입)으로 간다(`code-principles.md` §2 암묵 기본값 금지 · `billing-rules.md` §1 정합). 가이드라인 등급 근거 = 도구 비강제 + 적용 판단에 주관 여지(원칙 4).
 
 ### 탈락 — 하드 규칙 신설 X (원칙 4 변동성/주관)
 
@@ -97,4 +98,5 @@
 
 ## §F. 명시 cycle 이력
 
+- 2026-07-26 · MASTER-CLI-COMPOSITION-RULES-S3-001 · §C 가이드라인 절에 "클래스 위임 `by` = 상속 없는 조합" 1 항목 append (= Kotlin 공식 주의 "delegate 는 위임 클래스의 override 를 보지 못한다" 명기 · 부분 교체 시 명시 조합으로 유도). 하드 규칙 3(C-1~C-3) + 후퇴/탈락 표 + §B pointer 표 무접촉. 4-repo byte-identical propagation.
 - 2026-05-31 · RULE-ARCH-PHASE2-001 · 본 guide 신설(§B 4 SoT + 7 아키텍처 pointer · §C 하드 규칙 3 채택 + 식별자 case 후퇴 + scope function 가이드라인 + 4 후보 탈락) + `rule-routing-index.md §A L2 / §B` 등록. 진입 HEAD `f759954`(Phase 1 commit `5cb9cdd` 후속). 4 SoT/7 docs 본문 복제 0(pointer only). `.editorconfig` · production build(`*.gradle.kts`) · 보호 5종 무접촉.

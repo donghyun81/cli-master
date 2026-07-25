@@ -70,6 +70,25 @@ val viewModel: HomeViewModel = koinViewModel()
 
 ---
 
+## 5a. foundation ↔ 앱 책임 경계 (= 기본 선택은 앱의 몫)
+
+- **foundation 은 계약(interface) 과 구현(impl) 을 제공한다.** `EntitlementRepository` 같은 계약과
+  `NoOpX` / `MockX` 같은 구현을 **둘 다** 제공하되, **어느 것을 쓸지는 정하지 않는다.**
+- **선택은 앱의 조합 루트가 한다.** 앱은 seam 묶음을 **이름을 불러** 구성해 foundation aggregate 에
+  넘긴다. foundation 은 넘겨받은 것을 **그대로 bind** 할 뿐이다.
+- **aggregate 에 기본 인자를 두지 않는다** — 두는 순간 "앱이 말하지 않아도 돌아가는" 경로가 생기고,
+  그 경로는 도구로 검출되지 않는다 (`docs/rules/code-principles.md` §2 암묵 기본값 금지 ·
+  Koin verify / Compiler Plugin = *"structural dependency presence, not semantic correctness"*).
+- **supersede (구 서술 보존 · 삭제 아님)**: (구 · FND-BILLING-SEAM-001 · 2026-06-05)
+  *"foundation 이 production-safe 기본 bind 를 제공하고 자식이 필요 시 override 한다."*
+  → 자식이 override 를 **빠뜨려도 아무것도 깨지지 않아** F1(= production entitlement 가 잔액 0 NoOp 으로
+  잔존)이 발생. `FND-BILLING-SEAMS-S1-001`(app-foundation `b1ff997`) 로 대체.
+- **경계 요약**: foundation = *무엇이 가능한가* · 앱 = *무엇을 쓰는가*.
+- 정합: `docs/rules/billing-rules.md` §1 명시 조합 paradigm · 조합 루트는 **`object` 싱글턴이 아니라**
+  앱이 수명을 소유하는 인스턴스(= 위 §6 thin bridge 경로와 구분 · Android 공식 AppContainer 형태).
+
+---
+
 ## 6. 기존 container 잔존 처리
 
 기존에 직접 만든 DI container 가 남아 있다면:
