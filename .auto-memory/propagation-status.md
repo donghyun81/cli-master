@@ -177,7 +177,7 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 | `docs/rules/reporting.md` | `e86e8315e46d` | ✓ | ✓ | ✓ |
 | `docs/rules/routing-and-delegation.md` | `46f10fe90629` | ✓ | ✓ | ✓ |
 | `docs/rules/deferred-domains.md` | `26fce91cff37` | ✓ | ✓ | ✓ |
-| `docs/rules/code-principles.md` | `3338feafe832` | ✓ | ✓ | ✓ |
+| `docs/rules/code-principles.md` | `de906ed2445b` | ✓ | ✓ | ✓ |
 | `docs/rules/design-to-code-sync.md` | `81a52a9bc694` | ✓ | ✓ | ✓ |
 | `docs/rules/ux-laws.md` | `febd74dcacf8` | ✓ | ✓ | ✓ |
 | `docs/agent/architecture/COMMON_ARCHITECTURE.md` | `6177dda18914` | ✓ | ✓ | ✓ |
@@ -191,7 +191,7 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 
 ## Last verify-sync
 
-- timestamp: 2026-07-17T16:30:46+0900
+- timestamp: 2026-07-26T01:52:15+0900
 - pass: 163
 - drift: 2
 - miss: 6
