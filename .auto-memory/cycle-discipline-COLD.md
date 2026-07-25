@@ -163,13 +163,16 @@ PLAN.md / VERIFY.md / REVIEW.md / TODO.md
 
 근거: native installer 의 background auto-updater 가 `~/.local/bin/claude` 심링크를 강제 재생성 (`anthropics/claude-code#41602`, `#3010`, `#28625`). 이중 차단 미설정 시 사용자 능동 jump 정책 무력 (의도 X 자동 jump 사고 · 다운그레이드 무력화 영역 포함).
 
+**`claude update` 차단 = 위 이중 설정의 설계된 결과 (고장 X · 2026-07-25 `MASTER-CLI-CC-VERSION-UPGRADE-002` 명시):** 두 변수 역할 분담 = `DISABLE_AUTOUPDATER` 는 백그라운드 자동 체크만 차단 (`claude update` / `claude install` 수동 경로는 그대로 동작) · `DISABLE_UPDATES` 가 그 수동 경로까지 차단. ∴ 이중 차단 환경에서 `claude update` 실행 시 `Updates are disabled by your administrator` 출력 = **정상 동작** (= 정책이 의도한 결과 · 고장/오설정 아님). 해제 · 주석 · 임시 `unset` 후 재실행 = **전면 금지** (= native self-update 경로 개방 = 본 §13 정책 무력화). 정합 갱신 경로 = **npm scope 단독** (= 위 `npm install -g @anthropic-ai/claude-code@latest`).
+
 **매 cycle 진입 self-test 3 항목 (모두 PASS 의무):**
 
 매 cycle 첫 행동:
 
 1. `claude --version` raw output 캡처 — EVIDENCE.md 안 그대로 박음.
 2. `claude mcp list` 안 `pencil ✓ Connected` 명시 — 출력 안 verbatim 박음.
-3. CLI 세션 안 `ToolSearch query="pencil"` 결과 = 아래 9 종 `mcp__pencil__*` **전수 존재** (= named-set 전수 판정 · 단순 ≥N 카운트 X · `MASTER-CLI-PENCIL-SELFTEST-GATE-RECALIBRATE-001` baseline · Pencil app v1.1.62 측 4 종 제거 반영): batch_design / batch_get / export_nodes / get_editor_state / get_guidelines / get_screenshot / get_variables / set_variables / snapshot_layout. (구 13 종 중 제거 4 = find_empty_space_on_canvas / open_document / replace_all_matching_properties / search_all_unique_properties · **pencil 서버 측 제거 · Claude Code 버전 무관** · 2-환경 corroborate: cli ToolSearch 9 + cowork deferred 9 동일.)
+3. CLI 세션 안 `ToolSearch query="pencil"` 결과 = 아래 9 종 `mcp__pencil__*` **전수 존재** (= named-set 전수 판정 · 단순 ≥N 카운트 X · `MASTER-CLI-PENCIL-SELFTEST-GATE-RECALIBRATE-002` baseline = Pencil app v1.1.69 측 **1-swap 재보정** 반영 · 직전 `MASTER-CLI-PENCIL-SELFTEST-GATE-RECALIBRATE-001` baseline = v1.1.62 측 4 종 제거 반영): batch_design / batch_get / export_html / export_nodes / get_editor_state / get_guidelines / get_screenshot / get_variables / snapshot_layout. (구 13 종 중 제거 4 = find_empty_space_on_canvas / open_document / replace_all_matching_properties / search_all_unique_properties · **pencil 서버 측 제거 · Claude Code 버전 무관** · 2-환경 corroborate: cli ToolSearch 9 + cowork deferred 9 동일.)
+   - **v1.1.69 1-swap** (= 위 RECALIBRATE-002) = `set_variables` 제거 → `export_html` 삽입 · **count 9 불변** (= 카운트 STOP 미발동 · named-set 게이트가 검출한 경위). 구 v1.1.62 판 named-set (= `set_variables` 포함) = **폐기** · 호출 시도 시 미해결 (2026-07-25 `MASTER-CLI-CC-VERSION-UPGRADE-002` 실측 = `select:mcp__pencil__set_variables` → "No matching deferred tools found"). 본 항 named-set = hot `docs/rules/cycle-discipline.md` §13 요약과 **동일 집합 의무** (= 두 층 불일치 자체가 drift · 위 구 판 잔존이 그 사례).
 
 3 항목 모두 PASS = cycle 진행 가능. 1+ FAIL = 즉시 STOP + 아래 복귀 절차.
 
@@ -218,7 +221,7 @@ native installer 전환 평가 결론 = **npm 유지 · native 전환 X (현 시
 2. native auto-updater 가 `~/.local/bin/claude` symlink 를 강제 재생성한다 (#41602 / #3010 / #28625 · 위 본문 근거 정합 · open/stale). 이중 차단을 우회하는 경로.
 3. 설치 후 버전 pin 부재 + `claude update` = latest 점프 + 다운그레이드 명령 부재. 통제형 수동 갱신(npm scope) 과 self-test FAIL 시 known-working 복귀 절차를 동시에 파괴한다.
 
-npm 상태 = deprecated (2026-01 v2.1.15~) 이나 게시 지속 (현 latest 2.1.170 · 하드 EOL 미공지) = **deprecated-but-retained**. 현 시점 npm scope 유지가 통제 우위.
+npm 상태 (= 2026-07-25 `npm view` live 실측 갱신 · `MASTER-CLI-CC-VERSION-UPGRADE-002`): dist-tags `latest 2.1.220` / `stable 2.1.212` / `next 2.1.220` · **`deprecated` field 부재** · `engines.node` = `>=22.0.0` · 하드 EOL 미공지. 구 서술 "deprecated (2026-01 v2.1.15~) 이나 게시 지속 (현 latest 2.1.170) = deprecated-but-retained" = **stale 폐기** (= deprecated 표식 해소 실측 + 공식 문서가 npm 설치를 정식 경로로 문서화). 현 시점 npm scope 유지가 통제 우위 (단 아래 재판정 = 조건 3 충족).
 
 **재검토 trigger 4조건** (1+ 충족 시 native 전환 별 cycle 진입):
 
@@ -226,6 +229,8 @@ npm 상태 = deprecated (2026-01 v2.1.15~) 이나 게시 지속 (현 latest 2.1.
 2. native auto-updater 의 `~/.local/bin/claude` symlink 강제 재생성 해소 (#41602 / #28625 close 확인).
 3. 설치 후 버전 pin 또는 다운그레이드 실효 명령 제공.
 4. 또는 npm 패키지 하드 EOL 공지 (= 강제 전환 시점 · native 통제 한계 감수 + mitigation 설계 별 cycle).
+
+**재판정 이력 (2026-07-25 · `MASTER-CLI-CC-VERSION-UPGRADE-002` · 판정·기록만 · 전환 실행/실험 X):** **조건 3 = 충족** → STOP + Coin 회수 · 전환 평가 = 별 cycle `MASTER-CLI-NATIVE-MIGRATION-REEVAL-002`. 근거 = 설치 2.1.220 바이너리 문자열 local 실측 (= `bin/claude.exe` · 웹 조회 X): `minimumVersion` = "Minimum version to stay on - prevents downgrades" (= 버전 floor 설정 · 위반 시 "below your minimumVersion setting") + managed `requiredMinimumVersion` / `requiredMaximumVersion` (= policySettings 측 실행 허용 **범위** 강제 · "above your organization's requiredMaximumVersion") + `autoUpdatesChannel` (= "Channel for auto-updates (latest or stable)"). ∴ 위 조건 3 서술 "설치 후 버전 pin 부재 + 다운그레이드 명령 부재" = 제품 settings 층에서 해소 (= installer 무관 · 동일 바이너리). **조건 1 · 2 = UNKNOWN** (= #60956 / #41602·#28625 close 여부 = 웹 조회 영역 = master `CLAUDE.md §4` 절대 금지 · native 미설치[`~/.local/bin/claude` + `~/.local/share/claude` 양쪽 부재 실측]로 local 관측 경로 부재 · 조건 2 완화 신호 = 공식 문서 인용 "Before v2.1.207, the auto-updater replaced a custom launcher at that path with its own symlink on every update" = cowork 제공 · cli 실측 X = UNKNOWN 유지). **조건 4 = 미충족** (= 위 npm 상태 실측 · 게시 지속 + deprecated 부재).
 
 세부 trail = `.auto-memory/incident-log.md` 의 `CLAUDE-CODE-NATIVE-MIGRATION-EVAL-001` (평가 close). 위 §13 본문(npm scope · 이중 차단 · self-test 9 종 · FAIL 복귀 절차)은 무변경.
 
