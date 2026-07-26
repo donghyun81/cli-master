@@ -93,6 +93,8 @@ cli infra 수정 필요? — YES: 자식 안 사고 발견 = 패턴 1 · local o
 
 1. filename find 1차 → 2. **container 내부 content grep 2차 의무** (= filename 부재 시점 즉시 STOP/UNKNOWN 분류 금지 · symbol/object/function content keyword grep) → 3. lifecycle/deprecated 키워드 grep (ui-spec.json / SoT 실측 시 의무) → 4. filename + content **둘 다 부재 시점에만** STOP/UNKNOWN 분류 가능. (근거 사고 원문 = COLD)
 
+- **★범위 축 (= 위 4-step 의 전제)**: 본 절차는 **전수 트리 위에서 돌 때만** 유효하다 — **subset 위의 부재 판정 무효** · 「판정 보류」 표기 · **위임 범위 명시** · **받은 부재 보고 회수 시 재측정** 의 단일 SoT = [`code-principles.md` §2 「부재는 전수 트리에서만 판정한다」](./code-principles.md).
+
 ### 18) cli infra 분기 정기 review cadence (요약 — scope 표 = COLD)
 
 매 quarter 첫 월요일 KST (1/6·4/6·7/6·10/6 부근) — rules outdated + hooks self-test + settings 정합 + 보호 baseline + incident 추세 + `context-health-metrics.md` 재측정. 산출 = lightweight 4 file. 자동 발화 X (사용자 인지 단일).
@@ -136,10 +138,20 @@ rename + content 변경 동시 cycle = **post-rename `git add -u` 의무** → `
 - **실측 대응은 초과가 아니다**: paste 자신이 요구한 문서 · test · 실측 정정으로 발생한 증분은 **밴드 초과로 판정하지 않는다**(사유를 REPORT 에 명시). **밴드가 옳은 판단을 처벌하면 안 된다.**
 - 실측 근거 = **5회 연속 초과** (S0 test `+181` · S2 KDoc `+92` · HARDEN quote-repair · OUTPUT-BUDGET EF `+176`/test `+205` · SETTLE test `+248`). **초과분은 매번 paste 자신이 요구한 문서·test 였다.** 특히 SETTLE 의 `+248` = 두 ViewModel test file **통째 재작성**이 만든 개명 churn 이고, 그 재작성은 **옳은 판단**이었다(상태기계가 바뀌었으므로).
 
+### 31) paste 발행 전 scope × 제외 교차 검사 (= 상충은 문면끼리만 나지 않는다)
+
+- **발행 전 교차 검사 의무**: paste 저작 **마지막 step** 에서 ① **scope/변경 표 전 항** × **제외·STOP 좌표** = 교집합 0 인가 ② **scope 표 전 항** × **ChangeBudget 밴드 · 수치 조건 · xverify 기준** = **동시 충족 가능**한가 — **둘 다** 대조하고 **결과를 paste 본문에 기록**한다.
+- **★①만 돌리면 안 잡힌다**: 상충은 **문면 ↔ 문면** 뿐 아니라 **문면 ↔ 밴드/수치** 사이에서도 난다. 실측 = 어느 paste 가 ①을 실제로 돌려 **"충돌 0"** 을 선언하고도, 같은 문서 안에서 **「순감 −120~−40」 밴드 ↔ 「구 문면 삭제 0 = verbatim 보존」(+140)** 이 **구조적 동시 충족 불가**인 채 발행됐다. **①의 통과가 ②의 알리바이가 되지 않는다.**
+- **기록 형식 (권장)**: `§N.N 교차 검사 — scope <a>종 × 제외 <b>종 = 충돌 <c> · 경계 항목 = <목록>`. **경계 항목 칸이 핵심**이다 — "충돌 0" 만 남으면 **무엇을 봤는지** 알 수 없고, 검사를 안 한 것과 구분되지 않는다.
+- **충돌은 발행 전에 해소한다.** 못 하면 **어느 쪽이 우선인지 paste 에 명시**한다 — **집행자에게 떠넘기지 않는다**(판정을 미루면 실행 시점에 되돌리기가 더 비싸다).
+- **★집행자 측 대칭 의무**: 그럼에도 상충을 발견하면 **자동 봉합 금지** — 상충 사실 + 어느 쪽을 왜 우선했는지를 **paste-back 에 보고**한다 (= `reporting.md` §13 negative space 와 같은 층). **조용히 봉합하면 저작 측이 자기 결함을 영영 모른다.**
+- 실측 근거 = **3회 연속** (전부 같은 저작자 · **3회 다 cli 개인 판단이 막았다**): ① 요건(*"구 판 = GD 스냅샷 명시"* · 문서 **상단** 배너) ↔ xverify 기준(*"GD 어휘 = 이력 블록에만"* · 문서 **말미**) ② `§3-S10` 대상 `L99` ↔ `§2.3 D3` 「티켓」 zone 보호 ③ ChangeBudget 순감 밴드 ↔ inline 치환 보존. **막아준 게 규칙이 아니라 개인 판단이라 다음 세션이 못 잡는다** — 본 §이 그 판단을 규칙으로 승격시킨다.
+
 ---
 
 ## 변경 정책 + demote 이력
 
 > 변경 정책 = [`rule-footer-common.md`](../../.claude/rules/rule-footer-common.md). 2026-07-10 · MASTER-CLI-CONTEXT-DIET-2-001 T1 · 본 file diet (49.4K → hot 실행 규약 · 원문 전문 = COLD verbatim snapshot · 정보 소실 0).
+> 2026-07-26 · MASTER-CLI-MEASUREMENT-DISCIPLINE-001 · **§31 신설** (= paste 발행 전 **scope × 제외 교차 검사** ①문면×문면 + ②**문면×밴드/수치** 양쪽 의무 + 경계 항목 기록 + 발행 전 해소·못 하면 우선순위 명시 + ★**집행자 측 대칭 의무**[상충 발견 시 자동 봉합 금지 · paste-back 보고]) + **§17 범위 축 pointer 1행**(= BASELINE 4-step 은 **전수 트리 위에서만** 유효 · 본문 SoT = `code-principles.md` §2 「부재는 전수 트리에서만」). 근거 = **3회 연속 상충**(요건↔xverify 기준 · `§3-S10 L99`↔`§2.3 D3` zone · 순감 밴드↔inline 치환 보존) · **3회 다 규칙이 아니라 cli 개인 판단이 막았다** · ②축 실증 = 어느 paste 가 ①을 돌려 "충돌 0" 선언 후에도 밴드 상충이 남았다. §1~§30 **무접촉**.
 > 2026-07-26 · MASTER-CLI-RULES-SETTLE-001 · **§30 신설** (= A-6 + A-6′ · ChangeBudget **3층 분리**[실코드 / 주석·KDoc / test] + **분류 기준을 밴드가 직접 말한다**[주석·KDoc·빈 줄 포함 여부 명시 · 정의 없는 밴드는 스스로를 위반한다] + ★**재작성 file 은 라인 밴드에서 빼고 "재작성 N file + 사유"로 별도 보고**[`numstat` 은 **재작성을 재지 변경을 재지 않는다**] + 실측 대응은 초과 아님). 근거 = **5회 연속 초과**(S0 test +181 · S2 KDoc +92 · HARDEN quote-repair · OUTPUT-BUDGET EF+176/test+205 · SETTLE test +248) · **초과분은 매번 paste 자신이 요구한 문서·test** · SETTLE +248 = ViewModel test 2 file 통째 재작성 churn 이며 그 재작성은 **옳은 판단**이었다(상태기계 변경). §1~§29 **무접촉**.
 > 2026-07-15 · MASTER-GIT-ROLE-COMMIT-V3-001 · §5 = agent commit 한시 허가 (v2) → **git 역할 경계 정책 (v3)** 재작성 — commit + git log 위생 = cli 소관 default(전 카테고리·영구) · push + 고위험 git(reset/clean/rebase/filter-branch/amend/force/reflog) = Coin 소관. v2 카테고리 나열 · `[agent-commit: yes]` 묵시 신호 폐지. 4개 층(§5 · `safety-and-secrets.md` deny 표 · `COMMIT_CONVENTION.md` §2 · `settings.json` deny) 문언 모순 일괄 정합.
