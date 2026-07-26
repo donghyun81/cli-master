@@ -190,6 +190,19 @@ STDOUT: [핵심 출력]
 
 > **측정/self-test 기록 형식 (T3 · MASTER-CLI-CONTEXT-DIET-2-001)**: raw output verbatim 박제 회피 — **판정 + 핵심 수치/sha 12자리 + 원문 파일 pointer** 로 기록한다 (예: `PASS · sha 3aa71c62d9e4 · 원문 = .ai/reports/<id>/logs/verify-sync.txt`). 긴 로그 = 파일로 남기고 pointer 만 (= `cycle-discipline.md` §13 self-test 기록 정합 · §9.1 path pointer 원칙 동형).
 
+### §8.1 수치 인용 = 산출 명령 + **환경** 동반 의무 (= 2026-07-26 · MASTER-CLI-RULES-SETTLE-001)
+
+- **수치를 인용하면 그 수치를 만든 명령을 함께 적는다.** 명령 없는 수치는 **재현 불가 = 근거 아님**(= §8 `[CONFIRMED]` 요건 미달 · `[INFERRED]` 이하로 강등).
+- **★산출 명령만으로는 부족하다 — 환경을 함께 진다.** 같은 명령이 다른 값을 내는 축:
+  **① shell**(zsh ↔ bash · glob 확장/정렬 상이) · **② locale**(`LC_COLLATE` · `*` 정렬 순서 → concat 순서 → 해시) · **③ 해시 도구**(`shasum -a 256` / `git hash-object` / `md5` · git-sha1 은 **blob header 포함** = 순수 내용 해시와 **영구 불일치**) · **④ glob 대상 범위**(`*.md` 가 무엇을 포함하는지 · file 수 `n` 동반 의무).
+- **★aggregate 해시는 정체성이 아니라 drift 검출기다.** 재현해야 할 대상은 **특정 hex 가 아니라**
+  **"한 실행 안에서 N-repo 값이 동일하다"** 는 **불변식**이다.
+  - ⟹ **값이 안 맞으면 먼저 환경 차이를 의심한다** (내용 drift 로 단정하지 않는다 = `code-principles.md` §2 표면 속성 분류 금지 정합).
+  - ⟹ **어떤 산식을 쓰든 한 명령 · 한 환경으로 N repo 를 재고 같으면 통과.** 산식을 바꿀 거면 **바꾼 사실과 새 산식을 박제**한다(조용한 교체 금지).
+- **기록 형식 (권장)**: `<값> · 산식=<명령> · 환경=<shell + LC_COLLATE + 해시도구> · n=<대상 file 수>`
+  예: `b368fcdbffcdb0e5 · 산식=cat docs/rules/*.md | shasum -a 256 · 환경=bash 3.2.57 · LC_COLLATE=C.UTF-8 · n=44`
+- 실측 근거 (= **3회 반복**): 동일 4-repo aggregate 가 보고 주체마다 다른 hex 로 나왔고, 매번 **내용 drift 가 아니라 환경 차이**였다. 직전 cycle 에서 6 변형 전부 불일치 보고 → **값이 틀린 게 아니라 환경이 달랐다.**
+
 ---
 
 ## §9 Subagent Return Contract
@@ -269,6 +282,7 @@ subagent 가 상위 agent 에게 돌려주는 최소 요약은 아래 5 개 섹�
 - (직전) C2-RULES-RESTRUCTURE-001 (2026-05-02) · `evidence-and-reporting.md` (438 line) → `report-paths.md` (line 1~70) + `report-formats.md` (line 71~end) 분리 신설
 - 2026-05-21 · MASTER-CLI-CLEANUP-7CYCLE-001 · 본 file 신설 (= `report-paths.md` + `report-formats.md` 2 file 본문 통합 default · 본질 변경 X · 단일 SoT 정합 default) + 2 file 삭제 + 9 file 인용 갱신 + 5-repo byte-identical propagation
 - 2026-05-22 · MASTER-CLI-CYCLE-2A-ANCHOR-LIST-HOT-INSTALL-001 · §13 Negative Space Line append default (= anchor list paradigm 정합 default)
+- 2026-07-26 · MASTER-CLI-RULES-SETTLE-001 · **§8.1 신설** (= A-5 + A-5′ · 수치 인용 = **산출 명령 + 환경** 동반 의무 · 환경 4축 = shell / `LC_COLLATE` / 해시 도구 / glob 대상 범위 `n` · **★aggregate 해시 = 정체성 아닌 drift 검출기** = 재현 대상은 특정 hex 가 아니라 **"한 실행 안에서 N-repo 동일"** 불변식 · 값 불일치 = **먼저 환경 차이 의심**(내용 drift 단정 금지 · `code-principles.md` §2 정합) · 산식 교체 시 **바꾼 사실 + 새 산식 박제** 의무 · 기록 형식 권장 1줄). 근거 = 동일 4-repo aggregate 가 보고 주체마다 다른 hex → **매번 내용 drift 아닌 환경 차이**(3회 반복 · 직전 cycle 6 변형 전부 불일치). §8 기존 표 + §1~§7 · §9~§14 **무접촉**. 4-repo byte-identical propagation.
 - 2026-06-22 · MASTER-CLI-CROSSREPO-RECONCILE-AUTONOMY-PARADIGM-001 · §14 동족 구현 정합 surface 규약 append (= cross-repo cycle 한정 · 같은 맥락 2+ repo 구현 paste-back 회수 시점 3-bucket 정합 표 형식 + dispatch checklist `cross-repo-parallel-exec-detail.md §2.2.1` step 5 정합 · advisory · auto-converge 금지 · 본문 canonical = detail §4.4 · 본 §은 형식만 소유). 6-repo byte-identical propagation.
 
 ---

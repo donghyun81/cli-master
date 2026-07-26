@@ -16,6 +16,13 @@
   - **① identity assertion** — `assertSame(기대 인스턴스, 해석 결과)`. **타입 assertion 은 부족하다**: `assertTrue(x is EntitlementRepository)` 는 NoOp 기본값 부활을 **못 잡는다**(NoOp 도 같은 타입 · `FND-BILLING-SEAMS-S1-001` 실증). "무엇이 아닌지"(`assertNotSame` / `assertFalse(x is NoOpX)`)까지 명시.
   - **② 음성 대조(negative control)** — 가드를 **일부러 깨보고 FAIL 하는지** 확인한 흔적. 통과만 기록된 테스트는 **공허한 테스트와 구분되지 않는다** (`SELFWARD-ENTITLEMENT-WIRE-S0-001` / `SELFWARD-COMPOSITION-ROOT-S2-001` 실증 = 음성 대조 3/3 FAIL 확인).
   - 근거 정합: `code-principles.md` §2 암묵 기본값 금지 · `billing-rules.md` §1 명시 조합 paradigm (도구는 *structural presence* 만 본다).
+- **실 데이터 검증 의무 (빈 계정 금지)** — 사용자 데이터를 **입력으로 쓰는 경로**(특히 유료·생성·AI)는 **실 데이터가 있는 계정**으로 검증한다. 빈 데이터로 도는 검증은 **데이터 의존 결함을 구조적으로 못 잡는다**(입력이 없으면 그 코드가 실행되지 않는다). 검증용 **seed 계정을 자산으로 유지**한다(1회성 계정 금지 · 재현 가능해야 한다).
+  - 실측 근거: **F2** — 기록 **0건** 계정은 `200`, **실 기록** 계정은 `502`. 빈 계정만 쓴 탓에 "AI 기능이 **한 번도 작동한 적 없다**"는 사실이 **몇 달간** 검출되지 않았다.
+- **성공 경로 관측 가능성 선행 의무** — **성공을 관측할 수 없으면 그에 의존하는 변경은 검증 불가**다. 성공/실패를 **원장(로그·계측)으로 가를 수 있게 만든 뒤에** 그 경로를 바꾼다(관측 → 변경 순서 · 역순 금지).
+  - 실측 근거: 관측 확보(①)를 변경(②)보다 **먼저** 한 순서의 근거. ②가 같은 3 시도를 **성공 1 · 실패 2** 로 실제로 갈랐다 — 관측이 없었다면 어느 쪽도 증명 못 한다.
+- **외부 응답 검증 실패 경로 = 진단 가능 로그 의무** — 외부(모델·서드파티) 응답의 검증/파싱이 실패하는 경로는 **① 분기 식별자**(어느 검증에서 떨어졌나) + **② 원문 발췌(상한 명시)** + **③ 에러 메시지** 를 남긴다. "실패했다"만 남는 로그는 **다음 cycle 에도 같은 미지**를 남긴다.
+  - **마스킹 의무**: 발췌 대상 = **모델 출력 한정**. **사용자 원문 · 키 · 토큰 = 제외**(= `safety-and-secrets.md` §시크릿 기록 금지 정합 · 로그도 파일이다).
+  - 실측 근거: **A1 로그 1개**가 F2 의 미지를 **한 cycle 안에** 닫았다 (그 전까지는 재현 자체가 불가능했다). EF 측 정착 = `supabase-handling.md` §11.
 - **native `/verify` bundled skill (2026-05-27 · MASTER-CLI-NATIVE-RUN-VERIFY-SANDBOX-INTEGRATION-001)**: Anthropic v2.1.145+ 의 `/verify` 는 build + 실 앱 실행으로 코드 변경을 확인한다(test/type-check fallback 회피). manual 검증 명령(`./gradlew ...` + `adb ...`) 또는 `/verify` bundled skill 양쪽 사용 가능 — cli session 자율 · 단 "0 command 금지" 정합. 자식별 launch recipe = `.claude/skills/run-<name>/SKILL.md`(`/run-skill-generator` capture) · staging flavor 한정
 
 ### 검증 명령 실행 불가 시

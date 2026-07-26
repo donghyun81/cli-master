@@ -130,6 +130,20 @@ allowed-tools: Bash, Read, Edit, Write
 
 본 skill = `.claude/skills/disk-verification/SKILL.md` 동족 paradigm default · 본 §4.3 self-consistent 의무 = `disk-verification` §3.1 자기 정합 paradigm 본질 정합 default.
 
+### §4.5 ★paste-back 회수 = **커밋 file 집합 대조 의무** (= D-6 · 2026-07-26 · MASTER-CLI-RULES-SETTLE-001)
+
+- paste-back 회수 시점 **`git show --name-only <sha>`** 결과 vs paste source **`§2` scope** 를 **대조**한다 (= 집합 비교 · 개수 일치만으로 불충분).
+- **★"내 diff 는 깨끗하다" 는 diff 에 대해 참이고 커밋에 대해 거짓일 수 있다.** 작업 중 본 diff 와 **실제 커밋된 file 집합**은 다른 대상이다 — 같은 repo 에서 다른 workstream 이 동시에 돌면 `git index` 를 공유하므로(= repo 당 1개 · `add`→`commit` 비원자적) **남의 file 이 내 커밋에 실린다**.
+- 대조에서 **scope 밖 file 발견 = 즉시 보고** (= 자동 되돌리기 금지 · 되돌림은 절대 sha 로 · `cross-repo-parallel-exec-detail.md` §2.1.6 D-5 정합).
+- **디렉터리 단위 대조 금지 · file 단위 명시**: 오염 file 이 **본 cycle scope 디렉터리 안**에 있을 수 있다 (= 실측 · 오염 9 중 1건 · D-4 정합).
+- 실측 근거: file 겹침 **0** 인 3 cycle 동시 진행에서 **커밋 오염 9건**. diff 기준 자기 점검은 **전부 통과**했다 — 대조 대상이 틀렸던 것.
+
+### §4.6 수치 인용 = **산출 명령 + 환경** 동반 (= A-5′ · paste authoring 측 적용)
+
+- paste source `§0` baseline / `§1` 측정 인용의 **수치**는 **산출 명령**과 **환경**(shell · `LC_COLLATE` · 해시 도구 · glob 대상 범위 `n`)을 함께 적는다. 형식 canonical = [`reporting.md` §8.1](../../../docs/rules/reporting.md).
+- **aggregate 해시 = 정체성이 아니라 drift 검출기** — 재현 대상은 **특정 hex 가 아니라 "한 실행 안에서 N-repo 동일"** 이라는 **불변식**이다. cli 측 재현 실패 보고를 받으면 **먼저 환경 차이를 의심**한다(내용 drift 로 단정 금지).
+- 실측 근거 (**3회 반복**): 동일 4-repo aggregate 가 authoring 측과 cli 측에서 다른 hex 로 나왔고 **매번 환경 차이**였다. 직전 cycle = cli 가 6 변형 전부 불일치 보고 → **값이 틀린 게 아니라 환경이 달랐다.**
+
 ---
 
 ## §5 cli session 자율 paradigm
@@ -210,6 +224,7 @@ allowed-tools: Bash, Read, Edit, Write
 
 - 2026-05-22 · `MASTER-CLI-PASTE-AUTHORING-DISK-VERIFICATION-PARADIGM-001` · 직전 rule (`docs/rules/paste-authoring-disk-verification.md`) 신설 (= paradigm 본질 + trigger 조건 + 3 의무 영역 + paste-back verify 의무 본문 + cli session 자율 paradigm + STOP 조건 + 적용 영역 + 자기 정합 paradigm 본질 + 인접 paradigm 정합 default) + `cycle-discipline.md` §26 pointer 추가 default + CLAUDE.md §15 entry append default + 5-repo byte-identical propagation default
 - 2026-05-26 · `MASTER-CLI-SKILLS-MIGRATION-PHASE-1-001` · 본 skill 신설 default (= 직전 rule 본문 본질 보존 default · skill paradigm 정합 default · trigger 시점 lazy load default · `docs/rules/paste-authoring-disk-verification.md` 측 thin pointer 갱신 default)
+- 2026-07-26 · `MASTER-CLI-RULES-SETTLE-001` · **§4.5 커밋 file 집합 대조 의무**(= D-6 · `git show --name-only <sha>` vs paste §2 scope · "내 diff 는 깨끗하다" = diff 에 참 · **커밋에 거짓 가능** · 근거 = file 겹침 0 인 3 cycle 동시 진행의 커밋 오염 9건) + **§4.6 수치 인용 = 산출 명령 + 환경 동반**(= A-5′ · aggregate 해시 = 정체성 아닌 **drift 검출기** · 재현 대상 = "한 실행 안에서 N-repo 동일" 불변식 · 근거 = 환경 차이 3회 반복) 신설. 기존 §1~§4.4 · §5~§12 무접촉. 4-repo byte-identical propagation.
 - precedent: `MASTER-CLI-LAUNCH-STATUS-AUTO-SYNC-PARADIGM-001` (= H35 마감 default · self-contained 12 section format default · 본 skill format 차용 default) + `MASTER-CLI-RECOMMENDED-OPTION-DISK-VERIFICATION-PARADIGM-001` (= H29 마감 default · 동족 paradigm 본질 default · cli session 측 disk 측정 의무 paradigm default · 본 skill = cowork chat 측 paste source authoring paradigm default · 별 file 분리 paradigm default)
 - trigger baseline: H36 chat 측 3REPO-CRITICAL-PATH-PROGRESS-001 cycle GB scope 재 정의 사고 default (= paste source umbrella 측 `BreathSessionRepository.kt` + `BreathSessionDao.kt` 명시 default · 실 disk 부재 default · 실 disk = `MeditationSessionsListRepository.kt` 정합 default · cli session 측 자율 scope 재 정의 마감 default · 본 사고 재발 risk 회피 default)
 

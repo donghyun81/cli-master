@@ -50,7 +50,7 @@ git worktree = 한 repo 측 추가 working tree 를 별 디렉터리 × 별 bran
 
 | # | 적용 영역 | 본질 |
 |---|---|---|
-| ① | **within-repo 병렬** | 같은 repo 안 동시 2+ workstream (= 독립 cycle × N) 측 worktree × branch 격리 default (= 단일 working tree 측 동시 변경 충돌 차단) |
+| ① | **within-repo 병렬** | 같은 repo 안 동시 2+ workstream (= 독립 cycle × N) 측 worktree × branch 격리 default (= 단일 working tree 측 동시 변경 충돌 차단) — ★**2026-07-26 D-2 승격: "가능" → 같은 repo 병렬 시 「의무」** (= file 겹침 0 이어도 `git index` 공유 = 격리 없이 진행 금지 · §2.1.6) |
 | ② | **master propagation 격리** | propagation cycle 진행 중 별도 master cycle 측 worktree 격리 default (= main checkout = propagation 전용 보존) |
 | ③ | 영역 1 sub-agent 격리 | **보류 default** (= 현 영역 1 = read-only 측정 용도 · worktree 격리 실수요 0 실측 · 재평가 = 실수요 발생 시점 별 cycle) |
 
@@ -81,6 +81,7 @@ git -C <repo> branch -d wt/<cycle-id>
 - worktree branch 합류 (= merge) = **해당 workstream cycle 마감 step 포함 의무** (= merge + verify + self-clean 후 paste-back · 별도 통합 task 상시 분리 X).
 - conflict 검출 시 = **자동 해소 금지** (= 보고 → 사람 판단 · STOP #4 해석 default). 대형 conflict = STOP 후 별도 cycle 분기 default.
 - **병렬 분기 전제** (= 분기 결정 시점 의무): 파일 겹침 측정 = cowork paste 발행 단계 의무 (= Inspection · 사람 영역) — 같은 file 접촉 workstream = 병렬 금지 · 순차 의무.
+  > ⚠ **★본 행의 판정 기준은 틀렸다 — §2.1.6 으로 정정** (2026-07-26 · `MASTER-CLI-RULES-SETTLE-001` · 구 문면 = 이력 보존 · 삭제 0). **file 겹침은 필요조건이지 충분조건이 아니다.** 공유 자원은 file 이 아니라 **`git index`** 이며, index 는 **repo 당 하나**다. 위 기준만 지킨 3 cycle 병렬(= file 겹침 **0**)이 **커밋 오염**을 냈다. 같은 repo 안 2+ workstream = **격리 의무**(§2.1.6).
 
 **guard 3** (= D3+D7 · 신 STOP 항 신설 X = 기존 STOP 9항 해석 적용):
 
@@ -94,6 +95,23 @@ git -C <repo> branch -d wt/<cycle-id>
 
 - worktree = 단순 git checkout (= 추가 AI 호출 0) default — **interactive pool 정합 ✓ · 영역 3 (= Agent SDK credit pool) 무관**.
 - worktree 격리 자체 = sub-agent 수 증가 영역 X — 기존 sub-agent 병렬 cap ≤ 3 (= §3.4) 불변 의무 (= 모순 금지).
+
+### 2.1.6 ★병렬 판정 기준 **정정** — 공유 자원은 file 이 아니라 `git index` 다 (= 2026-07-26 · MASTER-CLI-RULES-SETTLE-001)
+
+> **본 §2.1.6 = 위 "병렬 분기 전제"(`같은 file 접촉 workstream = 병렬 금지`) 의 판정 기준 정정 본문.** 구 문면 = 무삭제 보존(이력) · **현재형 판정 기준 = 본 §**. **추가가 아니라 정정**이다 — 조용히 덧붙이면 다음 사람이 **또 file 겹침만 본다.**
+
+**사고 실측 (= 현행 규칙이 사고를 허용했다)**: 2026-07-26 Selfward 에서 **3 cycle 이 동시 진행**됐다 — `RULES-AS-TESTS`(= `composeApp/rules`) · `DOCS-ENTRY-REALIGN`(= `docs/CLAUDE.md`) · `OUTPUT-BUDGET`(= `supabase/functions`). **file 겹침 = 0**. **현행 규칙을 전부 지켰다.** 그런데 **커밋이 오염됐다**(= 남의 workstream 파일이 내 커밋에 9건 혼입).
+
+| # | 정착 | 내용 |
+|---|---|---|
+| **D-1** | **판정 기준 정정** | **file 겹침 = 필요조건 · 충분조건 아님.** `git index` 는 **repo 당 하나**이고 `add`→`commit` 은 **원자적이 아니다** — file 이 안 겹쳐도 **index 는 겹친다.** ⟹ **같은 repo 안 2+ workstream = index 공유 = 격리 의무** (파일 목록 비교로 병렬 가부를 판정하지 않는다) |
+| **D-2** | **worktree = 의무로 승격** | 영역 1.5 (= §2.1.5) 를 *"가능"* → **"같은 repo 병렬 시 의무"** 로 승격. 같은 repo 안 동시 2+ workstream 은 **worktree × branch 격리 없이 진행 금지** (= 본문 canonical = §2.1.5 · kernel `cross-repo-parallel-exec.md §2` 1-bullet 동기화) |
+| **D-3** | **pathspec = 보조 · 반쪽** | `git commit -- <pathspec>` = index 우회 **보조** 수단(= 다른 workstream 의 staged 변경을 쓸어담지 않음). ★**단 HEAD 에 없는 신 file 에는 안 먹는다** — untracked 신 file 은 pathspec commit 이 **포착하지 못한다**(= 격리를 대체하지 못하는 **반쪽** · D-2 의 보완재일 뿐) |
+| **D-4** | **디렉터리 pathspec 금지** | pathspec 은 **file 단위 명시만 유효** · **디렉터리 단위 금지**. 실측: 오염 9건 중 **1건이 본 cycle scope 디렉터리 안**에 있었다 — 디렉터리로 끊으면 **남의 파일이 내 scope 경계 안에 들어와 있어도 통과**한다 |
+| **D-5** | **복구 절차 = 절대 sha** | 복구/되돌리기 절차는 **절대 sha 로 적는다.** `HEAD~N` 은 **문서가 쓰인 순간부터 부패한다** — 실측: 그 사이 커밋 하나가 올라와 `HEAD~1` 이 **남의 커밋**을 가리켰다 (= 상대 참조로 적은 복구 절차가 **2차 사고**를 만든다) |
+| **D-6** | **커밋 file 집합 대조** | paste-back 회수 시점 = `git show --name-only <sha>` vs paste `§2` scope **대조 의무**. cli 의 *"내 diff 는 깨끗하다"* 는 **diff 에 대해 참이고 커밋에 대해 거짓**일 수 있다 (본문 = [`paste-source-authoring` skill](../../.claude/skills/paste-source-authoring/SKILL.md) §4.5) |
+
+**★worktree 는 이미 검증됐다 (= 대조 실측)**: 격리 **없음** = 오염 **1회**(위 3 cycle) · 격리 **있음** = 오염 **0회** — worktree 안에서 돌던 중 **다른 세션이 `gently-product-docs` 에 커밋**(16:34)했음에도 **오염 0 · 커밋 집합 정확히 24+1 · self-clean orphan 0**.
 
 ### 2.2 영역 2 — 다중 cli session 운영 paradigm (= 권장 paradigm default · 2026-05-19 본문 강화)
 

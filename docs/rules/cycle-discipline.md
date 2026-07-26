@@ -128,9 +128,18 @@ rename + content 변경 동시 cycle = **post-rename `git add -u` 의무** → `
 - **28** Automation policy = [`automation-policy.md`](./automation-policy.md) (Transport 자동화 OK / Inspection 자동화 X)
 - **29** Mode 시스템 = [`mode-system.md`](./mode-system.md) (M1/M3/M5 bundle + picker + recovery)
 
+### 30) ChangeBudget 층 분리 + 재작성 별도 보고 (= 밴드가 스스로를 정의한다)
+
+- **3층 분리 의무**: ChangeBudget 밴드는 **① 실코드 / ② 주석·KDoc / ③ test** 를 **각각의 밴드**로 적는다. 한 숫자로 합치면 "문서를 쓰라"는 지시와 "라인을 줄이라"는 밴드가 **같은 cycle 안에서 서로 모순**된다.
+- **분류 기준을 밴드가 직접 말한다**: 각 층이 **주석 · KDoc · 빈 줄을 포함하는지** 밴드 옆에 명시한다. **정의 없는 밴드는 스스로를 위반한다**(세는 법이 없으면 초과 판정도 없다).
+- **★재작성 file 은 라인 밴드에서 뺀다**: 통째 재작성한 file 은 밴드에 넣지 말고 **"재작성 N file + 사유"** 로 **따로 보고**한다. `git show --numstat` 은 **재작성을 재지 변경을 재지 않는다**(전량 삭제 + 전량 추가로 계상).
+- **실측 대응은 초과가 아니다**: paste 자신이 요구한 문서 · test · 실측 정정으로 발생한 증분은 **밴드 초과로 판정하지 않는다**(사유를 REPORT 에 명시). **밴드가 옳은 판단을 처벌하면 안 된다.**
+- 실측 근거 = **5회 연속 초과** (S0 test `+181` · S2 KDoc `+92` · HARDEN quote-repair · OUTPUT-BUDGET EF `+176`/test `+205` · SETTLE test `+248`). **초과분은 매번 paste 자신이 요구한 문서·test 였다.** 특히 SETTLE 의 `+248` = 두 ViewModel test file **통째 재작성**이 만든 개명 churn 이고, 그 재작성은 **옳은 판단**이었다(상태기계가 바뀌었으므로).
+
 ---
 
 ## 변경 정책 + demote 이력
 
 > 변경 정책 = [`rule-footer-common.md`](../../.claude/rules/rule-footer-common.md). 2026-07-10 · MASTER-CLI-CONTEXT-DIET-2-001 T1 · 본 file diet (49.4K → hot 실행 규약 · 원문 전문 = COLD verbatim snapshot · 정보 소실 0).
+> 2026-07-26 · MASTER-CLI-RULES-SETTLE-001 · **§30 신설** (= A-6 + A-6′ · ChangeBudget **3층 분리**[실코드 / 주석·KDoc / test] + **분류 기준을 밴드가 직접 말한다**[주석·KDoc·빈 줄 포함 여부 명시 · 정의 없는 밴드는 스스로를 위반한다] + ★**재작성 file 은 라인 밴드에서 빼고 "재작성 N file + 사유"로 별도 보고**[`numstat` 은 **재작성을 재지 변경을 재지 않는다**] + 실측 대응은 초과 아님). 근거 = **5회 연속 초과**(S0 test +181 · S2 KDoc +92 · HARDEN quote-repair · OUTPUT-BUDGET EF+176/test+205 · SETTLE test +248) · **초과분은 매번 paste 자신이 요구한 문서·test** · SETTLE +248 = ViewModel test 2 file 통째 재작성 churn 이며 그 재작성은 **옳은 판단**이었다(상태기계 변경). §1~§29 **무접촉**.
 > 2026-07-15 · MASTER-GIT-ROLE-COMMIT-V3-001 · §5 = agent commit 한시 허가 (v2) → **git 역할 경계 정책 (v3)** 재작성 — commit + git log 위생 = cli 소관 default(전 카테고리·영구) · push + 고위험 git(reset/clean/rebase/filter-branch/amend/force/reflog) = Coin 소관. v2 카테고리 나열 · `[agent-commit: yes]` 묵시 신호 폐지. 4개 층(§5 · `safety-and-secrets.md` deny 표 · `COMMIT_CONVENTION.md` §2 · `settings.json` deny) 문언 모순 일괄 정합.

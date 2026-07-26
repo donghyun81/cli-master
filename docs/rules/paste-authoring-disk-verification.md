@@ -14,3 +14,4 @@
 
 - 2026-05-22 · `MASTER-CLI-PASTE-AUTHORING-DISK-VERIFICATION-PARADIGM-001` · 본 rule 신설 default (= 215 lines · 12 section default · trigger 기반 paradigm + 3 의무 영역 + paste-back verify 의무 본문 + cli session 자율 paradigm + STOP 조건 + 적용 영역 + 자기 정합 paradigm 본질 default)
 - 2026-05-26 · `MASTER-CLI-SKILLS-MIGRATION-PHASE-1-001` · 본 rule body → `.claude/skills/paste-source-authoring/SKILL.md` 측 이동 default (= 옵션 A thin pointer paradigm 정합 default · 본문 본질 보존 default · 기존 pointer × N 무접촉 default · L1-4 단일 SoT paradigm 정합 default)
+- 2026-07-26 · `MASTER-CLI-RULES-SETTLE-001` · 본 rule 소관 2 규칙이 **본문 SoT (= 위 skill body) 에 정착** — **§4.5 커밋 file 집합 대조 의무**(= D-6 · `git show --name-only <sha>` vs paste §2 scope 대조 · diff 기준 자기 점검이 커밋 오염을 못 잡는다) + **§4.6 수치 인용 = 산출 명령 + 환경 동반**(= A-5′ · aggregate 해시 = drift 검출기 · 형식 canonical = `reporting.md` §8.1). 본 thin pointer 는 **thin 유지**(= L1-4 단일 SoT paradigm 정합 · 본문 복제 0 · 정착 좌표만 본 이력에 기록).
