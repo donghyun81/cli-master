@@ -100,10 +100,8 @@ security add-generic-password -a "$USER" -s <slot-name> -w
 ```
 
 slot 명세 (= 2026-07-29 `MASTER-CLI-STALE-SWEEP-4ACTIVE-001` 실측 현행화 · 구 판 = GB/GD/GT 3 slot 한정 `MASTER-CLI-SUPABASE-COMPREHENSIVE-001` baseline):
-- `supabase-selfward-token` (= **활성** 도메인 자식 Selfward 측 PAT · staging+prod 단일 계정)
-- `supabase-gb-token` (= GentlyBreath 측 PAT · **동결** · `.mcp.json` read_only 인용만)
-- `supabase-gd-token` (= GentlyDay 측 PAT · **동결** · 동일)
-- `supabase-gt-token` (= GentlyTable 측 PAT · **동결** · 동일)
+- `supabase-selfward-token` (= **활성** 도메인 자식 Selfward 측 PAT · staging+prod 단일 계정) → `SUPABASE_ACCESS_TOKEN_SELFWARD` → `.mcp.json` `supabase-selfward` (= **staging ref 단독 · `read_only=true`** · 2026-07-29 `MASTER-CLI-CONTEXT-DIET-3-001` 등록 · Coin 본심 ④). **prod ref 등록 = STOP** (= 구조적 격리 · staging/prod 별 project).
+- `supabase-gb-token` / `supabase-gd-token` / `supabase-gt-token` (= 동결 3 측 PAT · Keychain **잔존** · **`.mcp.json` 등록 = 2026-07-29 해제** → 현재 미소비 · wrap 은 계속 주입[warn+skip 정합]). 동결 repo 재조회 필요 시 = `.mcp.json` 재등록이 아니라 **Coin 회수** (= 동결 = 쓰기 0 · 읽기도 상시 배선 대상 아님).
 
 **miss 정책** (= `~/bin/claude-wrap.sh` 정합 · 2026-07-29 정정): slot miss = **warn + skip · `claude` 기동 계속**. 구 판 fail-fast(`exit 1`)는 동결 slot 정리 시점에 `claude` 자체를 기동 불능으로 만들었다 (= 동결 3 slot 은 read_only MCP 편의 수단이지 기동 전제가 아님).
 

@@ -67,6 +67,8 @@ case "$CMD" in
     ;;
 esac
 
-# 자동 allow JSON 반환 (deny 패턴은 settings.json 이 우선 차단)
-echo '{"hookSpecificOutput":{"hookEventName":"PreToolUse","permissionDecision":"allow"}}'
+# 판정 미반환 (= 2026-07-29 MASTER-CLI-CONTEXT-DIET-3-001).
+# 구 판은 무조건 allow JSON 을 반환했으나 settings.json `defaultMode: bypassPermissions` 가
+# 이미 같은 일을 하고 deny 는 어느 쪽이든 우선이라 → 판정 중복. 본 hook 의 실 기능은
+# stale git lock 정리 + 위험 git warn 단독. 판정은 harness 소관으로 되돌린다.
 exit 0

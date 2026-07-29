@@ -6,25 +6,11 @@
       "args": ["--app", "desktop"],
       "env": {}
     },
-    "supabase-gb": {
+    "supabase-selfward": {
       "type": "http",
-      "url": "https://mcp.supabase.com/mcp?project_ref=vpmkruzpcpbfpqgpcihp&read_only=true",
+      "url": "https://mcp.supabase.com/mcp?project_ref=pdaqmzmgotwodyokdkhn&read_only=true",
       "headers": {
-        "Authorization": "Bearer ${SUPABASE_ACCESS_TOKEN_GB}"
-      }
-    },
-    "supabase-gd": {
-      "type": "http",
-      "url": "https://mcp.supabase.com/mcp?project_ref=davlfkmebzdzolmaznlk&read_only=true",
-      "headers": {
-        "Authorization": "Bearer ${SUPABASE_ACCESS_TOKEN_GD}"
-      }
-    },
-    "supabase-gt": {
-      "type": "http",
-      "url": "https://mcp.supabase.com/mcp?project_ref=jzypsbpdjrxnzodkkfhs&read_only=true",
-      "headers": {
-        "Authorization": "Bearer ${SUPABASE_ACCESS_TOKEN_GT}"
+        "Authorization": "Bearer ${SUPABASE_ACCESS_TOKEN_SELFWARD}"
       }
     }
   }
