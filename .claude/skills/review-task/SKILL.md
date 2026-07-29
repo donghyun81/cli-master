@@ -21,9 +21,9 @@ disable-model-invocation: true
 
 ### 1. 시크릿 grep 실행 (구 compound-lint 단계 대체)
 ```bash
-grep -rEn 'AKIA[0-9A-Z]{16}|sk-[a-zA-Z0-9]{32,}|ghp_[a-zA-Z0-9]{36}|xox[baprs]-[0-9a-zA-Z-]+|ya29\.[a-zA-Z0-9._-]+|AIza[0-9A-Za-z_-]{35}' .ai/reports/$ARGUMENTS/ 2>&1
+bash scripts/agent/secret-scan.sh .ai/reports/$ARGUMENTS/
 ```
-exit code 와 stdout 을 기록한다 — 무매치(exit 1) = 시크릿 0 = PASS · 매치(exit 0) = 시크릿 감지 = FAIL. 패턴 SoT = `safety-and-secrets.md` §시크릿 스캔 패턴.
+exit code 와 stdout 을 기록한다 — **exit 0 = 시크릿 0 = PASS · exit 1 = 시크릿 감지 = FAIL(즉시 STOP)**. 패턴 SoT = `safety-and-secrets.md` §시크릿 스캔 패턴 · 실행 진입점 = `scripts/agent/secret-scan.sh` 단일 (= 2026-07-29 정규식 4중 복제 해소 · 매치 시 값 본문은 출력하지 않고 `file:line` 만 찍는다).
 
 ### 2. 필수 아티팩트 확인
 `.ai/reports/$ARGUMENTS/` 디렉터리에서 다음을 확인:

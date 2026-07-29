@@ -53,9 +53,9 @@
 
 ```bash
 ls .ai/reports/<taskId>/        # 산출물 존재 확인 (형식 SoT = reporting.md §1 표 대조)
-grep -rEn 'AKIA[0-9A-Z]{16}|sk-[a-zA-Z0-9]{32,}|ghp_[a-zA-Z0-9]{36}|xox[baprs]-[0-9a-zA-Z-]+|ya29\.[a-zA-Z0-9._-]+|AIza[0-9A-Za-z_-]{35}' .ai/reports/<taskId>/
+bash scripts/agent/secret-scan.sh .ai/reports/<taskId>/
 ```
-시크릿 grep (패턴 SoT = `safety-and-secrets.md` §시크릿 스캔 패턴): 무매치(exit 1) = PASS · 매치(exit 0) = FAIL (시크릿 감지 — 즉시 STOP)
+시크릿 scan: **exit 0 = PASS · exit 1 = FAIL (시크릿 감지 — 즉시 STOP)**. 패턴 SoT = `safety-and-secrets.md` §시크릿 스캔 패턴 · **실행 진입점 = `scripts/agent/secret-scan.sh` 단일** (= 2026-07-29 `MASTER-CLI-CONTEXT-DIET-3-001` · 구 판은 같은 정규식이 4곳에 복제돼 이미 미세 발산[`AIza[0-9A-Za-z\-_]` vs `[0-9A-Za-z_-]`]이 있었다 — 보안 패턴이 갈라지면 한쪽만 못 잡는다).
 
 ---
 

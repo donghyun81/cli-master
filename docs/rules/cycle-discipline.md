@@ -129,7 +129,7 @@ rename + content 변경 동시 cycle = **post-rename `git add -u` 의무** → `
 - **23** Recommended option disk verification = [`disk-verification` skill](../../.claude/skills/disk-verification/SKILL.md) (경유 `recommended-option-disk-verification.md` · §17 실측 표준 흡수)
 - **24** Runtime crash mitigation = [`runtime-crash-mitigation` skill](../../.claude/skills/runtime-crash-mitigation/SKILL.md) (9-step · staging 한정)
 - **25** INITIATIVES + INDEX + task file auto-sync = [`initiatives-sync` skill](../../.claude/skills/initiatives-sync/SKILL.md) (5 의무 영역 = skill §3 · ④ KR gate + ⑤ always-fresh)
-- **26** Paste source authoring disk 실측 = [`paste-source-authoring` skill](../../.claude/skills/paste-source-authoring/SKILL.md)
+- **26** Paste source authoring disk 실측 = [`disk-verification` skill](../../.claude/skills/disk-verification/SKILL.md) §2 책임 분리 + §4 의무 ⑤ (= 2026-07-29 `MASTER-CLI-CONTEXT-DIET-3-001` 로 구 `paste-source-authoring` skill 통합 · §23 과 같은 file 을 가리킨다)
 - **27** Anchor list = [`anchor-list.md`](../../.claude/rules/anchor-list.md) (10 anchor hot · negative space line = `reporting.md` §13)
 - **28** Automation policy = [`automation-policy.md`](./automation-policy.md) (Transport 자동화 OK / Inspection 자동화 X)
 - **29** Mode 시스템 = [`mode-system.md`](./mode-system.md) (M1/M3/M5 bundle + picker + recovery)

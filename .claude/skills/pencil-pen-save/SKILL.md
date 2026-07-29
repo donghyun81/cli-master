@@ -1,7 +1,6 @@
 ---
 name: pencil-pen-save
-description: Use when saving new or modified .pen files via Pencil MCP tools (desktop app stdio paradigm). New doc first save requires 1 user GUI click (macOS Save As modal); existing doc save is fully automated via pencil-auto-save hook. Includes 11-step new doc workflow + 5-step existing doc workflow + headless mode fallback pointer (pencil-cli skill).
-paths: **/*.pen, docs/design/pencil-sot/**
+description: Use when saving modified .pen files via Pencil MCP tools (desktop app stdio paradigm) — existing-doc save is fully automated by the pencil-auto-save hook. For creating a NEW .pen use the pencil-cli skill (headless) instead; the desktop new-doc path needed a manual macOS Save As click and its entry tool was removed in Pencil v1.1.62. Applies to **/*.pen and docs/design/pencil-sot/**.
 allowed-tools: Bash, Read
 ---
 

@@ -1,7 +1,6 @@
 ---
 name: pencil-recolor
-description: Use when remapping a .pen file's foundation-Neutral gray-trap fills to an active child brand colorScheme via the headless deterministic generator (pen_recolor.py). Covers code→.pen recolor (gray-trap fix), foundation Neutral role→hex fingerprint, fidelity gate (true-leak / role-gap / off-token WARN), and dual-layer ui-spec.json sha sync. No Pencil app required — pure JSON read/write.
-paths: docs/design/pencil-sot/**, **/*.pen
+description: Use when remapping a .pen file's foundation-Neutral gray-trap fills to an active child brand colorScheme via the headless deterministic generator (pen_recolor.py). Covers code→.pen recolor (gray-trap fix), foundation Neutral role→hex fingerprint, fidelity gate (true-leak / role-gap / off-token WARN), and dual-layer ui-spec.json sha sync. No Pencil app required — pure JSON read/write. Applies to **/*.pen and docs/design/pencil-sot/**.
 allowed-tools: Bash, Read
 ---
 

@@ -31,9 +31,9 @@ exit code 0이면 PASS. non-zero면 실패 로그를 기록하고 3단계로 진
 3. 산출물·시크릿 검증 실행 (구 compound-lint 단계 대체):
 ```bash
 ls .ai/reports/$ARGUMENTS/ 2>&1
-grep -rEn 'AKIA[0-9A-Z]{16}|sk-[a-zA-Z0-9]{32,}|ghp_[a-zA-Z0-9]{36}|xox[baprs]-[0-9a-zA-Z-]+|ya29\.[a-zA-Z0-9._-]+|AIza[0-9A-Za-z_-]{35}' .ai/reports/$ARGUMENTS/ 2>&1
+bash scripts/agent/secret-scan.sh .ai/reports/$ARGUMENTS/
 ```
-ls = 필수 산출물 존재 확인 (형식 SoT = `reporting.md` §1 표) · grep = 시크릿 패턴 0 match 의무 (패턴 SoT = `safety-and-secrets.md` §시크릿 스캔 패턴). 산출물 전부 존재 + grep 무매치(exit 1)면 전체 PASS. 산출물 누락 또는 grep 매치(시크릿 감지)면 FAIL — 아래 재시도 절차 진행.
+ls = 필수 산출물 존재 확인 (형식 SoT = `reporting.md` §1 표) · secret-scan = 시크릿 0 match 의무. **exit 0 = PASS · exit 1 = FAIL(시크릿 감지)** (= grep 관례와 반대로 뒤집혀 있다). 패턴 SoT = `safety-and-secrets.md` §시크릿 스캔 패턴 · 실행 진입점 = `scripts/agent/secret-scan.sh` 단일 (= 2026-07-29 정규식 4중 복제 해소). 산출물 전부 존재 + scan PASS 면 전체 PASS. 산출물 누락 또는 scan FAIL 이면 FAIL — 아래 재시도 절차 진행.
 
 ## 실패 시 자동 재시도 (최대 2회)
 

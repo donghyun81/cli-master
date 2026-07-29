@@ -1,258 +1,102 @@
 ---
 name: disk-verification
-description: Use before emitting a Recommended option, next-cycle candidate, paste source umbrella, or deciding cycle scope to measure on-disk implementation state via grep/find/git ls-files/Read. Prevents stale recommendations + surface-pattern guessing. Counterpart to paste-source-authoring skill (cowork chat side) — this skill is cli session side.
+description: Use before quoting on-disk state as fact — emitting a Recommended option or next-cycle candidate, authoring a cc-paste-<TASK-ID>.md umbrella (cowork side), deciding cycle scope, or verifying a paste-back (cli side). Measure with grep/find/git ls-files/Read first; prevents stale candidates and surface-pattern guessing. Covers both sides of the cowork↔cli responsibility split.
 allowed-tools: Bash, Read, Grep, Glob
 ---
 
-# Recommended Option Disk Verification Paradigm
+# Disk 실측 의무 paradigm (= 후보 발행 · paste authoring · scope 결정 · paste-back verify 공통)
 
-> **단일 목적**: 후속 cycle 후보 / Recommended option / paste source umbrella 측 발행 직전 disk 측 이미 구현 여부 측정 의무 paradigm. cowork chat + cli session 양쪽 적용 default.
-> **신설**: MASTER-CLI-RECOMMENDED-OPTION-DISK-VERIFICATION-PARADIGM-001 (2026-05-21).
-> **연관 paradigm**:
-> - `docs/rules/cycle-discipline.md` §23 (= 본 skill 측 pointer default)
-> - `docs/rules/workflow-core.md` §implement Testability Seams (= 동족 paradigm default · 변동성 경계 측 인터페이스 측정 본질 정합 default)
-> - `docs/rules/code-principles.md` §2 YAGNI (= "나중에 쓸 것 으로 추가하지 않음" 정합 default · 본 paradigm 측 표면 후보 추측 차단 본질 정합)
-> - `.claude/skills/paste-source-authoring/SKILL.md` (= 동족 paradigm default · cowork chat 측 paste source authoring 측 disk 실측 의무 default)
+> **한 줄**: 디스크를 사실로 인용하기 전에 **먼저 잰다**. 표면 패턴 추측 · 직전 cycle 측정값 재사용 · "있을 것 같다" 는 전부 위반.
+> **통합** (2026-07-29 `MASTER-CLI-CONTEXT-DIET-3-001`): 구 판은 `disk-verification`(cli 측) + `paste-source-authoring`(cowork 측) **2 skill 로 갈라져 서로를 순환 참조**했다 (`disk-verification §3`↔`paste-source-authoring §8`). 같은 원칙의 두 적용면일 뿐이라 본 file 로 통합 — 단 **책임 분리는 §2 에 단일 SoT 로 보존**(= 구 `paste-source-authoring §12` 가 통합 후보를 명시하며 붙인 조건 그대로).
+> **사례 / 인접표 / 이력** = `references/` 분할 (= 판정에 매번 필요하지 않은 층 · 아래 §8).
+> **신설 계보**: `MASTER-CLI-RECOMMENDED-OPTION-DISK-VERIFICATION-PARADIGM-001` (2026-05-21) + `MASTER-CLI-PASTE-AUTHORING-DISK-VERIFICATION-PARADIGM-001` (2026-05-22).
 
 ---
 
-## §1 본 paradigm 본질
+## §1 적용 시점 (= trigger · 매 cycle 강제 X)
 
-후속 cycle 후보 / Recommended option / paste source umbrella 측 발행 시점 disk 측 이미 구현 여부 측정 의무 default. 후보 영역 본문 + 권장 영역 본문 + 표면 후보 paradigm 모두 default · disk 측정 의무 default · 표면 패턴 추측 차단 default · 부분 구현 영역 측 scope 재 정의 의무 default.
-
-본 paradigm 적용 시점 = 다음 4 영역 default:
-
-| 적용 시점 | 본질 |
+| 시점 | 측 |
 |---|---|
-| 후속 cycle 후보 발행 시 | cli session 또는 cowork chat 측 다음 cycle 후보 list 산출 시점 default |
-| Recommended option 발행 직전 | 단일 Recommended option 측 사용자 본심 회수 직전 시점 default |
-| paste source umbrella authoring 시 | cowork chat 측 paste source 본문 작성 시점 default (= 본 §1.4 정합 default) |
-| cli session 측 cycle scope 결정 시 | master cycle 또는 자식 cycle 측 scope file 영역 결정 시점 default |
+| 후속 cycle 후보 발행 | cowork / cli |
+| Recommended option 발행 **직전** | cowork / cli |
+| `cc-paste-<TASK-ID>.md` umbrella authoring (= `§0` baseline · `§1`·`§1.3` 측정 인용 · `§2` scope · `§3` contract SoT) | **cowork** ⭐ |
+| cycle scope file 영역 결정 | cli |
+| 신 rule / 신 entry 신설 (= 중복 신설 차단) | cli |
+| paste-back verify (= `[EC]` 섹션) | cli |
+| 단순 정독 · 도메인 source 측정 | **적용 X** (= §7 화이트리스트) |
 
----
+## §2 책임 분리 (= 단일 SoT · `cowork-project-instructions §B-1`+`§B-2` 정합)
 
-## §2 4 의무 영역
+| 주체 | 책임 |
+|---|---|
+| **cowork chat** ⭐ | paste source umbrella authoring 측 **disk 실측 의무** — `§0` baseline 측정 · `§1`+`§1.3` 측정 결과 인용 · `§2` scope file path × N disk verify · `§3` contract SoT 인용 entry × N **byte-identical quote** |
+| **cli session** | **paste-back verify 의무** (= `[EC]` 섹션에 측정 결과 정합 명시) · paste source 측 명시 영역이 disk 에 없으면 **자율 scope 재정의**(= §4 의무 ③/④) + 사용자 보고 권장 |
+| 사용자 본인 | terminal 진입 + paste 운반 + cleanup 결정 (= 자율) |
 
-본 paradigm 본질 = 4 의무 영역 default · 신 rule 본문 측 본 4 영역 정합 의무 default:
+핵심: **authoring 측 실측 의무 = cowork 단일** · **verify 측 = cli**. 한쪽이 다른 쪽 몫을 대신 지지 않는다.
 
-### §2.1 의무 ① — disk 측 이미 구현 여부 측정 의무
-
-후속 cycle 후보 발행 시 disk 측 이미 구현 여부 측정 의무 default. 측정 명령 영역:
+## §3 측정 명령 (= 무엇으로 재나)
 
 ```bash
-# file 측 검색 (= filename + content 동시 grep 의무 · cycle-discipline.md §17 정합)
+# filename 1차 + content 2차 = 동시 의무 (A7 · cycle-discipline.md §17)
+#   filename 부재만으로 "없다" 고 분류하지 않는다 — container 안을 열어 본다.
 find <path> -name "<file-pattern>" -type f
 grep -rn "<symbol>\|<keyword>" --include="*.<ext>" <path>
 git ls-files | grep "<pattern>"
 
-# 신 rule / 신 entry 측 0 match 측정 (= 중복 신설 차단 default)
-grep -r -l "<new-rule-keyword>" .claude/
+# 신 rule / 신 entry 중복 신설 차단 (= 0 match 여야 신설)
+grep -rl "<new-rule-keyword>" .claude/ docs/rules/
 
-# 신 paradigm 측 기존 영역 측정 (= 갱신 vs 신설 결정 default)
-grep -n -i "<paradigm-keyword>" .claude/rules/<existing-rule>.md
+# 갱신 vs 신설 판정 (= 기존 영역에 이미 있나)
+grep -ni "<paradigm-keyword>" docs/rules/<existing-rule>.md
 ```
 
-표면 패턴 추측 차단 default · 본 의무 정합 시점 = cli session 측 disk 측정 명령 호출 후 결과 인용 default.
+> **부재 판정은 전수 트리에서만** (= `code-principles.md §2`): staged 사본 · 단일 repo cwd glob · 부분 grep 위의 "없다" 는 **무효** — 없는 게 아니라 안 본 것이다. 범위 밖이면 「부재」가 아니라 **「판정 보류」**.
 
-### §2.2 의무 ② — Recommended option 발행 직전 disk 측 이미 구현 여부 측정 default
+## §4 의무 ①~⑤
 
-직전 cycle 측 측정 마감 영역 default · 신 cycle 측 재 측정 의무 default · 표면 후보 추측 차단 default. baseline drift 영역 발견 시점 정합 의무 default (= [[feedback-baseline-ingest-stale]] 동족 paradigm default).
-
-본 의무 본질 = "측정 결과 stale 영역 발견 시점 = Recommended option 발행 차단 default · 측정 재 호출 의무 default" default.
-
-### §2.3 의무 ③ — 부분 구현 영역 발견 시 scope 재 정의 default
-
-부분 구현 영역 (= 측정 대상 영역 측 일부 구현 + 일부 신 본질) 발견 시:
-- cli session 자율 또는 사용자 본심 회수 default
-- 신 본질 명시 default
-- 표면 stale 후보 명시 X default
-- scope 본질 변경 default
-
-예시 영역 (= H29 chat 측정 default · §4.2 정합):
-- foundation `EdgeFunctionInvoker.kt:27` 측 `<ResponseType>` typed seam 이미 구현 default
-- 단 `requestBody: Map<String, String>` 한정 default
-- `<RequestType>` typed body 영역 = 신 본질 default
-- → scope 재 정의 default (= "ResponseType seam 이미 구현 default · RequestType typed body seam 신설" default)
-
-### §2.4 의무 ④ — 완전 stale 영역 발견 시 후보 제거 또는 대체 default
-
-완전 stale 영역 (= 측정 대상 영역 측 이미 마감 default · 신 본질 X) 발견 시:
-- 사용자 본심 회수 default
-- cli session 자율 default
-- 본 cycle 측 스킵 default 또는 다른 영역 default
-
-예시 영역 (= H29 chat 측정 default · §4.1 정합):
-- GB 3 핵심 Repository (= `MeditationRepository.kt:17` + `BreathGuidanceRepository.kt:94` + `MeditationSessionsListRepository.kt:25`) 모두 이미 interface default
-- → 완전 stale 후보 default → 후보 제거 의무 default
-
----
-
-## §3 paste source authoring 영역 (= ⑤ 추가 의무 영역 default)
-
-paste source umbrella 발행 시점 본 paradigm 정합 의무 default · 발행 자체 본 paradigm 본질 자기 정합 영역 default:
-
-| 영역 | 본질 |
-|---|---|
-| §0 baseline 영역 | 4-active HEAD sha + 보호 5 file sha + cycle scope file sha 측정 의무 default |
-| §3 contract SoT 영역 | disk 측정 결과 인용 의무 default (= grep / find / `git hash-object` 측정 결과 본문 인용 default) |
-| §3 기존 paradigm × N 인용 영역 | 인용 entry 측 실 disk 존재 측정 의무 default (= 가정 X · 실 disk 측 존재 entry 한정 link default) |
-
-본 영역 위반 시점 = paste source authoring 측 paradigm 위반 default (= 자기 정합 paradigm 본질 default).
-
-### §3.1 자기 정합 paradigm 본질
-
-본 paradigm 자체 = 본 paradigm 신설 cycle 측 paste source umbrella authoring 시점 자기 적용 의무 default. cli session 측 본 cycle IMPL 시 신 paradigm 자기 적용 default · §0 + §3 영역 disk 측정 결과 인용 의무 default.
-
-precedent cycle 측 측정 결과 인용 default (= precedent cycle 진입 시점 baseline default):
-
-| 측정 영역 | 측정 결과 | precedent cycle 측 의미 |
+| # | 의무 | 위반 시 |
 |---|---|---|
-| master `.claude/rules/` 측 `recommended-option-disk-verification` grep | 0 match default | 신 rule 신설 영역 default (= 중복 X default) |
-| master `docs/rules/cycle-discipline.md` 측 신 paradigm grep | 0 match default | 갱신 영역 default (= 신 § 신설 default) |
-| master `.claude/hooks/` 측 신 hook grep | 0 match default (= 12 hook 기존 default) | 신 hook 신설 영역 default (= optional default) |
-| `scripts/propagate.sh` + `scripts/verify-sync.sh` 존재 verify | 모두 존재 default | 4-repo propagation paradigm 정합 default |
+| ① | 후보 발행 시 **disk 측 이미 구현 여부** 측정 | 표면 추측 = 위반 |
+| ② | Recommended option 발행 **직전 재측정** (= 직전 cycle 측정값 재사용 금지 · baseline drift) | stale 발견 = 발행 차단 + 재측정 |
+| ③ | **부분 구현** 발견 시 **scope 재정의** (= 신 본질만 명시 · 표면 stale 후보 명시 X) | cli 자율 또는 본심 회수 |
+| ④ | **완전 stale** 발견 시 **후보 제거 또는 대체** | 본심 회수 또는 cli 자율 스킵 |
+| ⑤ | **paste source authoring 자기 정합** — 발행하는 paste 자체가 본 paradigm 사례여야 한다 (= `§0` baseline · `§3` 인용 entry 실재 측정 · 가정 X) | paste-back 본문에 위반 명시 |
 
----
+**⑤ 세부** (= cowork authoring 3 의무):
 
-## §4 예시 case (= 본 paradigm 위반 / 정합 영역 default)
+1. `§1`+`§1.3` **측정 결과 인용** — scope file × N 의 `grep`/`find`/`git ls-files`/`Read` 실측 결과 본문 인용 (가정 X)
+2. `§3` contract SoT **byte-identical quote** — precedent rule + 인용 entry × N · `line N~M` 형식 · 본문 변형 X
+3. `§2` scope **file path 전량 disk 측정** — 부재 발견 시 scope 재정의 의무 (= ③/④ 정합)
 
-### §4.1 예시 1 — 완전 stale 영역 발견 case (= ④ 정합 default)
+## §5 gotcha (= 반복 발현한 것만)
 
-```
-cycle 후보 발행 = "GB-REPOSITORY-INTERFACE-EXTRACT-001"
-(= GB 3 핵심 Repository → interface 추출 default)
-  ↓
-disk 측정 X default (= 본 paradigm 위반 default)
-  ↓
-사용자 본심 회수 후 발견:
-- MeditationRepository.kt:17 = 이미 interface default
-- BreathGuidanceRepository.kt:94 = 이미 interface default
-- MeditationSessionsListRepository.kt:25 = 이미 interface default
-  ↓
-완전 stale 후보 default
-  ↓
-mitigation = 후보 제거 default (= ④ 정합 default)
-```
+- **★"내 diff 는 깨끗하다" 는 diff 에 참이고 커밋에 거짓일 수 있다** (D-6 · 2026-07-26): paste-back 회수 시 **`git show --name-only <sha>`** vs paste `§2` scope 를 **집합 대조**한다(개수 일치로 불충분). 같은 repo 에서 다른 workstream 이 동시에 돌면 `git index` 를 공유하므로(repo 당 1개 · `add`→`commit` 비원자적) **남의 file 이 내 커밋에 실린다**. 실측: file 겹침 **0** 인 3 cycle 동시 진행에서 **커밋 오염 9건** — diff 기준 자기 점검은 **전부 통과했다**(대조 대상이 틀렸던 것).
+  - scope 밖 file 발견 = **즉시 보고 · 자동 되돌리기 금지** (되돌림은 절대 sha · `cross-repo-parallel-exec-detail.md §2.1.6` D-5).
+  - **디렉터리 단위 대조 금지 · file 단위 명시** — 오염 file 이 본 cycle scope 디렉터리 **안**에 있을 수 있다 (실측: 오염 9 중 1건).
+- **★aggregate 해시는 정체성이 아니라 drift 검출기** (A-5′): 수치 인용은 **산출 명령 + 환경**(shell · `LC_COLLATE` · 해시 도구 · glob 대상 `n`)을 함께 적는다 (형식 = `reporting.md §8.1`). 재현 대상은 특정 hex 가 아니라 **"한 실행 안에서 N-repo 동일"** 이라는 **불변식**이다. 재현 실패 보고를 받으면 **먼저 환경 차이를 의심**한다(내용 drift 단정 금지 · 실측 3회 반복 전부 환경 차이).
+- **표면 속성으로 분류하지 않는다** (A7 · `code-principles.md §2`): 도구가 없다고 경로가 없는 게 아니다.
 
-본 paradigm 정합 영역 default:
+## §6 STOP
 
-```
-cycle 후보 발행 직전 disk 측정 의무 default
-  ↓
-grep "^interface\|^abstract class" GB/.../repository/*.kt
-  ↓
-3 file 측 interface 측정 결과 PASS default
-  ↓
-완전 stale 영역 인지 default → 후보 제거 또는 대체 default
-```
-
-### §4.2 예시 2 — 부분 구현 영역 발견 case (= ③ 정합 default)
-
-```
-cycle 후보 발행 = "MASTER-CLI-EDGE-FUNCTION-INVOKER-SEAM-EXTEND-001"
-(= EdgeFunctionInvoker seam 확장 default)
-  ↓
-disk 측정 X default (= 본 paradigm 위반 default)
-  ↓
-사용자 본심 회수 후 발견:
-- foundation EdgeFunctionInvoker.kt:27 = <ResponseType> 이미 구현 default
-- 단 requestBody = Map<String,String> 한정 default
-- <RequestType> typed body 영역 = 신 본질 default
-  ↓
-부분 구현 default
-  ↓
-mitigation = scope 재 정의 default (= ③ 정합 default · "ResponseType seam 이미 구현 default · RequestType typed body seam 신설" default)
-```
-
-### §4.3 예시 3 — paste source authoring 측 paradigm 위반 case (= ⑤ 자기 정합 paradigm default)
-
-```
-paste source umbrella 발행 = "신 rule 본문 측 기존 paradigm × N link 인용 default"
-  ↓
-인용 entry × N 측 실 disk 측정 X default (= 본 paradigm 위반 default)
-  ↓
-cli session 측 본 cycle 진입 후 disk 측정 결과:
-- 인용 entry × N 측 실 disk 측 일부 entry 부재 default
-  ↓
-paste source authoring 측 paradigm 위반 default (= 자기 정합 paradigm 본질 default)
-  ↓
-mitigation = paste-back 본문 측 명시 default
-+ 신 rule 본문 측 link 영역 = 실 disk 정합 entry 한정 default
-+ 사용자 본심 회수 default 또는 cli session 자율 진행 default
-```
-
-본 예시 = 본 paradigm 신설 cycle 자체 발견 case default (= 본 cycle 진입 시점 baseline default).
-
----
-
-## §5 위반 시 mitigation cycle paradigm
-
-| 단계 | 절차 |
-|---|---|
-| 1. 감지 | 사용자 본심 회수 또는 cli session 자율 발견 |
-| 2. 분류 | ① / ② / ③ / ④ / ⑤ 중 어느 의무 영역 위반 |
-| 3. 정정 | disk 측정 호출 + 결과 인용 (= 표면 추측 차단 default) |
-| 4. scope 재 정의 또는 후보 제거 | ③ 또는 ④ 정합 default |
-| 5. 기록 | 본 cycle 마감 시점 paste-back 본문 측 명시 default + memory entry 누적 회차 +1 default (= 본 paradigm 측 누적 누적 측정 영역 default) |
-
----
-
-## §6 적용 영역
-
-| 영역 | 적용 |
-|---|---|
-| cowork chat 측 다음 cycle 후보 발행 시점 | 의무 default |
-| cowork chat 측 Recommended option 발행 직전 시점 | 의무 default |
-| cowork chat 측 paste source umbrella authoring 시점 | 의무 default |
-| cli session 측 cycle scope file 영역 결정 시점 | 의무 default |
-| cli session 측 신 rule / 신 entry 신설 시점 | 의무 default (= 중복 신설 차단 default) |
-| cli session 측 단순 정독 또는 측정 영역 | 적용 X default |
-
----
-
-## §7 도메인 어휘 화이트리스트 (= 제외 영역 default)
-
-도메인 어휘 측 표면 패턴 추측 차단 paradigm 측 정합 의무 X default (= 본 paradigm 본질 = 후보 / 권장 / paste source 영역 default · 도메인 source 측 본 paradigm 정합 X default).
-
-| 도메인 | 정합 X default |
-|---|---|
-| 도메인 source code (= app/ + composeApp/ + core/ + src/) | 본 paradigm 정합 X default (= 자식 자율 default) |
-| 디자인 SoT (= docs/design/) | 본 paradigm 정합 X default (= `pencil-uiux-workflow.md` 정합 default) |
-| 빌드 / CI / tooling | 본 paradigm 정합 X default |
-
----
-
-## §8 STOP 조건
+**canonical 9 항 = `.claude/rules/stop-canonical.md`** (= 자동 주입 · 여기서 재복제하지 않는다). 본 skill **고유** trigger 만:
 
 | trigger | mitigation |
 |---|---|
-| Recommended option 발행 후 사용자 본심 회수 측 stale 영역 발견 | 즉시 STOP + scope 재 정의 default 또는 후보 제거 default (= ③ / ④ 정합 default) |
-| paste source umbrella 발행 후 cli session 측 인용 entry 측 실 disk 측 부재 발견 | 즉시 STOP + paste-back 본문 측 명시 default (= ⑤ 자기 정합 paradigm default) |
-| 본 paradigm 측 누적 위반 발화 (= 3 회 누적 default) | 신 cycle 진입 + mitigation 강화 cycle default (= 자동 enforce hook 신설 검토 default) |
+| paste source 측 명시 영역이 **전부** disk 부재 | 즉시 STOP + 본심 회수 (= scope 본질 자체가 성립 X · cycle 재정의) |
+| 본 paradigm 위반 **3 회 누적** | mitigation cycle 진입 (= enforce hook 신설 검토) |
 
----
+그 외(보호 sha drift · HIGH RISK 도메인 · 본심 분기)는 canonical #5 / #1·#7 / #9 로 이미 덮인다 — 구 판은 이 3 을 skill 안에 재복제해 뒀다.
 
-## §9 인접 paradigm 정합 영역
+## §7 적용 X (= 화이트리스트)
 
-| 인접 entry | 본질 |
-|---|---|
-| `docs/rules/cycle-discipline.md` §17 BASELINE 실측 표준 (= filename + content 동시 grep 의무) | 본 paradigm 측 의무 ① 측정 명령 영역 정합 default (= filename find 1차 + container 내부 content grep 2차) |
-| `docs/rules/cycle-discipline.md` §23 (= 본 skill 측 pointer default · 신 § 신설 default) | 본 paradigm 본질 명시 영역 default · cycle scope 결정 영역 default |
-| `.claude/skills/paste-source-authoring/SKILL.md` | 동족 paradigm default · cowork chat 측 paste source authoring 측 disk 실측 의무 default · 본 skill 측 §3 + §4.3 정합 default |
-| `docs/rules/workflow-core.md` §implement Testability Seams | 동족 paradigm default (= 변동성 경계 측 인터페이스 측정 본질 정합 default) |
-| `docs/rules/code-principles.md` §2 YAGNI | "나중에 쓸 것 으로 추가하지 않음" 정합 default · 본 paradigm 측 표면 후보 추측 차단 본질 정합 default |
+도메인 source (`app/` · `composeApp/` · `core/` · `src/`) · 디자인 SoT (`docs/design/` · `pencil-uiux-workflow.md` 소관) · 빌드/CI/tooling. 본 paradigm 본질 = **후보 / 권장 / paste source / scope 결정** 영역.
 
----
+## §8 references (= 판정에 매번 필요하지 않은 층)
 
-## §10 본 skill 의 변경 정책
+- [`references/examples.md`](references/examples.md) — 예시 case 3 (완전 stale / 부분 구현 / authoring 위반) + 자기 정합 사례
+- [`references/adjacent-and-history.md`](references/adjacent-and-history.md) — 인접 paradigm 정합 표 + 양 skill cycle 이력 verbatim + 후속 cycle 후보
 
-- cli infra 권장 byte-identical (= 4-repo · master + app-foundation + gently-product-docs + Selfward)
-- 변경 시 master cycle 신설 + 4-repo propagation (= `cycle-discipline.md` §15 패턴 1 정합)
-- 자식 repo 측 직접 수정 금지
+## §9 본 skill 의 변경 정책
 
----
-
-## §11 명시 cycle 이력
-
-- 2026-05-21 · `MASTER-CLI-RECOMMENDED-OPTION-DISK-VERIFICATION-PARADIGM-001` · 직전 rule (`docs/rules/recommended-option-disk-verification.md`) 신설 (= paradigm 본질 + 4 의무 영역 + paste source authoring ⑤ 자기 정합 paradigm + 예시 case 3 + 위반 mitigation cycle + 적용 영역 + 인접 paradigm 정합 default) + cycle-discipline.md §23 신설 default + 5-repo byte-identical propagation
-- 2026-05-26 · `MASTER-CLI-SKILLS-MIGRATION-PHASE-1-001` · 본 skill 신설 default (= 직전 rule 본문 본질 보존 default · skill paradigm 정합 default · trigger 시점 lazy load default · `docs/rules/recommended-option-disk-verification.md` 측 thin pointer 갱신 default)
+> 변경 정책 = [`rule-footer-common.md`](../../rules/rule-footer-common.md) (= 4-repo 권장 byte-identical · master cycle + propagation · 자식 직접 수정 금지).

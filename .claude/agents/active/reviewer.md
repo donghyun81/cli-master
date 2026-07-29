@@ -119,9 +119,9 @@ Skeptic tuning 을 지킨 리뷰는 REVIEW.md `## Findings` 에 "가장 약한 �
 
 PASS 시:
 ```bash
-grep -rEn 'AKIA[0-9A-Z]{16}|sk-[a-zA-Z0-9]{32,}|ghp_[a-zA-Z0-9]{36}|xox[baprs]-[0-9a-zA-Z-]+|ya29\.[a-zA-Z0-9._-]+|AIza[0-9A-Za-z_-]{35}' .ai/reports/<taskId>/
+bash scripts/agent/secret-scan.sh .ai/reports/<taskId>/
 ```
-시크릿 grep 무매치(exit 1) 확인 (구 compound-lint = deprecated · 도구 부재) 후 `.ai/reports/<taskId>/COMPOUND.md` 갱신.
+시크릿 scan **PASS(exit 0)** 확인 후 `.ai/reports/<taskId>/COMPOUND.md` 갱신 (패턴 SoT = `safety-and-secrets.md` · 실행 진입점 단일 = 2026-07-29 정규식 4중 복제 해소 · 구 compound-lint = deprecated).
 `.ai/tasks/INDEX.md` → DONE
 
 stdout:

@@ -109,7 +109,7 @@ git -C <repo> branch -d wt/<cycle-id>
 | **D-3** | **pathspec = 보조 · 반쪽** | `git commit -- <pathspec>` = index 우회 **보조** 수단(= 다른 workstream 의 staged 변경을 쓸어담지 않음). ★**단 HEAD 에 없는 신 file 에는 안 먹는다** — untracked 신 file 은 pathspec commit 이 **포착하지 못한다**(= 격리를 대체하지 못하는 **반쪽** · D-2 의 보완재일 뿐) |
 | **D-4** | **디렉터리 pathspec 금지** | pathspec 은 **file 단위 명시만 유효** · **디렉터리 단위 금지**. 실측: 오염 9건 중 **1건이 본 cycle scope 디렉터리 안**에 있었다 — 디렉터리로 끊으면 **남의 파일이 내 scope 경계 안에 들어와 있어도 통과**한다 |
 | **D-5** | **복구 절차 = 절대 sha** | 복구/되돌리기 절차는 **절대 sha 로 적는다.** `HEAD~N` 은 **문서가 쓰인 순간부터 부패한다** — 실측: 그 사이 커밋 하나가 올라와 `HEAD~1` 이 **남의 커밋**을 가리켰다 (= 상대 참조로 적은 복구 절차가 **2차 사고**를 만든다) |
-| **D-6** | **커밋 file 집합 대조** | paste-back 회수 시점 = `git show --name-only <sha>` vs paste `§2` scope **대조 의무**. cli 의 *"내 diff 는 깨끗하다"* 는 **diff 에 대해 참이고 커밋에 대해 거짓**일 수 있다 (본문 = [`paste-source-authoring` skill](../../.claude/skills/paste-source-authoring/SKILL.md) §4.5) |
+| **D-6** | **커밋 file 집합 대조** | paste-back 회수 시점 = `git show --name-only <sha>` vs paste `§2` scope **대조 의무**. cli 의 *"내 diff 는 깨끗하다"* 는 **diff 에 대해 참이고 커밋에 대해 거짓**일 수 있다 (본문 = [`disk-verification` skill](../../.claude/skills/disk-verification/SKILL.md) §5 gotcha) |
 
 **★worktree 는 이미 검증됐다 (= 대조 실측)**: 격리 **없음** = 오염 **1회**(위 3 cycle) · 격리 **있음** = 오염 **0회** — worktree 안에서 돌던 중 **다른 세션이 `gently-product-docs` 에 커밋**(16:34)했음에도 **오염 0 · 커밋 집합 정확히 24+1 · self-clean orphan 0**.
 
