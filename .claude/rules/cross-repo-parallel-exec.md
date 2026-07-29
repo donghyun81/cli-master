@@ -73,7 +73,7 @@
 
 ## 5. STOP 조건 (= cross-repo 영역 한정)
 
-> **본 §5 = pointer 영역 default**. 본문 단일 SoT = [`CLAUDE.md §5`](../../CLAUDE.md) (= `MASTER-CLI-CYCLE-1-STOP-CANONICAL-INTEGRATION-001` 마감 default · 9 STOP 항 default · cross-repo HIGH RISK 도메인 진입 = STOP #7 default · 보호 5 file sha drift = STOP #5 default). 본 § 본문 변경 시 = master cycle 신설 + 4-repo propagation 의무 default.
+> **본 §5 = pointer 영역 default**. 본문 단일 SoT = [`stop-canonical.md`](./stop-canonical.md) (= 9 STOP 항 default · cross-repo HIGH RISK 도메인 진입 = STOP #7 default · 보호 5 file sha drift = STOP #5 default · 2026-07-29 `MASTER-CLI-CONTEXT-DIET-3-001` 로 master `CLAUDE.md §5` 에서 이동). 본 § 본문 변경 시 = master cycle 신설 + 4-repo propagation 의무 default.
 
 ## 6. paradigm 호출 trigger 영역
 

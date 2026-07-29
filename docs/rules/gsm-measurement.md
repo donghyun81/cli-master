@@ -114,7 +114,7 @@ trigger 는 게이트가 아니다. "이 목표는 현재 규칙으로 안 잡�
 
 ## §7. STOP 조건 pointer
 
-본문 단일 SoT = master [`CLAUDE.md §5`](../../CLAUDE.md) (= 9 STOP 항 canonical). GSM 관련 추가 회수 신호: realign 의미 약화(게이트 약화·deviation 삭제·고위험 목표 제거·anchor 우선순위 변경) · Goodhart/streetlight 징후 · 비대/고변동 = 보류 + 본심 회수(§5 정합).
+본문 단일 SoT = [`stop-canonical.md`](../../.claude/rules/stop-canonical.md) (= 9 STOP 항 canonical · 2026-07-29 master `CLAUDE.md §5` 에서 자동 주입층으로 이동). GSM 관련 추가 회수 신호: realign 의미 약화(게이트 약화·deviation 삭제·고위험 목표 제거·anchor 우선순위 변경) · Goodhart/streetlight 징후 · 비대/고변동 = 보류 + 본심 회수(§5 정합).
 
 ---
 

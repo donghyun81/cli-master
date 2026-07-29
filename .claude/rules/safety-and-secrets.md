@@ -175,7 +175,7 @@ AIza[0-9A-Za-z\-_]{35}    # Google API Key
 
 ## 비가역 변경 STOP 정책
 
-> **본 § = pointer 영역 default**. 본문 단일 SoT = [`CLAUDE.md §5`](../../CLAUDE.md) (= `MASTER-CLI-CYCLE-1-STOP-CANONICAL-INTEGRATION-001` 마감 default · 9 STOP 항 default). 본 § 본문 변경 시 = master cycle 신설 + 4-repo propagation 의무 default.
+> **본 § = pointer 영역 default**. 본문 단일 SoT = [`stop-canonical.md`](./stop-canonical.md) (= 9 STOP 항 default · 2026-07-29 `MASTER-CLI-CONTEXT-DIET-3-001` 로 master `CLAUDE.md §5` 에서 이동 · 구 canonical cycle = `MASTER-CLI-CYCLE-1-STOP-CANONICAL-INTEGRATION-001`). 본 § 본문 변경 시 = master cycle 신설 + 4-repo propagation 의무 default.
 
 ---
 

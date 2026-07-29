@@ -186,7 +186,7 @@
 
 ## §5. STOP 조건 pointer
 
-본문 단일 SoT = master `CLAUDE.md §5` (= Cycle 1 canonical 결과 default · 9 항 default · Mode 잘못 결정 sub-case 흡수 default · L1-7 정합 default)
+본문 단일 SoT = [`stop-canonical.md`](./stop-canonical.md) (= 9 항 default · Mode 잘못 결정 sub-case 흡수 default · L1-7 정합 default · 2026-07-29 `MASTER-CLI-CONTEXT-DIET-3-001` 로 master `CLAUDE.md §5` 에서 이동 · 구 canonical = Cycle 1 결과)
 
 ## §6. 인접 paradigm 정합
 

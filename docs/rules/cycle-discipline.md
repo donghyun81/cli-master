@@ -114,7 +114,7 @@ cycle 마감 시 갱신 대상 3 영역: ① task 산출물 (`.ai/reports/<taskI
 - **21.1 영역 분리**: cli infra 4-repo byte-identical 영역 = §15 패턴 1 · 자식 도메인 specific = §15 패턴 2 (본 § 영역 X) · cross-repo 정합 검증 = 패턴 1 + 영역 1 sub-agent fan-out.
 - **21.2 paradigm 분기** 단일 SoT = `cross-repo-parallel-exec.md` (= 영역 1 sub-agent fan-out / 영역 2 다중 cli session · 선택 = cli session 자율).
 - **21.3 운영 표준 7 step**: ① master 변경+commit → ② `bash scripts/propagate.sh <path> [--targets all]` → ③ 자식별 staged commit (master commit body 인용) → ④ `bash scripts/verify-sync.sh` exit 0 → ⑤ `propagation-reports/<cycle-id>/REPORT.md` 생성 → ⑥ master audit commit (`.auto-memory/propagation-status.md` 갱신) → ⑦ master `CLAUDE.md` §15 entry append.
-- **21.4 STOP** = master [`CLAUDE.md §5`](../../CLAUDE.md) (9항 canonical · pointer).
+- **21.4 STOP** = [`stop-canonical.md`](../../.claude/rules/stop-canonical.md) (9항 canonical · pointer · 2026-07-29 master `CLAUDE.md §5` 에서 이동).
 - **21.5 산출물** = master `.ai/reports/<cycle-id>/` {PLAN,EVIDENCE,VERIFY,REVIEW,TODO} (= lightweight 가능 · §11 정합).
 - **21.6 정합** = `cross-repo-parallel-exec.md` + `cross-repo-orchestrator.md` + `routing-and-delegation.md` §실행 방식 + 부모 mount root `CLAUDE.md` §3.
 

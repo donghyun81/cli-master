@@ -1,9 +1,9 @@
 # Rule Routing Table — 행동(Reading Mode 7종) → 의무 로드 (intake 시 본 표만 정독)
 
 > 본 file = `rule-routing-index.md` §B 의 독립 실사용 판 (= MASTER-CLI-CONTEXT-DIET-2-001 T2 · 원문 §B = index-COLD 보존). **intake 시 = 본 표만 정독** · index 전문 정독 = 색인 갱신 cycle 한정. 갱신 = index §D 와 동기 의무.
-> **L0 (항상 적용)** = `safety-and-secrets` + `anchor-list` + `cross-repo-parallel-exec`(kernel) + master `CLAUDE.md §5`(STOP 9항) + 부모 root `CLAUDE.md`.
+> **L0 (항상 적용)** = `safety-and-secrets` + `anchor-list` + `cross-repo-parallel-exec`(kernel) + `stop-canonical`(STOP 9항 · 2026-07-29 master `CLAUDE.md §5` 에서 자동 주입층으로 이동) + 부모 root `CLAUDE.md`.
 > **L0 재정독 개정 (T5 · DIET-2-001)**: 세션 **최초 1회 Read** → 이후 cycle = SessionStart hook 주입값(branch·baseline 등) + 경량 실측(HEAD sha · 보호 manifest 대조)로 **갈음** · drift 신호 시만 해당 파일 재Read + 재실측. **STOP #5 (보호 sha drift) 로직 불변**.
-> **자동 주입층 경계 (T1 · MASTER-CLI-CONTEXT-DIET-2-003)**: `.claude/rules/` 잔존 5 (= `safety-and-secrets` + `anchor-list` + `cross-repo-parallel-exec`(kernel) + `rule-routing-table`(본 표) + `rule-footer-common`) = 세션 시작 **자동 주입 · Read 불요 · compact 생존** (drift 대조 = SessionStart hook 주입값). 그 외 44 rule = `docs/rules/` 로 이전 → **자동 주입 X · Reading Mode Read 가 유일 로드 경로 · compact 후 재주입 없음** (필요 시 재Read). = 자동 주입층 ↔ Reading Mode Read 이중 적재 해소 (진입 base tok 감축).
+> **자동 주입층 경계 (T1 · MASTER-CLI-CONTEXT-DIET-2-003 · T-3 갱신)**: `.claude/rules/` 잔존 **6** (= `safety-and-secrets` + `anchor-list` + `cross-repo-parallel-exec`(kernel) + `stop-canonical`(2026-07-29 신설) + `rule-routing-table`(본 표) + `rule-footer-common`) = 세션 시작 **자동 주입 · Read 불요 · compact 생존** (drift 대조 = SessionStart hook 주입값). 그 외 44 rule = `docs/rules/` 로 이전 → **자동 주입 X · Reading Mode Read 가 유일 로드 경로 · compact 후 재주입 없음** (필요 시 재Read). = 자동 주입층 ↔ Reading Mode Read 이중 적재 해소 (진입 base tok 감축).
 
 | Reading Mode | 의무 로드 (L0 +) |
 |---|---|

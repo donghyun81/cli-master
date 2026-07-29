@@ -9,7 +9,7 @@
 > - `cycle-discipline.md` §2 (OPS 신설 원칙 · L1-1 예외) + §15 패턴 1 (master cycle + propagation) + §18~§19 (정기 review + self-improving loop)
 > - `mode-system.md` — Mode(행동 layer) ↔ 본 색인 Reading Mode(행동 유형) 정합
 > - `anchor-list.md` — L0 anchor 의 일부(A1·A2·A4 등) 본문 SoT
-> - master `CLAUDE.md §5` — STOP 조건 canonical(L0 항상 적용)
+> - `.claude/rules/stop-canonical.md` — STOP 조건 canonical(L0 항상 적용 · 자동 주입 · 2026-07-29 master `CLAUDE.md §5` 에서 이동)
 > SOT: `CLAUDE.md`
 
 ---
@@ -43,7 +43,7 @@
 | [`anchor-list.md`](../../.claude/rules/anchor-list.md) | 누락 시 cycle 실패하는 10 anchor(A1~A10 · baseline drift / 보호 sha / scope / propagation 등) |
 | [`cross-repo-parallel-exec.md`](../../.claude/rules/cross-repo-parallel-exec.md) **(kernel)** | 4-repo 단방향 propagation(A4) + subscription pool 정합(A6 · `claude -p` 회피 · billing) + 영역 1/2/3 1-줄 요약 + STOP/trigger · 실행 본문 = `cross-repo-parallel-exec-detail.md`(behavior-triggered · L1) |
 
-> file 외 L0: master `CLAUDE.md §5`(STOP 9항 canonical) + 부모 mount root `CLAUDE.md`(7-repo umbrella = 4-active + 3 동결). 두 헌법은 `.claude/rules/` 밖이라 본 48 집합에 포함되지 않으나 L0 로 항상 적용.
+> L0 추가: `.claude/rules/stop-canonical.md`(STOP 9항 canonical · **2026-07-29 `MASTER-CLI-CONTEXT-DIET-3-001` 로 `.claude/rules/` 안으로 이동** = 자동 주입 · 본 집합 포함) + file 외 L0 = 부모 mount root `CLAUDE.md`(7-repo umbrella = 4-active + 3 동결 · `.claude/rules/` 밖이라 본 집합 미포함 · L0 로 항상 적용).
 
 ### L1 — 프로세스·워크플로우 (작업 시작 시 · 21 rule)
 
