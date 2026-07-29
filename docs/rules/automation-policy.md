@@ -15,7 +15,7 @@
 
 ### §1.2 원칙 2 — 자동화 자리에 명시적 inspection checkpoint
 
-자동화 영역 정착 시점 = 직후 calibration 강화 cycle 3~5 default (= `text-degeneration-prevention.md §3` + `cycle-discipline.md §19` Hooks self-improving loop paradigm 정합 default).
+자동화 영역 정착 시점 = 직후 calibration 강화 cycle 3~5 default (= `cycle-discipline.md §19` 반복 패턴 자기관측 loop 정합 default · 구 병기 근거 `text-degeneration-prevention.md §3` = 2026-07-29 `MASTER-CLI-JUDGMENT-SHIFT-001` 제거 → 원문 `.auto-memory/text-degeneration-prevention-COLD.md`).
 
 ---
 

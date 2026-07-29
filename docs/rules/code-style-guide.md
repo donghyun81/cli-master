@@ -6,7 +6,7 @@
 > **연관 파일**:
 > - `rule-routing-index.md` — 본 guide 의 계층·행동 라우팅 위치 + amend loop
 > - `code-principles.md` — SOLID/DRY/KISS/YAGNI + 리뷰 체크리스트 (설계 원칙 SoT · 본 guide 는 그 위의 Kotlin 표면 관용)
-> - `abbreviation-policy.md` — 식별자 축약 금지 + 허용 약어 (네이밍 SoT)
+> - 네이밍 SoT = 본 guide §C 가이드라인 「명명·관용」 (= 2026-07-29 `MASTER-CLI-JUDGMENT-SHIFT-001` · 구 `abbreviation-policy.md` 금지어 list 대조 → **주변 코드 관용 준수 판단 위임** · 구 rule 원문 = [`.auto-memory/abbreviation-policy-COLD.md`](../../.auto-memory/abbreviation-policy-COLD.md) verbatim 보존)
 > SOT: `CLAUDE.md`
 
 ---
@@ -17,7 +17,7 @@
 - **pointer-first**: 포맷 / 축약 / 설계 원칙 / 커밋 / 아키텍처는 각 SoT 가 단일 진실이다. 본 guide 는 그 본문을 복제하지 않는다(복제 발견 = STOP · `rule-routing-index.md §D`).
 - **로드 시점**: code-level(Kotlin) 행동 — 구현형 / UI-UX형 / API-서버형(`rule-routing-index.md §B`). cli-infra ops(bash·md)는 본 guide 대상이 아니다(Kotlin 표면 관용이라서).
 - **무엇을 신설하는가**: 아래 §C 의 안정·객관·광범위 규칙만. 도구가 강제하는 영역(포맷·import 정렬·modifier 순서)이나 주관적 영역(LOC budget·KDoc 의무)은 신설하지 않는다(§C 탈락 표).
-- **enforcement 수준 = warn (advisory)**: 본 guide 규칙은 차단(blocking) 아님 — 기존 warn hook(`check-abbreviation.sh` + `post-edit-degeneration-check.sh`) + IDE/리뷰 advisory 로 강제하고 신 blocking gate 는 신설하지 않는다(사용자 본심). 빌드 강제화(ktlint warn-gate 등)는 별 후보 cycle.
+- **enforcement 수준 = warn (advisory)**: 본 guide 규칙은 차단(blocking) 아님 — IDE/리뷰 advisory 로 강제하고 신 blocking gate 는 신설하지 않는다(사용자 본심). 빌드 강제화(ktlint warn-gate 등)는 별 후보 cycle. (2026-07-29 `MASTER-CLI-JUDGMENT-SHIFT-001` supersede: 구 문면이 근거로 든 warn hook 2종[`check-abbreviation.sh` + `post-edit-degeneration-check.sh`] = **제거** — 명명·출력 품질은 hook 대조가 아니라 모델 판단에 위임. warn 등급 자체는 불변.)
 
 ---
 
@@ -26,7 +26,7 @@
 | 영역 | SoT pointer | 가리키는 것 |
 |---|---|---|
 | 포맷·들여쓰기·EOL | [`.editorconfig`](../../.editorconfig) | charset utf-8 / LF / indent 4 / max 120 + `[*.{kt,kts}]` ktlint_standard 선언 = **advisory**(IDE/수기) · 빌드 비강제(플러그인 미연결) · 강제화(ktlint warn-gate) = 후보 cycle `MASTER-CLI-KTLINT-WARN-GATE-NNN` |
-| 식별자 축약·약어 | [`abbreviation-policy.md`](./abbreviation-policy.md) | 사용자 정의 축약 금지 seed + 허용 표준 약어 list + PreToolUse hook |
+| 식별자 명명·축약 | 본 guide §C 가이드라인 「명명·관용」 | 주변 코드 관용 준수 (= 판단 위임 · 금지어 list 대조 폐기 · 구 원문 = `.auto-memory/abbreviation-policy-COLD.md`) |
 | 설계 원칙·리뷰 | [`code-principles.md`](./code-principles.md) | SOLID 5 + DRY/KISS/YAGNI + 코드 리뷰 체크리스트(A~H) |
 | 커밋 메시지 | [`COMMIT_CONVENTION.md`](../../docs/agent/process/COMMIT_CONVENTION.md) | Conventional Commits type/scope/subject/body + `ops` 확장 |
 | 레이어 방향 | [`KMP_CMP_LAYER_DIRECTION.md`](../../docs/agent/architecture/KMP_CMP_LAYER_DIRECTION.md) | shared-first 단방향 레이어 흐름 강제 |
@@ -64,10 +64,11 @@
 
 ### 후퇴 → pointer (원칙 1 중복 회피)
 
-- **식별자 case** (PascalCase 타입 / camelCase 멤버 / UPPER_SNAKE const): `.editorconfig` 의 `ktlint_standard` + Kotlin 컴파일러 관용 + `abbreviation-policy.md` 가 이미 커버한다. 본 guide 는 명문화하지 않고 그 pointer 로 후퇴한다(원칙 1: 양 최소 · 이중 진실 0).
+- **식별자 case** (PascalCase 타입 / camelCase 멤버 / UPPER_SNAKE const): `.editorconfig` 의 `ktlint_standard` + Kotlin 컴파일러 관용 + 아래 가이드라인 「명명·관용」이 이미 커버한다. 본 guide 는 명문화하지 않고 그 pointer 로 후퇴한다(원칙 1: 양 최소 · 이중 진실 0).
 
 ### 가이드라인 (비강제 · Kotlin 공식 스타일 수준)
 
+- **명명·관용 = 주변 코드를 따른다** — 주변 코드처럼 읽히는 코드를 쓴다: 그 파일의 주석 밀도·명명·관용을 맞춘다. 축약 여부는 고정 금지어 list 가 아니라 **주변 코드가 이미 쓰는 어휘**가 판정한다(주변이 `idx` 를 쓰면 `idx`, `index` 를 쓰면 `index`). 도메인 표준 약어(`id`·`url`·`api`·`dto`)는 그대로 쓴다. **신설 근거**(2026-07-29 `MASTER-CLI-JUDGMENT-SHIFT-001` · Coin 본심 ①): 구 판은 금지어 seed list + `check-abbreviation.sh` PreToolUse hook 대조였으나 — list 는 수동 유지 대상이라 프레임워크 API 명을 false positive 로 차단(선례 = Play Billing `BillingFlowParams` 계열 Edit 차단)했고, 명명 적합성은 list 대조가 아니라 맥락 판단의 문제다. 구 rule 원문(금지 seed + 허용 약어 전량) = [`.auto-memory/abbreviation-policy-COLD.md`](../../.auto-memory/abbreviation-policy-COLD.md) verbatim 보존(정보 소실 0 · hot 복귀 trigger = 명명 퇴행 재발 1+ 회).
 - **scope function 의미 분담** (`let` / `run` / `apply` / `also` / `with`): 의도된 의미로만 쓰고 2단계 이상 중첩은 피한다 — **권장(비강제)**. 의미 선택 자체는 주관 여지가 있어(원칙 4) 하드 규칙이 아니라 가이드라인으로 둔다. 본문은 Kotlin 공식 coding conventions.
 - **클래스 위임 `by` = 상속 없는 조합** — 인터페이스 구현을 다른 객체에 넘길 때 상속 대신 위임을 쓴다(`class A(b: B) : I by b`). 조합은 결합을 낮추고 교체 지점을 드러낸다. **★Kotlin 공식 주의(반드시 인지)**: *위임 대상(delegate)은 위임하는 클래스의 `override` 를 보지 못한다* — 파생 클래스가 override 한 멤버는 delegate 내부 호출에서 **호출되지 않고**, delegate 는 **자신의 구현만** 참조한다. 따라서 **"일부만 갈아끼우면 나머지가 따라온다"를 가정하지 말 것.** 부분 교체가 필요하면 위임이 아니라 **명시 조합**(필요한 협력자를 전부 이름으로 주입)으로 간다(`code-principles.md` §2 암묵 기본값 금지 · `billing-rules.md` §1 정합). 가이드라인 등급 근거 = 도구 비강제 + 적용 판단에 주관 여지(원칙 4).
 

@@ -4,8 +4,7 @@
 > **신설**: MASTER-LIBS-VERSIONS-CROSS-VERIFY-HOOK-001 (= 본 chat baseline ingest stale 사고 #2 + #3 본질 mitigation · 2026-05-13).
 > **연관**:
 > - `cycle-discipline.md` §15 패턴 1 (master cycle 신설 + 4-repo propagation)
-> - `.claude/hooks/libs-versions-cross-verify.sh` (PostToolUse Edit|Write matcher 자동 검사)
-> - `text-degeneration-prevention.md` (동일 hook scaffold patterns)
+> - `.claude/hooks/libs-versions-cross-verify.sh` (PostToolUse Edit|Write matcher · **발동 = `libs.versions.toml` 접촉 시 한정** · 2026-07-29 `MASTER-CLI-JUDGMENT-SHIFT-001` 축소 — `.kt` 편집 발동분은 Gradle 빌드가 결정적으로 잡는 영역이라 폐지)
 > SOT: `CLAUDE.md`
 
 ---

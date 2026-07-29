@@ -30,6 +30,8 @@
 #
 # 신설: MASTER-CLI-INSTRUCTIONS-LOADED-PROTECTED-FILE-HOOK-INSTALL-001 (2026-05-26)
 # 갱신: MASTER-CLI-CONTEXT-OPT-PHASE2-BASELINE-SURFACE-001 (2026-06-01 · always-fresh 표면화 emit + mount root robust 탐지)
+# 갱신: MASTER-CLI-JUDGMENT-SHIFT-001 (2026-07-29 · stdout 다이어트 = 정상 4 줄 → 1 줄 · 보호5 sha 원값은
+#       drift ≠ 0 일 때만 전개 · 4-active HEAD 는 A1 인용 근거라 유지 · 측정/enforce 로직 무변)
 #
 # macOS bash 3.x 호환. self-test: bash .claude/hooks/instructions-loaded-baseline-verify.sh
 # Neutralization: master-only — child repos byte-identical via propagation.
@@ -118,19 +120,26 @@ for rel in PROTECTED:
 
 drift_n = len(drift)
 if not baseline_protected:
-    drift_status = "baseline absent → SessionStart baseline-snapshot.sh 재실행 권장"
+    drift_status = "baseline absent (SessionStart baseline-snapshot.sh 재실행 권장)"
 elif drift_n == 0:
-    drift_status = "0 (보호 5 file = baseline 일치)"
+    drift_status = "0"
 else:
     drift_status = "{} DRIFT".format(drift_n)
 
-# 4. always-fresh 1-블록 (= AI-readable baseline)
-block = "\n".join([
-    "[baseline:always-fresh] InstructionsLoaded live 측정 (mount={})".format(mount_root),
-    "  4-active HEAD: " + " · ".join(head_parts),
-    "  보호5 sha(12): " + " · ".join(sha_parts),
-    "  보호 sha drift: " + drift_status,
-])
+# 4. always-fresh 블록 (= AI-readable baseline)
+#    MASTER-CLI-JUDGMENT-SHIFT-001 (2026-07-29) stdout 다이어트: 정상 경로 = 1 줄.
+#    4-active HEAD 는 **유지** — anchor A1 이 "이후 cycle = hook 주입값 인용 갈음" 으로 이 값에
+#    의존한다(빼면 매 cycle 재측정 = 순손실). 반면 보호 5 의 sha 12-hex 원값은 정상 시 아무도
+#    인용하지 않고 판단에 쓰이는 건 drift 수치뿐 → 원값은 drift ≠ 0 일 때만 펼친다.
+lines = [
+    "[baseline] live: HEAD " + " · ".join(head_parts) + " | 보호5 drift=" + drift_status,
+]
+if drift_n > 0 or not baseline_protected:
+    lines.append("  보호5 sha(12): " + " · ".join(sha_parts))
+    for d in drift:
+        lines.append("  DRIFT " + d)
+    lines.append("  SoT: .auto-memory/protected-file-hashes.md · anchor A1+A2 (STOP #5)")
+block = "\n".join(lines)
 
 # 5. AI-readable additionalContext emit (stdout JSON · noise 최소 1 블록)
 print(json.dumps({

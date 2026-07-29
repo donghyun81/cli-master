@@ -125,10 +125,6 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash $CLAUDE_PROJECT_DIR/.claude/hooks/check-abbreviation.sh"
-          },
-          {
-            "type": "command",
             "command": "bash $CLAUDE_PROJECT_DIR/.claude/hooks/pre-screen-edit-pen-check.sh"
           },
           {
@@ -159,16 +155,12 @@
           },
           {
             "type": "command",
-            "command": "bash $CLAUDE_PROJECT_DIR/.claude/hooks/post-edit-degeneration-check.sh"
-          },
-          {
-            "type": "command",
             "command": "bash $CLAUDE_PROJECT_DIR/.claude/hooks/libs-versions-cross-verify.sh"
           }
         ]
       },
       {
-        "matcher": "Bash|Read|Edit|Write|Glob|Grep",
+        "matcher": "Bash",
         "hooks": [
           {
             "type": "command",
@@ -192,10 +184,6 @@
           {
             "type": "command",
             "command": "bash $CLAUDE_PROJECT_DIR/.claude/hooks/stop-gate.sh"
-          },
-          {
-            "type": "command",
-            "command": "bash $CLAUDE_PROJECT_DIR/.claude/hooks/stop-reflect.sh"
           },
           {
             "type": "command",

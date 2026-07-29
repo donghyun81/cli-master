@@ -7,6 +7,8 @@
 #   warn    (default) — stderr warning only, always exit 0
 #   enforce          — exit 2 on violation
 #
+# 발동 범위: gradle/libs.versions.toml 접촉 시 한정 (= MASTER-CLI-JUDGMENT-SHIFT-001 축소 · 아래 trigger filter).
+#
 # Self-test:
 #   bash .claude/hooks/libs-versions-cross-verify.sh
 #   bash .claude/hooks/libs-versions-cross-verify.sh gradle/libs.versions.toml
@@ -42,17 +44,14 @@ if [ -z "$TRIGGER_PATH" ]; then
     TRIGGER_PATH="$TOML_PATH"
 fi
 
-# --- Trigger filter: only run when relevant file changed ---
+# --- Trigger filter: toml 접촉 시에만 평가 ---
+# MASTER-CLI-JUDGMENT-SHIFT-001 (2026-07-29) 축소: 구 판은 `*.kt` under src 편집마다도 발동해
+#   repo 전체 .kt glob(6 패턴 recursive)을 돌렸다. 그러나 이 검사가 잡는 오류(artifact 명 ↔ import
+#   convention 불일치)는 **Gradle 빌드가 결정적으로 잡는다** — 매 Kotlin 편집마다 선행 재확인할
+#   근거가 없다. 선언 SoT(toml)가 바뀌는 순간만 3-source 매트릭스를 검증한다.
 case "$TRIGGER_PATH" in
     */gradle/libs.versions.toml|*/libs.versions.toml)
-        : ;; # always evaluate
-    *.kt)
-        # Only evaluate Kotlin under src directory.
-        case "$TRIGGER_PATH" in
-            */src/*|*/app/src/*) : ;;
-            *) exit 0 ;;
-        esac
-        ;;
+        : ;; # 선언 변경 = 평가
     *)
         exit 0 ;;
 esac

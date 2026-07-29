@@ -4,7 +4,7 @@
 # 확장: MASTER-CLI-GSM-CONTEXT-HEALTH-ABSORB-001 (2026-06-04 · context-health 측정 흡수 · 신 hook 신설 X · settings.json 무접촉)
 # 관련: docs/rules/gsm-measurement.md §2 (Metric family) · §3 (DORA 정의) · §4 (측정 layer) ·
 #       .auto-memory/cycle-health-log.md (DORA 정량 append) · .auto-memory/context-health-metrics.md §3.1 (context 건강 분기 append) ·
-#       stop-reflect.sh / stop-housekeeping.sh (= 동일 non-blocking advisory 철학)
+#       stop-housekeeping.sh (= 동일 non-blocking advisory 철학)
 #
 # 동작:
 #   1. master repo 의 git log 에서 DORA 4-key proxy 산출 (= 결정론적 read-only · Transport)

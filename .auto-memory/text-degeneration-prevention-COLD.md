@@ -1,4 +1,11 @@
-# Text Degeneration Prevention Policy
+# text-degeneration-prevention — COLD storage (demote 직전 원문 전문 verbatim)
+
+> **신설**: MASTER-CLI-JUDGMENT-SHIFT-001 (2026-07-29 · demote 직전 HEAD `d04858b`).
+> hot rule `docs/rules/text-degeneration-prevention.md` + 검사 hook `.claude/hooks/post-edit-degeneration-check.sh` = **본 cycle 제거** — n-gram 반복 퇴행은 구세대 모델 증상이고 Claude 5 세대에서 사실상 소멸 → 매 `.md` 편집마다 3-metric 검사를 돌리는 대신 **모델 판단에 위임** (= Coin 본심 2026-07-29 ②). 아래 = demote 직전 **원문 전문 verbatim** (= 정보 소실 0 · 3 metric 정의 + 임계 + paraphrase 의무 포함).
+> **비규범 (감사·추적 전용)**: live 규정과 충돌 시 hot rule 이 우선. master-only (= `.auto-memory/` · propagation X).
+> **hot 복귀 trigger**: 출력 퇴행 사고 1+ 회 재발 시 (= COLD 관례).
+
+---
 
 > **단일 목적**: autoregressive LLM 의 token-level degeneration (= 동일 어절 / 형태소 / n-gram 의 반복 강화) 을 출력 단계에서 감지·차단.
 > **신설**: MASTER-DEGENERATION-PREVENTION-POLICY-001 (= ledger MASTER-T09 · 2026-05-12).

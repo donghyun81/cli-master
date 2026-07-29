@@ -1,7 +1,7 @@
 #!/bin/bash
 # stop-housekeeping.sh — 사후 단계 housekeeping (Stop hook · non-blocking · 항상 exit 0)
 # 신설: MASTER-CLI-POSTCYCLE-AUTOMATION-001 Phase D
-# 관련: cycle-discipline.md §19 (stop-reflect 패턴) · working-file-lifecycle.md ·
+# 관련: cycle-discipline.md §19 (반복 패턴 자기관측) · working-file-lifecycle.md ·
 #       stop-gate.sh (blocking 영역 = 무접촉 · 본 hook 은 항상 exit 0 = 완료 차단 X)
 #
 # 동작 (모두 silent-success · 이상 시에만 stderr WARN):
@@ -9,7 +9,7 @@
 #   2. 상태문서 freshness — master .auto-memory 2 status doc 부재참조 grep → WARN (read-only)
 #   3. cowork-handoff-active.md size — mount root · threshold 초과 → WARN + rotate 권유 (read-only · 자동 rotate X)
 #
-# Exit: 항상 exit 0 (= stop-gate.sh 의 blocking 영역 breakage X · stop-reflect.sh 철학 정합)
+# Exit: 항상 exit 0 (= stop-gate.sh 의 blocking 영역 breakage X · non-blocking advisory 철학)
 # mode (env HOUSEKEEPING_ENFORCE): warn (default · WARN stderr 출력) / silent (= 출력 0 · 행동은 유지)
 # self-test: bash .claude/hooks/stop-housekeeping.sh
 # macOS bash 3.x 호환 (associative array X / ${var,,} X)

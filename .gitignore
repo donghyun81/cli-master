@@ -13,6 +13,7 @@
 
 # Logs
 .ai/hooks/*.log
+.ai/hooks/.session-marker
 .ai/traces/*.jsonl
 .ai/nightly-baseline/*.log
 .ai/nightly-baseline/latest.md

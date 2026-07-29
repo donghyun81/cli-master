@@ -2,16 +2,29 @@
 # SessionStart hook — silent-success / verbose-failure.
 # macOS bash 3.x 호환.
 #
-# 정상 경로 출력: branch / open task count / last REVIEW verdict / (PromptFit drift)
-# 총 ≤ 4 줄 (PromptFit drift 포함 시). 누락/오류 신호가 있을 때만 WARN.
-# read-only. 네트워크 없음. 항상 exit 0.
+# 정상 경로 출력 = **1 줄** (branch · open_tasks · last_review).
+#   MASTER-CLI-JUDGMENT-SHIFT-001 (2026-07-29) stdout 다이어트: 구 판은 매 세션 7 줄을 주입했고
+#   그중 4 줄(protected_baseline_count · cc_version · arguments_purged · daemon)은 **모델이 판단에
+#   쓰지 않는 텔레메트리**였다. 값은 버리지 않고 .ai/hooks/session-telemetry.log 로 옮긴다.
+#   부수 동작(git lock 정리 · ARGUMENTS purge · daemon 검증 · working-file archive)은 전량 유지.
+#   이상 신호(WARN · lock 정리)는 종전대로 발화 — 조용한 건 정상일 때뿐이다.
+# read-only(트레이스 로그 제외). 네트워크 없음. 항상 exit 0.
 
 REPO_ROOT=$(git rev-parse --show-toplevel 2>/dev/null || echo ".")
 cd "$REPO_ROOT" || exit 0
 
+# 텔레메트리 = stdout 대신 로그 파일 (gitignore: .ai/hooks/*.log)
+TELEMETRY_LOG=".ai/hooks/session-telemetry.log"
+mkdir -p .ai/hooks 2>/dev/null || true
+TELEMETRY_TS=$(date '+%Y-%m-%dT%H:%M:%S')
+# 세션 시작 marker — stop-gate.sh 가 "현 세션에 변경된 task" 를 mtime 비교로 한정하는 기준점.
+touch .ai/hooks/.session-marker 2>/dev/null || true
+log_telemetry() {
+    echo "$TELEMETRY_TS $*" >> "$TELEMETRY_LOG" 2>/dev/null || true
+}
+
 # 1. branch
 BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "UNKNOWN")
-echo "[session] branch=$BRANCH"
 
 # 2. open task count
 INDEX_FILE=".ai/tasks/INDEX.md"
@@ -25,7 +38,6 @@ if [ -f "$INDEX_FILE" ]; then
         | wc -l \
         | tr -d ' ')
 fi
-echo "[session] open_tasks=$OPEN_COUNT"
 
 # 3. last REVIEW verdict (가장 최근 수정된 REVIEW.md 한 건)
 LAST_VERDICT="n/a"
@@ -50,7 +62,9 @@ if [ -d "$REPORTS_DIR" ]; then
         LAST_VERDICT="${VERDICT_LINE:-unknown}"
     fi
 fi
-echo "[session] last_review=$LAST_TASK $LAST_VERDICT"
+
+# === 정상 경로 stdout = 이 1 줄이 전부 ===
+echo "[session] branch=$BRANCH · open_tasks=$OPEN_COUNT · last_review=$LAST_TASK $LAST_VERDICT"
 
 # 4. PromptFit drift signal — 최근 5 건 PromptFitScore 평균
 # INDEX.md row format: `| <taskId> | <date> | <score> | <verdict> | ...`
@@ -65,7 +79,7 @@ if [ -f "$PROMPTFIT_INDEX" ]; then
         | tail -5 \
         | awk '{sum+=$1; n+=1} END { if (n>0) printf "%.1f", sum/n; }')
     if [ -n "$AVG" ]; then
-        echo "[session] promptfit_avg5=$AVG"
+        log_telemetry "promptfit_avg5=$AVG"
     fi
 fi
 
@@ -73,7 +87,7 @@ fi
 PROTECTED_HASHES=".auto-memory/protected-file-hashes.md"
 if [ -f "$PROTECTED_HASHES" ]; then
     PROTECTED_COUNT=$(grep -cE "^\| (docs/|\.claude/)" "$PROTECTED_HASHES" 2>/dev/null | tr -d ' ')
-    echo "[session] protected_baseline_count=$PROTECTED_COUNT"
+    log_telemetry "protected_baseline_count=$PROTECTED_COUNT"
 fi
 
 # === Claude Code 버전 진단 echo (cycle-discipline.md §13 latest-chase 정책) ===
@@ -81,7 +95,7 @@ fi
 # 버전 판정 / 강제 복귀 = §13 cli session 측 self-test (claude --version raw capture → EVIDENCE) 담당.
 ACTUAL_VERSION=$(claude --version 2>/dev/null | grep -oE '[0-9]+\.[0-9]+\.[0-9]+' | head -1)
 if [ -n "$ACTUAL_VERSION" ]; then
-    echo "[session] cc_version=$ACTUAL_VERSION"
+    log_telemetry "cc_version=$ACTUAL_VERSION"
 fi
 
 # === C11 추가: 세션 시작 시 .git/**/*.lock 광역 PID 검증 + stale 자동 정리 ===
@@ -125,7 +139,7 @@ fi
 # === 사고 1 mitigation: ARGUMENTS stale inject 방지 ===
 # 직전 CLI 세션 마감 시 ARGUMENTS env 안 비움 → 새 세션 진입 시 stale [C1/N] 재 inject risk.
 unset ARGUMENTS 2>/dev/null
-echo "[session] arguments_purged"
+log_telemetry "arguments_purged"
 
 # === 사고 4 mitigation: launchd daemon 활성 검증 (C12 권장 영구 적용) ===
 if command -v launchctl >/dev/null 2>&1; then
@@ -139,7 +153,7 @@ if command -v launchctl >/dev/null 2>&1; then
             echo "[session]   install: bash \$MASTER_DIR/scripts/install-git-lock-daemon.sh" >&2
         fi
     else
-        echo "[session] daemon=active"
+        log_telemetry "daemon=active"
     fi
 fi
 

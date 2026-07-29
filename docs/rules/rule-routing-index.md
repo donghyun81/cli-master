@@ -65,7 +65,7 @@
 | [`initiatives-auto-sync.md`](./initiatives-auto-sync.md) | INITIATIVES + INDEX + task file 갱신 의무 (thin pointer → skill) |
 | [`libs-versions-cross-verify.md`](./libs-versions-cross-verify.md) | libs.versions.toml ↔ artifact ↔ import 3-source 사후 정합 |
 | [`terminology.md`](./terminology.md) | SoT/SSOT 등 일반 어휘 단일 사전 |
-| [`text-degeneration-prevention.md`](./text-degeneration-prevention.md) | 출력 token degeneration 3 metric + paraphrase 의무 |
+| ~~`text-degeneration-prevention.md`~~ (등록 해제) | **2026-07-29 `MASTER-CLI-JUDGMENT-SHIFT-001` rule+hook 제거 · 판단 위임** — n-gram 반복 퇴행 = 구세대 증상. 원문 verbatim = [`.auto-memory/text-degeneration-prevention-COLD.md`](../../.auto-memory/text-degeneration-prevention-COLD.md) |
 | [`architecture-foundation-link-policy.md`](./architecture-foundation-link-policy.md) | architecture 문서 → app-foundation 실 path markdown link 의무 |
 | [`cross-repo-parallel-exec-detail.md`](./cross-repo-parallel-exec-detail.md) | cross-repo 실행 본문(영역 1/2/3 + dispatch + 자식별 cwd 분리 + sub-agent token cost + 정합 처리) · cross-repo 행동 trigger 로드(= L0 kernel demote 본문) |
 | [`gsm-measurement.md`](./gsm-measurement.md) | GSM 계측 canonical form(G/S/M 3-tuple) + DORA 4-key + Metric family 지도 + amend 정량 trigger · anchor/§C/context-health 정합 기준 · 계측·amend 시점 consult |
@@ -77,7 +77,7 @@
 |---|---|
 | [`code-style-guide.md`](./code-style-guide.md) | L2 단일 진입점 · 스타일 SoT pointer(포맷/축약/원칙/커밋/아키텍처) + 신규 안정 규칙(nullability · visibility · concurrency 노출) |
 | [`code-principles.md`](./code-principles.md) | SOLID + DRY/KISS/YAGNI + 코드 리뷰 체크리스트(reviewer 자동 참조) |
-| [`abbreviation-policy.md`](./abbreviation-policy.md) | 사용자 정의 축약 금지 seed + 허용 표준 약어 + hook 정합 |
+| ~~`abbreviation-policy.md`~~ (등록 해제) | **2026-07-29 `MASTER-CLI-JUDGMENT-SHIFT-001` rule+hook 제거 · 판단 위임** — 명명 SoT = `code-style-guide.md` §C 「명명·관용」(주변 코드 준수). 원문 verbatim = [`.auto-memory/abbreviation-policy-COLD.md`](../../.auto-memory/abbreviation-policy-COLD.md) |
 | [`design-to-code-sync.md`](./design-to-code-sync.md) | Design SoT → Code 단방향 sync 도구 무관 패턴(5-type / Output Checklist) |
 | [`design-prompting-paradigm.md`](./design-prompting-paradigm.md) | design 도구 agent prompt 4원칙(measurable / context / reference / iterative) |
 
@@ -145,7 +145,7 @@
 | 6. CLI 운영 레이어형 | cli infra 변경이 보호 무결성·production 무접촉·4-repo 정합을 충족 | 보호 5 sha / production touch LOC / 4-repo byte-identical | 보호 5 file sha 변동 0 + production code touch 0 LOC + 4-repo byte-identical | 보호 sha drift / 자식 cli infra 직접 수정 징후 = 즉시 STOP(`CLAUDE.md §5` #5·#6) |
 | 7. task 재개-후속형 | 재개가 HANDOFF 우선·최소 read·직전 상태 정합을 충족 | HANDOFF read 순서 / bulk read / 직전 PASS 정합 | HANDOFF.md 우선 read + bulk read 0 + 직전 PASS 단계와 정합 | reset 금지 조건(verify 진행 중·STOP 신호·계약 미완) 시 reset 보류(`workflow-core`) |
 
-**amend loop (색인·규칙 진화 통로)**: 행동 수행 중 "기존 규칙으로 안 잡히는 반복 패턴"을 발견하면 `cli infra rule candidate` 로 누적한다. 자동 신설하지 않는다 — `cycle-discipline §19`(stop-reflect.sh self-improving loop · silent 후보 제안) + `§18`(분기 정기 review cadence) + `automation-policy §1.2`(자동화 직후 calibration 강화) 를 통해 사용자 confirm 후 master cycle 로 정착시킨다(`cycle-discipline §2` L1-1 예외 = 사용자 본심 외화 영역만 신 rule 허용). **정량 trigger** (= [`gsm-measurement.md §6`](./gsm-measurement.md)): 동일 행동/anchor 의 M 이 **N(기본 3) cycle 연속 deviation** 이면 amend 후보로 승격한다(= `stop-reflect.sh` 임계 정합 · 게이트 X · 사람 판단 신호).
+**amend loop (색인·규칙 진화 통로)**: 행동 수행 중 "기존 규칙으로 안 잡히는 반복 패턴"을 발견하면 `cli infra rule candidate` 로 누적한다. 자동 신설하지 않는다 — `cycle-discipline §19`(반복 패턴 자기관측 · 후보 제안) + `§18`(분기 정기 review cadence) + `automation-policy §1.2`(자동화 직후 calibration 강화) 를 통해 사용자 confirm 후 master cycle 로 정착시킨다(`cycle-discipline §2` L1-1 예외 = 사용자 본심 외화 영역만 신 rule 허용). **정량 trigger** (= [`gsm-measurement.md §6`](./gsm-measurement.md)): 동일 행동/anchor 의 M 이 **N(기본 3) cycle 연속 deviation** 이면 amend 후보로 승격한다(= 게이트 X · 사람 판단 신호 · 구 `stop-reflect.sh` 임계 계승 · hook 자체는 2026-07-29 `MASTER-CLI-JUDGMENT-SHIFT-001` 제거 → 관측 주체 = cli session).
 
 ---
 
@@ -200,10 +200,10 @@
 | 단계 | 어디서 | SoT pointer |
 |---|---|---|
 | **확인 (consult)** | 행동 판정 직후 — `workflow-core.md` Intake(Reading Mode 판정) + implement step | 본 색인 §B 라우팅 표 (L0 항상 + L1/L2/L3 subset · bulk read 금지) |
-| **강제 (enforce)** | **warn 수준** (차단 X · 신 blocking gate 신설 X · 사용자 본심) | `code-style-guide.md` §A(enforcement=warn) + `check-abbreviation.sh` + `post-edit-degeneration-check.sh` (기존 warn hook) |
-| **개선 (amend)** | 색인·가이드 미커버 또는 충돌 발견 시 | `cycle-discipline.md §18`(분기 review) + `§19`(stop-reflect self-improving) + `automation-policy.md §1.2`(calibration) + cowork memory `project_cli_infra_rule_candidates` + 본 색인 §C/§D deviation |
+| **강제 (enforce)** | **warn 수준** (차단 X · 신 blocking gate 신설 X · 사용자 본심) | `code-style-guide.md` §A(enforcement=warn) + IDE/리뷰 advisory (= 2026-07-29 `MASTER-CLI-JUDGMENT-SHIFT-001` supersede: 구 근거 warn hook 2종[`check-abbreviation.sh` + `post-edit-degeneration-check.sh`] 제거 · 명명·출력 품질 = 모델 판단 위임) |
+| **개선 (amend)** | 색인·가이드 미커버 또는 충돌 발견 시 | `cycle-discipline.md §18`(분기 review) + `§19`(반복 패턴 자기관측) + `automation-policy.md §1.2`(calibration) + cowork memory `project_cli_infra_rule_candidates` + 본 색인 §C/§D deviation |
 
-> enforce = warn default 본심: advisory + 기존 warn hook 으로 강제하고 blocking gate 는 신설하지 않는다. 빌드 강제화(ktlint warn-gate 등)는 별 후보 cycle(`MASTER-CLI-KTLINT-WARN-GATE-NNN`).
+> enforce = warn default 본심: advisory 로 강제하고 blocking gate 는 신설하지 않는다. 빌드 강제화(ktlint warn-gate 등)는 별 후보 cycle(`MASTER-CLI-KTLINT-WARN-GATE-NNN`).
 
 ---
 

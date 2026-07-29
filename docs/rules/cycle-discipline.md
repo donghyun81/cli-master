@@ -99,9 +99,11 @@ cli infra 수정 필요? — YES: 자식 안 사고 발견 = 패턴 1 · local o
 
 매 quarter 첫 월요일 KST (1/6·4/6·7/6·10/6 부근) — rules outdated + hooks self-test + settings 정합 + 보호 baseline + incident 추세 + `context-health-metrics.md` 재측정. 산출 = lightweight 4 file. 자동 발화 X (사용자 인지 단일).
 
-### 19) Hooks self-improving loop (요약 — 상세 = COLD)
+### 19) 반복 패턴 자기관측 loop (요약 — 상세 = COLD)
 
-`stop-reflect.sh` (Stop hook · stop-gate 와 분리) = REVIEW/EVIDENCE 안 paradigm 누적 패턴 grep (한 file 3+ 회 임계) → silent stderr 후보 제안 · exit 0 non-blocking · 채택 = 사용자 자율 (자동 file 신설 X).
+cycle 마감 시 REVIEW/EVIDENCE 안에서 **같은 paradigm 이 반복 등장**하는지(한 file 3+ 회가 관례 임계) 스스로 관측하고, 걸리면 rule candidate 로 제안한다 · 비차단 · 채택 = 사용자 자율 (자동 file 신설 X).
+
+> **2026-07-29 `MASTER-CLI-JUDGMENT-SHIFT-001` supersede**: 구 판은 이 관측을 `stop-reflect.sh` (Stop hook) 의 **단어빈도 grep** 이 수행했다. 신호가 약하고(빈도 = 반복 paradigm 의 대리 지표일 뿐) 회고는 맥락 판단 영역이라 hook 을 제거하고 **cli session 판단으로 위임**했다. 임계·비차단·사용자 confirm 성격은 불변 (= `rule-routing-index.md §C` amend loop + `gsm-measurement.md §6` 정량 trigger 정합).
 
 ### 20) DocSync 단계 본문
 

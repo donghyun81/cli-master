@@ -55,6 +55,7 @@ PATCH_BODY=$(cat <<'PATCH'
 # master cli infra 와 동기 의무. 직접 수정 금지.
 .claude/settings.local.json
 .ai/hooks/*.log
+.ai/hooks/.session-marker
 .ai/traces/*.jsonl
 .ai/nightly-baseline/*.log
 .ai/nightly-baseline/latest.md

@@ -1,4 +1,11 @@
-# Abbreviation Policy — Unified SoT
+# abbreviation-policy — COLD storage (demote 직전 원문 전문 verbatim)
+
+> **신설**: MASTER-CLI-JUDGMENT-SHIFT-001 (2026-07-29 · demote 직전 HEAD `d04858b`).
+> hot rule `docs/rules/abbreviation-policy.md` + enforcement hook `.claude/hooks/check-abbreviation.sh` = **본 cycle 제거** — 식별자 명명은 금지어 list 대조가 아니라 **주변 코드 관용 준수로 판단 위임** (= `docs/rules/code-style-guide.md` §A 위임 1줄이 현행 SoT · Claude 5 세대 context engineering 정합 · Coin 본심 2026-07-29 ①). 아래 = demote 직전 **원문 전문 verbatim** (= 정보 소실 0 · 금지 seed + 허용 약어 list 포함).
+> **비규범 (감사·추적 전용)**: live 규정과 충돌 시 hot rule 이 우선. master-only (= `.auto-memory/` · propagation X).
+> **hot 복귀 trigger**: 명명 퇴행 사고 1+ 회 재발 시 (= COLD 관례).
+
+---
 
 > **단일 목적**: 4-repo 패키지 (claude-cli-master + app-foundation + gently-product-docs + Selfward) 의 구현 코드레벨에서 사용자 정의 축약 변수/함수/클래스/파일/패키지명 금지 정책 + 금지 seed list + 허용 표준 약어 list 통합 SoT.
 > **신설**: MASTER-CLI-CLEANUP-7CYCLE-001 (2026-05-21) · 직전 3 file (`no-abbreviation-policy.md` + `forbidden-abbreviations.md` + `allowed-acronyms.md`) 본문 통합 default (= GLOBAL-NO-ABBREV-POLICY-001 + 002 baseline 흡수).

@@ -104,8 +104,8 @@ GSM 의 닫힌 loop 마지막 단계 = 측정 결과가 규칙 진화를 부른�
 
 **trigger 규칙**: 동일 anchor 또는 행동의 M 이 **N cycle 연속 목표 미달(deviation)** 이면 amend 후보로 승격한다.
 
-- 기본 N = **3** (= `stop-reflect.sh` paradigm 누적 임계 + `text-degeneration-prevention §3` M2 임계와 동일 결). 고변동 지표는 N 상향 가능.
-- 승격 경로 = `stop-reflect.sh`(silent 후보 stderr) → `cycle-discipline §18` 분기 review → 사용자 confirm → master cycle 정착. **자동 신설 X**(`cycle-discipline §2` L1-1 예외 = 사용자 본심 외화 영역만).
+- 기본 N = **3** (= `cycle-discipline §19` 반복 패턴 누적 임계와 동일 결). 고변동 지표는 N 상향 가능. (2026-07-29 `MASTER-CLI-JUDGMENT-SHIFT-001` supersede: 구 문면의 근거 2종 = `stop-reflect.sh` 임계 + `text-degeneration-prevention §3` M2 임계 · 양쪽 다 제거 → 임계값 3 자체는 계승.)
+- 승격 경로 = cli session 자기관측(`cycle-discipline §19` 후보 제안) → `cycle-discipline §18` 분기 review → 사용자 confirm → master cycle 정착. **자동 신설 X**(`cycle-discipline §2` L1-1 예외 = 사용자 본심 외화 영역만).
 - prototype: cowork memory `feedback_cli_paste_back_sha_self_report_drift`(4-cycle 추세) = 본 정량 trigger 의 첫 관측 패턴.
 
 trigger 는 게이트가 아니다. "이 목표는 현재 규칙으로 안 잡힌다"는 신호를 누적해 사람이 판단하게 할 뿐이다(Inspection 수동 · §4).
