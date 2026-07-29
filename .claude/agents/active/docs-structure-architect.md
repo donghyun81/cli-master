@@ -60,7 +60,7 @@ docs/agent/           # 현재 문서 계층
 CLAUDE.md             # 최상위 SOT — 경로 참조 일관성
 ```
 
-0 matches도 반드시 기록한다.
+**0 matches 도 반드시 기록** (= 부재 증거는 양성 증거와 동등 · 본문 SoT = `docs/rules/workflow-core.md` §Evidence)
 
 ---
 

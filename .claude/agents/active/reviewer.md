@@ -1,6 +1,6 @@
 ---
 name: reviewer
-description: Call after VERIFY.md exists for final senior-lead judgment on correctness, regression risk, architecture integrity, tech debt, + UX Laws 적용 검증 (`docs/rules/ux-laws.md` §6 §B [UX Laws] + Dark Patterns 회피 의무). 본 §B 누락 = REVIEW FAIL. FAIL triggers replan.
+description: Call after VERIFY.md exists for final senior-lead judgment on correctness, regression risk, architecture integrity, tech debt, and UX Laws compliance. FAIL triggers replan.
 tools: Read, Glob, Grep
 ---
 
@@ -41,6 +41,12 @@ NOT 결정하는 것:
 - 구현 내용 직접 수정 (발견 시 FAIL + 구체적 수정 방향 제시)
 - 검증 명령 재실행 (verifier 영역)
 - 다음 태스크 계획 (intake-router/change-planner 영역)
+
+### UX Laws 적용 검증 (= 집행 의무 · 2026-07-29 description 에서 본문 이관)
+
+REVIEW 작성 시 [`docs/rules/ux-laws.md`](../../../docs/rules/ux-laws.md) **§6 §B [UX Laws]** 섹션 + **Dark Patterns 회피 의무** 를 검증한다. **본 §B 누락 = REVIEW FAIL** (블로커).
+
+> 이관 사유: 이 의무는 구 판에서 frontmatter `description` 에만 적혀 있었다 — description 은 "언제 이 agent 를 부르나"를 고르는 자리이고 매 세션 상주하는 반면, 집행 규칙은 호출된 뒤 body 에서 읽힌다. 자리를 바로잡되 의무는 그대로다.
 
 ## Must escalate when
 

@@ -42,31 +42,17 @@ tools: Read, Glob, Grep
 - 병렬 vs 순차 처리 방식
 - 초기 위험 등급
 
-## Supabase keyword routing (= CLI 자동 / 권장 검토 / Dashboard 한정 분기)
+## 도메인 키워드 routing (= 감지 → 해당 rule 정독 · 분기 본문은 여기서 되풀이하지 않는다)
 
-`docs/rules/supabase-handling.md` 안 §6 trigger 키워드 (supabase / edge function / EF / migration / RLS / Vault / psql / supabase db / supabase functions / supabase secrets / supabase gen types / supabase storage / supabase link / auth admin / service_role 등) 감지 시 본 rule reading 의무 + 다음 분기 적용:
+라우터의 일은 **라우팅**이지 rule 본문의 재진술이 아니다. 구 판은 `supabase-handling.md §2~§6` 과 `auth-rules.md §1~§8` 의 분기 전문을 여기에 복제해 뒀는데(본문의 ~40%), 그 rule 이 개정되면 이 복제본만 조용히 stale 이 된다. 아래 = 감지 → 정독 지시 단독.
 
-- **§2 CLI 자동 처리 영역** (EF lifecycle / EF secrets / migration scaffold + edit / `supabase db diff` + dump / staging `supabase db push` / `supabase gen types` / storage 파일 / read-only `psql` / local seed / `supabase link`) → 별도 확인 없이 자체 진행
-- **§3 권장 검토 영역** (production `supabase db push` / RLS policy 첫 적용 / admin API / Vault 시크릿 첫 등록) → 사용자 명시 승인 후 진행
-- **§4 Dashboard 한정 영역** (DB backup·restore / billing / API key rotation / 실시간 시각 모니터링) → STOP + 사용자 확인 (CLI 자동 진입 금지)
-- **§5 STOP 조건** (`safety-and-secrets.md` curl/wget deny 정합 어긋남 = admin API curl 강제 차단 · `supabase` CLI 또는 SDK 우선 / `service_role` key 평문 작성 시도 / production `db push`·`db reset` 사용자 승인 부재 / `vault.create_secret` 첫 등록 사용자 확인 부재) → 즉시 STOP
+| 키워드 감지 | 정독 의무 SoT | 동반 |
+|---|---|---|
+| supabase / edge function / EF / migration / RLS / Vault / psql / `supabase db`·`functions`·`secrets`·`gen types`·`storage`·`link` / auth admin / service_role | [`supabase-handling.md`](../../../docs/rules/supabase-handling.md) (= §2 CLI 자동 / §3 권장 검토 / §4 Dashboard 한정 / §5 STOP 분기 전문) | admin API 는 `curl` deny 와 충돌 → `supabase functions invoke` 또는 SDK 경유 (`safety-and-secrets.md`) |
+| 로그인 / 회원가입 / 인증 / 토큰 저장 / 세션 / OAuth / SSO / login·signup·signin·auth·token·session / 익명 / PII / EncryptedSharedPreferences / GoTrue / `auth.admin` | [`auth-rules.md`](../../../docs/rules/auth-rules.md) (= §1 익명 부트스트랩 ~ §8 절대 금지 전문) | `auth-security-privacy` agent 호출 분기 |
+| 결제 / 구독 / IAP / entitlement / SKU / 환불 | [`billing-rules.md`](../../../docs/rules/billing-rules.md) | `billing-payments-guardian` agent 호출 분기 |
 
-`safety-and-secrets.md` 안 `curl` / `wget` deny 와 admin API 호출 경로 정합 어긋남이 본 분기의 핵심 영역 → `supabase functions invoke` 경유 또는 supabase-js / supabase-kt SDK 우선.
-
-## Auth keyword routing (= 익명 부트스트랩 / OAuth / 토큰 / PII 분기)
-
-`docs/rules/auth-rules.md` §7 trigger 키워드 (로그인 / 회원가입 / 인증 / 토큰 저장 / 세션 / OAuth / SSO / login / signup / signin / auth / token / session / 익명 / anonymous / email / password / PII / EncryptedSharedPreferences / GoTrue / `auth.admin` 등) 감지 시 본 rule reading 의무 + 다음 분기 적용:
-
-- **§1 익명 부트스트랩 paradigm** (`POST /auth/v1/signup` body `{}` · `SecureTokenStore` 저장 · `AnonymousAuthBootstrap` 진입점) → default 채택 영역 · CLI 자동 진입 가능
-- **§2 identity 변동성 경계** (`UserIdentityProvider` 인터페이스 단일 진입점 · domain 계층 SDK 직접 호출 금지) → 위반 시 STOP + 인터페이스 분리 의뢰
-- **§3 토큰 저장 의무** (`EncryptedSharedPreferences` 의무 · plaintext SharedPreferences 금지 · HTTPS only) → 위반 시 즉시 STOP
-- **§4 AuthRepository 패턴** (`signOut()` = 익명 세션 폐기 + 신규 부트스트랩 · `restoreSession()` = `bootstrapAsync()` 통합) → paradigm 정합 의무
-- **§5 JSON backup paradigm** (`formatVersion` + `exportedFromRepo` guard 의무 · SAF 사용 의무) → 신설 시 본 paradigm 정합
-- **§6 OAuth Phase 2** (Google / Kakao OAuth) → **별 cycle 의무** · 본 cycle 안 직접 진입 금지 · 사용자 명시 승인 후 cycle 분리
-- **§7 STOP trigger** (로그인 방식 / 세션 / 토큰 저장 방식 변경 · OAuth 신설 · RLS 정책 충돌 · 시크릿 하드코딩) → 즉시 STOP + Coin 명시 승인 의뢰
-- **§8 절대 금지** (시크릿 하드코딩 · PII 로그 출력 · HTTP · plaintext 토큰 · mock 인증 production 노출 · Supabase 서버 사이드 직접 변경) → 위반 시 즉시 STOP
-
-본 분기 핵심 = Auth trigger 활성 시점 `auth-rules.md` SoT 정독 의무 (= Key questions 영역 위험 신호 평가 직후 본 rule reading) + `auth-security-privacy` agent (= active) 호출 분기.
+키워드 목록 자체도 각 rule 의 trigger 절이 SoT다 (위는 진입 힌트). 어느 분기든 **STOP 판정 = `.claude/rules/stop-canonical.md` 9 항** (= 자동 주입 · 별도 정독 불요).
 
 ## Must escalate when
 

@@ -76,7 +76,7 @@ NOT 결정하는 것 (= 별 cycle 의무 · `routing-and-delegation.md` Planner/
 - 도메인 활성화 상태: `docs/rules/deferred-domains.md` §2 매트릭스 (Billing = ACTIVE × 4-repo · MASTER-BILLING-DOMAIN-ACTIVATE-001 baseline)
 - 결제 코드: 현재 repo 의 `BillingRepository` / `EntitlementRepository` / `BillingClient` 직접 호출 영역 검색
 - 시크릿 처리: 현재 repo 의 Google Service Account JSON / API key 참조 영역 검색 (`safety-and-secrets.md` 정합)
-- **0 matches 도 반드시 기록** (부재 증거가 중요할 수 있음 — 예: Edge Function 미구현 시점 mock-first 정합 판정 근거)
+- **0 matches 도 반드시 기록** (= 부재 증거는 양성 증거와 동등 · 본문 SoT = `docs/rules/workflow-core.md` §Evidence)
 
 **BASELINE 실측 의무** (`cycle-discipline.md` §17 정합): filename find 결과 부재 시점에서 즉시 STOP/UNKNOWN 분류 X — container 내부 동일 의미 symbol/object/function grep 의무 (예: `grep -rn "interface BillingRepository\|class BillingClient\|fun verify-purchase" --include="*.kt"`).
 

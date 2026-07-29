@@ -1,6 +1,6 @@
 ---
 name: test-strategist
-description: Call (read-only) when a change touches testable logic and you need a test-strategy judgment — ROI 우선순위(어디부터 테스트하나), 피라미드/test size 적정성, 여러 경우(happy+경계+에러+empty/동시성) 완전성, 회귀 위험. 특히 고위험 도메인(Auth/Billing/Data/Backend) 변경 시. SoT = docs/agent/architecture/TESTING_STRATEGY.md.
+description: Call (read-only) when a change touches testable logic and you need a test-strategy judgment — what to test first, at what test size, and whether the case coverage is complete. Especially for high-risk domains (Auth/Billing/Data/Backend).
 tools: Read, Glob, Grep
 ---
 

@@ -57,7 +57,7 @@ NOT 결정하는 것:
 
 - 현재 repo의 변경된 파일과 관련 문서 파일 매핑
 - `.ai/reports/<taskId>/` 보고서 완결성 확인
-- **0 matches도 반드시 기록**
+- **0 matches 도 반드시 기록** (= 부재 증거는 양성 증거와 동등 · 본문 SoT = `docs/rules/workflow-core.md` §Evidence)
 
 ---
 

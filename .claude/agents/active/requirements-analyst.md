@@ -58,7 +58,7 @@ tools: Read, Glob, Grep
 - 관련 소스 파일 검색 (Grep/Glob)
 - 기존 태스크 중복 확인 (`.ai/tasks/INDEX.md`)
 - 앱 컨텍스트 필요 시: `.claude/rules/` 참조 (역할 파일에 앱 문서 직접 하드코딩 금지)
-- **0 matches도 반드시 기록** (부재 증거 = 양성 증거)
+- **0 matches 도 반드시 기록** (= 부재 증거는 양성 증거와 동등 · 본문 SoT = `docs/rules/workflow-core.md` §Evidence)
 
 ---
 
