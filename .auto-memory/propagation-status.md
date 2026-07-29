@@ -170,9 +170,9 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 | `docs/design/pencil-sot-policy.md` | `2bfc81c538b2` | ✓ | ✓ | ✓ |
 | `docs/rules/uiux-sot-refresh.md` | `31c0da56aeec` | ✓ | ✓ | ✓ |
 | `docs/design/design-sot-policy.md` | `92a5e99804ff` | ✓ | ✓ | ✓ |
-| `.claude/settings.json` | `313fec8d0023` | ✓ | ✓ | ✓ |
+| `.claude/settings.json` | `db3987072d4b` | ✓ | ✓ | ✓ |
 | `docs/rules/workflow-core.md` | `69b017d624d5` | ✓ | ✓ | ✓ |
-| `docs/rules/cycle-discipline.md` | `44c7e664987e` | ✓ | ✓ | ✓ |
+| `docs/rules/cycle-discipline.md` | `1795cc31e2f1` | ✓ | ✓ | ✓ |
 | `docs/rules/pencil-automation.md` | `a2506a34d797` | ✓ | ✓ | ✓ |
 | `docs/rules/reporting.md` | `f85f991f2628` | ✓ | ✓ | ✓ |
 | `docs/rules/routing-and-delegation.md` | `51f6c6a486d5` | ✓ | ✓ | ✓ |
@@ -191,14 +191,14 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 
 ## Last verify-sync
 
-- timestamp: 2026-07-29T15:41:11+0900
-- pass: 163
+- timestamp: 2026-07-29T16:17:54+0900
+- pass: 158
 - drift: 2
 - miss: 6
 - exit: 1
 
 ### Drift 상세
 
-- docs/architecture/CLI-MASTER-SCOPE-SEPARATION-CHARTER.md  master=d83ce881e159  app-foundation=MISS  gently-product-docs=MISS  Selfward=MISS
+- docs/architecture/CLI-MASTER-SCOPE-SEPARATION-CHARTER.md  master=b547ae5be350  app-foundation=MISS  gently-product-docs=MISS  Selfward=MISS
 - docs/ops/production-cli-access-tokens.md  master=3b0e8131fb67  app-foundation=MISS  gently-product-docs=MISS  Selfward=MISS
 - docs/templates/release-checklist.template.md  master=e6c62fb280f4  app-foundation=30fc93967106(✗)  gently-product-docs=30fc93967106(✗)  Selfward=✓
