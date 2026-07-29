@@ -86,7 +86,7 @@
 ## §D. deviation + amend
 
 - **deviation**: 위 §C 규칙에서 벗어날 필요가 생기면 각 규칙의 deviation 경로를 따르되, 표준 외 선택은 PLAN `## 3. ArchitectureImpact` 에 근거 + reviewer 판정(`rule-routing-index.md §C` 정합).
-- **amend**: code-level 행동 중 "기존 규칙으로 안 잡히는 반복 패턴"을 발견하면 `cli infra rule candidate` 로 누적한다. 자동 신설하지 않는다 — `cycle-discipline.md §19`(stop-reflect self-improving loop) + `§18`(분기 정기 review) 를 통해 사용자 confirm 후 master cycle 로 정착(`rule-routing-index.md §D` 정합 · `cycle-discipline.md §2` L1-1 예외).
+- **amend**: code-level 행동 중 "기존 규칙으로 안 잡히는 반복 패턴"을 발견하면 `cli infra rule candidate` 로 누적한다. 자동 신설하지 않는다 — `cycle-discipline.md §19`(반복 패턴 자기관측 loop) + `§18`(분기 정기 review) 를 통해 사용자 confirm 후 master cycle 로 정착(`rule-routing-index.md §D` 정합 · `cycle-discipline.md §2` L1-1 예외).
 
 ---
 
