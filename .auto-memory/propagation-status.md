@@ -170,9 +170,9 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 | `docs/design/pencil-sot-policy.md` | `2bfc81c538b2` | ✓ | ✓ | ✓ |
 | `docs/rules/uiux-sot-refresh.md` | `31c0da56aeec` | ✓ | ✓ | ✓ |
 | `docs/design/design-sot-policy.md` | `92a5e99804ff` | ✓ | ✓ | ✓ |
-| `.claude/settings.json` | `db3987072d4b` | ✓ | ✓ | ✓ |
+| `.claude/settings.json` | `fdaf79e0dfe0` | ✓ | ✓ | ✓ |
 | `docs/rules/workflow-core.md` | `69b017d624d5` | ✓ | ✓ | ✓ |
-| `docs/rules/cycle-discipline.md` | `1795cc31e2f1` | ✓ | ✓ | ✓ |
+| `docs/rules/cycle-discipline.md` | `e5f547153109` | ✓ | ✓ | ✓ |
 | `docs/rules/pencil-automation.md` | `a2506a34d797` | ✓ | ✓ | ✓ |
 | `docs/rules/reporting.md` | `f85f991f2628` | ✓ | ✓ | ✓ |
 | `docs/rules/routing-and-delegation.md` | `51f6c6a486d5` | ✓ | ✓ | ✓ |
@@ -187,12 +187,12 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 | `docs/agent/process/COMMIT_CONVENTION.md` | `e2e8c636d82a` | ✓ | ✓ | ✓ |
 | `scripts/agent/frontmatter-grep.sh` | `a387a4dc26dc` | ✓ | ✓ | ✓ |
 | `.editorconfig` | `e6eb4cfe06a8` | ✓ | ✓ | ✓ |
-| `.mcp.json` | `1e6c13bac563` | ✓ | ✓ | ✓ |
+| `.mcp.json` | `52b16685b740` | ✓ | ✓ | ✓ |
 
 ## Last verify-sync
 
-- timestamp: 2026-07-29T16:22:18+0900
-- pass: 158
+- timestamp: 2026-07-29T17:03:36+0900
+- pass: 160
 - drift: 2
 - miss: 6
 - exit: 1
