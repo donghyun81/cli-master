@@ -99,22 +99,30 @@ security add-generic-password -a "$USER" -s <slot-name> -w
 # -w flag = hidden prompt · token 측 stdout 노출 차단
 ```
 
-본 cycle 측 slot 명세 (= MASTER-CLI-SUPABASE-COMPREHENSIVE-001 baseline):
-- `supabase-gb-token` (= GentlyBreath 측 PAT)
-- `supabase-gd-token` (= GentlyDay 측 PAT)
-- `supabase-gt-token` (= GentlyTable 측 PAT)
+slot 명세 (= 2026-07-29 `MASTER-CLI-STALE-SWEEP-4ACTIVE-001` 실측 현행화 · 구 판 = GB/GD/GT 3 slot 한정 `MASTER-CLI-SUPABASE-COMPREHENSIVE-001` baseline):
+- `supabase-selfward-token` (= **활성** 도메인 자식 Selfward 측 PAT · staging+prod 단일 계정)
+- `supabase-gb-token` (= GentlyBreath 측 PAT · **동결** · `.mcp.json` read_only 인용만)
+- `supabase-gd-token` (= GentlyDay 측 PAT · **동결** · 동일)
+- `supabase-gt-token` (= GentlyTable 측 PAT · **동결** · 동일)
+
+**miss 정책** (= `~/bin/claude-wrap.sh` 정합 · 2026-07-29 정정): slot miss = **warn + skip · `claude` 기동 계속**. 구 판 fail-fast(`exit 1`)는 동결 slot 정리 시점에 `claude` 자체를 기동 불능으로 만들었다 (= 동결 3 slot 은 read_only MCP 편의 수단이지 기동 전제가 아님).
 
 ### 추출 paradigm (= wrap script 측 진입 영역)
 
-`~/bin/claude-wrap.sh` 측 fail-fast paradigm:
+`~/bin/claude-wrap.sh` 측 warn+skip paradigm:
 
 ```bash
-SUPABASE_ACCESS_TOKEN_GB="$(security find-generic-password -s supabase-gb-token -a "$USER" -w 2>/dev/null)" \
-  || { echo "Keychain miss: supabase-gb-token" >&2; exit 1; }
-export SUPABASE_ACCESS_TOKEN_GB
+inject_token() {
+  local slot="$1" var="$2" val=""
+  val="$(security find-generic-password -s "$slot" -a "$USER" -w 2>/dev/null)" || {
+    echo "claude-wrap.sh: Keychain miss: $slot — skip" >&2   # 값 미출력 · 기동 계속
+    return 0
+  }
+  export "$var=$val"
+}
 ```
 
-**bash semantics fact** (= fail-fast paradigm 정합 의무):
+**bash semantics fact** (= 값 capture paradigm 정합 의무):
 - `export VAR="$(failing)"` 측 exit code = 0 default (= `export` builtin 측 `$()` exit code propagate X)
 - → local assignment + export 분리 paradigm 의무 (= 위 본문 정합)
 
@@ -128,12 +136,13 @@ export SUPABASE_ACCESS_TOKEN_GB
 - `.mcp.json` 측 `${SUPABASE_ACCESS_TOKEN_<자식>}` env interpolation 정합 (= 평문 token 본문 X)
 - wrap script 측 subshell `$()` capture + 변수 미echo (= stdout / stderr 노출 차단)
 - commit log 측 `eyJ` (= JWT prefix) / `sbp_` (= Supabase PAT prefix) 평문 0 match 의무 (= §시크릿 스캔 패턴 grep 정합)
+- **★검증 harness 자체가 노출 경로다** (= 2026-07-29 `MASTER-CLI-STALE-SWEEP-4ACTIVE-001` 실사고): secret 주입 script 를 dry-run / 진단할 때 **값이 아니라 존재 여부만** 출력한다. `${v:+SET}` / `${#v}` 는 안전하나 `${v:-UNSET}` 은 **값이 있으면 값을 출력한다** (= 그 사고의 정확한 기전 · 마스킹 의도가 정반대로 작동). 안전형 = `[ -n "$v" ] && echo SET || echo UNSET`. 노출 시 = 파일 기록 여부 전수 확인 + **해당 토큰 rotation 회수**(Coin 몫) 보고 의무 — 노출은 transcript 한정이어도 회수 대상이다.
 
 ---
 
 ## 시크릿 스캔 패턴
 
-시크릿 grep 스캔 (= `grep -rE` 직접 실행 · 구 compound-lint 도구 = deprecated · 6-repo 부재 · MASTER-CLI-COMPOUND-LINT-DEPRECATE-001) 이 다음 패턴을 검사한다:
+시크릿 grep 스캔 (= `grep -rE` 직접 실행 · 구 compound-lint 도구 = deprecated · 4-repo 부재 · MASTER-CLI-COMPOUND-LINT-DEPRECATE-001) 이 다음 패턴을 검사한다:
 
 ```
 AKIA[0-9A-Z]{16}          # AWS Access Key
@@ -166,7 +175,7 @@ AIza[0-9A-Za-z\-_]{35}    # Google API Key
 
 ## 비가역 변경 STOP 정책
 
-> **본 § = pointer 영역 default**. 본문 단일 SoT = [`CLAUDE.md §5`](../../CLAUDE.md) (= `MASTER-CLI-CYCLE-1-STOP-CANONICAL-INTEGRATION-001` 마감 default · 9 STOP 항 default). 본 § 본문 변경 시 = master cycle 신설 + 6-repo propagation 의무 default.
+> **본 § = pointer 영역 default**. 본문 단일 SoT = [`CLAUDE.md §5`](../../CLAUDE.md) (= `MASTER-CLI-CYCLE-1-STOP-CANONICAL-INTEGRATION-001` 마감 default · 9 STOP 항 default). 본 § 본문 변경 시 = master cycle 신설 + 4-repo propagation 의무 default.
 
 ---
 
@@ -192,4 +201,4 @@ AIza[0-9A-Za-z\-_]{35}    # Google API Key
 - 발화 시점 = stderr 측 warn 출력 default + post-rename `git add -u` 의무 paradigm 안내 default
 - mode = warn default (= exit 0 · non-blocking default · enforce mode 별 cycle default)
 
-상세 paradigm step + STOP 조건 = `cycle-discipline.md` §22 단일 SoT default. 본 § 본문 변경 시 = master cycle 신설 + 6-repo propagation 의무 default (= `cycle-discipline.md` §15 패턴 1 정합).
+상세 paradigm step + STOP 조건 = `cycle-discipline.md` §22 단일 SoT default. 본 § 본문 변경 시 = master cycle 신설 + 4-repo propagation 의무 default (= `cycle-discipline.md` §15 패턴 1 정합).

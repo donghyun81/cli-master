@@ -20,6 +20,12 @@
 
 set -uo pipefail
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# 전파 대상 SoT = repo-config.sh TARGET_REPOS (= 하드코딩 금지 · 2026-07-17 T6 재편 후
+# 구 판은 동결 3(GB/GD/GT)을 표로 뽑아 실 전파 대상과 무관한 REPORT 를 냈다).
+# shellcheck source=./repo-config.sh
+. "$SCRIPT_DIR/repo-config.sh"
+
 : "${PARENT_DIR:=$HOME/AndroidStudioProjects}"
 : "${MASTER_DIR:=$PARENT_DIR/claude-cli-master}"
 
@@ -68,7 +74,7 @@ MASTER_HEAD=$(git rev-parse --short HEAD 2>/dev/null || echo "(no-git)")
   echo ""
   echo "| repo | HEAD | branch | dirty? |"
   echo "|---|---|---|---|"
-  for r in GentlyBreath GentlyDay GentlyTable; do
+  for r in $TARGET_REPOS; do
     if [ -d "$PARENT_DIR/$r/.git" ]; then
       H=$(git -C "$PARENT_DIR/$r" rev-parse --short HEAD 2>/dev/null)
       B=$(git -C "$PARENT_DIR/$r" rev-parse --abbrev-ref HEAD 2>/dev/null)

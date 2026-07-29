@@ -1,6 +1,6 @@
 # Cross-Repo Parallel Execution Paradigm SoT
 
-> **단일 목적**: 단일 cli session 측 cross-repo (= 6-repo · master + app-foundation + GB + GD + GT + gently-product-docs) 자식 병렬 실행 paradigm + 다중 cli session 운영 paradigm 양쪽 분기 + cli session 자율 판단 영역 + 자식별 cwd 분리 + cross-repo 정합 처리 paradigm 통합 SoT.
+> **단일 목적**: 단일 cli session 측 cross-repo (= 4-repo · master + app-foundation + gently-product-docs + Selfward · 동결 3[GB/GD/GT] = 전파 대상 X · 쓰기 0) 자식 병렬 실행 paradigm + 다중 cli session 운영 paradigm 양쪽 분기 + cli session 자율 판단 영역 + 자식별 cwd 분리 + cross-repo 정합 처리 paradigm 통합 SoT.
 > **신설**: MASTER-CLI-PARENT-MOUNT-PARALLEL-EXEC-PARADIGM-001 (2026-05-19).
 > **연관 파일**:
 > - 부모 mount root `CLAUDE.md` (= `/Users/yundonghyeon/AndroidStudioProjects/CLAUDE.md` · cli session 진입 baseline) §3 cli session 진입 paradigm 분기
@@ -15,7 +15,7 @@
 
 ## 1. 본 rule SoT 본질
 
-본 rule = **cross-repo (= 6-repo) 측 cli session 운영 paradigm 단일 reference**. 단일 cli session 측 sub-agent 측 fan-out paradigm + 다중 cli session 운영 paradigm 양쪽 분기 명시 default.
+본 rule = **cross-repo (= 4-repo) 측 cli session 운영 paradigm 단일 reference**. 단일 cli session 측 sub-agent 측 fan-out paradigm + 다중 cli session 운영 paradigm 양쪽 분기 명시 default.
 
 본 paradigm 핵심 본심 = **cli session 측 자율 판단 default** (= 요청사항 본질 측정 후 paradigm 선택 default · 사용자 본심 정합 = "양쪽 모두 가능한데 요청사항에 따라서 claude code cli 가 판단해서 일을 처리").
 
@@ -30,7 +30,7 @@
 - **영역 3** (= `claude -p` sub-process spawn): **회피 default** (= 아래 §2.4 · Agent SDK credit pool 별 영역 · full API rate · roll over X · 요금 폭탄 risk). → detail §2.3 (paradigm 선택 본심).
 - **동족 구현 정합** (= 같은 맥락 2+ repo 구현 결과의 advisory 비교 층 · paste-back 회수 시점): cli-infra byte-identical 강제(= A4)도 정확성 cross-verify(= detail §4.1)도 아닌 사후 surface · 도메인 자율(= detail §4.2/§4.3) 위 advisory · **auto-converge 금지**. → detail §4.4 (= 유일 본문 canonical) · surface 형식·발행 위치 = `reporting.md §14`.
 
-> **단방향 propagation (A4 · 항상-on)**: cli infra = master 단방향 propagation + 6-repo byte-identical · 자식 직접 수정 금지 (= master `CLAUDE.md §3 + §4` · `cycle-discipline.md §15` 패턴 1). cross-repo 정합 처리 본문 (= sub-agent return 통합 §4.1 + sha 비교 §4.2 + drift mitigation §4.3) = detail §4.
+> **단방향 propagation (A4 · 항상-on)**: cli infra = master 단방향 propagation + 4-repo byte-identical · 자식 직접 수정 금지 (= master `CLAUDE.md §3 + §4` · `cycle-discipline.md §15` 패턴 1). cross-repo 정합 처리 본문 (= sub-agent return 통합 §4.1 + sha 비교 §4.2 + drift mitigation §4.3) = detail §4.
 
 ### 2.4 Subscription-aware paradigm (= 2026-06-15 Anthropic billing split 정합 · `MASTER-CLI-CROSS-REPO-SUBSCRIPTION-AWARE-PARADIGM-001` 신설)
 
@@ -73,7 +73,7 @@
 
 ## 5. STOP 조건 (= cross-repo 영역 한정)
 
-> **본 §5 = pointer 영역 default**. 본문 단일 SoT = [`CLAUDE.md §5`](../../CLAUDE.md) (= `MASTER-CLI-CYCLE-1-STOP-CANONICAL-INTEGRATION-001` 마감 default · 9 STOP 항 default · cross-repo HIGH RISK 도메인 진입 = STOP #7 default · 보호 5 file sha drift = STOP #5 default). 본 § 본문 변경 시 = master cycle 신설 + 6-repo propagation 의무 default.
+> **본 §5 = pointer 영역 default**. 본문 단일 SoT = [`CLAUDE.md §5`](../../CLAUDE.md) (= `MASTER-CLI-CYCLE-1-STOP-CANONICAL-INTEGRATION-001` 마감 default · 9 STOP 항 default · cross-repo HIGH RISK 도메인 진입 = STOP #7 default · 보호 5 file sha drift = STOP #5 default). 본 § 본문 변경 시 = master cycle 신설 + 4-repo propagation 의무 default.
 
 ## 6. paradigm 호출 trigger 영역
 
@@ -83,9 +83,10 @@
 
 | 키워드 | 한국어 + 영어 |
 |---|---|
-| repo 측 영역 | `6-repo` / `5-repo` / `3 자식` / `GB + GD + GT` / `자식별` / `다중 repo` |
+| repo 측 영역 (현행) | `4-repo` / `4-active` / `전파 자식 3` / `FND + PDOCS + SW` / `동결 계승 원천` / `자식별` / `다중 repo` |
+| repo 측 영역 (구 판 · 이력 인용 trigger 보존) | `6-repo` / `5-repo` / `3 자식` / `GB + GD + GT` |
 | paradigm 영역 | `cross-repo` / `fan-out` / `병렬` / `parallel` / `동족 자식` |
-| 영역 영역 | `propagation` / `byte-identical` / `cli infra 6-repo` / `master + 5 자식` |
+| 영역 영역 | `propagation` / `byte-identical` / `cli infra 4-repo` / `master + 자식 3` |
 
 ### 6.2 본 rule reading skip default trigger
 
@@ -96,7 +97,7 @@
 
 ## 7. 본 rule 의 변경 정책
 
-> 변경 정책 = [`rule-footer-common.md`](./rule-footer-common.md) (= 6-repo 권장 byte-identical · master cycle + propagation · 자식 직접 수정 금지 · T6).
+> 변경 정책 = [`rule-footer-common.md`](./rule-footer-common.md) (= 4-repo 권장 byte-identical · master cycle + propagation · 자식 직접 수정 금지 · T6).
 
 ## 8. 명시 cycle 이력
 

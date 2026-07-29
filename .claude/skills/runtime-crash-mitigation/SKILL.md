@@ -6,7 +6,7 @@ allowed-tools: Bash, Read, Edit
 
 # Runtime Crash Mitigation Process
 
-> **단일 목적**: 자식 repo (= GB / GD / GT) 측 Android runtime crash 발견 시점 cli session 측 mitigation process paradigm. trigger 기반 paradigm default (= 매번 runtime verify 회피 default · runtime crash 발견 시점 진입 default · 외부 동기화 덜 된 영역 false positive 회피 default).
+> **단일 목적**: 활성 도메인 자식 (= Selfward) 측 Android runtime crash 발견 시점 cli session 측 mitigation process paradigm. trigger 기반 paradigm default (= 매번 runtime verify 회피 default · runtime crash 발견 시점 진입 default · 외부 동기화 덜 된 영역 false positive 회피 default).
 > **신설**: MASTER-CLI-RUNTIME-CRASH-MITIGATION-PROCESS-PARADIGM-001 (2026-05-22).
 > **precedent**: `3REPO-RUNTIME-CRASH-DIAGNOSIS-001` (= H32 chat 마감 default · Sentry `SentryInitProvider` 자동 init 측 empty DSN crash 차단 default · `<meta-data android:name="io.sentry.auto-init" android:value="false" />` × 3 자식 byte-identical mitigation default).
 > **연관 paradigm**:
@@ -91,7 +91,7 @@ Anthropic v2.1.145+ 측 bundled skill (`/run` + `/verify` + `/run-skill-generato
 |---|---|---|
 | `/verify` | step 7 verify 의무 (= §3 5-command 본문) 측 native 대체 default. build + 실 앱 구동 측 코드 변경 확인 default — test / type check fallback 회피 default. | "0 command 금지" (`workflow-core.md ## /verify 규칙`) 정합 — `/verify` = 1+ 실 명령 실행 default |
 | `/run` | step 3 launch + 실 앱 구동 측 native 대체 default (= `adb monkey` launch 본문). 변경 동작 시각 확인 default. | step 3 Logcat 수집 전 launch paradigm 정합 |
-| `/run-skill-generator` | 자식별 launch recipe 1 회 capture default (= `.claude/skills/run-<name>/SKILL.md`). 본 패키지 측 run-master / run-foundation / run-GB / run-GD / run-GT 신설 default. | 자식별 staging flavor recipe 정합 — GB/GD/GT = `:composeApp:installStagingDebug` default |
+| `/run-skill-generator` | 자식별 launch recipe 1 회 capture default (= `.claude/skills/run-<name>/SKILL.md`). 본 패키지 측 실측 = `run-master`(master) / `run-foundation`(FND) / `run-Selfward`(SW) · **repo-local 보유** (= propagate 대상 X · `--prune` 사용 시 삭제 위험). | 자식별 staging flavor recipe 정합 — Selfward = `:composeApp:installStagingDebug` default |
 
 #### staging flavor 한정 + production push X (= §3.1 강화)
 
@@ -133,7 +133,7 @@ Anthropic v2.1.145+ 측 bundled skill (`/run` + `/verify` + `/run-skill-generato
 | emulator 측 runtime verify 부재 마감 시점 (= step 7 skip 시도) | 즉시 STOP default (= 본 paradigm 핵심 의무 영역 default) |
 | DB schema 변경 / migration 영역 root cause 발견 | 즉시 STOP + 사용자 회수 default (= deferred Data 도메인 default) |
 | Auth / Billing 영역 root cause 발견 시점 production 영역 진입 시도 | 즉시 STOP + 사용자 회수 default (= `auth-rules.md` + `billing-rules.md` 정합) |
-| 사용자 본심 분기 의제 본질 발견 (= mitigation paradigm 본질 결정 default · scope expansion default · 6-repo paradigm 영역 default) | AskUserQuestion 회수 default |
+| 사용자 본심 분기 의제 본질 발견 (= mitigation paradigm 본질 결정 default · scope expansion default · 4-repo paradigm 영역 default) | AskUserQuestion 회수 default |
 
 ---
 
@@ -141,7 +141,8 @@ Anthropic v2.1.145+ 측 bundled skill (`/run` + `/verify` + `/run-skill-generato
 
 | 영역 | 적용 |
 |---|---|
-| 자식 repo (= GB / GD / GT) 측 Android runtime crash | 의무 default |
+| 활성 도메인 자식 (= Selfward) 측 Android runtime crash | 의무 default |
+| 동결 3 (= GB / GD / GT) 측 runtime crash | **해당 X** (= 2026-07-17 T6 · 쓰기 0 · mitigation 필요 판단 = STOP + Coin 회수) |
 | app-foundation 측 Android runtime crash | 의무 default (= 자식 측 동족 paradigm 차용 default) |
 | master cli infra cycle 측 runtime crash 영역 | 적용 X default (= cli infra rule 영역 = production code 무접촉 default) |
 | iOS runtime crash | 적용 X default (= 본 paradigm 측 ADB / Android emulator 영역 한정 default · iOS 영역 = 별 paradigm cycle 후보 default) |
@@ -155,7 +156,7 @@ Anthropic v2.1.145+ 측 bundled skill (`/run` + `/verify` + `/run-skill-generato
 
 | section | 본질 |
 |---|---|
-| §0 Baseline | 6-repo HEAD sha + 보호 5 file sha + 직전 H<chat> 마감 default |
+| §0 Baseline | 4-active HEAD sha + 보호 5 file sha + 직전 H<chat> 마감 default |
 | §0.3 가설 우선순위 | disk 측정 결과 인용 default (= cowork chat 측 측정 결과 + cli session 측 재 verify 의무 default · `.claude/skills/disk-verification/SKILL.md` §3 정합) |
 | §1 Cycle 본질 | outcome + cli session 자율 paradigm + 사용자 본심 정합 default |
 | §2 Scope | 변경 영역 + 무접촉 영역 default |
@@ -197,8 +198,8 @@ Anthropic v2.1.145+ 측 bundled skill (`/run` + `/verify` + `/run-skill-generato
 
 ## §10 본 skill 의 변경 정책
 
-- cli infra 권장 byte-identical (= 6-repo · master + app-foundation + GentlyBreath + GentlyDay + GentlyTable + gently-product-docs)
-- 변경 시 master cycle 신설 + 6-repo propagation 의무 (= `cycle-discipline.md` §15 패턴 1 정합)
+- cli infra 권장 byte-identical (= 4-repo · master + app-foundation + gently-product-docs + Selfward)
+- 변경 시 master cycle 신설 + 4-repo propagation 의무 (= `cycle-discipline.md` §15 패턴 1 정합)
 - 자식 repo 측 직접 수정 금지
 
 ---

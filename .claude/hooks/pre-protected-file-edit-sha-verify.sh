@@ -5,7 +5,7 @@
 #
 # Purpose:
 #   Before Edit/Write touches one of the 5 protected files (cli infra byte-identical
-#   invariants across 6-repo), surface a warning so cli session escalates to a
+#   invariants across 4-active), surface a warning so cli session escalates to a
 #   master cycle (per docs/rules/cycle-discipline.md §3 + §10) rather than
 #   editing in-place. In enforce mode, block the tool call with structured JSON
 #   deny output.
@@ -106,7 +106,7 @@ SUMMARY=$(echo "$ANALYSIS" | grep "^PROTECTED:" | head -1)
 PROTECTED_REL=$(echo "$SUMMARY" | cut -d: -f2)
 FILE_PATH=$(echo "$SUMMARY" | cut -d: -f3-)
 
-BLOCK_REASON="Protected file edit blocked: ${PROTECTED_REL}. Protected files require a master cycle (see docs/rules/cycle-discipline.md §3 + §10) — direct edit bypasses 6-repo byte-identical invariants."
+BLOCK_REASON="Protected file edit blocked: ${PROTECTED_REL}. Protected files require a master cycle (see docs/rules/cycle-discipline.md §3 + §10) — direct edit bypasses 4-repo byte-identical invariants."
 
 BLOCK_MSG="[pre-protected-file-edit] Protected file edit attempted
 File:      ${FILE_PATH}

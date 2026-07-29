@@ -43,9 +43,12 @@ if [ -n "$UNTITLED_FILES" ]; then
   echo "  4. 또는 archive 격리: mv <untitled path> docs/design/pencil-exports/archive/<yyyymmdd>/_orphan/"
 fi
 
-# 다른 repo (GentlyTable / GentlyBreath) 잘못 저장 검증
-WRONG_REPO=$(find "$PARENT_DIR/GentlyTable" -iname "$EXPECTED_NAME.pen" 2>/dev/null; \
-             find "$PARENT_DIR/GentlyBreath" -iname "$EXPECTED_NAME.pen" 2>/dev/null)
+# 다른 repo 잘못 저장 검증 (= 활성 SW 외 · 동결 3 포함 · 2026-07-29 4-active 재편)
+WRONG_REPO=""
+for _wr in GentlyBreath GentlyDay GentlyTable app-foundation gently-product-docs; do
+  [ -d "$PARENT_DIR/$_wr" ] || continue
+  WRONG_REPO="$WRONG_REPO$(find "$PARENT_DIR/$_wr" -iname "$EXPECTED_NAME.pen" 2>/dev/null)"
+done
 if [ -n "$WRONG_REPO" ]; then
   echo ""
   echo "✗ 다른 repo 에 잘못 저장 발견:"

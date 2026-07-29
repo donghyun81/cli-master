@@ -60,7 +60,7 @@ cli-master는 두 층을 한 repo에 섞고 있고, **자기 §0 charter조차 �
 | `docs/rules/` 중 제품-도메인 (24) | pencil-*(8: automation·cli-headless·component-paradigm·mcp-tools-reference·pen-format-schema·theme-multi-axis·**uiux-workflow**★·visual-primitives)·code-style-guide·code-principles·auth-rules·billing-rules·supabase-handling·design-prompting-paradigm·design-to-code-sync·domain-roles·deferred-domains·ui-ux-analysis·ux-laws·**uiux-sot-refresh**★·sot-code-name-map·architecture-foundation-link-policy·legacy-cleanup-governance·runtime-crash-mitigation-process | 제품 코드/디자인/도메인 규칙 (★=보호 5) |
 | `docs/release-readiness/PACKAGE-OVERVIEW.md` | 출시 현황 | 제품 출시 상태 |
 | `docs/agent/audits/`·`docs/agent/solutions/PROMPTFIT_RUBRIC.md`·`docs/baseline/` | 감사·rubric·cowork redline | 제품/프로세스 산출(일부 archive 후보) |
-| `docs/ops/production-cli-access-tokens.md` | prod secret runbook | 제품 운영 · ★**민감(secret)** · 현재 verify-sync MISS-5(master-only 의도적 6-repo 제외) — 분리 시 secret 취급·접근권 재설계 의무 |
+| `docs/ops/production-cli-access-tokens.md` | prod secret runbook | 제품 운영 · ★**민감(secret)** · 현재 verify-sync MISS-5(master-only 의도적 4-repo 제외) — 분리 시 secret 취급·접근권 재설계 의무 |
 
 ### ⚠ 경계 — 내용 검토 후 확정
 

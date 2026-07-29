@@ -111,7 +111,7 @@ if [ "$PROPAGATE_ALL" = 1 ]; then
 fi
 
 # === C16: run-* recipe cp 가드 (= MASTER-CLI-INFRA-SMALL-BATCH-001) ===
-# .claude/skills/run-*  = 자식별 run/verify launch recipe (master=run-master · FND=run-foundation · GB/GD/GT=run-<자식>).
+# .claude/skills/run-*  = 자식별 run/verify launch recipe (실측: master=run-master · FND=run-foundation · SW=run-Selfward).
 #   각 자식 한정 repo-local (L1-3 polyrepo · byte-identical 아님) → master→자식 cp 금지.
 #   --prune EXCLUDE(PRUNE_EXCLUDE_PATHS · 동일 glob)는 역방향(orphan 오탐)만 막았고,
 #   순방향 cp(--all find 자동 포착 + 명시 인자 양 경로)엔 가드 부재 → run-master 재seeding 사고.
@@ -151,7 +151,7 @@ if [ "$PRUNE_MODE" = 1 ]; then
   PRUNE_ROOT_FILES=()  # root 파일 = 자식 build 영향 (gradlew 등) → default prune 제외
   PRUNE_EXCLUDE_NAMES=(.DS_Store settings.local.json)
   # path-glob EXCLUDE = basename 으로 표현 불가한 자식 repo-local 영역 (case-glob · '*' 는 '/' 포함 매칭)
-  #   .claude/skills/run-*  = 자식별 run/verify recipe (master=run-master · FND=run-foundation · GB/GD/GT=run-<자식>)
+  #   .claude/skills/run-*  = 자식별 run/verify recipe (실측: master=run-master · FND=run-foundation · SW=run-Selfward)
   #   = byte-identical 아님 · L1-3 polyrepo 자식 차별화 영역 (workflow-core.md Native run/verify integration)
   #   → master 부재가 정상(false-orphan) · basename=SKILL.md 라 PRUNE_EXCLUDE_NAMES 로 표현 불가
   #   주의: run-* subtree 만 제외 · 진짜 orphan(master SoT cli-infra file 자식 잔존분)은 여전히 검출

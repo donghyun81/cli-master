@@ -19,7 +19,7 @@ bash scripts/propagate.sh --all
 
 기능:
 - master 파일 sha 계산
-- 각 자식 repo path 해결 (`<PARENT>/GentlyBreath` 등 placeholder 변환)
+- 각 자식 repo path 해결 (`<PARENT>/Selfward` 등 placeholder 변환)
 - cp + 자식 repo 안 git stage
 - cross-verify (자식 sha = master sha 확인)
 - 결과 stdout 출력
@@ -139,7 +139,7 @@ C10 적용 후 = 99.99% 자동 (daemon 죽거나 macOS 외 환경 만 미적용)
 |---|---|---|
 | `PARENT_DIR` | `~/AndroidStudioProjects` | 부모 폴더 (자식 repo 들이 있는 곳) |
 | `MASTER_DIR` | `$PARENT_DIR/claude-cli-master` | master repo |
-| `TARGET_REPOS` | `GentlyBreath GentlyDay GentlyTable` | 자식 repo 명단 (env 로 override) |
+| `TARGET_REPOS` | `app-foundation gently-product-docs Selfward` | 전파 자식 명단 (env 로 override · SoT = `repo-config.sh` · 2026-07-17 T6 재편) |
 
 ## 신규 자식 repo 추가 절차
 

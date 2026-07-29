@@ -1,6 +1,6 @@
 # Workflow adoption policy (= dynamic workflows 전면 미정 → 조건부 허용)
 
-> 본 file = 6-repo 측 `Workflow` 도구(dynamic workflows) 채택 정책 단일 SoT. 판단 기준 + gate 실측 + 토큰 예산 통제의 유일 본문.
+> 본 file = 4-repo 측 `Workflow` 도구(dynamic workflows) 채택 정책 단일 SoT. 판단 기준 + gate 실측 + 토큰 예산 통제의 유일 본문.
 > 위치 = `claude-cli-master/docs/rules/workflow-policy.md`
 > 신설: `MASTER-CLI-WORKFLOW-ADOPTION-POLICY-002` · 2026-06-04
 > 본질: `MASTER-CLI-WORKFLOW-SUBAGENT-BILLING-GUARD-001`(2026-06-04) 이 `cross-repo-parallel-exec.md §2.4.1` 에 정착시킨 gate ① + 토큰 예산 통제 본문을 별 rule 로 교정 이관(유실 0) + 채택 정책 전반 완성.
@@ -84,7 +84,7 @@
 
 - 본 file = `Workflow` 도구 채택 정책 + gate 실측 + 토큰 예산 통제의 유일 본문.
 - `cross-repo-parallel-exec.md §2.4.1` = 본 file pointer 만 보유한다 (kernel 1줄 잔존 · 본문 중복 금지).
-- 기준 변경 시 = 본 file 단일 변경 + 6-repo byte-identical propagation.
+- 기준 변경 시 = 본 file 단일 변경 + 4-repo byte-identical propagation.
 
 ---
 
@@ -100,7 +100,7 @@
 
 ## §8. 변경 정책
 
-> 변경 정책 = [`rule-footer-common.md`](../../.claude/rules/rule-footer-common.md) (= 6-repo 권장 byte-identical · master cycle + propagation · 자식 직접 수정 금지 · T6).
+> 변경 정책 = [`rule-footer-common.md`](../../.claude/rules/rule-footer-common.md) (= 4-repo 권장 byte-identical · master cycle + propagation · 자식 직접 수정 금지 · T6).
 
 ---
 

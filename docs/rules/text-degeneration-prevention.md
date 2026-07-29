@@ -3,7 +3,7 @@
 > **단일 목적**: autoregressive LLM 의 token-level degeneration (= 동일 어절 / 형태소 / n-gram 의 반복 강화) 을 출력 단계에서 감지·차단.
 > **신설**: MASTER-DEGENERATION-PREVENTION-POLICY-001 (= ledger MASTER-T09 · 2026-05-12).
 > **연관**:
-> - `cycle-discipline.md` §15 패턴 1 (master cycle 신설 + 6-repo propagation)
+> - `cycle-discipline.md` §15 패턴 1 (master cycle 신설 + 4-repo propagation)
 > - `.claude/hooks/post-edit-degeneration-check.sh` (PostToolUse 자동 검사)
 > - `code-principles.md` §4 reviewer 체크리스트 (작성 직전 mental scan 항목)
 > SOT: `CLAUDE.md`
@@ -160,7 +160,7 @@ scan 통과 후 출력 → PostToolUse hook (§6) 가 사후 재검증.
 
 ## 12. 본 SoT 의 변경 정책
 
-> 변경 정책 = [`rule-footer-common.md`](../../.claude/rules/rule-footer-common.md) (= 6-repo 권장 byte-identical · master cycle + propagation · 자식 직접 수정 금지 · T6).
+> 변경 정책 = [`rule-footer-common.md`](../../.claude/rules/rule-footer-common.md) (= 4-repo 권장 byte-identical · master cycle + propagation · 자식 직접 수정 금지 · T6).
 
 ---
 

@@ -11,7 +11,7 @@
 #   bash $HOME/AndroidStudioProjects/claude-cli-master/scripts/nightly-baseline-report.sh
 #
 # scope:
-#   - 단일 repo (claude-cli-master) · 자식 4 repo (GB/GD/GT/app-foundation) read-only.
+#   - 단일 repo (claude-cli-master) · 전파 자식 3 (app-foundation/gently-product-docs/Selfward · repo-config SoT) read-only.
 #   - 출력 file 외 쓰기 X (= 보호 파일 / cli infra / 자식 repo 무접촉 의무).
 #
 # 산출물:
@@ -64,7 +64,7 @@ log_append "start · claude_bin=${CLAUDE_BIN:-(부재)}"
 
 REPOS_ALL="claude-cli-master $TARGET_REPOS"
 
-# === 측정 A — 6-repo HEAD ===
+# === 측정 A — 4-active HEAD ===
 read_head() {
   local repo_dir="$1"
   if [ -d "$repo_dir/.git" ]; then
@@ -83,7 +83,7 @@ build_head_block() {
   done
 }
 
-# === 측정 B — 보호 파일 5 종 × 6-repo sha matrix ===
+# === 측정 B — 보호 파일 5 종 × 4-active sha matrix ===
 sha_short() {
   local f="$1"
   if [ -f "$f" ]; then
@@ -204,7 +204,7 @@ PROMPT_BODY=$(cat <<PROMPT
 ## 본 작업 정의 (repo 도메인 baseline · 단방향 단일 진실)
 
 - master = claude-cli-master (cli infra + 보호 파일 5 종 SoT 단일 source · 자식 repo 단방향 propagation 발행)
-- 자식 4 repo = GentlyBreath (호흡) / GentlyDay (일상) / GentlyTable (식단) / app-foundation (공통 foundation)
+- 자식 3 repo = Selfward (「나에게로」· 활성 도메인 자식 단일 · 1 앱 N 도메인) / app-foundation (공통 foundation) / gently-product-docs (제품 기획·비전 문서)
 - 보호 파일 5 종 = master ↔ 자식 byte-identical 강제 (drift 발견 시 mitigation cycle 의무)
 - cli infra = .claude/ 전체 = 권장 byte-identical (drift lazy 가능)
 
@@ -219,11 +219,11 @@ PROMPT_BODY=$(cat <<PROMPT
 
 ## raw 측정 데이터
 
-### A. 6-repo HEAD
+### A. 4-active HEAD
 
 $HEAD_BLOCK
 
-### B. 보호 파일 5 종 × 6-repo sha matrix
+### B. 보호 파일 5 종 × 4-active sha matrix
 
 $PROTECTED_BLOCK
 
@@ -256,7 +256,7 @@ $CYCLE_BLOCK
 
 (보호 파일 정합 + cli infra drift + 진행 중 cycle 1 순위 · 사람 1 분 읽기 분량)
 
-## 2. 6-repo HEAD
+## 2. 4-active HEAD
 
 (A 표 그대로)
 
@@ -281,10 +281,9 @@ $CYCLE_BLOCK
 | repo | 도메인 |
 |---|---|
 | claude-cli-master | master · cli infra + 보호 파일 SoT |
-| GentlyBreath | 자식 · 호흡 |
-| GentlyDay | 자식 · 일상 |
-| GentlyTable | 자식 · 식단 |
+| Selfward | 자식 · 「나에게로」 활성 도메인 단일 (1 앱 N 도메인) |
 | app-foundation | 자식 · 공통 foundation |
+| gently-product-docs | 자식 · 제품 기획·비전 문서 |
 
 위 layout 그대로 출력하라. 데이터 안에 없는 fact 추가 X.
 PROMPT
@@ -320,7 +319,7 @@ if [ "$CLAUDE_EXIT" -ne 0 ] || [ -z "$CLAUDE_OUT" ]; then
     echo "> 측정 KST: $TS_KST · 측정 UTC: $TS_UTC"
     echo "> claude exit = $CLAUDE_EXIT · 종합 단계 skip · 아래 raw 측정 데이터 그대로 박음"
     echo ""
-    echo "## A. 6-repo HEAD"
+    echo "## A. 4-active HEAD"
     echo ""
     printf "%s\n" "$HEAD_BLOCK"
     echo ""

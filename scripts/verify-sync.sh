@@ -132,7 +132,7 @@ else
     ! -path '*skills/run-*' \
     ! -path 'docs/release-readiness/*' \
     ! -path 'docs/agent/audits/*' 2>/dev/null | sort)
-  # skills/run-* = 자식별 차별화 launch recipe (run-master/foundation/GB/GD/GT · 각 자식 한정 ·
+  # skills/run-* = 자식별 차별화 launch recipe (실측: run-master / run-foundation / run-Selfward · 각 자식 한정 ·
   #   propagation X · §Q-2 / P0-4 NATIVE-RUN-VERIFY-SANDBOX) → byte-identical/MISS 검증 제외
   #   (MASTER-CLI-VERIFY-SYNC-DIFFERENTIATION-SCOPE-001)
   # docs/agent/audits/* = master-only 점-측정 audit (TESTING-BACKFILL-AUDIT.md ·

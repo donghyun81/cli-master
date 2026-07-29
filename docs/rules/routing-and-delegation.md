@@ -159,7 +159,7 @@ intake-router는 키워드 분류기가 아니다 — **어떤 전문 판단이 
 
 역할별 경로 스코핑: `.claude/rules/safety-and-secrets.md` "## 역할별 경로 허용 매트릭스" 참조.
 
-### Cross-repo 영역 (= 6-repo · master + app-foundation + GB + GD + GT + gently-product-docs) — 2026-05-19 신설
+### Cross-repo 영역 (= 4-repo · master + app-foundation + gently-product-docs + Selfward) — 2026-05-19 신설
 
 > 본 sub-section = `MASTER-CLI-PARENT-MOUNT-PARALLEL-EXEC-PARADIGM-001` 안 추가. cross-repo 영역 본질 발견 시점 본 sub-section 정합 + `.claude/rules/cross-repo-parallel-exec.md` SoT reading 의무.
 
@@ -174,7 +174,7 @@ paradigm 선택 본심 = cli session 측 자율 판단 default (= 사용자 본�
 
 #### cross-repo sub-agent (= cross-repo-orchestrator)
 
-cross-repo 영역 본질 발견 시점 (= 키워드: "6-repo" / "5-repo" / "3 자식" / "GB + GD + GT" / "cross-repo" / "동족 자식" / "병렬" / "fan-out" / "byte-identical" / "propagation" 등) `cross-repo-orchestrator` sub-agent 호출 default. 본 sub-agent 측 routing 본질:
+cross-repo 영역 본질 발견 시점 (= 키워드 현행: "4-repo" / "4-active" / "전파 자식 3" / "FND + PDOCS + SW" / "동결 계승 원천" / "cross-repo" / "동족 자식" / "병렬" / "fan-out" / "byte-identical" / "propagation" · 구 판 이력 인용 trigger 보존: "6-repo" / "5-repo" / "3 자식" / "GB + GD + GT" 등) `cross-repo-orchestrator` sub-agent 호출 default. 본 sub-agent 측 routing 본질:
 
 - `intake-router.md` 측 **단일 repo routing paradigm** 측 cross-repo 측 확장 영역 default (= 2 영역 분리 paradigm 정합)
 - 본 sub-agent 측 직접 해법 결정 X (= routing + 통합 영역 단일 default · Planner 경계 정합)

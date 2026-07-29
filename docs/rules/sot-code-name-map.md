@@ -1,4 +1,4 @@
-# SoT ↔ Code 화면명 매핑 SoT (6-repo · master + app-foundation + GentlyBreath + GentlyDay + GentlyTable + gently-product-docs · 자식 도메인 코드 = GB/GD/GT 측만)
+# SoT ↔ Code 화면명 매핑 SoT (4-repo · master + app-foundation + gently-product-docs + Selfward · 자식 도메인 코드 = Selfward 측만 · 구 GB/GD/GT = 2026-07-17 T6 동결)
 
 > **단일 목적**: Pencil SoT 화면명 ↔ Compose 코드 화면명 차이 영역 통합 매핑.
 > **scope**: GB / GD / GT 3 자식 repo (master = SoT 만 보유 / 코드 X).
@@ -8,7 +8,7 @@
 
 > ⚠ **STALENESS / VOLATILITY 경고** (= 2026-05-31 측정 · `MASTER-CLI-SOT-CODE-NAME-MAP-VOLATILE-FLAG-001`):
 > - **3 자식 코드 row 대거 stale** (= GB 6 / GD 3 / GT 9 stale) + **실재 화면 누락** (= GB 5 / GD 6 / GT 4) + ui-spec SoT 디렉터리 희소 (= GB 4 / GT 4).
-> - 본 doc = **volatile artifact** (= 화면 evolution 마다 6-repo 수기 byte-identical 갱신 의무 · disk 자동 도출 가능 영역을 수기 유지 · `rule-architecture` 원칙 4 변동성 risk · 원칙 1 양 최소·SSOT risk).
+> - 본 doc = **volatile artifact** (= 화면 evolution 마다 4-repo 수기 byte-identical 갱신 의무 · disk 자동 도출 가능 영역을 수기 유지 · `rule-architecture` 원칙 4 변동성 risk · 원칙 1 양 최소·SSOT risk).
 > - **전면 재매핑 + 구조결정 (= 자동도출 hook vs byte-identical 강등 vs 자식별 분리) = `ENTRY-PROMPT-rule-architecture-establishment.md` 프로그램 이관** (= GAP-2 행동→규칙 라우팅 색인 + §5-A L3 도메인층 + 원칙 1/4). **그 전까지 본 §2~§4 표 = 참고용 (= 현행 보장 X)**.
 
 ---
@@ -124,7 +124,7 @@
 - 보호 5 또는 cli infra 6 drift 발생 시 본 매핑 재검증 (직접 영향 X 면 lazy).
 - 자식 repo 안 신규 *Screen*.kt 추가 / 삭제 / rename = 본 매핑 row 갱신 의무.
 - 자식 repo 안 신규 ui-spec.json 추가 / 삭제 / rename = 본 매핑 row 갱신 의무.
-- 갱신 시 master 작성 + 6-repo cp propagation (cli infra 표준 byte-identical 의무 · 자식 도메인 코드 매핑 본질 = GB/GD/GT 측만 default · foundation 측 화면 X default).
+- 갱신 시 master 작성 + 4-repo cp propagation (cli infra 표준 byte-identical 의무 · 자식 도메인 코드 매핑 본질 = Selfward 측만 default · foundation 측 화면 X default).
 
 ---
 

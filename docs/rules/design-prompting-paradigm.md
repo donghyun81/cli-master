@@ -184,7 +184,7 @@ agent 측 prompt 발행 직전 self-check 3 항목:
 
 ## 9. 본 SoT 의 변경 정책
 
-> 변경 정책 = [`rule-footer-common.md`](../../.claude/rules/rule-footer-common.md) (= 6-repo 권장 byte-identical · master cycle + propagation · 자식 직접 수정 금지 · T6).
+> 변경 정책 = [`rule-footer-common.md`](../../.claude/rules/rule-footer-common.md) (= 4-repo 권장 byte-identical · master cycle + propagation · 자식 직접 수정 금지 · T6).
 
 ---
 

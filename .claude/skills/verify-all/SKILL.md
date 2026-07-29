@@ -8,7 +8,7 @@ disable-model-invocation: true
 
 # verify-all
 
-> Purpose: architectureCheck + unit test + 산출물·시크릿 grep 검증 일괄 실행 (구 compound-lint 단계 = deprecated · 도구 6-repo 부재 · MASTER-CLI-COMPOUND-LINT-DEPRECATE-001). 최대 2회 재시도로 간헐적 환경 문제를 흡수하되 실패는 STOP 보고.
+> Purpose: architectureCheck + unit test + 산출물·시크릿 grep 검증 일괄 실행 (구 compound-lint 단계 = deprecated · 도구 4-repo 부재 · MASTER-CLI-COMPOUND-LINT-DEPRECATE-001). 최대 2회 재시도로 간헐적 환경 문제를 흡수하되 실패는 STOP 보고.
 
 인자: `$ARGUMENTS` — taskId (예: `SW-UI-001`)
 

@@ -214,8 +214,8 @@ allowed-tools: Bash, Read, Edit, Write
 
 ## §10 본 skill 의 변경 정책
 
-- cli infra 권장 byte-identical (= 6-repo · master + app-foundation + GentlyBreath + GentlyDay + GentlyTable + gently-product-docs)
-- 변경 시 master cycle 신설 + 6-repo propagation 의무 (= `cycle-discipline.md` §15 패턴 1 정합)
+- cli infra 권장 byte-identical (= 4-repo · master + app-foundation + gently-product-docs + Selfward)
+- 변경 시 master cycle 신설 + 4-repo propagation 의무 (= `cycle-discipline.md` §15 패턴 1 정합)
 - 자식 repo 측 직접 수정 금지
 
 ---

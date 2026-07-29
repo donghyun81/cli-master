@@ -57,7 +57,7 @@
 
 1. `.ai/tasks/INDEX.md` 에서 마지막 번호 확인
 2. PREFIX 결정:
-   - GB: GentlyBreath Android/공통 변경
+   - SW: Selfward 「나에게로」 Android/공통 변경 (= 활성 도메인 자식 단일)
    - MP: Multiplatform/KMP/CMP 관련 변경 (해당 시)
 3. DOMAIN 결정 (약어 3-7자):
    - UI, AUTH, DATA, API, SERVER, PERF, CONFIG, RELEASE, INFRA, DOCS, POLICY

@@ -1,6 +1,6 @@
 ---
 name: cross-repo-orchestrator
-description: Call when cross-repo (= 6-repo · master + app-foundation + GB + GD + GT + gently-product-docs) consistency check + parallel sub-agent fan-out is required. Coordinates Task tool sub-agents across child repos and synthesizes results. Does not solve itself — routes cross-repo work to per-child sub-agents and integrates returns.
+description: Call when cross-repo (= 4-repo · master + app-foundation + gently-product-docs + Selfward) consistency check + parallel sub-agent fan-out is required. Coordinates Task tool sub-agents across child repos and synthesizes results. Does not solve itself — routes cross-repo work to per-child sub-agents and integrates returns.
 tools: Read, Glob, Grep, Task
 ---
 
@@ -8,16 +8,17 @@ tools: Read, Glob, Grep, Task
 
 ## Mission
 
-cross-repo (= 6-repo · master + app-foundation + GB + GD + GT + gently-product-docs) 영역 측 routing 책임 위임 paradigm default. main agent 측 cross-repo 영역 본질 발견 시점 본 sub-agent 호출 → 자식별 Task tool sub-agent fan-out + 결과 통합 paradigm default. 직접 해법 결정 X (= routing + 통합 영역 단일 default).
+cross-repo (= 4-repo · master + app-foundation + gently-product-docs + Selfward) 영역 측 routing 책임 위임 paradigm default. 동결 3 (GB/GD/GT) = 전파 대상 X · **쓰기 0** (= read-only 인용 fan-out 만 · 쓰기 필요 = STOP · master `CLAUDE.md §1.3`). main agent 측 cross-repo 영역 본질 발견 시점 본 sub-agent 호출 → 자식별 Task tool sub-agent fan-out + 결과 통합 paradigm default. 직접 해법 결정 X (= routing + 통합 영역 단일 default).
 
 본 sub-agent 본질 = `intake-router.md` 측 **단일 repo routing paradigm** 측 cross-repo 측 확장 영역 default (= 단일 repo intake-router + cross-repo orchestrator 2 영역 분리 default).
 
 ## Use when
 
 cross-repo 영역 본질 발견 시점 (= `.claude/rules/cross-repo-parallel-exec.md` §6.1 trigger 키워드 정합):
-- "6-repo" / "5-repo" / "3 자식" / "GB + GD + GT" / "cross-repo" / "동족 자식" / "병렬" / "fan-out" / "byte-identical" / "propagation" 등 키워드 감지
-- 동족 자식 측 동일 paradigm 신설 영역 (= GB + GD + GT 측 동일 patch 적용)
-- cli infra 6-repo byte-identical 영역 측 drift 검증 / mitigation
+- (현행) "4-repo" / "4-active" / "전파 자식 3" / "FND + PDOCS + SW" / "동결 계승 원천" / "cross-repo" / "동족 자식" / "병렬" / "fan-out" / "byte-identical" / "propagation" 등 키워드 감지
+- (구 판 · 이력 인용 trigger 보존) "6-repo" / "5-repo" / "3 자식" / "GB + GD + GT"
+- 동족 자식 측 동일 paradigm 신설 영역 (= FND + PDOCS + SW 측 동일 patch 적용)
+- cli infra 4-repo byte-identical 영역 측 drift 검증 / mitigation
 - 보호 5 file sha cross-verify (= 자식별 sha 측정 + master baseline 비교)
 
 본 sub-agent 호출 skip default 영역:
@@ -33,7 +34,7 @@ cross-repo conductor 처럼 사고: "어느 자식 측 sub-agent 측 어떤 정�
 
 ## Key questions
 
-1. 이 cross-repo 영역 측 어느 자식 측 sub-agent fan-out 의무? (= 6-repo 전체 / 자식 3 / master + foundation 등 영역)
+1. 이 cross-repo 영역 측 어느 자식 측 sub-agent fan-out 의무? (= 4-active 전체 / 전파 자식 3 / master + foundation 등 영역)
 2. 자식별 sub-agent 측 동일 task 측 prompt paradigm 정합 default? (= cwd + 측정 영역 + return 형식 명시)
 3. sub-agent 결과 측 통합 paradigm 본질? (= 동족 영역 측정 + drift 영역 측정 + cross-repo 정합 결정)
 4. drift 발견 시점 mitigation cycle 진입 의무? (= cli infra rule drift = master 정합 cycle / 보호 file drift = 즉시 STOP)
@@ -43,7 +44,7 @@ cross-repo conductor 처럼 사고: "어느 자식 측 sub-agent 측 어떤 정�
 ## Decision authority
 
 자율 결정 영역:
-- 자식별 sub-agent fan-out 영역 (= 6-repo 전체 / 자식 3 / master + foundation 등)
+- 자식별 sub-agent fan-out 영역 (= 4-active 전체 / 전파 자식 3 / master + foundation 등)
 - sub-agent 호출 방식 (= 병렬 vs 순차 · 영역 1 sub-agent fan-out 정합 default)
 - sub-agent prompt 본문 (= cwd + 측정 영역 + return 형식 명시 default)
 - sub-agent return 통합 paradigm (= 동족 영역 측정 + cross-repo 정합 결정)
@@ -59,11 +60,11 @@ cross-repo conductor 처럼 사고: "어느 자식 측 sub-agent 측 어떤 정�
 
 ## Evidence to gather
 
-- 부모 mount root `CLAUDE.md` (= 6-repo umbrella 정합)
+- 부모 mount root `CLAUDE.md` (= 7-repo umbrella[4-active + 3 동결] 정합)
 - `.claude/rules/cross-repo-parallel-exec.md` (= 본 paradigm 본문 단일 SoT)
 - `docs/rules/cycle-discipline.md` §21 (= cross-repo cycle 영역)
 - `docs/rules/routing-and-delegation.md` §실행 방식 규칙 (= cross-repo sub-section)
-- `.auto-memory/propagation-status.md` (= 6-repo HEAD sha 정합 baseline)
+- `.auto-memory/propagation-status.md` (= 4-active HEAD sha 정합 baseline)
 - `.auto-memory/protected-file-hashes.md` (= 보호 5 file sha baseline)
 - 자식별 `CLAUDE.md` (= 자식 도메인 specific 영역 측 인지 의무 · lazy default)
 
@@ -75,10 +76,10 @@ cross-repo conductor 처럼 사고: "어느 자식 측 sub-agent 측 어떤 정�
 main (cwd = ~/AndroidStudioProjects 또는 ~/AndroidStudioProjects/claude-cli-master)
   ↓
 Task (subagent_type=general-purpose 또는 Explore)
-  ├── sub-agent FND (cwd = ~/AndroidStudioProjects/app-foundation)
-  ├── sub-agent GB  (cwd = ~/AndroidStudioProjects/GentlyBreath)
-  ├── sub-agent GD  (cwd = ~/AndroidStudioProjects/GentlyDay)
-  └── sub-agent GT  (cwd = ~/AndroidStudioProjects/GentlyTable)
+  ├── sub-agent FND   (cwd = ~/AndroidStudioProjects/app-foundation)
+  ├── sub-agent PDOCS (cwd = ~/AndroidStudioProjects/gently-product-docs)
+  └── sub-agent SW    (cwd = ~/AndroidStudioProjects/Selfward)
+  (동결 3 = GentlyBreath / GentlyDay / GentlyTable · read-only 인용 시에만 · 쓰기 0)
   ↓
 main 측 결과 통합 + cross-repo 정합 결정
 ```
@@ -126,7 +127,7 @@ PASS / FAIL / PARTIAL / UNKNOWN / N/A
 [EVIDENCE]
 - 요청 요약: <한 줄 영역>
 - cross-repo 영역 본질: <키워드 영역 / 본질 영역>
-- 자식별 sub-agent fan-out 영역: <6-repo / 자식 3 / master+FND 등>
+- 자식별 sub-agent fan-out 영역: <4-active / 전파 자식 3 / master+FND 등>
 - 자식별 sub-agent prompt 본문: <cwd + 측정 영역 + return 형식>
 - 자식별 sub-agent return Verdict: <PASS/FAIL/PARTIAL/UNKNOWN/N/A × 자식별>
 - cross-repo 정합 측정 결과: <동족 영역 / drift 영역>
@@ -149,8 +150,8 @@ PASS / FAIL / PARTIAL / UNKNOWN / N/A
 
 ## 본 sub-agent 의 변경 정책
 
-- cli infra 권장 byte-identical (= 6-repo · master + 5 자식)
-- 변경 시 master cycle 신설 + 6-repo propagation 의무 (= `cycle-discipline.md` §15 패턴 1 정합)
+- cli infra 권장 byte-identical (= 4-repo · master + 자식 3)
+- 변경 시 master cycle 신설 + 4-repo propagation 의무 (= `cycle-discipline.md` §15 패턴 1 정합)
 - 자식 repo 측 직접 수정 금지
 
 ## 명시 cycle 이력

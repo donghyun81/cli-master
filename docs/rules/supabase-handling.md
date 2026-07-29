@@ -8,7 +8,7 @@
 > - `auth-rules.md` §1 — GoTrue REST 익명 부트스트랩
 > - `deferred-domains.md` §1 STOP trigger (Backend / API) + §5 trigger 키워드
 > - `routing-and-delegation.md` — auth-security-privacy + billing-payments-guardian + server-implementer 매핑
-> - `cycle-discipline.md` §15 패턴 1 (master cycle 신설 + 6-repo propagation)
+> - `cycle-discipline.md` §15 패턴 1 (master cycle 신설 + 4-repo propagation)
 > SOT: `CLAUDE.md`
 
 ---
@@ -119,7 +119,7 @@
 3. prod write = Management API `/database/query` `read_only=false` **단일 경로** (`db push` / `psql` / `migration list --linked` 차단 = prod DB pw slot 부재).
 4. PHASE A 기대치 상이 / 파괴적 변경 필요 / 승인 미수신 / prod 토큰 부재 = STOP.
 
-> prod ref 표 + 토큰 연결 절차 = master-only 운영 runbook (`docs/ops/production-cli-access-tokens.md` · 6-repo propagation 대상 X). 본 recipe 는 ref 를 step 2 (`GET /v1/projects`) 로 런타임 발견 → 하드코딩 X (= 6-repo byte-identical 보존).
+> prod ref 표 + 토큰 연결 절차 = master-only 운영 runbook (`docs/ops/production-cli-access-tokens.md` · 4-repo propagation 대상 X). 본 recipe 는 ref 를 step 2 (`GET /v1/projects`) 로 런타임 발견 → 하드코딩 X (= 4-repo byte-identical 보존).
 
 ### §3.2 RLS policy migration
 - 첫 적용 시 Dashboard 시각 검증 후 migration `.sql` 정착 권장
@@ -211,7 +211,7 @@ SUPABASE_ACCESS_TOKEN / SUPABASE_ACCESS_TOKEN_GB / SUPABASE_ACCESS_TOKEN_GD / SU
 
 ## §8 본 rule 의 변경 정책
 
-> 변경 정책 = [`rule-footer-common.md`](../../.claude/rules/rule-footer-common.md) (= 6-repo 권장 byte-identical · master cycle + propagation · 자식 직접 수정 금지 · T6).
+> 변경 정책 = [`rule-footer-common.md`](../../.claude/rules/rule-footer-common.md) (= 4-repo 권장 byte-identical · master cycle + propagation · 자식 직접 수정 금지 · T6).
 
 ---
 
@@ -231,7 +231,7 @@ SUPABASE_ACCESS_TOKEN / SUPABASE_ACCESS_TOKEN_GB / SUPABASE_ACCESS_TOKEN_GD / SU
 
 ### §10.1 MCP server 등록 + 호출 paradigm
 
-`.mcp.json` 측 등록 영역 (= 6-repo byte-identical · `claude-cli-master` + `app-foundation` + `GentlyBreath` + `GentlyDay` + `GentlyTable` + `gently-product-docs`):
+`.mcp.json` 측 등록 영역 (= 4-repo byte-identical · `claude-cli-master` + `app-foundation` + `gently-product-docs` + `Selfward`):
 
 | server | project_ref | 자식 도메인 |
 |---|---|---|
@@ -285,7 +285,7 @@ token 보관 + 추출 영역 = macOS Keychain · `security find-generic-password
 
 ### §10.6 자식별 3 instance paradigm
 
-6-repo byte-identical propagation (= master `.mcp.json` 본문 = 6-repo 동일 · 3 server 모두 등록). 자식 cwd 측 cli session 진입 시점 = 3 server 모두 진입 가능 default · 단 호출 namespace 측 자식 도메인 정합 의무 (= GB repo 측 `mcp__supabase-gb__*` 호출 default).
+4-repo byte-identical propagation (= master `.mcp.json` 본문 = 4-repo 동일 · 3 server 모두 등록). 자식 cwd 측 cli session 진입 시점 = 3 server 모두 진입 가능 default · 단 호출 namespace 측 자식 도메인 정합 의무 (= GB repo 측 `mcp__supabase-gb__*` 호출 default).
 
 ### §10.7 기존 `cli_...` token 폐기 paradigm
 

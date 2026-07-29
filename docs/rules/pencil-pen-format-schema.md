@@ -407,7 +407,7 @@ batch_design({ ops: [
 | trigger | mitigation |
 |---|---|
 | `version` field 측 `"2.13"` 외 measurement | 공식 doc 측 schema upgrade 측정 + 본 SoT 갱신 cycle 진입 (= `MASTER-CLI-PENCIL-SCHEMA-UPDATE-NNN`) |
-| 14 번째 Entity type 발견 (= 공식 doc 측 신규 추가) | 본 SoT §2 union type 갱신 + 6-repo propagation cycle 진입 |
+| 14 번째 Entity type 발견 (= 공식 doc 측 신규 추가) | 본 SoT §2 union type 갱신 + 4-repo propagation cycle 진입 |
 | `Ref` 측 `ref` field 미명시 + `type: "ref"` 호출 시도 | batch_design 측 FAIL 발화 · agent prompt 측 component id 명시 의뢰 |
 | Variable reference 측 `$` prefix 부재 + 존재 X token 시도 | document `variables` map 측 등록 의무 (= 등록 X 시 raw string default) |
 | schema 본문 측 mismatch + AI agent 측 prompt 측 임의 type 추가 시도 | 본 schema 13 type 외 추가 X default · prompt 재 작성 의뢰 |
@@ -416,7 +416,7 @@ batch_design({ ops: [
 
 ## 8. 본 SoT 의 변경 정책
 
-> 변경 정책 = [`rule-footer-common.md`](../../.claude/rules/rule-footer-common.md) (= 6-repo 권장 byte-identical · master cycle + propagation · 자식 직접 수정 금지 · T6).
+> 변경 정책 = [`rule-footer-common.md`](../../.claude/rules/rule-footer-common.md) (= 4-repo 권장 byte-identical · master cycle + propagation · 자식 직접 수정 금지 · T6).
 
 ---
 

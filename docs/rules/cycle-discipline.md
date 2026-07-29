@@ -107,9 +107,9 @@ cli infra 수정 필요? — YES: 자식 안 사고 발견 = 패턴 1 · local o
 
 cycle 마감 시 갱신 대상 3 영역: ① task 산출물 (`.ai/reports/<taskId>/*.md`) ② 운영 레이어 (`docs/agent/**`) ③ **자식 출시 docs** (= `docs/release-readiness/INITIATIVES.md` + `docs/CLAUDE.md` 또는 자식 root `CLAUDE.md` + `docs/setup/*`). 본 cycle 영향 영역 발견 시 갱신 의무 · 무영향 = 0 갱신 (빈 commit 금지) · 진입 = `docs-change-communicator` agent. 사용자 manual 갱신 영역 폐기 (= 자동/반자동 우선).
 
-### 21) Cross-repo cycle 영역 (= 6-repo)
+### 21) Cross-repo cycle 영역 (= 4-repo)
 
-- **21.1 영역 분리**: cli infra 6-repo byte-identical 영역 = §15 패턴 1 · 자식 도메인 specific = §15 패턴 2 (본 § 영역 X) · cross-repo 정합 검증 = 패턴 1 + 영역 1 sub-agent fan-out.
+- **21.1 영역 분리**: cli infra 4-repo byte-identical 영역 = §15 패턴 1 · 자식 도메인 specific = §15 패턴 2 (본 § 영역 X) · cross-repo 정합 검증 = 패턴 1 + 영역 1 sub-agent fan-out.
 - **21.2 paradigm 분기** 단일 SoT = `cross-repo-parallel-exec.md` (= 영역 1 sub-agent fan-out / 영역 2 다중 cli session · 선택 = cli session 자율).
 - **21.3 운영 표준 7 step**: ① master 변경+commit → ② `bash scripts/propagate.sh <path> [--targets all]` → ③ 자식별 staged commit (master commit body 인용) → ④ `bash scripts/verify-sync.sh` exit 0 → ⑤ `propagation-reports/<cycle-id>/REPORT.md` 생성 → ⑥ master audit commit (`.auto-memory/propagation-status.md` 갱신) → ⑦ master `CLAUDE.md` §15 entry append.
 - **21.4 STOP** = master [`CLAUDE.md §5`](../../CLAUDE.md) (9항 canonical · pointer).

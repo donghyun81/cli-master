@@ -211,7 +211,7 @@ agent 안 자동화 sequence 예:
 
 ### 7.3 멀티-repo umbrella caveat (= headless 필수 · 버전업 = delta-aware · pre-scan) — `MASTER-CLI-PENCIL-MULTIREPO-HEADLESS-001` (2026-06-24)
 
-본 패키지 = 6-repo umbrella · 자식 3 (GB/GD/GT) 측 `.pen` 보유. desktop-stdio MCP 는 **single active workspace** (= 관측상 GT) 에 anchored (= `pencil-mcp-tools-reference.md §0.2`). 따라서 (= SSOT 6-rule 중 본 skill 소관 = 2·4·5·6):
+본 패키지 = 7-repo umbrella (= 4-active + 3 동결) · **활성 `.pen` 보유 = Selfward** (실측 2026-07-29: SW 14 · 동결 GB 13 / GD 11 / GT 11 = 읽기 인용만 · 쓰기 0). desktop-stdio MCP 는 **single active workspace** (= 관측상 GT) 에 anchored (= `pencil-mcp-tools-reference.md §0.2`). 따라서 (= SSOT 6-rule 중 본 skill 소관 = 2·4·5·6):
 
 2. **멀티-repo `.pen` = headless 필수**: 자기 active-workspace 가 아닌 repo 의 `.pen` 작업 = headless 경로만 — ① 평문-JSON disk read/write (= `pencil-uiux-workflow.md §2.5` 기본) 또는 ② `pencil interactive -i/-o <path>` (= 파일 경로 동작 · §4.2). desktop-stdio MCP active-editor 의존 금지 (= 타 repo 측 GT file 반환·오염 risk). desktop MCP active-editor 진입 (= §7.1 desktop 행) = Coin 본인 단일 repo 실시간 시각 검증 한정.
 
@@ -281,8 +281,8 @@ agent 안 자동화 sequence 예:
 
 ## 11. 본 skill 의 변경 정책
 
-- cli infra 권장 byte-identical (6-repo · master + 5 자식)
-- 변경 시 master cycle 신설 + 6-repo propagation (`cycle-discipline.md` §15 패턴 1)
+- cli infra 권장 byte-identical (4-repo · master + 자식 3)
+- 변경 시 master cycle 신설 + 4-repo propagation (`cycle-discipline.md` §15 패턴 1)
 - 자식 repo 직접 수정 금지
 
 ---

@@ -31,9 +31,9 @@ main agent 측 결과 통합 + cross-repo 정합 결정
 
 **적용 case 예**:
 - "GB + GD + GT 측 동일 paradigm 신설 영역 cycle" (= 동족 자식 측 sha 정합 측정 + 동일 patch 적용)
-- "6-repo 측 보호 file sha drift 검증" (= 자식별 sha 측정 + master 측 baseline 비교)
+- "4-repo 측 보호 file sha drift 검증" (= 자식별 sha 측정 + master 측 baseline 비교)
 - "3 자식 측 동일 도메인 영역 측 source 측정" (= 동족 자식 측 source code 비교 + 정합 측정)
-- "cli infra rule SoT 본문 cross-repo cross-verify" (= 6-repo byte-identical 영역 측 drift 발견)
+- "cli infra rule SoT 본문 cross-repo cross-verify" (= 4-repo byte-identical 영역 측 drift 발견)
 
 **Subagent Return Contract 정합 의무** (= `reporting.md` §9 정합):
 - 단일 sub-agent return ≤ 4,000 token 요약
@@ -232,7 +232,7 @@ Agent(
 sub-agent 측 자식 측 cli infra (= `../<repo>/CLAUDE.md` + `.claude/`) 인지 paradigm 정합 의무:
 - sub-agent 측 자식 측 reading order 정합 default (= 부모 mount root CLAUDE.md §3.1 정합)
 - sub-agent 측 자식 측 cli infra rule (= 자식 측 `.claude/rules/`) 측 byte-identical 영역 인지 (= cli infra SoT = master 측 단일 default)
-- sub-agent 측 자식 측 보호 file 인지 (= 5 file × 6-repo byte-identical default)
+- sub-agent 측 자식 측 보호 file 인지 (= 5 file × 4-repo byte-identical default)
 
 ### 3.3 sub-agent return 영역 통합 paradigm
 
@@ -293,8 +293,8 @@ main agent 측 sub-agent 결과 통합 paradigm (= `reporting.md` §9 Subagent R
 
 | 비교 영역 | measure method | 정합 default |
 |---|---|---|
-| cli infra rule SoT 측 sha | `git hash-object` × 자식별 | 6-repo byte-identical 의무 (= master + 5 자식 측 동일 sha) |
-| 보호 5 file 측 sha | `git hash-object` × 자식별 | 6-repo byte-identical 의무 (= `.auto-memory/protected-file-hashes.md` baseline 정합) |
+| cli infra rule SoT 측 sha | `git hash-object` × 자식별 | 4-repo byte-identical 의무 (= master + 자식 3 측 동일 sha) |
+| 보호 5 file 측 sha | `git hash-object` × 자식별 | 4-repo byte-identical 의무 (= `.auto-memory/protected-file-hashes.md` baseline 정합) |
 | 자식 도메인 source code | `grep -rn` + 동족 자식 측 비교 | 자식별 도메인 specific 영역 default (= drift 영역 X · 자식 자율 default) |
 | ui-spec.json 측 lifecycle | `grep -E "lifecycle\|deprecated"` | 자식별 lifecycle 영역 default (= 도메인 specific 영역 default) |
 

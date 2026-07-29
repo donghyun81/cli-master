@@ -51,7 +51,7 @@
 
 <!-- propagation: repo-only -->
 <!-- TODO: <REPO>-only 도메인 역할이 필요하면 propagation 후 자식 repo 에서 이 블록 안에 추가. master 에서는 비움. -->
-<!-- 현재 master = 25 agent 전수 generic(6-repo byte-identical). 진짜 repo-specific agent(자식에만 존재 · master 부재) = 0 → 본 블록 비움 유지. 자식이 자기 도메인 전용 agent 를 신설하면 본 블록에 추가하고 위 매트릭스 형식(소유 SoT·상태·STOP 권한)으로 1행 등재한다. -->
+<!-- 현재 master = 25 agent 전수 generic(4-repo byte-identical). 진짜 repo-specific agent(자식에만 존재 · master 부재) = 0 → 본 블록 비움 유지. 자식이 자기 도메인 전용 agent 를 신설하면 본 블록에 추가하고 위 매트릭스 형식(소유 SoT·상태·STOP 권한)으로 1행 등재한다. -->
 <!-- /propagation: repo-only -->
 
 ---

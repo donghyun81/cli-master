@@ -49,7 +49,7 @@
 
 ### 산출물·시크릿 검증 (권장 · 구 Compound Lint = deprecated)
 
-> 구 compound-lint 도구 = 6-repo 부재 (deprecated · MASTER-CLI-COMPOUND-LINT-DEPRECATE-001). 검증 의무는 아래 실존 명령으로 수행한다.
+> 구 compound-lint 도구 = 4-repo 부재 (deprecated · MASTER-CLI-COMPOUND-LINT-DEPRECATE-001). 검증 의무는 아래 실존 명령으로 수행한다.
 
 ```bash
 ls .ai/reports/<taskId>/        # 산출물 존재 확인 (형식 SoT = reporting.md §1 표 대조)

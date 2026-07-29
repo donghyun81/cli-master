@@ -307,7 +307,7 @@ reviewer agent 가 REVIEW.md 작성 시 본 섹션 자동 추가:
 
 ## 7. 본 룰의 변경 정책
 
-> 변경 정책 = [`rule-footer-common.md`](../../.claude/rules/rule-footer-common.md) (= 6-repo 권장 byte-identical · master cycle + propagation · 자식 직접 수정 금지 · T6).
+> 변경 정책 = [`rule-footer-common.md`](../../.claude/rules/rule-footer-common.md) (= 4-repo 권장 byte-identical · master cycle + propagation · 자식 직접 수정 금지 · T6).
 > 신규 dark pattern 발견 시 §3 추가 + 자식 repo 의무 적용 (본 file 고유 조항).
 
 ---

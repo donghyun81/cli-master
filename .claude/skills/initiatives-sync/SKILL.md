@@ -7,7 +7,7 @@ allowed-tools: Bash, Read, Edit, Write
 
 # INITIATIVES + INDEX + Task file Auto-Sync Paradigm
 
-> **단일 목적**: 자식 repo (= GB / GD / GT) 측 cycle REVIEW PASS 시점 cli session 측 `docs/release-readiness/INITIATIVES.md` + `.ai/tasks/INDEX.md` + `.ai/tasks/<CYCLE-ID>.md` 3 file 갱신 의무 paradigm. trigger 기반 paradigm default (= 자식 cycle 마감 시점 진입 default · paste-back 본문 발행 직전 시점 default · 매 cycle 마감 시점 catch-up drift 회피 default).
+> **단일 목적**: 활성 도메인 자식 (= Selfward) 측 cycle REVIEW PASS 시점 cli session 측 `docs/release-readiness/INITIATIVES.md` + `.ai/tasks/INDEX.md` + `.ai/tasks/<CYCLE-ID>.md` 3 file 갱신 의무 paradigm. trigger 기반 paradigm default (= 자식 cycle 마감 시점 진입 default · paste-back 본문 발행 직전 시점 default · 매 cycle 마감 시점 catch-up drift 회피 default).
 > **신설**: MASTER-CLI-LAUNCH-STATUS-AUTO-SYNC-PARADIGM-001 (2026-05-22).
 > **precedent**: `MASTER-CLI-RUNTIME-CRASH-MITIGATION-PROCESS-PARADIGM-001` (= H32 마감 default · self-contained 11 section format default · 본 skill format 차용 default).
 > **trigger 본질**: 직전 H32-H34 마감 사이클 측 INITIATIVES HEAD drift 누적 default (= GB 14 commits / GD 18 commits / GT 12 commits drift default) + `.ai/tasks/INDEX.md` 갱신 drift (= GD 4 days 누락 / GT 6 days 누락 default) + 신 task file 누락 (= GB 2 / GD 0 / GT 1 default) baseline default.
@@ -177,7 +177,8 @@ allowed-tools: Bash, Read, Edit, Write
 
 | 영역 | 적용 |
 |---|---|
-| 자식 repo (= GB / GD / GT) 측 cycle REVIEW PASS 시점 default | 의무 default ⭐ |
+| 활성 도메인 자식 (= Selfward) 측 cycle REVIEW PASS 시점 default | 의무 default ⭐ |
+| 동결 3 (= GB / GD / GT) 측 | **해당 X** (= 2026-07-17 T6 · 쓰기 0 · 본 skill 진입 자체가 STOP) |
 | 자식 repo 측 propagation cycle 마감 시점 | lazy 가능 default (= 자율 default) |
 | app-foundation 측 cycle REVIEW PASS 시점 | 의무 default (= 자식 측 동족 paradigm 차용 default · INITIATIVES 영역 정합 default) |
 | master cli infra cycle 영역 | 적용 X default (= INITIATIVES file 부재 default + `.ai/tasks/` 영역 부재 default · cli infra rule 영역 default) |
@@ -191,7 +192,7 @@ allowed-tools: Bash, Read, Edit, Write
 
 | section | 본질 |
 |---|---|
-| §0 Baseline | 6-repo HEAD sha + 보호 5 file sha + drift 영역 측정 결과 default |
+| §0 Baseline | 4-active HEAD sha + 보호 5 file sha + drift 영역 측정 결과 default |
 | §0.3 사고 영역 disk 측정 | INITIATIVES HEAD drift + INDEX 갱신 drift + 신 task file 누락 영역 disk 측정 결과 인용 default (= `.claude/skills/disk-verification/SKILL.md` §3 정합) |
 | §1 Cycle 본질 | outcome + cli session 자율 paradigm + 사용자 본심 정합 default |
 | §2 Scope | 변경 영역 + 무접촉 영역 default |
@@ -233,8 +234,8 @@ allowed-tools: Bash, Read, Edit, Write
 
 ## §11 본 skill 의 변경 정책
 
-- cli infra 권장 byte-identical (= 6-repo · master + app-foundation + GentlyBreath + GentlyDay + GentlyTable + gently-product-docs)
-- 변경 시 master cycle 신설 + 6-repo propagation 의무 (= `cycle-discipline.md` §15 패턴 1 정합)
+- cli infra 권장 byte-identical (= 4-repo · master + app-foundation + gently-product-docs + Selfward)
+- 변경 시 master cycle 신설 + 4-repo propagation 의무 (= `cycle-discipline.md` §15 패턴 1 정합)
 - 자식 repo 측 직접 수정 금지
 
 ---

@@ -1,6 +1,6 @@
 # Automation policy (= Transport OK / Inspection X 원칙 default)
 
-> 본 file = 6-repo 측 automation policy 영구 SoT default · 운반 자동화 OK + 검증 자동화 X 원칙 default
+> 본 file = 4-repo 측 automation policy 영구 SoT default · 운반 자동화 OK + 검증 자동화 X 원칙 default
 > 위치 = `claude-cli-master/docs/rules/automation-policy.md`
 > 신설: `MASTER-CLI-CYCLE-3-AUTOMATION-POLICY-INSTALL-001` · 2026-05-22
 

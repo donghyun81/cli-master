@@ -42,9 +42,9 @@ Pencil app v1.1.62 → v1.1.69 측 MCP surface **1-swap** (= count 9 유지 · n
 
 ### 0.2 멀티-repo workspace + cross-version 마이그 caveat (= `MASTER-CLI-PENCIL-MULTIREPO-HEADLESS-001` · 2026-06-24)
 
-본 패키지 = 6-repo umbrella (= master + app-foundation + GB + GD + GT + gently-product-docs) · 자식 3 (GB/GD/GT) 측 `.pen` 보유. 아래 §1~§6 desktop-stdio 도구 운영 시점 3 caveat 정합 의무 (= HOME-PEN-2.13 혼선 근본 mitigation).
+본 패키지 = 7-repo umbrella (= 4-active + 3 동결) · **활성 `.pen` 보유 = Selfward** (실측 2026-07-29: SW 14 · 동결 GB 13 / GD 11 / GT 11 = 읽기 인용만 · 쓰기 0). 아래 §1~§6 desktop-stdio 도구 운영 시점 3 caveat 정합 의무 (= HOME-PEN-2.13 혼선 근본 mitigation).
 
-1. **MCP = single active workspace**: 본 §1~§6 desktop-stdio 도구 (`get_editor_state` · `batch_get` · `batch_design` · `get_screenshot` · `snapshot_layout` 등) 는 **현재 active editor/workspace 하나**에만 작동한다. 6-repo umbrella 측 MCP 는 단일 workspace (= 관측상 GentlyTable) 에 anchored default → 자기 active-workspace 가 아닌 다른 repo (GB/GD) 의 `.pen` 을 MCP 로 측정·편집 시도 시 **GT 측 file 이 반환·편집됨** (= 타 repo 오염 risk). 멀티-repo `.pen` 작업 경로 = `pencil-cli` skill §7.3 headless 의무.
+1. **MCP = single active workspace**: 본 §1~§6 desktop-stdio 도구 (`get_editor_state` · `batch_get` · `batch_design` · `get_screenshot` · `snapshot_layout` 등) 는 **현재 active editor/workspace 하나**에만 작동한다. 7-repo umbrella (= 4-active + 3 동결) 측 MCP 는 단일 workspace (= 관측상 GentlyTable) 에 anchored default → 자기 active-workspace 가 아닌 다른 repo (GB/GD) 의 `.pen` 을 MCP 로 측정·편집 시도 시 **GT 측 file 이 반환·편집됨** (= 타 repo 오염 risk). 멀티-repo `.pen` 작업 경로 = `pencil-cli` skill §7.3 headless 의무.
 
 3. **cross-verify = disk**: 멀티-repo `.pen` 검증 = `shasum -a 256` + 평문-JSON grep 단일. `get_editor_state` 측 검증 금지 (= active-workspace 따라 타 repo 반환). dual-sha = `.pen` shasum == `ui-spec.json` 측 `lastSyncedDesignToolStateHash`.
 
@@ -300,7 +300,7 @@ CI/CD 통합 = `pencil-cli-headless.md` §10 (lazy default · 별 cycle).
 
 ## 11. 본 SoT 의 변경 정책
 
-> 변경 정책 = [`rule-footer-common.md`](../../.claude/rules/rule-footer-common.md) (= 6-repo 권장 byte-identical · master cycle + propagation · 자식 직접 수정 금지 · T6).
+> 변경 정책 = [`rule-footer-common.md`](../../.claude/rules/rule-footer-common.md) (= 4-repo 권장 byte-identical · master cycle + propagation · 자식 직접 수정 금지 · T6).
 
 ---
 

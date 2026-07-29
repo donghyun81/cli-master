@@ -93,7 +93,7 @@ paste source umbrella 발행 시점 본 paradigm 정합 의무 default · 발행
 
 | 영역 | 본질 |
 |---|---|
-| §0 baseline 영역 | 6-repo HEAD sha + 보호 5 file sha + cycle scope file sha 측정 의무 default |
+| §0 baseline 영역 | 4-active HEAD sha + 보호 5 file sha + cycle scope file sha 측정 의무 default |
 | §3 contract SoT 영역 | disk 측정 결과 인용 의무 default (= grep / find / `git hash-object` 측정 결과 본문 인용 default) |
 | §3 기존 paradigm × N 인용 영역 | 인용 entry 측 실 disk 존재 측정 의무 default (= 가정 X · 실 disk 측 존재 entry 한정 link default) |
 
@@ -110,7 +110,7 @@ precedent cycle 측 측정 결과 인용 default (= precedent cycle 진입 시�
 | master `.claude/rules/` 측 `recommended-option-disk-verification` grep | 0 match default | 신 rule 신설 영역 default (= 중복 X default) |
 | master `docs/rules/cycle-discipline.md` 측 신 paradigm grep | 0 match default | 갱신 영역 default (= 신 § 신설 default) |
 | master `.claude/hooks/` 측 신 hook grep | 0 match default (= 12 hook 기존 default) | 신 hook 신설 영역 default (= optional default) |
-| `scripts/propagate.sh` + `scripts/verify-sync.sh` 존재 verify | 모두 존재 default | 6-repo propagation paradigm 정합 default |
+| `scripts/propagate.sh` + `scripts/verify-sync.sh` 존재 verify | 모두 존재 default | 4-repo propagation paradigm 정합 default |
 
 ---
 
@@ -246,8 +246,8 @@ mitigation = paste-back 본문 측 명시 default
 
 ## §10 본 skill 의 변경 정책
 
-- cli infra 권장 byte-identical (= 6-repo · master + app-foundation + GentlyBreath + GentlyDay + GentlyTable + gently-product-docs)
-- 변경 시 master cycle 신설 + 6-repo propagation (= `cycle-discipline.md` §15 패턴 1 정합)
+- cli infra 권장 byte-identical (= 4-repo · master + app-foundation + gently-product-docs + Selfward)
+- 변경 시 master cycle 신설 + 4-repo propagation (= `cycle-discipline.md` §15 패턴 1 정합)
 - 자식 repo 측 직접 수정 금지
 
 ---
