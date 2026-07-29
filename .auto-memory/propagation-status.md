@@ -171,15 +171,15 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 | `docs/rules/uiux-sot-refresh.md` | `31c0da56aeec` | ✓ | ✓ | ✓ |
 | `docs/design/design-sot-policy.md` | `92a5e99804ff` | ✓ | ✓ | ✓ |
 | `.claude/settings.json` | `313fec8d0023` | ✓ | ✓ | ✓ |
-| `docs/rules/workflow-core.md` | `5d93b9d73f10` | ✓ | ✓ | ✓ |
-| `docs/rules/cycle-discipline.md` | `05836ebe1300` | ✓ | ✓ | ✓ |
+| `docs/rules/workflow-core.md` | `69b017d624d5` | ✓ | ✓ | ✓ |
+| `docs/rules/cycle-discipline.md` | `44c7e664987e` | ✓ | ✓ | ✓ |
 | `docs/rules/pencil-automation.md` | `a2506a34d797` | ✓ | ✓ | ✓ |
-| `docs/rules/reporting.md` | `49931d30e4e5` | ✓ | ✓ | ✓ |
-| `docs/rules/routing-and-delegation.md` | `46f10fe90629` | ✓ | ✓ | ✓ |
-| `docs/rules/deferred-domains.md` | `26fce91cff37` | ✓ | ✓ | ✓ |
-| `docs/rules/code-principles.md` | `1eb738b2fb80` | ✓ | ✓ | ✓ |
+| `docs/rules/reporting.md` | `f85f991f2628` | ✓ | ✓ | ✓ |
+| `docs/rules/routing-and-delegation.md` | `51f6c6a486d5` | ✓ | ✓ | ✓ |
+| `docs/rules/deferred-domains.md` | `e38a799032da` | ✓ | ✓ | ✓ |
+| `docs/rules/code-principles.md` | `d5f48e60bda0` | ✓ | ✓ | ✓ |
 | `docs/rules/design-to-code-sync.md` | `81a52a9bc694` | ✓ | ✓ | ✓ |
-| `docs/rules/ux-laws.md` | `febd74dcacf8` | ✓ | ✓ | ✓ |
+| `docs/rules/ux-laws.md` | `76247cd98ac4` | ✓ | ✓ | ✓ |
 | `docs/agent/architecture/COMMON_ARCHITECTURE.md` | `6177dda18914` | ✓ | ✓ | ✓ |
 | `docs/agent/architecture/TDD_WORKFLOW.md` | `209f9aa3f69c` | ✓ | ✓ | ✓ |
 | `docs/agent/architecture/MODEL_SEPARATION.md` | `d6262ba37923` | ✓ | ✓ | ✓ |
@@ -191,7 +191,7 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 
 ## Last verify-sync
 
-- timestamp: 2026-07-26T21:21:46+0900
+- timestamp: 2026-07-29T15:41:11+0900
 - pass: 163
 - drift: 2
 - miss: 6
@@ -199,6 +199,6 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 
 ### Drift 상세
 
-- docs/architecture/CLI-MASTER-SCOPE-SEPARATION-CHARTER.md  master=f7ca0507f2fe  app-foundation=MISS  gently-product-docs=MISS  Selfward=MISS
+- docs/architecture/CLI-MASTER-SCOPE-SEPARATION-CHARTER.md  master=d83ce881e159  app-foundation=MISS  gently-product-docs=MISS  Selfward=MISS
 - docs/ops/production-cli-access-tokens.md  master=3b0e8131fb67  app-foundation=MISS  gently-product-docs=MISS  Selfward=MISS
 - docs/templates/release-checklist.template.md  master=e6c62fb280f4  app-foundation=30fc93967106(✗)  gently-product-docs=30fc93967106(✗)  Selfward=✓
