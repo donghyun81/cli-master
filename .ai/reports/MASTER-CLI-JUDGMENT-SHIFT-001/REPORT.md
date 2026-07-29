@@ -115,13 +115,25 @@ tool 분포 실측: Bash **56.8%** / Edit 23.0% / Read 16.0% / Write 4.1% / **Gl
 
 ## §7. 사고 / 후속
 
-**사고**: 없음. (자식 commit pathspec 사고 = 재발 0 — 변수 미사용 literal heredoc. 진행 중 `libs-versions` self-test 1회가 stdin 대기로 timeout 됐으나 이는 **비-tty + 미존재 경로** 조합에서 발동하는 **기존 입력 해결 분기**의 성질이고 본 cycle 변경분 아님 · 실 PostToolUse stdin 경로로 재측정하여 해소 · 파일 변경 0.)
+**commit 연쇄 (4 master + 2 자식 ×3)**
+
+| # | master | 내용 | 자식 3 |
+|---|---|---|---|
+| 1 | `15b1ba1` | content (제거 3 · 축소 2 · 다이어트 2 · stop-gate · 정합) | FND `986a25b` / PDOCS `33c4d93` / SW `86b2e8f` (각 22 file) |
+| 2 | `cbbf179` | audit (§15 + REPORT + manifest resync) | — (master-only) |
+| 3 | `d295f82` | **잔여 참조 1건 정정** (아래) | FND `c2626e0` / PDOCS `442a9b8` / SW `63d70d5` (각 1 file) |
+| 4 | `5099a60` | propagation-status 재생성 | — (master-only) |
+
+**최종 dangling sweep = 5/5 ∅** (live 표면 `check-abbreviation` · `post-edit-degeneration` · `stop-reflect` · `abbreviation-policy.md` · `text-degeneration-prevention` 참조 0 · 이력 line 2건은 의도적 보존). `docs/rules` 44→**42 file · aggregate `91cc8c367ed418e8` 4-repo 동일** (산식 `cat docs/rules/*.md | shasum -a 256` · 환경 bash 3.2.57 · LC_COLLATE unset(C) · shasum 6.02).
+
+**사고**: 없음. **자기검출 1** — 마감 전수 sweep 에서 `code-style-guide.md:89` §amend 의 `stop-reflect self-improving loop` 문면 1건 누락 발견(1차 grep 이 §19 정정 대상 file 들만 훑고 code-style-guide 재확인을 빠뜨림) → `d295f82` 로 정정 + 자식 3 재전파 + 4-repo 재일치(`6975c5525f516b80`) 확인. `--amend` 미사용(= Coin 소관 · git v3) → 별 commit 분리. (자식 commit pathspec 사고 = 재발 0 — 변수 미사용 literal heredoc. 진행 중 `libs-versions` self-test 1회가 stdin 대기로 timeout 됐으나 이는 **비-tty + 미존재 경로** 조합에서 발동하는 **기존 입력 해결 분기**의 성질이고 본 cycle 변경분 아님 · 실 PostToolUse stdin 경로로 재측정하여 해소 · 파일 변경 0.)
 
 **후속 (scope 외 · 자율 진입 금지)**
 1. **trace 전면 제거** — `reporting.md §9.2` + `cross-repo-orchestrator.md:121` 동반 정정 필요(§2.2). 겸하여 `_unknown` 낙착(taskId 미해결) 자체 처분.
 2. **stale-ref 5 → 6** — `protected-file-hashes.md:87` 의 **과거 sha record 행**이 이제 부재 파일을 가리킨다(이력이라 verbatim 보존 = 삭제 X). DIET-2-003 잔여 5건과 **동일 class** → 같은 후속 묶음.
 3. **`ensure-child-gitignore-patches.sh` = marker-only idempotent** — auto-managed block **본문이 바뀌어도 재patch 안 함**(본 cycle 실측: "이미 patch 박혀 있음" 3/3 skip → 1줄 수동 동기). 내용 대조 재patch = 별 cycle.
 4. rules 층 topology 어휘 sweep (T7 회부분) · DIET-3 (동일 파일 접촉 → **본 cycle 착지 후 순차** · paste §11).
-5. push = Coin.
+5. **§15 hot entry > 10** = `S15-HOT-DEMOTE-006` advisory (`measure-gsm-cycle.sh` Stop hook 자동 surface · 판정·이전 = 수동).
+6. push = Coin.
 
 **Negative Space (고려했으나 hot 제외)**: 결정적 집행층 전량 무접촉(보호5 sha hook · pre-commit-stage-check · pre-tool-use lock 정리 · pencil-auto-save · stop-housekeeping · post-policy-watch · deny 19 · **stop-gate 게이트 골격**) · settings.json permissions 절(= DIET-3 소관) 0 · 그 외 hook 무접촉 · 보호 5 sha 0 · 이력 line 삭제 0 · 동결 3 = 0 · `--prune` 0 · production/EF/DB/Money 0 · `.claude/rules/` 신설 0.
