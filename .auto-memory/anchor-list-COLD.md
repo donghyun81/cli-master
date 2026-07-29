@@ -62,3 +62,16 @@
 ## §3. cycle 이력
 
 - 2026-05-22 · `MASTER-CLI-CYCLE-2B-ANCHOR-LIST-COLD-INSTALL-001` · 본 file 신설 default · master only default · propagation X default
+
+---
+
+## §4. hot rule 측 `§7. cycle 이력` verbatim 이전 (4 entry · 2026-07-29 `MASTER-CLI-CONTEXT-DIET-3-001`)
+
+> 아래 = `.claude/rules/anchor-list.md §7` 원문 verbatim (= 삭제 0 · hot 은 1줄 pointer 후퇴 · 자동 주입층이라 이력 상주 불요).
+
+## §7. cycle 이력
+
+- 2026-05-22 · `MASTER-CLI-CYCLE-2A-ANCHOR-LIST-HOT-INSTALL-001` · 본 file 신설 + reporting.md §13 append + cycle-discipline.md §27 pointer 신설 + 5-repo byte-identical propagation default
+- 2026-05-22 · `MASTER-CLI-CYCLE-2B-ANCHOR-LIST-COLD-INSTALL-001` · cold storage `anchor-list-COLD.md` 신설 default (= master only default · 본 § 본문 X default · Cycle 2b 측 본문 default)
+- 2026-06-02 · `MASTER-CLI-GSM-MEASUREMENT-LAYER-001` · A1~A10 각 anchor 에 G/S/M 3-tuple 외화 (= `gsm-measurement.md` canonical form 정합 · §1 본질 bullet 추가). 기존 Purpose / 적용 trigger / 우선순위(P0 6 + P1 4) / precedent 본문 무삭제 · 본질·우선순위·trigger 보존 (= 형식 GSM 정합 · 내용 약화 0). 5-repo byte-identical propagation.
+- 2026-06-22 · `MASTER-CLI-CROSSREPO-RECONCILE-AUTONOMY-PARADIGM-001` · A8 확장(= 동족 구현 정합 advisory step · G/S/M 에 "같은 맥락 2+ repo 구현 후 paste-back 회수 시점 정합 advisory 수행 · 미수행 = 0 · auto-converge 금지" + precedent `cross-repo-parallel-exec-detail.md §4.4`) + A10 확장(= cli 도메인 구현 HOW §FREEDOM 자율 폭 명시 + S/M 에 "paste source HOW-leak 건수 = 0" GSM-M + cli 자율 = 도메인 HOW 한정 경계[STOP 9 #1 Money/Auth/DB · 보호5 A2 · cli-infra byte-identical A4 미확대] + precedent `§B-5`). **신 hot anchor 신설 X** (= hot 10 baseline 유지 · 기존 A8/A10 확장 default · P0 6 + P1 4 불변). req1(동족 구현 정합 advisory) + req2(cli HOW 자율 확대 범위 한정) 한 쌍 정합. 6-repo byte-identical propagation.
