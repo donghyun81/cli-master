@@ -85,6 +85,8 @@ Cowork prep 통합 prompt 작성 전 **6 실측 의무** — **hook 주입값 �
 | **패턴 2** local-only | `.claude/settings.local.json` / `.ai/` / 자식 `app/` 코드 | master 무관 · 자식 자유 변경 · propagation X |
 | **패턴 3** 도메인 활성화 | UNKNOWN → ACTIVE trigger (`deferred-domains.md` §5) | STOP → master 신설 (`<domain>-rules.md` + `activate-agent.sh` + deferred-domains/routing 표 갱신) → propagate → 자식 구현 cycle |
 
+**§15 hot 상한 규약** (= 2026-07-29 `MASTER-CLI-CONTEXT-DIET-3-001` 신설 · 마감 step 의무): master `CLAUDE.md §15` entry 신설 시 — ① 신 entry = **≤400B** 로 저작 ② **3 초과분 = 그 자리에서 즉시 COLD demote** (= `.auto-memory/master-cycle-history-COLD.md` 표 말미 verbatim append · advisory 대기 / 별 demote cycle 신설 **금지** — 그 lazy 가 이력을 헌법의 ~70% 로 키웠다) ③ demote 후 COLD title / §1 heading / lineage count 동기 ④ 제거 행이 COLD 에 **verbatim 실재** 확인 (= exact-string 대조 · 손실 0 = HARD). 상세 서술의 진짜 SoT = `.ai/reports/<cycle-id>/REPORT.md` · §15 = 색인 층.
+
 ### 16) cli 수정 우선순위 결정 트리
 
 cli infra 수정 필요? — YES: 자식 안 사고 발견 = 패턴 1 · local override 만 = 패턴 2 · 도메인 활성화 trigger = 패턴 3 / NO: 자식 본 작업 cycle 진행. (원문 diagram = COLD)
