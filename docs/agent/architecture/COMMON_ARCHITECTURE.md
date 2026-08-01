@@ -81,14 +81,20 @@
 
 ### 4.1 다중 값 컬럼 타입 표현 규약 (앱-중립 · persistence 한정)
 
+> ★**정정 · supersede 고지 (2026-08-01)**: 구 「중첩/구조화 객체 = `JSONB`」 + 「중첩 구조가 필요해질 때 `JSONB` 승격」 2항은 `ADR-0001-SERVER-DATA-OWNERSHIP-SEPARATION`(Accepted 2026-08-01)로 **supersede** 되어 아래 3분 갈림길로 대체됐다. **사유**: 구 승격 규칙이 `JSONB` 로 보낸 항목은 **종별 제약(1:1 UNIQUE·종류별 NOT NULL·열거형 CHECK)을 걸 수 없게** 되는데 그 대가가 비용으로 세어지지 않았고, 구 규칙의 `TEXT[]` 실적용처(`user_profiles` 3컬럼)는 **살아있는 적용처가 0**(사문 · P1-1 에서 테이블째 DROP)이었다. **덮어쓰기가 아니라 전이** — 구 문면 verbatim = `claude-cli-master/.ai/reports/MASTER-DATA-OWNERSHIP-RULE-001/REPORT.md`.
+
 다중 값 컬럼은 의미 구조에 따라 일관된 Postgres 타입으로 표현한다(앱 무관).
 
 - **문자열 리스트 = `TEXT[]`** (네이티브 배열). 예: 태그·선호·제한·환경 목록. CSV 문자열(쉼표 구분 한 컬럼) 금지 — 타입 미강제·파싱 오류 회피.
-- **중첩/구조화 객체 = `JSONB`**. 예: 분석 결과·분포·외부 페이로드 등 키-값/중첩.
+- **구조를 가진 항목의 목록 = 자식 테이블** (필드 2개 이상 · 순서가 의미 있음). `position integer` 로 순서를 지고 PK = `(parent_id, position)`. ★구 「`JSONB` 승격」 대체.
+- **우리가 형태를 정하지 않는 외부 페이로드 = `JSONB`**. 예: 타사 응답 원문. 우리 스키마가 아니므로 검사 대상도 아니다.
 - **단일 스칼라 = scalar**(`TEXT`/`BOOLEAN`/`TIMESTAMPTZ` 등). 배열로 승격하지 않는다.
-- **승격 규칙**: 새 다중 값 컬럼은 `TEXT[]` 기본. 항목에 **중첩 구조**가 필요해질 때만 `JSONB`로 승격한다.
+
+★**갈림길 1문**: 「이 안의 필드에 **제약을 걸고 싶어질 것 같은가**?」 → 그렇다면 **자식 테이블**이다. `JSONB` 는 **제약을 걸 수 없다는 선언**이고, 그건 외부 페이로드에만 맞는 말이다.
 
 > 도메인 의미(verbatim recognition·enum 라벨 금지 등)는 본 절이 아니라 각 앱 design SoT·product 원칙에서 다룬다(본 절 = persistence 표현 한정).
+
+> **형태 층 상세** = [`SERVER_DATA_OWNERSHIP.md`](SERVER_DATA_OWNERSHIP.md) — 소유 경계·분리 판단(§2)·스키마 형태 6·삭제 3층·왕복·배포 순서·검증 7. 본 §4 가 「무엇이 SoT 인가」라면, 그 문서가 「그럼 어떤 모양으로 두는가」다.
 
 ---
 
@@ -115,3 +121,4 @@
 - `TESTABILITY_SEAMS.md` — clock/dispatcher/identity/logger/uuid 주입
 - `DEPENDENCY_DECISION_CHECKLIST.md` — 신규 의존성 8개 항목
 - `LEGACY_CLEANUP_GOVERNANCE.md` — 코드 제거 거버넌스 (rules/legacy-cleanup-governance.md 의 architecture-level 보충)
+- `SERVER_DATA_OWNERSHIP.md` — 서버 소유 데이터의 형태 층 (§4 의 상세 · 분리/스키마/삭제/왕복/배포/검증)

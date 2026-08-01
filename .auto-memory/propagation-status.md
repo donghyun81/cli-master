@@ -180,7 +180,7 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 | `docs/rules/code-principles.md` | `d5f48e60bda0` | ✓ | ✓ | ✓ |
 | `docs/rules/design-to-code-sync.md` | `81a52a9bc694` | ✓ | ✓ | ✓ |
 | `docs/rules/ux-laws.md` | `76247cd98ac4` | ✓ | ✓ | ✓ |
-| `docs/agent/architecture/COMMON_ARCHITECTURE.md` | `6177dda18914` | ✓ | ✓ | ✓ |
+| `docs/agent/architecture/COMMON_ARCHITECTURE.md` | `9ef0dedcf80c` | ✓ | ✓ | ✓ |
 | `docs/agent/architecture/TDD_WORKFLOW.md` | `209f9aa3f69c` | ✓ | ✓ | ✓ |
 | `docs/agent/architecture/MODEL_SEPARATION.md` | `d6262ba37923` | ✓ | ✓ | ✓ |
 | `docs/agent/architecture/SSOT_PRINCIPLES.md` | `5d531efb0bda` | ✓ | ✓ | ✓ |
@@ -191,8 +191,8 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 
 ## Last verify-sync
 
-- timestamp: 2026-07-29T18:15:42+0900
-- pass: 160
+- timestamp: 2026-08-01T10:51:52+0900
+- pass: 161
 - drift: 2
 - miss: 6
 - exit: 1
