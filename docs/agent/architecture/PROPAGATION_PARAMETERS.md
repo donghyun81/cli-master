@@ -4,7 +4,7 @@
 >
 > Authority: `claude-cli-master`. Other repos consume this file as read-only spec.
 > Created by: SW-OPS-PARAM-001
-> Revised by: SW-OPS-PARAM-002 (per-repo `scripts/agent/repo-config.sh` 외부화)
+> Revised by: SW-OPS-PARAM-002 (per-repo `scripts/repo-config.sh` 외부화)
 
 ---
 
@@ -12,7 +12,7 @@
 
 운영 자산(구 `scripts/agent/compound-lint.sh`(deprecated · 도구 부재 · MASTER-CLI-COMPOUND-LINT-DEPRECATE-001), `.claude/agents/active/layer-checker.md`, `docs/rules/domain-roles.md`, `.claude/commands/{check-layer,uiux-refresh}.md`, `docs/rules/uiux-sot-refresh.md`) 은 generic 하다 — 어떤 repo 에도 byte-identical 로 propagation 가능하다. (= domain-roles.md = MASTER-CLI-CLEANUP-7CYCLE-001 S3 안 `.claude/agents/active/` → `.claude/rules/` 이동 마감)
 
-repo 고유 값(패키지/경로/파일명/이름) 은 각 repo 가 자체 `scripts/agent/repo-config.sh` 에서 export 한다.
+repo 고유 값(패키지/경로/파일명/이름) 은 각 repo 가 자체 `scripts/repo-config.sh` 에서 export 한다.
 운영 스크립트는 실행 시점에 `repo-config.sh` 를 source 해 env var 를 로드한다.
 
 이 디자인은 두 invariant 를 동시에 충족한다:
@@ -25,7 +25,7 @@ repo 고유 값(패키지/경로/파일명/이름) 은 각 repo 가 자체 `scri
 
 ## 2. repo-config.sh 인터페이스
 
-각 repo 는 `scripts/agent/repo-config.sh` 를 소유하며 아래 변수를 export 한다.
+각 repo 는 `scripts/repo-config.sh` 를 소유하며 아래 변수를 export 한다.
 
 ### Repo identity (필수)
 
@@ -73,7 +73,7 @@ repo 고유 값(패키지/경로/파일명/이름) 은 각 repo 가 자체 `scri
 ## 3. Placeholder 토큰 (uiux-refresh.md + uiux-sot-refresh.md)
 
 source 문서에는 placeholder 토큰만 사용하며 default 값을 명시하지 않는다.
-각 토큰은 해당 repo 의 `scripts/agent/repo-config.sh` 변수로 매핑된다.
+각 토큰은 해당 repo 의 `scripts/repo-config.sh` 변수로 매핑된다.
 
 | 토큰 | repo-config 변수 | 의미 |
 |---|---|---|
@@ -98,10 +98,10 @@ repo-specific 섹션은 `<!-- propagation: repo-only -->` 마커로 격리한다
 ### Step 2 — target-side propagation
 1. generic 자산 7개를 source → target 으로 byte-identical 복사 (sed/치환 금지)
 2. `<!-- propagation: repo-only -->` 마커 블록은 propagation 시 제외
-3. 각 target 은 자체 `scripts/agent/repo-config.sh` 를 소유 — propagation 대상이 아님
+3. 각 target 은 자체 `scripts/repo-config.sh` 를 소유 — propagation 대상이 아님
 
 ### Step 3 — target 에 repo-config.sh 신설/유지
-target repo 는 자체 `scripts/agent/repo-config.sh` 를 만들거나 유지한다.
+target repo 는 자체 `scripts/repo-config.sh` 를 만들거나 유지한다.
 이 파일은 repo 고유 — 다른 repo 에서 copy 받지 않는다.
 
 ### Step 4 — uiux-refresh.md placeholder 해석

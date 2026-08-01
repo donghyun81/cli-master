@@ -5,7 +5,7 @@
 > **결정 기록**: `ADR-0001-SERVER-DATA-OWNERSHIP-SEPARATION`(Coin 확정 2026-08-01). 본 문서 조항의 **변경은 새 ADR 로** 한다 — 이 file 을 직접 고쳐 덮지 않는다(§9).
 > ★**supersede 고지**: 본 문서 §3-2 는 구 `COMMON_ARCHITECTURE §4.1` 의 「중첩/구조화 객체 = JSONB · 중첩 필요 시 JSONB 승격」을 **대체**한다. §4.1 은 본 cycle 에서 함께 정정된다.
 > **유래**: Selfward 「나에게로」 P1(서버 소유 재정의 · 2026-07-31~08-01) 실측. 각 조항의 `근거` = 그때 무엇이 틀렸었는지.
-> **연관**: `MODEL_SEPARATION.md` · `SSOT_PRINCIPLES.md` · `docs/rules/supabase-handling.md`(운영 채널) · `docs/backend/RLS_AND_PLAY_INTEGRITY_GUIDE.md`(RLS 기초)
+> **연관**: `MODEL_SEPARATION.md` · `SSOT_PRINCIPLES.md` · `docs/rules/supabase-handling.md`(운영 채널)
 
 ---
 

@@ -70,7 +70,7 @@
 
 | 종류 | 감지 도구 |
 |---|---|
-| 운영 레이어 drift (SteadyWell ↔ targets) | 정기 audit + `/fulfill-doc-governance` |
+| 운영 레이어 drift (`claude-cli-master` ↔ targets) | 정기 audit + `/fulfill-doc-governance` |
 | 문서 ↔ 코드 drift | `docs-drift-auditor` (read-only) |
 | 동일 UI 개념 중복 표시 | reviewer Architecture Integrity — Layer Boundaries 체크 |
 | 정책 계산 위치 위반 | reviewer Architecture Integrity — Layer Boundaries 체크 |

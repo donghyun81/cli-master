@@ -17,6 +17,18 @@
 - **GO** = 제품 표준 층. 분리 후보. 제품 *표면/도메인*이 바뀔 때 변함.
 - **경계** = 판단 필요(내용 검토 후 확정).
 
+### §0.1 신규 문서 배치 절차 (= 2026-08-01 신설 · 의무)
+
+**master 에 문서를 신설·이동하기 전, 그 문서를 위 §0 단일 test 에 먼저 통과시킨다.**
+
+- **GO 판정** ⇒ 기본 처분 = **「현 위치 유지 + §2 GO 표 등재」**. 분리는 §4 트리거 시점에 **더미 전체가 한 번에** 움직인다 — 신설분만 딴 데 두면 분리 시 그것만 혼자 다른 곳에 남는다.
+- **GO 판정** ⇒ 동시에 **신설 자체를 다시 묻는다**(= 이 repo 소관인가 · 제품/자식 repo 가 맞는 자리 아닌가).
+- **STAY 판정** ⇒ `.claude/` · `scripts/` · process 층에 배치.
+- 등재 누락은 다음 분리 cycle 의 누락으로 그대로 이어진다 ⇒ **배치와 등재는 한 cycle 안에서** 끝낸다.
+- `docs/architecture/` ↔ `docs/agent/architecture/` = **다른 디렉터리**. 뭉뚱그리면 GO 판정 자체가 어긋난다(전자 = charter + external-dep · 후자 = 아키텍처 표준 더미).
+
+> **계기**: 2026-08-01 `SERVER_DATA_OWNERSHIP.md` 신설이 §2 가 이미 🚚 GO(분리 후보)로 분류해 둔 `docs/agent/architecture/` 더미에 **등재 없이** 들어간 건. 「빼야 한다」고 표시된 더미에 새 파일을 더하면서 그 표를 갱신하지 않았다 — 규칙만 있고 계기가 없으면 다음에 또 스친다.
+
 ---
 
 ## §1. 핵심 발견 — 현재 conflation
@@ -41,7 +53,7 @@ cli-master는 두 층을 한 repo에 섞고 있고, **자기 §0 charter조차 �
 | `.claude/` 전체 (71 file) | agents(25)·commands(8)·hooks(17)·rules(5 kernel)·skills(20)·settings.json | Claude Code가 읽고 실행하는 **메커니즘**. ★단, 내용이 제품-도메인인 것은 §2-경계 |
 | `scripts/` (24) | propagate·verify-sync·activate-agent·report-gen·git-lock/safe·archiver·baseline-report·restore·repo-config 등 | propagation·repo-ops·git-안전 **도구** |
 | `CLAUDE.md` | master 운영 SoT | 운영 헌법 · ★단 §0 charter는 재정의 필요(§3) |
-| `.claude/rules/` 5 kernel | safety-and-secrets·anchor-list·cross-repo-parallel-exec·rule-routing-table·rule-footer-common | CLI L0 kernel(안전·앵커·크로스레포·라우팅) |
+| `.claude/rules/` 6 kernel | safety-and-secrets·anchor-list·cross-repo-parallel-exec·rule-routing-table·rule-footer-common·**stop-canonical**(2026-07-29 신설) | CLI L0 kernel(안전·앵커·크로스레포·라우팅·STOP) |
 | `docs/rules/` 중 CLI-workflow (16) | routing-and-delegation·cycle-discipline·mode-system·workflow-core·workflow-policy·reporting·verification-and-review·working-file-lifecycle·rule-routing-index·cross-repo-parallel-exec-detail·paste-authoring-disk-verification·recommended-option-disk-verification·gsm-measurement·automation-policy·plugin-policy·libs-versions-cross-verify (= 2026-07-29 `MASTER-CLI-JUDGMENT-SHIFT-001` 18→16 · abbreviation-policy + text-degeneration-prevention = 판단 위임 전환 후 `.auto-memory/*-COLD.md`) | CLI/agent가 *어떻게 일하는가* |
 | `docs/agent/process/` (4) | COMMIT_CONVENTION·DOC_GOVERNANCE_WORKFLOW·DOC_TASK_TYPES·REPO_FIRST_INTAKE_WORKFLOW | dev/문서 workflow (★COMMIT_CONVENTION 경계) |
 | `docs/agent/architecture/PROPAGATION_PARAMETERS.md` | propagation 파라미터 | 도구 설정 |
@@ -54,9 +66,9 @@ cli-master는 두 층을 한 repo에 섞고 있고, **자기 §0 charter조차 �
 | `docs/templates/` 전체 (10) | api-spec·billing·data-model·screen-flow·**release-checklist**·plan-10-section·review-12-section·setup-guide·ai-prompt-guide·pencil-dev-prompt | 제품/앱 **저작 양식** |
 | `docs/schemas/ui-spec.schema.json` | UI 설계 계약 | 제품 UI 계약 · ★보호 5 |
 | `docs/design/` (2) | design-sot-policy·pencil-sot-policy | 제품 디자인 거버넌스 · ★보호 5 |
-| `docs/backend/` (1) | RLS_AND_PLAY_INTEGRITY_GUIDE | 제품 백엔드/보안 |
+| ~~`docs/backend/` (1)~~ **해소** | RLS_AND_PLAY_INTEGRITY_GUIDE | 제품 백엔드/보안 · **2026-08-01 `MASTER-DOCS-STALE-SWEEP-002` 로 전파 세트 이탈** — master `archive/2026-08/` 1부 보존(내용 무편집) + 자식 3 삭제 ⇒ 분리 대상 아님(디렉터리 소멸) |
 | `docs/guides/` (1) | **app-implementation-guide** | "앱을 어떻게 구현하는가"(정곡) |
-| `docs/architecture/external-dep-abstraction.md` + `docs/agent/architecture/` (13) | COMMON_ARCHITECTURE·KMP_CMP_LAYER_DIRECTION·KOIN_DI_BASELINE·COMPOSE_STABILITY·ERROR_RESULT_POLICY·MODEL_SEPARATION·SSOT_PRINCIPLES·TDD_WORKFLOW·TESTABILITY_SEAMS·TESTING_STRATEGY·DEPENDENCY_DECISION_CHECKLIST·LEGACY_CLEANUP_GOVERNANCE·ADR_TEMPLATE | 소프트웨어 **아키텍처 표준**(제품이 어떻게 지어지는가) |
+| `docs/architecture/external-dep-abstraction.md` + `docs/agent/architecture/` (14) | COMMON_ARCHITECTURE·KMP_CMP_LAYER_DIRECTION·KOIN_DI_BASELINE·COMPOSE_STABILITY·ERROR_RESULT_POLICY·MODEL_SEPARATION·SSOT_PRINCIPLES·TDD_WORKFLOW·TESTABILITY_SEAMS·TESTING_STRATEGY·DEPENDENCY_DECISION_CHECKLIST·LEGACY_CLEANUP_GOVERNANCE·ADR_TEMPLATE·**SERVER_DATA_OWNERSHIP**(2026-08-01 신설 등재 · §0.1) | 소프트웨어 **아키텍처 표준**(제품이 어떻게 지어지는가) |
 | `docs/rules/` 중 제품-도메인 (24) | pencil-*(8: automation·cli-headless·component-paradigm·mcp-tools-reference·pen-format-schema·theme-multi-axis·**uiux-workflow**★·visual-primitives)·code-style-guide·code-principles·auth-rules·billing-rules·supabase-handling·design-prompting-paradigm·design-to-code-sync·domain-roles·deferred-domains·ui-ux-analysis·ux-laws·**uiux-sot-refresh**★·sot-code-name-map·architecture-foundation-link-policy·legacy-cleanup-governance·runtime-crash-mitigation-process | 제품 코드/디자인/도메인 규칙 (★=보호 5) |
 | `docs/release-readiness/PACKAGE-OVERVIEW.md` | 출시 현황 | 제품 출시 상태 |
 | `docs/agent/audits/`·`docs/agent/solutions/PROMPTFIT_RUBRIC.md`·`docs/baseline/` | 감사·rubric·cowork redline | 제품/프로세스 산출(일부 archive 후보) |
@@ -72,7 +84,7 @@ cli-master는 두 층을 한 repo에 섞고 있고, **자기 §0 charter조차 �
 | `docs/agent/process/COMMIT_CONVENTION`·`docs/agent/solutions/PROMPTFIT_RUBRIC`·`agent/architecture/ADR_TEMPLATE` | dev-workflow(STAY) vs 공유 eng 표준(GO) 경계 |
 | top-level `gradle.properties` | cli-master에 gradle 파일 = 용도 확인(vestigial 여부) |
 
-**요약 수치**: STAY ≈ `.claude/`(71) + scripts(24) + CLI-workflow rules(18) + process(4) + config. GO ≈ templates(10) + schemas(1) + design(2) + backend(1) + guides(1) + architecture(14) + 제품-도메인 rules(24) + release-readiness(1) + ops/baseline/audits. ★보호 5종 = **전부 GO(제품-디자인)**.
+**요약 수치**: STAY ≈ `.claude/`(71) + scripts(24) + CLI-workflow rules(18) + process(4) + config. GO ≈ templates(10) + schemas(1) + design(2) + ~~backend(1)~~(2026-08-01 archive 이탈) + guides(1) + architecture(15) + 제품-도메인 rules(24) + release-readiness(1) + ops/baseline/audits. ★보호 5종 = **전부 GO(제품-디자인)**.
 
 ---
 
@@ -115,7 +127,8 @@ cli-master는 두 층을 한 repo에 섞고 있고, **자기 §0 charter조차 �
 ## §5. 감사 provenance
 
 - disk 실측 = 2026-07-13 KST · `device_bash find claude-cli-master`(archive/.git/propagation-reports 제외) · read-only.
-- 파일 수: `.claude/` 71(agents 25·commands 8·hooks 17·rules 5·skills 20+) · `docs/rules/` 44 · `docs/templates/` 10 · `docs/agent/architecture/` 14 · scripts 24.
+- 파일 수(= 2026-07-13 실측): `.claude/` 71(agents 25·commands 8·hooks 17·rules 5·skills 20+) · `docs/rules/` 44 · `docs/templates/` 10 · `docs/agent/architecture/` 14 · scripts 24.
+- **재count(= 2026-08-01 `MASTER-DOCS-STALE-SWEEP-002` 실측)**: `.claude/rules/` **6**(+`stop-canonical` · 2026-07-29 `MASTER-CLI-CONTEXT-DIET-3-001`) · `docs/rules/` **42**(2026-07-29 `MASTER-CLI-JUDGMENT-SHIFT-001` 로 `abbreviation-policy`+`text-degeneration-prevention` 제거) · `docs/agent/architecture/` **15**(+`SERVER_DATA_OWNERSHIP` · §0.1). 나머지 수치 = 미재측정(= 2026-07-13 값 그대로 · 재count 시 본 행 갱신 의무).
 - 보호 5종 = 전부 제품-디자인(ui-spec.schema·pencil-uiux-workflow·pencil-sot-policy·uiux-sot-refresh·design-sot-policy) 확인.
-- `.claude/rules`(5) ≠ `docs/rules`(44) = 둘 다 실디렉토리(symlink 아님) — kernel은 `.claude`, 전 corpus는 `docs/rules`.
+- `.claude/rules`(2026-08-01 실측 **6**) ≠ `docs/rules`(실측 **42**) = 둘 다 실디렉토리(symlink 아님) — kernel은 `.claude`, 전 corpus는 `docs/rules`.
 - 근거 = 본 감사 + master `CLAUDE.md §0/§2` charter 대조.

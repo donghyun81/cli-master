@@ -11,7 +11,7 @@
 | 레이어 | 경로 | 변경 권한 |
 |---|---|---|
 | 운영 레이어 (CLI ops) | `CLAUDE.md`, `.claude/`, `scripts/agent/`, `docs/agent/`, `.ai/` | 모든 레포 공통 — propagation 대상 |
-| 제품 레이어 (코드) | `app/`, `shared/` ([app-foundation/shared/domain/](../../../../app-foundation/shared/domain/) · [app-foundation/shared/data/](../../../../app-foundation/shared/data/) · [app-foundation/shared/feature-state/](../../../../app-foundation/shared/feature-state/)), `iosApp/`, `feature/`, `gradle/` | 레포별 고유 — propagation 대상 아님 |
+| 제품 레이어 (코드) | `app/`, `shared/` ([app-foundation/shared/domain/](../../../../app-foundation/shared/domain/) — 실측 `shared/` = `domain` 단독 · 모듈 열거 SoT = `app-foundation/CLAUDE.md §0.2`), `iosApp/`, `feature/`, `gradle/` | 레포별 고유 — propagation 대상 아님 |
 
 운영 레이어는 **앱-중립**으로 유지한다. 제품 컨텍스트(앱 이름, 도메인 정책, 결제 모델, AI 사용 정책 등)는 운영 레이어에 침투하지 않는다.
 

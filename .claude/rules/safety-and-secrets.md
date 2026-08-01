@@ -60,7 +60,7 @@
 
 > server-implementer는 에이전트 파일이 존재하나 현재 대상 경로가 없다.
 > server/ 디렉터리 생성 시 이 매트릭스를 갱신하고 [DEFERRED] 태그를 해제한다.
-> KMP/CMP 도입 시 SteadyWell SoT에서 관련 경로 매트릭스를 재propagation한다.
+> KMP/CMP 도입 시 `claude-cli-master` SoT에서 관련 경로 매트릭스를 재propagation한다.
 
 read-only 역할(ux-auditor, backend-api-architect 등)은 Write/Edit 권한이 없으므로 매트릭스 대상이 아니다.
 

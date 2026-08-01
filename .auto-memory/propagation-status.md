@@ -180,10 +180,10 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 | `docs/rules/code-principles.md` | `d5f48e60bda0` | ✓ | ✓ | ✓ |
 | `docs/rules/design-to-code-sync.md` | `81a52a9bc694` | ✓ | ✓ | ✓ |
 | `docs/rules/ux-laws.md` | `76247cd98ac4` | ✓ | ✓ | ✓ |
-| `docs/agent/architecture/COMMON_ARCHITECTURE.md` | `9969282d97e6` | ✓ | ✓ | ✓ |
+| `docs/agent/architecture/COMMON_ARCHITECTURE.md` | `b11d8942ba51` | ✓ | ✓ | ✓ |
 | `docs/agent/architecture/TDD_WORKFLOW.md` | `209f9aa3f69c` | ✓ | ✓ | ✓ |
 | `docs/agent/architecture/MODEL_SEPARATION.md` | `d6262ba37923` | ✓ | ✓ | ✓ |
-| `docs/agent/architecture/SSOT_PRINCIPLES.md` | `5d531efb0bda` | ✓ | ✓ | ✓ |
+| `docs/agent/architecture/SSOT_PRINCIPLES.md` | `826e19561023` | ✓ | ✓ | ✓ |
 | `docs/agent/process/COMMIT_CONVENTION.md` | `e2e8c636d82a` | ✓ | ✓ | ✓ |
 | `scripts/agent/frontmatter-grep.sh` | `a387a4dc26dc` | ✓ | ✓ | ✓ |
 | `.editorconfig` | `e6eb4cfe06a8` | ✓ | ✓ | ✓ |
@@ -191,13 +191,13 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 
 ## Last verify-sync
 
-- timestamp: 2026-08-01T12:38:08+0900
-- pass: 162
+- timestamp: 2026-08-01T16:01:22+0900
+- pass: 161
 - drift: 0
 - miss: 6
 - exit: 1
 
 ### Drift 상세
 
-- docs/architecture/CLI-MASTER-SCOPE-SEPARATION-CHARTER.md  master=b547ae5be350  app-foundation=MISS  gently-product-docs=MISS  Selfward=MISS
+- docs/architecture/CLI-MASTER-SCOPE-SEPARATION-CHARTER.md  master=0944b3147b66  app-foundation=MISS  gently-product-docs=MISS  Selfward=MISS
 - docs/ops/production-cli-access-tokens.md  master=3b0e8131fb67  app-foundation=MISS  gently-product-docs=MISS  Selfward=MISS

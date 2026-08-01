@@ -123,7 +123,7 @@ bash scripts/verify-sync.sh
 - `.ai/uiux-sot/refresh/VERIFY.md` (refresh 검증 명령)
 - `.ai/uiux-sot/refresh/WORKFLOW.md` (refresh workflow)
 - `.github/pull_request_template.md` (PR template)
-- `docs/backend/RLS_AND_PLAY_INTEGRITY_GUIDE.md` (Supabase RLS + Play Integrity)
+- `archive/2026-08/RLS_AND_PLAY_INTEGRITY_GUIDE.md` (Supabase RLS + Play Integrity) — 2026-08-01 `MASTER-DOCS-STALE-SWEEP-002` 로 **전파 세트 이탈** (구 경로 = docs/backend/ · master archive 1부 보존 · 자식 3 삭제 · 내용 무편집)
 
 ### 신설 9 파일 (master 신규 SoT)
 - `docs/guides/app-implementation-guide.md` (204 줄 · Claude CLI 진입 1차 가이드)

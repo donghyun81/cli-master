@@ -9,7 +9,7 @@
 | package inventory | `find .ai/uiux-sot -maxdepth 4 -type f | sort` | required files exist |
 | refresh docs inventory | `find .ai/uiux-sot/refresh -maxdepth 2 -type f | sort` | refresh docs set exists (PRECONDITIONS.md present when the repo maintains a gap route map) |
 | policy markers | `rg -n "BASELINE_PENDING_REFRESH|CURRENT_BASELINE|latest-only|lineage|git diff" .ai/uiux-sot` | required policy strings exist |
-| live route authority sanity | `. scripts/agent/repo-config.sh && rg -n "composable\(\|navigate\(" "$REPO_APP_ROUTES" "$REPO_APP_ROOT_COMPOSABLE"` | route inventory stays live-code-first |
+| live route authority sanity | `. scripts/repo-config.sh && rg -n "composable\(\|navigate\(" "$REPO_APP_ROUTES" "$REPO_APP_ROOT_COMPOSABLE"` | route inventory stays live-code-first |
 | unresolved gap authority sanity | repo-specific gap route grep over the repo's screen / shared / manifest sources — concrete route names, state gates, and query params live in the repo's `PRECONDITIONS.md` when maintained | target routes, state gates, query params, and no-deep-link constraints are evidence-backed |
 | precondition/doc sync | `rg -n "precondition\|blocked\|unknown\|authoritative proof\|XML" .ai/uiux-sot/refresh/*.md .ai/uiux-sot/semantic/*.md .ai/uiux-sot/latest/*.md` | preconditions and blocked/unknown rationale are synced across refresh/semantic/latest docs |
 | task artifact completeness | `ls .ai/reports/<taskId>/` (구 compound-lint = deprecated) | task reports complete |

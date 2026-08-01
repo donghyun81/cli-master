@@ -216,7 +216,7 @@ verify / review 없이 완료 금지.
 - DI baseline: 4-repo 모두 `Koin`. 위치는 `app/` (또는 향후 `shared/app` glue)
 
 세부: `docs/rules/workflow-core.md` + `cycle-discipline.md` + `pencil-automation.md` + `docs/rules/ui-ux-analysis.md`.
-아키텍처 공통 SoT: 각 자식 repo 의 `docs/agent/architecture/` (각 자식 repo 가 SteadyWell propagation 받음).
+아키텍처 공통 SoT: 각 자식 repo 의 `docs/agent/architecture/` (각 자식 repo 가 `claude-cli-master` propagation 받음).
 
 ---
 
