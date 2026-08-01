@@ -235,6 +235,33 @@ master 전체 변경 = **5 file 뿐** (`git status --porcelain`): 정정 4 + `pr
 
 ---
 
+## ⓘ 동결 3 (GB/GD/GT) 쓰기 0 실증 (STOP 준수)
+
+`propagate.sh` targets 실측 = `app-foundation gently-product-docs Selfward` (동결 3 미포함) — 그러나 **가정하지 않고 실측 확인**:
+
+| repo | HEAD | tracked dirty | dirty file 최신 mtime | 본 cycle 전파 5 file 변경 |
+|---|---|---|---|---|
+| GentlyBreath | `a67a5a3` | 6 | 2026-07-15 10:18 | **0** ✓ |
+| GentlyDay | `912e80a` | 12 | 2026-07-15 00:14 | **0** ✓ |
+| GentlyTable | `6612e4d` | 8 | 2026-07-15 00:21 | **0** ✓ |
+
+dirty 26건 전량이 **2026-06-06 ~ 2026-07-15** mtime = 본 session(2026-08-01 12:33~) 이전의 **기존 잔여물**이며, 본 cycle 이 만든 변경이 아니다. 동결 3 = **read-only 인용만 · 쓰기 0** ✓
+
+---
+
+## §최종 상태
+
+| repo | HEAD | tracked dirty | ahead |
+|---|---|---|---|
+| claude-cli-master | `eb52902` | 0 | 18 |
+| app-foundation | `a7c9280` | 0 | 2 |
+| gently-product-docs | `7af7493` | 0 | 3 |
+| Selfward | `15a4ec7` | 0 | 14 |
+
+커밋 후 5 file × 4 repo byte-identical 재확인 = **전량 ✓**. push = **미수행** (Coin 본인 터미널 소관).
+
+---
+
 ## §후속 후보 (본 cycle 미처리 · 근거 있는 지목)
 
 전수 census 가 드러냈으나 §2 scope / §6 STOP 로 **의도적으로 미접촉**한 건:
