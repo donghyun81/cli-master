@@ -2,7 +2,7 @@
 
 > **Source of Truth** for repo-specific environment variables and placeholder tokens used by ops-layer assets to support multi-repo propagation without source-side edits.
 >
-> Authority: SteadyWell. Other repos consume this file as read-only spec.
+> Authority: `claude-cli-master`. Other repos consume this file as read-only spec.
 > Created by: SW-OPS-PARAM-001
 > Revised by: SW-OPS-PARAM-002 (per-repo `scripts/agent/repo-config.sh` 외부화)
 
@@ -17,7 +17,7 @@ repo 고유 값(패키지/경로/파일명/이름) 은 각 repo 가 자체 `scri
 
 이 디자인은 두 invariant 를 동시에 충족한다:
 - **runtime 0-sed**: source → target propagation 시 string replacement 가 0 회 (byte-identical 복사)
-- **0 repo-specific residue at targets**: source 자산에 특정 repo 의 패키지/경로 default 가 잔존하지 않음 — target propagation 후 SteadyWell 식별자 0 hit
+- **0 repo-specific residue at targets**: source 자산에 특정 repo 의 패키지/경로 default 가 잔존하지 않음 — target propagation 후 source repo(= `claude-cli-master`) 식별자 0 hit
 
 이전 디자인 (SW-OPS-PARAM-001) 은 env var fallback default 를 SteadyWell 값으로 두어 backward compatibility 를 확보했으나, multi-repo extension 시점(SW-OPS-REPROP-001 dry-verify) 에서 두 invariant 의 양립 불가가 surface 됐다. 본 revision 이 그 conflict 를 해소한다.
 
@@ -31,8 +31,8 @@ repo 고유 값(패키지/경로/파일명/이름) 은 각 repo 가 자체 `scri
 
 | 변수 | 의미 | 예시 |
 |---|---|---|
-| `REPO_NAME` | display name | `SteadyWell` / `GentlyDay` / `GentlyBreath` / `GentlyTable` |
-| `REPO_PREFIX` | task ID prefix | `SW` / `GD` / `GB` / `GT` |
+| `REPO_NAME` | display name | `Selfward` / `app-foundation` / `gently-product-docs` |
+| `REPO_PREFIX` | task ID prefix | `SW` / `FND` / `PDOCS` |
 
 ### 패키지 (필수)
 

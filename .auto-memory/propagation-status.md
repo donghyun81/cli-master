@@ -180,7 +180,7 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 | `docs/rules/code-principles.md` | `d5f48e60bda0` | ✓ | ✓ | ✓ |
 | `docs/rules/design-to-code-sync.md` | `81a52a9bc694` | ✓ | ✓ | ✓ |
 | `docs/rules/ux-laws.md` | `76247cd98ac4` | ✓ | ✓ | ✓ |
-| `docs/agent/architecture/COMMON_ARCHITECTURE.md` | `9ef0dedcf80c` | ✓ | ✓ | ✓ |
+| `docs/agent/architecture/COMMON_ARCHITECTURE.md` | `9969282d97e6` | ✓ | ✓ | ✓ |
 | `docs/agent/architecture/TDD_WORKFLOW.md` | `209f9aa3f69c` | ✓ | ✓ | ✓ |
 | `docs/agent/architecture/MODEL_SEPARATION.md` | `d6262ba37923` | ✓ | ✓ | ✓ |
 | `docs/agent/architecture/SSOT_PRINCIPLES.md` | `5d531efb0bda` | ✓ | ✓ | ✓ |
@@ -191,9 +191,9 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 
 ## Last verify-sync
 
-- timestamp: 2026-08-01T10:51:52+0900
-- pass: 161
-- drift: 2
+- timestamp: 2026-08-01T12:38:08+0900
+- pass: 162
+- drift: 0
 - miss: 6
 - exit: 1
 
@@ -201,4 +201,3 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 
 - docs/architecture/CLI-MASTER-SCOPE-SEPARATION-CHARTER.md  master=b547ae5be350  app-foundation=MISS  gently-product-docs=MISS  Selfward=MISS
 - docs/ops/production-cli-access-tokens.md  master=3b0e8131fb67  app-foundation=MISS  gently-product-docs=MISS  Selfward=MISS
-- docs/templates/release-checklist.template.md  master=e6c62fb280f4  app-foundation=30fc93967106(✗)  gently-product-docs=30fc93967106(✗)  Selfward=✓

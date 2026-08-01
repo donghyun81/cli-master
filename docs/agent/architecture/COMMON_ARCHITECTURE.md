@@ -1,8 +1,8 @@
 # Common Architecture — App-Neutral CLI Ops Foundation
 
 > **목적**: Claude Code 운영 헌법(`CLAUDE.md`)이 모든 Android 앱 레포에서 동일하게 동작하도록 보장하는 공통 아키텍처 SoT.
-> **적용 대상**: SteadyWell, GentlyDay, GentlyBreath, GentlyTable 및 향후 propagation 대상 레포.
-> **SoT**: 이 문서. 변경은 SteadyWell에서 먼저 반영 후 propagation.
+> **적용 대상**: 4-active — `claude-cli-master`(master) · `app-foundation` · `gently-product-docs` · `Selfward` 및 향후 propagation 대상 레포. (GentlyBreath · GentlyDay · GentlyTable = 2026-07-17 T6 **동결 계승 원천** — 전파 대상 아님 · 쓰기 0)
+> **SoT**: 이 문서. 변경은 `claude-cli-master` 에서 먼저 반영 후 자식으로 단방향 propagation.
 
 ---
 
@@ -100,11 +100,11 @@
 
 ## 5. Propagation Discipline
 
-1. **SoT 원본**: 변경은 SteadyWell repo에서 먼저 반영
-2. **Verify in source**: SteadyWell에서 lint·verify·review PASS
+1. **SoT 원본**: 변경은 `claude-cli-master` repo에서 먼저 반영
+2. **Verify in source**: `claude-cli-master` 에서 lint·verify·review PASS
 3. **Propagate**: 변경된 파일을 각 target repo에 복사 + 레포-고유 부분 재적용
 4. **Verify in target**: 각 target에서 lint·verify·review PASS
-5. **Drift Audit**: 정기적으로 SteadyWell ↔ targets 간 drift 점검
+5. **Drift Audit**: 정기적으로 `claude-cli-master` ↔ targets 간 drift 점검
 
 운영 레이어 drift는 `/fulfill-doc-governance` 트랙으로 처리한다.
 

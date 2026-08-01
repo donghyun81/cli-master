@@ -1,6 +1,7 @@
 # RLS 매트릭스 + Play Integrity 도입 가이드
 
-> **대상**: GB (GentlyBreath) · GD (GentlyDay) · GT (GentlyTable)
+> **대상**: GB (GentlyBreath) · GD (GentlyDay) · GT (GentlyTable) — **3 = 2026-07-17 T6 이후 동결 계승 원천**(전파 대상 아님 · 쓰기 0). 현행 활성 도메인 자식 = `Selfward`.
+> **본 문서의 지위**: 작성 시점(2026-04-20) 계획·설계 **기록**. 아래 테이블 매트릭스 · CLI 프롬프트의 repo·패키지·TaskId 좌표는 **당시 값 그대로 보존**한다(이력 — 현행 좌표로 읽지 말 것).
 > **작성일 (KST)**: 2026-04-20
 > **전제**: Phase 0 Dashboard 작업에서 CAPTCHA 를 **기본 비적용**으로 결정. 대체 스택으로 **RLS 정책 강화 + Play Integrity API + Rate Limits** 를 모바일 표준 조합으로 채택.
 > **SoT**: 이 파일 = 계획·설계 SoT. 실제 Supabase 정책 반영은 Coin 수동 (SQL Editor). 실제 코드 반영은 CLI 프롬프트 실행 후 repo.
