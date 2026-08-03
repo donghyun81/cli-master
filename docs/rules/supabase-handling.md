@@ -193,6 +193,8 @@ service_role / anon key
 mcp / Supabase MCP / mcp__supabase-*
 Keychain / security find-generic-password / security add-generic-password
 SUPABASE_ACCESS_TOKEN / SUPABASE_ACCESS_TOKEN_GB / SUPABASE_ACCESS_TOKEN_GD / SUPABASE_ACCESS_TOKEN_GT
+SUPABASE_ACCESS_TOKEN_SELFWARD
+401 / Unauthorized / 토큰 만료 / PAT 재발급
 ```
 
 ---
@@ -221,6 +223,7 @@ SUPABASE_ACCESS_TOKEN / SUPABASE_ACCESS_TOKEN_GB / SUPABASE_ACCESS_TOKEN_GD / SU
 - 2026-05-18 · MASTER-CLI-SUPABASE-COMPREHENSIVE-001 · §10 신설 (= MCP server 호출 paradigm + supabase CLI 통합 paradigm + 자식별 3 instance + Keychain wrap reference + read-only baseline + `cli_...` token 폐기) + §6 키워드 trigger list append + 5-repo byte-identical propagation (= master + app-foundation + GB + GD + GT)
 - 2026-07-26 · MASTER-CLI-RULES-SETTLE-001 · **§2.10 신설** (= A-4 · EF 로그 = Management API **`logs.all`** 단일 경로 · `/database/query` 와 **동일 PAT** · `function_logs`/`function_edge_logs`/`edge_logs` · 콘솔 = fallback) + **§2.1 · §4.4 · §10.3 3곳 supersede 표식**(= `supabase functions logs` **서브커맨드 부재 실측** CLI v2.98.2 · 구 서술 **무삭제 이력 보존** · 근거 = 부재를 "콘솔만 가능"으로 오단정 = **도구 부재 ≠ 경로 부재**) + **§11 AI 응답 계약 신설**(= §11.1 JSON 계약 verbatim 인용 시 **낫표 「」 명시** = C-1 · F2 주 원인 = 프롬프트 자신의 verbatim 지시가 raw `"` 유도 → 조기 종료 / §11.2 절단 감지 = **`stop_reason` 1차 · `outputTokens>=maxTokens` 폴백 전용 · OR 금지** = C-2 정정본 · SDK 0.30.0 실취득 23/23 · 초안의 대리-신호-규칙화 = 표면 속성 분류 금지와 정면 충돌 / §11.3 절단·정규화는 **파싱 후 필드에** = C-3 · `MAX_OUTPUT_CHARS 5000` 선절단 → 초과 시 **100% 파싱 실패** / §11.4 외부 응답 실패 경로 **진단 로그 + 마스킹 의무** = A-3 · 발췌 = 모델 출력 한정). **소유 판정 3 기준 실측 PASS**(4-repo byte-identical `f567cff5a52e` · 자기 선언 §8 · `propagate.sh:99` scan set). §1·§3·§5·§6·§7·§10 본문 무접촉. 4-repo byte-identical propagation.
 - 2026-06-19 · MASTER-SUPABASE-PROD-APPLY-RECIPE-001 · §3.1 확장 (Production apply = "staging 자율 → Coin 명시 승인 → cli prod push" 8-step recipe · `db push` prod 금지 → Management API `/database/query` `read_only=false` 단일 경로 · 검증 선례 GT-USERS-FK-RESTORE-001 / GB·GD-PROD-APPLY-001) + §10.5 정정 (staging 토큰 `supabase-g{b,d,t}-token` env inject vs prod 토큰 `supabase-g{b,d,t}-prod-token` inline 캡처·env 미적재 2-tier 구분 + prod DB pw slot 부재) + §5 STOP prod write 승인/토큰/PHASE A 게이트 정정 · 반복된 "prod 도달 불가 STOP"(daily_tips GT) 근본 해소 · production code 무접촉 · 6-repo byte-identical propagation
+- 2026-08-02 · MASTER-CLI-RULES-TOKEN-SLOT-WRITER-001 · **§10.8 신설**(= 401 진단 사다리 · ①env↔slot 다이제스트 대조 → ②slot 실패 → ③재발급 · **①생략 재발급 = STOP** · 안전형 대조 snippet) + **§10.2 정정**(= CLI 명령 경로 = **slot 직독 의무** · 구 env 간접 2 형태 = 블록 주석 보존 · `{GB,GD,GT}` → 활성 `SELFWARD` 단독) + **§10.5 표 현행화**(= staging 활성 행 신설 · 구 `supabase-g{b,d,t}-token` 행 = **폐기 표식**[2026-07-29 slot 삭제] · **prod 행 무접촉**). 근거 = 401 **5회** 재발 실측(같은 세션 env `05978642…`=401 / slot `30c013e1…`=200 · 둘 다 len 44 · 세션 기동 07-25 ↔ slot rotate 07-29 = **9일 스냅숏 보유**) · 근본 = **세션 수명 > 토큰 수명** · 지식은 `incident-log:537` 에 있었으나 **처방문(§10.2)이 정반대를 가르쳐** 재생산. **env 주입 제거 아님 = 경로 분리**(= `.mcp.json:13` interpolation 이 env 를 요구 · MCP 층 = env 유지 / CLI 층 = slot 직독 · §10.5 prod tier 의 inline 캡처 형태를 staging CLI 경로에 적용). + **§6 trigger 2줄 추가**(= `SUPABASE_ACCESS_TOKEN_SELFWARD` · **`401 / Unauthorized / 토큰 만료 / PAT 재발급`** · 구 `:195` 행 **무접촉** · 근거 = trigger 없는 조항은 **읽히지 않는다** = 로그와 같은 자리). `~/bin/claude-wrap.sh` · `~/.zshrc` = **repo 밖 = Coin 손**(문서는 형태만 정한다). §1~§5·§7·§8·§10.1·§10.3·§10.4·§10.6·§10.7·§11 **무접촉**. 4-repo byte-identical propagation.
 
 ---
 
@@ -243,12 +246,19 @@ SUPABASE_ACCESS_TOKEN / SUPABASE_ACCESS_TOKEN_GB / SUPABASE_ACCESS_TOKEN_GD / SU
 
 ### §10.2 supabase CLI 호출 paradigm 분기
 
-기존 §2 본문 (= CLI 자동 처리 영역) 본문 본질 무접촉. 신 paradigm = wrap script (= `~/bin/claude-wrap.sh`) 측 `SUPABASE_ACCESS_TOKEN_{GB,GD,GT}` env var inject 통합. 자식별 진입 시점 (= 사용자 본인 terminal 또는 cli session 내부):
+기존 §2 본문 (= CLI 자동 처리 영역) 본문 본질 무접촉. 신 paradigm = wrap script (= `~/bin/claude-wrap.sh`) 측 `SUPABASE_ACCESS_TOKEN_{GB,GD,GT}` env var inject 통합. 자식별 진입 시점 (= 사용자 본인 terminal 또는 cli session 내부): ★**2026-08-02 정정**(`MASTER-CLI-RULES-TOKEN-SLOT-WRITER-001`): 구 문면의 `{GB,GD,GT}` = **동결 3**(= 2026-07-29 slot 폐기 · `safety-and-secrets.md` slot 명세 참조) · **활성 = `SUPABASE_ACCESS_TOKEN_SELFWARD` 단독**. 그리고 ★**env 는 기동 시점 스냅숏이다** — 아래 예시는 **slot 직독** 형태로 대체됐다(근거 = §10.8).
 
 ```bash
-SUPABASE_ACCESS_TOKEN="$SUPABASE_ACCESS_TOKEN_GB" supabase functions list --project-ref vpmkruzpcpbfpqgpcihp
-# 또는 ~/.zshrc alias paradigm:
-supabase-gb projects list   # alias supabase-gb='SUPABASE_ACCESS_TOKEN="$SUPABASE_ACCESS_TOKEN_GB" supabase'
+# ★CLI 명령 경로 = slot 직독 (= env 경유 금지 · 근거 = §10.8 · 2026-08-02 정정)
+SUPABASE_ACCESS_TOKEN="$(security find-generic-password -s supabase-selfward-token -a "$USER" -w)" \
+  supabase functions list --project-ref pdaqmzmgotwodyokdkhn
+
+# ~/.zshrc alias 도 같은 형태여야 한다 (= ★파일이 repo 밖 → 실 반영은 Coin 손):
+#   alias supabase-sw='SUPABASE_ACCESS_TOKEN="$(security find-generic-password -s supabase-selfward-token -a "$USER" -w)" supabase'
+
+# ★[구 판 보존 · 2026-08-02 이전] 아래 2 형태는 env 간접이라 세션이 오래 살면 반드시 틀린다:
+#   SUPABASE_ACCESS_TOKEN="$SUPABASE_ACCESS_TOKEN_GB" supabase functions list --project-ref vpmkruzpcpbfpqgpcihp
+#   supabase-gb projects list   # alias supabase-gb='SUPABASE_ACCESS_TOKEN="$SUPABASE_ACCESS_TOKEN_GB" supabase'
 ```
 
 ### §10.3 분기 결정 표 (= MCP server vs supabase CLI 진입)
@@ -275,7 +285,8 @@ token 보관 + 추출 영역 = macOS Keychain · `security find-generic-password
 
 | tier | Keychain slot | 적재 방식 | org | 사용 |
 |---|---|---|---|---|
-| **staging** | `supabase-g{b,d,t}-token` (3 slot) | `~/bin/claude-wrap.sh` → env `SUPABASE_ACCESS_TOKEN_<self>` **상시 inject** | staging org | §2 CLI 자동 + §10.2 (cli 자율) |
+| **staging (활성)** | `supabase-selfward-token` (1 slot) | `~/bin/claude-wrap.sh` → env `SUPABASE_ACCESS_TOKEN_SELFWARD` (= **MCP 층 전용**) · ★**CLI 명령은 slot 직독**(§10.8) | staging+prod **단일 계정** | MCP = **staging ref 단독 · `read_only=true`** · **prod ref 등록 = STOP**(불변) |
+| ~~**staging**~~ ⚠ **폐기 (2026-07-29)** | `supabase-g{b,d,t}-token` (3 slot) | `~/bin/claude-wrap.sh` → env `SUPABASE_ACCESS_TOKEN_<self>` **상시 inject** | staging org | §2 CLI 자동 + §10.2 (cli 자율) — ⚠ **동결 3 · slot 삭제됨** (= `MASTER-CLI-RESIDUAL-OPS-001` · 구 근거 · 이력 보존) |
 | **prod** | `supabase-g{b,d,t}-prod-token` (3 slot · **별 slot** · 2026-06-02 등록) | **inline 캡처만** (subshell `$()` · env 미적재 · 즉시 unset) | prod org (GB `bfdt…` · GD/GT `xhcug…` · staging org 와 별개) | §3.1 Phase 3 (Coin 승인 후 한정) |
 
 - prod 토큰 = staging 토큰과 **별 slot** · **env 영구 적재 X** (= 상시 prod 권한 회피 · prod opt-in 유지). staging env 토큰으로 prod ref 불가시 = prod Keychain slot 로드 필요 (§3.1 Phase 3 step 2).
@@ -298,6 +309,30 @@ token 보관 + 추출 영역 = macOS Keychain · `security find-generic-password
 4. 폐기 후 = wrap script 측 inject paradigm 측 자동 인증 default
 
 cli session 측 직접 폐기 시도 = STOP (= §5 정합 · 사용자 manual 의무).
+
+### §10.8 토큰 401 진단 사다리 (= 2026-08-02 신설 · 5회 재발 회수)
+
+★**401 의 첫 진단은 「PAT 가 죽었나」가 아니라 「내가 넘긴 값이 slot 과 같은가」다.**
+
+| 단계 | 무엇을 | 판정 |
+|---|---|---|
+| ① | env 판 vs slot 판 **다이제스트 대조**(아래 안전형) | **다르다 → 진단 종료** · 원인 = env stale · 처방 = slot 직독(§10.2) |
+| ② | ①이 같은데도 401 | slot 값 자체 실패 → **Coin 회수**(재발급 후보) |
+| ③ | 재발급 | ②까지 간 뒤에만 · **cli 실행 0** (= §10.7 정합 · 사용자 manual 의무) |
+
+★**①을 건너뛴 재발급 제안 = STOP.** 재발급은 비가역이고(구 토큰 revoke), **env 가 stale 이면 새 토큰도 즉시 같은 401 이 된다** — 살아 있는 세션의 env 는 재발급으로 갱신되지 않기 때문이다. 실측 = 2026-07-29 rotation 후 한 세션이 9일간 구 값을 보유해 **401 5회 재발** · 매번 「PAT 사망」으로 오진(`.auto-memory/incident-log.md:537` 이 그 기전을 이미 적어 뒀는데도).
+
+**안전형 대조** (= 평문 0 · argv 0 · `safety-and-secrets.md §평문 차단 의무` 정합):
+
+```bash
+printf '%s' "${SUPABASE_ACCESS_TOKEN_SELFWARD-}" | shasum -a 256 | cut -c1-16   # env 판
+security find-generic-password -s supabase-selfward-token -a "$USER" -w \
+  | shasum -a 256 | cut -c1-16                                                   # slot 판
+```
+
+- 값은 **파이프로만** 흐른다 — **argv 금지**(`ps` 노출) · **변수 echo 금지**.
+- `${v:-UNSET}` 류 = **금지**(= 2026-07-29 L2 노출의 정확한 기전).
+- 길이 비교(`${#v}`)는 **판정 근거가 못 된다** — 실측 2 값 모두 len 44 였다.
 
 ---
 

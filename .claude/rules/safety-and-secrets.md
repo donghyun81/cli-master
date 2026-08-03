@@ -103,6 +103,15 @@ slot 명세 (= 2026-07-29 `MASTER-CLI-STALE-SWEEP-4ACTIVE-001` 실측 현행화 
 - `supabase-selfward-token` (= **활성** 도메인 자식 Selfward 측 PAT · staging+prod 단일 계정) → `SUPABASE_ACCESS_TOKEN_SELFWARD` → `.mcp.json` `supabase-selfward` (= **staging ref 단독 · `read_only=true`** · 2026-07-29 `MASTER-CLI-CONTEXT-DIET-3-001` 등록 · Coin 본심 ④). **prod ref 등록 = STOP** (= 구조적 격리 · staging/prod 별 project).
 - `supabase-gb-token` / `supabase-gd-token` / `supabase-gt-token` (= 동결 3 측 PAT · Keychain **잔존** · **`.mcp.json` 등록 = 2026-07-29 해제** → 현재 미소비 · wrap 은 계속 주입[warn+skip 정합]). 동결 repo 재조회 필요 시 = `.mcp.json` 재등록이 아니라 **Coin 회수** (= 동결 = 쓰기 0 · 읽기도 상시 배선 대상 아님).
 
+★**env 주입 값 = 기동 시점 스냅숏 · Keychain slot = SoT** (= 2026-08-02 `MASTER-CLI-RULES-TOKEN-SLOT-WRITER-001` 신설 · 근거 = 401 5회 재발 실측):
+
+`~/bin/claude-wrap.sh` 는 **cli 기동 시점 1회** slot 을 읽어 env 에 넣는다. 이후 slot 이 rotate 돼도 **살아 있는 세션의 env 는 구 값을 계속 들고 있다** — 즉 ★**세션 수명 > 토큰 수명이면 env 는 반드시 틀린다.** 2026-07-29 rotation 후 한 세션이 **9일간** 구 값을 보유해 401 을 5회 재발시켰고, 매번 「PAT 가 죽었다」로 오진됐다.
+
+- **MCP server 경로** = **env 유지**. `.mcp.json` 의 `${SUPABASE_ACCESS_TOKEN_<자식>}` interpolation 이 env 를 요구하므로 **제거 불가**. stale 이면 **세션 재기동**이 정답.
+- ★**CLI 명령 경로**(= `supabase …` / Management API curl) = **slot 직독 의무** · env 경유 **금지**.
+  ⟹ 신 기전이 아니다 — `supabase-handling.md §10.5` 의 **prod tier** 가 이미 쓰던 「inline 캡처 · env 미적재」를 **staging tier 의 CLI 경로에도 적용**하는 것.
+- 401 진단 = `supabase-handling.md §10.8` 사다리. ★**env↔slot 대조를 건너뛴 재발급 제안 = STOP**(비가역 · env stale 이면 새 토큰도 같은 401).
+
 **miss 정책** (= `~/bin/claude-wrap.sh` 정합 · 2026-07-29 정정): slot miss = **warn + skip · `claude` 기동 계속**. 구 판 fail-fast(`exit 1`)는 동결 slot 정리 시점에 `claude` 자체를 기동 불능으로 만들었다 (= 동결 3 slot 은 read_only MCP 편의 수단이지 기동 전제가 아님).
 
 ### 추출 paradigm (= wrap script 측 진입 영역)
@@ -135,6 +144,7 @@ inject_token() {
 - wrap script 측 subshell `$()` capture + 변수 미echo (= stdout / stderr 노출 차단)
 - commit log 측 `eyJ` (= JWT prefix) / `sbp_` (= Supabase PAT prefix) 평문 0 match 의무 (= §시크릿 스캔 패턴 grep 정합)
 - **★검증 harness 자체가 노출 경로다** (= 2026-07-29 `MASTER-CLI-STALE-SWEEP-4ACTIVE-001` 실사고): secret 주입 script 를 dry-run / 진단할 때 **값이 아니라 존재 여부만** 출력한다. `${v:+SET}` / `${#v}` 는 안전하나 `${v:-UNSET}` 은 **값이 있으면 값을 출력한다** (= 그 사고의 정확한 기전 · 마스킹 의도가 정반대로 작동). 안전형 = `[ -n "$v" ] && echo SET || echo UNSET`. 노출 시 = 파일 기록 여부 전수 확인 + **해당 토큰 rotation 회수**(Coin 몫) 보고 의무 — 노출은 transcript 한정이어도 회수 대상이다.
+- **★값 대조는 다이제스트로 · 길이로 하지 않는다** (= 2026-08-02 신설): 두 값이 같은지 물어야 할 때(예: env 판 vs slot 판) `printf '%s' "$v" | shasum -a 256 | cut -c1-16` 로 **앞 16 hex 만** 비교한다 — 값은 파이프로만 흐르고 **argv 에 넣지 않는다**(`ps` 노출). 길이(`${#v}`)는 근거가 못 된다: 실측에서 **서로 다른 두 토큰이 둘 다 len 44** 였다.
 
 ---
 

@@ -2,7 +2,7 @@
 
 > **단일 목적**: 앱의 사용자 데이터를 서버가 소유할 때 **어떻게 나누고 · 스키마를 어떤 형태로 짜고 · 삭제를 어떻게 전파하고 · 왕복을 어떻게 묶고 · 무엇을 검증하는가**의 단일 규약. 도메인 무관 = **신규 앱이 propagation 으로 그대로 상속**한다.
 > **상위**: `COMMON_ARCHITECTURE.md §4`(사용자 데이터 SoT = 서버 authoritative). 본 문서 = 그 §4 의 **형태 층 상세**이며, §4 가 정한 「무엇이 SoT 인가」 위에 「그럼 어떤 모양으로 두는가」를 얹는다.
-> **결정 기록**: `ADR-0001-SERVER-DATA-OWNERSHIP-SEPARATION`(Coin 확정 2026-08-01). 본 문서 조항의 **변경은 새 ADR 로** 한다 — 이 file 을 직접 고쳐 덮지 않는다(§9).
+> **결정 기록**: `ADR-0001-SERVER-DATA-OWNERSHIP-SEPARATION`(Coin 확정 2026-08-01). 본 문서 조항의 **변경은 새 ADR 로** 한다 — 이 file 을 직접 고쳐 덮지 않는다(§9). **추가 결정**: `ADR-0002-SERVER-WRITE-PATH-BEYOND-SYNC`(Accepted 2026-08-02 · §5-1 근거). ADR-0001 을 **대체하지 않고**(supersede 아님) 그것이 남긴 공백 1칸(= writer 수)을 채운다.
 > ★**supersede 고지**: 본 문서 §3-2 는 구 `COMMON_ARCHITECTURE §4.1` 의 「중첩/구조화 객체 = JSONB · 중첩 필요 시 JSONB 승격」을 **대체**한다. §4.1 은 본 cycle 에서 함께 정정된다.
 > **유래**: Selfward 「나에게로」 P1(서버 소유 재정의 · 2026-07-31~08-01) 실측. 각 조항의 `근거` = 그때 무엇이 틀렸었는지.
 > **연관**: `MODEL_SEPARATION.md` · `SSOT_PRINCIPLES.md` · `docs/rules/supabase-handling.md`(운영 채널)
@@ -162,6 +162,18 @@ USING (EXISTS (SELECT 1 FROM parent p WHERE p.id = child.parent_id AND p.user_id
 - **자식 갱신 = 부모 1건 단위 delete-then-insert.** 자식은 `position` 이 순서를 지므로 부분 갱신이 의미 없다.
 - **참조 순서** = 참조되는 축을 **먼저** 보낸다(기록 → 산출물). 복합 FK 가 그 순서를 강제한다.
 
+### 5-1. ★**「왕복이 1 쌍이다」와 「writer 가 1 이다」는 다른 명제다**
+
+`sync-*` 밖에서 서버가 직접 쓰는 경로(예: **생성 EF 가 산출물을 응답 만드는 김에 그 자리에서 INSERT**)가 생기면 — **왕복 수는 그대로인데 writer 는 2 가 된다.** 위 §5 는 전자만 말한다. 후자는 **금지되지 않으며**, 아래 3 을 **동시에** 충족할 때 성립한다(`ADR-0002-SERVER-WRITE-PATH-BEYOND-SYNC`).
+
+1. ★**reader 를 함께 센다.** 그 행을 내려받는 경로가 **실재하는지**가 아니라, **그 경로의 게이트가 이 행에도 열려 있는지**를 센다. ★**배선이 있다 ≠ 배선이 돈다.**
+2. **멱등 키 발급 주체는 그대로 클라다**(§3-4 불변). 서버가 써도 키는 클라 발급 `client_id` 를 그대로 쓴다 — 그래야 두 writer 의 같은 행이 `UNIQUE (user_id, client_id)` 위에서 겹친다.
+3. **충돌은 DB 에 맡긴다.** UNIQUE + upsert 로 해소하고 **앱 로직으로 순서를 지키려 하지 않는다**(순서 보장은 프로세스 사망 앞에서 성립하지 않는다 — 애초에 그 사망을 막으려고 writer 를 늘린 것이다).
+
+> **근거**: Selfward `SELFWARD-BG-1-SERVER-PERSIST-001`. 생성 EF 에 persist 를 붙이면서 「hydrate 가 이미 가져오므로 별도 배선 0」으로 판단했으나, 복원 usecase 의 게이트가 **uid 당 1회**(`HydrateOwnedUseCase.kt:75`)여서 **이미 복원을 마친 기기 = 실사용자 전원에게 아무것도 오지 않았다.** 역게이트 usecase(`RecoverGeneratedOutputsUseCase.kt:64`)를 신설해서야 닫혔다. **틀린 것은 결론이 아니라 census 의 축**이었다 — 「배선이 있는가」만 세고 **「게이트가 걸려 있는가」**를 세지 않았다.
+
+> ★**환경 간 진실 차이 = 문면 위험**: 배포가 환경별로 갈리면 같은 문장이 한쪽에서 참, 한쪽에서 거짓이 된다. 사용자에게 하는 약속(「나가도 이어져요」)은 **prod 기준**이지 staging 기준이 아니다. 실측 = staging `story` v13 / `cumulative-insight` v10 ↔ **prod 둘 다 v5 무접촉**(2026-08-03).
+
 ---
 
 ## 6. 배포 순서 규율 (DDL ↔ 코드)
@@ -200,6 +212,7 @@ USING (EXISTS (SELECT 1 FROM parent p WHERE p.id = child.parent_id AND p.user_id
 - [ ] FK 마다 §3-6 의 1문을 물었는가 · 예외에 근거 주석이 있는가
 - [ ] **삭제 3층이 전부 있는가** — tombstone · wire · CASCADE
 - [ ] 왕복이 1쌍인가 · 자식이 부모 안에 중첩인가
+- [ ] ★**`sync-*` 밖 writer 가 있는가 · 있다면 그 행의 **reader 경로와 그 게이트**를 셌는가**(§5-1)
 - [ ] 배포 순서(§6)를 cycle 계획에 적었는가
 - [ ] 검증 7 항(§7)이 REPORT 계약에 들어갔는가
 
