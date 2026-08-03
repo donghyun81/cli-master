@@ -101,7 +101,7 @@ security add-generic-password -a "$USER" -s <slot-name> -w
 
 slot 명세 (= 2026-07-29 `MASTER-CLI-STALE-SWEEP-4ACTIVE-001` 실측 현행화 · 구 판 = GB/GD/GT 3 slot 한정 `MASTER-CLI-SUPABASE-COMPREHENSIVE-001` baseline):
 - `supabase-selfward-token` (= **활성** 도메인 자식 Selfward 측 PAT · staging+prod 단일 계정) → `SUPABASE_ACCESS_TOKEN_SELFWARD` → `.mcp.json` `supabase-selfward` (= **staging ref 단독 · `read_only=true`** · 2026-07-29 `MASTER-CLI-CONTEXT-DIET-3-001` 등록 · Coin 본심 ④). **prod ref 등록 = STOP** (= 구조적 격리 · staging/prod 별 project).
-- `supabase-gb-token` / `supabase-gd-token` / `supabase-gt-token` (= 동결 3 측 PAT · Keychain **잔존** · **`.mcp.json` 등록 = 2026-07-29 해제** → 현재 미소비 · wrap 은 계속 주입[warn+skip 정합]). 동결 repo 재조회 필요 시 = `.mcp.json` 재등록이 아니라 **Coin 회수** (= 동결 = 쓰기 0 · 읽기도 상시 배선 대상 아님).
+- `supabase-gb-token` / `supabase-gd-token` / `supabase-gt-token` (= 동결 3 측 PAT · Keychain **잔존** · **`.mcp.json` 등록 = 2026-07-29 해제** → 현재 미소비 · wrap 은 계속 주입[warn+skip 정합]). 동결 repo 재조회 필요 시 = `.mcp.json` 재등록이 아니라 **Coin 회수** (= 동결 = 쓰기 0 · 읽기도 상시 배선 대상 아님). ★**2026-08-03 정정**(`MASTER-CLI-SLOT-SPEC-AND-COMMIT-FENCE-001`): 위 「Keychain **잔존**」·「wrap 은 계속 주입」 = **stale**. 실측 = 2026-07-29 `MASTER-CLI-RESIDUAL-OPS-001` 에서 Coin 이 `security delete-generic-password` ×3 을 실행해 **3 slot 전량 폐기**(조치 후 실측 = `MISS` ✓ · `incident-log.md:536-537`). ⟹ 현재 = **slot 부재 · wrap 은 주입을 시도하나 warn+skip 으로 흘린다**(아래 miss 정책 정합 · 기동 영향 0). 동결 repo 재조회 필요 시 = **Keychain 재등록부터** Coin 회수(구 문면의 「`.mcp.json` 재등록이 아니라」는 그대로 유효하나, 지금은 그 앞 단계가 하나 더 있다).
 
 ★**env 주입 값 = 기동 시점 스냅숏 · Keychain slot = SoT** (= 2026-08-02 `MASTER-CLI-RULES-TOKEN-SLOT-WRITER-001` 신설 · 근거 = 401 5회 재발 실측):
 

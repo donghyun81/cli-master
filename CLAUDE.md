@@ -297,9 +297,9 @@ PLAN / VERIFY / REVIEW / PromptFit 정규 스키마: `docs/rules/reporting.md` �
 | cycle ID | 마감일 | 변경 요약 | 영향 자식 repo |
 |---|---|---|---|
 
-| MASTER-CLI-STALE-SWEEP-4ACTIVE-001 | 2026-07-29 | T6 재편 실행 층 stale 일소 (M5 · prod 0 LOC · 보호 5 sha 0). hooks REPOS→4-active + FROZEN 분리 · archiver 동결 쓰기 제거 · report-gen `$TARGET_REPOS` · 문면 59. 사고 4 자기검출(PAT 노출→Coin rotation). [상세](.ai/reports/MASTER-CLI-STALE-SWEEP-4ACTIVE-001/REPORT.md) | 4-repo 50 file |
-| MASTER-CLI-JUDGMENT-SHIFT-001 | 2026-07-29 | 구형 모델 전제 검사장치 → 판단 위임 (M5 · prod 0 LOC · 보호 5 sha 0). hook 3 + rule 2 제거→COLD verbatim · 축소 2 · stdout 7→1 · 등록 17→14 · 158 PASS · 사고 0. [상세](.ai/reports/MASTER-CLI-JUDGMENT-SHIFT-001/REPORT.md) | 4-repo 22 file |
 | MASTER-CLI-CONTEXT-DIET-3-001 | 2026-07-29 | 상주 컨텍스트 다이어트 (M5 · prod 0 · 보호 sha 0). **142→85.5KB(−39.9%)** · §15 57.7→2.1KB. STOP 9항→`stop-canonical` 자동주입(복제 3→1) · §15 상한 3×≤400B · 이력 3 COLD · skill 통합 · commands 8→4 · allow 54 삭제 · .mcp=SW. [R](.ai/reports/MASTER-CLI-CONTEXT-DIET-3-001/REPORT.md) | 4-repo |
+| MASTER-CLI-RULES-TOKEN-SLOT-WRITER-001 | 2026-08-02 | 토큰 slot 직독 분리 + writer 2 조건 (docs-only · prod 0 · 값 0). §10.8 401 사다리 신설(env↔slot 대조 → 재발급 최후) · §10.2 정정 · §6 trigger 에 `401` 등재 · SDO §5-1(ADR-0002). 근본 = 세션 수명 > 토큰 수명 | 4-repo 3 file |
+| MASTER-CLI-SLOT-SPEC-AND-COMMIT-FENCE-001 | 2026-08-03 | slot 명세 stale 회수 + 전파 게이트 (docs-only · prod 0). 동결 3 slot 「잔존」→「삭제됨」(07-29 실측) · §2.1.6 D-7 신설(자식 commit 직전 `-uno` 재측정 · pathspec = D-3 이 이미 반쪽) · §15 entry 2 + demote 2 | 4-repo 2 file |
 
 > **§15 cold 재배치** (= 10 회차 누적 · `MASTER-CLI-CONTEXT-OPT-PHASE1-CYCLE-HISTORY-COLD-001` 2026-06-01 → … → `MASTER-CLI-S15-HOT-DEMOTE-005` 2026-07-17 9회차 → **`MASTER-CLI-CONTEXT-DIET-3-001` 2026-07-29 10회차** · 회차 전량 열거 = COLD §1 heading lineage): master cycle **149 entry 전체 이력** (= `C1-MASTER-BOOTSTRAP-001` ~ 본 cycle 직전) = verbatim 보존 → [`.auto-memory/master-cycle-history-COLD.md`](.auto-memory/master-cycle-history-COLD.md) (= 삭제 0 · 감사 추적 영구 보존 · lifecycle = 매 5 cycle 또는 분기 review). **hot 압축 행의 원문도 COLD 에 verbatim 실재** (= 재작성 ≠ 소실).
 
