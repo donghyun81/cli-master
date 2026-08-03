@@ -122,6 +122,8 @@ paste A4 문면(「slot 삭제됨」) ↔ 디스크 canonical(`:104` 「Keychain
 2. `strings.xml` = 지금도 **unstaged working-tree 단독** (= 내가 stage/commit/수정 **0**)
 3. `Selfward HEAD~1` = **`140dd8c`** = 진입 baseline 일치
 
+**세션 live 확증** (= cycle 마감 시점 재측): `Selfward -uno` **1 → 4** 로 증가 — `JournalDetailScreen.kt` · `ReplyComposeSheet.kt` · `StoryComposeScreen.kt` 추가(= `ai_generating_wait` 소비처 3 = 동일 workstream). ⟹ 우연한 잔여 dirty 가 **아니라 진행 중인 세션**이다.
+
 ★**이것이 정확히 `cross-repo-parallel-exec.md §2` 영역 1.5 가 경고하는 형태다** — 「공유 자원은 file 이 아니라 `git index`(repo 당 1개 · `add`→`commit` 비원자적)이므로 **file 겹침 0 이어도 격리 없이 병렬 금지**」. 내 `git commit` 은 index **전체**를 커밋하므로, 저 세션이 내 `git add`↔`git commit` **사이**(sub-second)에 `git add` 를 했다면 **남의 미완 production 변경이 내 docs commit 에 삼켜졌다**. 이번엔 삼키지 않았으나 **마진이 1초 미만**이었다. → **회부 R-AI**.
 
 ### 4-3. paste C2 좌표 서술 내부 불일치 (판단 + 보고)
