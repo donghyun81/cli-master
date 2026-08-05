@@ -1,4 +1,4 @@
-# Master Cycle History COLD storage (= 149 entry 영구 누적 + cold 영역 default)
+# Master Cycle History COLD storage (= 150 entry 영구 누적 + cold 영역 default)
 
 > 본 file = master `CLAUDE.md §15` cycle 진행 이력 cold storage default · hot 영역 = `CLAUDE.md §15` (= 최근 5 + 본 cold pointer) default · 감사 추적 영구 보존 default
 > 위치 = `claude-cli-master/.auto-memory/master-cycle-history-COLD.md` (= master only default · propagation X default · 4 자식 §15 (= 현 6 entry hot · master 86 의 pure subset) 측 단일 cold superset default)
@@ -8,7 +8,9 @@
 
 ---
 
-## §1. master §15 cycle 진행 이력 (= 149 entry verbatim · Phase 1 65 + COLD-002 +19 + EXEC2-B +2 + EXEC3 +4 + EXEC3-002 +4 + AUTO-DEMOTE +9 + S15-HOT-DEMOTE-003 +8 + S15-HOT-DEMOTE-004 +10 + S15-HOT-DEMOTE-005 +16 + CONTEXT-DIET-3 +12 재배치 · **+ SLOT-SPEC-AND-COMMIT-FENCE 재수록 2 = 위 149 합산 밖**)
+## §1. master §15 cycle 진행 이력 (= 150 entry verbatim · Phase 1 65 + COLD-002 +19 + EXEC2-B +2 + EXEC3 +4 + EXEC3-002 +4 + AUTO-DEMOTE +9 + S15-HOT-DEMOTE-003 +8 + S15-HOT-DEMOTE-004 +10 + S15-HOT-DEMOTE-005 +16 + CONTEXT-DIET-3 +12 재배치 + AUTH-RULES-EMAIL-FIRST +1 · **+ SLOT-SPEC-AND-COMMIT-FENCE 재수록 2 = 위 150 합산 밖**)
+
+> ★**12 회차 demote 의 성격** (= 2026-08-05 `MASTER-CLI-AUTH-RULES-EMAIL-FIRST-001`): 표 말미 1행 (= `MASTER-CLI-CONTEXT-DIET-3-001`) = **distinct entry 신설 +1** (= 위 재수록 2 와 성격 상이 · 본 cycle ID 는 demote 직전 COLD 전수 grep **0 hit** 실측 ⟹ 압축판 재수록이 아니라 **최초 수록**). 「CONTEXT-DIET-3 +12 재배치」 항은 그 cycle 이 **밀어낸 12 entry** 를 가리키고, 신설 「+1」 은 그 cycle **자신의 entry** 를 가리킨다 — 두 항은 서로 다른 대상이다.
 
 > ★**재수록 2 의 성격** (= 2026-08-03 `MASTER-CLI-SLOT-SPEC-AND-COMMIT-FENCE-001` · 11 회차 demote): 표 말미 2행 (= `MASTER-CLI-STALE-SWEEP-4ACTIVE-001` + `MASTER-CLI-JUDGMENT-SHIFT-001`) = **distinct entry 신설 0**. 두 cycle 의 **장문 원문은 이미 본 §1 앞자리에 실재**(= `CONTEXT-DIET-3 +12 재배치` 분) — 말미 2행은 그 **hot 압축판 문면**(= master `CLAUDE.md §15` 이 `≤400B` 로 재작성해 보유하던 판)이 hot 상한 3 유지로 밀려난 것이다. ⟹ **같은 cycle ID 가 표에 2회** 등장하는 것은 중복 오류가 아니라 `CLAUDE.md §15` 상한 규약의 「400B 초과 서술은 재작성하되 **원문은 COLD 에 verbatim**」 + §15 note 「**hot 압축 행의 원문도 COLD 에 verbatim 실재**」 **양쪽을 다 보존**한 결과다 (= 압축판도 삭제 0). 향후 회차도 동일 성격이면 본 note 에 합산한다.
 
@@ -167,6 +169,7 @@
 | MASTER-CLI-JUDGMENT-SHIFT-001 | 2026-07-29 | 구형 모델 전제 검사장치 → **판단 위임** (M5 · production 0 LOC · 보호 5 sha 0). 제거 3 hook + rule 2 → COLD verbatim(소실 0) · 축소 2 · stdout 7→1·4→1줄 · stop-gate 현 세션 scope + exit 정합. 등록 17→14 · verify-sync **158 PASS · 신규 drift 0** · 사고 0. 상세 = [`REPORT.md`](.ai/reports/MASTER-CLI-JUDGMENT-SHIFT-001/REPORT.md) | **4-repo 적용** (master content `15b1ba1` + 자식 3 byte-identical 22 file: FND `986a25b` / PDOCS `33c4d93` / SW `86b2e8f` · 동결 3 파일·커밋 0) |
 | MASTER-CLI-STALE-SWEEP-4ACTIVE-001 | 2026-07-29 | T6 재편 실행 층 stale 일소 (M5 · prod 0 LOC · 보호 5 sha 0). hooks REPOS→4-active + FROZEN 분리 · archiver 동결 쓰기 제거 · report-gen `$TARGET_REPOS` · 문면 59. 사고 4 자기검출(PAT 노출→Coin rotation). [상세](.ai/reports/MASTER-CLI-STALE-SWEEP-4ACTIVE-001/REPORT.md) | 4-repo 50 file |
 | MASTER-CLI-JUDGMENT-SHIFT-001 | 2026-07-29 | 구형 모델 전제 검사장치 → 판단 위임 (M5 · prod 0 LOC · 보호 5 sha 0). hook 3 + rule 2 제거→COLD verbatim · 축소 2 · stdout 7→1 · 등록 17→14 · 158 PASS · 사고 0. [상세](.ai/reports/MASTER-CLI-JUDGMENT-SHIFT-001/REPORT.md) | 4-repo 22 file |
+| MASTER-CLI-CONTEXT-DIET-3-001 | 2026-07-29 | 상주 컨텍스트 다이어트 (M5 · prod 0 · 보호 sha 0). **142→85.5KB(−39.9%)** · §15 57.7→2.1KB. STOP 9항→`stop-canonical` 자동주입(복제 3→1) · §15 상한 3×≤400B · 이력 3 COLD · skill 통합 · commands 8→4 · allow 54 삭제 · .mcp=SW. [R](.ai/reports/MASTER-CLI-CONTEXT-DIET-3-001/REPORT.md) | 4-repo |
 
 ---
 
