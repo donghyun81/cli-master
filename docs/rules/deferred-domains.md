@@ -43,13 +43,13 @@ STOP 시 자동 발화 agent (`.claude/agents/deferred/`):
 | Performance | UNKNOWN | UNKNOWN | UNKNOWN | UNKNOWN |
 | Billing | **ACTIVE** ² | **ACTIVE** ² | **ACTIVE** ² | **ACTIVE** ² |
 
-¹ Supabase Auth 익명 부트스트랩 + JSON backup · GT-AUTH-PIVOT-001 명시된 패러다임 · `auth-rules.md` SoT (MASTER-AUTH-DOMAIN-ACTIVATE-001).
+¹ Supabase Auth 익명 부트스트랩 + JSON backup · GT-AUTH-PIVOT-001 명시된 패러다임 · `auth-rules.md` SoT (MASTER-AUTH-DOMAIN-ACTIVATE-001). — ⚠ **supersede: 「익명 부트스트랩」 = 현행 패러다임 아님** (2026-08-05 `MASTER-CLI-AUTH-RULES-EMAIL-FIRST-001` default 전환) · master 측 활성 default = `auth-rules.md` **§1b email-first 가입 (이메일 OTP)** · GT = 동결 계승 원천이라 §1 계보 유지 (전환 대상 X) · 구 서술 = 이력 보존 · SELFWARD-PRELAUNCH-SWEEP-002.
 
 ² Mock-first paradigm + Edge Function 영수증 검증 paradigm · GT CLAUDE.md §6 명시된 Google Play Billing 소비형 인앱 상품 (한입 티켓) · `billing-rules.md` SoT (MASTER-BILLING-DOMAIN-ACTIVATE-001).
 
-³ Supabase Auth 익명 부트스트랩 + EncryptedSessionStore · Phase 2 진행 중 (GB-PHASE-2-AUTH-* baseline) · `auth-rules.md` SoT 재사용 (MASTER-GB-AUTH-ACTIVATE-001).
+³ Supabase Auth 익명 부트스트랩 + EncryptedSessionStore · Phase 2 진행 중 (GB-PHASE-2-AUTH-* baseline) · `auth-rules.md` SoT 재사용 (MASTER-GB-AUTH-ACTIVATE-001). — ⚠ **스코프 표지: GB = 동결 계승 원천 · §1 계보 유지 (전환 대상 X)** · 활성 default 은 `auth-rules.md` **§1b email-first 가입 (이메일 OTP)** 이며 본 각주는 그 default 이 아니다 (2026-08-05 `MASTER-CLI-AUTH-RULES-EMAIL-FIRST-001`) · 구 서술 = 이력 보존 · SELFWARD-PRELAUNCH-SWEEP-002.
 
-⁴ Supabase Auth 익명 부트스트랩 (foundation `AnonymousAuthBootstrap` + `signInAnonymously` · per-token `SecureTokenStore`) · `GentlyDayApplication.onCreate()` 측 `restoreSession()` 단일 진입점 + `SplashViewModel` 15s timeout bootstrap observe · `auth-rules.md` SoT 재사용 (MASTER-CLI-AUTH-DOMAIN-RECONCILE-001).
+⁴ Supabase Auth 익명 부트스트랩 (foundation `AnonymousAuthBootstrap` + `signInAnonymously` · per-token `SecureTokenStore`) · `GentlyDayApplication.onCreate()` 측 `restoreSession()` 단일 진입점 + `SplashViewModel` 15s timeout bootstrap observe · `auth-rules.md` SoT 재사용 (MASTER-CLI-AUTH-DOMAIN-RECONCILE-001). — ⚠ **스코프 표지: GD = 동결 계승 원천 · §1 계보 유지 (전환 대상 X)** · 활성 default 은 `auth-rules.md` **§1b email-first 가입 (이메일 OTP)** 이며 본 각주는 그 default 이 아니다 (2026-08-05 `MASTER-CLI-AUTH-RULES-EMAIL-FIRST-001`) · 구 서술 = 이력 보존 · SELFWARD-PRELAUNCH-SWEEP-002.
 
 > **GB SteadyWell propagation 잔존 drift close** (`incident-log.md` C1 baseline 명시됨): C4 propagation 으로 master UNKNOWN baseline 통일 마감 후 MASTER-GB-AUTH-ACTIVATE-001 (2026-05-11) 으로 GB Auth 정식 활성화 (UNKNOWN → ACTIVE³). drift trail 자연 close.
 

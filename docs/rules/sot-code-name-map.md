@@ -29,7 +29,7 @@
 
 | SoT 화면명 (ui-spec) | 코드 화면명 (`*Screen*.kt`) | 카테고리 | 라우트 | 비고 |
 |---|---|---|---|---|
-| auth-screen | (UI 미구현) | SoT only | — | 익명 인증 자동 (`AnonymousAuthBootstrap`), UI 화면 없음 |
+| auth-screen | (UI 미구현) | SoT only | — | 익명 인증 자동 (`AnonymousAuthBootstrap`), UI 화면 없음 — ⚠ **스코프 표지: 본 행 = 동결 3 중 GB 계보 한정 · 활성 default 아님** (`auth-rules.md` §1 스코프 라벨 · 2026-08-05 `MASTER-CLI-AUTH-RULES-EMAIL-FIRST-001`) · 활성 자식 Selfward = **email-first 가입 UI 실재** (실측 `composeApp/src/commonMain/kotlin/com/gently/selfward/shared/auth/SignInScreen.kt`) · 현행 = `auth-rules.md` §1b (구 서술 = GB 실측 이력 · 삭제 0 · SELFWARD-PRELAUNCH-SWEEP-002) |
 | breathing-screen | BreathScreen.kt | 1:1 명명 차이 | `Destinations.BREATH` | "breathing" ↔ "Breath" |
 | darkmode-screen | (없음) | SoT only | — | 디자인 SoT (테마 토글), 코드 = SettingsScreen 안 토글 컴포넌트 |
 | design-tokens-screen | (없음) | SoT only | — | 디자인 시스템 SoT (코드 X) |
@@ -80,7 +80,7 @@
 | SoT 화면명 (ui-spec) | 코드 화면명 | 카테고리 | 라우트 | 비고 |
 |---|---|---|---|---|
 | ai-disclaimer-screen | AIDetailScreen.kt | 1:1 명명 차이 | `RootRoutes.SETTINGS_AI` | settings/sub/ · `AiDisclaimerDetailCard` 컴포넌트 포함 |
-| auth-screen | (UI 미구현) | SoT only | — | 익명 인증 자동 (`AnonymousAuthBootstrap`) |
+| auth-screen | (UI 미구현) | SoT only | — | 익명 인증 자동 (`AnonymousAuthBootstrap`) — ⚠ **스코프 표지: 본 행 = 동결 3 중 GT 계보 한정 · 활성 default 아님** (`auth-rules.md` §1 스코프 라벨 · 2026-08-05 `MASTER-CLI-AUTH-RULES-EMAIL-FIRST-001`) · 활성 자식 Selfward = **email-first 가입 UI 실재** (실측 `composeApp/src/commonMain/kotlin/com/gently/selfward/shared/auth/SignInScreen.kt`) · 현행 = `auth-rules.md` §1b (구 서술 = GT 실측 이력 · 삭제 0 · SELFWARD-PRELAUNCH-SWEEP-002) |
 | condition-input-screen | ConditionInputScreen.kt | 1:1 직매핑 | `RootRoutes.CONDITION_INPUT` | — |
 | daily-accompaniment-screen | DailyAccompanimentScreen.kt | 1:1 직매핑 | (Phase 3 vertical slice) | GT-PHASE-3-SOT-001 신설 · RESULT = AccompanimentResultContent.kt |
 | darkmode-screen | (없음) | SoT only | — | 디자인 SoT (테마 토글) |

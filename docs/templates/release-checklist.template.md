@@ -45,7 +45,7 @@
 | 3 | Description (en + ko) | ☐ | 4000 자 이하 |
 | 4 | 스크린샷 (6.7" + 6.5" + 5.5" iPhone + iPad) | ☐ | 사이즈 별 의무 |
 | 5 | App Privacy 폼 (iOS 14.5+) | ☐ | Data Types + Usage 명시 |
-| 6 | App Review Information (test account + notes) | ☐ | 익명 부트스트랩 패러다임 명시 |
+| 6 | App Review Information (test account + notes) | ☐ | email-first 가입 (이메일 OTP · `auth-rules.md` §1b) 패러다임 명시 — ⚠ **supersede: 구 문면 「익명 부트스트랩 패러다임 명시」 = 활성 default 아님** (2026-08-05 `MASTER-CLI-AUTH-RULES-EMAIL-FIRST-001` · 구 §1 = 동결 3(GB/GD/GT) 계보 한정 · 구 서술 = 이력 보존 · SELFWARD-PRELAUNCH-SWEEP-002) |
 | 7 | 가격 / 가용 지역 / 카테고리 | ☐ | Play Console 정합 |
 | 8 | TestFlight 베타 | ☐ | external + internal 트랙 |
 

@@ -89,7 +89,7 @@
 
 | rule | 1차 목적 |
 |---|---|
-| [`auth-rules.md`](./auth-rules.md) | Supabase 익명 부트스트랩 + 토큰 저장 + JSON backup |
+| [`auth-rules.md`](./auth-rules.md) | email-first 가입 (이메일 OTP) + 토큰 저장 + JSON backup — ⚠ **supersede: 구 설명 「Supabase 익명 부트스트랩 + 토큰 저장 + JSON backup」 = 활성 default 아님** (2026-08-05 `MASTER-CLI-AUTH-RULES-EMAIL-FIRST-001` default 전환 · 익명 폐지 확정 = `DECISION-SELFWARD-EMAIL-FIRST-SIGNUP-20260804`) · 현행 = `auth-rules.md` §1b · 구 익명 부트스트랩 = 같은 rule §1 **동결 3(GB/GD/GT) 계보 + FND 존치 표면** 한정 (구 서술 = 이력 보존 · SELFWARD-PRELAUNCH-SWEEP-002) |
 | [`supabase-handling.md`](./supabase-handling.md) | Edge Function / migration / RLS / Vault — CLI 자동 vs Dashboard 분기 |
 | [`billing-rules.md`](./billing-rules.md) | Mock-first + Edge Function 영수증 검증 + entitlement |
 | [`domain-roles.md`](./domain-roles.md) | 도메인 역할 navigation index(active/deferred agent 매핑) |

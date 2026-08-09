@@ -5,7 +5,7 @@
 > **연관 파일**:
 > - `safety-and-secrets.md` — curl/wget deny + 시크릿 기록 금지 정책
 > - `billing-rules.md` §2 — Edge Function 단일 진입점 (verify-purchase) + §3 Vault 시크릿 저장
-> - `auth-rules.md` §1 — GoTrue REST 익명 부트스트랩
+> - `auth-rules.md` §1b — email-first 가입 (이메일 OTP) — ⚠ **supersede: 구 서술 「`auth-rules.md` §1 — GoTrue REST 익명 부트스트랩」 = 활성 default 아님** (2026-08-05 `MASTER-CLI-AUTH-RULES-EMAIL-FIRST-001` · §1 = 동결 3(GB/GD/GT) 계보 + FND 존치 표면 한정 · 구 서술 = 이력 보존 · SELFWARD-PRELAUNCH-SWEEP-002)
 > - `deferred-domains.md` §1 STOP trigger (Backend / API) + §5 trigger 키워드
 > - `routing-and-delegation.md` — auth-security-privacy + billing-payments-guardian + server-implementer 매핑
 > - `cycle-discipline.md` §15 패턴 1 (master cycle 신설 + 4-repo propagation)
@@ -205,7 +205,7 @@ SUPABASE_ACCESS_TOKEN_SELFWARD
 |---|---|---|
 | Edge Function 단일 진입점 (영수증 검증) | `billing-rules.md` §2 | EF = client → server 단일 게이트 · 클라이언트 직접 Google Play Developer API 호출 금지 |
 | Vault 시크릿 저장 (Service Account JSON) | `billing-rules.md` §3 | Vault 우선 · EF env 주입 |
-| GoTrue REST 익명 부트스트랩 | `auth-rules.md` §1 | `POST /auth/v1/signup` body `{}` = 클라이언트 SDK 영역 (admin API 영역 외) |
+| email-first 가입 (이메일 OTP) | `auth-rules.md` §1b | `signInWith(OTP) { createUser = true }` → `verifyEmailOtp(OtpType.Email.EMAIL, …)` = 클라이언트 SDK 영역 (admin API 영역 외) — ⚠ **supersede: 구 행 「GoTrue REST 익명 부트스트랩 \| `auth-rules.md` §1 \| `POST /auth/v1/signup` body `{}` = 클라이언트 SDK 영역 (admin API 영역 외)」 = 활성 default 아님** (2026-08-05 `MASTER-CLI-AUTH-RULES-EMAIL-FIRST-001` · §1 = 동결 3 계보 + FND 존치 표면 한정 · 신 호출 형태 인용처 = `auth-rules.md` §1b · 구 서술 = 이력 보존 · SELFWARD-PRELAUNCH-SWEEP-002) |
 | service_role key 노출 금지 | `safety-and-secrets.md` (시크릿 기록 금지) | 평문 작성 금지 · EF env 주입 |
 | Backend / API STOP trigger | `deferred-domains.md` §1 #3 | Supabase Edge Function = Backend 도메인 STOP trigger |
 
