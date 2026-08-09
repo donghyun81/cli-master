@@ -257,10 +257,16 @@ docs/agent/architecture/SERVER_DATA_OWNERSHIP.md     5633e55a  5633e55a  5633e55
 
 ### G8 · 신규 file 행 출력
 
+★**자를 함께 적는다** — `git ls-files --others` (untracked 나열)는 **본 cycle 유래 아닌 진입 시점 잔존**(`Selfward/.ai/_scratch/**` dex 다수 · 타 cycle REPORT 등)을 함께 세어 분모가 오염된다. ⟹ 「본 cycle 이 신규 생성한 file」의 자 = **commit 범위 diff**:
+
 ```
-claude-cli-master/.ai/reports/SELFWARD-PRELAUNCH-SWEEP-002/REPORT.md
+git diff --name-only --diff-filter=A f18b1bd..HEAD          # master (진입 HEAD = f18b1bd)
+git diff --name-only --diff-filter=A HEAD~2..HEAD           # PDOCS · FND
+git diff --name-only --diff-filter=A HEAD~1..HEAD           # SW
+→ claude-cli-master/.ai/reports/SELFWARD-PRELAUNCH-SWEEP-002/REPORT.md
+  (PDOCS / FND / SW = 0행)
 ```
-⟹ **REPORT 계열 단독.**
+⟹ **REPORT 계열 단독** · 자식 3 = 신규 생성 0(전파는 전량 기존 file 갱신).
 
 ---
 
