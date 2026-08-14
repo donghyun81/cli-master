@@ -4,7 +4,9 @@
 > 자식 repo 의 사고는 자식 repo 의 `.auto-memory/incident-log.md` 에 기록 (master 와 별도).
 > master 사고 = cli infra / propagation / 보호 파일 / scripts 관련만.
 
-## 사고 분류 (CLAUDE.md §22 추상 분류 참조)
+> ★**머리 층 재저작 = `MASTER-INCIDENT-LOG-REALIGN-001` (2026-08-14).** 아래 분류 6종·기록 형식 5필드는 **무변**이고, 바뀐 것은 ⑴ 죽은 참조처 제거 ⑵ 계승 라벨 경고 ⑶ 실사용 실측 명기 **셋뿐**이다. ★**기존 entry 는 1 byte도 수정하지 않았다**(소급 정정 금지 — 사고 기록은 그때의 사실이다).
+
+## 사고 분류
 
 - **도메인 도구 한계** — 외부 도구 미지원 기능
 - **자동화 install ≠ activation** — 설치는 됐으나 작동 검증 안 됨
@@ -12,6 +14,10 @@
 - **agent self-verification false positive** — agent EC PASS 보고하나 실측 FAIL
 - **사용자 의도 vs 정책 충돌** — 정책이 반복 의도와 어긋남
 - **cycle scope 부풀음** — 한 cycle 에 다른 영역 묶임
+
+> ★**구 판 헤더가 달고 있던 「(CLAUDE.md 추상 분류 참조)」를 뗐다.** 사유 = **참조처가 성립하지 않는다** — `claude-cli-master/CLAUDE.md` 의 절 표기는 `## 0.` ~ `## 16.` 형식이라 애초에 그런 번호 체계를 쓰지 않는다(2026-08-14 실측 · 4-active `CLAUDE.md` 전부 동일). ★분류 6종 자체는 **무변**이며, 자식 3 판(`MULTI-INCIDENT-LOG-PROPAGATE-001` 2026-08-14 신설)과 이로써 **문면이 정합**한다.
+
+> ★★**계승 라벨 「3-repo drift」 주의**(= 개명은 별 cycle 소관 · 본 file 이 정하지 않는다) — 이 이름은 **2026-07-17 `MASTER-T6-REPO-REALIGN-001` 재편 전** 형상(자식 3)의 것이다. 현행 = **4-active**(master + app-foundation + gently-product-docs + Selfward) **+ 동결 3**(GentlyBreath · GentlyDay · GentlyTable). ★**아래 누적 entry 중 6건이 이 라벨을 쓰고 있으며 전부 이력으로 보존한다** — 읽을 때 「3-repo」를 현행 repo 수로 읽지 마라.
 
 ## 기록 형식
 
@@ -23,6 +29,10 @@
 - mitigation: <대응 1줄>
 - trail: <별 trail ID 또는 close>
 ```
+
+> ★★**5 필드는 선택이 아니라 계약이다.** `docs/rules/gsm-measurement.md` 가 **MTTR**(결함 발견 → `mitigation` 마감 경과)을 본 file 에서 계산하므로, `mitigation` 이 빠진 entry는 지표의 분모에서 조용히 사라진다.
+
+> ★**누적 실사용 실측 (2026-08-14 · `MASTER-INCIDENT-LOG-REALIGN-001`)** — entry **52** 중 필드 출현 = `trail` 47 · `type` 45 · `cycle` 42 · `mitigation` 39 · `summary` 38 · 선언 밖 `scope` 2. ⟹ ★**17 entry 가 위 형식과 어긋난다**(필드 누락 15 · 헤딩이 `## YYYY-MM-DDTHH:MM:SS+0900` 형식이 아닌 것 2 · 한 헤딩 아래 entry 2개가 뭉친 것 1). ★**소급 정정은 하지 않는다** — 기록을 나중에 다듬으면 그것은 더 이상 기록이 아니다. **신규 entry 부터 5 필드를 지킨다.**
 
 ## 2026-05-11T16:30:00+0900
 - type: 도메인 도구 한계 사전 검증 PASS (Sentry SDK ↔ Kotlin 2.0.21 호환 baseline 확인)
