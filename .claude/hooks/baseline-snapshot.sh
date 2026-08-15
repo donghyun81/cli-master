@@ -1,6 +1,6 @@
 #!/bin/bash
 # baseline-snapshot.sh — SessionStart hook
-# 목적: 4-active (claude-cli-master + app-foundation + gently-product-docs + Selfward) HEAD + cycle-discipline.md sha +
+# 목적: 4-active (claude-cli-master + app-foundation + toward-product-docs + Selfward) HEAD + cycle-discipline.md sha +
 #       보호 파일 5종 sha + settings.json sha 자동 측정 +
 #       .ai/baseline-snapshot/<timestamp>.json 출력 + latest.json 복사.
 # 신설: MASTER-COWORK-HANDOFF-BASELINE-AUTOVERIFY-HOOK-001 (2026-05-12)
@@ -36,7 +36,7 @@ fi
 REPOS=(
   "claude-cli-master"
   "app-foundation"
-  "gently-product-docs"
+  "toward-product-docs"
   "Selfward"
 )
 
@@ -147,7 +147,7 @@ cp "$OUT_FILE" "$LATEST_FILE" 2>/dev/null
 MASTER_CYCLE=$(grep -A 4 '"claude-cli-master"' "$OUT_FILE" | grep cycleDisciplineSha | head -1 | sed -E 's/.*"([a-f0-9]{64}|MISSING)".*/\1/')
 DRIFT_COUNT=0
 DRIFT_LIST=""
-for child in app-foundation gently-product-docs Selfward; do
+for child in app-foundation toward-product-docs Selfward; do
   CHILD_CYCLE=$(grep -A 4 "\"$child\"" "$OUT_FILE" | grep cycleDisciplineSha | head -1 | sed -E 's/.*"([a-f0-9]{64}|MISSING)".*/\1/')
   if [ -n "$CHILD_CYCLE" ] && [ "$CHILD_CYCLE" != "$MASTER_CYCLE" ] && [ "$CHILD_CYCLE" != "MISSING" ]; then
     DRIFT_COUNT=$((DRIFT_COUNT+1))

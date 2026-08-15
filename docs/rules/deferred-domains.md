@@ -31,7 +31,7 @@ STOP 시 자동 발화 agent (`.claude/agents/deferred/`):
 
 ---
 
-## 2. 현재 상태 (4-repo 통합 baseline · master + app-foundation + gently-product-docs + Selfward)
+## 2. 현재 상태 (4-repo 통합 baseline · master + app-foundation + toward-product-docs + Selfward)
 
 > master baseline = 모두 UNKNOWN. 자식 repo 별 도메인 활성화는 자식 repo 의 별도 cycle 에서 진행 + master propagation 시 본 표 갱신.
 

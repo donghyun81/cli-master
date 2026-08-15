@@ -1,6 +1,6 @@
 # Cross-Repo Parallel Execution Paradigm SoT
 
-> **단일 목적**: 단일 cli session 측 cross-repo (= 4-repo · master + app-foundation + gently-product-docs + Selfward · 동결 3[GB/GD/GT] = 전파 대상 X · 쓰기 0) 자식 병렬 실행 paradigm + 다중 cli session 운영 paradigm 양쪽 분기 + cli session 자율 판단 영역 + 자식별 cwd 분리 + cross-repo 정합 처리 paradigm 통합 SoT.
+> **단일 목적**: 단일 cli session 측 cross-repo (= 4-repo · master + app-foundation + toward-product-docs + Selfward · 동결 3[GB/GD/GT] = 전파 대상 X · 쓰기 0) 자식 병렬 실행 paradigm + 다중 cli session 운영 paradigm 양쪽 분기 + cli session 자율 판단 영역 + 자식별 cwd 분리 + cross-repo 정합 처리 paradigm 통합 SoT.
 > **신설**: MASTER-CLI-PARENT-MOUNT-PARALLEL-EXEC-PARADIGM-001 (2026-05-19).
 > **연관 파일**:
 > - 부모 mount root `CLAUDE.md` (= `/Users/yundonghyeon/AndroidStudioProjects/CLAUDE.md` · cli session 진입 baseline) §3 cli session 진입 paradigm 분기

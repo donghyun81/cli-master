@@ -11,7 +11,7 @@
 #   bash $HOME/AndroidStudioProjects/claude-cli-master/scripts/nightly-baseline-report.sh
 #
 # scope:
-#   - 단일 repo (claude-cli-master) · 전파 자식 3 (app-foundation/gently-product-docs/Selfward · repo-config SoT) read-only.
+#   - 단일 repo (claude-cli-master) · 전파 자식 3 (app-foundation/toward-product-docs/Selfward · repo-config SoT) read-only.
 #   - 출력 file 외 쓰기 X (= 보호 파일 / cli infra / 자식 repo 무접촉 의무).
 #
 # 산출물:
@@ -204,7 +204,7 @@ PROMPT_BODY=$(cat <<PROMPT
 ## 본 작업 정의 (repo 도메인 baseline · 단방향 단일 진실)
 
 - master = claude-cli-master (cli infra + 보호 파일 5 종 SoT 단일 source · 자식 repo 단방향 propagation 발행)
-- 자식 3 repo = Selfward (「나에게로」· 활성 도메인 자식 단일 · 1 앱 N 도메인) / app-foundation (공통 foundation) / gently-product-docs (제품 기획·비전 문서)
+- 자식 3 repo = Selfward (「나에게로」· 활성 도메인 자식 단일 · 1 앱 N 도메인) / app-foundation (공통 foundation) / toward-product-docs (제품 기획·비전 문서)
 - 보호 파일 5 종 = master ↔ 자식 byte-identical 강제 (drift 발견 시 mitigation cycle 의무)
 - cli infra = .claude/ 전체 = 권장 byte-identical (drift lazy 가능)
 
@@ -283,7 +283,7 @@ $CYCLE_BLOCK
 | claude-cli-master | master · cli infra + 보호 파일 SoT |
 | Selfward | 자식 · 「나에게로」 활성 도메인 단일 (1 앱 N 도메인) |
 | app-foundation | 자식 · 공통 foundation |
-| gently-product-docs | 자식 · 제품 기획·비전 문서 |
+| toward-product-docs | 자식 · 제품 기획·비전 문서 |
 
 위 layout 그대로 출력하라. 데이터 안에 없는 fact 추가 X.
 PROMPT

@@ -10,7 +10,7 @@
 # 환경 변수:
 #   PARENT_DIR     기본: ~/AndroidStudioProjects
 #   MASTER_DIR     기본: $PARENT_DIR/claude-cli-master
-#   TARGET_REPOS   기본: "app-foundation gently-product-docs Selfward"
+#   TARGET_REPOS   기본: "app-foundation toward-product-docs Selfward"
 #
 # 동작:
 #   1. master 의 모든 cli infra + 보호 파일 sha 계산

@@ -63,7 +63,7 @@ mount_root = os.environ.get("ILV_MOUNT", "")
 baseline_path = os.environ.get("ILV_BASELINE", "")
 
 # 4-active (= master `CLAUDE.md §1.2` · T6 재편 정합). 동결 3(GB/GD/GT) = 전파 대상 X · 쓰기 0 → 본 baseline 측정 대상 X.
-REPOS = ["claude-cli-master", "app-foundation", "gently-product-docs", "Selfward"]
+REPOS = ["claude-cli-master", "app-foundation", "toward-product-docs", "Selfward"]
 PROTECTED = [
     "docs/schemas/ui-spec.schema.json",
     "docs/rules/pencil-uiux-workflow.md",

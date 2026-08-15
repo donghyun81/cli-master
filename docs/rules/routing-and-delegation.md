@@ -159,7 +159,7 @@ intake-router는 키워드 분류기가 아니다 — **어떤 전문 판단이 
 
 역할별 경로 스코핑: `.claude/rules/safety-and-secrets.md` "## 역할별 경로 허용 매트릭스" 참조.
 
-### Cross-repo 영역 (= 4-repo · master + app-foundation + gently-product-docs + Selfward) — 2026-05-19 신설
+### Cross-repo 영역 (= 4-repo · master + app-foundation + toward-product-docs + Selfward) — 2026-05-19 신설
 
 > 본 sub-section = `MASTER-CLI-PARENT-MOUNT-PARALLEL-EXEC-PARADIGM-001` 안 추가. cross-repo 영역 본질 발견 시점 본 sub-section 정합 + `.claude/rules/cross-repo-parallel-exec.md` SoT reading 의무.
 

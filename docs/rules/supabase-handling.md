@@ -234,7 +234,7 @@ SUPABASE_ACCESS_TOKEN_SELFWARD
 
 ### §10.1 MCP server 등록 + 호출 paradigm
 
-`.mcp.json` 측 등록 영역 (= 4-repo byte-identical · `claude-cli-master` + `app-foundation` + `gently-product-docs` + `Selfward`):
+`.mcp.json` 측 등록 영역 (= 4-repo byte-identical · `claude-cli-master` + `app-foundation` + `toward-product-docs` + `Selfward`):
 
 | server | project_ref | 자식 도메인 |
 |---|---|---|

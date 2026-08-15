@@ -48,7 +48,7 @@ architecture file 측 코드 path 인용 영역 측:
 → `app-foundation/` 측 실제 영역 기준 relative path = **`../../../../app-foundation/<path>`** (= 4 step 상위).
 
 4-repo 모두 동일 표기 (= byte-identical 정합):
-- claude-cli-master + GB + GD + GT + app-foundation + gently-product-docs 모두 `../../../../app-foundation/<path>` 채택.
+- claude-cli-master + GB + GD + GT + app-foundation + toward-product-docs 모두 `../../../../app-foundation/<path>` 채택.
 - foundation 측 자기 참조 영역 = 동일 (= 위치 `app-foundation/docs/agent/architecture/<FILE>.md` → `../../../../app-foundation/<path>/` 해석 결과 = `AndroidStudioProjects/app-foundation/<path>/` = correct ✓).
 
 ---

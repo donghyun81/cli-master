@@ -16,7 +16,7 @@
 ---
 
 > **이 repo 는 cli infra + 보호 파일의 단일 source-of-truth.**
-> 자식 repo (app-foundation / gently-product-docs / Selfward / 향후 추가) 는 본 repo 에서 단방향 propagation 을 받는다 (= 4-repo · 2026-07-17 T6 재편 · GB/GD/GT = 동결 계승 원천 = 전파 대상 X · §1.3).
+> 자식 repo (app-foundation / toward-product-docs / Selfward / 향후 추가) 는 본 repo 에서 단방향 propagation 을 받는다 (= 4-repo · 2026-07-17 T6 재편 · GB/GD/GT = 동결 계승 원천 = 전파 대상 X · §1.3).
 > 시간대: Asia/Seoul (KST) · 운영 CLI: Claude Code 단일.
 
 ---
@@ -57,7 +57,7 @@
 | 자식 repo | 역할 | 절대 경로 (placeholder) |
 |---|---|---|
 | app-foundation (FND) | shared KMP/CMP foundation | `<PARENT>/app-foundation` |
-| gently-product-docs (PDOCS) | 공통 제품 기획·비전 문서 | `<PARENT>/gently-product-docs` |
+| toward-product-docs (PDOCS) | 공통 제품 기획·비전 문서 | `<PARENT>/toward-product-docs` |
 | Selfward (SW) | 활성 도메인 자식 (= §1.1) | `<PARENT>/Selfward` |
 
 cli infra byte-identical 형상 = **4-repo** (= master + 위 자식 3).
@@ -92,7 +92,7 @@ cli infra byte-identical 형상 = **4-repo** (= master + 위 자식 3).
 
 ```
 1. master 에서 cli infra 또는 보호 파일 변경 + commit
-2. bash scripts/propagate.sh <relative-path> [--targets FND,gently-product-docs,Selfward|all]   # C3 에서 신설 · alias = GB/GD/GT/FND 만 · 그 외 = 폴더명 verbatim
+2. bash scripts/propagate.sh <relative-path> [--targets FND,toward-product-docs,Selfward|all]   # C3 에서 신설 · alias = GB/GD/GT/FND 만 · 그 외 = 폴더명 verbatim
 3. 각 자식 repo 에서 staged commit (master commit body 인용)
 4. bash scripts/verify-sync.sh   # cross-verify · sha 비교
 5. propagation-reports/<cycle-id>/REPORT.md 자동 생성 (report-gen.sh)
@@ -297,9 +297,9 @@ PLAN / VERIFY / REVIEW / PromptFit 정규 스키마: `docs/rules/reporting.md` �
 | cycle ID | 마감일 | 변경 요약 | 영향 자식 repo |
 |---|---|---|---|
 
-| MASTER-CLI-AUTH-RULES-EMAIL-FIRST-001 | 2026-08-05 | auth-rules default 전환 = 익명 부트스트랩 → email-first 가입 (docs-only · prod 0 · 보호 sha 0). §1b 신설(활성 default · gateway op 5 + authenticator op 6 · AAB 와 Mutex 비공유 = 동시 배선 금지) · §1 = 동결 계보 재스코프 · §4/§5.2/§6 이관 · §7 STOP 무변 · 문면 삭제 0 | 4-repo 1 file |
 | SELFWARD-PRELAUNCH-SWEEP-002 | 2026-08-09 | auth-rules 「이름표」 stale 회수 (docs-only · prod 0 LOC · auth-rules 본문 sha 무변 `a8c59b48`). 본문은 08-05 에 전환됐는데 그것을 가리키는 pointer·표·각주·템플릿이 안 늙었다 — 전파 6 + repo-local 3 · 구 문면 verbatim 존치 14/14 · 삭제 0 | 4-repo 6 + local 3 |
 | MASTER-LIFECYCLE-4ACTIVE-REALIGN-001 | 2026-08-15 | archiver 4-active 정합 (prod 0 · 보호 sha 0). rule §3 위치 = 동결 3 → plist 실물 5 · 패턴 5→9 pointer · 14일→**7일**(SoT = script 상수) · 조기-archive **REPORT.md 인정**(요건 무변 · 사문화 해소) · plist skip → stderr. [R](.ai/reports/MASTER-LIFECYCLE-4ACTIVE-REALIGN-001/REPORT.md) | 4-repo 3 file |
+| MULTI-REPO-RENAME-TOWARD-001 | 2026-08-15 | repo명 `gently-product-docs` → **`toward-product-docs`** (Gently→Toward 브랜드층 · prod 0 · 보호 sha 0). 부모 root `mv` + 기계층 술어 전수 치환 **92 file**(master 29·FND 21·SW 21·PDOCS 20·root 1) + 안내층 2. 이력층(`archive/`·`.ai/`·`.auto-memory/`) 무접촉 · appId·코드 심볼·동결 3·GitHub remote 무변 | 4-repo 91 + root 1 |
 
 > **§15 cold 재배치** (= 10 회차 누적 · `MASTER-CLI-CONTEXT-OPT-PHASE1-CYCLE-HISTORY-COLD-001` 2026-06-01 → … → `MASTER-CLI-S15-HOT-DEMOTE-005` 2026-07-17 9회차 → **`MASTER-CLI-CONTEXT-DIET-3-001` 2026-07-29 10회차** · 회차 전량 열거 = COLD §1 heading lineage): master cycle **149 entry 전체 이력** (= `C1-MASTER-BOOTSTRAP-001` ~ 본 cycle 직전) = verbatim 보존 → [`.auto-memory/master-cycle-history-COLD.md`](.auto-memory/master-cycle-history-COLD.md) (= 삭제 0 · 감사 추적 영구 보존 · lifecycle = 매 5 cycle 또는 분기 review). **hot 압축 행의 원문도 COLD 에 verbatim 실재** (= 재작성 ≠ 소실).
 

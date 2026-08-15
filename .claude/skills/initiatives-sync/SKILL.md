@@ -106,7 +106,7 @@ allowed-tools: Bash, Read, Edit, Write
 - §3 active initiative 전수 KR(OKR Key Result · `OKR.md`) 귀속 태그 1+ default (= 고아 initiative 0 의무)
 - 예외 허용 = `[—] (future-phase · no Q3 KR)` 명시 future-phase initiative (= 현 분기 KR 미귀속 정당 영역 default)
 - 고아 발견(= KR 태그 부재 + future-phase 예외 미명시) = 등재 거부 또는 표면화 default (= audit #4 류 = KR 미귀속 출시 task 차단)
-- KR ↔ initiative 귀속 = 제품 SoT `OKR.md`(전략 하위 live 분기 운영 층 · `../gently-product-docs/docs/`) 단일 SoT 참조 default (= 본 gate = 귀속 *검증*만 · OKR 본문 편집 아님 default)
+- KR ↔ initiative 귀속 = 제품 SoT `OKR.md`(전략 하위 live 분기 운영 층 · `../toward-product-docs/docs/`) 단일 SoT 참조 default (= 본 gate = 귀속 *검증*만 · OKR 본문 편집 아님 default)
 
 ### §3.5 ⑤ 완료분 always-fresh 본질
 
@@ -190,7 +190,7 @@ allowed-tools: Bash, Read, Edit, Write
 > 전문 = [`references/paste-commit-and-history.md`](references/paste-commit-and-history.md) verbatim (= 2026-07-29 분할 · 판정에 매번 필요하지 않은 층 · 삭제 0).
 ## §11 본 skill 의 변경 정책
 
-- cli infra 권장 byte-identical (= 4-repo · master + app-foundation + gently-product-docs + Selfward)
+- cli infra 권장 byte-identical (= 4-repo · master + app-foundation + toward-product-docs + Selfward)
 - 변경 시 master cycle 신설 + 4-repo propagation 의무 (= `cycle-discipline.md` §15 패턴 1 정합)
 - 자식 repo 측 직접 수정 금지
 

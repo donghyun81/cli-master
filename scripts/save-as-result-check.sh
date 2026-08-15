@@ -45,7 +45,7 @@ fi
 
 # 다른 repo 잘못 저장 검증 (= 활성 SW 외 · 동결 3 포함 · 2026-07-29 4-active 재편)
 WRONG_REPO=""
-for _wr in GentlyBreath GentlyDay GentlyTable app-foundation gently-product-docs; do
+for _wr in GentlyBreath GentlyDay GentlyTable app-foundation toward-product-docs; do
   [ -d "$PARENT_DIR/$_wr" ] || continue
   WRONG_REPO="$WRONG_REPO$(find "$PARENT_DIR/$_wr" -iname "$EXPECTED_NAME.pen" 2>/dev/null)"
 done

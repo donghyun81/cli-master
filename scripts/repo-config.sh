@@ -15,7 +15,7 @@
 # 환경 변수 override 가능 (사용자 측 export 시 우선 채택):
 #   PARENT_DIR     기본: $HOME/AndroidStudioProjects
 #   MASTER_DIR     기본: $PARENT_DIR/claude-cli-master
-#   TARGET_REPOS   기본: "app-foundation gently-product-docs Selfward"
+#   TARGET_REPOS   기본: "app-foundation toward-product-docs Selfward"
 #
 # 변경 정책:
 #   - master cycle 신설 + 4-repo propagation 의무 (`cycle-discipline.md` §15 패턴 1)
@@ -25,8 +25,8 @@
 : "${PARENT_DIR:=$HOME/AndroidStudioProjects}"
 : "${MASTER_DIR:=$PARENT_DIR/claude-cli-master}"
 # Selfward 편입 = MASTER-SELFWARD-CLAUDE-PARITY-001 (2026-07-17 · .claude 초회 backstop)
-# propagate 대상 6→4 재편 (GB/GD/GT 전파 제거) = MASTER-T6-REPO-REALIGN-001 (2026-07-17 · 전파 자식 3: app-foundation/gently-product-docs/Selfward · GB/GD/GT 원본 보존 · GitHub archive=Coin 콘솔)
-: "${TARGET_REPOS:=app-foundation gently-product-docs Selfward}"
+# propagate 대상 6→4 재편 (GB/GD/GT 전파 제거) = MASTER-T6-REPO-REALIGN-001 (2026-07-17 · 전파 자식 3: app-foundation/toward-product-docs/Selfward · GB/GD/GT 원본 보존 · GitHub archive=Coin 콘솔)
+: "${TARGET_REPOS:=app-foundation toward-product-docs Selfward}"
 
 # === PROTECTED_FILES (5 종 보호 file 강제 byte-identical · master ↔ 3 propagation target = 4-repo) ===
 # 본 baseline = `.auto-memory/protected-file-hashes.md` 측 sha-256 인용.

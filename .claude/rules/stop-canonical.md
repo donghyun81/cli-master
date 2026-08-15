@@ -1,6 +1,6 @@
 # STOP 조건 canonical (= 9 항 · 자동 주입층)
 
-> 본 file = 4-active (= master + app-foundation + gently-product-docs + Selfward) 측 **STOP 조건 본문 단일 SoT**.
+> 본 file = 4-active (= master + app-foundation + toward-product-docs + Selfward) 측 **STOP 조건 본문 단일 SoT**.
 > **신설** = `MASTER-CLI-CONTEXT-DIET-3-001` (2026-07-29 · Coin 본심 ③). 구 본문 = master `CLAUDE.md §5` (= 2026-05-22 `MASTER-CLI-CYCLE-1-STOP-CANONICAL-INTEGRATION-001` 통합판) + 자식 `CLAUDE.md §5` inline 복제 2 (= FND · SW · 실측 전수 3 곳). 본 file 로 이동 = **복제 3 → 1** · 자동 주입층이라 **전 세션 상시 가시** + propagate 자동 정합.
 > **본문 무접촉 pointer 영역** (= 2026-07-29 전수 실측): master `CLAUDE.md §5` · FND/SW `CLAUDE.md §5` · PDOCS `CLAUDE.md §4` · 부모 mount root `CLAUDE.md §6` · `safety-and-secrets.md §비가역 변경 STOP 정책` · `cycle-discipline.md §21.4` · `cross-repo-parallel-exec.md §5` · `anchor-list.md §5` · `gsm-measurement.md` · `rule-routing-index.md` / `rule-routing-table.md` L0 목록.
 > ⚠ 구 master `CLAUDE.md §5` 는 pointer 처로 `cycle-discipline.md §22.4` 를 열거했으나 **디스크 부재 실측** (= §22 는 요약판으로 축소 · STOP subsection = COLD 수납 · 본 목록에서 제외 = stale 정정).

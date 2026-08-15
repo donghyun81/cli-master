@@ -41,7 +41,7 @@ frontmatter 부재 시: mtime 7일 경과 fallback 적용 (warn-only, 자동 arc
 - `~/AndroidStudioProjects/archive/` (부모 root · git 밖)
 - `~/AndroidStudioProjects/claude-cli-master/archive/` (master)
 - `~/AndroidStudioProjects/app-foundation/archive/` (FND)
-- `~/AndroidStudioProjects/gently-product-docs/archive/` (PDOCS)
+- `~/AndroidStudioProjects/toward-product-docs/archive/` (PDOCS)
 - `~/AndroidStudioProjects/Selfward/archive/` (SW)
 
 각 위치 안 구조:

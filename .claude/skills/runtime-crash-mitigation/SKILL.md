@@ -155,7 +155,7 @@ Anthropic v2.1.145+ 측 bundled skill (`/run` + `/verify` + `/run-skill-generato
 > 전문 = [`references/paste-commit-and-history.md`](references/paste-commit-and-history.md) verbatim (= 2026-07-29 분할 · 판정에 매번 필요하지 않은 층 · 삭제 0).
 ## §10 본 skill 의 변경 정책
 
-- cli infra 권장 byte-identical (= 4-repo · master + app-foundation + gently-product-docs + Selfward)
+- cli infra 권장 byte-identical (= 4-repo · master + app-foundation + toward-product-docs + Selfward)
 - 변경 시 master cycle 신설 + 4-repo propagation 의무 (= `cycle-discipline.md` §15 패턴 1 정합)
 - 자식 repo 측 직접 수정 금지
 

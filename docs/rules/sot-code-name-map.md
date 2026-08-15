@@ -1,4 +1,4 @@
-# SoT ↔ Code 화면명 매핑 SoT (4-repo · master + app-foundation + gently-product-docs + Selfward · 자식 도메인 코드 = Selfward 측만 · 구 GB/GD/GT = 2026-07-17 T6 동결)
+# SoT ↔ Code 화면명 매핑 SoT (4-repo · master + app-foundation + toward-product-docs + Selfward · 자식 도메인 코드 = Selfward 측만 · 구 GB/GD/GT = 2026-07-17 T6 동결)
 
 > **단일 목적**: Pencil SoT 화면명 ↔ Compose 코드 화면명 차이 영역 통합 매핑.
 > **scope**: GB / GD / GT 3 자식 repo (master = SoT 만 보유 / 코드 X).

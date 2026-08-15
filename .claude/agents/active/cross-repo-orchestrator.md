@@ -1,6 +1,6 @@
 ---
 name: cross-repo-orchestrator
-description: Call when cross-repo (= 4-repo · master + app-foundation + gently-product-docs + Selfward) consistency check + parallel sub-agent fan-out is required. Coordinates Task tool sub-agents across child repos and synthesizes results. Does not solve itself — routes cross-repo work to per-child sub-agents and integrates returns.
+description: Call when cross-repo (= 4-repo · master + app-foundation + toward-product-docs + Selfward) consistency check + parallel sub-agent fan-out is required. Coordinates Task tool sub-agents across child repos and synthesizes results. Does not solve itself — routes cross-repo work to per-child sub-agents and integrates returns.
 tools: Read, Glob, Grep, Task
 ---
 
@@ -8,7 +8,7 @@ tools: Read, Glob, Grep, Task
 
 ## Mission
 
-cross-repo (= 4-repo · master + app-foundation + gently-product-docs + Selfward) 영역 측 routing 책임 위임 paradigm default. 동결 3 (GB/GD/GT) = 전파 대상 X · **쓰기 0** (= read-only 인용 fan-out 만 · 쓰기 필요 = STOP · master `CLAUDE.md §1.3`). main agent 측 cross-repo 영역 본질 발견 시점 본 sub-agent 호출 → 자식별 Task tool sub-agent fan-out + 결과 통합 paradigm default. 직접 해법 결정 X (= routing + 통합 영역 단일 default).
+cross-repo (= 4-repo · master + app-foundation + toward-product-docs + Selfward) 영역 측 routing 책임 위임 paradigm default. 동결 3 (GB/GD/GT) = 전파 대상 X · **쓰기 0** (= read-only 인용 fan-out 만 · 쓰기 필요 = STOP · master `CLAUDE.md §1.3`). main agent 측 cross-repo 영역 본질 발견 시점 본 sub-agent 호출 → 자식별 Task tool sub-agent fan-out + 결과 통합 paradigm default. 직접 해법 결정 X (= routing + 통합 영역 단일 default).
 
 본 sub-agent 본질 = `intake-router.md` 측 **단일 repo routing paradigm** 측 cross-repo 측 확장 영역 default (= 단일 repo intake-router + cross-repo orchestrator 2 영역 분리 default).
 
@@ -77,7 +77,7 @@ main (cwd = ~/AndroidStudioProjects 또는 ~/AndroidStudioProjects/claude-cli-ma
   ↓
 Task (subagent_type=general-purpose 또는 Explore)
   ├── sub-agent FND   (cwd = ~/AndroidStudioProjects/app-foundation)
-  ├── sub-agent PDOCS (cwd = ~/AndroidStudioProjects/gently-product-docs)
+  ├── sub-agent PDOCS (cwd = ~/AndroidStudioProjects/toward-product-docs)
   └── sub-agent SW    (cwd = ~/AndroidStudioProjects/Selfward)
   (동결 3 = GentlyBreath / GentlyDay / GentlyTable · read-only 인용 시에만 · 쓰기 0)
   ↓

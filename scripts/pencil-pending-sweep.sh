@@ -31,9 +31,9 @@ set -uo pipefail
 # Override: env var `PARENT_MOUNT_ROOT` 측 절대 path measurement.
 : "${PARENT_MOUNT_ROOT:=/Users/yundonghyeon/AndroidStudioProjects}"
 
-# 4-active scan target (= 2026-07-17 T6 재편 정합 · gently-product-docs = pencil-sot dir 부재 → graceful skip).
+# 4-active scan target (= 2026-07-17 T6 재편 정합 · toward-product-docs = pencil-sot dir 부재 → graceful skip).
 # 활성 `.pen` 보유 = Selfward (실측 2026-07-29: SW 14). 동결 3(GB/GD/GT)은 쓰기 0 = sweep 대상 X.
-REPOS=("claude-cli-master" "app-foundation" "gently-product-docs" "Selfward")
+REPOS=("claude-cli-master" "app-foundation" "toward-product-docs" "Selfward")
 
 # Trail target (= cli-master 단일 default).
 TRAIL_REPO="claude-cli-master"

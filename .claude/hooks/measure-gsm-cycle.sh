@@ -172,7 +172,7 @@ run_context_health() {
   CH_RULES="$MASTER_DIR/.claude/rules"
   ch_l0=$(ch_sum "$CH_RULES/safety-and-secrets.md" "$CH_RULES/anchor-list.md" "$CH_RULES/cross-repo-parallel-exec.md")
   ch_child_md=""
-  for ch_c in Selfward app-foundation gently-product-docs; do
+  for ch_c in Selfward app-foundation toward-product-docs; do
     if [ -f "$MOUNT_ROOT/$ch_c/CLAUDE.md" ]; then ch_child_md="$MOUNT_ROOT/$ch_c/CLAUDE.md"; break; fi
   done
   ch_child=$(ch_count "$ch_child_md")

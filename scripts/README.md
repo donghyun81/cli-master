@@ -139,7 +139,7 @@ C10 적용 후 = 99.99% 자동 (daemon 죽거나 macOS 외 환경 만 미적용)
 |---|---|---|
 | `PARENT_DIR` | `~/AndroidStudioProjects` | 부모 폴더 (자식 repo 들이 있는 곳) |
 | `MASTER_DIR` | `$PARENT_DIR/claude-cli-master` | master repo |
-| `TARGET_REPOS` | `app-foundation gently-product-docs Selfward` | 전파 자식 명단 (env 로 override · SoT = `repo-config.sh` · 2026-07-17 T6 재편) |
+| `TARGET_REPOS` | `app-foundation toward-product-docs Selfward` | 전파 자식 명단 (env 로 override · SoT = `repo-config.sh` · 2026-07-17 T6 재편) |
 
 ## 신규 자식 repo 추가 절차
 
