@@ -159,11 +159,11 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 ## Auto-generated (verify-sync · live · 직접 편집 금지)
 
 > 본 영역 = `verify-sync.sh` 매 실행 시 live sha 재생성. 수기 편집 금지 (= 영구 stale 차단).
-> targets: app-foundation gently-product-docs Selfward
+> targets: app-foundation toward-product-docs Selfward
 
 ### 보호 5 + 핵심 cli infra sha 매트릭스 (live)
 
-| 파일 | master sha (12) | app-foundation | gently-product-docs | Selfward |
+| 파일 | master sha (12) | app-foundation | toward-product-docs | Selfward |
 |---|---|---|---|---|
 | `docs/schemas/ui-spec.schema.json` | `8502c01428fb` | ✓ | ✓ | ✓ |
 | `docs/rules/pencil-uiux-workflow.md` | `202d3f4f29c0` | ✓ | ✓ | ✓ |
@@ -171,16 +171,16 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 | `docs/rules/uiux-sot-refresh.md` | `31c0da56aeec` | ✓ | ✓ | ✓ |
 | `docs/design/design-sot-policy.md` | `92a5e99804ff` | ✓ | ✓ | ✓ |
 | `.claude/settings.json` | `fdaf79e0dfe0` | ✓ | ✓ | ✓ |
-| `docs/rules/workflow-core.md` | `69b017d624d5` | ✓ | ✓ | ✓ |
+| `docs/rules/workflow-core.md` | `99e422f280c9` | ✓ | ✓ | ✓ |
 | `docs/rules/cycle-discipline.md` | `e5f547153109` | ✓ | ✓ | ✓ |
 | `docs/rules/pencil-automation.md` | `a2506a34d797` | ✓ | ✓ | ✓ |
-| `docs/rules/reporting.md` | `128da90c0c53` | ✓ | ✓ | ✓ |
-| `docs/rules/routing-and-delegation.md` | `51f6c6a486d5` | ✓ | ✓ | ✓ |
-| `docs/rules/deferred-domains.md` | `05f6f4eb31ad` | ✓ | ✓ | ✓ |
+| `docs/rules/reporting.md` | `75b20064bbef` | ✓ | ✓ | ✓ |
+| `docs/rules/routing-and-delegation.md` | `a3ea9b7d87cd` | ✓ | ✓ | ✓ |
+| `docs/rules/deferred-domains.md` | `9952cb6074c6` | ✓ | ✓ | ✓ |
 | `docs/rules/code-principles.md` | `d5f48e60bda0` | ✓ | ✓ | ✓ |
 | `docs/rules/design-to-code-sync.md` | `81a52a9bc694` | ✓ | ✓ | ✓ |
 | `docs/rules/ux-laws.md` | `76247cd98ac4` | ✓ | ✓ | ✓ |
-| `docs/agent/architecture/COMMON_ARCHITECTURE.md` | `b11d8942ba51` | ✓ | ✓ | ✓ |
+| `docs/agent/architecture/COMMON_ARCHITECTURE.md` | `e857074ad1d9` | ✓ | ✓ | ✓ |
 | `docs/agent/architecture/TDD_WORKFLOW.md` | `209f9aa3f69c` | ✓ | ✓ | ✓ |
 | `docs/agent/architecture/MODEL_SEPARATION.md` | `d6262ba37923` | ✓ | ✓ | ✓ |
 | `docs/agent/architecture/SSOT_PRINCIPLES.md` | `826e19561023` | ✓ | ✓ | ✓ |
@@ -191,7 +191,7 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 
 ## Last verify-sync
 
-- timestamp: 2026-08-15T15:46:24+0900
+- timestamp: 2026-08-15T19:45:24+0900
 - pass: 161
 - drift: 0
 - miss: 6
@@ -199,5 +199,5 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 
 ### Drift 상세
 
-- docs/architecture/CLI-MASTER-SCOPE-SEPARATION-CHARTER.md  master=0944b3147b66  app-foundation=MISS  gently-product-docs=MISS  Selfward=MISS
-- docs/ops/production-cli-access-tokens.md  master=3b0e8131fb67  app-foundation=MISS  gently-product-docs=MISS  Selfward=MISS
+- docs/architecture/CLI-MASTER-SCOPE-SEPARATION-CHARTER.md  master=0944b3147b66  app-foundation=MISS  toward-product-docs=MISS  Selfward=MISS
+- docs/ops/production-cli-access-tokens.md  master=3b0e8131fb67  app-foundation=MISS  toward-product-docs=MISS  Selfward=MISS
