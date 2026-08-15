@@ -203,6 +203,10 @@ STDOUT: [핵심 출력]
   예: `b368fcdbffcdb0e5 · 산식=cat docs/rules/*.md | shasum -a 256 · 환경=bash 3.2.57 · LC_COLLATE=C.UTF-8 · n=44`
 - 실측 근거 (= **3회 반복**): 동일 4-repo aggregate 가 보고 주체마다 다른 hex 로 나왔고, 매번 **내용 drift 가 아니라 환경 차이**였다. 직전 cycle 에서 6 변형 전부 불일치 보고 → **값이 틀린 게 아니라 환경이 달랐다.**
 
+### §8.2 ★REPORT 는 자기 commit sha 를 담지 않는다 (= 2026-08-15 · MASTER-BRAND-TOWARD-INFRA-001)
+
+REPORT 가 자기 자신을 담은 commit 의 sha 를 인용하면, 그 값은 **commit 이 존재한 뒤에만 알 수 있다** — 즉 **backfill(사후 재편집 + 재commit)을 구조적으로 강제**한다. 종단 산출물은 **자기 sha 없이 완결되는 서식**으로 저작한다 (인용 대상 = **선행** commit sha · 자기 commit 은 `[R]` 링크 + cycle-id 로 지시). 근거 = `PDOCS-BRAND-TOWARD-001` 사고.
+
 ---
 
 ## §9 Subagent Return Contract

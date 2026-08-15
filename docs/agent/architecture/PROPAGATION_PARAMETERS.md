@@ -31,7 +31,7 @@ repo 고유 값(패키지/경로/파일명/이름) 은 각 repo 가 자체 `scri
 
 | 변수 | 의미 | 예시 |
 |---|---|---|
-| `REPO_NAME` | display name | `Selfward` / `app-foundation` / `gently-product-docs` |
+| `REPO_NAME` | display name | `Selfward` / `app-foundation` / `toward-product-docs` |
 | `REPO_PREFIX` | task ID prefix | `SW` / `FND` / `PDOCS` |
 
 ### 패키지 (필수)

@@ -1,7 +1,7 @@
 # Common Architecture — App-Neutral CLI Ops Foundation
 
 > **목적**: Claude Code 운영 헌법(`CLAUDE.md`)이 모든 Android 앱 레포에서 동일하게 동작하도록 보장하는 공통 아키텍처 SoT.
-> **적용 대상**: 4-active — `claude-cli-master`(master) · `app-foundation` · `gently-product-docs` · `Selfward` 및 향후 propagation 대상 레포. (GentlyBreath · GentlyDay · GentlyTable = 2026-07-17 T6 **동결 계승 원천** — 전파 대상 아님 · 쓰기 0)
+> **적용 대상**: 4-active — `claude-cli-master`(master) · `app-foundation` · `toward-product-docs` · `Selfward` 및 향후 propagation 대상 레포. (GentlyBreath · GentlyDay · GentlyTable = 2026-07-17 T6 **동결 계승 원천** — 전파 대상 아님 · 쓰기 0)
 > **SoT**: 이 문서. 변경은 `claude-cli-master` 에서 먼저 반영 후 자식으로 단방향 propagation.
 
 ---
