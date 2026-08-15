@@ -174,7 +174,7 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 | `docs/rules/workflow-core.md` | `69b017d624d5` | ✓ | ✓ | ✓ |
 | `docs/rules/cycle-discipline.md` | `e5f547153109` | ✓ | ✓ | ✓ |
 | `docs/rules/pencil-automation.md` | `a2506a34d797` | ✓ | ✓ | ✓ |
-| `docs/rules/reporting.md` | `f85f991f2628` | ✓ | ✓ | ✓ |
+| `docs/rules/reporting.md` | `128da90c0c53` | ✓ | ✓ | ✓ |
 | `docs/rules/routing-and-delegation.md` | `51f6c6a486d5` | ✓ | ✓ | ✓ |
 | `docs/rules/deferred-domains.md` | `05f6f4eb31ad` | ✓ | ✓ | ✓ |
 | `docs/rules/code-principles.md` | `d5f48e60bda0` | ✓ | ✓ | ✓ |
@@ -191,7 +191,7 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 
 ## Last verify-sync
 
-- timestamp: 2026-08-09T15:57:14+0900
+- timestamp: 2026-08-15T15:46:24+0900
 - pass: 161
 - drift: 0
 - miss: 6
