@@ -4,20 +4,24 @@
 
 ## 1. working file 카테고리
 
-다음 패턴 파일은 마감 시 자동 archive 대상:
-- 부모 root + 4 자식 repo: `cycle-prompt-*.md`
-- 부모 root + 4 자식 repo: `cc-paste-*.md`
-- 부모 root + 4 자식 repo: `*_addendum*.md` / `*-addendum-*.md`
-- 부모 root + 4 자식 repo: `*.bak`
-- 자식 repo: `.ai/prompts/*.md` (이전 prompts policy 흡수 — handoff / pivot / activate / entry / verification 등 모든 working file)
+> ★**패턴 정본 = script 상수** (= 본 절 = 발췌 · 열거 재복제 금지): 자동 archive 대상 패턴의 단일 SoT = [`scripts/working-file-archiver.sh`](../../scripts/working-file-archiver.sh) `sweep_candidates()` 의 `for pattern in …` 목록 (= **root 9 패턴** + `.ai/prompts/*.md`). 본 절이 그 목록을 다시 세면 두 번째 열거처가 곧 drift 원이 된다 — 신규 패턴 추가는 **script 를 고치고 본 발췌는 그대로 두거나 함께 갱신**한다.
+
+sweep 위치(= §3 5 위치) 의 repo root 에서 다음 패턴이 마감 시 자동 archive 대상 (= 2026-08-15 실측 발췌):
+
+- `cycle-prompt-*.md` · `cc-paste-*.md` · `*_addendum*.md` / `*-addendum-*.md` · `*.bak`
+- `cowork-handoff-*ENTRY*.md` · `cowork-chat-entry-*.md` · `ENTRY-PROMPT-*.md` · `cc-audit-*.md`
+- 자식 repo 한정: `.ai/prompts/*.md` (이전 prompts policy 흡수 — handoff / pivot / activate / entry / verification 등 모든 working file · 부모 root `.ai/` 는 대상 밖)
 
 **제외 (자동 archive X)**:
 - `.ai/reports/` 안 내용 일체 (cycle 산출물 — 영구 자료)
 - `.claude/rules/` / `.claude/hooks/` / `scripts/` (cli infra)
 - 도메인 코드 / 디자인 SoT (`docs/` 안 등)
 - README.md / CLAUDE.md / .gitignore (repo-specific 또는 보호)
+- `cowork-handoff-architecture.md` (영구 SoT) / `cowork-handoff-active.md` (append SoT · `handoff-active-rotate.sh` 관할) — 정본 = script `is_excluded()`
 
 ## 2. frontmatter 3 키 (working file 모두 의무)
+
+> ★**일수 SoT** (= 본 file 전역 적용 · §2 / §5 문면 공통): 아래 「7일」 = **인용값** · 정본 = [`scripts/working-file-archiver.sh`](../../scripts/working-file-archiver.sh) `MTIME_THRESHOLD_DAYS` 상수. 일수 변경 = **script 상수를 고치고 본 문면 + `reporting.md §1` 인용을 함께 갱신**한다 (= 문면만 고치면 무효).
 
 ```yaml
 ---
@@ -31,12 +35,14 @@ frontmatter 부재 시: mtime 7일 경과 fallback 적용 (warn-only, 자동 arc
 
 ## 3. archive 위치 (5 위치 단일 SoT)
 
-5 위치 모두 동일 구조 운영:
-- `~/AndroidStudioProjects/archive/` (부모 root)
-- `~/AndroidStudioProjects/claude-cli-master/archive/`
-- `~/AndroidStudioProjects/GentlyBreath/archive/`
-- `~/AndroidStudioProjects/GentlyDay/archive/`
-- `~/AndroidStudioProjects/GentlyTable/archive/`
+> ★**4-active 정합** (= 2026-08-15 `MASTER-LIFECYCLE-4ACTIVE-REALIGN-001` 정정): 구 판은 **동결 3 (GentlyBreath / GentlyDay / GentlyTable)** 을 열거해 2026-07-17 `MASTER-T6-REPO-REALIGN-001` 재편을 반영하지 못했다 (= 동결 3 = 전파 대상 X · 쓰기 0 · master `CLAUDE.md §1.3`). 위치 정본 = launchd plist [`scripts/com.coin.working-file-archiver.plist`](../../scripts/com.coin.working-file-archiver.plist) 의 `for r in …` 5 경로 · 아래 목록 = 그 실물과 문자열 정합.
+
+5 위치 모두 동일 구조 운영 (= 부모 root + 4-active):
+- `~/AndroidStudioProjects/archive/` (부모 root · git 밖)
+- `~/AndroidStudioProjects/claude-cli-master/archive/` (master)
+- `~/AndroidStudioProjects/app-foundation/archive/` (FND)
+- `~/AndroidStudioProjects/gently-product-docs/archive/` (PDOCS)
+- `~/AndroidStudioProjects/Selfward/archive/` (SW)
 
 각 위치 안 구조:
 ````
@@ -61,12 +67,12 @@ archive/
 | 2026-05-04 17:47 | cycle-prompt-XXX.md | (parent root) | XXX | mtime 경과 |
 ```
 
-trigger 종류 = `REVIEW.md PASS` / `mtime 경과` / `수동`.
+trigger 종류 = `REVIEW.md PASS` / `REPORT.md PASS` / `mtime 경과` / `수동` (= script 가 실제 매칭된 판정 file 명을 그대로 기록).
 
 ## 5. trigger mechanism
 
 - (a) **frontmatter mtime fallback**: file 의 mtime 이 7 일 경과 + frontmatter 3 키 명시 → 자동 archive
-- (b) **REVIEW.md PASS 매칭**: frontmatter 의 `정리trigger` 안 명시한 task ID 의 REVIEW.md 가 PASS 상태 → 자동 archive
+- (b) **REVIEW.md·REPORT.md PASS 매칭**: frontmatter 의 `정리trigger` 안 명시한 task ID 의 `.ai/reports/<taskId>/` 아래 **`REVIEW.md` 또는 `REPORT.md`** 가 PASS 상태 → 자동 archive. ★**REPORT.md 인정** = 2026-08-15 `MASTER-LIFECYCLE-4ACTIVE-REALIGN-001` 신설 — master cycle 산출물은 `REPORT.md` 뿐(= master `CLAUDE.md §11`)이라 REVIEW.md 만 조회하던 구 판에서는 조기-archive 경로가 **사문화**돼 있었다. **task ID 요건 · PASS 판정 함수는 무변** (= 인정 file 집합만 `{REVIEW.md}` → `{REVIEW.md, REPORT.md}`)
 
 위 2 trigger 중 하나 만족 = archive 대상.
 

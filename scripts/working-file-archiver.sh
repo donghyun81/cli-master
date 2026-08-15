@@ -73,23 +73,37 @@ review_says_pass() {
   return 1
 }
 
-# REVIEW.md PASS 매칭 (= 정리trigger 의 task ID 검색 · repo-local + sibling repo lookup)
+# REVIEW.md / REPORT.md PASS 매칭 (= 정리trigger 의 task ID 검색 · repo-local + sibling repo lookup)
 #   sibling lookup = mount root 아래 git repo 별 .ai/reports/ 검색 (= 부모 root sweep 시
 #   master-cycle cc-paste 의 REVIEW(master repo 소재)도 PASS trigger 매칭 가능).
+#
+#   ★REPORT.md 인정 = MASTER-LIFECYCLE-4ACTIVE-REALIGN-001 (2026-08-15).
+#     근인 = master cycle 산출물은 `REPORT.md` 뿐 (= master `CLAUDE.md §11` · 자식 cycle 만 REVIEW.md)
+#     → REVIEW.md 만 조회하던 구 판에서 master-cycle working file 의 조기-archive 경로가 사문화
+#       (= mtime 7 일 fallback 만 남아 cc-paste 가 최대 7 일 잔존).
+#     ★넓힌 것은 **인정 file 집합 1 개뿐**: task ID 요건(= 아래 -z 조기 return)과
+#       PASS 판정(= review_says_pass 무접촉) 은 무변 — 마감 판정의 그 외 요건 불변.
+REPORT_BASENAMES="REVIEW.md REPORT.md"
+MATCH_BASENAME=""   # 매칭된 판정 file 명 (= INDEX trigger 칸 표기용 · set -u 대비 초기화)
+
 check_review_pass() {
   local task_id="$1"
   [ -z "$task_id" ] && return 1
+  local b d
   # (1) repo-local
-  review_says_pass "$REPO_ROOT/.ai/reports/$task_id/REVIEW.md" && return 0
+  for b in $REPORT_BASENAMES; do
+    review_says_pass "$REPO_ROOT/.ai/reports/$task_id/$b" && { MATCH_BASENAME="$b"; return 0; }
+  done
   # (2) sibling repo lookup (mount-root 인지)
   local mount_root="$REPO_ROOT"
   if [ ! -d "$REPO_ROOT/claude-cli-master" ] && [ -d "$REPO_ROOT/../claude-cli-master" ]; then
     mount_root="$(cd "$REPO_ROOT/.." && pwd)"
   fi
-  local d
   for d in "$mount_root"/*/; do
     [ -d "${d}.git" ] || continue
-    review_says_pass "${d}.ai/reports/$task_id/REVIEW.md" && return 0
+    for b in $REPORT_BASENAMES; do
+      review_says_pass "${d}.ai/reports/$task_id/$b" && { MATCH_BASENAME="$b"; return 0; }
+    done
   done
   return 1
 }
@@ -155,9 +169,10 @@ process_candidate() {
   local task_id=$(echo "$cleanup_trigger" | grep -oE '[A-Z]+-[A-Z0-9-]+-[0-9]+' | head -1)
   local cycle_id="${task_id:-unknown}"
 
-  # (b) REVIEW.md PASS 매칭 우선
+  # (b) REVIEW.md / REPORT.md PASS 매칭 우선
+  MATCH_BASENAME=""
   if check_review_pass "$task_id"; then
-    archive_one "$file" "REVIEW.md PASS" "$cycle_id"
+    archive_one "$file" "${MATCH_BASENAME:-REVIEW.md} PASS" "$cycle_id"
     return
   fi
 

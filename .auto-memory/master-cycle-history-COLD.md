@@ -1,4 +1,4 @@
-# Master Cycle History COLD storage (= 151 entry 영구 누적 + cold 영역 default)
+# Master Cycle History COLD storage (= 152 entry 영구 누적 + cold 영역 default)
 
 > 본 file = master `CLAUDE.md §15` cycle 진행 이력 cold storage default · hot 영역 = `CLAUDE.md §15` (= 최근 5 + 본 cold pointer) default · 감사 추적 영구 보존 default
 > 위치 = `claude-cli-master/.auto-memory/master-cycle-history-COLD.md` (= master only default · propagation X default · 4 자식 §15 (= 현 6 entry hot · master 86 의 pure subset) 측 단일 cold superset default)
@@ -8,7 +8,9 @@
 
 ---
 
-## §1. master §15 cycle 진행 이력 (= 151 entry verbatim · Phase 1 65 + COLD-002 +19 + EXEC2-B +2 + EXEC3 +4 + EXEC3-002 +4 + AUTO-DEMOTE +9 + S15-HOT-DEMOTE-003 +8 + S15-HOT-DEMOTE-004 +10 + S15-HOT-DEMOTE-005 +16 + CONTEXT-DIET-3 +12 재배치 + AUTH-RULES-EMAIL-FIRST +1 + PRELAUNCH-SWEEP-002 +1 · **+ SLOT-SPEC-AND-COMMIT-FENCE 재수록 2 = 위 151 합산 밖**)
+## §1. master §15 cycle 진행 이력 (= 152 entry verbatim · Phase 1 65 + COLD-002 +19 + EXEC2-B +2 + EXEC3 +4 + EXEC3-002 +4 + AUTO-DEMOTE +9 + S15-HOT-DEMOTE-003 +8 + S15-HOT-DEMOTE-004 +10 + S15-HOT-DEMOTE-005 +16 + CONTEXT-DIET-3 +12 재배치 + AUTH-RULES-EMAIL-FIRST +1 + PRELAUNCH-SWEEP-002 +1 + LIFECYCLE-4ACTIVE-REALIGN +1 · **+ SLOT-SPEC-AND-COMMIT-FENCE 재수록 2 = 위 152 합산 밖**)
+
+> ★**14 회차 demote 의 성격** (= 2026-08-15 `MASTER-LIFECYCLE-4ACTIVE-REALIGN-001`): 표 말미 1행 (= `MASTER-CLI-SLOT-SPEC-AND-COMMIT-FENCE-001`) = **distinct entry 신설 +1** (= 12·13 회차와 동일 성격 · demote 직전 COLD 전수 grep = **표 행 0 hit** 실측 [= 기존 1 hit 은 위 「재수록 2」 note 안 인용문 · 표 행 아님] ⟹ 압축판 재수록이 아니라 **최초 수록**). 제거 행 = hot §15 상한 3 유지분 · 원문 verbatim 실재 대조 PASS.
 
 > ★**13 회차 demote 의 성격** (= 2026-08-09 `SELFWARD-PRELAUNCH-SWEEP-002`): 표 말미 1행 (= `MASTER-CLI-RULES-TOKEN-SLOT-WRITER-001`) = **distinct entry 신설 +1** (= 12 회차와 동일 성격 · demote 직전 COLD 전수 grep **0 hit** 실측 ⟹ 압축판 재수록이 아니라 **최초 수록**). 제거 행 = hot §15 상한 3 유지분 · 원문 verbatim 실재 대조 PASS.
 
@@ -173,6 +175,7 @@
 | MASTER-CLI-JUDGMENT-SHIFT-001 | 2026-07-29 | 구형 모델 전제 검사장치 → 판단 위임 (M5 · prod 0 LOC · 보호 5 sha 0). hook 3 + rule 2 제거→COLD verbatim · 축소 2 · stdout 7→1 · 등록 17→14 · 158 PASS · 사고 0. [상세](.ai/reports/MASTER-CLI-JUDGMENT-SHIFT-001/REPORT.md) | 4-repo 22 file |
 | MASTER-CLI-CONTEXT-DIET-3-001 | 2026-07-29 | 상주 컨텍스트 다이어트 (M5 · prod 0 · 보호 sha 0). **142→85.5KB(−39.9%)** · §15 57.7→2.1KB. STOP 9항→`stop-canonical` 자동주입(복제 3→1) · §15 상한 3×≤400B · 이력 3 COLD · skill 통합 · commands 8→4 · allow 54 삭제 · .mcp=SW. [R](.ai/reports/MASTER-CLI-CONTEXT-DIET-3-001/REPORT.md) | 4-repo |
 | MASTER-CLI-RULES-TOKEN-SLOT-WRITER-001 | 2026-08-02 | 토큰 slot 직독 분리 + writer 2 조건 (docs-only · prod 0 · 값 0). §10.8 401 사다리 신설(env↔slot 대조 → 재발급 최후) · §10.2 정정 · §6 trigger 에 `401` 등재 · SDO §5-1(ADR-0002). 근본 = 세션 수명 > 토큰 수명 | 4-repo 3 file |
+| MASTER-CLI-SLOT-SPEC-AND-COMMIT-FENCE-001 | 2026-08-03 | slot 명세 stale 회수 + 전파 게이트 (docs-only · prod 0). 동결 3 slot 「잔존」→「삭제됨」(07-29 실측) · §2.1.6 D-7 신설(자식 commit 직전 `-uno` 재측정 · pathspec = D-3 이 이미 반쪽) · §15 entry 2 + demote 2 | 4-repo 2 file |
 
 ---
 

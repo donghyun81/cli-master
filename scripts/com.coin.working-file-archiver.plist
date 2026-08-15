@@ -8,7 +8,7 @@
   <array>
     <string>/bin/bash</string>
     <string>-c</string>
-    <string>for r in /Users/yundonghyeon/AndroidStudioProjects /Users/yundonghyeon/AndroidStudioProjects/claude-cli-master /Users/yundonghyeon/AndroidStudioProjects/app-foundation /Users/yundonghyeon/AndroidStudioProjects/gently-product-docs /Users/yundonghyeon/AndroidStudioProjects/Selfward; do [ -x "$r/scripts/working-file-archiver.sh" ] &amp;&amp; "$r/scripts/working-file-archiver.sh"; done</string>
+    <string>for r in /Users/yundonghyeon/AndroidStudioProjects /Users/yundonghyeon/AndroidStudioProjects/claude-cli-master /Users/yundonghyeon/AndroidStudioProjects/app-foundation /Users/yundonghyeon/AndroidStudioProjects/gently-product-docs /Users/yundonghyeon/AndroidStudioProjects/Selfward; do if [ -x "$r/scripts/working-file-archiver.sh" ]; then "$r/scripts/working-file-archiver.sh"; else echo "archiver skip: $r" 1>&amp;2; fi; done</string>
   </array>
   <key>StartCalendarInterval</key>
   <dict>
