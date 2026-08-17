@@ -5,7 +5,7 @@
 
 ## 수기 sha 매트릭스 폐기 (= Phase C · MASTER-CLI-POSTCYCLE-AUTOMATION-001 · 2026-06-01)
 
-> **본질**: 직전 수기 sha 표 (= 자식 repo 등록 5-02 baseline HEAD + 보호 5종 매트릭스 + cli infra 핵심 매트릭스) = 영구 stale 원인. propagation 마다 수기 갱신 의무 누락 → 소멸 file 참조 누적: 직전 표 안 workflow.md(현 `workflow-core.md`) · evidence-and-reporting.md(현 `reporting.md` 통합) · domain-roles.md(구 .claude/agents/ → 현 `.claude/rules/domain-roles.md`) · pencil-uiux-workflow.md 7621013e(현 e6a4a2a1...) · save-as-result-check.sh(scripts/ 이동) 등.
+> **본질**: 직전 수기 sha 표 (= 자식 repo 등록 5-02 baseline HEAD + 보호 5종 매트릭스 + cli infra 핵심 매트릭스) = 영구 stale 원인. propagation 마다 수기 갱신 의무 누락 → 소멸 file 참조 누적: 직전 표 안 workflow.md(현 `workflow-core.md`) · evidence-and-reporting.md(현 `reporting.md` 통합) · domain-roles.md(구 .claude/agents/ → 현 `docs/rules/domain-roles.md`) · pencil-uiux-workflow.md 7621013e(현 e6a4a2a1...) · save-as-result-check.sh(scripts/ 이동) 등.
 > **정정**: 수기 매트릭스 → 본 file 하단 `## Auto-generated (verify-sync ...)` 영역으로 전환 = `verify-sync.sh` 가 매 실행 시 live sha (보호 5 + 핵심 cli infra) 재생성 + 자동 footer (`## Last verify-sync`). 두 자동 영역 = **단일 진실** · 수기 편집 금지. 부재 참조 발생 시 verify-sync 가 stderr WARN 발화 (= drift 재발 감지).
 > **현 정합 상태** = 하단 자동 매트릭스 (live) 정독. master HEAD + 보호 5종 sha 표면화 = `.ai/baseline-snapshot/latest.json` (InstructionsLoaded hook always-fresh) + `CLAUDE.md §14a` (git-sha1) + `.auto-memory/protected-file-hashes.md` (sha-256 manifest) 정합.
 

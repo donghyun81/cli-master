@@ -1,6 +1,6 @@
 # Rule Routing Index — 계층 taxonomy + 행동→규칙 라우팅 색인
 
-> **단일 목적**: `.claude/rules/` 48 rule 의 논리적 계층(L0~L3) 외화 + Reading Mode 7종(행동) → 의무 로드 규칙 집합 매핑 + 행동별 측정 가능 목표(GSM) + deviation 경로 + 색인 갱신 규약. **물리 폴더 이동 없음 · frontmatter 없음** — 본 색인 한 file 이 계층을 표현한다.
+> **단일 목적**: `docs/rules/` 42 + `.claude/rules/` 6 = **48 rule**(= 색인 자신 제외) 의 논리적 계층(L0~L3) 외화 + Reading Mode 7종(행동) → 의무 로드 규칙 집합 매핑 + 행동별 측정 가능 목표(GSM) + deviation 경로 + 색인 갱신 규약. **물리 폴더 이동 없음 · frontmatter 없음** — 본 색인 한 file 이 계층을 표현한다.
 > **본 색인 = pointer only**. 각 rule 의 본문은 해당 file 단일 SoT. 본 색인은 어느 본문도 복제하지 않는다.
 > **정독 시점 (T2)**: intake 시 = [`rule-routing-table.md`](../../.claude/rules/rule-routing-table.md) 만 정독 · **본 index 전문 정독 = 색인 갱신 cycle 한정** (= MASTER-CLI-CONTEXT-DIET-2-001).
 > **신설**: RULE-ARCH-PHASE1-001 (2026-05-31 · Phase 0 audit `cc-audit-RULE-ARCH-PHASE0-001.md` §4 매핑 후보 + cli session 42-file 재측정 정합).
@@ -16,7 +16,7 @@
 
 ## §0. 계층 본질 + 사용법
 
-`.claude/rules/` 는 평면 폴더다(subfolder 0). 본 색인은 자신을 제외한 **48 rule** 을 그 평면 위에 **논리적 4층**으로 덮어 행동별로 무엇을 먼저 읽어야 하는지 가리킨다.
+rule 은 **두 평면 폴더**에 산다(`docs/rules/` = 콜드 · `.claude/rules/` = 자동 주입 · 각 subfolder 0). 본 색인은 자신을 제외한 **48 rule** 을 그 평면 위에 **논리적 4층**으로 덮어 행동별로 무엇을 먼저 읽어야 하는지 가리킨다.
 
 | 층 | 이름 | 로드 시점 | 본질 |
 |---|---|---|---|
@@ -156,14 +156,15 @@
 2. **rule 이동/통합/폐기 시**: §A 행 제거 또는 이동 + §B 의존 행 동기. 통합(예: 3 file → 1 SoT)은 흡수 후 단일 행으로 정리.
 3. **층 재배치 판단**: L0/L1/L2/L3 경계가 모호하면 "로드 시점"으로 판정(항상=L0 / 작업 시작=L1 / code-level=L2 / 키워드 trigger=L3). 재배치는 본 색인 1 file 변경으로 끝난다 — 물리 이동·frontmatter 불요.
 4. **갱신 trigger**: 신 rule 신설 cycle 마감 시 + `cycle-discipline §18` 분기 review 시 + Reading Mode 정의(`workflow-core` §Intake) 변경 시.
-5. **(선택) verify hook pointer**: 본 색인 §A 멤버 수 + 색인 자신 1 = `find .claude/rules -type f -name '*.md' | wc -l`(현재 48 + 1 = 49) 정합 검증을 분기 review(`cycle-discipline §18`) 측 측정 항목으로 둘 수 있다(자동 hook 신설은 별 cycle).
+5. **(선택) verify hook pointer**: 본 색인 §A 멤버 수 + 색인 자신 1 = `ls -1 docs/rules/ | wc -l` + `ls -1 .claude/rules/ | wc -l` **두 경로 합산**(= repo root 기준 · 현재 43 + 6 = **49**) 정합 검증을 분기 review(`cycle-discipline §18`) 측 측정 항목으로 둘 수 있다(자동 hook 신설은 별 cycle).
+   - ★[구 판 보존] 구 명령·구 기대 = `find .claude/rules -type f -name '*.md' | wc -l`(현재 48 + 1 = 49). rule 이 두 폴더로 갈린 뒤(= `MASTER-CLI-CONTEXT-DIET-2-003` T1) **이 자의 현 출력은 6 이다** — 그 자를 믿고 정합 검증을 돌리면 `docs/rules/` 43 본이 사라진 것처럼 보인다(= `MASTER-STALE-SWEEP-001` 실측 · 자기 검증 명령이 죽은 채 남아 있던 자리).
 6. **frontmatter 표준화 = 본 cycle 비포함**: 42 file 에 `layer:` frontmatter 일괄 부여는 자식 propagation cascade + 보호 resync 를 동시에 trigger 하므로 별 의제. 본 색인의 수기 유지가 `cycle-discipline §2`(양 최소·변동성 회피) 측 default.
 
 ---
 
 ## §E. propagation 정책
 
-- 본 file = cli infra **권장 byte-identical** 영역(`.claude/rules/` · 보호 5종 아님 · `cycle-discipline §3`). 42 rule 이 4-repo byte-identical 이므로 본 색인도 4-repo 에서 동일하게 유효 → `propagate.sh` 대상.
+- 본 file = cli infra **권장 byte-identical** 영역(실 위치 = `docs/rules/` · 보호 5종 아님 · `cycle-discipline §3`). 42 rule 이 4-repo byte-identical 이므로 본 색인도 4-repo 에서 동일하게 유효 → `propagate.sh` 대상.
 - **본 cycle(RULE-ARCH-PHASE1-001) = master 신설 only**. 5-repo byte-identical propagation = 별 follow-up cycle(`MASTER-CLI-RULE-ROUTING-INDEX-PROPAGATE-NNN` 가칭 · `cycle-discipline §15` 패턴 1). 자식 직접 수정 금지(`CLAUDE.md §4`).
 
 ---
