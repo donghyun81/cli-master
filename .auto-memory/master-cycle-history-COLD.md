@@ -182,6 +182,7 @@
 | MASTER-CLI-SLOT-SPEC-AND-COMMIT-FENCE-001 | 2026-08-03 | slot 명세 stale 회수 + 전파 게이트 (docs-only · prod 0). 동결 3 slot 「잔존」→「삭제됨」(07-29 실측) · §2.1.6 D-7 신설(자식 commit 직전 `-uno` 재측정 · pathspec = D-3 이 이미 반쪽) · §15 entry 2 + demote 2 | 4-repo 2 file |
 | MASTER-CLI-AUTH-RULES-EMAIL-FIRST-001 | 2026-08-05 | auth-rules default 전환 = 익명 부트스트랩 → email-first 가입 (docs-only · prod 0 · 보호 sha 0). §1b 신설(활성 default · gateway op 5 + authenticator op 6 · AAB 와 Mutex 비공유 = 동시 배선 금지) · §1 = 동결 계보 재스코프 · §4/§5.2/§6 이관 · §7 STOP 무변 · 문면 삭제 0 | 4-repo 1 file |
 | SELFWARD-PRELAUNCH-SWEEP-002 | 2026-08-09 | auth-rules 「이름표」 stale 회수 (docs-only · prod 0 LOC · auth-rules 본문 sha 무변 `a8c59b48`). 본문은 08-05 에 전환됐는데 그것을 가리키는 pointer·표·각주·템플릿이 안 늙었다 — 전파 6 + repo-local 3 · 구 문면 verbatim 존치 14/14 · 삭제 0 | 4-repo 6 + local 3 |
+| MASTER-LIFECYCLE-4ACTIVE-REALIGN-001 | 2026-08-15 | archiver 4-active 정합 (prod 0 · 보호 sha 0). rule §3 위치 = 동결 3 → plist 실물 5 · 패턴 5→9 pointer · 14일→**7일**(SoT = script 상수) · 조기-archive **REPORT.md 인정**(요건 무변 · 사문화 해소) · plist skip → stderr. [R](.ai/reports/MASTER-LIFECYCLE-4ACTIVE-REALIGN-001/REPORT.md) | 4-repo 3 file |
 
 ---
 

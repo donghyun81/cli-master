@@ -37,6 +37,9 @@ implement → cleanup pass → Pre-DocSync Verify(PASS) → DocSync → /verify 
   `MASTER-CLI-DOCS-AUTOSYNC-PARADIGM-001` 안 영구 정착. 세부 본문 = `cycle-discipline.md`
   §20 + `.claude/agents/active/docs-change-communicator.md` Key questions.
 - ops-layer task 는 cleanup pass 를 `N/A (ops-layer task)` 로 EVIDENCE.md 에 명시한다.
+- **낡은 문면 등재**: 요청 확인 / 조사 / 구현 각 단계에서 문면↔실물 갈림을 발견하면 `<repo>/STALE-DEBT.md` 에
+  1행 등재한다 (**등재하면 진행 허용** — 이 의무는 cycle 을 멈추지 않는다 · 이력·박제 문면은 대상 밖).
+  본문 = `docs/rules/stale-artifact-tracking.md`.
 - verifier 또는 reviewer가 reject하면 → change-planner/system-architect 단계로 되돌린다.
 
 ---

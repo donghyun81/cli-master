@@ -3,6 +3,7 @@
 > code-level 구현/수정 task에서 항상 실행되는 legacy/미사용 코드 점검·제거 governance.
 > "항상 실행"은 cleanup 후보를 항상 점검한다는 뜻이다. shell/script가 제품 코드를 자동 삭제하는 뜻이 아니다.
 > SOT: `CLAUDE.md` | 관련: `docs/rules/workflow-core.md` (단계 흐름) / `docs/rules/cycle-discipline.md` (cycle 정책), `.claude/rules/safety-and-secrets.md`
+> **자매 rule**: [`stale-artifact-tracking.md`](./stale-artifact-tracking.md) — 본 rule 이 다루지 않는 **낡은 문면**(주석·SoT 문서·rule 문면이 실물과 갈림)을 전담한다. 본 rule = **코드 제거**, 자매 = **문면 drift 등재**. 아래 「적용 범위」에서 본 rule 이 제외하는 문서형·조사형·ops-layer task 가 그 자매의 영역이다 (= `MASTER-STALE-TRACKING-001` 2026-08-17 · 본 rule 본문 무변).
 
 ---
 

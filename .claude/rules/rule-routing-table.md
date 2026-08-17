@@ -7,7 +7,7 @@
 
 | Reading Mode | 의무 로드 (L0 +) |
 |---|---|
-| 1. 구현형 | L1: workflow-core · cycle-discipline · verification-and-review · reporting · routing-and-delegation · legacy-cleanup-governance · mode-system(M1/M3) · libs-versions-cross-verify(의존성 변경 시) / L2: code-style-guide · code-principles · 테스트 시 TESTING_STRATEGY+TDD_WORKFLOW+TESTABILITY_SEAMS / L3(키워드 시): auth-rules · billing-rules · supabase-handling · deferred-domains |
+| 1. 구현형 | L1: workflow-core · cycle-discipline · verification-and-review · reporting · routing-and-delegation · legacy-cleanup-governance · stale-artifact-tracking(문면↔실물 갈림 발견 시 등재) · mode-system(M1/M3) · libs-versions-cross-verify(의존성 변경 시) / L2: code-style-guide · code-principles · 테스트 시 TESTING_STRATEGY+TDD_WORKFLOW+TESTABILITY_SEAMS / L3(키워드 시): auth-rules · billing-rules · supabase-handling · deferred-domains |
 | 2. UI-UX형 | L1: workflow-core · cycle-discipline · verification-and-review · reporting / L2: code-style-guide · design-to-code-sync · design-prompting-paradigm · code-principles · 테스트 시 TESTING_STRATEGY / L3: ui-ux-analysis · ux-laws · uiux-sot-refresh(보호) · sot-code-name-map + Pencil 시 pencil-uiux-workflow(보호) 및 Pencil cluster |
 | 3. API-서버형 | L1: workflow-core · cycle-discipline · verification-and-review · reporting / L2: code-style-guide · code-principles · 테스트 시 TESTING_STRATEGY / L3: supabase-handling · auth-rules · billing-rules · deferred-domains(Backend/Data STOP) |
 | 4. 빌드-릴리즈형 | L1: cycle-discipline(§13 환경 정합) · libs-versions-cross-verify · initiatives-auto-sync · verification-and-review · reporting · working-file-lifecycle |

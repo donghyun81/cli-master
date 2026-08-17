@@ -30,7 +30,7 @@
 
 ---
 
-## §A. 계층 taxonomy (L0~L3 · 48 rule 배치)
+## §A. 계층 taxonomy (L0~L3 · 49 rule 배치)
 
 > 각 file 옆 1줄 = 1차 목적(분류 문구). 본문은 해당 file 단일 SoT — 여기서 복제하지 않는다. (보호) = 보호 5종 byte-identical 영역.
 
@@ -45,7 +45,7 @@
 
 > L0 추가: `.claude/rules/stop-canonical.md`(STOP 9항 canonical · **2026-07-29 `MASTER-CLI-CONTEXT-DIET-3-001` 로 `.claude/rules/` 안으로 이동** = 자동 주입 · 본 집합 포함) + file 외 L0 = 부모 mount root `CLAUDE.md`(7-repo umbrella = 4-active + 3 동결 · `.claude/rules/` 밖이라 본 집합 미포함 · L0 로 항상 적용).
 
-### L1 — 프로세스·워크플로우 (작업 시작 시 · 21 rule)
+### L1 — 프로세스·워크플로우 (작업 시작 시 · 22 rule)
 
 | rule | 1차 목적 |
 |---|---|
@@ -59,6 +59,7 @@
 | [`plugin-policy.md`](./plugin-policy.md) | plugin 조건부 허용(공식+커스텀 불요) vs 회피(자식 차별화) 판단 기준 |
 | [`workflow-policy.md`](./workflow-policy.md) | `Workflow` 도구(dynamic workflows) 조건부 허용 + gate 실측(pool 귀속/버전/활성화 전제) + 허용·회피 영역 + 200k 토큰 예산 통제 |
 | [`legacy-cleanup-governance.md`](./legacy-cleanup-governance.md) | cleanup pass + 제거 허용 근거 + code removal vs file deletion STOP |
+| [`stale-artifact-tracking.md`](./stale-artifact-tracking.md) | 낡은 문면(주석·SoT 문서·rule 문면)의 발견 의무 + `STALE-DEBT.md` 대장 등재 + sweep trigger — 이력·박제는 대상 밖 (= `legacy-cleanup-governance` 의 자매 · 코드 제거 X · 문면 drift 전담) |
 | [`working-file-lifecycle.md`](./working-file-lifecycle.md) | cc-paste / cycle-prompt 등 working file archive + frontmatter 3키 |
 | [`recommended-option-disk-verification.md`](./recommended-option-disk-verification.md) | 추천/scope 결정 전 disk 실측 의무 (thin pointer → skill) |
 | [`paste-authoring-disk-verification.md`](./paste-authoring-disk-verification.md) | paste source authoring 측 disk 실측 의무 (thin pointer → skill) |
