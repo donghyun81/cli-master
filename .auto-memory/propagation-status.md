@@ -171,7 +171,7 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 | `docs/rules/uiux-sot-refresh.md` | `31c0da56aeec` | ✓ | ✓ | ✓ |
 | `docs/design/design-sot-policy.md` | `92a5e99804ff` | ✓ | ✓ | ✓ |
 | `.claude/settings.json` | `fdaf79e0dfe0` | ✓ | ✓ | ✓ |
-| `docs/rules/workflow-core.md` | `99e422f280c9` | ✓ | ✓ | ✓ |
+| `docs/rules/workflow-core.md` | `fc61294804c4` | ✓ | ✓ | ✓ |
 | `docs/rules/cycle-discipline.md` | `e5f547153109` | ✓ | ✓ | ✓ |
 | `docs/rules/pencil-automation.md` | `a2506a34d797` | ✓ | ✓ | ✓ |
 | `docs/rules/reporting.md` | `75b20064bbef` | ✓ | ✓ | ✓ |
@@ -191,8 +191,8 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 
 ## Last verify-sync
 
-- timestamp: 2026-08-15T19:45:24+0900
-- pass: 161
+- timestamp: 2026-08-17T17:10:22+0900
+- pass: 162
 - drift: 0
 - miss: 6
 - exit: 1
