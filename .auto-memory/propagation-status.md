@@ -191,13 +191,15 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 
 ## Last verify-sync
 
-- timestamp: 2026-08-17T17:10:22+0900
+- timestamp: 2026-08-17T18:34:37+0900
 - pass: 162
-- drift: 0
-- miss: 6
+- drift: 2
+- miss: 10
 - exit: 1
 
 ### Drift 상세
 
 - docs/architecture/CLI-MASTER-SCOPE-SEPARATION-CHARTER.md  master=0944b3147b66  app-foundation=MISS  toward-product-docs=MISS  Selfward=MISS
 - docs/ops/production-cli-access-tokens.md  master=3b0e8131fb67  app-foundation=MISS  toward-product-docs=MISS  Selfward=MISS
+- docs/stale-sweeps/README.md  master=d0c280dace76  app-foundation=MISS  toward-product-docs=MISS  Selfward=95b4781a492b(✗)
+- docs/stale-sweeps/SWEEP-20260817.md  master=5d326661e3c3  app-foundation=MISS  toward-product-docs=MISS  Selfward=8b8ab20a6252(✗)
