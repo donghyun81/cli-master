@@ -191,7 +191,7 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 
 ## Last verify-sync
 
-- timestamp: 2026-08-23T16:55:00+0900
+- timestamp: 2026-08-23T21:38:20+0900
 - pass: 161
 - drift: 0
 - miss: 0
