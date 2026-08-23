@@ -38,7 +38,7 @@
 | 4 | 디자인 화면 단일 출처 (실데이터) | 화면 1 개의 구조/시각 정답 | 1a `<screen>.ui-spec.json` + 1b `<screen>.<ext>` |
 | 5 | 도구 바인딩 | 디자인 도구의 구체 절차 | `docs/design/pencil-sot-policy.md` (의미 = pencil-sot-binding) + `docs/rules/pencil-uiux-workflow.md` |
 | 6 | refresh baseline | 런타임 → SoT 비교 기준의 현재 baseline | `docs/rules/uiux-sot-refresh.md` + `.ai/uiux-sot/latest/` |
-| 7 | 화면명 매핑 | SoT 화면명 ↔ Compose 코드 화면명 매핑 | `docs/rules/sot-code-name-map.md` |
+| 7 | 화면명 매핑 | SoT 화면명 ↔ Compose 코드 화면명 매핑 | **현행 SoT 부재** (= 2026-08-23 `MASTER-AIDOC-RELEASE-REALIGN-001` 은퇴 · 구 판 = 동결 3(GB/GD/GT) 전용 표 · 활성 자식 Selfward 섹션 0 이라 읽히면 죽은 매핑을 줬다). 은퇴 직전 원문 = `.auto-memory/sot-code-name-map-COLD.md` verbatim (master only). Selfward 판 재수립 = 화면 census 선행 별 판 |
 | 8 | 도메인 정책 SSoT (분산) | 각 도메인 정책의 단일 출처 | `auth-rules.md` (인증) · `code-style-guide.md` §C 「명명·관용」 (식별자 명명 · 2026-07-29 `MASTER-CLI-JUDGMENT-SHIFT-001` 이관 — 구 `abbreviation-policy.md` 금지 seed/허용 약어 = `.auto-memory/abbreviation-policy-COLD.md` verbatim) · `working-file-lifecycle.md` (working file) · `cycle-discipline.md` (cycle) · `verification-and-review.md` (검증) · `routing-and-delegation.md` (agent) · `ux-laws.md` (UX) · `data-model.md` / `api-spec.md` / `billing.md` (자식 도메인) |
 
 ### 1.3 SoT 아님 (반대 케이스 · 명시 부정)

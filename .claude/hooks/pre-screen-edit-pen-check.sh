@@ -17,11 +17,12 @@
 # Reference SoT:
 #   - docs/design/pencil-sot-policy.md §1 (SoT 우선순위)
 #   - docs/rules/pencil-uiux-workflow.md §3 (5-type IMPL 흐름 · Type 2 / Phase R)
-#   - docs/rules/sot-code-name-map.md (명명 차이 영역 baseline · false positive 시 본 file 인용)
+#   - (구) 화면명 매핑표 = 2026-08-23 MASTER-AIDOC-RELEASE-REALIGN-001 은퇴 (동결 3 전용 · 활성 자식 섹션 0)
+#     → 원문 = master .auto-memory/ COLD verbatim · 현행 명명 차이 판정 = docs/design/pencil-sot/ 직접 조회
 #
 # Neutralization:
 #   - master repo (claude-cli-master) = cli infra source · `*Screen.kt` 무존재 default · matcher 자연 skip
-#   - 매핑 mismatch 시 (예: BreathScreen.kt ↔ breathing-screen.pen) = warn default + sot-code-name-map.md 인용 default
+#   - 매핑 mismatch 시 (예: BreathScreen.kt ↔ breathing-screen.pen) = warn default · 명명 차이 자체는 여전히 정상 (= 부재로 단정 금지)
 #
 # macOS bash 3.x 호환 (associative array X / ${var,,} X).
 
@@ -56,7 +57,7 @@ if not file_path:
 
 import os.path as osp
 
-# Match only `*Screen.kt` or `*Screens.kt` (singular or plural · sot-code-name-map.md 인용 영역)
+# Match only `*Screen.kt` or `*Screens.kt` (singular or plural · 명명 차이 영역)
 basename = osp.basename(file_path)
 match = re.match(r'^([A-Z][A-Za-z0-9]*?)Screens?\.kt$', basename)
 if not match:
@@ -106,7 +107,8 @@ ${DETAILS}
 → Policy: docs/design/pencil-sot-policy.md §1 (SoT 우선순위)
 → Flow:   docs/rules/pencil-uiux-workflow.md §3 (Type 2 신규 또는 Phase R 역공학)
 → Action: 신 .pen 신설 (Type 2) 또는 역공학 (Phase R) 진입 후 Compose 변경 진행
-→ Note:   화면명 매핑 baseline = docs/rules/sot-code-name-map.md (명명 차이 가능 · false positive 시 본 file 인용)"
+→ Note:   SoT 화면명 ↔ 코드 file 명은 다를 수 있다 (예: breathing-screen.pen ↔ BreathScreen.kt).
+            부재로 단정하기 전에 docs/design/pencil-sot/ 를 직접 훑어라."
 
     if [ "$PEN_CHECK_ENFORCE" = "enforce" ]; then
         printf '%s\n' "$BLOCK_MSG" >&2
@@ -116,7 +118,7 @@ ${DETAILS}
         printf '%s\n' "$DETAILS" >&2
         printf '  → Policy: docs/design/pencil-sot-policy.md §1\n' >&2
         printf '  → Flow:   docs/rules/pencil-uiux-workflow.md §3 (Type 2 / Phase R)\n' >&2
-        printf '  → Map:    docs/rules/sot-code-name-map.md (mismatch 시 인용)\n' >&2
+        printf '  → Map:    SoT 화면명 ↔ file 명 차이 가능 — docs/design/pencil-sot/ 직접 조회\n' >&2
         printf '  (upgrade to enforce: export PEN_CHECK_ENFORCE=enforce)\n' >&2
     fi
 fi

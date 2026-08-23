@@ -68,7 +68,7 @@
 | # | 항목 | 상태 | 비고 |
 |---|---|---|---|
 | 1 | POST_NOTIFICATIONS 권한 + 거부 flow + UX | ☐ | Android 13+ 의무 |
-| 2 | `<domain-permissions>` | ☐ | <예: USE_EXACT_ALARM + WAKE_LOCK + VIBRATE (GB) / Health Connect + ACTIVITY_RECOGNITION (GD) / CAMERA + READ_MEDIA_IMAGES (GT)> |
+| 2 | `<domain-permissions>` | ☐ | `<도메인별 권한 · 미정의>` (= 실측 자 = `AndroidManifest.xml` `uses-permission` 전수) |
 | 3 | 권한 거부 시 graceful degradation | ☐ | 핵심 flow X + 부가 기능 안내 |
 | 4 | 권한 사유 (rationale) 다국어 | ☐ | strings.xml ko + en |
 
@@ -78,10 +78,10 @@
 
 | # | 항목 | 목표 | 측정 |
 |---|---|---|---|
-| 1 | APK 크기 | `<apk-budget>` | <예: 25 MB (GB) / 30 MB (GD) / 35 MB (GT)> · `./gradlew :app:bundleRelease` 후 측정 |
+| 1 | 출하물 크기 | `<apk-budget>` | `<앱별 예산 · 미측정>` · `./gradlew :composeApp:bundleProductionRelease` 후 측정 (= AAB) |
 | 2 | cold start | ≤ 1500 ms | universal · `adb shell am start -W` 측정 |
-| 3 | 메모리 peak | `<memory-budget>` | <예: 150 MB (GB) / 200 MB (GD) / 250 MB (GT)> · Android Studio Profiler |
-| 4 | `<domain-latency>` | (도메인별) | <예: 배터리 ≤ 0.5% (GB) / 일지 저장 ≤ 500 ms (GD) / 사진 업로드 1MB ≤ 3초 + 영양 Edge Function ≤ 1초 (GT)> |
+| 3 | 메모리 peak | `<memory-budget>` | `<앱별 예산 · 미측정>` · Android Studio Profiler |
+| 4 | `<domain-latency>` | (도메인별) | `<도메인별 지연 예산 · 미정의>` |
 
 ---
 
@@ -91,7 +91,7 @@
 |---|---|---|---|
 | 1 | D7 retention | <예: ≥ 25%> | Firebase Analytics |
 | 2 | paid conversion | <예: ≥ 2%> | Play Console + Edge Function 검증 |
-| 3 | `<domain-kpi>` | (도메인별) | <예: 호흡 완료율 ≥ 60% (GB) / 일지 작성률 ≥ 40% (GD) / 영양 처방 수령률 ≥ 30% (GT)> |
+| 3 | `<domain-kpi>` | (도메인별) | `<도메인별 KPI · 미정의>` |
 | 4 | 크래시 free rate | ≥ 99.5% | Firebase Crashlytics |
 
 ---

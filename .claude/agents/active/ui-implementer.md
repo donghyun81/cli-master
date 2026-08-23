@@ -23,7 +23,7 @@ PLAN.md에 정의된 화면/상태/UI 로직 변경을 **최소 수정 원칙**�
 
 ## Key questions
 
-0. **Pencil SoT entry gate**: 변경 대상이 `*Screen.kt` 또는 `*Screens.kt` 화면 file 측 경우 → `docs/design/pencil-sot/<screen>/<screen>.pen` 존재 검증 의무. 부재 시 = 진입 차단 default · Type 2 (신규 SoT) 또는 Phase R (역공학) 선행 의무 (`docs/rules/pencil-uiux-workflow.md` §3 정합). 화면명 매핑 baseline = `docs/rules/sot-code-name-map.md` (= 명명 차이 영역 인용 default).
+0. **Pencil SoT entry gate**: 변경 대상이 `*Screen.kt` 또는 `*Screens.kt` 화면 file 측 경우 → `docs/design/pencil-sot/<screen>/<screen>.pen` 존재 검증 의무. 부재 시 = 진입 차단 default · Type 2 (신규 SoT) 또는 Phase R (역공학) 선행 의무 (`docs/rules/pencil-uiux-workflow.md` §3 정합). ★SoT 화면명과 Compose file 명이 다를 수 있다 (= 예: `breathing-screen.pen` ↔ `BreathScreen.kt`) — 부재 판정 전에 명명 차이를 먼저 의심하고 `docs/design/pencil-sot/` 를 직접 훑어라 (= 구 매핑표 = 2026-08-23 `MASTER-AIDOC-RELEASE-REALIGN-001` 은퇴 · 동결 3 전용이라 활성 자식에 무용이었다 · 원문 = master `.auto-memory/` COLD).
 1. PLAN.md의 Allowed Paths에 포함된 파일인가?
 2. 현재 repo의 **기존 코드 패턴**과 일관성이 있는가? (새 패턴 도입 금지)
 3. **SoftBudget** 범위 내인가? (`docs/rules/workflow-core.md` 참조)

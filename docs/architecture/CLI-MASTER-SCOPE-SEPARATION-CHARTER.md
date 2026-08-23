@@ -69,7 +69,7 @@ cli-master는 두 층을 한 repo에 섞고 있고, **자기 §0 charter조차 �
 | ~~`docs/backend/` (1)~~ **해소** | RLS_AND_PLAY_INTEGRITY_GUIDE | 제품 백엔드/보안 · **2026-08-01 `MASTER-DOCS-STALE-SWEEP-002` 로 전파 세트 이탈** — master `archive/2026-08/` 1부 보존(내용 무편집) + 자식 3 삭제 ⇒ 분리 대상 아님(디렉터리 소멸) |
 | `docs/guides/` (1) | **app-implementation-guide** | "앱을 어떻게 구현하는가"(정곡) |
 | `docs/architecture/external-dep-abstraction.md` + `docs/agent/architecture/` (14) | COMMON_ARCHITECTURE·KMP_CMP_LAYER_DIRECTION·KOIN_DI_BASELINE·COMPOSE_STABILITY·ERROR_RESULT_POLICY·MODEL_SEPARATION·SSOT_PRINCIPLES·TDD_WORKFLOW·TESTABILITY_SEAMS·TESTING_STRATEGY·DEPENDENCY_DECISION_CHECKLIST·LEGACY_CLEANUP_GOVERNANCE·ADR_TEMPLATE·**SERVER_DATA_OWNERSHIP**(2026-08-01 신설 등재 · §0.1) | 소프트웨어 **아키텍처 표준**(제품이 어떻게 지어지는가) |
-| `docs/rules/` 중 제품-도메인 (24) | pencil-*(8: automation·cli-headless·component-paradigm·mcp-tools-reference·pen-format-schema·theme-multi-axis·**uiux-workflow**★·visual-primitives)·code-style-guide·code-principles·auth-rules·billing-rules·supabase-handling·design-prompting-paradigm·design-to-code-sync·domain-roles·deferred-domains·ui-ux-analysis·ux-laws·**uiux-sot-refresh**★·sot-code-name-map·architecture-foundation-link-policy·legacy-cleanup-governance·runtime-crash-mitigation-process | 제품 코드/디자인/도메인 규칙 (★=보호 5) |
+| `docs/rules/` 중 제품-도메인 (23) | pencil-*(8: automation·cli-headless·component-paradigm·mcp-tools-reference·pen-format-schema·theme-multi-axis·**uiux-workflow**★·visual-primitives)·code-style-guide·code-principles·auth-rules·billing-rules·supabase-handling·design-prompting-paradigm·design-to-code-sync·domain-roles·deferred-domains·ui-ux-analysis·ux-laws·**uiux-sot-refresh**★·architecture-foundation-link-policy·legacy-cleanup-governance·runtime-crash-mitigation-process (= 2026-08-23 `MASTER-AIDOC-RELEASE-REALIGN-001` 24→23 · 화면명 매핑표 은퇴 → master `.auto-memory/` COLD verbatim) | 제품 코드/디자인/도메인 규칙 (★=보호 5) |
 | `docs/release-readiness/PACKAGE-OVERVIEW.md` | 출시 현황 | 제품 출시 상태 |
 | `docs/agent/audits/`·`docs/agent/solutions/PROMPTFIT_RUBRIC.md`·`docs/baseline/` | 감사·rubric·cowork redline | 제품/프로세스 산출(일부 archive 후보) |
 | `docs/ops/production-cli-access-tokens.md` | prod secret runbook | 제품 운영 · ★**민감(secret)** · 현재 verify-sync MISS-5(master-only 의도적 4-repo 제외) — 분리 시 secret 취급·접근권 재설계 의무 |
@@ -84,7 +84,7 @@ cli-master는 두 층을 한 repo에 섞고 있고, **자기 §0 charter조차 �
 | `docs/agent/process/COMMIT_CONVENTION`·`docs/agent/solutions/PROMPTFIT_RUBRIC`·`agent/architecture/ADR_TEMPLATE` | dev-workflow(STAY) vs 공유 eng 표준(GO) 경계 |
 | top-level `gradle.properties` | cli-master에 gradle 파일 = 용도 확인(vestigial 여부) |
 
-**요약 수치**: STAY ≈ `.claude/`(71) + scripts(24) + CLI-workflow rules(18) + process(4) + config. GO ≈ templates(10) + schemas(1) + design(2) + ~~backend(1)~~(2026-08-01 archive 이탈) + guides(1) + architecture(15) + 제품-도메인 rules(24) + release-readiness(1) + ops/baseline/audits. ★보호 5종 = **전부 GO(제품-디자인)**.
+**요약 수치**: STAY ≈ `.claude/`(71) + scripts(24) + CLI-workflow rules(18) + process(4) + config. GO ≈ templates(10) + schemas(1) + design(2) + ~~backend(1)~~(2026-08-01 archive 이탈) + guides(1) + architecture(15) + 제품-도메인 rules(23) + release-readiness(1) + ops/baseline/audits. ★보호 5종 = **전부 GO(제품-디자인)**.
 
 ---
 

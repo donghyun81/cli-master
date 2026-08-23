@@ -1,3 +1,13 @@
+# sot-code-name-map — COLD storage (은퇴 직전 원문 전문 verbatim)
+
+> **신설**: MASTER-AIDOC-RELEASE-REALIGN-001 (2026-08-23 · 은퇴 직전 HEAD `8ace5a3`).
+> **원 경로**: `docs/rules/sot-code-name-map.md` (= 진입 sha8 `be929efd` · 139행 · 4-repo byte-identical) — 본 cycle `git rm`.
+> **은퇴 사유**: 분모가 동결 3(GB/GD/GT) 전량이고 활성 자식(Selfward) 섹션이 0이라, 읽히면 죽은 repo 의 stale 표를 준다 — 없는 것보다 나쁘다.
+> **비규범 (감사·추적 전용)**: live 규정과 충돌 시 hot rule 이 우선. master-only (= `.auto-memory/` · propagation X).
+> **hot 복귀 trigger**: Selfward 판 화면 census 선행 후 매핑 재수립 판단 시 (= 본 cycle scope 밖 · 별 판).
+
+---
+
 # SoT ↔ Code 화면명 매핑 SoT (4-repo · master + app-foundation + toward-product-docs + Selfward · 자식 도메인 코드 = Selfward 측만 · 구 GB/GD/GT = 2026-07-17 T6 동결)
 
 > **단일 목적**: Pencil SoT 화면명 ↔ Compose 코드 화면명 차이 영역 통합 매핑.
