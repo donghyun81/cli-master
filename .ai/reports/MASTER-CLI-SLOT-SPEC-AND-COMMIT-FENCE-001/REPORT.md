@@ -151,6 +151,8 @@ paste §1-3 = 「entry 2 · demote 2」. 실측 grep:
 | ★**R-AM** | ★**D-7 문면 정밀화** — 「`-uno` 가 비어 있지 않으면 STOP」은 **글자 그대로면 전파 cycle 에서 항상 발화**(propagate 가 자기 파일을 스테이징하므로). 판정축 = **`-uno` − 본 cycle 전파 pathspec**. 본 cycle 은 그렇게 운용했으나 **문면은 안 고쳤다**(= scope) | 별 cycle |
 | ★**R-AN** | ★**`RESIDUAL-OPS-001` §15 entry 미등재**(hot 0 / cold 0) — R-AK 결론 확정 후 일괄 처리 권장 | R-AK 종속 |
 
+★**ID 충돌 해소 (2026-08-03 후속 · 본 REPORT 발행 직후)**: 본 cycle 이 발행한 `R-AM`·`R-AN` 이 `SELFWARD-T1-5-AI-GUARD-METRICS-001` 의 동명 회부와 충돌 → **T1-5 측을 한 칸 밀어 재번호**(`R-AM`→`R-AQ` · `R-AN`→`R-AR` · `R-AO`→`R-AS` · T1-5 가 이미 쓰던 `R-AP`[= `sync-owned/handler.ts:211`]는 **유지**). **본 REPORT 의 `R-AM`·`R-AN` = 불변**(= 선점 측). 착지 = T1-5 paste §7·§9 + Selfward `strings.xml:957`·`App.kt:1015` 주석 2 (= 편집만 · T1-5 live 로 **commit 0** · D-7 정합).
+
 `push` = **Coin 본인 터미널** (master `40e7d7e`+audit · FND `4d4d431` · PDOCS `56d9830` · SW `5a298bc`).
 
 ---

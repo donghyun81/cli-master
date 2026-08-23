@@ -170,7 +170,7 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 | `docs/design/pencil-sot-policy.md` | `2bfc81c538b2` | ✓ | ✓ | ✓ |
 | `docs/rules/uiux-sot-refresh.md` | `31c0da56aeec` | ✓ | ✓ | ✓ |
 | `docs/design/design-sot-policy.md` | `92a5e99804ff` | ✓ | ✓ | ✓ |
-| `.claude/settings.json` | `fdaf79e0dfe0` | ✓ | ✓ | ✓ |
+| `.claude/settings.json` | `17a10c02a4b9` | ✓ | ✓ | ✓ |
 | `docs/rules/workflow-core.md` | `fc61294804c4` | ✓ | ✓ | ✓ |
 | `docs/rules/cycle-discipline.md` | `e5f547153109` | ✓ | ✓ | ✓ |
 | `docs/rules/pencil-automation.md` | `a2506a34d797` | ✓ | ✓ | ✓ |
@@ -191,7 +191,7 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 
 ## Last verify-sync
 
-- timestamp: 2026-08-17T18:34:37+0900
+- timestamp: 2026-08-22T20:12:20+0900
 - pass: 162
 - drift: 2
 - miss: 10
@@ -202,4 +202,4 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 - docs/architecture/CLI-MASTER-SCOPE-SEPARATION-CHARTER.md  master=0944b3147b66  app-foundation=MISS  toward-product-docs=MISS  Selfward=MISS
 - docs/ops/production-cli-access-tokens.md  master=3b0e8131fb67  app-foundation=MISS  toward-product-docs=MISS  Selfward=MISS
 - docs/stale-sweeps/README.md  master=d0c280dace76  app-foundation=MISS  toward-product-docs=MISS  Selfward=95b4781a492b(✗)
-- docs/stale-sweeps/SWEEP-20260817.md  master=5d326661e3c3  app-foundation=MISS  toward-product-docs=MISS  Selfward=8b8ab20a6252(✗)
+- docs/stale-sweeps/SWEEP-20260817.md  master=f49c2b507e1c  app-foundation=MISS  toward-product-docs=MISS  Selfward=8b8ab20a6252(✗)
