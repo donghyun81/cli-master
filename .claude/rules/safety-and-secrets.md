@@ -142,7 +142,10 @@ inject_token() {
 본 paradigm 측 token 평문 commit / file 기록 차단 (= 기존 §시크릿 기록 금지 규칙 정합):
 - `.mcp.json` 측 `${SUPABASE_ACCESS_TOKEN_<자식>}` env interpolation 정합 (= 평문 token 본문 X)
 - wrap script 측 subshell `$()` capture + 변수 미echo (= stdout / stderr 노출 차단)
-- commit log 측 `eyJ` (= JWT prefix) / `sbp_` (= Supabase PAT prefix) 평문 0 match 의무 (= §시크릿 스캔 패턴 grep 정합)
+- commit log 측 `eyJ` (= JWT prefix) / `sbp_` (= Supabase PAT prefix) / `sb_secret_` (= Supabase 신 API 키) 평문 0 match 의무.
+  ★**패턴 정합 O · 범위 정합 X** (= 2026-08-23 `MASTER-SECRET-PATTERN-STACK-001` 정정): 위 3 계열은 이제 §시크릿 스캔 패턴에 **실재한다**(구 판은 「§시크릿 스캔 패턴 grep 정합」이라 적었으나 **그 블록에 셋 다 부재**했다 = 문서가 자기 안에서 갈려 있었다).
+  다만 **스캐너가 이 의무를 집행하지는 않는다** — 스캐너 범위는 `.ai/reports/<taskId>/` 아래 **작업 트리 file** 이고, 여기서 말하는 **commit log(= commit message)** 는 그 분모에 들지 않는다. 두 범위는 같지 않다.
+  ⟹ commit message 측 평문 0 match = **수동 의무**(`git log` 육안 + commit 전 자기 점검). 자동화가 필요하면 별 cycle (= commit-msg hook 축 · 본 판 scope X).
 - **★검증 harness 자체가 노출 경로다** (= 2026-07-29 `MASTER-CLI-STALE-SWEEP-4ACTIVE-001` 실사고): secret 주입 script 를 dry-run / 진단할 때 **값이 아니라 존재 여부만** 출력한다. `${v:+SET}` / `${#v}` 는 안전하나 `${v:-UNSET}` 은 **값이 있으면 값을 출력한다** (= 그 사고의 정확한 기전 · 마스킹 의도가 정반대로 작동). 안전형 = `[ -n "$v" ] && echo SET || echo UNSET`. 노출 시 = 파일 기록 여부 전수 확인 + **해당 토큰 rotation 회수**(Coin 몫) 보고 의무 — 노출은 transcript 한정이어도 회수 대상이다.
 - **★값 대조는 다이제스트로 · 길이로 하지 않는다** (= 2026-08-02 신설): 두 값이 같은지 물어야 할 때(예: env 판 vs slot 판) `printf '%s' "$v" | shasum -a 256 | cut -c1-16` 로 **앞 16 hex 만** 비교한다 — 값은 파이프로만 흐르고 **argv 에 넣지 않는다**(`ps` 노출). 길이(`${#v}`)는 근거가 못 된다: 실측에서 **서로 다른 두 토큰이 둘 다 len 44** 였다.
 
@@ -158,8 +161,19 @@ sk-[a-zA-Z0-9]{32,}       # OpenAI API Key
 ghp_[a-zA-Z0-9]{36}       # GitHub Personal Access Token
 xox[baprs]-[0-9a-zA-Z-]+  # Slack Token
 ya29\.[a-zA-Z0-9._-]+     # Google OAuth Token
-AIza[0-9A-Za-z\-_]{35}    # Google API Key
+AIza[0-9A-Za-z_-]{35}     # Google API Key
+sbp_[a-f0-9]{40}                                                          # Supabase PAT (management)
+sb_secret_[A-Za-z0-9_-]{20,}                                              # Supabase secret key (신 API 키 형식)
+eyJ[A-Za-z0-9_-]{10,}\.[A-Za-z0-9_-]{10,}\.[A-Za-z0-9_-]{10,}             # JWT 3-segment (anon / service_role)
+postgres(ql)?://[^:@/[:space:]]+:[^@/[:space:]]{8,}@                      # DB 접속 문자열 (비밀번호 포함형만)
+-----BEGIN [A-Z ]*PRIVATE KEY-----                                        # PEM 개인키
 ```
+
+> **Supabase 계열 5 신설** (2026-08-23 `MASTER-SECRET-PATTERN-STACK-001`): 주 백엔드가 Supabase 인데 패턴 6종에 그 계열이 **0종**이었다.
+> `sb_publishable_` 는 **의도적 제외** — 설계상 공개 키(클라 배포분)라 anon 과 같은 취급이다. 시크릿이 아닌 것을 물면 스캐너가 꺼진다.
+> ★**자릿수 하한은 추정이 아니라 실측이 정했다**: `eyJ` 단독은 4-repo `.ai/reports` 에서 **43 file**(바이너리 PNG 포함)을 물었고, 3-segment 형은 **0** 이다(하한을 `{2,}` 까지 낮춰도 0 — 오탐을 막는 건 자릿수가 아니라 **3-segment 구조**다).
+> postgres 는 pw 하한 `+` 일 때 오탐 **1**(보고서가 적어 둔 예시형 `…://u:p@`), `{8,}` 일 때 **0** 이며 실 접속 문자열 민감도는 무변이다.
+> **비용**: 6종 → 11종 = 1051 file 기준 3.64s → 5.88s(**+61%**). 스캐너의 실 호출 단위(`.ai/reports/<taskId>/`)에서는 **0.00s → 0.00s**.
 
 보고서 디렉터리(`.ai/reports/`)에서 위 패턴이 발견되면 즉시 삭제 또는 마스킹.
 
