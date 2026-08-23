@@ -184,6 +184,7 @@
 | SELFWARD-PRELAUNCH-SWEEP-002 | 2026-08-09 | auth-rules 「이름표」 stale 회수 (docs-only · prod 0 LOC · auth-rules 본문 sha 무변 `a8c59b48`). 본문은 08-05 에 전환됐는데 그것을 가리키는 pointer·표·각주·템플릿이 안 늙었다 — 전파 6 + repo-local 3 · 구 문면 verbatim 존치 14/14 · 삭제 0 | 4-repo 6 + local 3 |
 | MASTER-LIFECYCLE-4ACTIVE-REALIGN-001 | 2026-08-15 | archiver 4-active 정합 (prod 0 · 보호 sha 0). rule §3 위치 = 동결 3 → plist 실물 5 · 패턴 5→9 pointer · 14일→**7일**(SoT = script 상수) · 조기-archive **REPORT.md 인정**(요건 무변 · 사문화 해소) · plist skip → stderr. [R](.ai/reports/MASTER-LIFECYCLE-4ACTIVE-REALIGN-001/REPORT.md) | 4-repo 3 file |
 | MULTI-REPO-RENAME-TOWARD-001 | 2026-08-15 | repo명 `gently-product-docs` → **`toward-product-docs`** (Gently→Toward 브랜드층 · prod 0 · 보호 sha 0). 부모 root `mv` + 기계층 술어 전수 치환 **92 file**(master 29·FND 21·SW 21·PDOCS 20·root 1) + 안내층 2. 이력층 무접촉 · appId·코드 심볼·동결 3·GitHub remote 무변. [R](.ai/reports/MULTI-REPO-RENAME-TOWARD-001/REPORT.md) | 4-repo 91 + root 1 |
+| MASTER-BRAND-TOWARD-INFRA-001 | 2026-08-15 | 브랜드층 Gently→Toward (docs-only · prod 0 · 보호 sha 0). census 56 = ㉯심볼 28·㉰계보 25 존치 · ㉮치환 **3** = 대문자 grep 밖 소문자 `gently-product-docs`. `reporting.md §8.2` 신설(REPORT 자기 sha 금지) · 부모 root §2.1 정정. [R](.ai/reports/MASTER-BRAND-TOWARD-INFRA-001/REPORT.md) | 4-repo 4 + root 1 |
 
 ---
 
