@@ -131,13 +131,35 @@ else
     ! -path './.git/*' \
     ! -path '*skills/run-*' \
     ! -path 'docs/release-readiness/*' \
-    ! -path 'docs/agent/audits/*' 2>/dev/null | sort)
+    ! -path 'docs/agent/audits/*' \
+    ! -path 'docs/architecture/CLI-MASTER-SCOPE-SEPARATION-CHARTER.md' \
+    ! -path 'docs/ops/*' \
+    ! -path 'docs/stale-sweeps/*' \
+    ! -path '.github/workflows/*' 2>/dev/null | sort)
   # skills/run-* = 자식별 차별화 launch recipe (실측: run-master / run-foundation / run-Selfward · 각 자식 한정 ·
   #   propagation X · §Q-2 / P0-4 NATIVE-RUN-VERIFY-SANDBOX) → byte-identical/MISS 검증 제외
   #   (MASTER-CLI-VERIFY-SYNC-DIFFERENTIATION-SCOPE-001)
   # docs/agent/audits/* = master-only 점-측정 audit (TESTING-BACKFILL-AUDIT.md ·
   #   자식 propagation 없음 · docs/release-readiness 격리 선례와 같은 결) → MISS 오인 제외
   #   (MASTER-PRELAUNCH3-SMALLFIX-001)
+  #
+  # === 제외 4종 (MASTER-PROPAGATION-HYGIENE-001 · 2026-08-23 · propagate.sh 동일 4행 정합) ===
+  # ★양 script 에 같은 4종을 같은 순서로 넣는다 — 한쪽만 넣으면 cp 분모와 verify 분모가 갈린다.
+  # docs/architecture/CLI-MASTER-SCOPE-SEPARATION-CHARTER.md = master-only 거버넌스 문서 → MISS 오인 제외.
+  #   ★file 단위 의무 · dir 제외 금지: 형제 external-dep-abstraction.md 는 FND/TPD/SW 전량 실재 =
+  #   살아 있는 전파다 (실측 2026-08-23: docs/architecture 2본 · charter 만 자식 3 전량 부재).
+  #   ⟹ 이 dir 에 master-only 문서가 또 생기면 그 1본이 다시 MISS 로 뜬다 (= file 단위의 대가 ·
+  #      docs/rules/cross-repo-parallel-exec-detail.md §5).
+  # docs/ops/* = master-only 운영 runbook (자격증명 주입 경로 서술) · 자식 도입 = 별 scope 결정.
+  #   실측: 1본 (production-cli-access-tokens.md) · FND/TPD/SW 전량 부재 = MISS 3.
+  # docs/stale-sweeps/* = ★자식별 고유 산출물 — MISS 와 DRIFT 를 동시에 냈다 (FND·TPD 부재 / SW 실재+sha 상이).
+  #   근거 = docs/rules/stale-artifact-tracking.md:70 이 sweep 산출을 <repo>/docs/stale-sweeps/SWEEP-YYYYMMDD.md
+  #   로 repo 별 정의 (동 rule :46 대장도 <repo>/STALE-DEBT.md · :93 = 대장·README 를 Selfward 측에 먼저 신설).
+  #   실측 sha: README.md master=d0c280da ↔ SW=95b4781a · SWEEP-20260817.md master=f49c2b50 ↔ SW=8b8ab20a
+  #   (루트 STALE-DEBT.md 동형: master=4a09c7a7 ↔ SW=a871f982) ⟹ skills/run-* 와 같은 결.
+  # .github/workflows/* = ★예방적 제외. 2026-08-23 현재 4-repo 전량 0본 = 지금은 아무것도 안 잡는다.
+  #   목적 = ci.yml 신설 시점에 Gradle 전제 workflow 가 Gradle 없는 TPD·master 로 번지는 것 차단.
+  #   형제 .github/pull_request_template.md 는 계속 분모에 잔존 (= workflows/ 하위만 문다 · 실측 확인).
   # C5 박힘: root 공통 파일 명시 추가 (gradle.properties 제외 = domain-specific · L1-3)
   for rf in .editorconfig .mcp.json gradlew gradlew.bat; do
     [ -f "$rf" ] && CHECK_FILES+=("$rf")

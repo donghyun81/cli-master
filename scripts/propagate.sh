@@ -101,9 +101,33 @@ if [ "$PROPAGATE_ALL" = 1 ]; then
     ! -name 'settings.local.json' \
     ! -path './.git/*' \
     ! -path 'docs/release-readiness/*' \
-    ! -path 'docs/agent/audits/*' 2>/dev/null)
+    ! -path 'docs/agent/audits/*' \
+    ! -path 'docs/architecture/CLI-MASTER-SCOPE-SEPARATION-CHARTER.md' \
+    ! -path 'docs/ops/*' \
+    ! -path 'docs/stale-sweeps/*' \
+    ! -path '.github/workflows/*' 2>/dev/null)
   # docs/agent/audits/* = master-only 점-측정 audit → --all propagation 제외
   #   (verify-sync.sh 매트릭스 정합 · MASTER-PRELAUNCH3-SMALLFIX-001)
+  #
+  # === 제외 4종 (MASTER-PROPAGATION-HYGIENE-001 · 2026-08-23 · verify-sync.sh 동일 4행 정합) ===
+  # docs/architecture/CLI-MASTER-SCOPE-SEPARATION-CHARTER.md = master-only 거버넌스 문서 → 제외.
+  #   ★file 단위 의무 · dir 제외 금지: 같은 dir 의 형제 external-dep-abstraction.md 는 자식 3 전량에
+  #   실재 = 살아 있는 전파다. dir 로 빼면 그 3본이 분모에서 함께 사라진다.
+  #   실측 2026-08-23: docs/architecture = 2본 · charter 는 FND/TPD/SW 전량 부재 ·
+  #   external-dep-abstraction.md 는 FND/TPD/SW 전량 실재.
+  #   ⟹ 이 dir 에 master-only 문서가 또 생기면 그 1본이 다시 MISS 로 뜬다 (= file 단위의 대가 ·
+  #      살아 있는 전파를 죽이는 것보다 싸다 · docs/rules/cross-repo-parallel-exec-detail.md §5).
+  # docs/ops/* = master-only 운영 runbook (자격증명 주입 경로 서술) · 자식 도입 = 별 scope 결정.
+  #   실측: 1본 (production-cli-access-tokens.md) · FND/TPD/SW 전량 부재.
+  # docs/stale-sweeps/* = ★자식별 고유 산출물 (byte-identical 대상 아님 · MISS 와 DRIFT 를 동시에 냈다).
+  #   근거 = docs/rules/stale-artifact-tracking.md:70 이 sweep 산출을 <repo>/docs/stale-sweeps/SWEEP-YYYYMMDD.md
+  #   로 repo 별 정의 (동 rule :46 대장도 <repo>/STALE-DEBT.md · :93 = 대장·README 를 Selfward 측에 먼저 신설).
+  #   실측 sha 상이: README.md master=d0c280da ↔ SW=95b4781a · SWEEP-20260817.md master=f49c2b50 ↔ SW=8b8ab20a
+  #   (루트 STALE-DEBT.md 동형: master=4a09c7a7 ↔ SW=a871f982) ⟹ .claude/skills/run-* 와 같은 결.
+  # .github/workflows/* = ★예방적 제외. 2026-08-23 현재 4-repo 전량 0본 = 지금은 아무것도 안 잡는다.
+  #   목적 = ci.yml 신설 시점에 Gradle 전제 workflow 가 Gradle 없는 TPD·master 로 번지는 것 차단
+  #   (ⓓ CI-VERIFY 의 선행 조치). 형제 .github/pull_request_template.md 는 계속 분모에 잔존한다
+  #   (= workflows/ 하위만 문다 · 실측 확인).
   # C5 박힘: root 공통 파일 5종 명시 추가
   for rf in .editorconfig .mcp.json gradle.properties gradlew gradlew.bat; do
     [ -f "$rf" ] && FILES+=("$rf")
@@ -146,7 +170,13 @@ if [ "$PRUNE_MODE" = 1 ]; then
   # === 안전 정책 (whitelist) ===
   # default = .claude/ 만 prune 후보 (master 가 SoT 인 cli infra 영역)
   # 자식의 도메인 영역 (docs/, .ai/, scripts/agent/, app/) = 자율 영역 = prune 안 함
-  # cli infra 외 영역 추가 = --include <path> flag 사용 (Coin 명시 의무)
+  # cli infra 외 영역 추가 = Coin 명시 의무 (= 본 whitelist 확장 = 본심 회수 사항 · cli 자율 확장 금지)
+  #   ★구 주석은 여기서 "include <path> flag" 사용을 안내했으나 그 flag 는 파서에 없다 —
+  #     실측 분기 4종뿐 = --all(:44) / --targets(:48) / --prune(:52) / --apply(:56) ·
+  #     미지 flag 는 :64 의 -*) 분기가 exit 2 로 떨군다. 안내는 거짓이었고 정책만 참이었다.
+  #   ★docs/ 영역 삭제 전파의 실제 경로 = docs/rules/cross-repo-parallel-exec-detail.md §5
+  #     (= .claude/** 는 본 --prune --apply · docs/** 는 자식별 수동 git rm · 2단).
+  #   (MASTER-PROPAGATION-HYGIENE-001 · 2026-08-23)
   PRUNE_BASE_PATHS=(.claude)
   PRUNE_ROOT_FILES=()  # root 파일 = 자식 build 영향 (gradlew 등) → default prune 제외
   PRUNE_EXCLUDE_NAMES=(.DS_Store settings.local.json)
