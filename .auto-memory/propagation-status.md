@@ -174,7 +174,7 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 | `docs/rules/workflow-core.md` | `fc61294804c4` | ✓ | ✓ | ✓ |
 | `docs/rules/cycle-discipline.md` | `e5f547153109` | ✓ | ✓ | ✓ |
 | `docs/rules/pencil-automation.md` | `a2506a34d797` | ✓ | ✓ | ✓ |
-| `docs/rules/reporting.md` | `75b20064bbef` | ✓ | ✓ | ✓ |
+| `docs/rules/reporting.md` | `85a858d5378c` | ✓ | ✓ | ✓ |
 | `docs/rules/routing-and-delegation.md` | `a3ea9b7d87cd` | ✓ | ✓ | ✓ |
 | `docs/rules/deferred-domains.md` | `9952cb6074c6` | ✓ | ✓ | ✓ |
 | `docs/rules/code-principles.md` | `d5f48e60bda0` | ✓ | ✓ | ✓ |
@@ -191,15 +191,15 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 
 ## Last verify-sync
 
-- timestamp: 2026-08-22T20:12:20+0900
-- pass: 162
+- timestamp: 2026-08-23T16:16:20+0900
+- pass: 161
 - drift: 2
 - miss: 10
 - exit: 1
 
 ### Drift 상세
 
-- docs/architecture/CLI-MASTER-SCOPE-SEPARATION-CHARTER.md  master=0944b3147b66  app-foundation=MISS  toward-product-docs=MISS  Selfward=MISS
+- docs/architecture/CLI-MASTER-SCOPE-SEPARATION-CHARTER.md  master=913f79c40658  app-foundation=MISS  toward-product-docs=MISS  Selfward=MISS
 - docs/ops/production-cli-access-tokens.md  master=3b0e8131fb67  app-foundation=MISS  toward-product-docs=MISS  Selfward=MISS
 - docs/stale-sweeps/README.md  master=d0c280dace76  app-foundation=MISS  toward-product-docs=MISS  Selfward=95b4781a492b(✗)
 - docs/stale-sweeps/SWEEP-20260817.md  master=f49c2b507e1c  app-foundation=MISS  toward-product-docs=MISS  Selfward=8b8ab20a6252(✗)
