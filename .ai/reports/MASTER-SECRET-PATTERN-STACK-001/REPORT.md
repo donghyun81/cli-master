@@ -232,11 +232,25 @@ verify-sync.sh → exit 0 · PASS 161 · DRIFT 0 · MISS 0
 5. **바이너리 file 취급** — 스캐너는 `-I` 없이 돌아 바이너리도 분모에 든다(`eyJ` 단독이 PNG 를 문 것이 그 증거). 신 5패턴에는 영향 0 이었으나 **구조적 소음원으로 남아 있다**(별 축).
 6. **사전 존재 오탐 2건 처분** — ②-부산 발견의 `_scanner-probe.txt`(SW · untracked) + `VERIFY.md:40`(FND · **tracked**). §11 쓰기 허용 밖이라 **무접촉**. ★특히 tracked 쪽은 지우지 않으면 FND 스캐너가 **영구히 빨간불**이다.
 
-### ★후속 회수 필요 (= 본 판이 처분권 없는 것)
+### ★본인 회수 완료 — `CLAUDE.md §15` (= 본 판이 임의 처분하지 않은 것)
 
-- **master `CLAUDE.md §15` cycle entry + §16 마감 절차** — 헌법 §16-① 은 「모든 cli infra 변경 = §15 표에 entry 추가 의무」인데
-  paste **§11 쓰기 허용 목록에 `CLAUDE.md` 가 없다**(`propagation-status.md` 는 있다 = 저자가 마감 bookkeeping 을 의식했으되 §15 는 뺐다).
-  ⟹ **임의 확대하지 않고 보류**했다. 판정 = 본인 몫.
+헌법 §16-① 은 「모든 cli infra 변경 = §15 표에 entry 추가 의무」인데
+paste **§11 쓰기 허용 목록에 `CLAUDE.md` 가 없었다**(`propagation-status.md` 는 있다 = 저자가 마감 bookkeeping 을 의식했으되 §15 는 뺐다).
+⟹ 임의 확대하지 않고 **회수 → 본인 판정 「지금 추가」** ⟹ **commit `c570d1e` 로 이행.**
+
+- §15 hot 상한 3 유지 — 신설 `MASTER-SECRET-PATTERN-STACK-001` · demote `MASTER-STALE-TRACKING-001`
+- COLD 수납 = `master-cycle-history-COLD.md` verbatim · **구 hot 원문 vs COLD 수납분 byte 동일 대조 PASS (삭제 0)**
+- `CLAUDE.md` = propagate find 분모 밖 ⟹ **전파 불요** (실측 확인)
+- diff = `CLAUDE.md` ±1 행 · COLD +1/−0
+
+### 최종 commit 4 (= ENTRY_SHA `74424f2` 이후 · 전량 내 것)
+
+| sha | 무엇 | 범위 |
+|---|---|---|
+| `6b88eaa` | §C — 스크립트 + 문서 **동시** | master 2 file |
+| `a6edefd`/`ac372de`/`eaa8b8c` | §D — 자식 전파 (path-limited) | FND/PDOCS/SW 각 2 file |
+| `1315149` | REPORT + propagation-status | master 2 file |
+| `c570d1e` | §15 entry + COLD demote | master 2 file |
 
 ---
 
