@@ -331,3 +331,51 @@ drift 발견 시점 main agent 측 mitigation:
 
 본 §4.4 신설 = `MASTER-CLI-CROSSREPO-RECONCILE-AUTONOMY-PARADIGM-001` (2026-06-22 · req1 동족 구현 정합 advisory 층 · req2 cli HOW 자율 확대와 한 쌍 = 사후 비교가 divergence catch).
 
+## 5. 삭제 전파 절차 (= master 에서 지운 것이 자식에서도 지워졌는지)
+
+> **신설** = `MASTER-PROPAGATION-HYGIENE-001` (2026-08-23). 계기 = `MASTER-AIDOC-RELEASE-REALIGN-001` 이 `docs/rules/sot-code-name-map.md` 를 은퇴시킬 때, **그 삭제가 자식에 착지했는지 물어볼 자가 없다**는 것이 드러났다. 집행 전 census 실측 = `docs/rules` + `.claude/rules` 전량에서 `git rm` hit **1** (= `legacy-cleanup-governance.md:33` · 그것도 「지울지 말지」의 STOP 판정이지 「어떻게 전파하는지」가 아니다) · `prune --apply` **0** · `삭제 전파` **0**.
+> **왜 신 rule 파일이 아니라 절인가**: `docs/rules/*.md` 계수(**42**)는 `rule-routing-table.md` 가 인용하는 분모이고 직전 판이 방금 재계수한 값이다. 신설은 언제나 누군가의 분모를 낡게 만든다 (= `cycle-discipline.md` §2 「OPS 신설 금지 원칙」 · 그 §2 의 신설 escape 는 「사용자 본심 외화」 한정인데 본 절은 거기 해당하지 않는다).
+> **왜 이 파일인가**: §4 가 「cross-repo 정합 처리」(= sha 비교 · drift mitigation)를 다루고, **삭제는 sha 가 없을 때의 정합**이다 — 같은 축의 빈자리. (후보 3본 대조: `legacy-cleanup-governance.md` = 코드 심볼 제거 governance 축이라 「문서형 task → 적용 안 함」을 스스로 명시 · `cycle-discipline.md` = 전 절이 요약 pointer 로 축소된 다이어트 판이라 본문 4명제를 얹으면 그 방향과 충돌.)
+> **좌표 규율**: 아래 인용은 `파일:행` **+ 앵커 문자열**을 함께 적는다. 행은 움직인다 (= `stale-artifact-tracking.md:50` 「좌표 = `file` + 앵커 문자열 · ★행 번호 금지 (= 행은 움직인다)」와 같은 이유 — 실제로 본 절을 쓰는 cycle 이 같은 script 를 편집해 좌표를 21행 밀었다). 행 수치 = **2026-08-23 실측**이고, 갈리면 앵커로 다시 찾는다.
+
+### 5.1 명제 1 — `verify-sync.sh` 는 삭제의 착지를 증명하지 못한다
+
+`scripts/verify-sync.sh:128` (앵커 `done < <(find .claude docs scripts/agent …`) 이 분모(`CHECK_FILES`)를 **master 에서** 만든다. 이어 `scripts/verify-sync.sh:196~198` (앵커 `MASTER_SHA=$(shasum -a 256 "$MASTER_DIR/$f"` → `if [ -z "$MASTER_SHA" ]` → `continue`) 이 master 측 sha 가 비면 그 행을 **건너뛴다**.
+
+⟹ **master 에 없는 파일은 분모에 들지 않는다.** 자식에만 남은 잔존물은 MISS 도 DRIFT 도 아니고 **아무것도 아니다** — 자는 「없다」고 말하는 게 아니라 **묻지 않는다**. `verify-sync` 가 대답하는 질문은 「master 것이 자식에 있고 같은가」 하나다.
+
+★**반증 경로** (= 이것이 신념이 아니라 명제인 이유): 「자식-단독 잔존이 판독에 뜨는 실행」 **1건**이면 반증된다. 본 절 신설 cycle 이 그 실험을 실제로 돌렸다 — `docs/stale-sweeps/*` 2본을 분모에서 뺀 뒤 **Selfward 디스크에는 그 2본이 그대로 남은 상태로** `verify-sync` 를 재실행했고, 판독은 그 2본을 **한 줄도 언급하지 않았다** (집행 전 판독에서는 같은 2본이 DRIFT 로 떴다). **분모가 무엇을 볼 수 있는지를 결정한다.**
+
+### 5.2 명제 2 — 삭제 전파는 2단이다 (영역마다 경로가 다르다)
+
+| 영역 | 경로 | 근거 (`파일:행` + 앵커) |
+|---|---|---|
+| `.claude/**` | `bash scripts/propagate.sh --prune --apply` (= 자동 `rm` + 자식 `git add`) | whitelist = `scripts/propagate.sh:180` 앵커 `PRUNE_BASE_PATHS=(.claude)` · 실행부 = `scripts/propagate.sh:246~252` 앵커 `# master 부재 여부` → `rm -f "$REPO_DIR/$f"` · `--apply` 미지정 = dry-run (`orphan:` list 만) |
+| `docs/**` · `.ai/**` · `scripts/agent/**` · `app/**` | ★**자식별 수동 `git rm`** | `scripts/propagate.sh:172` 앵커 「자식의 도메인 영역 (docs/, .ai/, scripts/agent/, app/) = 자율 영역 = prune 안 함」 — **의도된 미포함**이지 누락이 아니다 |
+
+★**whitelist 확장으로 해결하지 마라.** `PRUNE_BASE_PATHS` 를 넓히는 것 = master 가 자식 도메인 자율 영역을 일괄 `rm` 할 권한을 갖는 것이고, §4.2 「자식 도메인 source = 자식별 도메인 specific · drift 영역 X」 + §4.3 「자식 도메인 source drift = lazy default」와 정면 충돌한다. 확장은 Coin 명시 회수 사항 (= `scripts/propagate.sh:173` 앵커 「cli infra 외 영역 추가 = Coin 명시 의무」).
+
+### 5.3 명제 3 — 삭제 판의 착지 게이트 = 자식 N개 각각의 `test -f` 부재
+
+명제 1 때문에 `verify-sync` exit 0 은 **삭제 착지의 증거가 아니다**. 삭제를 포함한 cycle 은 게이트를 따로 세운다 (= 자식 수만큼 직접 측정 · 도구 판독 인용 금지):
+
+```bash
+for r in app-foundation toward-product-docs Selfward; do
+  [ -f "../$r/<지운 path>" ] && echo "RESIDUAL $r" || echo "OK(absent) $r"
+done
+```
+
+선례 = `MASTER-AIDOC-RELEASE-REALIGN-001` (2026-08-23 · 착지 `3a62ad6`) — `docs/rules/sot-code-name-map.md` 은퇴를 **4-repo 전량 `test -f` 부재 실측**으로 닫았다 (본 절 작성 시점 재측정: master · FND · TPD · SW 전량 부재 ✓).
+
+### 5.4 명제 4 — 이력은 지우지 않는다 (`.auto-memory/<name>-COLD.md` verbatim 이관)
+
+문서를 은퇴시킬 때 본문은 `.auto-memory/<name>-COLD.md` 로 **verbatim** 옮긴다 (= 삭제 0 · 소급 정정 금지 정합). **master 한정**이다 — `.auto-memory` 는 전파 분모 밖이라(= `scripts/verify-sync.sh:128` 의 find 진입 root 6종 = `.claude` `docs` `scripts/agent` `.ai/promptfit` `.ai/uiux-sot/refresh` `.github` · `.auto-memory` 부재) 자식 판에는 COLD 가 **없는 것이 정상**이다.
+
+실측 선례 = `.auto-memory/*-COLD.md` **9본** (`ls -1 .auto-memory/*COLD*.md | wc -l` · 2026-08-23) — `abbreviation-policy` · `anchor-list` · `cross-repo-parallel-exec` · `cycle-discipline` · `master-cycle-history` · `mode-bundle` · `rule-routing-index` · `sot-code-name-map` · `text-degeneration-prevention`. 마지막에서 두 번째가 직전 판이 낸 것이다.
+
+### 5.5 경계 — 제외(exclude)는 삭제가 아니다
+
+find 제외 절에 1줄 넣는 것은 **분모에서 빼는 것**이지 자식 디스크에서 지우는 것이 아니다. 둘을 섞으면 「조용해졌으니 정리됐다」는 오독이 생긴다. 제외 후에도 자식 잔존물은 그대로 있고, 명제 1 때문에 **자는 그것을 영원히 언급하지 않는다** — 잔존을 없애야 한다면 명제 2·3 을 따로 밟는다.
+
+★**file 단위 제외의 대가** (= 2026-08-23 실측 기반 결정): `docs/architecture/CLI-MASTER-SCOPE-SEPARATION-CHARTER.md` 는 **dir 이 아니라 file 단위**로 제외했다 — 같은 dir 의 형제 `external-dep-abstraction.md` 가 FND/TPD/SW 전량에 실재하는 **살아 있는 전파**여서, dir 제외는 그 3본을 분모에서 함께 죽인다. 대가는 명시한다: **그 dir 에 master-only 문서가 또 생기면 그 1본이 다시 MISS 로 뜬다.** 그때의 처분 = 제외 행 1줄 추가이고, 「형제가 전파 중인지」를 먼저 `test -f` 로 재는 것이 순서다 (= 살아 있는 전파를 죽이는 것보다 MISS 1건이 싸다).
+

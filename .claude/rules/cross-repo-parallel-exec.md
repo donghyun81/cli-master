@@ -29,6 +29,7 @@
 - **영역 2** (= 다중 cli session 운영 · **권장 default**): 실 IMPL / 자식 cli infra 정합 / 자식별 무거운 IMPL · 사용자 본인 terminal × N · interactive pool. → detail §2.2 · §2.2.1 (dispatch checklist) · §2.2.2 (dispatch ≠ fan-out 경계).
 - **영역 3** (= `claude -p` sub-process spawn): **회피 default** (= 아래 §2.4 · Agent SDK credit pool 별 영역 · full API rate · roll over X · 요금 폭탄 risk). → detail §2.3 (paradigm 선택 본심).
 - **동족 구현 정합** (= 같은 맥락 2+ repo 구현 결과의 advisory 비교 층 · paste-back 회수 시점): cli-infra byte-identical 강제(= A4)도 정확성 cross-verify(= detail §4.1)도 아닌 사후 surface · 도메인 자율(= detail §4.2/§4.3) 위 advisory · **auto-converge 금지**. → detail §4.4 (= 유일 본문 canonical) · surface 형식·발행 위치 = `reporting.md §14`.
+- **삭제 전파** (= master 에서 지운 것): ★`verify-sync` 는 분모를 master 에서 만들어 **삭제 착지를 증명하지 못한다** — `.claude/**` = `propagate.sh --prune --apply` · `docs/**` = 자식별 수동 `git rm` · 착지 게이트 = 자식 N개 각각 `test -f` 부재. → detail §5 (= 유일 본문 canonical).
 
 > **단방향 propagation (A4 · 항상-on)**: cli infra = master 단방향 propagation + 4-repo byte-identical · 자식 직접 수정 금지 (= master `CLAUDE.md §3 + §4` · `cycle-discipline.md §15` 패턴 1). cross-repo 정합 처리 본문 (= sub-agent return 통합 §4.1 + sha 비교 §4.2 + drift mitigation §4.3) = detail §4.
 
