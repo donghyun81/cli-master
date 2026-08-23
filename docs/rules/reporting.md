@@ -26,8 +26,26 @@
 | PLAN | `.ai/reports/<taskId>/PLAN.md` | ChangeBudget + 작업 계획 |
 | VERIFY | `.ai/reports/<taskId>/VERIFY.md` | 검증 명령 + 결과 |
 | REVIEW | `.ai/reports/<taskId>/REVIEW.md` | 최종 판정 |
+| REPORT | `.ai/reports/<taskId>/REPORT.md` | cc-paste cycle 의 집행 보고 (실물 = 현행 주력 산출물) |
 | COMPOUND | `.ai/reports/<taskId>/COMPOUND.md` | 종합 검증 결과 (구 compound-lint = deprecated) |
 | TODO | `.ai/reports/<taskId>/TODO.md` | 후속 작업 목록 |
+
+### §1.1 release 꼬리 (= release cycle 한정 · 2026-08-23 `MASTER-AIDOC-RELEASE-REALIGN-001` 신설)
+
+> **소급 의무 아님**: 본 규약은 신설 이후 release cycle 에 적용된다. 기존 REPORT 는 대상이 아니며 소급 위반으로 판정하지 않는다 (= 위 REPORT 행도 **현행 실물의 기술**이지 신 생성 의무가 아니다).
+
+```
+★release cycle 한정 · REPORT 말미 5줄 (그 외 cycle = N/A 1줄로 갈음)
+① 대상 변형 = <flavor>/<buildType> 실명
+② minify 통과 = exit <code> · 소요 <시간> · 자 = <명령>
+③ 출시 대상 화면 DESIGN-DEBT OPEN row = <n> (자 = <명령>)
+④ 롤백 지점 = <commit 또는 tag> · 복구 경로 = <1줄>
+⑤ prod DDL / Money path 접촉 = 유/무 (유 = STOP #1 경유 여부)
+```
+
+②의 기준 실측 (= `SELFWARD-RELEASE-GATE-001` §2 · 2026-08-23): `./gradlew :composeApp:assembleProductionRelease --no-daemon` = **exit 0 · 75s wall**(warm = 41 executed / 354 up-to-date · R8 태스크 executed 확인). ★`bundleProductionRelease` 변형 = **미측정**(그래프만 `--dry-run` 확인) · cold 캐시 소요 = **미측정**. 수를 채울 수 없으면 `<미측정>` 으로 둔다 — 추정값 기재 금지.
+
+③은 전체 OPEN 수가 아니라 **출시 대상 화면에 걸린 OPEN row** 를 센다. render-artifact 류(preview PNG 재렌더 등 = SoT 아님)와 구조 부채를 분리 계수한다. 판정 기준 = 활성 자식 `DESIGN-DEBT.md` 머리 규정(= 「출시 대상 화면의 OPEN row = release 게이트 hard FAIL」). 「출시 대상 화면」 명단 확정 = Coin 몫.
 
 ---
 
