@@ -297,19 +297,18 @@ PLAN / VERIFY / REVIEW / PromptFit 정규 스키마: `docs/rules/reporting.md` �
 
 | cycle ID | 마감일 | 변경 요약 | 영향 자식 repo |
 |---|---|---|---|
-
-| MASTER-ENGINEERING-BASELINE-001 | 2026-08-29 | 규율을 집행 측에 심었다 (M5 · prod 0 · 보호 sha 0 · 자식 0). K-131~K-146 **16 전량 master 0** → ≥1. ★arch 15본에 수명 규칙 0 인데 KOIN:52 가 factory{VM} 을 가르쳤다 → §4a + §1.6. ★발주의 최고령 오지목 = 선례 정본. [R](.ai/reports/MASTER-ENGINEERING-BASELINE-001/REPORT.md) | 4-repo 0 (#130) |
 | MASTER-ENGINEERING-BASELINE-002 | 2026-08-29 | 001 이 도는 동안 난 규율 8 (M5 · prod 0 · 보호 sha 0 · 자식 0). K-147~K-154 master 0→전량 ≥1. ★「주력 산출물」인데 형식 절이 없던 `reporting.md` → §15 + `§정정 append`. ★게이트 = 이름 아닌 집합 차. manifest stale 2. [R](.ai/reports/MASTER-ENGINEERING-BASELINE-002/REPORT.md) | 4-repo 0 (#130) |
 | MASTER-TASK-PURPOSE-CONTRACT-001 | 2026-08-29 | 태스크에 「왜」 계약 (M5 · prod 0 · 보호 sha 0 · 자식 0). K-155·K-156 master 0→≥1. ★「읽었나」 검증 불가 · 「되짚었나」 가능 ⟹ 재진술 의무. 배경 절 6층 중 5층 0. ★「자기 sha」 = 충족 불가 → 「본체」. [R](.ai/reports/MASTER-TASK-PURPOSE-CONTRACT-001/REPORT.md) | 4-repo 0 (#130) |
+| MASTER-DOC-MANIFEST-SWEEP-001 | 2026-08-29 | 문면이 자기를 틀리게 적으면 다음 사람의 분모가 된다 (M5 · prod 0 · 보호 sha 0 · 자식 0). 자기 서술 7 축 정정 + ★값 옆에 자 병기. ★이력 등재 = 규약 아닌 관례였다 → 1행 신설. ★§15 orphan = demote 잔해(9ba9dd3). [R](.ai/reports/MASTER-DOC-MANIFEST-SWEEP-001/REPORT.md) | 4-repo 0 (#130) |
 
-> **§15 cold 재배치** (= 10 회차 누적 · `MASTER-CLI-CONTEXT-OPT-PHASE1-CYCLE-HISTORY-COLD-001` 2026-06-01 → … → `MASTER-CLI-S15-HOT-DEMOTE-005` 2026-07-17 9회차 → **`MASTER-CLI-CONTEXT-DIET-3-001` 2026-07-29 10회차** · 회차 전량 열거 = COLD §1 heading lineage): master cycle **149 entry 전체 이력** (= `C1-MASTER-BOOTSTRAP-001` ~ 본 cycle 직전) = verbatim 보존 → [`.auto-memory/master-cycle-history-COLD.md`](.auto-memory/master-cycle-history-COLD.md) (= 삭제 0 · 감사 추적 영구 보존 · lifecycle = 매 5 cycle 또는 분기 review). **hot 압축 행의 원문도 COLD 에 verbatim 실재** (= 재작성 ≠ 소실).
+> **§15 cold 재배치** (= 10 회차 누적 · `MASTER-CLI-CONTEXT-OPT-PHASE1-CYCLE-HISTORY-COLD-001` 2026-06-01 → … → `MASTER-CLI-S15-HOT-DEMOTE-005` 2026-07-17 9회차 → **`MASTER-CLI-CONTEXT-DIET-3-001` 2026-07-29 10회차** · 회차 전량 열거 = COLD §1 heading lineage): master cycle 전체 이력 (= `C1-MASTER-BOOTSTRAP-001` ~ 본 cycle 직전) = verbatim 보존 → [`.auto-memory/master-cycle-history-COLD.md`](.auto-memory/master-cycle-history-COLD.md) (= 현행 **164 데이터행 / 162 고유 cycle ID** · 중복 2 · 자 = `grep -c '^| [A-Z0-9]'` / `cut -d'|' -f2` 후 `sort -u` · 2026-08-29 실측 · 구 표기 = 149 · 삭제 0 · 감사 추적 영구 보존 · lifecycle = 매 5 cycle 또는 분기 review). **hot 압축 행의 원문도 COLD 에 verbatim 실재** (= 재작성 ≠ 소실).
 
 ---
 
 ## 16. 본 SoT 변경 의무 절차
 
 1. master 의 모든 cli infra 변경은 본 CLAUDE.md §15 표에 cycle entry 추가 의무.
-2. 보호 파일 4 종 sha 변경 시 `.auto-memory/protected-file-hashes.md` 새 baseline 추가.
+2. **보호 파일 5 종** sha 변경 시 `.auto-memory/protected-file-hashes.md` 새 baseline 추가 (= `MASTER-DOC-MANIFEST-SWEEP-001` 정정 · 2026-08-29 · 구 표기 = 4 종 · 자 **3 일치** = §14a 표 데이터행 5 + manifest 「보호 파일 5 종」 표 행 5 + manifest verification 게이트 for 루프 경로 5 · ★판정 기준은 숫자가 아니라 **manifest 전수**다 = `stop-canonical.md` #5 정합).
 3. propagation 즉시 실행 (lazy 금지) — `scripts/propagate.sh` 호출.
 4. cross-verify 자동 실행 + 결과 `propagation-reports/<cycle-id>/REPORT.md` 자동 생성.
 5. 모든 자식 repo 가 새 sha 일치 확인 후 cycle 마감.
