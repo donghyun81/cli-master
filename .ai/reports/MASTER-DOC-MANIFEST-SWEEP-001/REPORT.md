@@ -263,4 +263,16 @@
 
 ## §정정 append (= 본체 commit 이후 사후 기입 · `reporting.md §15.2`)
 
-<!-- 본체 commit sha · 마감 porcelain · 마감 스캔 · 최종 ahead = commit 직후 기입 -->
+**본체 commit sha × 3** (= 본 REPORT 가 기록하는 **대상 file 을 담은** commit · K-156 · 자기 sha 아님):
+
+| # | sha | subject | `--name-only` |
+|---|---|---|---|
+| 1 | `3551bf5` | `docs(rules): … manifest advisory + §12 이력 정정` | `.auto-memory/protected-file-hashes.md` · `docs/rules/reporting.md` |
+| 2 | `50b1198` | `docs(rules): … 이력 등재 의무 + footer 범위` | `.claude/rules/rule-footer-common.md` |
+| 3 | `e1e2c55` | `docs(cycle): … COLD lineage 자 병기 + §15 표 복구 + 보호 종수` | `CLAUDE.md` · `.auto-memory/master-cycle-history-COLD.md` · `.ai/reports/MASTER-DOC-MANIFEST-SWEEP-001/REPORT.md` |
+
+- **마감 porcelain** = **0** (자 = `git --no-optional-locks status --porcelain | wc -l`)
+- **마감 스캔** = 시크릿 11 패턴 × `.ai/reports/MASTER-DOC-MANIFEST-SWEEP-001/` = **0 match** (grep exit 1 = PASS)
+- **최종 ahead** = **15** = **진입 11 + 본 판 4**(= 본체 3 + 본 `§정정 append` **꼬리 1**) · 자 = `git --no-optional-locks rev-list --count origin/main..HEAD` (본체 3 착지 직후 실측 = **14**). ★**상대식 표기**(= `reporting.md §15.2` · K-152-ⓑ): 위에 **나열된 sha 는 3** 인데 ahead 증가분은 **4** 다 ⟹ REPORT 만 읽는 독자도 **꼬리 commit 1 본의 존재를 안다**. 꼬리 자신의 sha 는 미기록이며 그것이 정상이다 — 담으려 commit 을 더 붙이면 그 sha 가 또 미기록된다(무한 후퇴 · K-156). 선례 = `e7f42d6`(`MASTER-TASK-PURPOSE-CONTRACT-001 REPORT §정정 append 후기입`).
+- **마감 게이트 재측** (HEAD `e1e2c55`) = `G0 claude-cli-master e1e2c55 4` · `G1 4 0` · `G2 1 1 1` · `G3 2 16` · `G4 0 0 0` · `G5 164 162` · `G6 0` · `G7 0 1` · `G8 2 24` · `G9 26 1 1 1` · `G10` 5 sha 불변 · `G11 916ff468` · **`G12 0`**(= 시점 = cycle 마감 · S1 미발동 확정)
+- **push = 0** (Coin 소관)
