@@ -297,11 +297,11 @@ PLAN / VERIFY / REVIEW / PromptFit 정규 스키마: `docs/rules/reporting.md` �
 
 | cycle ID | 마감일 | 변경 요약 | 영향 자식 repo |
 |---|---|---|---|
-| MASTER-ENGINEERING-BASELINE-002 | 2026-08-29 | 001 이 도는 동안 난 규율 8 (M5 · prod 0 · 보호 sha 0 · 자식 0). K-147~K-154 master 0→전량 ≥1. ★「주력 산출물」인데 형식 절이 없던 `reporting.md` → §15 + `§정정 append`. ★게이트 = 이름 아닌 집합 차. manifest stale 2. [R](.ai/reports/MASTER-ENGINEERING-BASELINE-002/REPORT.md) | 4-repo 0 (#130) |
 | MASTER-TASK-PURPOSE-CONTRACT-001 | 2026-08-29 | 태스크에 「왜」 계약 (M5 · prod 0 · 보호 sha 0 · 자식 0). K-155·K-156 master 0→≥1. ★「읽었나」 검증 불가 · 「되짚었나」 가능 ⟹ 재진술 의무. 배경 절 6층 중 5층 0. ★「자기 sha」 = 충족 불가 → 「본체」. [R](.ai/reports/MASTER-TASK-PURPOSE-CONTRACT-001/REPORT.md) | 4-repo 0 (#130) |
 | MASTER-DOC-MANIFEST-SWEEP-001 | 2026-08-29 | 문면이 자기를 틀리게 적으면 다음 사람의 분모가 된다 (M5 · prod 0 · 보호 sha 0 · 자식 0). 자기 서술 7 축 정정 + ★값 옆에 자 병기. ★이력 등재 = 규약 아닌 관례였다 → 1행 신설. ★§15 orphan = demote 잔해(9ba9dd3). [R](.ai/reports/MASTER-DOC-MANIFEST-SWEEP-001/REPORT.md) | 4-repo 0 (#130) |
+| MASTER-MEASURE-DISCIPLINE-001 | 2026-08-30 | 자를 썼다는 것은 옳은 자라는 증거가 아니다 (M5 · prod 0 · 보호 sha 0 · 자식 0). §0.1 도구≠판정 범위 · §0.3 계수 자 3 · §0.6 명제의 자 · 33) 원장 추적 · REPORT 축 12→13. ★발주 실측 3 미재현 → 자 병기 재측. [R](.ai/reports/MASTER-MEASURE-DISCIPLINE-001/REPORT.md) | 4-repo 0 (#130) |
 
-> **§15 cold 재배치** (= 10 회차 누적 · `MASTER-CLI-CONTEXT-OPT-PHASE1-CYCLE-HISTORY-COLD-001` 2026-06-01 → … → `MASTER-CLI-S15-HOT-DEMOTE-005` 2026-07-17 9회차 → **`MASTER-CLI-CONTEXT-DIET-3-001` 2026-07-29 10회차** · 회차 전량 열거 = COLD §1 heading lineage): master cycle 전체 이력 (= `C1-MASTER-BOOTSTRAP-001` ~ 본 cycle 직전) = verbatim 보존 → [`.auto-memory/master-cycle-history-COLD.md`](.auto-memory/master-cycle-history-COLD.md) (= 현행 **164 데이터행 / 162 고유 cycle ID** · 중복 2 · 자 = `grep -c '^| [A-Z0-9]'` / `cut -d'|' -f2` 후 `sort -u` · 2026-08-29 실측 · 구 표기 = 149 · 삭제 0 · 감사 추적 영구 보존 · lifecycle = 매 5 cycle 또는 분기 review). **hot 압축 행의 원문도 COLD 에 verbatim 실재** (= 재작성 ≠ 소실).
+> **§15 cold 재배치** (= 10 회차 누적 · `MASTER-CLI-CONTEXT-OPT-PHASE1-CYCLE-HISTORY-COLD-001` 2026-06-01 → … → `MASTER-CLI-S15-HOT-DEMOTE-005` 2026-07-17 9회차 → **`MASTER-CLI-CONTEXT-DIET-3-001` 2026-07-29 10회차** · 회차 전량 열거 = COLD §1 heading lineage): master cycle 전체 이력 (= `C1-MASTER-BOOTSTRAP-001` ~ 본 cycle 직전) = verbatim 보존 → [`.auto-memory/master-cycle-history-COLD.md`](.auto-memory/master-cycle-history-COLD.md) (= 현행 **165 데이터행 / 163 고유 cycle ID** · 중복 2 · 자 = `grep -c '^| [A-Z0-9]'` / `cut -d'|' -f2` 후 `sort -u` · 2026-08-29 실측 · 구 표기 = 149 · 삭제 0 · 감사 추적 영구 보존 · lifecycle = 매 5 cycle 또는 분기 review). **hot 압축 행의 원문도 COLD 에 verbatim 실재** (= 재작성 ≠ 소실).
 
 ---
 

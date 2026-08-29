@@ -324,6 +324,7 @@ subagent 가 상위 agent 에게 돌려주는 최소 요약은 아래 5 개 섹�
 - 2026-08-29 · MASTER-ENGINEERING-BASELINE-002 · **§15 신설** (= REPORT.md 형식 · §15.1 절 구성 12 축[실물 census 박제 · 발명 0] + §15.2 `§정정 append` 절 의무 · 근거 = §1 표가 REPORT 를 「현행 주력 산출물」로 규정하는데 **형식 절이 없었다** · 소급 의무 아님 = §1.1 선례 동형). **소급 등재** (= 2026-08-29 `MASTER-DOC-MANIFEST-SWEEP-001` · 자 = 위와 동일).
 - 2026-08-29 · MASTER-TASK-PURPOSE-CONTRACT-001 · **§3 Task 문서 `## 배경` 절 신설** (= 「무엇을 위한 것인가」가 「무엇을」 **앞에** 온다 · ⓑ 는 문장 아닌 **좌표**[round-trip 검증 가능] · ⓒ 「아닌 것」 부재 = 범위 오해 = 할루시 주 경로 · 빈칸 = Task 문서 미완) + §15.2 대상 정정 (= 「자기 commit sha」 → 「**본체** commit sha」 · K-156 · 자기 sha 는 어렵기 전에 **불가능**). **소급 등재** (= 2026-08-29 `MASTER-DOC-MANIFEST-SWEEP-001` · ★발주 census **밖**이었다 — 자칭이 절 헤더가 아니라 **본문 blockquote** 라 헤더 자에 안 걸렸다 · 자 = `git log --follow --format='%h|%ad|%s' -- docs/rules/reporting.md` ↔ 본 §12 대조).
 - 2026-08-29 · MASTER-DOC-MANIFEST-SWEEP-001 · 규약·원장 file 의 **자기 서술**을 실물에 맞추고 ★**값 옆에 자를 병기** (= 7 축: manifest advisory 2 · 본 §12 소급 등재 4 + 본 entry · COLD lineage 자칭 4 · `CLAUDE.md §15` 표 orphan 복구 · `CLAUDE.md §16-2` 보호 종수 · `rule-footer-common.md` 자칭 범위). 본 §12 등재 = 같은 판이 `rule-footer-common.md` 에 신설한 **「이력 절 등재 의무」의 첫 이행**. 4-repo propagation = 별 판(#130).
+- 2026-08-30 · MASTER-MEASURE-DISCIPLINE-001 · **§15.1 축 12 → 13** (= 축 **13 「판단·선택 → 원장」** 신설[발주가 안 물었는데 집행자가 정한 것 = 원장 번호 또는 「원장 불요 + 근거」] + 축 **9 「회부」**에 낱말 구분 1구[「원장 회부」 ≠ 「Coin 이관」] + intro 「12 축」→「13 축」 정합). 규율 본문 SoT = [`cycle-discipline.md`](./cycle-discipline.md) **33)** (= 본 §은 **REPORT 서식만** 소유 · 재복제 0). 근거 = 어느 REPORT 의 판단 7 항 중 원장 참조 **1**(단위 = 항) — 나머지는 **REPORT 안에서만 살고 다음 판의 분모에서 빠졌다**. ★신설 행은 헤더와 **칸 수 동일**(= `verification-and-review.md` §0.3 행별 칸 수 자 자기 적용 · 게이트 실측 불일치 **0**). §15.2 · §1~§14 **무접촉**. ★위 `MASTER-ENGINEERING-BASELINE-002` entry 의 「12 축」 = **당시 사실**이므로 무접촉(이력은 append-only · 소급 정정 아님).
 
 ---
 
@@ -360,7 +361,7 @@ subagent 가 상위 agent 에게 돌려주는 최소 요약은 아래 5 개 섹�
 
 ### §15.1 절 구성 (= 실물 census 로 뽑은 현 관례 박제 · 발명 0)
 
-절 **번호·기호는 자유** (= 실물 2 본이 `## 0.~11.` 와 `## ①~⑦` 로 갈린다 · 통일 강제 X). **아래 12 축이 있는가**가 판정선이다. 해당 없는 축 = **「N/A + 근거」 1줄** (= 빈칸은 「안 봤다」와 구별 불가 · `cycle-discipline.md` §32-ⓑ 정합).
+절 **번호·기호는 자유** (= 실물 2 본이 `## 0.~11.` 와 `## ①~⑦` 로 갈린다 · 통일 강제 X). **아래 13 축이 있는가**가 판정선이다. 해당 없는 축 = **「N/A + 근거」 1줄** (= 빈칸은 「안 봤다」와 구별 불가 · `cycle-discipline.md` §32-ⓑ 정합).
 
 | # | 축 | 내용 |
 |---|---|---|
@@ -372,10 +373,11 @@ subagent 가 상위 agent 에게 돌려주는 최소 요약은 아래 5 개 섹�
 | 6 | **「나를 의심하는 절차」 답** | 발주가 물은 항 **전량** |
 | 7 | **ChangeBudget** | 행 단위 + 밴드 대조 (= `cycle-discipline.md` §30) |
 | 8 | **STOP · 회귀 그물** | trigger 별 발동 여부 (0 도 값) |
-| 9 | **회부** | 남기는 부채 + **원장 번호** (= K-132 · 0 이면 「0」 + 근거) |
+| 9 | **회부** | 남기는 부채 + **원장 번호** (= K-132 · 0 이면 「0」 + 근거) · ★**「원장 회부」와 「Coin 이관」을 구분해 적는다** (= `cycle-discipline.md` 33)-ⓒ · 한 낱말이 두 축을 겸하면 둘 다 못 잰다) |
 | 10 | **commit · ahead** | commit sha × N + `--name-only` + 최종 ahead |
 | 11 | **자 대조표** | 「자의 이름 ↔ 자를 낸 명령」 (= `verification-and-review.md` §0.4 의무) |
 | 12 | **negative space** | 「고려했으나 hot 제외 영역」 1줄 (= §13) |
+| 13 | **판단·선택 → 원장** | 발주가 안 물었는데 **집행자가 정한 것** = **원장 번호** 또는 「원장 불요 + 근거」 (= `cycle-discipline.md` 33)-ⓑ · REPORT 안에서만 사는 판단 금지) |
 
 ### §15.2 ★`§정정 append` 절 의무 (K-152-ⓒ)
 
