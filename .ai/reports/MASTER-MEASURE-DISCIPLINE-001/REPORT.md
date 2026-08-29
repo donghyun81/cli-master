@@ -353,7 +353,10 @@ file 전체 값이 부푼 이유 = **내가 같은 commit 에 넣은 footer 이�
 
 _(본체 commit 후 기입 · K-156 = 대상은 **본체 sha** 이지 자기 sha 가 아니다)_
 
-- **본체 commit sha** = `<append 시 기입>`
-- **마감 porcelain** = `<append 시 기입>`
-- **마감 시크릿 스캔** = `<append 시 기입>`
-- **최종 ahead** = `<append 시 기입>`
+- **본체 commit sha** = **`b3a8857`** (= 본 REPORT 가 기록하는 대상 file 을 담은 commit · T5·T6·§15·COLD). 선행 2 = `c2ebe76`(T1·T2·T3) · `6a1993a`(T4).
+- **commit file 집합 대조** (= `git show --name-only` · diff 아님 = `v&r §0.3` K-137): `c2ebe76` = `verification-and-review.md` **1** · `6a1993a` = `cycle-discipline.md` **1** · `b3a8857` = `REPORT.md` + `COLD` + `SKILL.md` + `CLAUDE.md` + `reporting.md` **5**. ⟹ **scope 밖 file = 0 · 커밋 오염 0**(= `SKILL.md` §5 D-6 자 정합 · file 단위 명시).
+- **마감 porcelain** = **0**
+- **마감 시크릿 스캔** = `bash scripts/agent/secret-scan.sh .ai/reports/MASTER-MEASURE-DISCIPLINE-001/` = **exit 0 · PASS(0 매치)**
+- **마감 게이트 재실행** = 11/11 기대 충족 (`G0 claude-cli-master b3a8857 4` · G1 `1 4` · G2 `5 1 1 1` · G3 `1 2` · G4 `1 2 2` · G5 `1 1` · G6 `13 0` · G7 `1 1 1 1 1` · G8 `26` · G9 전량 동일 · G10 `916ff468` · G11 `0`)
+- **최종 ahead** = **18** (= 진입 15 + 본 판 3 · 상대식 K-152-ⓑ). ★본 `§정정 append` commit 을 붙이면 **19** 가 되어 **나열 sha 3 개보다 ahead 가 1 크다** — 그 차가 꼬리 commit 의 존재를 드러낸다(= `reporting.md` §15.2 명문 · 별도 플래그 절 불요).
+- **push** = **0** (Coin 소관).
