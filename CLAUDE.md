@@ -298,9 +298,9 @@ PLAN / VERIFY / REVIEW / PromptFit 정규 스키마: `docs/rules/reporting.md` �
 | cycle ID | 마감일 | 변경 요약 | 영향 자식 repo |
 |---|---|---|---|
 
-| MASTER-SECRET-PATTERN-STACK-001 | 2026-08-23 | 스캐너에 우리 스택 (M5 · prod 0 · 보호 sha 0). 주 백엔드가 Supabase 인데 패턴 6종에 그 계열 **0종** · 문서는 「eyJ/sbp_ 0 match (= 패턴 grep 정합)」이라 적으며 §패턴 블록엔 둘 다 부재(자기모순). 스크립트+문서 **한 commit**. 채택 5(6종 byte 보존) · **진탐 0** · P2 오탐 0 ⟹ 채택 · P3 는 실측이 원안 교정(`+`→`{8,}` · 오탐 1→0). ★P5 신설 = Supabase 신 API 키(census 가 후보를 늘렸다). ★`grep` 2개(ugrep shim ≠ 스캐너 binary) = 분모 갈림. 부산: 스캐너는 이미 FND·SW 빨간불(전량 기존 6패턴). [R](.ai/reports/MASTER-SECRET-PATTERN-STACK-001/REPORT.md) | 4-repo 2 |
 | MASTER-ENGINEERING-BASELINE-001 | 2026-08-29 | 규율을 집행 측에 심었다 (M5 · prod 0 · 보호 sha 0 · 자식 0). K-131~K-146 **16 전량 master 0** → ≥1. ★arch 15본에 수명 규칙 0 인데 KOIN:52 가 factory{VM} 을 가르쳤다 → §4a + §1.6. ★발주의 최고령 오지목 = 선례 정본. [R](.ai/reports/MASTER-ENGINEERING-BASELINE-001/REPORT.md) | 4-repo 0 (#130) |
 | MASTER-ENGINEERING-BASELINE-002 | 2026-08-29 | 001 이 도는 동안 난 규율 8 (M5 · prod 0 · 보호 sha 0 · 자식 0). K-147~K-154 master 0→전량 ≥1. ★「주력 산출물」인데 형식 절이 없던 `reporting.md` → §15 + `§정정 append`. ★게이트 = 이름 아닌 집합 차. manifest stale 2. [R](.ai/reports/MASTER-ENGINEERING-BASELINE-002/REPORT.md) | 4-repo 0 (#130) |
+| MASTER-TASK-PURPOSE-CONTRACT-001 | 2026-08-29 | 태스크에 「왜」 계약 (M5 · prod 0 · 보호 sha 0 · 자식 0). K-155·K-156 master 0→≥1. ★「읽었나」 검증 불가 · 「되짚었나」 가능 ⟹ 재진술 의무. 배경 절 6층 중 5층 0. ★「자기 sha」 = 충족 불가 → 「본체」. [R](.ai/reports/MASTER-TASK-PURPOSE-CONTRACT-001/REPORT.md) | 4-repo 0 (#130) |
 
 > **§15 cold 재배치** (= 10 회차 누적 · `MASTER-CLI-CONTEXT-OPT-PHASE1-CYCLE-HISTORY-COLD-001` 2026-06-01 → … → `MASTER-CLI-S15-HOT-DEMOTE-005` 2026-07-17 9회차 → **`MASTER-CLI-CONTEXT-DIET-3-001` 2026-07-29 10회차** · 회차 전량 열거 = COLD §1 heading lineage): master cycle **149 entry 전체 이력** (= `C1-MASTER-BOOTSTRAP-001` ~ 본 cycle 직전) = verbatim 보존 → [`.auto-memory/master-cycle-history-COLD.md`](.auto-memory/master-cycle-history-COLD.md) (= 삭제 0 · 감사 추적 영구 보존 · lifecycle = 매 5 cycle 또는 분기 review). **hot 압축 행의 원문도 COLD 에 verbatim 실재** (= 재작성 ≠ 소실).
 

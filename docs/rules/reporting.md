@@ -374,8 +374,10 @@ subagent 가 상위 agent 에게 돌려주는 최소 요약은 아래 5 개 섹�
 
 ### §15.2 ★`§정정 append` 절 의무 (K-152-ⓒ)
 
-**REPORT 를 commit 한 뒤에야 확정되는 값**(= 자기 commit sha · 마감 porcelain · 마감 스캔 결과 · 최종 ahead)은 **REPORT 말미의 `§정정 append` 절에 사후 기입**한다.
+**REPORT 를 commit 한 뒤에야 확정되는 값**(= **본체 commit sha** · 마감 porcelain · 마감 스캔 결과 · 최종 ahead)은 **REPORT 말미의 `§정정 append` 절에 사후 기입**한다.
 
+- ★**K-156 — 대상은 「본체 commit sha」이지 「자기 sha」가 아니다.** 본체 = **본 REPORT 가 기록하는 대상 file 을 담은 commit**이고, **`§정정 append` 자신을 담은 commit** 이 아니다. 후자는 어렵기 전에 **불가능**하다 — git 의 sha 는 **자기 내용의 해시**라 어떤 commit 도 자기 sha 를 담을 수 없고, 담으려 commit 을 하나 더 붙이면 **그 sha 가 또 미기록**된다(무한 후퇴). **실측** = 이 조항을 지키려 commit 4 본을 쓴 판에서, backfill commit 의 sha 는 tree 전수 **0 hit** 이고 본체 sha 는 **1 hit** 이었다 ⟹ **집행 실패가 아니라 조항 결함**이었다 (= 2026-08-29 `MASTER-TASK-PURPOSE-CONTRACT-001` 정정 · 구 문면은 「자기 commit sha」).
+- ★**꼬리 commit 의 존재는 `최종 ahead` 가 드러낸다** — ahead 를 **상대식**(`진입 N + 본 판 M` · M 은 `§정정 append` commit **포함**)으로 적으면(= §15.1 4 축 · `disk-verification/SKILL.md` **K-152-ⓑ** 정합) REPORT 만 읽는 독자도 **나열된 sha 수보다 ahead 가 1 크다**는 데서 꼬리 commit 을 안다. 별도 플래그 절 **불요**(= 실측으로 이미 성립하던 관례를 명문화한 것).
 - ★**판정선 = paste-back 이 유실돼도 REPORT 만으로 마감 좌표가 복원된다.**
 - ★**§8.2 와의 경계** — §8.2 「REPORT 는 자기 commit sha 를 담지 않는다」의 대상은 **REPORT 본문**이다 (= 본문은 **자기 sha 없이 완결**되는 서식 · 인용 대상 = 선행 commit). `§정정 append` 는 그 **유일한 예외 표면**이며 **append-only 꼬리**로 격리한다 — 본문 재편집이 아니므로 §8.2 가 막으려던 「본문 backfill 강제」는 발생하지 않는다. **두 절의 잔여 긴장 정리 = 별 판** (= 문면 정정은 별 판 · `verification-and-review.md` §0.1 K-140).
 - **실측 = 연속 2 회 실패.** 두 REPORT 모두 자기 마감 commit sha **0 hit** · 마감 스캔 결과 **0 hit** — 그 값들이 **채팅에만** 살았고, 원장 담당이 REPORT 만 읽고 기장했다가 **실제로 놓쳤다**.
