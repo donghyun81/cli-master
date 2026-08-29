@@ -21,7 +21,7 @@
 
 ---
 
-## 1. 우리 architecture 의 핵심 5 원칙 (Google 공식 기반)
+## 1. 우리 architecture 의 핵심 원칙 (= Google 공식 5 + 우리 1 · §1.6)
 
 ### 1.1 Single Source of Truth (SSOT)
 
@@ -70,6 +70,19 @@ Compose @Composable → ViewModel.onEvent(Event) → state mutation
 
 근거: [State and Jetpack Compose](https://developer.android.com/jetpack/compose/state) + 우리 `COMPOSE_STABILITY.md`.
 
+### 1.6 상태의 소유와 수명 (= 6 번째 원칙 · SSOT/UDF 가 답하지 않는 축)
+
+★**한 줄 원칙**: **상태의 수명 = 그것을 보는 화면의 수명.** 소유자는 **그 화면의 ViewModel** 이다.
+
+§1.1 SSOT 는 「상태가 **어디 하나**에 있나」를, §1.2 UDF 는 「상태가 **어느 방향**으로 흐르나」를 답한다. 둘 다 ★**「그 상태가 언제 죽나」를 답하지 않는다** — 그 빈칸에서 화면 상태가 **앱 수명을 사는** 형태가 자란다.
+
+- ★**§1.5 state hoisting 의 경계**: hoist 의 **상한은 화면(navigation entry)** 이다. 「가장 낮은 공통 ancestor」가 **App / Root 조립부**로 계산되면 그건 hoist 가 아니라 **누수**다 — 공통 ancestor 를 찾기 전에 **그 상태가 어느 화면의 것인지**를 먼저 정한다.
+- **앱 수명에 두는 것** = repository · store · seam(clock / dispatcher / logger 등). **화면 상태 · 표시물 · 이벤트 버스는 앱 층에 두지 않는다.**
+- **조립부는 그래프를 세울 뿐 상태를 갖지 않는다** — 조립부의 `remember { XxxViewModel(...) }` 는 그 VM 을 **앱 컴포지션 수명에 묶는다**(화면을 떠나도 안 죽는다).
+- **위반 신호**: 화면을 떠나도 살아 있는 상태 · 조립부의 VM 필드 · `remember` 밖으로 새는 화면 상태 · 정의만 있고 안 불리는 정리 함수.
+
+> **본문 SoT = [`KOIN_DI_BASELINE.md` §4a](../agent/architecture/KOIN_DI_BASELINE.md)** (= 소유·수명 규약 본문 · 본 §은 진입 가이드 층 · **본문 중복 0**). 원칙 층 = [`code-principles.md` §0.2](../rules/code-principles.md) (= SRP 의 「하나의 변경 이유」에 **생존주기** 포함).
+
 ---
 
 ## 2. 13 architecture 문서 ToC (master `docs/agent/architecture/`)
@@ -103,8 +116,9 @@ Compose @Composable → ViewModel.onEvent(Event) → state mutation
 2. UX 정의 (intake-router → requirements-analyst → ux-auditor)
 3. Pencil SoT 작성 (Pencil → Compose · pencil-uiux-workflow.md §Type 2)
 4. ui-spec.json 신설 + lastSyncedDesignToolStateHash 갱신
-5. Compose 코드 작성 (ui-implementer · MODEL_SEPARATION 의무)
-6. cleanup pass + verify + review (PromptFit 평가)
+5. ★상태 소유자·수명 지정 (§1.6 · 화면 VM = navigation entry scope · 앱/조립부 층 승격 금지)
+6. Compose 코드 작성 (ui-implementer · MODEL_SEPARATION 의무)
+7. cleanup pass + verify + review (PromptFit 평가)
 ```
 
 ### 3.2 신규 도메인 model (Data) 작성 절차

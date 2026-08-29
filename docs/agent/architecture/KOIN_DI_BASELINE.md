@@ -47,17 +47,38 @@ class HomeViewModel(
     private val clock: Clock,
 ) : ViewModel() { ... }
 
-// shared/app
+// shared/app — koin-compose-viewmodel
 val featureStateModule = module {
-    factory { HomeViewModel(get(), get()) }
+    viewModelOf(::HomeViewModel)
+    // factory { HomeViewModel(get(), get()) }  ← 구 예시 (= 소유자도 scope 도 없는 형태 · MASTER-ENGINEERING-BASELINE-001 정정 대상 · 이력 존치 · 삭제 0)
 }
+
+// 호출부 = 화면 진입 단위 (navigation entry 에 scope 된다)
+val vm: HomeViewModel = koinViewModel()
 ```
+
+> ★**`factory { … }` 는 현행 권장이 아니다.** `factory` 는 **요청마다 새 인스턴스**를 줄 뿐 **소유자도 수명도 지정하지 않는다** — 그 인스턴스를 누가 들고 언제 놓는지는 호출부(대개 조립부의 `remember`)가 우연히 정하게 되고, 그러면 화면 상태가 **앱 수명**을 산다. 수명 규약 = **§4a**.
 
 **Android 단독 환경 (androidx.lifecycle.ViewModel)**:
 ```kotlin
 // koin-androidx-compose
 val viewModel: HomeViewModel = koinViewModel()
 ```
+
+---
+
+### 4a. ViewModel 의 수명은 그것을 보는 화면의 수명이다 (= 소유·수명 규약)
+
+> **신설**: `MASTER-ENGINEERING-BASELINE-001` (2026-08-29). **신설 근거(실측)**: master 아키텍처 문서 전수(`docs/agent/architecture/*.md`)에서 `viewModelScope` **0** · `NavBackStackEntry` **0** · `생명주기` **0** 이었고, 그 빈자리에서 위 §4 가 KMP VM 을 `factory { … }` 로 가르치고 있었다 — **병을 규약이 직접 가르치던 상태**의 정정.
+> **원칙 층** = [`code-principles.md`](../../rules/code-principles.md) §0.2 (= SRP 의 「하나의 변경 이유」에 **생존주기**가 포함된다). 본 §은 그 원칙의 **DI 구현 층 규약**이다.
+
+- **ⓐ VM 은 화면 진입 단위(navigation entry)에 scope 된다.** CMP/KMP = **`NavBackStackEntry` scope** (= `koin-compose-viewmodel` 의 `koinViewModel()` 이 그 entry 의 `ViewModelStoreOwner` 에서 해석) · 코루틴은 **`viewModelScope`** 를 쓴다. ★**손 `dispose()` 금지** — 정리를 사람이 부르기로 하면 **대부분 안 달린다**(정의는 있는데 호출이 없는 형태). 프레임이 수명을 알게 하고, 정리는 `onCleared()` 로 따라오게 한다.
+- **ⓑ 앱 수명 singleton 은 repository · store · seam 만.** **화면 상태 · 표시물 · 이벤트 버스를 앱 층에 두지 않는다.** 앱 층 `single` 은 「앱이 사는 동안 하나여야 하는 것」에만 쓴다 — 화면이 보여줄 데이터는 그 조건을 만족하지 않는다.
+- **ⓒ 조립부(App / Root)가 화면 VM 의 소유자가 되지 않는다.** 조립부는 **그래프를 세울 뿐 상태를 갖지 않는다.** 조립부의 `remember { XxxViewModel(...) }` 는 그 VM 의 **생명주기를 앱 컴포지션에 묶는다** — 화면을 떠나도 죽지 않는다.
+- **ⓓ 생존 이유가 사라지면 제거하고, 필요할 때 다시 받아온다.** 「다시 만들기 아까워서」 살려 두지 않는다. 캐시가 필요하면 **무효화 시점을 함께 적는다**(무효화 없는 캐시 = 수명 없는 상태).
+- **ⓔ 위반 신호**: 화면을 떠나도 살아 있는 상태 · 조립부의 VM 필드 · `remember` 밖으로 새는 화면 상태 · `DisposableEffect` 의 key 가 **`remember` 인스턴스**(= 컴포지션이 사는 한 `onDispose` 가 안 돈다) · `fun dispose()` 정의 수 ≫ 호출 수.
+
+**판정 축 2** (= `code-principles.md` §0.2): ⑴ **생존주기** — 무엇과 함께 태어나 함께 죽나 ⑵ **역할** — 변경 이유가 하나인가. ★**파일 크기 · 파일 개수는 이 판정의 자가 아니다.**
 
 ---
 
@@ -103,3 +124,4 @@ val viewModel: HomeViewModel = koinViewModel()
 - `KMP_CMP_LAYER_DIRECTION.md` — Koin 배치 위치의 레이어 근거
 - `TESTABILITY_SEAMS.md` — DI 통한 심 주입
 - `.claude/rules/workflow.md` — 직접 구현 우선 원칙
+- [`docs/guides/app-implementation-guide.md`](../../guides/app-implementation-guide.md) §1.6 — 상태의 소유와 수명 (= §4a 의 가이드 층 진입점 · 본문 SoT = 본 file §4a)

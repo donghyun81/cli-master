@@ -45,7 +45,7 @@
 
 > gate = 규칙 설계 5원칙(양 최소화 / 읽을 대상 / 일관성 / 변동성 회피 / 예외 허용). 통과 = 안정 + 객관 + 광범위 + 기존 SoT 비중복. 각 규칙 = [규칙] + [근거] + [deviation].
 
-### 채택 — 하드 규칙 3
+### 채택 — 하드 규칙 4
 
 **C-1. Nullability & Immutability**
 - 규칙: 선언은 `val` 우선(`var` 는 재할당이 본질일 때만). 플랫폼 타입을 `!!` 로 단언하지 말고 `?.` / `?:` / `requireNotNull(...)` 로 의도를 드러낸다.
@@ -61,6 +61,13 @@
 - 규칙: 가변 동시성 타입을 노출하지 않는다 — `MutableStateFlow` / `MutableSharedFlow` 는 `private`, 외부에는 `StateFlow` / `Flow` 만. 일시중단 함수는 부수효과·I/O 를 이름에 드러낸다.
 - 근거: 가변 상태 노출은 단방향 흐름(UiState ownership · `ui-ux-analysis.md` + `workflow-core.md §implement`)을 깨고 외부 변경을 허용한다.
 - deviation: 읽기 노출이 필요하면 `asStateFlow()` 등 read-only projection 추가(가변 타입 직접 노출 금지).
+
+**C-4. 구현부 주석 = 판단 근거**
+- 규칙: **변경한 구현부**의 주석 / KDoc 에 **① 선택지 ② 버린 이유 ③ 다음 사람이 볼 것** 을 남긴다. ★**「무엇을 하는가」만 적은 주석은 코드의 중복**이다 — 코드가 이미 말하는 것을 한 번 더 말하면 낡기만 하고 알려주지 않는다.
+- 근거: **「왜 이렇게 됐나」가 코드에서 읽혀야 한다** (= [`code-principles.md`](./code-principles.md) §0.1-5 최상위 원칙). 판단 근거가 없으면 다음 사람은 **되돌릴 수 없어서 그대로 둔다** — 그 축적이 곧 구조 부채다. 「scope 밖 / 후속 / TODO」 를 적을 때는 **원장 회부 번호를 동반**한다(= 같은 §0.3 K-132 · 번호 없는 주석 부채는 아무도 회수하지 않는다).
+- deviation: **자명한 1행은 면제**(주석 양산 금지 · §C 탈락 표 「KDoc 의무화」 판정 불변 = 전면 의무화가 아니다). 표준을 벗어나면 PLAN `## 3. ArchitectureImpact` 에 **1줄 근거**.
+- 등급 = **warn (advisory)** — §A enforcement 수준 그대로. 신 blocking gate 신설 X.
+- ★**적용 경계**: 기존 KDoc 의 `BLUEPRINT` 인용 대량 잔존분(= 자식 repo 실측 45건 · `SW-T97`)은 **자식 소관 · 본 규칙의 소급 대상 아님**. C-4 는 그 판이 쓸 **판정선만** 제공한다(= 소급 정정 금지 정합).
 
 ### 후퇴 → pointer (원칙 1 중복 회피)
 
