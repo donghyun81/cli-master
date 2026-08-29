@@ -42,8 +42,8 @@
 ## 신설 cli infra (C2.5)
 
 - `docs/rules/code-principles.md` (250 줄) — Q1 답: SOLID 5 + DRY/KISS/YAGNI + 코드 리뷰 체크리스트 + reviewer 자동 참조 · **MASTER-ENGINEERING-BASELINE-002 정정** (2026-08-29 · 구 표기 = `.claude/rules/` · 151 줄 · 실물 = `.claude/rules/` 잔존 6 file 에 부재 + `docs/rules/` 실재 · 행수 = 집행 시점 `wc -l` 실측 · 정정 방식 = 아래 `:126` 「구 경로 병기」 선례 동형)
-- `.claude/rules/design-to-code-sync.md` (103 줄) — Q2 답: pencil-uiux-workflow.md 의 70% 공통 추출 (도구 무관)
-- `docs/design/design-sot-policy.md` (153 줄) — Q2 답: pencil-sot-policy.md 의 75% 공통 추출 (보호 신설)
+- `docs/rules/design-to-code-sync.md` (261 줄) — Q2 답: pencil-uiux-workflow.md 의 70% 공통 추출 (도구 무관) · **MASTER-DOC-MANIFEST-SWEEP-001 정정** (2026-08-29 · 구 표기 = `.claude/rules/` · 103 줄 · 실물 = `.claude/rules/` 잔존 6 file 에 부재 + `docs/rules/` 실재 · 행수 = 집행 시점 `wc -l` 실측 · 정정 방식 = 위 `:44` 동형)
+- `docs/design/design-sot-policy.md` (156 줄) — Q2 답: pencil-sot-policy.md 의 75% 공통 추출 (보호 신설) · **MASTER-DOC-MANIFEST-SWEEP-001 정정** (2026-08-29 · 구 표기 = 153 줄 · 경로 무변 · 행수 = 집행 시점 `wc -l` 실측 · ★본 행은 그 보호 file 을 **가리키는 행**이며 본문 무접촉)
 
 ## C2.5 분리 결과 — 도구 무관 vs Pencil 전용 매트릭스
 
