@@ -261,8 +261,20 @@ BASE15="$(git --no-optional-locks show <진입sha>:CLAUDE.md | awk '/^## 15\./{f
 
 | 값 | 확정치 |
 |---|---|
-| 본 REPORT commit sha (= commit 3) | `<후기입>` |
-| 마감 porcelain | `<후기입>` |
-| 시크릿 스캔 결과 | `<후기입>` |
-| 최종 ahead | `<후기입>` |
-| 마감 게이트 재실행 | `<후기입>` |
+| 본 REPORT commit sha (= commit 3) | **`1dcf20f`** (`docs(cycle): … manifest 정정 + §15 + REPORT`) |
+| 마감 porcelain | **0** (= `git --no-optional-locks status --porcelain \| wc -l`) |
+| 시크릿 스캔 결과 | **0 hit** — 11 패턴(`safety-and-secrets.md §시크릿 스캔 패턴` 전량) × `.ai/reports/MASTER-ENGINEERING-BASELINE-002/` · 자 = `grep -rEl '<11 alternation>' <dir> \| wc -l` |
+| 최종 ahead | **7** = 진입 3 + 본 판 **4** (`d46f79c` · `0ac9d68` · `1dcf20f` · 본 정정 append commit) |
+| 마감 게이트 재실행 | **14/14 PASS** (commit 3 직후 · 값은 §3 「후」 열과 동일 · G9 `3 2 1 0` · G12 5 sha 불변) |
+
+**commit file 집합 교차 대조** (= `disk-verification/SKILL.md §5` D-6 · `git show --name-only` vs scope · 개수 일치로 불충분하므로 **집합**으로):
+
+| commit | file |
+|---|---|
+| `d46f79c` | `docs/rules/cycle-discipline.md` · `docs/rules/verification-and-review.md` |
+| `0ac9d68` | `.claude/skills/disk-verification/SKILL.md` · `docs/rules/reporting.md` |
+| `1dcf20f` | `.auto-memory/protected-file-hashes.md` · `.auto-memory/master-cycle-history-COLD.md` · `CLAUDE.md` · `.ai/reports/…-002/REPORT.md` |
+
+⟹ **8 path = 발주 §1 대상 7본 + CLAUDE.md + REPORT** (COLD 는 T8 종속) · **scope 밖 file 0** · 타 workstream 오염 **0**.
+
+★**본 정정 append commit 자신의 sha 는 적지 않는다** — 적으려면 또 backfill 이 필요해 무한 후퇴한다. §15.2 의 판정선은 「**마감 좌표 복원**」이고, 위 표(REPORT commit `1dcf20f` + 최종 ahead 7 + 마감 porcelain 0)로 복원이 성립한다. 이 꼬리 자체가 `reporting.md §8.2`(본문 자기 sha 금지)와 §15.2 의 경계가 실제로 작동하는 지점이다.
