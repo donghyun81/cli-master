@@ -41,7 +41,7 @@
 
 ## 신설 cli infra (C2.5)
 
-- `.claude/rules/code-principles.md` (151 줄) — Q1 답: SOLID 5 + DRY/KISS/YAGNI + 코드 리뷰 체크리스트 + reviewer 자동 참조
+- `docs/rules/code-principles.md` (250 줄) — Q1 답: SOLID 5 + DRY/KISS/YAGNI + 코드 리뷰 체크리스트 + reviewer 자동 참조 · **MASTER-ENGINEERING-BASELINE-002 정정** (2026-08-29 · 구 표기 = `.claude/rules/` · 151 줄 · 실물 = `.claude/rules/` 잔존 6 file 에 부재 + `docs/rules/` 실재 · 행수 = 집행 시점 `wc -l` 실측 · 정정 방식 = 아래 `:126` 「구 경로 병기」 선례 동형)
 - `.claude/rules/design-to-code-sync.md` (103 줄) — Q2 답: pencil-uiux-workflow.md 의 70% 공통 추출 (도구 무관)
 - `docs/design/design-sot-policy.md` (153 줄) — Q2 답: pencil-sot-policy.md 의 75% 공통 추출 (보호 신설)
 
@@ -126,7 +126,7 @@ bash scripts/verify-sync.sh
 - `archive/2026-08/RLS_AND_PLAY_INTEGRITY_GUIDE.md` (Supabase RLS + Play Integrity) — 2026-08-01 `MASTER-DOCS-STALE-SWEEP-002` 로 **전파 세트 이탈** (구 경로 = docs/backend/ · master archive 1부 보존 · 자식 3 삭제 · 내용 무편집)
 
 ### 신설 9 파일 (master 신규 SoT)
-- `docs/guides/app-implementation-guide.md` (204 줄 · Claude CLI 진입 1차 가이드)
+- `docs/guides/app-implementation-guide.md` (243 줄 · Claude CLI 진입 1차 가이드) — **MASTER-ENGINEERING-BASELINE-002 정정** (2026-08-29 · 구 표기 = 204 줄 · 경로 무변 · 행수 = 집행 시점 `wc -l` 실측)
 - `docs/templates/api-spec.template.md`
 - `docs/templates/data-model.template.md`
 - `docs/templates/screen-flow.template.md`

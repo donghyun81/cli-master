@@ -293,13 +293,14 @@ PLAN / VERIFY / REVIEW / PromptFit 정규 스키마: `docs/rules/reporting.md` �
 ## 15. master cycle 진행 이력 (= **hot 상한 3 entry · 각 ≤400B**)
 
 > **상한 규약** (= 2026-07-29 `MASTER-CLI-CONTEXT-DIET-3-001` 신설 · 상시 로드 헌법의 ~70% 를 이력이 차지하던 상태 해소): 본 표 = **최근 3 entry 만** · 각 entry **≤400B**. **entry 신설 시 3 초과분 = 즉시 COLD demote** (= `.auto-memory/master-cycle-history-COLD.md` verbatim append · advisory 대기 X · 마감 step 안에서 집행). 400B 초과 서술은 재작성하되 **원문은 COLD 에 verbatim** (= 소실 0) · 상세는 `.ai/reports/<cycle-id>/REPORT.md` 가 진짜 SoT. 집행 절차 = `docs/rules/cycle-discipline.md §15`.
+> ★**방향** (= 2026-08-29 `MASTER-ENGINEERING-BASELINE-002` 명문화): **demote 대상 = 표의 맨 위 행**(= 최고령) · **신 entry = 맨 아래**. 마감일이 같아 날짜로 안 갈리는 경우가 실제로 있었다 — **순서가 정본**이다 (= 자 = `verification-and-review.md` §0.5 K-154 · 선례 = `48e75de`).
 
 | cycle ID | 마감일 | 변경 요약 | 영향 자식 repo |
 |---|---|---|---|
 
-| MASTER-PROPAGATION-HYGIENE-001 | 2026-08-23 | 전파 자 위생 (M5 · prod 0 · 보호 sha 0 · 신설 0). find 제외 4종 = charter(★file 단위 · 형제 3 자식 실재)·docs/ops·stale-sweeps·workflows. 분모 165→161 · MISS 10→0 · DRIFT 2→0. 유령 flag 처분 + detail §5 삭제 전파 4명제. [R](.ai/reports/MASTER-PROPAGATION-HYGIENE-001/REPORT.md) | 4-repo 2 |
 | MASTER-SECRET-PATTERN-STACK-001 | 2026-08-23 | 스캐너에 우리 스택 (M5 · prod 0 · 보호 sha 0). 주 백엔드가 Supabase 인데 패턴 6종에 그 계열 **0종** · 문서는 「eyJ/sbp_ 0 match (= 패턴 grep 정합)」이라 적으며 §패턴 블록엔 둘 다 부재(자기모순). 스크립트+문서 **한 commit**. 채택 5(6종 byte 보존) · **진탐 0** · P2 오탐 0 ⟹ 채택 · P3 는 실측이 원안 교정(`+`→`{8,}` · 오탐 1→0). ★P5 신설 = Supabase 신 API 키(census 가 후보를 늘렸다). ★`grep` 2개(ugrep shim ≠ 스캐너 binary) = 분모 갈림. 부산: 스캐너는 이미 FND·SW 빨간불(전량 기존 6패턴). [R](.ai/reports/MASTER-SECRET-PATTERN-STACK-001/REPORT.md) | 4-repo 2 |
 | MASTER-ENGINEERING-BASELINE-001 | 2026-08-29 | 규율을 집행 측에 심었다 (M5 · prod 0 · 보호 sha 0 · 자식 0). K-131~K-146 **16 전량 master 0** → ≥1. ★arch 15본에 수명 규칙 0 인데 KOIN:52 가 factory{VM} 을 가르쳤다 → §4a + §1.6. ★발주의 최고령 오지목 = 선례 정본. [R](.ai/reports/MASTER-ENGINEERING-BASELINE-001/REPORT.md) | 4-repo 0 (#130) |
+| MASTER-ENGINEERING-BASELINE-002 | 2026-08-29 | 001 이 도는 동안 난 규율 8 (M5 · prod 0 · 보호 sha 0 · 자식 0). K-147~K-154 master 0→전량 ≥1. ★「주력 산출물」인데 형식 절이 없던 `reporting.md` → §15 + `§정정 append`. ★게이트 = 이름 아닌 집합 차. manifest stale 2. [R](.ai/reports/MASTER-ENGINEERING-BASELINE-002/REPORT.md) | 4-repo 0 (#130) |
 
 > **§15 cold 재배치** (= 10 회차 누적 · `MASTER-CLI-CONTEXT-OPT-PHASE1-CYCLE-HISTORY-COLD-001` 2026-06-01 → … → `MASTER-CLI-S15-HOT-DEMOTE-005` 2026-07-17 9회차 → **`MASTER-CLI-CONTEXT-DIET-3-001` 2026-07-29 10회차** · 회차 전량 열거 = COLD §1 heading lineage): master cycle **149 entry 전체 이력** (= `C1-MASTER-BOOTSTRAP-001` ~ 본 cycle 직전) = verbatim 보존 → [`.auto-memory/master-cycle-history-COLD.md`](.auto-memory/master-cycle-history-COLD.md) (= 삭제 0 · 감사 추적 영구 보존 · lifecycle = 매 5 cycle 또는 분기 review). **hot 압축 행의 원문도 COLD 에 verbatim 실재** (= 재작성 ≠ 소실).
 
