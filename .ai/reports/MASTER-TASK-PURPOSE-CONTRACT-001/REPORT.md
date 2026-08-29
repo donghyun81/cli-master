@@ -237,3 +237,30 @@ bash <(awk '/^```bash$/{f=1;next} f&&/^```$/{exit} f' ~/AndroidStudioProjects/cc
 ## 13. negative space
 
 **고려했으나 hot 제외 영역**: `CLAUDE.md §15` 표 orphan 빈 줄(N2) — 고치려면 삭제 1 행이 필요해 「삭제 0」 계약과 정면 충돌 · COLD heading lineage 재계수(N1) · 태스크 문서 128 건 소급 작성(§0-ⓒ · S6) · SW `INITIATIVES.md` 배경 열(D-4 몫 · S1) · 재진술을 **게이트 계수**로 세우는 안(대조형이라 계수화하면 「문단이 있다」만 재고 **무엇이 참인가**는 못 잰다 ⟹ 의도적으로 접수 xverify 명제로 남김).
+
+---
+
+## §정정 append (= `reporting.md §15.2` 준수 · ★**본 판이 방금 좁힌 판**으로 기입)
+
+> **이 절의 대상이 바뀌었다** — 구 §15.2 는 「**자기** commit sha」를 요구했고 그건 충족 불가였다(§6-⑵). 본 판 T5 가 대상을 「**본체** commit sha」로 좁혔으므로, 아래는 **대상 file 을 담은 commit** 을 적는다. **이 append 를 담을 commit 자신의 sha 는 적지 않는다** — 적을 수 없는 것을 적으라고 요구하지 않는 것이 T5 의 전부다.
+
+| 값 | 확정치 |
+|---|---|
+| **본체 commit sha** (= T5 착지 `reporting.md §15.2` + `CLAUDE.md §15` + COLD + 본 REPORT 를 담은 commit) | **`1855f39`** (`docs(cycle): … §15.2 대상 정정 + §15 + REPORT`) |
+| 선행 본체 2 | **`edd90f2`**(T1·T2) · **`9591b7d`**(T3·T4·T6) — §11 표 기재분 |
+| 마감 porcelain | **0** (= `git --no-optional-locks status --porcelain \| wc -l`) |
+| 시크릿 스캔 결과 | **0 hit** — 11 패턴(`safety-and-secrets.md §시크릿 스캔 패턴` 전량) × `.ai/reports/MASTER-TASK-PURPOSE-CONTRACT-001/` · 자 = `grep -rEl '<11 alternation>' <dir> \| wc -l` · scanner binary = `grep` |
+| 최종 ahead | **11** = 진입 **7** + 본 판 **4** (`edd90f2` · `9591b7d` · `1855f39` · **본 정정 append commit**) — 상대식(K-152-ⓑ) |
+| 마감 게이트 재실행 | **11/11 PASS** (commit 3 직후 · 값 = §4 「후」 열과 동일 · G9 5 sha 불변 · G10 불변 · G11 = 0) |
+
+**commit × file 집합 대조** (= `SKILL.md §5` D-6 · 개수 아닌 집합):
+
+| commit | file |
+|---|---|
+| `edd90f2` | `docs/rules/reporting.md` · `.claude/skills/disk-verification/SKILL.md` · `docs/rules/code-principles.md` |
+| `9591b7d` | `.claude/skills/disk-verification/SKILL.md` · `docs/agent/process/REPO_FIRST_INTAKE_WORKFLOW.md` · `docs/rules/workflow-core.md` |
+| `1855f39` | `docs/rules/reporting.md` · `CLAUDE.md` · `.auto-memory/master-cycle-history-COLD.md` · `.ai/reports/…-001/REPORT.md` |
+
+⟹ 합집합 **8 path** = 발주 §1 대상 **4 본** + T2 파생 `code-principles.md` + `CLAUDE.md` + COLD + REPORT · **scope 밖 file 0** · 타 workstream 오염 **0** (= `git diff --name-only 7224836..HEAD` 8 = 위 합집합과 집합 일치).
+
+★**독자 확인법**: 위 표에 sha 3 개가 있고 최종 ahead 는 11(= 진입 7 + **4**)이다. **4 − 3 = 1** ⟹ 이 append 를 담은 꼬리 commit 이 하나 더 있다는 뜻이며, 그 sha 는 `git log` 에 있다. 이것이 §15.2 에 새로 박은 「꼬리 commit 의 존재는 최종 ahead 가 드러낸다」의 실물 예다.
