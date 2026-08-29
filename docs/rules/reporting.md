@@ -332,3 +332,37 @@ subagent 가 상위 agent 에게 돌려주는 최소 요약은 아래 5 개 섹�
 - **advisory** — 표 surface 만 의무 · 수렴 *실행*은 후속 cycle(= 본심 또는 cli HOW)로 분리. **auto-rewrite / auto-converge 금지** (= `cross-repo-parallel-exec-detail.md §4.4` 경계 정합 · 도메인 자율 default 불변).
 - **발행 영역**: paste-back 본문 inline default (= 불필요 산출물 박제 회피 · 별 file 박제는 cli 자율). 같은 맥락 2+ repo 구현 cycle 무 = 본 § N/A (= 표 생략).
 - **A8 정합**: 같은 맥락 2+ repo 구현 후 미surface 건수 `= 0` 측정 (= `anchor-list.md` A8 GSM-M).
+
+---
+
+## §15 REPORT.md 형식 (= cc-paste cycle 집행 보고 · 2026-08-29 신설 · `MASTER-ENGINEERING-BASELINE-002`)
+
+> **신설 근거(실측)**: §1 표가 REPORT 를 「**현행 주력 산출물**」로 규정하는데 **형식 절이 없었다** (= §3 Task · §4 EVIDENCE · §5 PLAN · §6 VERIFY · §7 REVIEW 는 있다). 그 공백에서 §15.2 의 사고가 났다.
+> **소급 의무 아님** (= §1.1 선례 동형): 신설 이후 cycle 에 적용한다. 기존 REPORT 는 소급 위반으로 판정하지 않는다.
+
+### §15.1 절 구성 (= 실물 census 로 뽑은 현 관례 박제 · 발명 0)
+
+절 **번호·기호는 자유** (= 실물 2 본이 `## 0.~11.` 와 `## ①~⑦` 로 갈린다 · 통일 강제 X). **아래 12 축이 있는가**가 판정선이다. 해당 없는 축 = **「N/A + 근거」 1줄** (= 빈칸은 「안 봤다」와 구별 불가 · `cycle-discipline.md` §32-ⓑ 정합).
+
+| # | 축 | 내용 |
+|---|---|---|
+| 1 | **판정** | PASS / FAIL / 부분 + 1줄 요약 |
+| 2 | **BASELINE 진입 재측** | 발주 인용값이 아니라 **집행 시점 실측** (= 갈리면 실물이 정본) |
+| 3 | **착지** | 대상별 좌표 `path` \| `line` \| `anchor` (= `verification-and-review.md` §0.2 K-136) |
+| 4 | **게이트 전/후** | 항별 **전 → 후 + 시점 + 판정** · 자 = 발주 게이트 블록 verbatim |
+| 5 | **편차 · 이의** | 방어 아님 — **자로 재현해서** 붙인다 |
+| 6 | **「나를 의심하는 절차」 답** | 발주가 물은 항 **전량** |
+| 7 | **ChangeBudget** | 행 단위 + 밴드 대조 (= `cycle-discipline.md` §30) |
+| 8 | **STOP · 회귀 그물** | trigger 별 발동 여부 (0 도 값) |
+| 9 | **회부** | 남기는 부채 + **원장 번호** (= K-132 · 0 이면 「0」 + 근거) |
+| 10 | **commit · ahead** | commit sha × N + `--name-only` + 최종 ahead |
+| 11 | **자 대조표** | 「자의 이름 ↔ 자를 낸 명령」 (= `verification-and-review.md` §0.4 의무) |
+| 12 | **negative space** | 「고려했으나 hot 제외 영역」 1줄 (= §13) |
+
+### §15.2 ★`§정정 append` 절 의무 (K-152-ⓒ)
+
+**REPORT 를 commit 한 뒤에야 확정되는 값**(= 자기 commit sha · 마감 porcelain · 마감 스캔 결과 · 최종 ahead)은 **REPORT 말미의 `§정정 append` 절에 사후 기입**한다.
+
+- ★**판정선 = paste-back 이 유실돼도 REPORT 만으로 마감 좌표가 복원된다.**
+- ★**§8.2 와의 경계** — §8.2 「REPORT 는 자기 commit sha 를 담지 않는다」의 대상은 **REPORT 본문**이다 (= 본문은 **자기 sha 없이 완결**되는 서식 · 인용 대상 = 선행 commit). `§정정 append` 는 그 **유일한 예외 표면**이며 **append-only 꼬리**로 격리한다 — 본문 재편집이 아니므로 §8.2 가 막으려던 「본문 backfill 강제」는 발생하지 않는다. **두 절의 잔여 긴장 정리 = 별 판** (= 문면 정정은 별 판 · `verification-and-review.md` §0.1 K-140).
+- **실측 = 연속 2 회 실패.** 두 REPORT 모두 자기 마감 commit sha **0 hit** · 마감 스캔 결과 **0 hit** — 그 값들이 **채팅에만** 살았고, 원장 담당이 REPORT 만 읽고 기장했다가 **실제로 놓쳤다**.
