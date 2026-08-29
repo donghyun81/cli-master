@@ -124,6 +124,9 @@ Remaining Work / Next Entry Conditions / Known Risks)만으로 동작한다.
 - STOP 위험
 - 필요한 read-only fan-out
 - implementer 진입 가능 여부
+- ★**배경 재진술** — 태스크의 `## 배경`(또는 발주 `§0`)을 읽고 **자기 말 1 문단**으로 되짚었는가 (= ⑴ 목적 ⑵ 상위 목표 **좌표** 지목 ⑶ 이 태스크가 **아닌** 것). ★**「읽었다」 선언은 판정이 아니다** — 「읽었나」는 검증 불가하고 **「되짚었나」는 검증 가능**하다. **verbatim 복붙 = 미이행**(안 읽은 것과 구별되지 않는다).
+  - 배경 절이 **없는** 태스크 = **`RESOLVABLE_IN_REPO`** 로 분류하고 **먼저 채운다**. ★**추론으로 메우지 않는다** — 그 메움이 곧 할루시다. 채울 근거가 repo 에 없으면 **`UNKNOWN`**(+ 확인 위치).
+  - 형식 SoT = [`reporting.md §3`](./reporting.md) `## 배경` · 발주 측 대응 칸 = [`disk-verification/SKILL.md`](../../.claude/skills/disk-verification/SKILL.md) §4 ⑥ 세부 **6** + ⑦ 세부 **3**.
 
 > **Reading Mode consult**: 판정된 Reading Mode 의 의무 로드 규칙 집합 = [`rule-routing-table.md`](../../.claude/rules/rule-routing-table.md) 에서 consult 한다 (= L0 + 해당 L1/L2/L3 subset 만 · bulk read 금지 · index 전문 정독 = 색인 갱신 cycle 한정 · T2).
 

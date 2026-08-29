@@ -81,6 +81,10 @@
 
 ## Task-Aware Reading Order
 
+★**① 그 태스크의 `## 배경`(없으면 발주 `§0`) — 무엇을 읽을지보다 「무엇을 위해 읽는지」가 먼저다.** 아래 표의 어느 행이든 이 행이 **선행**한다. 목적을 모른 채 권위 순서만 따라 읽으면 **비는 곳을 추론으로 메우게** 된다 (= 판정 = `docs/rules/workflow-core.md` Intake 「배경 재진술」 · 형식 = `docs/rules/reporting.md §3`).
+
+> **왜 이 행이 생겼나** (= `docs/rules/code-principles.md §0` 원칙 5 「판단 근거를 남긴다」): 2026-08-29 실측 — **본 file 170 행에 `배경` · `왜` · `맥락` 이 각각 0** 이었다. 읽기 순서 SoT 가 **무엇을 읽을지만 말하고 그 목적은 말하지 않았다** (= `MASTER-TASK-PURPOSE-CONTRACT-001`).
+
 아래 표는 "무엇을 읽어야 하는가"보다 "어떤 권위 순서로 읽어야 하는가"를 고정한다.
 summary layer는 가속용이며 authoritative source를 대체하지 않는다.
 
