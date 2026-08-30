@@ -330,6 +330,11 @@ for doc in $STATUS_DOCS; do
     REF_MISSING="${REF_MISSING}  - $path (in $(basename "$doc"))\n"
   done
 done
+# T2: 산출을 stdout 요약 1 행으로 낸다. 이유 = 이 트랙은 명령에 `2>` 를 쓰지 않으므로
+# stderr WARN 은 파이프 없이 잴 수단이 없었다 ⟹ 자가 자기 값을 stdout 으로 낸다.
+# 무조건 1 행 (부재 0 이어도 `분모=0 마킹제외=0 잔존=0`) · 아래 stderr 블록은 존치(사람이 읽는 층).
+REF_LEFT=$((REF_TOTAL - REF_MARKED))
+printf '[verify-sync] stale-ref: 분모=%s 마킹제외=%s 잔존=%s\n' "$REF_TOTAL" "$REF_MARKED" "$REF_LEFT"
 if [ -n "$REF_MISSING" ]; then
   echo "" >&2
   echo "[verify-sync] ⚠ 상태문서 부재 참조 (= stale ref · drift 재발 신호):" >&2
