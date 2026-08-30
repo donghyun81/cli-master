@@ -171,15 +171,15 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 | `docs/rules/uiux-sot-refresh.md` | `31c0da56aeec` | ✓ | ✓ | ✓ |
 | `docs/design/design-sot-policy.md` | `92a5e99804ff` | ✓ | ✓ | ✓ |
 | `.claude/settings.json` | `17a10c02a4b9` | ✓ | ✓ | ✓ |
-| `docs/rules/workflow-core.md` | `fc61294804c4` | ✓ | ✓ | ✓ |
-| `docs/rules/cycle-discipline.md` | `e5f547153109` | ✓ | ✓ | ✓ |
+| `docs/rules/workflow-core.md` | `f6ff5e09bca4` | ✓ | ✓ | `fc61294804c4`✗ |
+| `docs/rules/cycle-discipline.md` | `ab788f448192` | ✓ | ✓ | `e5f547153109`✗ |
 | `docs/rules/pencil-automation.md` | `a2506a34d797` | ✓ | ✓ | ✓ |
-| `docs/rules/reporting.md` | `85a858d5378c` | ✓ | ✓ | ✓ |
-| `docs/rules/routing-and-delegation.md` | `a3ea9b7d87cd` | ✓ | ✓ | ✓ |
+| `docs/rules/reporting.md` | `85b70b0c0d13` | ✓ | ✓ | `85a858d5378c`✗ |
+| `docs/rules/routing-and-delegation.md` | `f728c6b08bf3` | ✓ | ✓ | `a3ea9b7d87cd`✗ |
 | `docs/rules/deferred-domains.md` | `9952cb6074c6` | ✓ | ✓ | ✓ |
-| `docs/rules/code-principles.md` | `d5f48e60bda0` | ✓ | ✓ | ✓ |
-| `docs/rules/design-to-code-sync.md` | `81a52a9bc694` | ✓ | ✓ | ✓ |
-| `docs/rules/ux-laws.md` | `76247cd98ac4` | ✓ | ✓ | ✓ |
+| `docs/rules/code-principles.md` | `2e21249973e6` | ✓ | ✓ | `d5f48e60bda0`✗ |
+| `docs/rules/design-to-code-sync.md` | `fe29cb7d1664` | ✓ | ✓ | `81a52a9bc694`✗ |
+| `docs/rules/ux-laws.md` | `3bc9a89a4c36` | ✓ | ✓ | `76247cd98ac4`✗ |
 | `docs/agent/architecture/COMMON_ARCHITECTURE.md` | `e857074ad1d9` | ✓ | ✓ | ✓ |
 | `docs/agent/architecture/TDD_WORKFLOW.md` | `209f9aa3f69c` | ✓ | ✓ | ✓ |
 | `docs/agent/architecture/MODEL_SEPARATION.md` | `d6262ba37923` | ✓ | ✓ | ✓ |
@@ -191,8 +191,36 @@ bash scripts/propagate.sh --all       # 전 cli infra 일괄
 
 ## Last verify-sync
 
-- timestamp: 2026-08-23T22:30:03+0900
-- pass: 161
-- drift: 0
+- timestamp: 2026-08-30T20:42:17+0900
+- pass: 136
+- drift: 25
 - miss: 0
-- exit: 0
+- exit: 1
+
+### Drift 상세
+
+- .claude/rules/rule-footer-common.md  master=671ae5ece95f  app-foundation=✓  toward-product-docs=✓  Selfward=8013bbde9a8f(✗)
+- .claude/rules/rule-routing-table.md  master=11ecd2f6148c  app-foundation=✓  toward-product-docs=✓  Selfward=a318aa33b5da(✗)
+- .claude/rules/safety-and-secrets.md  master=bcc496515b43  app-foundation=✓  toward-product-docs=✓  Selfward=8bbe19ac6208(✗)
+- .claude/skills/disk-verification/SKILL.md  master=578c728c1840  app-foundation=✓  toward-product-docs=✓  Selfward=2fef22518120(✗)
+- .claude/skills/disk-verification/references/adjacent-and-history.md  master=375d2e60c594  app-foundation=✓  toward-product-docs=✓  Selfward=94cb496ae30c(✗)
+- docs/agent/architecture/KOIN_DI_BASELINE.md  master=23702fbb1ba7  app-foundation=✓  toward-product-docs=✓  Selfward=fe2f2da2da1e(✗)
+- docs/agent/process/REPO_FIRST_INTAKE_WORKFLOW.md  master=562b6d5c4a94  app-foundation=✓  toward-product-docs=✓  Selfward=b6a079ef96cb(✗)
+- docs/guides/app-implementation-guide.md  master=137fdd04b446  app-foundation=✓  toward-product-docs=✓  Selfward=4d378670d7b8(✗)
+- docs/rules/code-principles.md  master=2e21249973e6  app-foundation=✓  toward-product-docs=✓  Selfward=d5f48e60bda0(✗)
+- docs/rules/code-style-guide.md  master=99f807a232d2  app-foundation=✓  toward-product-docs=✓  Selfward=6975c5525f51(✗)
+- docs/rules/cross-repo-parallel-exec-detail.md  master=bbfdd23dacfc  app-foundation=✓  toward-product-docs=✓  Selfward=80935b6c2da9(✗)
+- docs/rules/cycle-discipline.md  master=ab788f448192  app-foundation=✓  toward-product-docs=✓  Selfward=e5f547153109(✗)
+- docs/rules/design-to-code-sync.md  master=fe29cb7d1664  app-foundation=✓  toward-product-docs=✓  Selfward=81a52a9bc694(✗)
+- docs/rules/legacy-cleanup-governance.md  master=bbe8eccc8b58  app-foundation=✓  toward-product-docs=✓  Selfward=bc576790f7fd(✗)
+- docs/rules/paste-authoring-disk-verification.md  master=fd9c9f1b563f  app-foundation=✓  toward-product-docs=✓  Selfward=c8cd42eac268(✗)
+- docs/rules/pencil-mcp-tools-reference.md  master=e37aa460a9e1  app-foundation=✓  toward-product-docs=✓  Selfward=50d94d1bfb87(✗)
+- docs/rules/reporting.md  master=85b70b0c0d13  app-foundation=✓  toward-product-docs=✓  Selfward=85a858d5378c(✗)
+- docs/rules/routing-and-delegation.md  master=f728c6b08bf3  app-foundation=✓  toward-product-docs=✓  Selfward=a3ea9b7d87cd(✗)
+- docs/rules/stale-artifact-tracking.md  master=995dea0a53e2  app-foundation=✓  toward-product-docs=✓  Selfward=c18a671905a6(✗)
+- docs/rules/terminology.md  master=266fff63912f  app-foundation=✓  toward-product-docs=✓  Selfward=e8fe0d5aa934(✗)
+- docs/rules/ui-ux-analysis.md  master=c016408fbc47  app-foundation=✓  toward-product-docs=✓  Selfward=6b48fd6622c5(✗)
+- docs/rules/ux-laws.md  master=3bc9a89a4c36  app-foundation=✓  toward-product-docs=✓  Selfward=76247cd98ac4(✗)
+- docs/rules/verification-and-review.md  master=06ec411082ac  app-foundation=✓  toward-product-docs=✓  Selfward=3f39d60a0661(✗)
+- docs/rules/workflow-core.md  master=f6ff5e09bca4  app-foundation=✓  toward-product-docs=✓  Selfward=fc61294804c4(✗)
+- docs/rules/working-file-lifecycle.md  master=090da7ccf047  app-foundation=✓  toward-product-docs=✓  Selfward=9490e78ad6b2(✗)
