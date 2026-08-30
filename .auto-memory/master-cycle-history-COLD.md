@@ -1,6 +1,8 @@
 # Master Cycle History COLD storage (= **165 데이터행 / 163 고유 cycle ID** 영구 누적 + cold 영역 default · 중복 2 · 자 = `grep -c '^| [A-Z0-9]'` / `cut -d'|' -f2` 후 `sort -u` · 2026-08-30 실측(MEASURE-DISCIPLINE-001 demote +1) · 구 표기 = 164 · 그 전 = 154)
 
-> 본 file = master `CLAUDE.md §15` cycle 진행 이력 cold storage default · hot 영역 = `CLAUDE.md §15` (= 최근 5 + 본 cold pointer) default · 감사 추적 영구 보존 default
+> 본 file = master `CLAUDE.md §15` cycle 진행 이력 cold storage default · hot 영역 = `CLAUDE.md §15` (= **hot 상한 3 entry · 각 ≤400B** + 본 cold pointer) default · 감사 추적 영구 보존 default
+> ★**자칭 정정** (= 2026-08-30 `MASTER-DOC-MANIFEST-SWEEP-002` · ㉡ #160): 구 문면 = ~~「최근 5 + 본 cold pointer」~~ (= 삭제 0 · 병기 보존). 규약 실물 = master [`CLAUDE.md`](../CLAUDE.md) `:293` 제목 괄호 「상한 3 entry · 각 ≤400B」 (= 2026-07-29 `MASTER-CLI-CONTEXT-DIET-3-001` 신설). ★**본 file 은 자기 안에서 갈려 있었다** — 같은 머리부 `:23` 이 이미 「…상한 3 유지로 밀려난 것」이라 적는다. 즉 결함은 「규약을 몰랐다」가 아니라 **자칭을 규약 개정 때 안 따라 옮긴 것**이다(= 두 번째 서술처가 곧 drift 원 · `rule-footer-common.md` 선례 동형). 자칭과 규약이 갈리면 **규약이 정본**이고, 갈렸다는 사실은 남긴다.
+> ★**entry 단위 = 데이터행** (= 2026-08-30 `MASTER-DOC-MANIFEST-SWEEP-002` · ㉡ #163): 본 file 의 「entry」 = 표의 **데이터행 1 행** (= 자 `grep -c '^| [A-Z0-9]'` · 현행 **165 행**). **고유 cycle ID** (= `cut -d'|' -f2` 후 `sort -u` · 현행 **163 ID**) 는 **진단값**이지 entry 단위가 아니다 — 둘의 차 **2** 가 곧 아래 `:23` 「재수록 2」이며 ★**차가 0 이 아닌 것이 정상**이다(중복 오류 아님). 단위를 안 적으면 다음 사람이 165 와 163 중 무엇을 「entry 수」로 읽을지 갈린다 (= `verification-and-review.md` §0.3 「★단위를 병기한다」 정합 · 단위 = `행` / `ID`).
 > 위치 = `claude-cli-master/.auto-memory/master-cycle-history-COLD.md` (= master only default · propagation X default · 4 자식 §15 (= 현 6 entry hot · master 86 의 pure subset) 측 단일 cold superset default)
 > 신설: `MASTER-CLI-CONTEXT-OPT-PHASE1-CYCLE-HISTORY-COLD-001` · 2026-06-01
 > lifecycle: 매 5 cycle 또는 분기 review default (= `cycle-discipline.md §18` 정합 default) · 신규 master cycle 누적 시 hot → cold 재이전 default
