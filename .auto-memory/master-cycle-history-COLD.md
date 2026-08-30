@@ -12,6 +12,25 @@
 
 ## §1. master §15 cycle 진행 이력 (= **169 데이터행 / 167 고유 cycle ID** verbatim · 중복 2 = `MASTER-CLI-STALE-SWEEP-4ACTIVE-001` + `MASTER-CLI-JUDGMENT-SHIFT-001` [= 아래 「재수록 2」 note 정합] · 자 = `grep -c '^| [A-Z0-9]'` / `cut -d'|' -f2` 후 `sort -u` · 2026-08-30 실측(REGISTER-AXIS-REPLACE demote +1 · 그 전 SWEEP-004 demote +1) · 구 표기 = 168 · 그 전 = 167 · 그 전 = 165 · 그 전 = 164 · ★아래 가산식은 **당시 누적 이력**이며 **현행 계수는 위 자로 잰다** — 가산식으로 현행 실측은 재구성되지 않는다[원인 규명 = 별 판] · Phase 1 65 + COLD-002 +19 + EXEC2-B +2 + EXEC3 +4 + EXEC3-002 +4 + AUTO-DEMOTE +9 + S15-HOT-DEMOTE-003 +8 + S15-HOT-DEMOTE-004 +10 + S15-HOT-DEMOTE-005 +16 + CONTEXT-DIET-3 +12 재배치 + AUTH-RULES-EMAIL-FIRST +1 + PRELAUNCH-SWEEP-002 +1 + LIFECYCLE-4ACTIVE-REALIGN +1 + MULTI-REPO-RENAME-TOWARD +1 + BRAND-TOWARD-INFRA +1 · **+ SLOT-SPEC-AND-COMMIT-FENCE 재수록 2 = 위 154 합산 밖**)
 
+> ★★**소급 채번 8 + 라벨 병기 정정 2 = 회부 마감** (= 2026-08-30 `MASTER-RULE-HISTORY-SECTION-001` T4 · 아래 `:24` 처분이 「별 판」으로 넘긴 항을 닫는다). **자 = 사건 계수 재도출**(= 인용 아님 · 발주값 대조용): `for s in $(git log --format=%H --reverse -- <COLD>); do git show --format= $s -- <COLD> | grep -c '^+| [A-Z0-9]'; done` 중 `>0` 인 것을 시간순 계수 ⟹ **28 사건**. ★**산술 검산 = 전 commit append 합 `169` == 실측 데이터행 `169`** · **삭제 사건 0**(= `^-| [A-Z0-9]` 전 commit 합 **0**) ⟹ 자의 **완전성 증명**(= 합이 맞고 삭제가 0 이므로 놓친 사건이 없다). 발주가 준 실서수 17~24 + sha 8 개 = **재도출 결과와 전량 일치**하나, ★**일치는 결과이지 근거가 아니다**(= 직전 판 문면 계승).
+>
+> **소급 채번 8** (= 라벨 없이 지나간 #17~#24 · 2026-08-17~08-29 · demote 수행 cycle 이 자기 회차를 안 적은 구간):
+>
+> | 실서수 | sha | 마감일 | demote 수행 cycle |
+> |---|---|---|---|
+> | **17** | `df62c9f` | 2026-08-17 | `MASTER-STALE-TRACKING-001` |
+> | **18** | `791fed7` | 2026-08-23 | `MASTER-AIDOC-RELEASE-REALIGN-001` |
+> | **19** | `74424f2` | 2026-08-23 | `MASTER-PROPAGATION-HYGIENE-001` |
+> | **20** | `c570d1e` | 2026-08-23 | `MASTER-SECRET-PATTERN-STACK-001` |
+> | **21** | `48e75de` | 2026-08-29 | `MASTER-ENGINEERING-BASELINE-001` |
+> | **22** | `1dcf20f` | 2026-08-29 | `MASTER-ENGINEERING-BASELINE-002` |
+> | **23** | `1855f39` | 2026-08-29 | `MASTER-TASK-PURPOSE-CONTRACT-001` |
+> | **24** | `e1e2c55` | 2026-08-29 | `MASTER-DOC-MANIFEST-SWEEP-001` |
+>
+> ⟹ 이로써 **19 회차** · **20 회차** · **21 회차** · **22 회차** · **23 회차** · **24 회차** 가 라벨을 얻고, 아래 두 note 의 구 라벨은 **25 회차** · **26 회차** 로 **병기 정정**된다 (= 구 라벨 **삭제 0**).
+>
+> ★**#17·#18 만 실서수 단독 표기인 이유** (= 회피가 아니라 **namespace 충돌**): 번호 **17**·**18** 의 bold 라벨 form 은 **이미 점유돼 있다** — 아래 두 note 가 `b3a8857`(실서수 **25**) 와 `a3ba108`(실서수 **26**) 에 그 두 번호를 붙였고, 그 구 라벨은 **삭제 0 원칙으로 존치**된다. 같은 form 을 `df62c9f`·`791fed7` 에도 붙이면 **하나의 라벨이 서로 다른 두 사건을 가리킨다** — 이 lineage 가 지금 고치고 있는 병(= 라벨과 사건의 불일치)을 **새로 하나 더 만드는 것**이다. ★**본 문단은 초안에서 그 두 라벨을 예시로 적었다가 게이트 G7 이 `3 3` 을 내서 잡혔다** — 라벨을 **설명하려고 인용한 것**과 **부여한 것**을 자는 구별하지 못한다(= `verification-and-review.md` §0.3 「존재·귀속」 축이 여기서도 그대로 물린다). ⟹ **#17·#18 = 실서수 표기 단독** · 라벨 회수는 구 라벨이 은퇴할 때(= 별 판). ★**라벨은 유일해야 자가 되고, 유일성이 깨지면 라벨 census 는 다시 거짓말한다**(= 아래 `:23` 이 밝힌 실패의 재발 형태).
+>
 > ★**28 회차 demote 의 성격** (= 2026-08-30 `MASTER-REGISTER-AXIS-REPLACE-001`): 표 말미 **1행** (= `MASTER-DOC-MANIFEST-SWEEP-002`) = **distinct entry 신설 +1** ⟹ **168 → 169 데이터행** · 고유 **166 → 167**. **이동 증명** = sha 쌍 대조 PASS (hot `CLAUDE.md:300` → COLD `:210` = 양측 `44fcdc4e6b1d78aa` · **399B**) ⟹ **verbatim 이동 · 삭제 0**. ★demote 대상 = **표의 맨 위 행**(= 최고령 · `CLAUDE.md §15` 「순서가 정본」 정합) — 본 판 hot 3 행은 **마감일이 셋 다 2026-08-30 으로 같아** 날짜로는 안 갈린다(= 그 규약이 정확히 이 상황을 위해 있다).
 >
 > ★★**회차 = 28 (= 본 판 재측 도출 · 인용 아님 · S7 정합)**: **자** = COLD 에 **데이터행을 append 한 commit** 을 시간순 계수 (= `for s in $(git log --format=%H --reverse -- <COLD>); do git show --format= $s -- <COLD> | grep -c '^+| [A-Z0-9]'; done` 중 `>0` 인 것) ⟹ **27 사건** + 본 판 **1** = **28**. **산술 검산** = 전 commit append 합 **168** == 본 판 직전 실측 데이터행 **168** · **삭제 사건 0**(= `^-| [A-Z0-9]` 전 commit 합 **0**) ⟹ 자의 **완전성 증명**(= 합이 맞고 삭제가 0 이므로 놓친 사건이 없다). ★**직전 판이 준 「27」을 인용하지 않고 재도출했고 값이 일치했다 — 일치는 결과이지 근거가 아니다.** 소급 채번 8 + 라벨 정정 2 = **회부 유지**(= 아래 정정 note 정합 · 무한 소급 금지).
@@ -23,9 +42,9 @@
 > ⟹ ★**왜 못 봤나 — 라벨을 세는 자는 빠진 라벨을 영영 못 찾는다.** `SWEEP-003` 이 쓴 자(`grep -o '[0-9]\{1,2\} 회차' <COLD> | sort -u`)는 **문면에 적힌 번호**의 census 다. 세어야 할 것은 **번호가 아니라 사건**이었다 (= `verification-and-review.md` §0.3 K-133 「리터럴 계수는 사용처가 아니다」의 **존재 축** 판 · 본 판이 그 축을 명문에 부착한 이유가 여기 있다).
 > ⟹ **처분**: 본 판은 **자기 회차만 실측 채번**(= 27)하고, **#17~#24 소급 채번 8 + `b3a8857`/`a3ba108` 라벨 정정 2 = 회부**(= 별 판 · 무한 소급 금지 · 아래 17·18 회차 note 의 구 라벨 = **삭제 0 · 병기 보존** · 그 note 들이 기술한 **성격·행수·sha 는 전부 유효**하고 **번호만 stale** 이다).
 >
-> ★**18 회차 demote 의 성격** (= 2026-08-30 `MASTER-DOC-MANIFEST-SWEEP-003` · ★**실서수 = 26** · 위 정정 note 참조): 표 말미 **2행** (= `MASTER-TASK-PURPOSE-CONTRACT-001` + `MASTER-DOC-MANIFEST-SWEEP-001`) = **distinct entry 신설 +2** (= demote 직전 COLD 전수 grep `^| MASTER-TASK-PURPOSE-CONTRACT-001 ` / `^| MASTER-DOC-MANIFEST-SWEEP-001 ` = **표 행 0 hit** 실측[= 게이트 G2 셋째 칸 「전」 `0`] ⟹ 최초 수록). **165 → 167**. ★**2 행인 이유** = hot 상한 3 만석에서 **등재 2**(`SWEEP-002` 미등재분 + 본 판 자신)를 넣으려면 **2 를 내려야 한다** — `CLAUDE.md §16-1` 「모든 cli infra 변경 = §15 등재 의무」의 착지 경로다. ★**이동 증명 = sha 쌍 대조 PASS**(hot `bf603be:CLAUDE.md:300`→COLD `:196` = `ea01847c3c1e7713` · `:301`→`:197` = `1e92f53ce1ba092c` · 자 = `shasum -a 256 | cut -c1-16`) ⟹ **재작성 아닌 verbatim 이동 · 삭제 0**.
+> ★**18 회차 demote 의 성격** (= 2026-08-30 `MASTER-DOC-MANIFEST-SWEEP-003` · ★**실서수 = 26** ⟹ **26 회차** · 위 정정 note 참조 · ★**구 라벨 「18」 = 삭제 0 · 병기 존치** — 이 note 가 기술한 **성격·행수·sha 는 전부 유효하고 번호만 stale** 이었다): 표 말미 **2행** (= `MASTER-TASK-PURPOSE-CONTRACT-001` + `MASTER-DOC-MANIFEST-SWEEP-001`) = **distinct entry 신설 +2** (= demote 직전 COLD 전수 grep `^| MASTER-TASK-PURPOSE-CONTRACT-001 ` / `^| MASTER-DOC-MANIFEST-SWEEP-001 ` = **표 행 0 hit** 실측[= 게이트 G2 셋째 칸 「전」 `0`] ⟹ 최초 수록). **165 → 167**. ★**2 행인 이유** = hot 상한 3 만석에서 **등재 2**(`SWEEP-002` 미등재분 + 본 판 자신)를 넣으려면 **2 를 내려야 한다** — `CLAUDE.md §16-1` 「모든 cli infra 변경 = §15 등재 의무」의 착지 경로다. ★**이동 증명 = sha 쌍 대조 PASS**(hot `bf603be:CLAUDE.md:300`→COLD `:196` = `ea01847c3c1e7713` · `:301`→`:197` = `1e92f53ce1ba092c` · 자 = `shasum -a 256 | cut -c1-16`) ⟹ **재작성 아닌 verbatim 이동 · 삭제 0**.
 >
-> ★**17 회차 = 무번호 demote** (= 2026-08-30 `MASTER-MEASURE-DISCIPLINE-001` · `b3a8857` · 소급 채번 · ★**실서수 = 25** · 위 27 회차 note 의 정정 참조 — 이 소급 채번은 **무번호 demote 를 1 개로 보고** 매긴 값이고 실제로는 **9 개**였다): 표 말미 1행 (= `MASTER-ENGINEERING-BASELINE-002`) · **164 → 165**. ★**당시 본 lineage 에 note 를 안 남겼다** — 그래서 hot `CLAUDE.md §15` 꼬리가 **2026-07-29 「10 회차」에 멈춘 채 6 회차를 놓쳤고**, `SWEEP-003` 발주는 그 stale 을 관용으로 이어받아 **「11 회차」를 지시**했다. ⟹ ★**회차는 demote 를 수행한 판이 같은 step 에서 채번한다** (= 안 적으면 다음 판의 분모가 stale 을 물려받는다 · `CLAUDE.md §15` 꼬리 정정 정합).
+> ★**17 회차 = 무번호 demote** (= 2026-08-30 `MASTER-MEASURE-DISCIPLINE-001` · `b3a8857` · 소급 채번 · ★**실서수 = 25** ⟹ **25 회차** · ★**구 라벨 「17」 = 삭제 0 · 병기 존치** · 위 27 회차 note 의 정정 참조 — 이 소급 채번은 **무번호 demote 를 1 개로 보고** 매긴 값이고 실제로는 **9 개**였다): 표 말미 1행 (= `MASTER-ENGINEERING-BASELINE-002`) · **164 → 165**. ★**당시 본 lineage 에 note 를 안 남겼다** — 그래서 hot `CLAUDE.md §15` 꼬리가 **2026-07-29 「10 회차」에 멈춘 채 6 회차를 놓쳤고**, `SWEEP-003` 발주는 그 stale 을 관용으로 이어받아 **「11 회차」를 지시**했다. ⟹ ★**회차는 demote 를 수행한 판이 같은 step 에서 채번한다** (= 안 적으면 다음 판의 분모가 stale 을 물려받는다 · `CLAUDE.md §15` 꼬리 정정 정합).
 >
 > ★**16 회차 demote 의 성격** (= 2026-08-15 `MASTER-BRAND-TOWARD-INFRA-001`): 표 말미 1행 (= `SELFWARD-PRELAUNCH-SWEEP-002`) = **distinct entry 신설 +1** (= 12·13·14·15 회차와 동일 성격 · demote 직전 COLD 전수 grep = **표 행 0 hit** 실측 [= 기존 1 hit 은 위 13 회차 note 안 **demote 수행 cycle** 인용 · 표 행 아님] ⟹ 압축판 재수록이 아니라 **최초 수록**). 제거 행 = hot §15 상한 3 유지분 · 원문 verbatim 실재 대조 PASS.
 
