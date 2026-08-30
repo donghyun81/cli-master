@@ -343,3 +343,12 @@ Anthropic v2.1.145+ bundled skill (`/run` + `/verify` + `/run-skill-generator`) 
 3. TODO.md 잔여 블로커 없음
 4. `.ai/tasks/INDEX.md` Status → DONE 업데이트
 
+
+---
+
+## 명시 cycle 이력
+
+> 판정 = **실질 개정 있음** (= 2026-08-30 `MASTER-RULE-HISTORY-SECTION-001` 소급 판정 · 축 = `rule-footer-common.md` 「실질 개정 ↔ 기계 치환」 · 판정표 29 행 = 그 판 REPORT). 소급 범위 = **판정 근거 한정**(= 무한 소급 금지 · 전 계보 열거 아님) · **기계 치환 commit 미등재**(= 축 자기 적용).
+
+- 2026-05-02 · `C1-MASTER-BOOTSTRAP-001` · 본 rule 신설 (= 350 행 · `ff65723`).
+- 2026-08-30 · `MASTER-RULE-HISTORY-SECTION-001` · **본 절 신설** (= 위 판정의 착지 · `rule-footer-common.md:10` 등재 의무 소급 이행 · 본문 절 무접촉).

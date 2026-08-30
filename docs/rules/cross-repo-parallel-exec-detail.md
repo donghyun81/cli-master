@@ -379,3 +379,12 @@ find 제외 절에 1줄 넣는 것은 **분모에서 빼는 것**이지 자식 �
 
 ★**file 단위 제외의 대가** (= 2026-08-23 실측 기반 결정): `docs/architecture/CLI-MASTER-SCOPE-SEPARATION-CHARTER.md` 는 **dir 이 아니라 file 단위**로 제외했다 — 같은 dir 의 형제 `external-dep-abstraction.md` 가 FND/TPD/SW 전량에 실재하는 **살아 있는 전파**여서, dir 제외는 그 3본을 분모에서 함께 죽인다. 대가는 명시한다: **그 dir 에 master-only 문서가 또 생기면 그 1본이 다시 MISS 로 뜬다.** 그때의 처분 = 제외 행 1줄 추가이고, 「형제가 전파 중인지」를 먼저 `test -f` 로 재는 것이 순서다 (= 살아 있는 전파를 죽이는 것보다 MISS 1건이 싸다).
 
+
+---
+
+## 6. 명시 cycle 이력
+
+> 판정 = **실질 개정 있음** (= 2026-08-30 `MASTER-RULE-HISTORY-SECTION-001` 소급 판정 · 축 = `rule-footer-common.md` 「실질 개정 ↔ 기계 치환」 · 판정표 29 행 = 그 판 REPORT). 소급 범위 = **판정 근거 한정**(= 무한 소급 금지 · 전 계보 열거 아님) · **기계 치환 commit 미등재**(= 축 자기 적용).
+
+- 2026-05-19 · `MASTER-CLI-PARENT-MOUNT-PARALLEL-EXEC-PARADIGM-001` · 본 rule 신설 (= 196 행 · `e1cef8c` · cross-repo 실행 paradigm 본문).
+- 2026-08-30 · `MASTER-RULE-HISTORY-SECTION-001` · **본 절 신설** (= 위 판정의 착지 · `rule-footer-common.md:10` 등재 의무 소급 이행 · 본문 절 무접촉).

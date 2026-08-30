@@ -224,3 +224,12 @@ postgres(ql)?://[^:@/[:space:]]+:[^@/[:space:]]{8,}@                      # DB �
 - mode = warn default (= exit 0 · non-blocking default · enforce mode 별 cycle default)
 
 상세 paradigm step + STOP 조건 = `cycle-discipline.md` §22 단일 SoT default. 본 § 본문 변경 시 = master cycle 신설 + 4-repo propagation 의무 default (= `cycle-discipline.md` §15 패턴 1 정합).
+
+---
+
+## 명시 cycle 이력
+
+> 판정 = **실질 개정 있음** (= 2026-08-30 `MASTER-RULE-HISTORY-SECTION-001` 소급 판정 · 축 = `rule-footer-common.md` 「실질 개정 ↔ 기계 치환」 · 판정표 29 행 = 그 판 REPORT). 소급 범위 = **판정 근거 한정**(= 무한 소급 금지 · 전 계보 열거 아님) · **기계 치환 commit 미등재**(= 축 자기 적용).
+
+- 2026-05-02 · `C1-MASTER-BOOTSTRAP-001` · 본 rule 신설 (= 140 행 · `ff65723` · 금지 명령/경로 + 역할별 경로 매트릭스 + 시크릿 기록 금지 + 스캔 패턴).
+- 2026-08-30 · `MASTER-RULE-HISTORY-SECTION-001` · **본 절 신설** (= 위 판정의 착지 · `rule-footer-common.md:10` 등재 의무 소급 이행 · 본문 절 무접촉).

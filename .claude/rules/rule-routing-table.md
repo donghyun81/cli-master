@@ -16,3 +16,12 @@
 | 7. task 재개-후속형 | L1: workflow-core(Context Reset/HANDOFF) · reporting(§9 Subagent Return) · cycle-discipline(§8) |
 
 > `abbreviation-policy` + `text-degeneration-prevention` = **rule·hook 전량 제거 · 판단 위임** (2026-07-29 `MASTER-CLI-JUDGMENT-SHIFT-001` · 구 판 = 의무 로드 제외 + `check-abbreviation.sh`/`post-edit-degeneration-check.sh` hook enforce). 명명 SoT = `code-style-guide.md` §C 「명명·관용」(주변 코드 준수) · 출력 퇴행 = 모델 판단 · 구 rule 원문 = `.auto-memory/{abbreviation-policy,text-degeneration-prevention}-COLD.md` verbatim. L3 = 키워드 trigger 시만 (무조건 로드 X). bulk read 금지. PLAN/REVIEW 스키마 템플릿 = **Risk ≥ Medium 시만** `docs/templates/{plan-10-section,review-12-section}.template.md` Read (T3).
+
+---
+
+## 명시 cycle 이력
+
+> 판정 = **실질 개정 있음** (= 2026-08-30 `MASTER-RULE-HISTORY-SECTION-001` 소급 판정 · 축 = `rule-footer-common.md` 「실질 개정 ↔ 기계 치환」 · 판정표 29 행 = 그 판 REPORT). 소급 범위 = **판정 근거 한정**(= 무한 소급 금지 · 전 계보 열거 아님) · **기계 치환 commit 미등재**(= 축 자기 적용).
+
+- 2026-07-10 · `MASTER-CLI-CONTEXT-DIET-2-001` · 본 file 신설 (= `rule-routing-index.md §B` 의 독립 실사용 판 · 17 행 · `cf063a8`). ★**이동 아님** = 창설 추가분의 핵심 어구 5 종(「intake 시 = 본 표만 정독」 · 「독립 실사용 판」 · 「L0 재정독 개정」 · 「세션 최초 1회 Read」 · 「갈음」)이 **PRE 판(`rule-routing-index.md`)에 전수 0** ⟹ 추가분 새 내용 ≠ 0 = 실질.
+- 2026-08-30 · `MASTER-RULE-HISTORY-SECTION-001` · **본 절 신설** (= 위 판정의 착지 · `rule-footer-common.md:10` 등재 의무 소급 이행 · 본문 절 무접촉).

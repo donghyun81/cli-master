@@ -128,3 +128,12 @@ UiState 정책:
 baseline 갱신 history:
 - (직전) baseline: "KMP/CMP 미도입 상태" default · 본 §은 향후 도입 시 활성화 영역 default
 - 2026-05-21 (MASTER-CLI-CLEANUP-7CYCLE-001 M3): app-foundation 도입 마감 default · KMP/CMP 활성 default · 본 §은 자식 도메인 코드 작성 시점 정합 영역 default
+
+---
+
+## 명시 cycle 이력
+
+> 판정 = **실질 개정 있음** (= 2026-08-30 `MASTER-RULE-HISTORY-SECTION-001` 소급 판정 · 축 = `rule-footer-common.md` 「실질 개정 ↔ 기계 치환」 · 판정표 29 행 = 그 판 REPORT). 소급 범위 = **판정 근거 한정**(= 무한 소급 금지 · 전 계보 열거 아님) · **기계 치환 commit 미등재**(= 축 자기 적용).
+
+- 2026-05-02 · `C1-MASTER-BOOTSTRAP-001` · 본 rule 신설 (= 115 행 · `ff65723`).
+- 2026-08-30 · `MASTER-RULE-HISTORY-SECTION-001` · **본 절 신설** (= 위 판정의 착지 · `rule-footer-common.md:10` 등재 의무 소급 이행 · 본문 절 무접촉).
