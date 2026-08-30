@@ -235,6 +235,7 @@
 | MASTER-DOC-MANIFEST-SWEEP-002 | 2026-08-30 | 문서가 자기를 재는 방식 (M5 · prod 0 · 보호 sha 0 · 자식 0). 이력 소급 등재 3 + 이력 절 입구 · §0.7 환경의 자 · K-136-⑵ 좌표는 rev 동반 · K-163 절 결속 종료 앵커. ★만든 부채 1 = 자기 §15 미등재(= 003 이 푼다). [R](.ai/reports/MASTER-DOC-MANIFEST-SWEEP-002/REPORT.md) | 4-repo 0 (#130) |
 | MASTER-DOC-MANIFEST-SWEEP-003 | 2026-08-30 | 규약이 자기 이력을 못 적게 막은 것을 푼다 (M5 · prod 0 · 보호 sha 0 · 자식 0). 등재 2 + demote 2 · 판정선 · 자의 깊이 · subset 실증 · 착지 경로 · 밴드 자. ★STOP 은 내용만 잠그고 경로는 연다(K-167). [R](.ai/reports/MASTER-DOC-MANIFEST-SWEEP-003/REPORT.md) | 4-repo 0 (#130) |
 | MASTER-DOC-MANIFEST-SWEEP-004 | 2026-08-30 | 규약은 있었고 지켜지지 않았다 (M5 · prod 0 · 보호 sha 0 · 자식 0). §8.1 인용 범위 전 채널 · §0.3 존재·귀속 자 · 30) 밴드 게이트화 · REPORT 축 14. ★판정선 교체 = 회부(새 축 반례 13) · 회차 18→26 재측 정정. [R](.ai/reports/MASTER-DOC-MANIFEST-SWEEP-004/REPORT.md) | 4-repo 0 (#130) |
+| MASTER-REGISTER-AXIS-REPLACE-001 | 2026-08-30 | 판정선은 수가 아니라 축이었다 (M5 · prod 0 · 보호 sha 0). 축 교체 「실질 개정 ↔ 기계 치환」 + 보조자 3 + ★이동 서명 좁힘 · 표 +2 · 자기 등재 · REPORT 정정 3. ★새 축 반례 0 · 회차 28 재측. [R](.ai/reports/MASTER-REGISTER-AXIS-REPLACE-001/REPORT.md) | 4-repo 0 (#130) |
 
 ---
 

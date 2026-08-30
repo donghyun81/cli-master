@@ -31,6 +31,10 @@
 - 「오래됐다」는 판정 근거가 **아니다**. 날짜·버전이 낡아도 행동이 안 갈리면 대상 밖이다.
 - 「N hit」는 판정이 아니라 **열어볼 신호**다. 문면을 열지 않은 등재 금지.
 - 실측 정본을 못 찾으면 등재하지 말고 **UNKNOWN 으로 남긴다**(= 정본 없는 「낡음」 주장은 그 자체가 낡은 문면의 새 생산).
+- ★**병기(마킹)된 구 문면 = 대상 아님** (= 2026-08-31 `MASTER-VERIFY-SYNC-MARKED-REF-AXIS-001`). 「삭제 0 · 구 문면 병기」(㉣ K-171)로 남긴 구 경로는 **처분이 함께 적혀 있으므로** 그것을 믿고 행동해도 틀린 판단을 하지 않는다 ⟹ 위 판정 자에 **부합하지 않는다**. 낡아 보이는 것과 오도하는 것은 다르고, 이 rule 이 무는 것은 **뒤쪽**이다.
+  - ⟹ **기계 자는 이 구별을 못 낸다** — 문자열 실재만 세는 scanner 는 병기된 이력과 진짜 stale 을 같은 「부재」로 보고한다. 그 상시 오탐이 진짜 drift 를 덮고, 다음 판을 **병기 삭제(= K-171 위반)로 유도**한다.
+  - ⟹ **자 쪽에서 뺀다 · 문서를 고치지 않는다**. 선례 = `scripts/verify-sync.sh` 의 `STALE_REF_MARKERS`(= `~~`·소멸·이동·구 경로·폐기) — **★path 축**: 그 path 의 인용 행이 **전량** 마킹일 때만 분모에서 제외하고, **한 행이라도 비마킹이면 남긴다**(= 진짜 stale 은 계속 뜬다). 행 축으로 빼면 비마킹 행이 그 path 를 살려 둔 채 계수만 줄어 숫자가 뜻을 잃는다.
+  - ⚠ 마커를 넓히면 **진짜 stale 을 삼킨다** — 특히 「부재」는 scanner 자신이 쓰는 **증상어**라 처분을 안 적고 부재를 서술만 해도 마킹이 된다(= 기각). 채택 기준 = 「그 path 의 부재가 **의도된 기록**임을 단언하는 어휘」.
 
 ## §3. 발견 의무 (= 워크플로우 편입 지점 3 · cowork · cli 공통)
 
@@ -93,3 +97,4 @@
 ## §9. cycle 이력
 
 - 2026-08-17 · `MASTER-STALE-TRACKING-001` · 본 rule 신설 (= Coin 직접 지시 · `cycle-discipline.md §2` L1-1 예외). 동반 = `rule-routing-index.md` §A L1 1행 등재 + `rule-routing-table.md` Reading Mode 1·5 행 동기 + `legacy-cleanup-governance.md` 자매 pointer 1줄 + `workflow-core.md` 단계 흐름 1행 + `Selfward/STALE-DEBT.md` 대장 신설 + `Selfward/docs/stale-sweeps/README.md` 회차 규약 신설. 선행 1회성 감사 = 부모 root `MEASURE-CROSSREPO-DOC-STALE-20260809.md`(→ 집행 = `archive/2026-08/cc-paste-MASTER-DOCS-STALE-SWEEP-002.md`) — 본 rule 이 그 **1회성 감사를 상설화**한다.
+- 2026-08-31 · `MASTER-VERIFY-SYNC-MARKED-REF-AXIS-001` · **§2 「병기된 구 문면 = 대상 아님」 4 bullet 신설** (= 판정 자의 경계 명문화 + 기계 자의 한계 + path 축 계약 + 마커 넓힘 기각 기준). 축 판정 = **실질 개정**(= `rule-footer-common.md` 「실질 개정 ↔ 기계 치환」 · 핵심 어구 5 종[「병기된 구 문면」·「낡아 보이는 것과 오도하는 것」·「자 쪽에서 뺀다」·「path 축」·「증상어」] PRE 판 **전수 0** ⟹ 추가분 새 내용 ≠ 0). 근거(실측 2026-08-31) = 본 판이 `verify-sync.sh` 의 stale-ref WARN 을 병기 규약과 양립시키며 발견한 **일반 규칙** — 그 WARN 은 rule 층 서술이 **전수 0**(자 = `grep -rln -e 'stale-ref' -e '부재 참조' docs/rules .claude/rules` = **0 hit**)이라 **판마다 다시 발견될 상태**였다. §1·§3~§8 **무접촉**.
