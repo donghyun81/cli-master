@@ -54,6 +54,14 @@
 
 - 2026-07-29 · `MASTER-CLI-CONTEXT-DIET-3-001` · `paste-source-authoring` + `disk-verification` **통합** (= 구 `paste-source-authoring §12` 통합 후보 집행 · 조건 "책임 분리 영역 단일 SoT 유지" 준수 → 통합본 `§2 책임 분리`). 원칙 + 의무 ①~⑤ + gotcha = `SKILL.md` 본문 · 사례/인접표/이력 = 본 `references/` 분할. `paste-source-authoring/SKILL.md` file 폐지 (= 본문 전량 통합본 + 본 references 로 이전 · 삭제 0). skill 내 STOP 표 = canonical 3 항(보호 sha / HIGH RISK / 본심 분기) 재복제 제거 → `.claude/rules/stop-canonical.md` pointer · **skill 고유 2 항만 잔류**. 4-repo byte-identical propagation.
 
+### §2.4 자 규율 층 (= 2026-08-29~ · `verification-and-review.md §0` 연동)
+
+> **소급 경계** = `SKILL.md §10` 이력 절 신설 시점 기준 **직전 2 판 + 본 판**. 그 앞은 **회부** (= 등재 의무 = 2026-08-29 `rule-footer-common.md:10` 신설 · 무한 소급 아님).
+
+- 2026-08-29 · `MASTER-TASK-PURPOSE-CONTRACT-001` · `SKILL.md` §4 ⑥ 세부 **K-155 신설** (= 발주는 「무엇을 하라」와 함께 「**무엇을 위한 것인지**」를 넘기고 집행자에게 **되짚게** 한다 · ★「읽었나」는 검증 불가 · 「되짚었나」는 **검증 가능** · 집행 측 = 자기 말 1 문단 재진술[목적 · ⓑ 좌표 지목 · 아닌 것] · ★verbatim 복붙 = 미이행 · 접수 측 자 2 = 좌표 round-trip + 할루시 검출점 · **게이트 계수로 세우지 않는다**). 자 = `git log -S'K-155'` → `9591b7d`.
+- 2026-08-30 · `MASTER-MEASURE-DISCIPLINE-001` · `SKILL.md` §4 ⑥ **자 규율 SoT pointer 신설** (= 자를 고르는 규율의 본문 SoT = `verification-and-review.md §0` · §0.1 도구 범위 / §0.3 자기 제외·행별 칸 수·단위 병기 / §0.6 명제의 자) + 세부4 「유지보수 부채」에 **「남긴 부채」 옆 자** 1 구. 자 = `git show --numstat b3a8857` → **2 추가 / 1 삭제**.
+- 2026-08-30 · `MASTER-DOC-MANIFEST-SWEEP-002` · `SKILL.md` **§10 「명시 cycle 이력」 절 신설** (= **pointer-only** · 본 §2 가 이력 단일 SoT 로 유지 · 착지 판정 근거 = §4 ⑥ 세부5 **K-147** 자기 적용 + `cross-repo-parallel-exec.md §8` / `anchor-list.md §7` 선례) + **본 §2.4 신설**. ★발주는 본 skill 을 「이력 절 부재」로 분류했으나 실물은 **「부재」가 아니라 「분할」**이었다 — 신설된 것은 이력이 아니라 **그 입구**다.
+
 ---
 
 ## §3 후속 cycle 후보 (= 구 `paste-source-authoring §12` verbatim · 통합 항은 소진)

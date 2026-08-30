@@ -136,3 +136,9 @@ grep -ni "<paradigm-keyword>" docs/rules/<existing-rule>.md
 ## §9 본 skill 의 변경 정책
 
 > 변경 정책 = [`rule-footer-common.md`](../../rules/rule-footer-common.md) (= 4-repo 권장 byte-identical · master cycle + propagation · 자식 직접 수정 금지).
+
+## §10 명시 cycle 이력
+
+> **전문 = [`references/adjacent-and-history.md`](references/adjacent-and-history.md) §2 verbatim** (= 2026-07-29 `MASTER-CLI-CONTEXT-DIET-3-001` 분할 · 삭제 0). ★**신 entry 도 그쪽에 append 한다** — 본 절은 **pointer 전용**이다.
+> ★**본 절이 pointer 인 이유** (= §4 ⑥ 세부5 **K-147** 자기 적용): 본 skill 의 배치 규약은 「원칙 · 의무 ①~⑦ · gotcha = `SKILL.md` 본문 / 사례 · 인접표 · **이력** = `references/` 분할」이다. 여기에 entry 를 직접 쌓으면 **이력 서술처가 둘이 되고, 두 번째 열거처가 곧 drift 원**이 된다(= `rule-footer-common.md` 자칭 범위 사고와 동형). **선례** = `.claude/rules/cross-repo-parallel-exec.md` §8 · `.claude/rules/anchor-list.md` §7 — **둘 다 pointer-only 이력 절**이다 (= §0.1 K-140 「선례가 정본」).
+> ⟹ 발주는 본 file 을 「이력 절 **부재**」로 분류했으나(= 문자열 `명시 cycle 이력` 0 hit), **실물은 「부재」가 아니라 「분할」**이었다. 본 판이 신설한 것은 **이력이 아니라 그 입구**다.
