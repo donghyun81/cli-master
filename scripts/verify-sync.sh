@@ -309,12 +309,25 @@ fi
 
 # === 상태문서 부재 참조 WARN (= drift 재발 감지 · --no-update 에서도 실행) ===
 # 두 상태문서가 인용하는 repo-relative file path 존재 검증 → 부재 시 stderr WARN.
+# T1: 「모든 인용 행이 마킹된 path」= 병기(K-171) → 분모에서 제외 (★path 축 · 「왜」 = 아래 T4 주석).
+STALE_REF_MARKERS='~~|소멸|이동|구 경로|폐기'
 STATUS_DOCS="$MASTER_DIR/.auto-memory/protected-file-hashes.md $MASTER_DIR/.auto-memory/propagation-status.md"
 REF_MISSING=""
+REF_TOTAL=0
+REF_MARKED=0
 for doc in $STATUS_DOCS; do
   [ -f "$doc" ] || continue
   for path in $(grep -oE '`(\.claude|docs|scripts|\.auto-memory|\.ai)/[A-Za-z0-9._/-]+\.(md|json|sh|sql|toml|kt|py)`' "$doc" | tr -d '`' | sort -u); do
-    [ -e "$MASTER_DIR/$path" ] || REF_MISSING="${REF_MISSING}  - $path (in $(basename "$doc"))\n"
+    [ -e "$MASTER_DIR/$path" ] && continue
+    REF_TOTAL=$((REF_TOTAL + 1))
+    # ★path 축: 이 path 를 인용하는 행이 **전량** 마킹일 때만 제외. 한 행이라도 비마킹이면 남긴다.
+    ref_cited=$(grep -c -F -- "$path" "$doc")
+    ref_marked=$(grep -F -- "$path" "$doc" | grep -c -E "$STALE_REF_MARKERS")
+    if [ "$ref_cited" -gt 0 ] && [ "$ref_cited" -eq "$ref_marked" ]; then
+      REF_MARKED=$((REF_MARKED + 1))
+      continue
+    fi
+    REF_MISSING="${REF_MISSING}  - $path (in $(basename "$doc"))\n"
   done
 done
 if [ -n "$REF_MISSING" ]; then
