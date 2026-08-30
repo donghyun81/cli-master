@@ -324,4 +324,16 @@ CLAUDE.md §15 hot 데이터행 3 (상한 3)
 
 > 본 절 = **REPORT commit 뒤에야 확정되는 값**의 사후 기입 자리. **본체 commit sha** = `ab5d67b` · `267c0cd` · `8b0ad11` (= 본 REPORT 가 기록하는 대상 file 을 담은 commit) — ★**자기 sha 는 담지 않는다**(K-156 · 불가능).
 
-- (append 대기) 마감 porcelain · 최종 ahead 실측 · REPORT commit sha
+**2026-08-30 · 마감 확정값 append** (= 본 절 자신을 담은 commit 뒤에 확정되는 값은 없다 · K-156):
+
+| 값 | 실측 |
+|---|---|
+| 마감 porcelain | **0** (`git --no-optional-locks status --porcelain \| wc -l`) |
+| REPORT commit sha | **`7e3c013`** (= 본 절 append **직전** commit · 선행 sha 인용 = §8.2 정합) |
+| 최종 ahead | **진입 19 + 본 판 5 = 24** (= 본체 3 + REPORT 1 + 본 `§정정 append` 1 · **상대식** = §15.2 · ★나열 sha **4** 보다 ahead 가 **1 크다**는 데서 꼬리 commit 을 안다) |
+| 최종 게이트 | **12/12 계약 충족** — `G10 = 0 23`(append 전 시점 · 계약 `22~25` 안) · **`G11 = 5 0 10`**(둘·셋째 불변 = S8 미발동) |
+| 보호 5 sha | **전량 무변동** — `8b46bb49…` / `68c6c213…` / `ce9c0d3e…` / `7e70e365…` / `0d265e0b…` = `CLAUDE.md §14a` baseline **5/5 일치** (STOP #5 미발동 · 자 = `git hash-object`) |
+| 시크릿 스캔 | **0 match** (`.ai/reports/MASTER-DOC-MANIFEST-SWEEP-002/` · 패턴 = `safety-and-secrets.md` 11 종 중 7 종) |
+| 만든 부채 | **1** (= `CLAUDE.md §15` 미등재 · 회부 ㉡신규① · **0 이 아니므로 적는다**) |
+
+★**본 판이 넘기는 것** = 원장 ㉡**신규①~⑥** + ㉡**#180 문면 정정** + ㉣**K-162 · K-163** 신설 / **Coin 이관** = 4-repo propagation · push(ahead 24) · ㉡신규③ 판정선 결정.
